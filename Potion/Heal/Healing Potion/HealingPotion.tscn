@@ -1,0 +1,13 @@
+[gd_scene load_steps=2 format=3 uid="uid://1go2jdnplx4l"]
+
+[ext_resource type="Texture2D" uid="uid://dw0wj1ftq8uye" path="res://Asset/potionSS.png" id="1_xf20t"]
+
+[node name="HealingPotion" type="Node3D"]
+
+[node name="PotionSprite" type="Sprite3D" parent="."]
+billboard = 2
+texture_filter = 0
+texture = ExtResource("1_xf20t")
+hframes = 5
+vframes = 2
+frame = 1
