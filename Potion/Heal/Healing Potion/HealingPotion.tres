@@ -12,6 +12,6 @@ region = Rect2(32, 0, 32, 32)
 script = ExtResource("1_0lskv")
 name = "Healing Potion"
 category = "Heal"
-isThrowable = false
+isThrowable = null
 potion = ExtResource("1_krgqs")
 potionSprite = SubResource("AtlasTexture_lyhjq")

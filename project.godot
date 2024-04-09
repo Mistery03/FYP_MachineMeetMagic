@@ -11,12 +11,22 @@ config_version=5
 [application]
 
 config/name="FYP_MachineMeetMagic"
+run/main_scene="res://Scene/Home/Home.tscn"
 config/features=PackedStringArray("4.2", "GL Compatibility")
 config/icon="res://icon.svg"
 
 [dotnet]
 
 project/assembly_name="FYP_MachineMeetMagic"
+
+[filesystem]
+
+import/fbx/enabled=false
+
+[layer_names]
+
+3d_physics/layer_1="enviroment"
+3d_physics/layer_2="player"
 
 [rendering]
 
