@@ -3,7 +3,7 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://cpixm4havt0yv"
-path.s3tc="res://.godot/imported/bnuuy_Material Base Color.png-5ab266b6adbfb9942a277a2fccf7e2f4.s3tc.ctex"
+path.s3tc="res://.godot/imported/bnuuy_Material Base Color.png-3bcb12640187d3c065d551900056fb86.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
@@ -12,8 +12,8 @@ generator_parameters={}
 
 [deps]
 
-source_file="res://Game Objects/meshlib/obj/bnuuy_Material Base Color.png"
-dest_files=["res://.godot/imported/bnuuy_Material Base Color.png-5ab266b6adbfb9942a277a2fccf7e2f4.s3tc.ctex"]
+source_file="res://Game Objects/meshlib/objects/bnuuy_Material Base Color.png"
+dest_files=["res://.godot/imported/bnuuy_Material Base Color.png-3bcb12640187d3c065d551900056fb86.s3tc.ctex"]
 
 [params]
 

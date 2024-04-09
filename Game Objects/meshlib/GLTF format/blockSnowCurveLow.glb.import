@@ -3,13 +3,13 @@
 importer="scene"
 importer_version=1
 type="PackedScene"
-uid="uid://dwfg5sxcacdy1"
-path="res://.godot/imported/bnuuy.glb-2bdebdfd73537f096868fa2c46c913d6.scn"
+uid="uid://d3u88v2tl5wwy"
+path="res://.godot/imported/blockSnowCurveLow.glb-54e479ec6e36d31358c91eb16ce82e0e.scn"
 
 [deps]
 
-source_file="res://Game Objects/meshlib/obj/bnuuy.glb"
-dest_files=["res://.godot/imported/bnuuy.glb-2bdebdfd73537f096868fa2c46c913d6.scn"]
+source_file="res://Game Objects/meshlib/GLTF format/blockSnowCurveLow.glb"
+dest_files=["res://.godot/imported/blockSnowCurveLow.glb-54e479ec6e36d31358c91eb16ce82e0e.scn"]
 
 [params]
 
