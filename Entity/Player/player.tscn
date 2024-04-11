@@ -127,7 +127,7 @@ playerData = ExtResource("2_g17go")
 
 [node name="PlayerSprite" type="Sprite3D" parent="."]
 transform = Transform3D(6, 0, 0, 0, 6, 0, 0, 0, 6, 0, 0, 0)
-billboard = 2
+billboard = 1
 texture_filter = 0
 texture = ExtResource("1_ksidj")
 hframes = 3
@@ -142,7 +142,9 @@ libraries = {
 }
 
 [node name="SpringArm3D" type="SpringArm3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 0.866025, 0.5, 0, -0.5, 0.866025, 0, 0, 0)
-spring_length = 6.0
+transform = Transform3D(1, 0, 0, 0, 0.819152, 0.573576, 0, -0.573576, 0.819152, 0, 0.5, 0)
+collision_mask = 0
+spring_length = 8.0
+margin = 0.1
 
 [node name="Camera3D" type="Camera3D" parent="SpringArm3D"]
