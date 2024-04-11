@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="EntityData" load_steps=2 format=3 uid="uid://c6joqno41m2ls"]
+
+[ext_resource type="Script" path="res://Entity/Data/EntityData.gd" id="1_chc5a"]
+
+[resource]
+script = ExtResource("1_chc5a")
+Name = "Player"
+MaxHealth = 100.0
+MaxStamina = 100.0
+MaxMana = 100.0
