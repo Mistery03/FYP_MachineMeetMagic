@@ -1,0 +1,21 @@
+[gd_resource type="Resource" script_class="PotionData" load_steps=6 format=3 uid="uid://doo0oqvv31wtn"]
+
+[ext_resource type="Script" path="res://Potion/Data/PotionData.gd" id="1_1xd70"]
+[ext_resource type="PackedScene" uid="uid://by4om3nil2ke3" path="res://Potion/Buff/Defence Potion/DefencePotion.tscn" id="1_mwayb"]
+[ext_resource type="Texture2D" uid="uid://dw0wj1ftq8uye" path="res://Asset/potionSS.png" id="1_r71ac"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_73vpx"]
+atlas = ExtResource("1_r71ac")
+region = Rect2(32, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jold8"]
+atlas = SubResource("AtlasTexture_73vpx")
+
+[resource]
+script = ExtResource("1_1xd70")
+name = "Defence Potion"
+category = "Buff"
+amount = 1
+isThrowable = false
+scene = ExtResource("1_mwayb")
+potionTexture = SubResource("AtlasTexture_jold8")

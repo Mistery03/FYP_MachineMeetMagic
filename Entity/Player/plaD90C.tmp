@@ -1,11 +1,10 @@
-[gd_scene load_steps=15 format=3 uid="uid://c1vsfoc55pk0w"]
+[gd_scene load_steps=14 format=3 uid="uid://c1vsfoc55pk0w"]
 
 [ext_resource type="Texture2D" uid="uid://bd32dcnew3uvf" path="res://Asset/L.png" id="1_ksidj"]
 [ext_resource type="Script" path="res://Entity/Player/player.gd" id="1_xfdxb"]
 [ext_resource type="Resource" uid="uid://c6joqno41m2ls" path="res://Entity/Player/playerData.tres" id="2_g17go"]
 [ext_resource type="Resource" uid="uid://doo0oqvv31wtn" path="res://Potion/Buff/Defence Potion/DefencePotion.tres" id="3_41una"]
 [ext_resource type="Script" path="res://Potion/PotionManager.gd" id="5_5bgkf"]
-[ext_resource type="Resource" uid="uid://b0rx68wwi0q20" path="res://Potion/Heal/Healing Potion/HealingPotion.tres" id="7_asdtf"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_r3drm"]
 
@@ -155,4 +154,3 @@ margin = 0.1
 
 [node name="PotionManager" type="Node" parent="."]
 script = ExtResource("5_5bgkf")
-potionDataList = Array[Resource("res://Potion/Data/PotionData.gd")]([ExtResource("3_41una"), ExtResource("7_asdtf")])
