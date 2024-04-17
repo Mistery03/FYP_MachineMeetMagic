@@ -8,3 +8,4 @@ Name = "Player"
 MaxHealth = 100.0
 MaxStamina = 100.0
 MaxMana = 100.0
+MaxDefence = 100.0

@@ -4,4 +4,4 @@ extends Potion
 
 func execute():
 	master.currHealth += healingPoints
-
+	print(master.currHealth)

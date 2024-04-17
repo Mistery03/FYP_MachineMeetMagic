@@ -1,5 +1,5 @@
 class_name Entity
-extends CharacterBody3D
+extends CharacterBody2D
 
 var currHealth:float = 0
 var currStamina:float = 0
@@ -11,5 +11,5 @@ func _process(delta):
 	pass
 
 
-func _moveToPos(pos:Vector3):
+func _moveToPos(pos:Vector2):
 	pass
