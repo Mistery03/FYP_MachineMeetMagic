@@ -31,6 +31,7 @@ func _process(delta) -> void:
 			_index = 1
 		elif _index == 1:
 			_index = 0
+		print("potion changed")
 			
 	if Input.is_action_just_pressed("DrinkPotion") and potionDataList[_index].amount > 0:
 		potionList[_index].execute()
