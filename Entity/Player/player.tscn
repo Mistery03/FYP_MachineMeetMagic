@@ -7,7 +7,9 @@
 [ext_resource type="Script" path="res://Potion/PotionManager.gd" id="5_5bgkf"]
 [ext_resource type="Resource" uid="uid://b0rx68wwi0q20" path="res://Potion/Heal/Healing Potion/HealingPotion.tres" id="7_asdtf"]
 
-[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_r3drm"]
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_5n34a"]
+radius = 56.0
+height = 164.0
 
 [sub_resource type="Animation" id="Animation_5y68e"]
 resource_name = "Idle"
@@ -124,35 +126,29 @@ _data = {
 "walkSide": SubResource("Animation_o3ehn")
 }
 
-[node name="Player" type="CharacterBody3D"]
+[node name="Player" type="CharacterBody2D"]
 script = ExtResource("1_xfdxb")
 playerData = ExtResource("2_g17go")
 potionObject = ExtResource("3_41una")
 
-[node name="PlayerSprite" type="Sprite3D" parent="."]
-transform = Transform3D(6, 0, 0, 0, 6, 0, 0, 0, 6, 0, 0, 0)
-billboard = 1
-texture_filter = 0
+[node name="PlayerSprite" type="Sprite2D" parent="."]
+texture_filter = 1
+scale = Vector2(6, 6)
 texture = ExtResource("1_ksidj")
 hframes = 3
 vframes = 4
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-shape = SubResource("CapsuleShape3D_r3drm")
+[node name="CollisionShape3D" type="CollisionShape2D" parent="."]
+position = Vector2(3, 18)
+shape = SubResource("CapsuleShape2D_5n34a")
 
 [node name="Animation" type="AnimationPlayer" parent="."]
 libraries = {
 "": SubResource("AnimationLibrary_ls5qq")
 }
 
-[node name="SpringArm3D" type="SpringArm3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 0.819152, 0.573576, 0, -0.573576, 0.819152, 0, 0.5, 0)
-collision_mask = 0
-spring_length = 8.0
-margin = 0.1
-
-[node name="Camera3D" type="Camera3D" parent="SpringArm3D"]
-
 [node name="PotionManager" type="Node" parent="."]
 script = ExtResource("5_5bgkf")
 potionDataList = Array[Resource("res://Potion/Data/PotionData.gd")]([ExtResource("3_41una"), ExtResource("7_asdtf")])
+
+[node name="Camera2D" type="Camera2D" parent="."]

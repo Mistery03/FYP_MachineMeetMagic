@@ -2,5 +2,5 @@
 
 [ext_resource type="Script" path="res://Potion/Buff/Defence Potion/DefencePotion.gd" id="1_bdalk"]
 
-[node name="DefencePotion" type="Node3D"]
+[node name="DefencePotion" type="Node2D"]
 script = ExtResource("1_bdalk")

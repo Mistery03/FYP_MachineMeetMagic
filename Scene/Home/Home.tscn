@@ -1,30 +1,3 @@
-[gd_scene load_steps=5 format=3 uid="uid://cdnfwg72d5exi"]
+[gd_scene format=3 uid="uid://dm1j4it5oof3n"]
 
-[ext_resource type="PackedScene" uid="uid://dwfg5sxcacdy1" path="res://Game Objects/meshlib/objects/bnuuy.glb" id="1_nn5pd"]
-[ext_resource type="PackedScene" uid="uid://c1vsfoc55pk0w" path="res://Entity/Player/player.tscn" id="3_13lwg"]
-[ext_resource type="PackedScene" uid="uid://c5llbybq22axf" path="res://Machine/machine.tscn" id="4_mm4jc"]
-[ext_resource type="MeshLibrary" uid="uid://b2oshppsjs3x4" path="res://Game Objects/meshlib/maplib.tres" id="4_y4ehm"]
-
-[node name="Home" type="Node3D"]
-
-[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 0.866025, 0.5, 0, -0.5, 0.866025, 0, 10, 0)
-shadow_enabled = true
-
-[node name="Player" parent="." instance=ExtResource("3_13lwg")]
-transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 2.70152, -2.7302)
-collision_layer = 2
-
-[node name="bnuuy" parent="." instance=ExtResource("1_nn5pd")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.76163, 0.518171, -0.382356)
-
-[node name="GridMap2" type="GridMap" parent="."]
-mesh_library = ExtResource("4_y4ehm")
-cell_size = Vector3(1, 1, 1)
-data = {
-"cells": PackedInt32Array(65535, 65533, 1, 0, 65533, 1, 1, 65533, 1, 1, 65534, 1, 1, 65535, 1, 0, 65535, 1, 65535, 65534, 1, 0, 65534, 1, 65535, 65532, 1, 0, 65532, 1, 2, 65533, 1, 1, 65532, 1, 2, 65534, 1, 2, 65535, 1, 2, 65532, 1, 65535, 65535, 1, 65537, 65533, 7)
-}
-metadata/_editor_floor_ = Vector3(0, 1, 0)
-
-[node name="Machine1" parent="." instance=ExtResource("4_mm4jc")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.49416, 2.32552, -2.07293)
+[node name="Home" type="Node2D"]
