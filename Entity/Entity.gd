@@ -1,6 +1,7 @@
 class_name Entity
 extends CharacterBody2D
 
+#Event
 signal OnHealthIncrease
 
 var currHealth:float = 0
