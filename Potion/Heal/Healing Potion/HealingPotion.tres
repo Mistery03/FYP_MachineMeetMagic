@@ -4,7 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://1go2jdnplx4l" path="res://Potion/Heal/Healing Potion/HealingPotion.tscn" id="1_krgqs"]
 [ext_resource type="Texture2D" uid="uid://dw0wj1ftq8uye" path="res://Asset/potionSS.png" id="2_mp31s"]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_lyhjq"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_0hg1n"]
 atlas = ExtResource("2_mp31s")
 region = Rect2(32, 0, 32, 32)
 
@@ -12,6 +12,7 @@ region = Rect2(32, 0, 32, 32)
 script = ExtResource("1_0lskv")
 name = "Healing Potion"
 category = "Heal"
-isThrowable = null
-potion = ExtResource("1_krgqs")
-potionSprite = SubResource("AtlasTexture_lyhjq")
+amount = 5
+isThrowable = false
+scene = ExtResource("1_krgqs")
+potionTexture = SubResource("AtlasTexture_0hg1n")
