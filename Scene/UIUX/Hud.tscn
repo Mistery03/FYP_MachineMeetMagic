@@ -1,14 +1,16 @@
-[gd_scene load_steps=4 format=3 uid="uid://b4op507tnfvgw"]
+[gd_scene load_steps=5 format=3 uid="uid://b4op507tnfvgw"]
 
+[ext_resource type="Script" path="res://Scene/UIUX/Hud.gd" id="1_7icip"]
 [ext_resource type="Texture2D" uid="uid://bg5c8m1a5wibs" path="res://Asset/UIUX/healthbarUnder.png" id="1_b6oaw"]
 [ext_resource type="Texture2D" uid="uid://cqm4lwbhuhlqd" path="res://Asset/UIUX/healthbarProgress.png" id="2_cy5g7"]
 [ext_resource type="Script" path="res://Scene/UIUX/HPProgressBar.gd" id="3_yt3vs"]
 
-[node name="Hud" type="Node2D"]
+[node name="Hud" type="CanvasLayer"]
+script = ExtResource("1_7icip")
 
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
-
-[node name="HPProgressBar" type="TextureProgressBar" parent="CanvasLayer"]
+[node name="HPProgressBar" type="TextureProgressBar" parent="."]
+unique_name_in_owner = true
+texture_filter = 1
 offset_left = 16.0
 offset_top = 16.0
 offset_right = 362.0
@@ -18,7 +20,7 @@ texture_under = ExtResource("1_b6oaw")
 texture_progress = ExtResource("2_cy5g7")
 script = ExtResource("3_yt3vs")
 
-[node name="ManaProgressBar" type="TextureProgressBar" parent="CanvasLayer"]
+[node name="ManaProgressBar" type="TextureProgressBar" parent="."]
 offset_left = 17.0
 offset_top = 80.0
 offset_right = 363.0

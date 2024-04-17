@@ -1,14 +1,20 @@
 extends TextureProgressBar
 
-@export var player: Player
-
+var player: Player
+signal increaseHP
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	update() # Replace with function body.
+	#value = player.currHealth
+	pass
+	#update() # Replace with function body.
 
-func update():
-	value = player.currHealth * 100 / 100
+func update(player: Player):
+	value = player.currHealth
+	
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	pass
+
+func increaseHealth():
+	
