@@ -7,3 +7,4 @@ extends Resource
 @export var MaxMana:float
 @export var MaxDefence:float
 
+	
