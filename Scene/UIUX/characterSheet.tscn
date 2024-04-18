@@ -1,3 +1,5 @@
 [gd_scene format=3 uid="uid://oq5f260mrj2o"]
 
-[node name="CharacterSheet" type="Node2D"]
+[node name="CharacterSheet" type="Control"]
+layout_mode = 3
+anchors_preset = 0
