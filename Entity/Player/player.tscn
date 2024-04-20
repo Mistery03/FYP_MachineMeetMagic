@@ -127,6 +127,7 @@ _data = {
 }
 
 [node name="Player" type="CharacterBody2D"]
+scale = Vector2(0.1, 0.1)
 script = ExtResource("1_xfdxb")
 playerData = ExtResource("2_g17go")
 potionObject = ExtResource("3_41una")
@@ -152,3 +153,4 @@ script = ExtResource("5_5bgkf")
 potionDataList = Array[Resource("res://Potion/Data/PotionData.gd")]([ExtResource("3_41una"), ExtResource("7_asdtf")])
 
 [node name="Camera2D" type="Camera2D" parent="."]
+zoom = Vector2(3, 3)
