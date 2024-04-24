@@ -27,7 +27,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0, 0.2, 0.4, 0.6),
 "transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 1,
-"values": [1, 2, 1, 2]
+"values": [1, 13, 1, 13]
 }
 
 [sub_resource type="Animation" id="Animation_jevvs"]
@@ -43,24 +43,6 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [0]
-}
-
-[sub_resource type="Animation" id="Animation_kan5q"]
-resource_name = "idleSide"
-length = 0.1
-loop_mode = 1
-step = 0.2
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("PlayerSprite:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [4]
 }
 
 [sub_resource type="Animation" id="Animation_my3d6"]
@@ -117,11 +99,29 @@ tracks/0/keys = {
 "values": [3, 4, 5, 4]
 }
 
+[sub_resource type="Animation" id="Animation_kan5q"]
+resource_name = "idleSideLeft"
+length = 0.7
+loop_mode = 1
+step = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("PlayerSprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [4, 12, 4, 12]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_ls5qq"]
 _data = {
 "Idle": SubResource("Animation_5y68e"),
 "RESET": SubResource("Animation_jevvs"),
-"idleSide": SubResource("Animation_kan5q"),
+"idleSideLeft": SubResource("Animation_kan5q"),
 "walkBack": SubResource("Animation_my3d6"),
 "walkFront": SubResource("Animation_a3iot"),
 "walkSide": SubResource("Animation_o3ehn")
@@ -134,15 +134,14 @@ playerData = ExtResource("2_g17go")
 potionObject = ExtResource("3_41una")
 
 [node name="Camera2D" type="Camera2D" parent="."]
-scale = Vector2(1, 1)
-zoom = Vector2(3, 3)
+zoom = Vector2(5, 5)
 
 [node name="PlayerSprite" type="Sprite2D" parent="."]
 texture_filter = 1
 scale = Vector2(6, 6)
 texture = ExtResource("1_ksidj")
 hframes = 3
-vframes = 4
+vframes = 5
 
 [node name="CollisionShape3D" type="CollisionShape2D" parent="."]
 position = Vector2(3, 18)
@@ -159,3 +158,17 @@ potionDataList = Array[Resource("res://Potion/Data/PotionData.gd")]([ExtResource
 
 [node name="StateManager" type="Node" parent="."]
 script = ExtResource("7_0owwg")
+
+[node name="Idle" type="Node" parent="StateManager"]
+
+[node name="Move" type="Node" parent="StateManager"]
+
+[node name="Build" type="Node" parent="StateManager"]
+
+[node name="CastMagic" type="Node" parent="StateManager"]
+
+[node name="DrinkPotion" type="Node" parent="StateManager"]
+
+[node name="Dodge" type="Node" parent="StateManager"]
+
+[node name="Gather" type="Node" parent="StateManager"]
