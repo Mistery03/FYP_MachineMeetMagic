@@ -11,9 +11,6 @@ const JUMP_VELOCITY = 4.5
 
 var potion:Potion
 
-# Get the gravity from the project settings to be synced with RigidBody nodes.
-var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
-
 func _ready():
 	currHealth = playerData.MaxHealth
 	currMana = playerData.MaxMana
@@ -25,8 +22,7 @@ func _ready():
 func _physics_process(delta):
 	
 
-	# Get the input direction and handle the movement/deceleration.
-	# As good practice, you should replace UI actions with custom gameplay actions.
+	
 
 
 	move_and_slide()

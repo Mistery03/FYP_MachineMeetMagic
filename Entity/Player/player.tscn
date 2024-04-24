@@ -1,10 +1,11 @@
-[gd_scene load_steps=15 format=3 uid="uid://c1vsfoc55pk0w"]
+[gd_scene load_steps=16 format=3 uid="uid://c1vsfoc55pk0w"]
 
 [ext_resource type="Texture2D" uid="uid://bd32dcnew3uvf" path="res://Asset/L.png" id="1_ksidj"]
 [ext_resource type="Script" path="res://Entity/Player/player.gd" id="1_xfdxb"]
 [ext_resource type="Resource" uid="uid://c6joqno41m2ls" path="res://Entity/Player/playerData.tres" id="2_g17go"]
 [ext_resource type="Resource" uid="uid://doo0oqvv31wtn" path="res://Potion/Buff/Defence Potion/DefencePotion.tres" id="3_41una"]
 [ext_resource type="Script" path="res://Potion/PotionManager.gd" id="5_5bgkf"]
+[ext_resource type="Script" path="res://Entity/State/StateMachine.gd" id="7_0owwg"]
 [ext_resource type="Resource" uid="uid://b0rx68wwi0q20" path="res://Potion/Heal/Healing Potion/HealingPotion.tres" id="7_asdtf"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_5n34a"]
@@ -132,6 +133,10 @@ script = ExtResource("1_xfdxb")
 playerData = ExtResource("2_g17go")
 potionObject = ExtResource("3_41una")
 
+[node name="Camera2D" type="Camera2D" parent="."]
+scale = Vector2(1, 1)
+zoom = Vector2(3, 3)
+
 [node name="PlayerSprite" type="Sprite2D" parent="."]
 texture_filter = 1
 scale = Vector2(6, 6)
@@ -152,5 +157,5 @@ libraries = {
 script = ExtResource("5_5bgkf")
 potionDataList = Array[Resource("res://Potion/Data/PotionData.gd")]([ExtResource("3_41una"), ExtResource("7_asdtf")])
 
-[node name="Camera2D" type="Camera2D" parent="."]
-zoom = Vector2(3, 3)
+[node name="StateManager" type="Node" parent="."]
+script = ExtResource("7_0owwg")
