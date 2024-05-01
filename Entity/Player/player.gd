@@ -9,8 +9,9 @@ const JUMP_VELOCITY = 4.5
 
 @onready var potion_manager = $PotionManager
 @onready var state_manager = $StateManager
-@onready var animation = $Animation
 @onready var player_sprite = $PlayerSprite
+@onready var animation = $Animation
+
 
 var potion:Potion
 
@@ -19,18 +20,17 @@ func _ready() -> void:
 	currMana = playerData.MaxMana
 	currStamina = playerData.MaxStamina
 	potion_manager.init(self)
-	
-	
+	state_manager.init(self,animation)
+
+func _unhandled_input(event: InputEvent) -> void:
+	state_manager.process_input(event)
 
 func _physics_process(delta) -> void:
-	
+	state_manager.process_physics(delta)
 
 	
-
-
-	move_and_slide()
 
 func _process(delta) -> void:
-	pass
+	state_manager.process_frame(delta)
 		
 

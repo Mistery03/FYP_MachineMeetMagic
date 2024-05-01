@@ -5,7 +5,8 @@ extends Node
 
 var current_state: State
 
-func init(parent: Entity, animations: AnimationPlayer) -> void:
+func init(parent: Player, animations: AnimatedSprite2D) -> void:
+	print(parent)
 	for child in get_children():
 		child.parent = parent
 		child.animations = animations

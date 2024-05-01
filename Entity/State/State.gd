@@ -2,16 +2,16 @@ class_name State
 extends Node
 
 @export
-var animation_name: String
+var animation_name: String = "IDLE"
 @export
 var move_speed: float = 300
 
 # Hold a reference to the parent so that it can be controlled by the state
-var parent: Entity
-var animations: AnimationPlayer
+var parent: Player
+var animations: AnimatedSprite2D
 
 func enter() -> void:
-	animations.play(animation_name)
+	animations.play(animation_name.to_upper())
 
 func exit() -> void:
 	pass

@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://c1vsfoc55pk0w"]
+[gd_scene load_steps=32 format=3 uid="uid://c1vsfoc55pk0w"]
 
 [ext_resource type="Texture2D" uid="uid://bd32dcnew3uvf" path="res://Asset/L.png" id="1_ksidj"]
 [ext_resource type="Script" path="res://Entity/Player/player.gd" id="1_xfdxb"]
@@ -7,125 +7,197 @@
 [ext_resource type="Script" path="res://Potion/PotionManager.gd" id="5_5bgkf"]
 [ext_resource type="Script" path="res://Entity/State/StateMachine.gd" id="7_0owwg"]
 [ext_resource type="Resource" uid="uid://b0rx68wwi0q20" path="res://Potion/Heal/Healing Potion/HealingPotion.tres" id="7_asdtf"]
+[ext_resource type="Script" path="res://Entity/State/Idle.gd" id="8_5d7eh"]
+[ext_resource type="Script" path="res://Entity/State/Move.gd" id="9_5ji7g"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_o46v5"]
+atlas = ExtResource("1_ksidj")
+region = Rect2(96, 160, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7k7d5"]
+atlas = ExtResource("1_ksidj")
+region = Rect2(128, 160, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ig6wc"]
+atlas = ExtResource("1_ksidj")
+region = Rect2(160, 160, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_344ge"]
+atlas = ExtResource("1_ksidj")
+region = Rect2(0, 160, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_31m1k"]
+atlas = ExtResource("1_ksidj")
+region = Rect2(32, 160, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yrotq"]
+atlas = ExtResource("1_ksidj")
+region = Rect2(64, 160, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tf0gl"]
+atlas = ExtResource("1_ksidj")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_x610m"]
+atlas = ExtResource("1_ksidj")
+region = Rect2(128, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lx3k1"]
+atlas = ExtResource("1_ksidj")
+region = Rect2(0, 128, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_eq0v3"]
+atlas = ExtResource("1_ksidj")
+region = Rect2(32, 128, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qdy4d"]
+atlas = ExtResource("1_ksidj")
+region = Rect2(64, 128, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hvnf4"]
+atlas = ExtResource("1_ksidj")
+region = Rect2(96, 128, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fbuvu"]
+atlas = ExtResource("1_ksidj")
+region = Rect2(128, 128, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_u18op"]
+atlas = ExtResource("1_ksidj")
+region = Rect2(160, 128, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3nerg"]
+atlas = ExtResource("1_ksidj")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_p7vc5"]
+atlas = ExtResource("1_ksidj")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ru38l"]
+atlas = ExtResource("1_ksidj")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_50o2q"]
+atlas = ExtResource("1_ksidj")
+region = Rect2(128, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_e77vn"]
+atlas = ExtResource("1_ksidj")
+region = Rect2(96, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ck3h6"]
+atlas = ExtResource("1_ksidj")
+region = Rect2(160, 32, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_47nfc"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_o46v5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7k7d5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ig6wc")
+}],
+"loop": true,
+"name": &"FALLEN",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_344ge")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_31m1k")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_yrotq")
+}],
+"loop": true,
+"name": &"FALLING",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tf0gl")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_x610m")
+}],
+"loop": true,
+"name": &"IDLE",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lx3k1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_eq0v3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qdy4d")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hvnf4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fbuvu")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_u18op")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qdy4d")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_eq0v3")
+}],
+"loop": true,
+"name": &"ROLL",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3nerg")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_p7vc5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3nerg")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ru38l")
+}],
+"loop": true,
+"name": &"WALKFRONT",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_50o2q")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_e77vn")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_50o2q")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ck3h6")
+}],
+"loop": true,
+"name": &"WALKSIDE",
+"speed": 5.0
+}]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_5n34a"]
 radius = 56.0
 height = 164.0
-
-[sub_resource type="Animation" id="Animation_5y68e"]
-resource_name = "Idle"
-length = 0.7
-loop_mode = 1
-step = 0.2
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("PlayerSprite:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.2, 0.4, 0.6),
-"transitions": PackedFloat32Array(1, 1, 1, 1),
-"update": 1,
-"values": [1, 13, 1, 13]
-}
-
-[sub_resource type="Animation" id="Animation_jevvs"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("PlayerSprite:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [0]
-}
-
-[sub_resource type="Animation" id="Animation_my3d6"]
-resource_name = "walkBack"
-length = 0.7
-loop_mode = 1
-step = 0.2
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("PlayerSprite:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.2, 0.4, 0.6),
-"transitions": PackedFloat32Array(1, 1, 1, 1),
-"update": 1,
-"values": [9, 10, 11, 10]
-}
-
-[sub_resource type="Animation" id="Animation_a3iot"]
-resource_name = "walkFront"
-length = 0.7
-loop_mode = 1
-step = 0.2
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("PlayerSprite:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.2, 0.4, 0.6),
-"transitions": PackedFloat32Array(1, 1, 1, 1),
-"update": 1,
-"values": [0, 1, 2, 1]
-}
-
-[sub_resource type="Animation" id="Animation_o3ehn"]
-resource_name = "walkSide"
-length = 0.7
-loop_mode = 1
-step = 0.2
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("PlayerSprite:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.2, 0.4, 0.6),
-"transitions": PackedFloat32Array(1, 1, 1, 1),
-"update": 1,
-"values": [3, 4, 5, 4]
-}
-
-[sub_resource type="Animation" id="Animation_kan5q"]
-resource_name = "idleSideLeft"
-length = 0.7
-loop_mode = 1
-step = 0.2
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("PlayerSprite:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.2, 0.4, 0.6),
-"transitions": PackedFloat32Array(1, 1, 1, 1),
-"update": 1,
-"values": [4, 12, 4, 12]
-}
-
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_ls5qq"]
-_data = {
-"Idle": SubResource("Animation_5y68e"),
-"RESET": SubResource("Animation_jevvs"),
-"idleSideLeft": SubResource("Animation_kan5q"),
-"walkBack": SubResource("Animation_my3d6"),
-"walkFront": SubResource("Animation_a3iot"),
-"walkSide": SubResource("Animation_o3ehn")
-}
 
 [node name="Player" type="CharacterBody2D"]
 scale = Vector2(0.1, 0.1)
@@ -137,38 +209,43 @@ potionObject = ExtResource("3_41una")
 zoom = Vector2(5, 5)
 
 [node name="PlayerSprite" type="Sprite2D" parent="."]
+visible = false
 texture_filter = 1
 scale = Vector2(6, 6)
 texture = ExtResource("1_ksidj")
 hframes = 3
 vframes = 5
+frame = 1
+
+[node name="Animation" type="AnimatedSprite2D" parent="."]
+texture_filter = 1
+scale = Vector2(5, 5)
+sprite_frames = SubResource("SpriteFrames_47nfc")
+animation = &"FALLEN"
+autoplay = "IDLE"
+frame_progress = 0.560347
 
 [node name="CollisionShape3D" type="CollisionShape2D" parent="."]
-position = Vector2(3, 18)
 shape = SubResource("CapsuleShape2D_5n34a")
-
-[node name="Animation" type="AnimationPlayer" parent="."]
-libraries = {
-"": SubResource("AnimationLibrary_ls5qq")
-}
 
 [node name="PotionManager" type="Node" parent="."]
 script = ExtResource("5_5bgkf")
 potionDataList = Array[Resource("res://Potion/Data/PotionData.gd")]([ExtResource("3_41una"), ExtResource("7_asdtf")])
 
-[node name="StateManager" type="Node" parent="."]
+[node name="StateManager" type="Node" parent="." node_paths=PackedStringArray("starting_state")]
 script = ExtResource("7_0owwg")
+starting_state = NodePath("Idle")
 
 [node name="Idle" type="Node" parent="StateManager"]
+script = ExtResource("8_5d7eh")
+inputList = {
+"MoveBackward": "MoveBackward",
+"MoveForward": "MoveForward",
+"MoveLeft": "MoveLeft",
+"MoveRight": "MoveRight"
+}
+animation_name = "Idle"
 
 [node name="Move" type="Node" parent="StateManager"]
-
-[node name="Build" type="Node" parent="StateManager"]
-
-[node name="CastMagic" type="Node" parent="StateManager"]
-
-[node name="DrinkPotion" type="Node" parent="StateManager"]
-
-[node name="Dodge" type="Node" parent="StateManager"]
-
-[node name="Gather" type="Node" parent="StateManager"]
+script = ExtResource("9_5ji7g")
+animation_name = "WalkSide"
