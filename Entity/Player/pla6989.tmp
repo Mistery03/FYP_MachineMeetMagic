@@ -286,9 +286,10 @@ script = ExtResource("9_5ji7g")
 idle_state = NodePath("../Idle")
 animation_name = "WalkSide"
 move_speed = 7000.0
+accel = null
 animationList = {
-"WalkBackward": "WalkBackward",
-"WalkFront": "WalkFront"
+"MoveBackward": "WalkBackward",
+"MoveFront": "WalkFront"
 }
 
 [node name="MoveComponent" type="Node" parent="."]

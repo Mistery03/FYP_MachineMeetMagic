@@ -4,6 +4,11 @@ extends Node
  
 @export var PotionHUD:Control
 @export var potionDataList:Array[PotionData]
+@export var inputList:Dictionary ={
+	"ChangePotion":"",
+	"DrinkPotion":"",
+	"UseUtility":"",
+}
 
 
 var player:Player
@@ -26,18 +31,18 @@ func init(player:Player) -> void:
 func _process(delta) -> void:
 	if potionDataList.size() <= 0:
 		return	
-	if Input.is_action_just_pressed("ChangePotion") and potionList.size() > 1:
+	if Input.is_action_just_pressed(inputList.find_key("ChangePotion").to_upper()) and potionList.size() > 1:
 		if _index == 0:
 			_index = 1
 		elif _index == 1:
 			_index = 0
 			
-	if Input.is_action_just_pressed("DrinkPotion") and potionDataList[_index].amount > 0:
+	if Input.is_action_just_pressed(inputList.find_key("DrinkPotion").to_upper()) and potionDataList[_index].amount > 0:
 		potionList[_index].execute()
 		potionDataList[_index].amount -= 1
 		print(potionDataList[_index].amount)
 	
-	if Input.is_action_just_pressed("UseUtility") and utiliyPotion != null:
+	if Input.is_action_just_pressed(inputList.find_key("UseUtility").to_upper()) and utiliyPotion != null:
 		utiliyPotion.execute()
 	
 	

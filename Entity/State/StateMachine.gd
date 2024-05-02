@@ -5,11 +5,12 @@ extends Node
 
 var current_state: State
 
-func init(parent: Player, animations: AnimatedSprite2D) -> void:
+func init(parent: Player, animations: AnimatedSprite2D,moveComponent:IMoveComponent) -> void:
 	print(parent)
 	for child in get_children():
 		child.parent = parent
 		child.animations = animations
+		child.move_component = moveComponent
 	
 	change_state(starting_state)
 # Change to the new state by first calling any exit logic on the current state.

@@ -30,11 +30,9 @@ func lerp_to_zero():
 		parent.velocity.x = 0.0
 
 func process_input(event: InputEvent) -> State:
-	var moveDirection = Input.get_vector(inputList.find_key("MoveLeft").to_upper(),
-	inputList.find_key("MoveRight").to_upper(),inputList.find_key("MoveForward").to_upper(),
-	inputList.find_key("MoveBackward").to_upper())
+	move_component.axis = move_component.get_movement_direction()
 
-	if moveDirection.axis:
+	if move_component.axis:
 		return move_state
 
 	return null
