@@ -1,5 +1,6 @@
-[gd_scene load_steps=7 format=3 uid="uid://dm1j4it5oof3n"]
+[gd_scene load_steps=8 format=3 uid="uid://dm1j4it5oof3n"]
 
+[ext_resource type="Script" path="res://Scene/Home/Home.gd" id="1_iycag"]
 [ext_resource type="PackedScene" uid="uid://c1vsfoc55pk0w" path="res://Entity/Player/player.tscn" id="1_jnw16"]
 [ext_resource type="Texture2D" uid="uid://cy01yfe162ynm" path="res://Asset/Machine.png" id="1_vetej"]
 [ext_resource type="Texture2D" uid="uid://c0q82oth7xkok" path="res://Asset/homeTileMap.png" id="2_wfa7x"]
@@ -207,6 +208,7 @@ sources/0 = SubResource("TileSetAtlasSource_klcm4")
 sources/1 = SubResource("TileSetAtlasSource_23vbt")
 
 [node name="Home" type="Node2D"]
+script = ExtResource("1_iycag")
 
 [node name="TileMap" type="TileMap" parent="."]
 texture_filter = 1

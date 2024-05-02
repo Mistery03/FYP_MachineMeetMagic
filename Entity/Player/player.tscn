@@ -1,4 +1,4 @@
-[gd_scene load_steps=36 format=3 uid="uid://c1vsfoc55pk0w"]
+[gd_scene load_steps=37 format=3 uid="uid://c1vsfoc55pk0w"]
 
 [ext_resource type="Texture2D" uid="uid://bd32dcnew3uvf" path="res://Asset/L.png" id="1_ksidj"]
 [ext_resource type="Script" path="res://Entity/Player/player.gd" id="1_xfdxb"]
@@ -9,6 +9,7 @@
 [ext_resource type="Resource" uid="uid://b0rx68wwi0q20" path="res://Potion/Heal/Healing Potion/HealingPotion.tres" id="7_asdtf"]
 [ext_resource type="Script" path="res://Entity/State/Idle.gd" id="8_5d7eh"]
 [ext_resource type="Script" path="res://Entity/State/Move.gd" id="9_5ji7g"]
+[ext_resource type="Script" path="res://Entity/Player/Build.gd" id="10_8exr0"]
 [ext_resource type="Script" path="res://Entity/Player/MoveComponent.gd" id="10_gim7i"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_o46v5"]
@@ -235,8 +236,10 @@ script = ExtResource("1_xfdxb")
 playerData = ExtResource("2_g17go")
 potionObject = ExtResource("3_41una")
 
-[node name="Camera2D" type="Camera2D" parent="."]
-zoom = Vector2(5, 5)
+[node name="Camera" type="Camera2D" parent="."]
+zoom = Vector2(7, 7)
+position_smoothing_enabled = true
+position_smoothing_speed = 10.0
 
 [node name="PlayerSprite" type="Sprite2D" parent="."]
 visible = false
@@ -270,14 +273,12 @@ inputList = {
 script = ExtResource("7_0owwg")
 starting_state = NodePath("Idle")
 
-[node name="Idle" type="Node" parent="StateManager" node_paths=PackedStringArray("move_state")]
+[node name="Idle" type="Node" parent="StateManager" node_paths=PackedStringArray("move_state", "build_state")]
 script = ExtResource("8_5d7eh")
 move_state = NodePath("../Move")
+build_state = NodePath("../Build")
 inputList = {
-"MoveBackward": "MoveBackward",
-"MoveForward": "MoveForward",
-"MoveLeft": "MoveLeft",
-"MoveRight": "MoveRight"
+"Build": "Build"
 }
 animation_name = "Idle"
 
@@ -290,6 +291,15 @@ animationList = {
 "WalkBackward": "WalkBackward",
 "WalkFront": "WalkFront"
 }
+
+[node name="Build" type="Node" parent="StateManager" node_paths=PackedStringArray("idle_state")]
+script = ExtResource("10_8exr0")
+idle_state = NodePath("../Idle")
+inputList = {
+"Build": "Build",
+"Exit": "Exit"
+}
+move_speed = 10000.0
 
 [node name="MoveComponent" type="Node" parent="."]
 script = ExtResource("10_gim7i")

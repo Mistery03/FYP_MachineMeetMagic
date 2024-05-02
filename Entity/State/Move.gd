@@ -12,8 +12,7 @@ func process_physics(delta: float) -> State:
 	if !move_component.get_movement_direction():
 		return idle_state
 
-	parent.velocity.x = move_component.get_movement_direction().x * move_speed * delta
-	parent.velocity.y = move_component.get_movement_direction().y * move_speed * delta
+	parent.velocity = move_component.get_movement_direction() * move_speed * delta
 	parent.animation.flip_h = move_component.axis.x < 0
 	if parent.velocity.y < 0:
 		animations.play(animationList.find_key("WalkBackward").to_upper())

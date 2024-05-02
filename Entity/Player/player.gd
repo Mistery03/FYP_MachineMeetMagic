@@ -11,16 +11,21 @@ const JUMP_VELOCITY = 4.5
 @onready var state_manager = $StateManager
 @onready var animation = $Animation
 @onready var move_component = $MoveComponent
-
+@onready var camera = $Camera
 
 var potion:Potion
+var isBuildEnabled:bool
+var homeTilemap:TileMap
+var mousePos:Vector2
+
+
 
 func _ready() -> void:
 	currHealth = playerData.MaxHealth
 	currMana = playerData.MaxMana
 	currStamina = playerData.MaxStamina
 	potion_manager.init(self)
-	state_manager.init(self,animation,move_component)
+	state_manager.init(self,animation,move_component,camera)
 
 func _unhandled_input(event: InputEvent) -> void:
 	state_manager.process_input(event)
@@ -31,6 +36,7 @@ func _physics_process(delta) -> void:
 	
 
 func _process(delta) -> void:
+	mousePos = get_global_mouse_position()
 	state_manager.process_frame(delta)
 		
 

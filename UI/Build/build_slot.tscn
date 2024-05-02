@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://bwh52l8hhy4o2"]
+
+[ext_resource type="Texture2D" uid="uid://bmyhgaqtdma1t" path="res://Asset/UIUX/slot.png" id="1_an5jc"]
+
+[node name="BuildSlot" type="Panel"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture_filter = 1
+texture = ExtResource("1_an5jc")
+centered = false

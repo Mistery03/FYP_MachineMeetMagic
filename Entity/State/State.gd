@@ -17,6 +17,7 @@ var animationList: Dictionary={
 var parent: Player
 var animations: AnimatedSprite2D
 var move_component: IMoveComponent
+var camera:Camera2D
 
 func enter() -> void:
 	animations.play(animation_name.to_upper())
