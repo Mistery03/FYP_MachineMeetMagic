@@ -1,7 +1,9 @@
-[gd_scene load_steps=3 format=3 uid="uid://dgn61wamn10el"]
+[gd_scene load_steps=5 format=3 uid="uid://dgn61wamn10el"]
 
+[ext_resource type="Script" path="res://UI/Build/build_menu.gd" id="1_0ur8d"]
 [ext_resource type="Texture2D" uid="uid://dy6bsmjnf8u44" path="res://Asset/UIUX/Container.png" id="1_bxykf"]
-[ext_resource type="PackedScene" uid="uid://bwh52l8hhy4o2" path="res://UI/Build/build_slot.tscn" id="2_gxta4"]
+[ext_resource type="PackedScene" uid="uid://b8l6h6q66lu2w" path="res://UI/Build/build_slot.tscn" id="2_gxta4"]
+[ext_resource type="FontFile" uid="uid://d06mhokaekc87" path="res://Asset/Font/editundo.ttf" id="2_kkbaq"]
 
 [node name="BuildMenu" type="Control"]
 layout_mode = 3
@@ -10,18 +12,63 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1_0ur8d")
 
 [node name="NinePatchRect" type="NinePatchRect" parent="."]
 texture_filter = 1
 layout_mode = 0
-offset_right = 40.0
-offset_bottom = 40.0
+offset_right = 166.0
+offset_bottom = 208.0
 texture = ExtResource("1_bxykf")
+region_rect = Rect2(0, 0, 32, 32)
+
+[node name="Label" type="Label" parent="NinePatchRect"]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -50.0
+offset_top = 10.0
+offset_right = 51.0
+offset_bottom = 33.0
+grow_horizontal = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("2_kkbaq")
+theme_override_font_sizes/font_size = 18
+text = "BUILD MENU"
+horizontal_alignment = 1
 
 [node name="GridContainer" type="GridContainer" parent="NinePatchRect"]
-layout_mode = 0
-offset_right = 40.0
-offset_bottom = 40.0
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -70.0
+offset_top = 31.0
+offset_right = 70.0
+offset_bottom = 99.0
+grow_horizontal = 2
+columns = 4
 
 [node name="BuildSlot" parent="NinePatchRect/GridContainer" instance=ExtResource("2_gxta4")]
 layout_mode = 2
+buildingName = "Extractor"
+atlasCoord = Vector2i(0, 1)
+
+[node name="BuildSlot2" parent="NinePatchRect/GridContainer" instance=ExtResource("2_gxta4")]
+layout_mode = 2
+buildingName = "Scroll Scriber"
+atlasCoord = Vector2i(0, 2)
+
+[node name="BuildSlot3" parent="NinePatchRect/GridContainer" instance=ExtResource("2_gxta4")]
+layout_mode = 2
+
+[node name="BuildSlot4" parent="NinePatchRect/GridContainer" instance=ExtResource("2_gxta4")]
+layout_mode = 2
+
+[node name="BuildSlot5" parent="NinePatchRect/GridContainer" instance=ExtResource("2_gxta4")]
+layout_mode = 2
+
+[connection signal="OnBuildingSelect" from="NinePatchRect/GridContainer/BuildSlot" to="." method="_on_build_slot_on_building_select"]
+[connection signal="OnBuildingSelect" from="NinePatchRect/GridContainer/BuildSlot2" to="." method="_on_build_slot_2_on_building_select"]

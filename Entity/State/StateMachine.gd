@@ -5,6 +5,7 @@ extends Node
 
 var current_state: State
 
+
 func init(parent: Player, animations: AnimatedSprite2D,moveComponent:IMoveComponent,camera:Camera2D) -> void:
 	print(parent)
 	for child in get_children():

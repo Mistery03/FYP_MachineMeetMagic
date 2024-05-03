@@ -1,10 +1,28 @@
-[gd_scene load_steps=2 format=3 uid="uid://bwh52l8hhy4o2"]
+[gd_scene load_steps=3 format=3 uid="uid://b8l6h6q66lu2w"]
 
 [ext_resource type="Texture2D" uid="uid://bmyhgaqtdma1t" path="res://Asset/UIUX/slot.png" id="1_an5jc"]
+[ext_resource type="Script" path="res://UI/Build/build_slot.gd" id="1_mxukq"]
 
 [node name="BuildSlot" type="Panel"]
+self_modulate = Color(1, 1, 1, 0)
+custom_minimum_size = Vector2(32, 32)
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = -1120.0
+offset_bottom = -616.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_mxukq")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture_filter = 1
 texture = ExtResource("1_an5jc")
 centered = false
+
+[node name="Button" type="Button" parent="."]
+layout_mode = 0
+offset_right = 32.0
+offset_bottom = 32.0
+
+[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]
