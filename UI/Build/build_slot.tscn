@@ -1,7 +1,12 @@
-[gd_scene load_steps=3 format=3 uid="uid://b8l6h6q66lu2w"]
+[gd_scene load_steps=5 format=3 uid="uid://b8l6h6q66lu2w"]
 
 [ext_resource type="Texture2D" uid="uid://bmyhgaqtdma1t" path="res://Asset/UIUX/slot.png" id="1_an5jc"]
 [ext_resource type="Script" path="res://UI/Build/build_slot.gd" id="1_mxukq"]
+[ext_resource type="Texture2D" uid="uid://cy01yfe162ynm" path="res://Asset/Machine.png" id="3_sebgp"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lix1r"]
+atlas = ExtResource("3_sebgp")
+region = Rect2(0, 0, 32, 32)
 
 [node name="BuildSlot" type="Panel"]
 self_modulate = Color(1, 1, 1, 0)
@@ -20,7 +25,18 @@ texture_filter = 1
 texture = ExtResource("1_an5jc")
 centered = false
 
+[node name="TextureRect" type="TextureRect" parent="."]
+texture_filter = 1
+layout_mode = 0
+offset_left = 2.0
+offset_top = 1.0
+offset_right = 42.0
+offset_bottom = 41.0
+scale = Vector2(0.7, 0.7)
+texture = SubResource("AtlasTexture_lix1r")
+
 [node name="Button" type="Button" parent="."]
+self_modulate = Color(1, 1, 1, 0.0784314)
 layout_mode = 0
 offset_right = 32.0
 offset_bottom = 32.0

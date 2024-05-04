@@ -231,7 +231,7 @@ animations = [{
 radius = 56.0
 height = 164.0
 
-[node name="Player" type="CharacterBody2D" groups=["invalidPosition"]]
+[node name="Player" type="CharacterBody2D"]
 scale = Vector2(0.1, 0.1)
 script = ExtResource("1_xfdxb")
 playerData = ExtResource("2_g17go")
