@@ -1,9 +1,9 @@
-[gd_scene load_steps=8 format=3 uid="uid://dgn61wamn10el"]
+[gd_scene load_steps=9 format=3 uid="uid://dgn61wamn10el"]
 
 [ext_resource type="Script" path="res://UI/Build/build_menu.gd" id="1_0ur8d"]
 [ext_resource type="Texture2D" uid="uid://dy6bsmjnf8u44" path="res://Asset/UIUX/Container.png" id="1_bxykf"]
 [ext_resource type="PackedScene" uid="uid://b8l6h6q66lu2w" path="res://UI/Build/build_slot.tscn" id="2_gxta4"]
-[ext_resource type="FontFile" uid="uid://d06mhokaekc87" path="res://Asset/Font/editundo.ttf" id="2_kkbaq"]
+[ext_resource type="FontFile" uid="uid://cl3rxpo58micg" path="res://Asset/Font/Lambda-Regular.ttf" id="3_88haw"]
 [ext_resource type="Texture2D" uid="uid://cy01yfe162ynm" path="res://Asset/Machine.png" id="5_25chw"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_t5h55"]
@@ -13,6 +13,10 @@ region = Rect2(0, 32, 32, 32)
 [sub_resource type="AtlasTexture" id="AtlasTexture_pyrnu"]
 atlas = ExtResource("5_25chw")
 region = Rect2(0, 64, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vqshy"]
+atlas = ExtResource("5_25chw")
+region = Rect2(0, 96, 32, 32)
 
 [node name="BuildMenu" type="Control"]
 layout_mode = 3
@@ -40,14 +44,15 @@ layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
-offset_left = -50.0
-offset_top = 10.0
-offset_right = 51.0
-offset_bottom = 33.0
+offset_left = -106.0
+offset_top = 7.0
+offset_right = 4210.0
+offset_bottom = 862.0
 grow_horizontal = 2
+scale = Vector2(0.05, 0.05)
 theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_fonts/font = ExtResource("2_kkbaq")
-theme_override_font_sizes/font_size = 18
+theme_override_fonts/font = ExtResource("3_88haw")
+theme_override_font_sizes/font_size = 400
 text = "BUILD MENU"
 horizontal_alignment = 1
 
@@ -77,6 +82,9 @@ atlasCoord = Vector2i(0, 2)
 
 [node name="BuildSlot3" parent="NinePatchRect/GridContainer" instance=ExtResource("2_gxta4")]
 layout_mode = 2
+buildingName = "Power Generator"
+texture = SubResource("AtlasTexture_vqshy")
+atlasCoord = Vector2i(0, 3)
 
 [node name="BuildSlot4" parent="NinePatchRect/GridContainer" instance=ExtResource("2_gxta4")]
 layout_mode = 2

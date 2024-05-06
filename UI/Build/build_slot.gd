@@ -11,7 +11,7 @@ func _ready():
 
 func _on_button_pressed():
 	build_menu.atlasCoord = atlasCoord
-	build_menu.visible = false
+	build_menu.parentUI.visible = false
 	
 
 
@@ -20,7 +20,7 @@ func _on_button_pressed():
 
 func _on_mouse_entered():
 	build_menu.isInMenu = true
-	print(build_menu.isInMenu )
+
 
 
 func _on_mouse_exited():

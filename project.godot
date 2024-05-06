@@ -17,6 +17,8 @@ config/icon="res://icon.svg"
 
 [display]
 
+window/size/viewport_width=1600
+window/size/viewport_height=900
 window/stretch/mode="canvas_items"
 
 [dotnet]
@@ -83,12 +85,22 @@ EXIT={
 "events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":4194305,"key_label":0,"unicode":0,"echo":false,"script":null)
 ]
 }
+DELETE={
+"deadzone": 0.5,
+"events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":90,"key_label":0,"unicode":122,"echo":false,"script":null)
+]
+}
 
 [layer_names]
 
+2d_physics/layer_1="player"
 3d_physics/layer_1="enviroment"
+2d_physics/layer_2="machine"
 3d_physics/layer_2="player"
+2d_physics/layer_3="furniture"
 3d_physics/layer_3="forage"
+2d_physics/layer_4="pickable"
+2d_physics/layer_5="wall"
 
 [rendering]
 
