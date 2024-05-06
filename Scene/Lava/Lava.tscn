@@ -1,3 +1,3 @@
 [gd_scene format=3 uid="uid://buk4jh4lipook"]
 
-[node name="Lava" type="Node3D"]
+[node name="Lava" type="Node2D"]

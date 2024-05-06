@@ -1,13 +1,18 @@
 class_name Entity
-extends CharacterBody3D
+extends CharacterBody2D
 
-func _ready():
-	pass # Replace with function body.
+#Event
+signal OnHealthIncrease
 
+var currHealth:float = 0
+var currStamina:float = 0
+var currMana:float = 0
+var currState
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	pass
 
-func _moveToPos(pos:Vector3):
+
+func _moveToPos(pos:Vector2):
 	pass

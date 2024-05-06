@@ -5,4 +5,5 @@ extends Resource
 @export var MaxHealth:float
 @export var MaxStamina:float
 @export var MaxMana:float
+@export var MaxDefence:float
 

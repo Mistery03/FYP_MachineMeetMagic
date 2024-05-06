@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=3 uid="uid://c5llbybq22axf"]
+
+[ext_resource type="Script" path="res://Machine/testMachine.gd" id="1_mhlqj"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_n52r5"]
+
+[node name="Machine1" type="MeshInstance3D"]
+mesh = SubResource("BoxMesh_n52r5")
+script = ExtResource("1_mhlqj")
+
+[node name="RayCast3D" type="RayCast3D" parent="."]

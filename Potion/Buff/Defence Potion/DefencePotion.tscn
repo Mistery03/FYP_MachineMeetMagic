@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://by4om3nil2ke3"]
+
+[ext_resource type="Script" path="res://Potion/Buff/Defence Potion/DefencePotion.gd" id="1_bdalk"]
+
+[node name="DefencePotion" type="Node2D"]
+script = ExtResource("1_bdalk")

@@ -1,3 +1,10 @@
-[gd_scene format=3 uid="uid://cdnfwg72d5exi"]
+[gd_scene load_steps=3 format=3 uid="uid://dm1j4it5oof3n"]
 
-[node name="Home" type="Node3D"]
+[ext_resource type="PackedScene" uid="uid://c1vsfoc55pk0w" path="res://Entity/Player/player.tscn" id="1_jnw16"]
+[ext_resource type="PackedScene" uid="uid://b4op507tnfvgw" path="res://Scene/UIUX/Hud.tscn" id="2_tpk55"]
+
+[node name="Home" type="Node2D"]
+
+[node name="Player" parent="." instance=ExtResource("1_jnw16")]
+
+[node name="Hud" parent="." instance=ExtResource("2_tpk55")]

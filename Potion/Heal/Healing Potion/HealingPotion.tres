@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="PotionData" load_steps=5 format=3 uid="uid://b0rx68wwi0q20"]
+
+[ext_resource type="Script" path="res://Potion/Data/PotionData.gd" id="1_0lskv"]
+[ext_resource type="PackedScene" uid="uid://1go2jdnplx4l" path="res://Potion/Heal/Healing Potion/HealingPotion.tscn" id="1_krgqs"]
+[ext_resource type="Texture2D" uid="uid://dw0wj1ftq8uye" path="res://Asset/potionSS.png" id="2_mp31s"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0hg1n"]
+atlas = ExtResource("2_mp31s")
+region = Rect2(32, 0, 32, 32)
+
+[resource]
+script = ExtResource("1_0lskv")
+name = "Healing Potion"
+category = "Heal"
+amount = 5
+isThrowable = false
+scene = ExtResource("1_krgqs")
+potionTexture = SubResource("AtlasTexture_0hg1n")
