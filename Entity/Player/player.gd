@@ -17,8 +17,7 @@ var potion:Potion
 var isBuildEnabled:bool
 var homeTilemap:TileMap
 var mousePos:Vector2
-
-
+var localLevel:Node2D
 
 func _ready() -> void:
 	currHealth = playerData.MaxHealth
@@ -32,9 +31,7 @@ func _unhandled_input(event: InputEvent) -> void:
 
 func _physics_process(delta) -> void:
 	state_manager.process_physics(delta)
-
 	
-
 func _process(delta) -> void:
 	mousePos = get_global_mouse_position()
 	state_manager.process_frame(delta)

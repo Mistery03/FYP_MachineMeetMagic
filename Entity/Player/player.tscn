@@ -1,4 +1,4 @@
-[gd_scene load_steps=40 format=3 uid="uid://c1vsfoc55pk0w"]
+[gd_scene load_steps=41 format=3 uid="uid://c1vsfoc55pk0w"]
 
 [ext_resource type="Texture2D" uid="uid://bd32dcnew3uvf" path="res://Asset/L.png" id="1_ksidj"]
 [ext_resource type="Script" path="res://Entity/Player/player.gd" id="1_xfdxb"]
@@ -14,6 +14,7 @@
 [ext_resource type="Script" path="res://Entity/State/Destroy.gd" id="11_7uhfu"]
 [ext_resource type="PackedScene" uid="uid://dgn61wamn10el" path="res://UI/Build/build_menu.tscn" id="12_58i1p"]
 [ext_resource type="FontFile" uid="uid://cl3rxpo58micg" path="res://Asset/Font/Lambda-Regular.ttf" id="14_me7n8"]
+[ext_resource type="Script" path="res://Entity/Player/InteractComponent.gd" id="15_wh8qd"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_o46v5"]
 atlas = ExtResource("1_ksidj")
@@ -430,3 +431,7 @@ grow_vertical = 2
 theme_override_font_sizes/font_size = 20
 text = "ESC: GO BACK
 "
+
+[node name="InteractComponent" type="Node" parent="." node_paths=PackedStringArray("parent")]
+script = ExtResource("15_wh8qd")
+parent = NodePath("..")
