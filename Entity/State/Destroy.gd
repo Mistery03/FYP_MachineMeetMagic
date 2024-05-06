@@ -10,7 +10,7 @@ var buildUI:Control
 @export
 var buildMenu:Control
 
-@export
+@export	
 var destroyHUD:Control
 
 @export
@@ -47,14 +47,19 @@ func process_physics(delta: float) -> State:
 func process_frame(delta:float) -> State:
 	var parentPos = parent.homeTilemap.local_to_map(parent.position)
 	var mouseTilePos = parent.homeTilemap.local_to_map(parent.mousePos)
-	var tileData:TileData = parent.homeTilemap.get_cell_tile_data(2,mouseTilePos)
-	if tileData:
-		isOccupied = tileData.get_custom_data("occupied")
-		
+	var machineData:TileData = parent.homeTilemap.get_cell_tile_data(2,mouseTilePos) 
+	if machineData:
+		isOccupied = machineData.get_custom_data("occupied")
 		if isOccupied:
 			parent.homeTilemap.set_cell(1,mouseTilePos,0,parent.homeTilemap.get_cell_atlas_coords(2,mouseTilePos))
 			parent.homeTilemap.set_layer_modulate(1,Color.RED)
+			
+			var machineList = parent.localLevel.machineList.get_children()
+			
 			if Input.is_action_just_pressed("ACTION"):
+				for machine in machineList:
+					if machine.position == parent.homeTilemap.map_to_local(mouseTilePos):
+						machine.queue_free()
 				parent.homeTilemap.erase_cell(2,mouseTilePos)
 				parent.homeTilemap.erase_cell(1,mouseTilePos)
 	

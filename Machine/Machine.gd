@@ -3,10 +3,9 @@ extends Node
 
 var machine:Machine 
 var next:Machine = null
-var position:Vector2
 
-func ready():
-	self.position = position
+
+
 
 func _ready():
 	print("machine is working test")

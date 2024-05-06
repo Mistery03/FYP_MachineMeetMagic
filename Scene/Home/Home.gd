@@ -9,11 +9,6 @@ func _ready():
 	player.isBuildEnabled = true
 	player.homeTilemap = tile_map
 	player.localLevel = self
+
 	
-func _process(delta) -> void:
-	if machineList.get_child_count() <= 0:
-		return
-	
-	#for child in machineList.get_children():
-		#print(child.position)
 

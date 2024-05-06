@@ -1,8 +1,7 @@
-[gd_scene load_steps=14 format=3 uid="uid://dprxecily2808"]
+[gd_scene load_steps=13 format=3 uid="uid://dprxecily2808"]
 
 [ext_resource type="Script" path="res://Machine/Material Exchange/Extractor/extractor.gd" id="1_gafqb"]
 [ext_resource type="Texture2D" uid="uid://cy01yfe162ynm" path="res://Asset/Machine.png" id="2_l6ugg"]
-[ext_resource type="Texture2D" uid="uid://bpladeekbslvm" path="res://Asset/grass.png" id="3_rhu68"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ptr5o"]
 atlas = ExtResource("2_l6ugg")
@@ -93,16 +92,3 @@ script = ExtResource("1_gafqb")
 texture_filter = 1
 sprite_frames = SubResource("SpriteFrames_8c6t1")
 animation = &"Processing"
-
-[node name="test" type="Control" parent="."]
-visible = false
-layout_mode = 3
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
-
-[node name="TextureRect" type="TextureRect" parent="test"]
-layout_mode = 0
-offset_right = 40.0
-offset_bottom = 40.0
-texture = ExtResource("3_rhu68")

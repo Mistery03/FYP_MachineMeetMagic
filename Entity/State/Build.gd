@@ -29,7 +29,6 @@ func enter() -> void:
 	super()
 	buildUI.visible = true
 	
-	print("build mode")
 
 	
 
@@ -56,9 +55,10 @@ func process_frame(delta:float) -> State:
 	var parentPos = parent.homeTilemap.local_to_map(parent.position)
 	var mouseTilePos = parent.homeTilemap.local_to_map(parent.mousePos)
 	
-	var floorData:TileData = parent.homeTilemap.get_cell_tile_data(0,mouseTilePos)
+	#named it floorData but really the data is to check if there is floor in the world
+	var floorData:TileData = parent.homeTilemap.get_cell_tile_data(0,mouseTilePos) 
+	#Now this one actually give u data about machine lmao
 	var machineData:TileData = parent.homeTilemap.get_cell_tile_data(2,mouseTilePos)
-	
 	
 	if floorData:
 		parent.homeTilemap.set_cell(1,mouseTilePos,0,buildMenu.atlasCoord)
@@ -70,25 +70,21 @@ func process_frame(delta:float) -> State:
 		var machinePreviewData:TileData = parent.homeTilemap.get_cell_tile_data(1,mouseTilePos)
 		
 		if machinePreviewData:
-			machineInstance =  machinePreviewData.get_custom_data("extractor")
+			machineInstance =  machinePreviewData.get_custom_data(buildMenu.machineName.to_pascal_case())
 			
 		if machineData:
 			isOccupied = machineData.get_custom_data("occupied")
-			# Set the color based on whether the tile is occupied
 			set_tile_color_based_on_occupation(isOccupied, mouseTilePos, parentPos)
 
-			if !isOccupied and Input.is_action_just_pressed("ACTION") and !buildMenu.isInMenu and mouseTilePos != parentPos:
-				set_tile_in_tilemap(mouseTilePos, buildMenu)
 		else:
-			# Default to green if there's no tile data
+			#No need to use isOccupied here cause there no machine to be found
 			set_tile_color_based_on_occupation(false, mouseTilePos, parentPos)
 
 			if Input.is_action_just_pressed("ACTION") and !buildMenu.isInMenu and mouseTilePos != parentPos and machinePreviewData:
 				set_tile_in_tilemap(mouseTilePos, buildMenu)
 				var instance = machineInstance.instantiate()
-				print(parent.homeTilemap.map_to_local(mouseTilePos))
 				instance.position = parent.homeTilemap.map_to_local(mouseTilePos)
-				parent.localLevel.add_child(instance)
+				parent.localLevel.machineList.add_child(instance)
 				
 	return null
 
