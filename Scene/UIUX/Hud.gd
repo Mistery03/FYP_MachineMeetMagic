@@ -27,3 +27,7 @@ func on_bag_pressed() -> void:
 	
 func handle_connecting_signal() -> void:
 	bag_btn.button_down.connect(on_bag_pressed)
+
+
+func _on_bag_btn_pressed():
+	pass # Replace with function body.
