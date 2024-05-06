@@ -1,0 +1,93 @@
+[gd_scene load_steps=9 format=3 uid="uid://dgn61wamn10el"]
+
+[ext_resource type="Script" path="res://UI/Build/build_menu.gd" id="1_0ur8d"]
+[ext_resource type="Texture2D" uid="uid://dy6bsmjnf8u44" path="res://Asset/UIUX/Container.png" id="1_bxykf"]
+[ext_resource type="PackedScene" uid="uid://b8l6h6q66lu2w" path="res://UI/Build/build_slot.tscn" id="2_gxta4"]
+[ext_resource type="FontFile" uid="uid://cl3rxpo58micg" path="res://Asset/Font/Lambda-Regular.ttf" id="3_88haw"]
+[ext_resource type="Texture2D" uid="uid://cy01yfe162ynm" path="res://Asset/Machine.png" id="5_25chw"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_t5h55"]
+atlas = ExtResource("5_25chw")
+region = Rect2(0, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pyrnu"]
+atlas = ExtResource("5_25chw")
+region = Rect2(0, 64, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vqshy"]
+atlas = ExtResource("5_25chw")
+region = Rect2(0, 96, 32, 32)
+
+[node name="BuildMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(3, 3)
+script = ExtResource("1_0ur8d")
+
+[node name="NinePatchRect" type="NinePatchRect" parent="."]
+texture_filter = 1
+layout_mode = 0
+offset_left = 0.333333
+offset_top = 5.33333
+offset_right = 166.333
+offset_bottom = 213.333
+texture = ExtResource("1_bxykf")
+region_rect = Rect2(0, 0, 32, 32)
+
+[node name="Label" type="Label" parent="NinePatchRect"]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -106.0
+offset_top = 7.0
+offset_right = 4210.0
+offset_bottom = 862.0
+grow_horizontal = 2
+scale = Vector2(0.05, 0.05)
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("3_88haw")
+theme_override_font_sizes/font_size = 400
+text = "BUILD MENU"
+horizontal_alignment = 1
+
+[node name="GridContainer" type="GridContainer" parent="NinePatchRect"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -70.0
+offset_top = 31.0
+offset_right = 70.0
+offset_bottom = 99.0
+grow_horizontal = 2
+columns = 4
+
+[node name="BuildSlot" parent="NinePatchRect/GridContainer" instance=ExtResource("2_gxta4")]
+layout_mode = 2
+buildingName = "Extractor"
+texture = SubResource("AtlasTexture_t5h55")
+atlasCoord = Vector2i(0, 1)
+
+[node name="BuildSlot2" parent="NinePatchRect/GridContainer" instance=ExtResource("2_gxta4")]
+layout_mode = 2
+buildingName = "Scroll Scriber"
+texture = SubResource("AtlasTexture_pyrnu")
+atlasCoord = Vector2i(0, 2)
+
+[node name="BuildSlot3" parent="NinePatchRect/GridContainer" instance=ExtResource("2_gxta4")]
+layout_mode = 2
+buildingName = "Power Generator"
+texture = SubResource("AtlasTexture_vqshy")
+atlasCoord = Vector2i(0, 3)
+
+[node name="BuildSlot4" parent="NinePatchRect/GridContainer" instance=ExtResource("2_gxta4")]
+layout_mode = 2
+
+[node name="BuildSlot5" parent="NinePatchRect/GridContainer" instance=ExtResource("2_gxta4")]
+layout_mode = 2

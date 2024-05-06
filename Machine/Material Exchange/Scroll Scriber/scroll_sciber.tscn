@@ -1,0 +1,86 @@
+[gd_scene load_steps=12 format=3 uid="uid://divwuueno2oyu"]
+
+[ext_resource type="Script" path="res://Machine/Material Exchange/Scroll Scriber/scroll_sciber.gd" id="1_ukyqw"]
+[ext_resource type="Texture2D" uid="uid://cy01yfe162ynm" path="res://Asset/Machine.png" id="2_q5lp5"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ccy71"]
+atlas = ExtResource("2_q5lp5")
+region = Rect2(160, 64, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0mcsq"]
+atlas = ExtResource("2_q5lp5")
+region = Rect2(0, 64, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_oc8dc"]
+atlas = ExtResource("2_q5lp5")
+region = Rect2(0, 64, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_84t2e"]
+atlas = ExtResource("2_q5lp5")
+region = Rect2(32, 64, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ycyo4"]
+atlas = ExtResource("2_q5lp5")
+region = Rect2(64, 64, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yvnbo"]
+atlas = ExtResource("2_q5lp5")
+region = Rect2(96, 64, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ys8lv"]
+atlas = ExtResource("2_q5lp5")
+region = Rect2(128, 64, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_opme2"]
+atlas = ExtResource("2_q5lp5")
+region = Rect2(160, 64, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_g1xxe"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ccy71")
+}],
+"loop": true,
+"name": &"End",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0mcsq")
+}],
+"loop": true,
+"name": &"Idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_oc8dc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_84t2e")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ycyo4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_yvnbo")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ys8lv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_opme2")
+}],
+"loop": true,
+"name": &"Processing",
+"speed": 5.0
+}]
+
+[node name="ScrollSciber" type="Node2D"]
+script = ExtResource("1_ukyqw")
+
+[node name="Animation" type="AnimatedSprite2D" parent="."]
+texture_filter = 1
+sprite_frames = SubResource("SpriteFrames_g1xxe")
+animation = &"End"

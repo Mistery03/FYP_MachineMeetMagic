@@ -1,12 +1,15 @@
+class_name Extractor
 extends Machine
 
-@onready var ray_cast_3d = $RayCast3D
+@export var extractorUI:Control
+
+@onready var animation = $Animation
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	ray = ray_cast_3d
-	pos = self.position 
-
+	print("test")
+	animation.play("Idle")
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):	super(delta)
+func _process(delta):
+	pass
