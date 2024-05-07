@@ -1,16 +1,15 @@
-[gd_scene load_steps=12 format=3 uid="uid://cbpifgpelsijg"]
+[gd_scene load_steps=11 format=3 uid="uid://cbpifgpelsijg"]
 
 [ext_resource type="Texture2D" uid="uid://daap0c1p135gi" path="res://Asset/UIUX/machineContainer.png" id="1_t7ctx"]
 [ext_resource type="Script" path="res://Machine/Material Exchange/Extractor/extractorUI.gd" id="1_yje0p"]
-[ext_resource type="Texture2D" uid="uid://dc5gs43kepf3r" path="res://Asset/UIUX/loadingBorderBar.png" id="2_w51cn"]
 [ext_resource type="SpriteFrames" uid="uid://cbtw4dcn8pny6" path="res://Machine/Material Exchange/Extractor/extractorAnimation.tres" id="3_eoxsh"]
-[ext_resource type="Texture2D" uid="uid://0nonicmp0lij" path="res://Asset/UIUX/loadingBar.png" id="3_ha8lr"]
 [ext_resource type="PackedScene" uid="uid://ckanenxxawbfv" path="res://UI/PowerSwitch/power_switch.tscn" id="4_1n8qa"]
 [ext_resource type="PackedScene" uid="uid://18gib6v62tlc" path="res://UI/MachineSlot/material_slot.tscn" id="5_17535"]
 [ext_resource type="PackedScene" uid="uid://cxsbrurialksc" path="res://UI/MachineManaBar/machine_mana_bar.tscn" id="5_chsgs"]
 [ext_resource type="PackedScene" uid="uid://dsnw47taoamf7" path="res://UI/MachineSlot/result_slot.tscn" id="6_4xced"]
 [ext_resource type="FontFile" uid="uid://cl3rxpo58micg" path="res://Asset/Font/Lambda-Regular.ttf" id="6_j4fma"]
 [ext_resource type="PackedScene" uid="uid://ciyq3cn8pdvwd" path="res://UI/MachineSlot/fuel_slot.tscn" id="7_73pd2"]
+[ext_resource type="PackedScene" uid="uid://3etlyd8c2p38" path="res://UI/ProgressBar/progress_bar.tscn" id="8_614ae"]
 
 [node name="ExtractorUI" type="Control"]
 layout_mode = 3
@@ -76,16 +75,12 @@ offset_right = 946.0
 offset_bottom = 618.0
 scale = Vector2(3, 3)
 
-[node name="ProgressBar" type="TextureProgressBar" parent="."]
+[node name="ProgressBar" parent="." instance=ExtResource("8_614ae")]
 layout_mode = 0
-offset_left = 296.0
-offset_top = 351.0
-offset_right = 936.0
-offset_bottom = 671.0
-scale = Vector2(0.8, 0.8)
-value = 100.0
-texture_over = ExtResource("2_w51cn")
-texture_progress = ExtResource("3_ha8lr")
+offset_left = 300.0
+offset_top = 346.0
+offset_right = 940.0
+offset_bottom = 666.0
 
 [node name="MachineManaBar" parent="." instance=ExtResource("5_chsgs")]
 layout_mode = 0

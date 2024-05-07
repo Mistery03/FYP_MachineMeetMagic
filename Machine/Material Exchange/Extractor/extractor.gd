@@ -1,7 +1,7 @@
 class_name Extractor
 extends Machine
 
-@export var extractorUI:Control
+@export var machineUI:Control
 
 @onready var animation = $Animation
 
@@ -16,14 +16,14 @@ func _process(delta):
 
 func _on_interectable_input_event(viewport, event, shape_idx):
 	if event is InputEventMouseButton and !player.isBuildMode:
-		if event.is_action_pressed("ACTION2"):
-			extractorUI.visible = true
+		if event.is_action_pressed("ACTION"):
+			machineUI.visible = true
 
 func _input(event):
-	if extractorUI.visible:
+	if machineUI.visible:
 		if Input.is_action_just_pressed("EXIT"):
-			extractorUI.visible = false
+			machineUI.visible = false
 
 func changeAnimation(animationName:String):
 	animation.play(animationName.to_pascal_case())
-	extractorUI.machine_animation.play(animationName.to_pascal_case())
+	machineUI.machine_animation.play(animationName.to_pascal_case())

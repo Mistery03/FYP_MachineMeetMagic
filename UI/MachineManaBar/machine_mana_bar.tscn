@@ -6,10 +6,8 @@
 [ext_resource type="Script" path="res://UI/MachineManaBar/machine_mana_bar.gd" id="3_vwcp1"]
 
 [node name="MachineManaBar" type="TextureProgressBar"]
-offset_left = 235.0
-offset_top = 498.0
-offset_right = 875.0
-offset_bottom = 818.0
+offset_right = 640.0
+offset_bottom = 320.0
 value = 100.0
 texture_over = ExtResource("1_8gvyd")
 texture_progress = ExtResource("2_kqdgy")

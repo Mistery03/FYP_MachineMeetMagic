@@ -1,36 +1,32 @@
 [gd_scene load_steps=5 format=3 uid="uid://dinksu5e5vepb"]
 
 [ext_resource type="Script" path="res://Machine/Electricity/Power Generator/power_generator.gd" id="1_cmhh4"]
-[ext_resource type="Texture2D" uid="uid://cy01yfe162ynm" path="res://Asset/Machine.png" id="2_tq0ud"]
+[ext_resource type="SpriteFrames" uid="uid://cktdrmvvswus8" path="res://Machine/Electricity/Power Generator/powerGeneratorAnimation.tres" id="2_3ulfp"]
+[ext_resource type="PackedScene" uid="uid://pbbfmyagu1u7" path="res://Machine/Electricity/Power Generator/powerGeneratorUI.tscn" id="3_c6u11"]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_vww4n"]
-atlas = ExtResource("2_tq0ud")
-region = Rect2(0, 96, 32, 32)
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_oek2j"]
+size = Vector2(24, 29)
 
-[sub_resource type="SpriteFrames" id="SpriteFrames_xt0ep"]
-animations = [{
-"frames": [],
-"loop": true,
-"name": &"End",
-"speed": 5.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_vww4n")
-}],
-"loop": true,
-"name": &"Idle",
-"speed": 5.0
-}, {
-"frames": [],
-"loop": true,
-"name": &"Processing",
-"speed": 5.0
-}]
-
-[node name="PowerGenerator" type="Node2D"]
+[node name="PowerGenerator" type="Node2D" node_paths=PackedStringArray("machineUI")]
+z_index = 10
+texture_filter = 1
 script = ExtResource("1_cmhh4")
+machineUI = NodePath("Root/PowerGeneratorUI")
 
 [node name="Animation" type="AnimatedSprite2D" parent="."]
-sprite_frames = SubResource("SpriteFrames_xt0ep")
-animation = &"Idle"
+sprite_frames = ExtResource("2_3ulfp")
+animation = &"NoPower"
+frame_progress = 0.028495
+
+[node name="Root" type="CanvasLayer" parent="."]
+
+[node name="PowerGeneratorUI" parent="Root" instance=ExtResource("3_c6u11")]
+visible = false
+
+[node name="Interectable" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Interectable"]
+position = Vector2(0, 0.5)
+shape = SubResource("RectangleShape2D_oek2j")
+
+[connection signal="input_event" from="Interectable" to="." method="_on_interectable_input_event"]
