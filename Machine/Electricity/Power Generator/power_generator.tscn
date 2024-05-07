@@ -1,0 +1,36 @@
+[gd_scene load_steps=5 format=3 uid="uid://dinksu5e5vepb"]
+
+[ext_resource type="Script" path="res://Machine/Electricity/Power Generator/power_generator.gd" id="1_cmhh4"]
+[ext_resource type="Texture2D" uid="uid://cy01yfe162ynm" path="res://Asset/Machine.png" id="2_tq0ud"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vww4n"]
+atlas = ExtResource("2_tq0ud")
+region = Rect2(0, 96, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_xt0ep"]
+animations = [{
+"frames": [],
+"loop": true,
+"name": &"End",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vww4n")
+}],
+"loop": true,
+"name": &"Idle",
+"speed": 5.0
+}, {
+"frames": [],
+"loop": true,
+"name": &"Processing",
+"speed": 5.0
+}]
+
+[node name="PowerGenerator" type="Node2D"]
+script = ExtResource("1_cmhh4")
+
+[node name="Animation" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_xt0ep")
+animation = &"Idle"

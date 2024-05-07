@@ -1,10 +1,9 @@
 class_name CharacterSheet
-extends CanvasLayer
+extends Control
 
 @onready var hp_progress_bar = %HPProgressBar
 @onready var mana_progress_bar = $ManaProgressBar
-@onready var player = $"../Player"
-@onready var bag_btn = $BagBtn 
+@export var player : Player
 @onready var character_sheet = $CharacterSheet 
 
 
@@ -13,7 +12,6 @@ func _ready():
 	hp_progress_bar.update(player)
 	mana_progress_bar.update(player)
 	print(self.player)
-	handle_connecting_signal()
 	set_process(false)
 	pass
 	 # Replace with function body.
@@ -25,9 +23,6 @@ func _process(delta):
 func on_bag_pressed() -> void:
 	character_sheet.visible = true
 	
-func handle_connecting_signal() -> void:
-	bag_btn.button_down.connect(on_bag_pressed)
 
 
-func _on_bag_btn_pressed():
-	pass # Replace with function body.
+

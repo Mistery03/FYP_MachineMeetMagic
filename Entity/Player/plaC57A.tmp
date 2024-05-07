@@ -1,4 +1,4 @@
-[gd_scene load_steps=42 format=3 uid="uid://c1vsfoc55pk0w"]
+[gd_scene load_steps=38 format=3 uid="uid://c1vsfoc55pk0w"]
 
 [ext_resource type="Texture2D" uid="uid://bd32dcnew3uvf" path="res://Asset/L.png" id="1_ksidj"]
 [ext_resource type="Script" path="res://Entity/Player/player.gd" id="1_xfdxb"]
@@ -9,13 +9,9 @@
 [ext_resource type="Resource" uid="uid://b0rx68wwi0q20" path="res://Potion/Heal/Healing Potion/HealingPotion.tres" id="7_asdtf"]
 [ext_resource type="Script" path="res://Entity/State/Idle.gd" id="8_5d7eh"]
 [ext_resource type="Script" path="res://Entity/State/Move.gd" id="9_5ji7g"]
-[ext_resource type="Script" path="res://Entity/State/Build.gd" id="10_10mal"]
+[ext_resource type="Script" path="res://Entity/Player/Build.gd" id="10_8exr0"]
 [ext_resource type="Script" path="res://Entity/Player/MoveComponent.gd" id="10_gim7i"]
-[ext_resource type="Script" path="res://Entity/State/Destroy.gd" id="11_7uhfu"]
 [ext_resource type="PackedScene" uid="uid://dgn61wamn10el" path="res://UI/Build/build_menu.tscn" id="12_58i1p"]
-[ext_resource type="FontFile" uid="uid://cl3rxpo58micg" path="res://Asset/Font/Lambda-Regular.ttf" id="14_me7n8"]
-[ext_resource type="PackedScene" uid="uid://biincpe1d1eek" path="res://UI/UIUX/Player_HUD.tscn" id="15_lr4a8"]
-[ext_resource type="Script" path="res://Entity/Player/InteractComponent.gd" id="15_wh8qd"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_o46v5"]
 atlas = ExtResource("1_ksidj")
@@ -235,15 +231,25 @@ animations = [{
 radius = 56.0
 height = 164.0
 
-[node name="Player" type="CharacterBody2D" groups=["invalidPosition"]]
+[node name="Player" type="CharacterBody2D"]
 scale = Vector2(0.1, 0.1)
 script = ExtResource("1_xfdxb")
 playerData = ExtResource("2_g17go")
 potionObject = ExtResource("3_41una")
 
 [node name="Camera" type="Camera2D" parent="."]
-zoom = Vector2(7, 7)
-position_smoothing_speed = 4.0
+zoom = Vector2(5, 5)
+position_smoothing_enabled = true
+position_smoothing_speed = 10.0
+
+[node name="PlayerSprite" type="Sprite2D" parent="."]
+visible = false
+texture_filter = 1
+scale = Vector2(6, 6)
+texture = ExtResource("1_ksidj")
+hframes = 3
+vframes = 5
+frame = 1
 
 [node name="Animation" type="AnimatedSprite2D" parent="."]
 texture_filter = 1
@@ -287,24 +293,10 @@ animationList = {
 "WalkFront": "WalkFront"
 }
 
-[node name="Build" type="Node" parent="StateManager" node_paths=PackedStringArray("idle_state", "delete_state", "buildUI", "buildMenu")]
-script = ExtResource("10_10mal")
+[node name="Build" type="Node" parent="StateManager" node_paths=PackedStringArray("idle_state", "buildMenu")]
+script = ExtResource("10_8exr0")
 idle_state = NodePath("../Idle")
-delete_state = NodePath("../Destroy")
-buildUI = NodePath("../../ROOT_UI/Build")
-buildMenu = NodePath("../../ROOT_UI/Build/BuildMenu")
-inputList = {
-"Build": "Build",
-"Exit": "Exit"
-}
-move_speed = 10000.0
-
-[node name="Destroy" type="Node" parent="StateManager" node_paths=PackedStringArray("build_state", "buildUI", "buildMenu", "destroyHUD")]
-script = ExtResource("11_7uhfu")
-build_state = NodePath("../Build")
-buildUI = NodePath("../../ROOT_UI/Build")
-buildMenu = NodePath("../../ROOT_UI/Build/BuildMenu")
-destroyHUD = NodePath("../../ROOT_UI/Destroy")
+buildMenu = NodePath("../../CanvasLayer/BuildMenu")
 inputList = {
 "Build": "Build",
 "Exit": "Exit"
@@ -320,113 +312,10 @@ inputList = {
 "MoveRight": "MoveRight"
 }
 
-[node name="ROOT_UI" type="CanvasLayer" parent="."]
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
 
-[node name="Player_hud" parent="ROOT_UI" node_paths=PackedStringArray("player") instance=ExtResource("15_lr4a8")]
-player = NodePath("../..")
-
-[node name="Build" type="Control" parent="ROOT_UI"]
+[node name="BuildMenu" parent="CanvasLayer" instance=ExtResource("12_58i1p")]
 visible = false
-layout_mode = 3
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
-
-[node name="BuildMenu" parent="ROOT_UI/Build" node_paths=PackedStringArray("parentUI") instance=ExtResource("12_58i1p")]
-layout_mode = 1
-anchors_preset = 4
-anchor_top = 0.5
+anchors_preset = 9
 anchor_right = 0.0
-anchor_bottom = 0.5
-offset_left = 49.0
-offset_top = 28.0
-offset_right = 49.0
-offset_bottom = 28.0
 grow_horizontal = 1
-parentUI = NodePath("..")
-
-[node name="BuildHud" type="VBoxContainer" parent="ROOT_UI/Build"]
-layout_mode = 1
-anchors_preset = 12
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_top = 760.0
-offset_right = 430.0
-offset_bottom = 824.0
-grow_horizontal = 2
-grow_vertical = 0
-size_flags_horizontal = 3
-alignment = 1
-
-[node name="HBoxContainer" type="HBoxContainer" parent="ROOT_UI/Build/BuildHud"]
-custom_minimum_size = Vector2(32, 32)
-layout_mode = 2
-theme_override_constants/separation = 100
-
-[node name="Control" type="Control" parent="ROOT_UI/Build/BuildHud/HBoxContainer"]
-layout_mode = 2
-
-[node name="CLOSEMENU" type="Label" parent="ROOT_UI/Build/BuildHud/HBoxContainer"]
-custom_minimum_size = Vector2(100, 32)
-layout_mode = 2
-text = "ESC: GO BACK
-"
-
-[node name="CHANGETODESTROY" type="Label" parent="ROOT_UI/Build/BuildHud/HBoxContainer"]
-custom_minimum_size = Vector2(32, 32)
-layout_mode = 2
-text = "Z:DESTORY MACHINE
-"
-
-[node name="Destroy" type="Control" parent="ROOT_UI"]
-visible = false
-layout_mode = 3
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
-
-[node name="DestroyLabel" type="Label" parent="ROOT_UI/Destroy"]
-layout_mode = 1
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = 609.0
-offset_right = 7307.0
-offset_bottom = 1367.0
-grow_horizontal = 2
-scale = Vector2(0.05, 0.05)
-theme_override_fonts/font = ExtResource("14_me7n8")
-theme_override_font_sizes/font_size = 1200
-text = "DESTROY MODE"
-
-[node name="Explanation" type="Label" parent="ROOT_UI/Destroy"]
-layout_mode = 2
-offset_top = 720.0
-offset_right = 1600.0
-offset_bottom = 767.0
-theme_override_fonts/font = ExtResource("14_me7n8")
-theme_override_font_sizes/font_size = 40
-text = "Select the machine to destroy"
-horizontal_alignment = 1
-
-[node name="CLOSEMENU" type="Label" parent="ROOT_UI/Destroy"]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = 100.0
-offset_top = 780.0
-offset_right = 233.0
-offset_bottom = 808.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_font_sizes/font_size = 20
-text = "ESC: GO BACK
-"
-
-[node name="InteractComponent" type="Node" parent="." node_paths=PackedStringArray("parent")]
-script = ExtResource("15_wh8qd")
-parent = NodePath("..")
