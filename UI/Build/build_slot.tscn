@@ -4,13 +4,13 @@
 [ext_resource type="Script" path="res://UI/Build/build_slot.gd" id="1_mxukq"]
 [ext_resource type="Texture2D" uid="uid://cy01yfe162ynm" path="res://Asset/Machine.png" id="3_sebgp"]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_lix1r"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_1itxd"]
 atlas = ExtResource("3_sebgp")
 region = Rect2(0, 0, 32, 32)
 
 [node name="BuildSlot" type="Panel"]
 self_modulate = Color(1, 1, 1, 0)
-custom_minimum_size = Vector2(32, 32)
+custom_minimum_size = Vector2(32, 48)
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -33,7 +33,7 @@ offset_top = 1.0
 offset_right = 42.0
 offset_bottom = 41.0
 scale = Vector2(0.7, 0.7)
-texture = SubResource("AtlasTexture_lix1r")
+texture = SubResource("AtlasTexture_1itxd")
 
 [node name="Button" type="Button" parent="."]
 self_modulate = Color(1, 1, 1, 0.0784314)

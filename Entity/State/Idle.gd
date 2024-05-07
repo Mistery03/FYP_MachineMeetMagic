@@ -17,7 +17,6 @@ var isBuildEnabled:bool = true
 func enter() -> void:
 	super()
 	isBuildEnabled = parent.isBuildEnabled
-	print("Idle")
 	lerp_to_zero()
 	await parent.get_tree().create_timer(0.2).timeout
 	parent.velocity.x = 0.0

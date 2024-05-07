@@ -2,7 +2,7 @@ extends Panel
 
 @export var buildingName:String = "Generic"
 @export var texture:Texture2D
-@export var atlasCoord:Vector2i = Vector2i(5,5)
+@export var atlasCoord:Vector2i = Vector2i(-1,-1)
 
 @onready var build_menu = $"../../.."
 @onready var texture_rect = $TextureRect

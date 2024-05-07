@@ -322,7 +322,6 @@ inputList = {
 [node name="ROOT_UI" type="CanvasLayer" parent="."]
 
 [node name="Build" type="Control" parent="ROOT_UI"]
-visible = false
 layout_mode = 3
 anchors_preset = 0
 offset_right = 40.0
