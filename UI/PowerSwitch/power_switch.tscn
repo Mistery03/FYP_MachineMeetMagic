@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://ckanenxxawbfv"]
+
+[ext_resource type="Script" path="res://UI/PowerSwitch/power_switch.gd" id="1_jddt1"]
+[ext_resource type="FontFile" uid="uid://cl3rxpo58micg" path="res://Asset/Font/Lambda-Regular.ttf" id="1_ne0vx"]
+
+[node name="PowerSwitch" type="CheckButton"]
+modulate = Color(1, 0, 0, 1)
+offset_right = 44.0
+offset_bottom = 24.0
+scale = Vector2(3, 3)
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("1_ne0vx")
+theme_override_font_sizes/font_size = 25
+script = ExtResource("1_jddt1")

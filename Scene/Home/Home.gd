@@ -9,6 +9,6 @@ func _ready():
 	player.isBuildEnabled = true
 	player.homeTilemap = tile_map
 	player.localLevel = self
-
+	machineList.player = player
 	
 

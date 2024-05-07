@@ -1,11 +1,5 @@
-[gd_scene load_steps=2 format=3 uid="uid://oq5f260mrj2o"]
-
-[ext_resource type="Texture2D" uid="uid://bmw2uy10i1kwr" path="res://Asset/UIUX/scroll_UI.png" id="1_gykdu"]
+[gd_scene format=3 uid="uid://oq5f260mrj2o"]
 
 [node name="CharacterSheet" type="Control"]
 layout_mode = 3
 anchors_preset = 0
-
-[node name="ScrollUi" type="Sprite2D" parent="."]
-position = Vector2(570, 299)
-texture = ExtResource("1_gykdu")

@@ -7,9 +7,23 @@ extends Machine
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	print("test")
-	animation.play("Idle")
-
+	changeAnimation("IDLE")
+	
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	pass
+	changeAnimation("Processing")
+
+
+func _on_interectable_input_event(viewport, event, shape_idx):
+	if event is InputEventMouseButton and !player.isBuildMode:
+		if event.is_action_pressed("ACTION2"):
+			extractorUI.visible = true
+
+func _input(event):
+	if extractorUI.visible:
+		if Input.is_action_just_pressed("EXIT"):
+			extractorUI.visible = false
+
+func changeAnimation(animationName:String):
+	animation.play(animationName.to_pascal_case())
+	extractorUI.machine_animation.play(animationName.to_pascal_case())

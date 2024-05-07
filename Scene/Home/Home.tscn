@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://dm1j4it5oof3n"]
+[gd_scene load_steps=12 format=3 uid="uid://dm1j4it5oof3n"]
 
 [ext_resource type="Script" path="res://Scene/Home/Home.gd" id="1_iycag"]
 [ext_resource type="PackedScene" uid="uid://c1vsfoc55pk0w" path="res://Entity/Player/player.tscn" id="1_jnw16"]
@@ -7,6 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://c0q82oth7xkok" path="res://Asset/homeTileMap.png" id="2_wfa7x"]
 [ext_resource type="PackedScene" uid="uid://divwuueno2oyu" path="res://Machine/Material Exchange/Scroll Scriber/scroll_sciber.tscn" id="3_cn71x"]
 [ext_resource type="PackedScene" uid="uid://dinksu5e5vepb" path="res://Machine/Electricity/Power Generator/power_generator.tscn" id="4_rrroh"]
+[ext_resource type="Script" path="res://Scene/Home/MachineList.gd" id="8_g4svt"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_klcm4"]
 texture = ExtResource("1_vetej")
@@ -749,3 +750,4 @@ position = Vector2(-16, 9)
 collision_mask = 18
 
 [node name="MachineList" type="Node" parent="."]
+script = ExtResource("8_g4svt")

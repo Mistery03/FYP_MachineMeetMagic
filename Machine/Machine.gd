@@ -3,7 +3,7 @@ extends Node
 
 var machine:Machine 
 var next:Machine = null
-
+var player:Player
 
 
 

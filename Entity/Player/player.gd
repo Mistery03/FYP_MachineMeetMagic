@@ -15,6 +15,7 @@ const JUMP_VELOCITY = 4.5
 
 var potion:Potion
 var isBuildEnabled:bool
+var isBuildMode:bool
 var homeTilemap:TileMap
 var mousePos:Vector2
 var localLevel:Node2D

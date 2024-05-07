@@ -1,0 +1,136 @@
+[gd_scene load_steps=12 format=3 uid="uid://cbpifgpelsijg"]
+
+[ext_resource type="Texture2D" uid="uid://daap0c1p135gi" path="res://Asset/UIUX/machineContainer.png" id="1_t7ctx"]
+[ext_resource type="Script" path="res://Machine/Material Exchange/Extractor/extractorUI.gd" id="1_yje0p"]
+[ext_resource type="Texture2D" uid="uid://dc5gs43kepf3r" path="res://Asset/UIUX/loadingBorderBar.png" id="2_w51cn"]
+[ext_resource type="SpriteFrames" uid="uid://cbtw4dcn8pny6" path="res://Machine/Material Exchange/Extractor/extractorAnimation.tres" id="3_eoxsh"]
+[ext_resource type="Texture2D" uid="uid://0nonicmp0lij" path="res://Asset/UIUX/loadingBar.png" id="3_ha8lr"]
+[ext_resource type="PackedScene" uid="uid://ckanenxxawbfv" path="res://UI/PowerSwitch/power_switch.tscn" id="4_1n8qa"]
+[ext_resource type="PackedScene" uid="uid://18gib6v62tlc" path="res://UI/MachineSlot/material_slot.tscn" id="5_17535"]
+[ext_resource type="PackedScene" uid="uid://cxsbrurialksc" path="res://UI/MachineManaBar/machine_mana_bar.tscn" id="5_chsgs"]
+[ext_resource type="PackedScene" uid="uid://dsnw47taoamf7" path="res://UI/MachineSlot/result_slot.tscn" id="6_4xced"]
+[ext_resource type="FontFile" uid="uid://cl3rxpo58micg" path="res://Asset/Font/Lambda-Regular.ttf" id="6_j4fma"]
+[ext_resource type="PackedScene" uid="uid://ciyq3cn8pdvwd" path="res://UI/MachineSlot/fuel_slot.tscn" id="7_73pd2"]
+
+[node name="ExtractorUI" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("1_yje0p")
+
+[node name="Background" type="TextureRect" parent="."]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 5.0
+offset_top = 82.0
+offset_right = 1085.0
+offset_bottom = 802.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_t7ctx")
+
+[node name="MachineAnimation" type="AnimatedSprite2D" parent="."]
+texture_filter = 1
+position = Vector2(550, 240)
+scale = Vector2(7, 7)
+sprite_frames = ExtResource("3_eoxsh")
+animation = &"Idle"
+
+[node name="PowerSwitch" parent="." instance=ExtResource("4_1n8qa")]
+layout_mode = 0
+offset_left = 36.0
+offset_top = 137.0
+offset_right = 89.0
+offset_bottom = 164.0
+
+[node name="MaterialSlot" parent="." instance=ExtResource("5_17535")]
+layout_mode = 0
+offset_left = 68.0
+offset_top = 413.0
+offset_right = 108.0
+offset_bottom = 453.0
+
+[node name="ResultSlot" parent="." instance=ExtResource("6_4xced")]
+layout_mode = 0
+offset_left = 901.0
+offset_top = 412.0
+offset_right = 941.0
+offset_bottom = 452.0
+
+[node name="FuelSlot" parent="." instance=ExtResource("7_73pd2")]
+layout_mode = 0
+offset_left = 68.0
+offset_top = 576.0
+offset_right = 108.0
+offset_bottom = 616.0
+
+[node name="MagicSlot" type="Panel" parent="."]
+layout_mode = 0
+offset_left = 906.0
+offset_top = 578.0
+offset_right = 946.0
+offset_bottom = 618.0
+scale = Vector2(3, 3)
+
+[node name="ProgressBar" type="TextureProgressBar" parent="."]
+layout_mode = 0
+offset_left = 296.0
+offset_top = 351.0
+offset_right = 936.0
+offset_bottom = 671.0
+scale = Vector2(0.8, 0.8)
+value = 100.0
+texture_over = ExtResource("2_w51cn")
+texture_progress = ExtResource("3_ha8lr")
+
+[node name="MachineManaBar" parent="." instance=ExtResource("5_chsgs")]
+layout_mode = 0
+offset_left = 229.0
+offset_top = 467.0
+offset_right = 869.0
+offset_bottom = 787.0
+
+[node name="ManaCapaity" type="Label" parent="."]
+layout_mode = 0
+offset_left = 260.0
+offset_top = 680.0
+offset_right = 847.0
+offset_bottom = 750.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("6_j4fma")
+theme_override_font_sizes/font_size = 60
+text = "MANA CAPACITY"
+horizontal_alignment = 1
+
+[node name="BuffDisplay" type="Label" parent="."]
+layout_mode = 0
+offset_left = 270.0
+offset_top = 353.0
+offset_right = 857.0
+offset_bottom = 496.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("6_j4fma")
+theme_override_font_sizes/font_size = 60
+text = "NO ACTIVE BUFF
+"
+horizontal_alignment = 1
+
+[node name="TempBackGround" type="TextureRect" parent="."]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 1100.0
+offset_top = 80.0
+offset_right = 1587.0
+offset_bottom = 800.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_t7ctx")
