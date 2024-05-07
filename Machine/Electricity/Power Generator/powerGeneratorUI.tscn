@@ -82,6 +82,7 @@ sprite_frames = ExtResource("6_03q1h")
 animation = &"Idle"
 
 [node name="BuffDisplay" type="Label" parent="."]
+layout_mode = 0
 offset_left = 91.0
 offset_top = 470.0
 offset_right = 678.0
@@ -93,7 +94,8 @@ text = "NO ACTIVE BUFF
 "
 horizontal_alignment = 1
 
-[node name="PowerStatus" type="Label" parent="."]
+[node name="ManaStatus" type="Label" parent="."]
+layout_mode = 0
 offset_left = 424.0
 offset_top = 677.0
 offset_right = 1011.0
@@ -101,5 +103,5 @@ offset_bottom = 747.0
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("7_f473q")
 theme_override_font_sizes/font_size = 60
-text = "POWER STATUS"
+text = "MANA STATUS"
 horizontal_alignment = 1

@@ -94,7 +94,7 @@ description = "Convert Magic into Researchable points"
 
 [node name="BuildSlot3" parent="BuildMenu/GridContainer" instance=ExtResource("2_gxta4")]
 layout_mode = 2
-buildingName = "Power Generator"
+buildingName = "Mana Generator"
 texture = SubResource("AtlasTexture_vqshy")
 atlasCoord = Vector2i(0, 3)
 description = "Need power? Just build a generator!"
