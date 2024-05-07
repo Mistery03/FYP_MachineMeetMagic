@@ -16,6 +16,7 @@ var isBuildEnabled:bool = true
 
 func enter() -> void:
 	super()
+	camera.position_smoothing_enabled = false
 	isBuildEnabled = parent.isBuildEnabled
 	lerp_to_zero()
 	await parent.get_tree().create_timer(0.2).timeout

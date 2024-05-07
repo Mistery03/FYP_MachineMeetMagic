@@ -50,7 +50,7 @@ func process_input(event: InputEvent) -> State:
 
 func process_physics(delta: float) -> State:
 	camera.position = move_component.get_movement_direction() * move_speed * delta
-	
+	camera.position_smoothing_enabled = true
 	
 	return null
 	
