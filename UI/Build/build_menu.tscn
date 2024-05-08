@@ -5,20 +5,11 @@
 [ext_resource type="PackedScene" uid="uid://b8l6h6q66lu2w" path="res://UI/Build/build_slot.tscn" id="2_gxta4"]
 [ext_resource type="FontFile" uid="uid://cl3rxpo58micg" path="res://Asset/Font/Lambda-Regular.ttf" id="3_88haw"]
 [ext_resource type="Texture2D" uid="uid://cy01yfe162ynm" path="res://Asset/Machine.png" id="5_25chw"]
+[ext_resource type="Resource" uid="uid://b7tm5f2vprc8a" path="res://Building/Machine/Material Exchange/Extractor/extractor.tres" id="6_mcw5q"]
 [ext_resource type="Script" path="res://UI/Build/DescriptionBoard.gd" id="6_ulo5r"]
 [ext_resource type="Texture2D" uid="uid://dw0wj1ftq8uye" path="res://Asset/potionSS.png" id="6_wdmht"]
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_t5h55"]
-atlas = ExtResource("5_25chw")
-region = Rect2(0, 32, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_pyrnu"]
-atlas = ExtResource("5_25chw")
-region = Rect2(0, 64, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_vqshy"]
-atlas = ExtResource("5_25chw")
-region = Rect2(0, 96, 32, 32)
+[ext_resource type="Resource" uid="uid://dqo00x1g854h3" path="res://Building/Machine/Material Exchange/Scroll Scriber/scrollScriber.tres" id="7_qrjdq"]
+[ext_resource type="Resource" uid="uid://ch3ruj8fn022x" path="res://Building/Machine/Electricity/Power Generator/powerGenerator.tres" id="9_8ovw4"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_spxpk"]
 atlas = ExtResource("5_25chw")
@@ -80,30 +71,15 @@ columns = 4
 
 [node name="BuildSlot" parent="BuildMenu/GridContainer" instance=ExtResource("2_gxta4")]
 layout_mode = 2
-buildingName = "Extractor"
-texture = SubResource("AtlasTexture_t5h55")
-atlasCoord = Vector2i(0, 1)
-description = "Extract magic essence from worldly materials."
+buildingData = ExtResource("6_mcw5q")
 
 [node name="BuildSlot2" parent="BuildMenu/GridContainer" instance=ExtResource("2_gxta4")]
 layout_mode = 2
-buildingName = "Scroll Scriber"
-texture = SubResource("AtlasTexture_pyrnu")
-atlasCoord = Vector2i(0, 2)
-description = "Convert Magic into Researchable points"
+buildingData = ExtResource("7_qrjdq")
 
 [node name="BuildSlot3" parent="BuildMenu/GridContainer" instance=ExtResource("2_gxta4")]
 layout_mode = 2
-buildingName = "Mana Generator"
-texture = SubResource("AtlasTexture_vqshy")
-atlasCoord = Vector2i(0, 3)
-description = "Need power? Just build a generator!"
-
-[node name="BuildSlot4" parent="BuildMenu/GridContainer" instance=ExtResource("2_gxta4")]
-layout_mode = 2
-
-[node name="BuildSlot5" parent="BuildMenu/GridContainer" instance=ExtResource("2_gxta4")]
-layout_mode = 2
+buildingData = ExtResource("9_8ovw4")
 
 [node name="DescriptionBoard" type="NinePatchRect" parent="."]
 visible = false

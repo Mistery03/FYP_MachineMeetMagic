@@ -1,4 +1,4 @@
-[gd_scene load_steps=42 format=3 uid="uid://c1vsfoc55pk0w"]
+[gd_scene load_steps=44 format=3 uid="uid://c1vsfoc55pk0w"]
 
 [ext_resource type="Texture2D" uid="uid://bd32dcnew3uvf" path="res://Asset/L.png" id="1_ksidj"]
 [ext_resource type="Script" path="res://Entity/Player/player.gd" id="1_xfdxb"]
@@ -13,8 +13,10 @@
 [ext_resource type="Script" path="res://Entity/Player/MoveComponent.gd" id="10_gim7i"]
 [ext_resource type="Script" path="res://Entity/State/Destroy.gd" id="11_7uhfu"]
 [ext_resource type="PackedScene" uid="uid://dgn61wamn10el" path="res://UI/Build/build_menu.tscn" id="12_58i1p"]
+[ext_resource type="Script" path="res://Entity/State/Wiring.gd" id="12_ii11w"]
 [ext_resource type="PackedScene" uid="uid://htlhwdgl8ast" path="res://HUD/DynamicLabel/dynamicLabel.tscn" id="14_8yknx"]
 [ext_resource type="FontFile" uid="uid://cl3rxpo58micg" path="res://Asset/Font/Lambda-Regular.ttf" id="14_me7n8"]
+[ext_resource type="PackedScene" uid="uid://dd2ysdc77pxkq" path="res://UI/Build/build_hud.tscn" id="15_otihl"]
 [ext_resource type="Script" path="res://Entity/Player/InteractComponent.gd" id="15_wh8qd"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_o46v5"]
@@ -311,6 +313,9 @@ inputList = {
 }
 move_speed = 10000.0
 
+[node name="Wiring" type="Node" parent="StateManager"]
+script = ExtResource("12_ii11w")
+
 [node name="MoveComponent" type="Node" parent="."]
 script = ExtResource("10_gim7i")
 inputList = {
@@ -342,35 +347,18 @@ offset_bottom = 28.0
 grow_horizontal = 1
 parentUI = NodePath("..")
 
-[node name="BuildHud" type="VBoxContainer" parent="ROOT_UI/Build"]
+[node name="BuildHud" parent="ROOT_UI/Build" instance=ExtResource("15_otihl")]
 layout_mode = 1
-anchors_preset = 12
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_top = 760.0
-offset_right = 430.0
-offset_bottom = 824.0
-grow_horizontal = 2
-grow_vertical = 0
-size_flags_horizontal = 3
-alignment = 1
-
-[node name="HBoxContainer" type="HBoxContainer" parent="ROOT_UI/Build/BuildHud"]
-custom_minimum_size = Vector2(32, 32)
-layout_mode = 2
-theme_override_constants/separation = 100
-
-[node name="Control" type="Control" parent="ROOT_UI/Build/BuildHud/HBoxContainer"]
-layout_mode = 2
-
-[node name="CloseBuildMenu" parent="ROOT_UI/Build/BuildHud/HBoxContainer" instance=ExtResource("14_8yknx")]
-layout_mode = 2
-
-[node name="DestroyMachine" parent="ROOT_UI/Build/BuildHud/HBoxContainer" instance=ExtResource("14_8yknx")]
-layout_mode = 2
-promptMessage = ": destroy machine"
-promptAction = "delete"
+anchors_preset = 0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+offset_left = -1.0
+offset_top = 800.0
+offset_right = 620.0
+offset_bottom = 864.0
+grow_horizontal = 1
+grow_vertical = 1
 
 [node name="Destroy" type="Control" parent="ROOT_UI"]
 visible = false

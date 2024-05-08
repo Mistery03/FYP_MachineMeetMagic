@@ -1,6 +1,7 @@
 class_name MachineManaBarUI
 extends TextureProgressBar
 
+@onready var mana_amount_display = $ManaAmountDisplay
 
 # Called when the node enters the scene tree for the first time.
 func _ready():

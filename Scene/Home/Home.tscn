@@ -3,10 +3,10 @@
 [ext_resource type="Script" path="res://Scene/Home/Home.gd" id="1_iycag"]
 [ext_resource type="PackedScene" uid="uid://c1vsfoc55pk0w" path="res://Entity/Player/player.tscn" id="1_jnw16"]
 [ext_resource type="Texture2D" uid="uid://cy01yfe162ynm" path="res://Asset/Machine.png" id="1_vetej"]
-[ext_resource type="PackedScene" uid="uid://dprxecily2808" path="res://Machine/Material Exchange/Extractor/extractor.tscn" id="2_r4xi5"]
+[ext_resource type="PackedScene" uid="uid://dprxecily2808" path="res://Building/Machine/Material Exchange/Extractor/extractor.tscn" id="2_r4xi5"]
 [ext_resource type="Texture2D" uid="uid://c0q82oth7xkok" path="res://Asset/homeTileMap.png" id="2_wfa7x"]
-[ext_resource type="PackedScene" uid="uid://divwuueno2oyu" path="res://Machine/Material Exchange/Scroll Scriber/scroll_sciber.tscn" id="3_cn71x"]
-[ext_resource type="PackedScene" uid="uid://dinksu5e5vepb" path="res://Machine/Electricity/Power Generator/power_generator.tscn" id="4_rrroh"]
+[ext_resource type="PackedScene" uid="uid://divwuueno2oyu" path="res://Building/Machine/Material Exchange/Scroll Scriber/scroll_sciber.tscn" id="3_cn71x"]
+[ext_resource type="PackedScene" uid="uid://dinksu5e5vepb" path="res://Building/Machine/Electricity/Power Generator/power_generator.tscn" id="4_rrroh"]
 [ext_resource type="Script" path="res://Scene/Home/MachineList.gd" id="8_g4svt"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_klcm4"]

@@ -55,7 +55,9 @@ func process_frame(delta:float) -> State:
 			parent.homeTilemap.set_layer_modulate(1,Color.RED)
 			
 			var machineList = parent.localLevel.machineList.get_children()
-			
+			for machine in machineList:
+					if machine.position == parent.homeTilemap.map_to_local(mouseTilePos):
+						machine.animation.stop()
 			if Input.is_action_just_pressed("ACTION"):
 				for machine in machineList:
 					if machine.position == parent.homeTilemap.map_to_local(mouseTilePos):
