@@ -25,9 +25,11 @@ var isOccupied:bool
 var isFloor:bool
 
 var wireTiles:Array = []
+var withinWire:Array = []
 
 var wireLayer:int = 4
 var machineLayer:int = 2
+
 
 func enter() -> void:
 	super()
@@ -36,6 +38,8 @@ func enter() -> void:
 	HUD.visible = true
 	
 
+
+	
 	
 
 func process_input(event: InputEvent) -> State:
@@ -58,10 +62,14 @@ func process_frame(delta:float) -> State:
 	var mouseTilePos = parent.homeTilemap.local_to_map(parent.mousePos)
 	
 	var machineData:TileData = parent.homeTilemap.get_cell_tile_data(machineLayer,mouseTilePos) 
+	var wireData:TileData = parent.homeTilemap.get_cell_tile_data(wireLayer,mouseTilePos)	
 	
-	#Create Wire	
+
+	
 	if Input.is_action_pressed("ACTION"):
-		wireTiles.append(mouseTilePos)
+		if prevMouseTilePos != mouseTilePos:
+			wireTiles.append(mouseTilePos)
+		prevMouseTilePos = mouseTilePos
 		
 		
 	#Remove Wire	
@@ -73,7 +81,20 @@ func process_frame(delta:float) -> State:
 				wireTiles.remove_at(index)
 				parent.homeTilemap.clear_layer(wireLayer)
 
-	parent.homeTilemap.set_cells_terrain_connect(wireLayer,wireTiles,0,0)			
+	parent.homeTilemap.set_cells_terrain_connect(wireLayer,wireTiles,0,0)	
+	
+	var machineList = parent.localLevel.machineList.get_children()
+	withinWire.clear()
+	
+	for machine in machineList:
+		for pos in wireTiles:
+			if wireData :
+				if parent.homeTilemap.local_to_map(machine.position) == pos and !isOccupied:
+					withinWire.append(machine)
+			else:
+				if parent.homeTilemap.local_to_map(machine.position) == pos:
+					withinWire.append(machine)
+	print(withinWire)
 	return null
 
 
