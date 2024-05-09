@@ -7,6 +7,8 @@ var move_state: State
 var idle_state: State
 @export 
 var delete_state:State
+@export
+var wiring_state:State
 
 @export
 var buildUI:Control
@@ -45,6 +47,10 @@ func process_input(event: InputEvent) -> State:
 	if Input.is_action_just_pressed("DELETE"):
 		buildUI.visible = false
 		return delete_state
+	
+	if Input.is_action_just_pressed("WIRING"):
+		buildUI.visible = false
+		return wiring_state
 
 	return null
 

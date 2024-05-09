@@ -289,10 +289,12 @@ animationList = {
 "WalkFront": "WalkFront"
 }
 
-[node name="Build" type="Node" parent="StateManager" node_paths=PackedStringArray("idle_state", "delete_state", "buildUI", "buildMenu")]
+[node name="Build" type="Node" parent="StateManager" node_paths=PackedStringArray("move_state", "idle_state", "delete_state", "wiring_state", "buildUI", "buildMenu")]
 script = ExtResource("10_10mal")
+move_state = NodePath("../Move")
 idle_state = NodePath("../Idle")
 delete_state = NodePath("../Destroy")
+wiring_state = NodePath("../Wiring")
 buildUI = NodePath("../../ROOT_UI/Build")
 buildMenu = NodePath("../../ROOT_UI/Build/BuildMenu")
 inputList = {
@@ -313,8 +315,17 @@ inputList = {
 }
 move_speed = 10000.0
 
-[node name="Wiring" type="Node" parent="StateManager"]
+[node name="Wiring" type="Node" parent="StateManager" node_paths=PackedStringArray("build_state", "buildUI", "buildMenu", "HUD")]
 script = ExtResource("12_ii11w")
+build_state = NodePath("../Build")
+buildUI = NodePath("../../ROOT_UI/Build")
+buildMenu = NodePath("../../ROOT_UI/Build/BuildMenu")
+HUD = NodePath("../../ROOT_UI/Wiring")
+inputList = {
+"Build": "Build",
+"Exit": "Exit"
+}
+move_speed = 10000.0
 
 [node name="MoveComponent" type="Node" parent="."]
 script = ExtResource("10_gim7i")
@@ -392,6 +403,65 @@ text = "Select the machine to destroy"
 horizontal_alignment = 1
 
 [node name="CloseBuildMenu" parent="ROOT_UI/Destroy" instance=ExtResource("14_8yknx")]
+layout_mode = 0
+offset_left = 100.0
+offset_top = 815.0
+offset_right = 207.0
+offset_bottom = 847.0
+
+[node name="Wiring" type="Control" parent="ROOT_UI"]
+visible = false
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="WiringLabel" type="Label" parent="ROOT_UI/Wiring"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = 609.0
+offset_right = 7307.0
+offset_bottom = 1367.0
+grow_horizontal = 2
+scale = Vector2(0.05, 0.05)
+theme_override_fonts/font = ExtResource("14_me7n8")
+theme_override_font_sizes/font_size = 1200
+text = "WIRING MODE
+"
+horizontal_alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="ROOT_UI/Wiring"]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 515.0
+offset_top = 683.0
+offset_right = 778.0
+offset_bottom = 715.0
+grow_horizontal = 2
+grow_vertical = 0
+scale = Vector2(1.5, 1.5)
+theme_override_constants/separation = 100
+
+[node name="CreateWire" parent="ROOT_UI/Wiring/HBoxContainer" instance=ExtResource("14_8yknx")]
+layout_mode = 2
+text = "CREATE WIRE
+"
+promptMessage = ": Create Wire"
+promptAction = "ACTION"
+
+[node name="DestroyWire" parent="ROOT_UI/Wiring/HBoxContainer" instance=ExtResource("14_8yknx")]
+layout_mode = 2
+text = "Destroy Wire
+"
+promptMessage = ": Destroy Wire"
+promptAction = "ACTION2"
+
+[node name="CloseBuildMenu" parent="ROOT_UI/Wiring" instance=ExtResource("14_8yknx")]
 layout_mode = 0
 offset_left = 100.0
 offset_top = 815.0

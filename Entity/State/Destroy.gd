@@ -26,7 +26,6 @@ var isOccupied:bool
 
 func enter() -> void:
 	super()
-	buildUI.visible = false
 	destroyHUD.visible = true
 
 
