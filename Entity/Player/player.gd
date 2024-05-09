@@ -35,5 +35,7 @@ func _physics_process(delta) -> void:
 func _process(delta) -> void:
 	mousePos = get_global_mouse_position()
 	state_manager.process_frame(delta)
-		
+	
+func on_item_picked_up(material:Materials):
+	print("I got a ", material.name)			
 

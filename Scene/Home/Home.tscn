@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://dm1j4it5oof3n"]
+[gd_scene load_steps=14 format=3 uid="uid://dm1j4it5oof3n"]
 
 [ext_resource type="Script" path="res://Scene/Home/Home.gd" id="1_iycag"]
 [ext_resource type="PackedScene" uid="uid://c1vsfoc55pk0w" path="res://Entity/Player/player.tscn" id="1_jnw16"]
@@ -7,6 +7,9 @@
 [ext_resource type="Texture2D" uid="uid://c0q82oth7xkok" path="res://Asset/homeTileMap.png" id="2_wfa7x"]
 [ext_resource type="PackedScene" uid="uid://divwuueno2oyu" path="res://Machine/Material Exchange/Scroll Scriber/scroll_sciber.tscn" id="3_cn71x"]
 [ext_resource type="PackedScene" uid="uid://dinksu5e5vepb" path="res://Machine/Electricity/Power Generator/power_generator.tscn" id="4_rrroh"]
+[ext_resource type="PackedScene" uid="uid://0445xnsvsr82" path="res://Scene/Pickup/pickup.tscn" id="8_a5v2n"]
+[ext_resource type="Resource" uid="uid://bdk3htb64qaf7" path="res://Materials/Data/fuel.tres" id="9_vaysc"]
+[ext_resource type="Resource" uid="uid://cchhf0shqvfkr" path="res://Materials/Data/magicEssence.tres" id="10_35awa"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_klcm4"]
 texture = ExtResource("1_vetej")
@@ -749,3 +752,14 @@ position = Vector2(-16, 9)
 collision_mask = 18
 
 [node name="MachineList" type="Node" parent="."]
+
+[node name="Pickup" parent="." instance=ExtResource("8_a5v2n")]
+position = Vector2(-81, 50)
+
+[node name="Pickup2" parent="." instance=ExtResource("8_a5v2n")]
+position = Vector2(-47, 54)
+materials = ExtResource("9_vaysc")
+
+[node name="Pickup3" parent="." instance=ExtResource("8_a5v2n")]
+position = Vector2(-65, 64)
+materials = ExtResource("10_35awa")
