@@ -303,9 +303,10 @@ inputList = {
 }
 move_speed = 10000.0
 
-[node name="Destroy" type="Node" parent="StateManager" node_paths=PackedStringArray("build_state", "buildUI", "buildMenu", "destroyHUD")]
+[node name="Destroy" type="Node" parent="StateManager" node_paths=PackedStringArray("build_state", "wiring_state", "buildUI", "buildMenu", "destroyHUD")]
 script = ExtResource("11_7uhfu")
 build_state = NodePath("../Build")
+wiring_state = NodePath("../Wiring")
 buildUI = NodePath("../../ROOT_UI/Build")
 buildMenu = NodePath("../../ROOT_UI/Build/BuildMenu")
 destroyHUD = NodePath("../../ROOT_UI/Destroy")

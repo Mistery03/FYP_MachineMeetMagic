@@ -5,6 +5,9 @@ extends Machine
 
 @onready var animation = $Animation
 
+var isManaProduced:bool
+var machineList:Array = []
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	changeAnimation("NoPower")
@@ -16,12 +19,17 @@ func _process(delta):
 		if machineUI.power_switch.button_pressed:
 			changeAnimation("Processing")
 			machineUI.status_bar.tint_progress = Color.GREEN
+			isManaProduced = true
 		else:
 			changeAnimation("idle")
 			machineUI.status_bar.tint_progress = Color.YELLOW
+			isManaProduced = false
 	else:
 		changeAnimation("NoPower")
 		machineUI.status_bar.tint_progress = Color.RED
+		isManaProduced = false
+	
+	print(machineList)
 		
 func _on_interectable_input_event(viewport, event, shape_idx):
 	if event is InputEventMouseButton and !player.isBuildMode:

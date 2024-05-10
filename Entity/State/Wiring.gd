@@ -21,8 +21,9 @@ var inputList:Dictionary= {
 
 var cameraSpeed:float = 0
 var prevMouseTilePos = Vector2i(-1,-1)
-var isOccupied:bool
+var isOccupied:bool = false
 var isFloor:bool
+var isCreating:bool = false
 
 var wireTiles:Array = []
 var withinWire:Array = []
@@ -47,6 +48,8 @@ func process_input(event: InputEvent) -> State:
 		HUD.visible = false
 		parent.homeTilemap.set_layer_modulate(4,Color8(255,255,255,0))
 		return build_state
+	if Input.is_action_just_pressed(inputList.find_key("Exit").to_upper()) and isCreating:
+		isCreating = false
 	
 
 	return null
@@ -64,37 +67,64 @@ func process_frame(delta:float) -> State:
 	var machineData:TileData = parent.homeTilemap.get_cell_tile_data(machineLayer,mouseTilePos) 
 	var wireData:TileData = parent.homeTilemap.get_cell_tile_data(wireLayer,mouseTilePos)	
 	
-
+	if machineData:
+		var isManaGenerator = machineData.get_custom_data("ManaGenerator")
+		if wireData :
+			isOccupied = wireData.get_custom_data("occupied")
+			
+			if Input.is_action_pressed("ACTION")  and isManaGenerator:
+				isCreating = true
+				
+			
 	
-	if Input.is_action_pressed("ACTION"):
-		if prevMouseTilePos != mouseTilePos:
-			wireTiles.append(mouseTilePos)
-		prevMouseTilePos = mouseTilePos
-		
-		
-	#Remove Wire	
-	if Input.is_action_pressed("ACTION2"):
-		parent.homeTilemap.erase_cell(4,mouseTilePos)
+			
+		else:
+			if Input.is_action_pressed("ACTION")  and isManaGenerator:
+				isCreating = true
+				
+	if wireTiles.size() <=0:
+		if isCreating and Input.is_action_pressed("ACTION"):		
+			if prevMouseTilePos != mouseTilePos:
+				wireTiles.append(mouseTilePos)
+			prevMouseTilePos = mouseTilePos
+	else:
 		for pos in wireTiles:
-			if pos == mouseTilePos:
-				var index = wireTiles.find(pos)
-				wireTiles.remove_at(index)
-				parent.homeTilemap.clear_layer(wireLayer)
+			for validPos in parent.homeTilemap.get_surrounding_cells(pos):
+				if isCreating and Input.is_action_pressed("ACTION") and mouseTilePos == validPos:		
+					if prevMouseTilePos != mouseTilePos:
+						wireTiles.append(mouseTilePos)
+					prevMouseTilePos = mouseTilePos
+		
+	print(parent.homeTilemap.get_surrounding_cells(mouseTilePos))
+	#Remove Wire	
+	if Input.is_action_just_pressed("ACTION2"):
+		if !wireTiles.is_empty():
+			var pos = wireTiles.pop_back()
+			parent.homeTilemap.erase_cell(4,pos)
+			parent.homeTilemap.clear_layer(wireLayer)
+		else:
+			isCreating = false
+
+		prevMouseTilePos = Vector2i(-1,-1)
 
 	parent.homeTilemap.set_cells_terrain_connect(wireLayer,wireTiles,0,0)	
 	
+	updateWithinWireList()
+	
+	
+	return null
+
+func updateWithinWireList():
 	var machineList = parent.localLevel.machineList.get_children()
 	withinWire.clear()
 	
 	for machine in machineList:
 		for pos in wireTiles:
-			if wireData :
-				if parent.homeTilemap.local_to_map(machine.position) == pos and !isOccupied:
+				if parent.homeTilemap.local_to_map(machine.position) == pos and !(machine is PowerGenerator):
 					withinWire.append(machine)
-			else:
-				if parent.homeTilemap.local_to_map(machine.position) == pos:
-					withinWire.append(machine)
-	print(withinWire)
-	return null
 
-
+	for machine in machineList:
+		if machine is PowerGenerator:
+			machine.machineList = withinWire
+	
+	#print(withinWire)

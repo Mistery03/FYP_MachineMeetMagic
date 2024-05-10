@@ -1,7 +1,7 @@
 extends Node
 
 var player:Player
-
+var count =0
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta) -> void:
@@ -10,3 +10,5 @@ func _process(delta) -> void:
 	
 	for machine in get_children():
 		machine.player = player
+		
+		

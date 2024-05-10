@@ -5,6 +5,9 @@ extends State
 var build_state: State
 
 @export
+var wiring_state: State
+
+@export
 var buildUI:Control
 
 @export
@@ -60,10 +63,12 @@ func process_frame(delta:float) -> State:
 			if Input.is_action_just_pressed("ACTION"):
 				for machine in machineList:
 					if machine.position == parent.homeTilemap.map_to_local(mouseTilePos):
-						machine.queue_free()
+							machine.queue_free()	
+				
 				parent.homeTilemap.erase_cell(2,mouseTilePos)
 				parent.homeTilemap.erase_cell(1,mouseTilePos)
-	
+				
+	wiring_state.updateWithinWireList()
 	if mouseTilePos != prevMouseTilePos:
 		parent.homeTilemap.erase_cell(1,prevMouseTilePos)
 	prevMouseTilePos = mouseTilePos

@@ -95,6 +95,8 @@ func process_frame(delta:float) -> State:
 				var instance = machineInstance.instantiate()
 				instance.position = parent.homeTilemap.map_to_local(mouseTilePos)
 				parent.localLevel.machineList.add_child(instance)
+			
+			wiring_state.updateWithinWireList()
 				
 	return null
 

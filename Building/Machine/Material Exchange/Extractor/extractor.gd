@@ -11,7 +11,14 @@ func _ready():
 	
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	changeAnimation("Processing")
+	#for machine in machineList:
+		#if is_instance_valid(machine):
+			#if machine is PowerGenerator:
+				#isThereFuel = machine.isManaProduced
+	if isThereFuel:
+		changeAnimation("Processing")
+	else:
+		changeAnimation("IDLE")
 
 
 func _on_interectable_input_event(viewport, event, shape_idx):
