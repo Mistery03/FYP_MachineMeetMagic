@@ -5,28 +5,27 @@ extends Machine
 
 @onready var animation = $Animation
 
+var isSwitched:bool
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	changeAnimation("IDLE")
 	
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	#for machine in machineList:
-		#if is_instance_valid(machine):
-			#if machine is PowerGenerator:
-				#isThereFuel = machine.isManaProduced
-	print(isThereFuel)
+
 	if isThereFuel:
-		machineUI.power_switch.button_pressed = true
-		if machineUI.power_switch.button_pressed:
-			changeAnimation("Processing")
-			machineUI.power_switch.button_pressed = true
-		else:
-			changeAnimation("IDLE")
-			machineUI.power_switch.button_pressed = false
+		machineUI.power_switch.disabled = false	
+	else:
+		machineUI.power_switch.disabled = true
+		
+
+	if machineUI.power_switch.button_pressed and !machineUI.power_switch.disabled:
+		changeAnimation("Processing")
 	else:
 		changeAnimation("IDLE")
-		machineUI.power_switch.button_pressed = false
+		
+
 
 
 func _on_interectable_input_event(viewport, event, shape_idx):
