@@ -7,6 +7,7 @@ extends Machine
 
 var isManaProduced:bool
 var machineList:Array = []
+var wireList:Array = []
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -29,7 +30,7 @@ func _process(delta):
 		machineUI.status_bar.tint_progress = Color.RED
 		isManaProduced = false
 	
-	print(machineList)
+	#print(machineList)
 		
 func _on_interectable_input_event(viewport, event, shape_idx):
 	if event is InputEventMouseButton and !player.isBuildMode:

@@ -67,23 +67,20 @@ func process_frame(delta:float) -> State:
 	var machineData:TileData = parent.homeTilemap.get_cell_tile_data(machineLayer,mouseTilePos) 
 	var wireData:TileData = parent.homeTilemap.get_cell_tile_data(wireLayer,mouseTilePos)	
 	
+	var machineList = parent.localLevel.machineList.get_children()
+	
+	
 	if machineData:
 		var isManaGenerator = machineData.get_custom_data("ManaGenerator")
 		if wireData :
 			isOccupied = wireData.get_custom_data("occupied")
-			
-			if Input.is_action_pressed("ACTION")  and isManaGenerator:
-				isCreating = true
-				
-			
-	
-			
 		else:
 			if Input.is_action_pressed("ACTION")  and isManaGenerator:
 				isCreating = true
-				
+				isOccupied = false
+			
 	if wireTiles.size() <=0:
-		if isCreating and Input.is_action_pressed("ACTION"):		
+		if isCreating and !isOccupied:		
 			if prevMouseTilePos != mouseTilePos:
 				wireTiles.append(mouseTilePos)
 			prevMouseTilePos = mouseTilePos
@@ -95,7 +92,6 @@ func process_frame(delta:float) -> State:
 						wireTiles.append(mouseTilePos)
 					prevMouseTilePos = mouseTilePos
 		
-	print(parent.homeTilemap.get_surrounding_cells(mouseTilePos))
 	#Remove Wire	
 	if Input.is_action_just_pressed("ACTION2"):
 		if !wireTiles.is_empty():
