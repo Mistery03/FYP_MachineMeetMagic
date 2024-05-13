@@ -63,10 +63,13 @@ func process_frame(delta:float) -> State:
 			if Input.is_action_just_pressed("ACTION"):
 				for machine in machineList:
 					if machine.position == parent.homeTilemap.map_to_local(mouseTilePos):
-							machine.queue_free()	
-				
+							machine.queue_free()
+							if machine is PowerGenerator:
+								machine.wireList.clear()	
 				parent.homeTilemap.erase_cell(2,mouseTilePos)
 				parent.homeTilemap.erase_cell(1,mouseTilePos)
+				wiring_state.prevGenPos = Vector2i(-100,-100)
+				parent.homeTilemap.clear_layer(wiring_state.wireLayer)
 				
 	wiring_state.updateWithinWireList()
 	if mouseTilePos != prevMouseTilePos:

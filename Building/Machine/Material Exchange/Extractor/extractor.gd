@@ -15,10 +15,18 @@ func _process(delta):
 		#if is_instance_valid(machine):
 			#if machine is PowerGenerator:
 				#isThereFuel = machine.isManaProduced
+	print(isThereFuel)
 	if isThereFuel:
-		changeAnimation("Processing")
+		machineUI.power_switch.button_pressed = true
+		if machineUI.power_switch.button_pressed:
+			changeAnimation("Processing")
+			machineUI.power_switch.button_pressed = true
+		else:
+			changeAnimation("IDLE")
+			machineUI.power_switch.button_pressed = false
 	else:
 		changeAnimation("IDLE")
+		machineUI.power_switch.button_pressed = false
 
 
 func _on_interectable_input_event(viewport, event, shape_idx):

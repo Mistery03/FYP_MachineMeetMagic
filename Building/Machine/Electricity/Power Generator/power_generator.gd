@@ -8,6 +8,9 @@ extends Machine
 var isManaProduced:bool
 var machineList:Array = []
 var wireList:Array = []
+var withinWireList:Array = []
+
+
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -20,17 +23,18 @@ func _process(delta):
 		if machineUI.power_switch.button_pressed:
 			changeAnimation("Processing")
 			machineUI.status_bar.tint_progress = Color.GREEN
-			isManaProduced = true
+			self.isManaProduced = true
 		else:
 			changeAnimation("idle")
 			machineUI.status_bar.tint_progress = Color.YELLOW
-			isManaProduced = false
+			self.isManaProduced = false
 	else:
 		changeAnimation("NoPower")
 		machineUI.status_bar.tint_progress = Color.RED
-		isManaProduced = false
-	
-	#print(machineList)
+		self.isManaProduced = false
+	print(withinWireList)
+	for machine in self.withinWireList:
+		machine.isThereFuel = self.isManaProduced
 		
 func _on_interectable_input_event(viewport, event, shape_idx):
 	if event is InputEventMouseButton and !player.isBuildMode:

@@ -2,6 +2,7 @@ class_name ExtractorUI
 extends Control
 
 @onready var machine_animation = $MachineAnimation
+@onready var power_switch = $PowerSwitch
 
 
 
