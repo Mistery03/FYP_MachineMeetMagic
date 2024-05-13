@@ -120,7 +120,7 @@ func process_frame(delta:float) -> State:
 			parent.homeTilemap.clear_layer(wireLayer)
 		else:
 			isCreating = false
-
+	
 		prevMouseTilePos = Vector2i(-1,-1)
 
 	parent.homeTilemap.set_cells_terrain_connect(wireLayer,wireTiles,0,0)	

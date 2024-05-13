@@ -34,7 +34,8 @@ func _process(delta):
 		self.isManaProduced = false
 	print(withinWireList)
 	for machine in self.withinWireList:
-		machine.isThereFuel = self.isManaProduced
+		if is_instance_valid(machine):
+			machine.isThereFuel = self.isManaProduced
 		
 func _on_interectable_input_event(viewport, event, shape_idx):
 	if event is InputEventMouseButton and !player.isBuildMode:
