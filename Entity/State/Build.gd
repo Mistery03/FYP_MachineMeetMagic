@@ -8,7 +8,9 @@ var idle_state: State
 @export 
 var delete_state:State
 @export
-var wiring_state:State
+var wiring_machine_state:State
+@export
+var wiring_battery_state:State
 
 @export
 var buildUI:Control
@@ -50,7 +52,7 @@ func process_input(event: InputEvent) -> State:
 	
 	if Input.is_action_just_pressed("WIRING"):
 		buildUI.visible = false
-		return wiring_state
+		return wiring_machine_state
 
 	return null
 
@@ -96,7 +98,8 @@ func process_frame(delta:float) -> State:
 				instance.position = parent.homeTilemap.map_to_local(mouseTilePos)
 				parent.localLevel.machineList.add_child(instance)
 			
-			wiring_state.updateWithinWireList()
+			wiring_machine_state.updateWithinWireList()
+			wiring_battery_state.updateWithinWireList()
 				
 	return null
 

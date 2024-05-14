@@ -1,4 +1,4 @@
-[gd_scene load_steps=44 format=3 uid="uid://c1vsfoc55pk0w"]
+[gd_scene load_steps=46 format=3 uid="uid://c1vsfoc55pk0w"]
 
 [ext_resource type="Texture2D" uid="uid://bd32dcnew3uvf" path="res://Asset/L.png" id="1_ksidj"]
 [ext_resource type="Script" path="res://Entity/Player/player.gd" id="1_xfdxb"]
@@ -14,10 +14,12 @@
 [ext_resource type="Script" path="res://Entity/State/Destroy.gd" id="11_7uhfu"]
 [ext_resource type="PackedScene" uid="uid://dgn61wamn10el" path="res://UI/Build/build_menu.tscn" id="12_58i1p"]
 [ext_resource type="Script" path="res://Entity/State/Wiring.gd" id="12_ii11w"]
+[ext_resource type="Script" path="res://Entity/Player/WiringBattery.gd" id="13_3c3kb"]
 [ext_resource type="PackedScene" uid="uid://htlhwdgl8ast" path="res://HUD/DynamicLabel/dynamicLabel.tscn" id="14_8yknx"]
 [ext_resource type="FontFile" uid="uid://cl3rxpo58micg" path="res://Asset/Font/Lambda-Regular.ttf" id="14_me7n8"]
 [ext_resource type="PackedScene" uid="uid://dd2ysdc77pxkq" path="res://UI/Build/build_hud.tscn" id="15_otihl"]
 [ext_resource type="Script" path="res://Entity/Player/InteractComponent.gd" id="15_wh8qd"]
+[ext_resource type="Script" path="res://UI/Wiring/Wiring.gd" id="18_3q6sb"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_o46v5"]
 atlas = ExtResource("1_ksidj")
@@ -289,12 +291,13 @@ animationList = {
 "WalkFront": "WalkFront"
 }
 
-[node name="Build" type="Node" parent="StateManager" node_paths=PackedStringArray("move_state", "idle_state", "delete_state", "wiring_state", "buildUI", "buildMenu")]
+[node name="Build" type="Node" parent="StateManager" node_paths=PackedStringArray("move_state", "idle_state", "delete_state", "wiring_machine_state", "wiring_battery_state", "buildUI", "buildMenu")]
 script = ExtResource("10_10mal")
 move_state = NodePath("../Move")
 idle_state = NodePath("../Idle")
 delete_state = NodePath("../Destroy")
-wiring_state = NodePath("../Wiring")
+wiring_machine_state = NodePath("../WiringMachine")
+wiring_battery_state = NodePath("../WiringBattery")
 buildUI = NodePath("../../ROOT_UI/Build")
 buildMenu = NodePath("../../ROOT_UI/Build/BuildMenu")
 inputList = {
@@ -303,10 +306,11 @@ inputList = {
 }
 move_speed = 10000.0
 
-[node name="Destroy" type="Node" parent="StateManager" node_paths=PackedStringArray("build_state", "wiring_state", "buildUI", "buildMenu", "destroyHUD")]
+[node name="Destroy" type="Node" parent="StateManager" node_paths=PackedStringArray("build_state", "wiring_machine_state", "wiring_battery_state", "buildUI", "buildMenu", "destroyHUD")]
 script = ExtResource("11_7uhfu")
 build_state = NodePath("../Build")
-wiring_state = NodePath("../Wiring")
+wiring_machine_state = NodePath("../WiringMachine")
+wiring_battery_state = NodePath("../WiringBattery")
 buildUI = NodePath("../../ROOT_UI/Build")
 buildMenu = NodePath("../../ROOT_UI/Build/BuildMenu")
 destroyHUD = NodePath("../../ROOT_UI/Destroy")
@@ -316,17 +320,30 @@ inputList = {
 }
 move_speed = 10000.0
 
-[node name="Wiring" type="Node" parent="StateManager" node_paths=PackedStringArray("build_state", "buildUI", "buildMenu", "HUD")]
+[node name="WiringMachine" type="Node" parent="StateManager" node_paths=PackedStringArray("build_state", "buildUI", "buildMenu", "wiring_battery", "HUD")]
 script = ExtResource("12_ii11w")
 build_state = NodePath("../Build")
 buildUI = NodePath("../../ROOT_UI/Build")
 buildMenu = NodePath("../../ROOT_UI/Build/BuildMenu")
+wiring_battery = NodePath("../WiringBattery")
 HUD = NodePath("../../ROOT_UI/Wiring")
 inputList = {
 "Build": "Build",
 "Exit": "Exit"
 }
 move_speed = 10000.0
+
+[node name="WiringBattery" type="Node" parent="StateManager" node_paths=PackedStringArray("build_state", "buildUI", "buildMenu", "wiring_machine", "HUD")]
+script = ExtResource("13_3c3kb")
+build_state = NodePath("../Build")
+buildUI = NodePath("../../ROOT_UI/Build")
+buildMenu = NodePath("../../ROOT_UI/Build/BuildMenu")
+wiring_machine = NodePath("../WiringMachine")
+HUD = NodePath("../../ROOT_UI/Wiring")
+inputList = {
+"Build": "Build",
+"Exit": "Exit"
+}
 
 [node name="MoveComponent" type="Node" parent="."]
 script = ExtResource("10_gim7i")
@@ -416,19 +433,17 @@ layout_mode = 3
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
+script = ExtResource("18_3q6sb")
+text = "WIRING MODE"
 
 [node name="WiringLabel" type="Label" parent="ROOT_UI/Wiring"]
 layout_mode = 1
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = 609.0
-offset_right = 7307.0
-offset_bottom = 1367.0
-grow_horizontal = 2
-scale = Vector2(0.05, 0.05)
+offset_left = 383.0
+offset_top = 51.0
+offset_right = 1182.0
+offset_bottom = 189.0
 theme_override_fonts/font = ExtResource("14_me7n8")
-theme_override_font_sizes/font_size = 1200
+theme_override_font_sizes/font_size = 90
 text = "WIRING MODE
 "
 horizontal_alignment = 1
@@ -468,6 +483,28 @@ offset_left = 100.0
 offset_top = 815.0
 offset_right = 207.0
 offset_bottom = 847.0
+
+[node name="WiringMachine" parent="ROOT_UI/Wiring" instance=ExtResource("14_8yknx")]
+layout_mode = 0
+offset_left = 300.0
+offset_top = 815.0
+offset_right = 509.0
+offset_bottom = 847.0
+text = "NUMKEY1: Wire Machine
+"
+promptMessage = ": Wire Machine"
+promptAction = "NUMKEY1"
+
+[node name="WiringBattery" parent="ROOT_UI/Wiring" instance=ExtResource("14_8yknx")]
+layout_mode = 0
+offset_left = 520.0
+offset_top = 815.0
+offset_right = 729.0
+offset_bottom = 847.0
+text = "NUMKEY1: Wire Machine
+"
+promptMessage = ": Wire Battery"
+promptAction = "NUMKEY2"
 
 [node name="InteractComponent" type="Node" parent="." node_paths=PackedStringArray("parent")]
 script = ExtResource("15_wh8qd")

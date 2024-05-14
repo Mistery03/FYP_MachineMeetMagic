@@ -1,0 +1,61 @@
+[gd_scene load_steps=7 format=3 uid="uid://1hjdqifegyyi"]
+
+[ext_resource type="Script" path="res://Building/Machine/Electricity/Battery/batteryUI.gd" id="1_33jrt"]
+[ext_resource type="Texture2D" uid="uid://daap0c1p135gi" path="res://Asset/UIUX/machineContainer.png" id="2_vrfs0"]
+[ext_resource type="PackedScene" uid="uid://cxsbrurialksc" path="res://UI/MachineManaBar/machine_mana_bar.tscn" id="5_e16pr"]
+[ext_resource type="Texture2D" uid="uid://cy01yfe162ynm" path="res://Asset/Machine.png" id="6_7dah2"]
+[ext_resource type="FontFile" uid="uid://cl3rxpo58micg" path="res://Asset/Font/Lambda-Regular.ttf" id="7_mnogx"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ny74c"]
+atlas = ExtResource("6_7dah2")
+region = Rect2(0, 384, 160, 32)
+
+[node name="BatteryUI" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_33jrt")
+
+[node name="Background" type="TextureRect" parent="."]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -540.0
+offset_top = 82.0
+offset_right = 540.0
+offset_bottom = 802.0
+grow_horizontal = 2
+texture = ExtResource("2_vrfs0")
+
+[node name="MachineManaBar" parent="." instance=ExtResource("5_e16pr")]
+layout_mode = 0
+offset_left = 478.0
+offset_top = 331.0
+offset_right = 1118.0
+offset_bottom = 651.0
+value = 0.0
+maxValue = 10000.0
+
+[node name="Sprite" type="Sprite2D" parent="."]
+texture_filter = 1
+position = Vector2(793, 272)
+scale = Vector2(8, 8)
+texture = SubResource("AtlasTexture_ny74c")
+hframes = 5
+
+[node name="ManaCapaity" type="Label" parent="."]
+layout_mode = 0
+offset_left = 507.0
+offset_top = 582.0
+offset_right = 1094.0
+offset_bottom = 652.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("7_mnogx")
+theme_override_font_sizes/font_size = 60
+text = "MANA CAPACITY"
+horizontal_alignment = 1

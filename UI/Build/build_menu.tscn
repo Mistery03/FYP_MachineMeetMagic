@@ -1,15 +1,16 @@
-[gd_scene load_steps=13 format=3 uid="uid://dgn61wamn10el"]
+[gd_scene load_steps=14 format=3 uid="uid://dgn61wamn10el"]
 
 [ext_resource type="Script" path="res://UI/Build/build_menu.gd" id="1_0ur8d"]
 [ext_resource type="Texture2D" uid="uid://dy6bsmjnf8u44" path="res://Asset/UIUX/Container.png" id="1_bxykf"]
 [ext_resource type="PackedScene" uid="uid://b8l6h6q66lu2w" path="res://UI/Build/build_slot.tscn" id="2_gxta4"]
 [ext_resource type="FontFile" uid="uid://cl3rxpo58micg" path="res://Asset/Font/Lambda-Regular.ttf" id="3_88haw"]
 [ext_resource type="Texture2D" uid="uid://cy01yfe162ynm" path="res://Asset/Machine.png" id="5_25chw"]
-[ext_resource type="Resource" uid="uid://b7tm5f2vprc8a" path="res://Building/Machine/Material Exchange/Extractor/extractor.tres" id="6_mcw5q"]
+[ext_resource type="Resource" uid="uid://b7tm5f2vprc8a" path="res://Building/Machine/Data/extractor.tres" id="5_mgpqo"]
+[ext_resource type="Resource" uid="uid://dqo00x1g854h3" path="res://Building/Machine/Data/scrollScriber.tres" id="6_ft3vg"]
 [ext_resource type="Script" path="res://UI/Build/DescriptionBoard.gd" id="6_ulo5r"]
 [ext_resource type="Texture2D" uid="uid://dw0wj1ftq8uye" path="res://Asset/potionSS.png" id="6_wdmht"]
-[ext_resource type="Resource" uid="uid://dqo00x1g854h3" path="res://Building/Machine/Material Exchange/Scroll Scriber/scrollScriber.tres" id="7_qrjdq"]
-[ext_resource type="Resource" uid="uid://ch3ruj8fn022x" path="res://Building/Machine/Electricity/Power Generator/powerGenerator.tres" id="9_8ovw4"]
+[ext_resource type="Resource" uid="uid://ch3ruj8fn022x" path="res://Building/Machine/Data/powerGenerator.tres" id="7_1tdyj"]
+[ext_resource type="Resource" uid="uid://b4ot4cdrsegxs" path="res://Building/Machine/Data/battery.tres" id="8_vgx31"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_spxpk"]
 atlas = ExtResource("5_25chw")
@@ -71,15 +72,19 @@ columns = 4
 
 [node name="BuildSlot" parent="BuildMenu/GridContainer" instance=ExtResource("2_gxta4")]
 layout_mode = 2
-buildingData = ExtResource("6_mcw5q")
+buildingData = ExtResource("5_mgpqo")
 
 [node name="BuildSlot2" parent="BuildMenu/GridContainer" instance=ExtResource("2_gxta4")]
 layout_mode = 2
-buildingData = ExtResource("7_qrjdq")
+buildingData = ExtResource("6_ft3vg")
 
 [node name="BuildSlot3" parent="BuildMenu/GridContainer" instance=ExtResource("2_gxta4")]
 layout_mode = 2
-buildingData = ExtResource("9_8ovw4")
+buildingData = ExtResource("7_1tdyj")
+
+[node name="BuildSlot4" parent="BuildMenu/GridContainer" instance=ExtResource("2_gxta4")]
+layout_mode = 2
+buildingData = ExtResource("8_vgx31")
 
 [node name="DescriptionBoard" type="NinePatchRect" parent="."]
 visible = false

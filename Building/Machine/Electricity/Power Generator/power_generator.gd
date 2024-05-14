@@ -2,6 +2,7 @@ class_name PowerGenerator
 extends Machine
 
 @export var machineUI:Control
+@export var manaPerSecond:float
 
 @onready var animation = $Animation
 
@@ -9,6 +10,9 @@ var isManaProduced:bool
 var machineList:Array = []
 var wireList:Array = []
 var withinWireList:Array = []
+
+var currManaProduced:float
+
 
 
 
@@ -32,10 +36,14 @@ func _process(delta):
 		changeAnimation("NoPower")
 		machineUI.status_bar.tint_progress = Color.RED
 		self.isManaProduced = false
-	print(withinWireList)
+	
+	
 	for machine in self.withinWireList:
-		if is_instance_valid(machine):
-			machine.isThereFuel = self.isManaProduced
+		if isManaProduced:
+			if is_instance_valid(machine):
+				machine.isThereFuel = self.isManaProduced
+			if machine is Battery:
+				machine.currMana += manaPerSecond * delta
 		
 func _on_interectable_input_event(viewport, event, shape_idx):
 	if event is InputEventMouseButton and !player.isBuildMode:

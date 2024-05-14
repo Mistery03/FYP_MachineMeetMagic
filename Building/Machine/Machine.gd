@@ -2,15 +2,12 @@ class_name Machine
 extends Node
 
 @export var isThereFuel:bool
+@export var manaConsumptionPerSecond:float
 
 var machine:Machine 
 var next:Machine = null
 var player:Player
 
-
-var batteryList = []
-var machineConnection = {}
-var batteryConnection = {}
 
 
 

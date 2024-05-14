@@ -48,7 +48,7 @@ texture_filter = 1
 position = Vector2(550, 240)
 scale = Vector2(7, 7)
 sprite_frames = ExtResource("3_bofy2")
-animation = &"Idle"
+animation = &"Processing"
 
 [node name="PowerSwitch" parent="." instance=ExtResource("4_ayn0i")]
 layout_mode = 0

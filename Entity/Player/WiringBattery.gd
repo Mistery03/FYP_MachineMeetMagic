@@ -1,4 +1,4 @@
-class_name WiringMachine
+class_name WiringBattery
 extends State
 
 @export
@@ -8,7 +8,7 @@ var buildUI:Control
 @export
 var buildMenu:Control
 @export
-var wiring_battery:State
+var wiring_machine:State
 
 
 
@@ -24,7 +24,7 @@ var inputList:Dictionary= {
 
 var cameraSpeed:float = 0
 var prevMouseTilePos = Vector2i(-1,-1)
-var prevGenPos = Vector2i(-100,-100)
+var prevBattPos = Vector2i(-100,-100)
 var isOccupied:bool = false
 var isFloor:bool
 var isCreating:bool = false
@@ -32,10 +32,10 @@ var isCreating:bool = false
 var wireTiles:Array = []
 var withinWire:Array = []
 
-var wireLayer:int = 4
+var wireLayer:int = 8
 var machineLayer:int = 2
 
-var powerGenPosList = []
+var batteryList = []
 
 
 func enter() -> void:
@@ -49,8 +49,8 @@ func process_input(event: InputEvent) -> State:
 		return build_state
 	if Input.is_action_just_pressed(inputList.find_key("Exit").to_upper()) and isCreating:
 		isCreating = false
-	if Input.is_action_just_pressed("NUMKEY2"):
-		return wiring_battery
+	if Input.is_action_just_pressed("NUMKEY1"):
+		return wiring_machine
 	
 	return null
 
@@ -72,12 +72,13 @@ func process_frame(delta:float) -> State:
 	handleMachineInteraction(mouseTilePos)
 	
 	if machineData:
-		handleManaGenerator(machineData, wireData, mouseTilePos)
+		handleBattery(machineData, wireData, mouseTilePos)
 		
 	handleWireCreation(mouseTilePos, wireData)
-
+	print(wireTiles)
+		
 	handleWireRemoval()
-	
+
 	parent.homeTilemap.set_cells_terrain_connect(wireLayer,wireTiles,0,0)	
 	
 	updateWithinWireList()
@@ -85,35 +86,35 @@ func process_frame(delta:float) -> State:
 	
 	return null
 func enterBuildMode():
-	parent.homeTilemap.set_layer_modulate(4,Color8(255,255,255,255))
+	parent.homeTilemap.set_layer_modulate(wireLayer,Color8(0,255,0,255))
 	parent.isBuildMode = true
 	HUD.visible = true
-	HUD.text = "MACHINE WIRING MODE"
+	HUD.text = "BATTERY WIRING MODE"
 	
 func exitBuildMode():
 	HUD.visible = false
-	parent.homeTilemap.set_layer_modulate(wireLayer, Color8(255, 255, 255, 0))
-	parent.homeTilemap.erase_cell(7, prevGenPos)
+	parent.homeTilemap.set_layer_modulate(wireLayer, Color8(0, 255,0, 0))
+	parent.homeTilemap.erase_cell(7, prevBattPos)
 
 func handleMachineInteraction(mouseTilePos):
-	parent.homeTilemap.set_cell(7, prevGenPos, 0, Vector2i(5, 5))
+	parent.homeTilemap.set_cell(7, prevBattPos, 0, Vector2i(5, 5))
 	for machine in parent.localLevel.machineList.get_children():
 		if machine.position == parent.homeTilemap.map_to_local(mouseTilePos):
-			if machine is PowerGenerator:
+			if machine is Battery:
 				if Input.is_action_just_pressed("ACTION"):
 					parent.homeTilemap.clear_layer(wireLayer)
-					parent.homeTilemap.erase_cell(7, prevGenPos)
+					parent.homeTilemap.erase_cell(7, prevBattPos)
 					parent.homeTilemap.set_cell(7, mouseTilePos, 0, Vector2i(5, 5))
-					prevGenPos = mouseTilePos
+					prevBattPos = mouseTilePos
 					wireTiles = machine.wireList
 					withinWire = machine.withinWireList
 					print(machine.name)
 					
-func handleManaGenerator(machineData, wireData, mouseTilePos):
-	var isManaGenerator = machineData.get_custom_data("ManaGenerator")
+func handleBattery(machineData, wireData, mouseTilePos):
+	var isBattery = machineData.get_custom_data("Battery")
 	isOccupied = wireData and wireData.get_custom_data("occupied") or false
 
-	if Input.is_action_pressed("ACTION") and isManaGenerator and not isOccupied:
+	if Input.is_action_pressed("ACTION") and isBattery and not isOccupied:
 		isCreating = true
 		
 
@@ -127,7 +128,7 @@ func handleWireCreation(mouseTilePos, wireData):
 	else:
 		for pos in wireTiles:
 			for validPos in parent.homeTilemap.get_surrounding_cells(pos):
-				if isCreating and Input.is_action_pressed("ACTION") and mouseTilePos == validPos and !wireData and validPos != prevGenPos:		
+				if isCreating and Input.is_action_pressed("ACTION") and mouseTilePos == validPos and !wireData and validPos != prevBattPos:		
 					if prevMouseTilePos != mouseTilePos:
 						wireTiles.append(mouseTilePos)
 					prevMouseTilePos = mouseTilePos
@@ -144,8 +145,6 @@ func handleWireRemoval():
 		else:
 			isCreating = false
 		prevMouseTilePos = Vector2i(-1, -1)
-	
-
 
 
 
@@ -153,11 +152,18 @@ func updateWithinWireList():
 	var machineList = parent.localLevel.machineList.get_children()
 	var mouseTilePos = parent.homeTilemap.local_to_map(parent.mousePos)
 	withinWire.clear()
+	batteryList.clear()
 	for machine in machineList:
 		for pos in wireTiles:
-			if parent.homeTilemap.local_to_map(machine.position) == pos and !(machine is PowerGenerator):
+			if parent.homeTilemap.local_to_map(machine.position) == pos and !(machine is Battery):
 				withinWire.append(machine)
-
+			if parent.homeTilemap.local_to_map(machine.position) == pos and machine is Battery:
+				batteryList.append(machine)
+				
+	
+		
+				
+	print(batteryList)
 	#print(withinWire)
 	
 	#print(withinWire)

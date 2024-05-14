@@ -11,6 +11,7 @@ size = Vector2(26, 28)
 z_index = 20
 script = ExtResource("1_tl5kv")
 machineUI = NodePath("Root/ExtractorUI")
+manaConsumptionPerSecond = 100.0
 
 [node name="Animation" type="AnimatedSprite2D" parent="."]
 texture_filter = 1

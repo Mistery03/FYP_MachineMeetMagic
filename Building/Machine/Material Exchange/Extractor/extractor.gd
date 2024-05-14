@@ -5,7 +5,6 @@ extends Machine
 
 @onready var animation = $Animation
 
-var isSwitched:bool
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -25,7 +24,6 @@ func _process(delta):
 	else:
 		changeAnimation("IDLE")
 		
-
 
 
 func _on_interectable_input_event(viewport, event, shape_idx):
