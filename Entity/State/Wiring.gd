@@ -45,11 +45,12 @@ func enter() -> void:
 
 func process_input(event: InputEvent) -> State:
 	if Input.is_action_just_pressed(inputList.find_key("Exit").to_upper()) or Input.is_action_just_pressed(inputList.find_key("Build").to_upper()):
-		exitBuildMode()
+		hideWiresOrbuildMode()
 		return build_state
 	if Input.is_action_just_pressed(inputList.find_key("Exit").to_upper()) and isCreating:
 		isCreating = false
 	if Input.is_action_just_pressed("NUMKEY2"):
+		hideWiresOrbuildMode()
 		return wiring_battery
 	
 	return null
@@ -90,7 +91,7 @@ func enterBuildMode():
 	HUD.visible = true
 	HUD.text = "MACHINE WIRING MODE"
 	
-func exitBuildMode():
+func hideWiresOrbuildMode():
 	HUD.visible = false
 	parent.homeTilemap.set_layer_modulate(wireLayer, Color8(255, 255, 255, 0))
 	parent.homeTilemap.erase_cell(7, prevGenPos)

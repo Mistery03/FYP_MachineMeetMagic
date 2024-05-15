@@ -10,7 +10,8 @@ var buildMenu:Control
 @export
 var wiring_machine:State
 
-
+@export
+var machineUpdater:Node
 
 @export	
 var HUD:Control
@@ -20,6 +21,8 @@ var inputList:Dictionary= {
 	"Exit":"",
 	"Build":""
 }
+
+signal OnBatteryListChanged
 
 
 var cameraSpeed:float = 0
@@ -37,19 +40,26 @@ var machineLayer:int = 2
 
 var batteryList = []
 
+var isCalculationsDone: bool = false 
+var isSubtractionCalculationsDone: bool = false 
+
+var accumulativeBatteryMaxCapacity:float = 0
+var accumulativeCurrMana:float = 0
 
 func enter() -> void:
 	super()
 	enterBuildMode()
+	updateAccumulativeCurrMana()
 	
 
 func process_input(event: InputEvent) -> State:
 	if Input.is_action_just_pressed(inputList.find_key("Exit").to_upper()) or Input.is_action_just_pressed(inputList.find_key("Build").to_upper()):
-		exitBuildMode()
+		hideWiresOrbuildMode()
 		return build_state
 	if Input.is_action_just_pressed(inputList.find_key("Exit").to_upper()) and isCreating:
 		isCreating = false
 	if Input.is_action_just_pressed("NUMKEY1"):
+		hideWiresOrbuildMode()
 		return wiring_machine
 	
 	return null
@@ -69,29 +79,36 @@ func process_frame(delta:float) -> State:
 	
 	var machineList = parent.localLevel.machineList.get_children()
 	
-	handleMachineInteraction(mouseTilePos)
+	#handleMachineInteraction(mouseTilePos)
 	
 	if machineData:
 		handleBattery(machineData, wireData, mouseTilePos)
 		
+		
 	handleWireCreation(mouseTilePos, wireData)
 	print(wireTiles)
 		
-	handleWireRemoval()
+	handleWireRemoval(machineData)
 
 	parent.homeTilemap.set_cells_terrain_connect(wireLayer,wireTiles,0,0)	
 	
+	updateAccumulativeCurrMana()
+	#accumulateBatteryMaxCapacity()
+	machineUpdater.setMachineUpdaterData(batteryList,withinWire)
 	updateWithinWireList()
 	
 	
+		
 	return null
+	
 func enterBuildMode():
 	parent.homeTilemap.set_layer_modulate(wireLayer,Color8(0,255,0,255))
 	parent.isBuildMode = true
 	HUD.visible = true
 	HUD.text = "BATTERY WIRING MODE"
-	
-func exitBuildMode():
+
+
+func hideWiresOrbuildMode():
 	HUD.visible = false
 	parent.homeTilemap.set_layer_modulate(wireLayer, Color8(0, 255,0, 0))
 	parent.homeTilemap.erase_cell(7, prevBattPos)
@@ -116,7 +133,7 @@ func handleBattery(machineData, wireData, mouseTilePos):
 
 	if Input.is_action_pressed("ACTION") and isBattery and not isOccupied:
 		isCreating = true
-		
+		isCalculationsDone = false	
 
 		
 func handleWireCreation(mouseTilePos, wireData):
@@ -133,18 +150,20 @@ func handleWireCreation(mouseTilePos, wireData):
 						wireTiles.append(mouseTilePos)
 					prevMouseTilePos = mouseTilePos
 					
-func handleWireRemoval():
+func handleWireRemoval(machineData):
 	if Input.is_action_just_pressed("ACTION2"):
 		if wireTiles.size() == 1:
 			wireTiles.clear()
 			parent.homeTilemap.clear_layer(wireLayer)
 		if not wireTiles.size() <= 0:
 			var pos = wireTiles.pop_back()
+			
 			parent.homeTilemap.erase_cell(wireLayer, pos)
-			parent.homeTilemap.clear_layer(wireLayer)
+			parent.homeTilemap.clear_layer(wireLayer)			
 		else:
 			isCreating = false
 		prevMouseTilePos = Vector2i(-1, -1)
+
 
 
 
@@ -154,16 +173,51 @@ func updateWithinWireList():
 	withinWire.clear()
 	batteryList.clear()
 	for machine in machineList:
+		var machinePos = parent.homeTilemap.local_to_map(machine.position)
 		for pos in wireTiles:
-			if parent.homeTilemap.local_to_map(machine.position) == pos and !(machine is Battery):
-				withinWire.append(machine)
-			if parent.homeTilemap.local_to_map(machine.position) == pos and machine is Battery:
-				batteryList.append(machine)
+			if machinePos == pos:
+				if !(machine is Battery):
+					withinWire.append(machine)
+				elif  machine is Battery:
+					addBattery(machine)	
 				
+	#print(batteryList)
+	#print(withinWire)
 	
+	#print(withinWire)
+# Call this function whenever you add a battery to the list
+func addBattery(battery):
+	if battery not in batteryList:
+		batteryList.append(battery)
+		isCalculationsDone = false
+		accumulateBatteryMaxCapacity()
+
+# Call this function whenever you remove a battery from the list
+func removeBattery(battery):
+	if battery in batteryList:
+		batteryList.erase(battery)
+		isCalculationsDone = false
+		accumulateBatteryMaxCapacity()
+	
+
+func accumulateBatteryMaxCapacity():
+	accumulativeBatteryMaxCapacity = 0
+	if batteryList.size() > 0 and !isCalculationsDone:
+		for battery in batteryList:
+			accumulativeBatteryMaxCapacity += battery.maxCapacity
 		
-				
-	print(batteryList)
-	#print(withinWire)
+			
+		isCalculationsDone = true
 	
-	#print(withinWire)
+	#print(accumulativeBatteryMaxCapacity)
+
+func updateAccumulativeCurrMana():
+	accumulativeCurrMana = 0.0  # Reset the accumulative current mana
+	if batteryList.size() > 0:
+		for battery in batteryList:
+			accumulativeCurrMana += battery.currMana
+
+	print("Accumulative Current Mana: ", accumulativeCurrMana)
+
+	
+	

@@ -52,12 +52,14 @@ func _process(delta):
 			
 	changeSpriteFrame(batteryBar)
 	
-	for machine in withinWireList:
+	"""for machine in withinWireList:
 		if percentage > 0 and machine.machineUI.power_switch.button_pressed:
 			consumeMana(machine.manaConsumptionPerSecond,delta)
 			machine.isThereFuel = true
 		else:
-			machine.isThereFuel = false
+			machine.isThereFuel = false"""
+	
+
 	
 	
 
