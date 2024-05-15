@@ -1,0 +1,45 @@
+[gd_scene load_steps=3 format=3 uid="uid://g6fcu5xcdnaa"]
+
+[ext_resource type="PackedScene" uid="uid://tws10ln776dl" path="res://UI/Potion/PotionSlot.tscn" id="1_5jbe2"]
+[ext_resource type="Script" path="res://UI/Potion/PotionGridContainer.gd" id="1_kh4ct"]
+
+[node name="PotionGridContainer" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("1_kh4ct")
+
+[node name="GridContainer" type="GridContainer" parent="."]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+columns = 5
+
+[node name="PotionSlot" parent="GridContainer" instance=ExtResource("1_5jbe2")]
+layout_mode = 2
+
+[node name="PotionSlot2" parent="GridContainer" instance=ExtResource("1_5jbe2")]
+layout_mode = 2
+
+[node name="PotionSlot3" parent="GridContainer" instance=ExtResource("1_5jbe2")]
+layout_mode = 2
+
+[node name="PotionSlot4" parent="GridContainer" instance=ExtResource("1_5jbe2")]
+layout_mode = 2
+
+[node name="PotionSlot5" parent="GridContainer" instance=ExtResource("1_5jbe2")]
+layout_mode = 2
+
+[node name="PotionSlot6" parent="GridContainer" instance=ExtResource("1_5jbe2")]
+layout_mode = 2
+
+[node name="PotionSlot7" parent="GridContainer" instance=ExtResource("1_5jbe2")]
+layout_mode = 2
+
+[node name="PotionSlot8" parent="GridContainer" instance=ExtResource("1_5jbe2")]
+layout_mode = 2
+
+[node name="PotionSlot9" parent="GridContainer" instance=ExtResource("1_5jbe2")]
+layout_mode = 2
+
+[node name="PotionSlot10" parent="GridContainer" instance=ExtResource("1_5jbe2")]
+layout_mode = 2
