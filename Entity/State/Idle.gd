@@ -21,6 +21,7 @@ func enter() -> void:
 	lerp_to_zero()
 	await parent.get_tree().create_timer(0.2).timeout
 	parent.velocity.x = 0.0
+	parent.itemHUDPlaceholder.visible = true
 	
 func lerp_to_zero():
 	# Gradually lerp the velocity to 0

@@ -34,6 +34,7 @@ func enter() -> void:
 	super()
 	buildUI.visible = true
 	parent.isBuildMode = true
+	parent.itemHUDPlaceholder.visible = false
 	
 
 	

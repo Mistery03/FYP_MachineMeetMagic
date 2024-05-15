@@ -2,7 +2,10 @@ extends State
 
 @export
 var idle_state: State
-	
+
+func enter() -> void:
+	super()
+	parent.itemHUDPlaceholder.visible = true
 
 func process_input(event: InputEvent) -> State:
 

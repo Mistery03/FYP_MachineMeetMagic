@@ -41,6 +41,7 @@ var powerGenPosList = []
 func enter() -> void:
 	super()
 	enterBuildMode()
+	parent.itemHUDPlaceholder.visible = false
 	
 
 func process_input(event: InputEvent) -> State:

@@ -9,6 +9,7 @@ const JUMP_VELOCITY = 4.5
 @export var staff:Staff = null
 @export var isStaffEquipped:bool
 @export var playerInventory:Control
+@export var itemHUDPlaceholder:Control
 
 @onready var potion_manager = $PotionManager
 @onready var state_manager = $StateManager

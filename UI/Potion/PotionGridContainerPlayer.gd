@@ -23,3 +23,10 @@ func decreasePotionAmount(potionData:PotionData):
 	for potion in grid_container.get_children():
 		if potion.potionData == potionData:
 			potion.potionAmount -= 1
+
+func getPotionAmount(potionData:PotionData) -> int:
+	for potion in grid_container.get_children():
+		if potion.potionData == potionData:
+			return potion.potionAmount
+	
+	return 0

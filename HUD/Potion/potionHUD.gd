@@ -7,6 +7,8 @@ extends Control
 
 @onready var texture_rect = $border/TextureRect
 @onready var player = $"../../.."
+@onready var darkened = $Darkened
+@onready var potion_amount = $PotionAmount
 
 var poppedValue
 var currTexture
@@ -27,6 +29,7 @@ func _ready():
 
 func _process(delta):
 	if potionGridHolderData:
+		
 		if Input.is_action_just_pressed("EQUIPPOTION"):
 
 			potionList = potionGridHolderData.potionList
@@ -43,11 +46,15 @@ func _process(delta):
 					currIncreament = 0
 				
 				if potionList[currIndex]:
+					var amount = potionGridHolderData.getPotionAmount(potionList[currIndex])
 					texture_rect.visible = true
+					potion_amount.visible = true
 					texture_rect.texture = potionList[currIndex].texture
+					potion_amount.text = str(amount)
 					player.potion_manager.potionData = potionList[currIndex]
 				else:
 					texture_rect.visible = false
+					potion_amount.visible = false
 					player.potion_manager.potionData = null
 					isPotionNull = true
 				print(potionList)	
