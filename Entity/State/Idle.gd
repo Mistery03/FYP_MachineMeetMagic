@@ -42,9 +42,11 @@ func process_input(event: InputEvent) -> State:
 
 	return null
 
-func process_physics(delta: float) -> State:
+func process_frame(delta: float) -> State:
 
-	#parent.move_and_slide()
-	
+	if parent.isStaffEquipped:
+		parent.staff.customAnimation.play("idleFront")
+	else:
+		parent.staff.customAnimation.play("RESET")
 	
 	return null

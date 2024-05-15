@@ -6,6 +6,8 @@ const JUMP_VELOCITY = 4.5
 
 @export var playerData:EntityData
 @export var potionObject:PotionData
+@export var staff:Staff = null
+@export var isStaffEquipped:bool
 
 @onready var potion_manager = $PotionManager
 @onready var state_manager = $StateManager
@@ -19,6 +21,7 @@ var isBuildMode:bool
 var homeTilemap:TileMap
 var mousePos:Vector2
 var localLevel:Node2D
+
 
 func _ready() -> void:
 	currHealth = playerData.MaxHealth

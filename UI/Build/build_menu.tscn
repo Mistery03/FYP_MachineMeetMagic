@@ -95,7 +95,7 @@ offset_top = 5.0
 offset_right = 475.0
 offset_bottom = 213.0
 texture = ExtResource("1_bxykf")
-region_rect = Rect2(0, 0, 32, 32)
+region_rect = Rect2(0.595047, 0.0548, 30.9449, 31.9452)
 script = ExtResource("6_ulo5r")
 
 [node name="BuildingIcon" type="TextureRect" parent="DescriptionBoard"]
