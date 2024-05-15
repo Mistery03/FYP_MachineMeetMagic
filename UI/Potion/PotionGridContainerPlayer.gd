@@ -19,4 +19,7 @@ func _process(delta):
 	
 	#print(potionList)
 
-
+func decreasePotionAmount(potionData:PotionData):
+	for potion in grid_container.get_children():
+		if potion.potionData == potionData:
+			potion.potionAmount -= 1

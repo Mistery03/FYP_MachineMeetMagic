@@ -45,8 +45,10 @@ func _process(delta):
 				if potionList[currIndex]:
 					texture_rect.visible = true
 					texture_rect.texture = potionList[currIndex].texture
+					player.potion_manager.potionData = potionList[currIndex]
 				else:
 					texture_rect.visible = false
+					player.potion_manager.potionData = null
 					isPotionNull = true
 				print(potionList)	
 				

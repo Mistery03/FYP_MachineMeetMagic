@@ -24,6 +24,7 @@ func _process(delta):
 				darkened.visible = false
 			else:
 				darkened.visible = true
+				potionAmount = clamp(potionAmount,0,99)
 			potion_amount.visible = potionInventory.isPotionAmountShown
 			potion_amount.text = str(potionAmount)
 

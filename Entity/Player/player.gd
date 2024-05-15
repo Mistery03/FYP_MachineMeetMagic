@@ -29,7 +29,6 @@ func _ready() -> void:
 	currHealth = playerData.MaxHealth
 	currMana = playerData.MaxMana
 	currStamina = playerData.MaxStamina
-	potion_manager.init(self)
 	state_manager.init(self,animation,move_component,camera)
 
 func _unhandled_input(event: InputEvent) -> void:

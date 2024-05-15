@@ -1,4 +1,4 @@
-[gd_scene load_steps=66 format=3 uid="uid://c1vsfoc55pk0w"]
+[gd_scene load_steps=65 format=3 uid="uid://c1vsfoc55pk0w"]
 
 [ext_resource type="Texture2D" uid="uid://bd32dcnew3uvf" path="res://Asset/L.png" id="1_ksidj"]
 [ext_resource type="Script" path="res://Entity/Player/player.gd" id="1_xfdxb"]
@@ -6,7 +6,6 @@
 [ext_resource type="Resource" uid="uid://doo0oqvv31wtn" path="res://Potion/Buff/Defence Potion/DefencePotion.tres" id="3_41una"]
 [ext_resource type="Script" path="res://Potion/PotionManager.gd" id="5_5bgkf"]
 [ext_resource type="Script" path="res://Entity/State/StateMachine.gd" id="7_0owwg"]
-[ext_resource type="Resource" uid="uid://b0rx68wwi0q20" path="res://Potion/Heal/Healing Potion/HealingPotion.tres" id="7_asdtf"]
 [ext_resource type="Script" path="res://Entity/State/Idle.gd" id="8_5d7eh"]
 [ext_resource type="Script" path="res://Entity/State/Move.gd" id="9_5ji7g"]
 [ext_resource type="Script" path="res://Entity/State/Build.gd" id="10_10mal"]
@@ -633,14 +632,10 @@ autoplay = "IDLE"
 [node name="CollisionShape3D" type="CollisionShape2D" parent="."]
 shape = SubResource("CapsuleShape2D_5n34a")
 
-[node name="PotionManager" type="Node" parent="."]
+[node name="PotionManager" type="Node" parent="." node_paths=PackedStringArray("potionInventory", "potionGridInventory")]
 script = ExtResource("5_5bgkf")
-potionDataList = Array[Resource("res://Potion/Data/PotionData.gd")]([ExtResource("3_41una"), ExtResource("7_asdtf")])
-inputList = {
-"ChangePotion": "ChangePotion",
-"DrinkPotion": "DrinkPotion",
-"UseUtility": "UseUtility"
-}
+potionInventory = NodePath("../ROOT_UI/Inventory/PotionInventory")
+potionGridInventory = NodePath("../ROOT_UI/Inventory/PotionGridContainer")
 
 [node name="StateManager" type="Node" parent="." node_paths=PackedStringArray("starting_state")]
 script = ExtResource("7_0owwg")
