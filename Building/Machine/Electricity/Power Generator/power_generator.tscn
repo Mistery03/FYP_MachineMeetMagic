@@ -13,6 +13,7 @@ texture_filter = 1
 script = ExtResource("1_sb6xt")
 machineUI = NodePath("Root/PowerGeneratorUI")
 manaPerSecond = 1000.0
+burnPerSecond = 1.0
 isThereFuel = true
 
 [node name="Animation" type="AnimatedSprite2D" parent="."]

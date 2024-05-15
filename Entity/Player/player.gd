@@ -24,6 +24,7 @@ var isBuildMode:bool
 var homeTilemap:TileMap
 var mousePos:Vector2
 var localLevel:Node2D
+var isPressable:bool = false
 
 
 func _ready() -> void:

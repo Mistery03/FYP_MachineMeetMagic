@@ -4,16 +4,21 @@ extends Control
 @onready var machine_animation = $MachineAnimation
 @onready var power_switch = $PowerSwitch
 @onready var status_bar = $StatusBar
+@onready var fuel_burning = $FuelBurning
 
+@export var maxValue:float = 100
+var currValue:float = 100
 
-# Called when the node enters the scene tree for the first time.
 func _ready():
-	pass # Replace with function body.
+	fuel_burning.value = currValue
+	fuel_burning.max_value = maxValue
+
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	pass
+	fuel_burning.value = currValue
+
 
 func changeAnimation(animationName:String):
 	machine_animation.play(animationName.to_pascal_case())
