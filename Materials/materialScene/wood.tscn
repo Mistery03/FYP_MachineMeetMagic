@@ -10,9 +10,11 @@ region = Rect2(48, 48, 24, 24)
 size = Vector2(6, 6)
 
 [node name="Node2D" type="Node2D"]
-position = Vector2(101, -56)
+position = Vector2(202, -112)
+scale = Vector2(2, 2)
 
 [node name="TextureRect" type="TextureRect" parent="."]
+texture_filter = 1
 offset_left = -101.0
 offset_top = 56.0
 offset_right = -95.0
