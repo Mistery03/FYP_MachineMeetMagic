@@ -3,6 +3,16 @@ extends State
 @export
 var idle_state: State
 
+func enter() -> void:
+	super()
+	parent.itemHUDPlaceholder.visible = true
+
+func process_input(event: InputEvent) -> State:
+
+
+	if Input.is_action_just_pressed("EXIT"):
+		toggle_menu()
+	return null
 
 func process_physics(delta: float) -> State:
 	var movement_direction = move_component.get_movement_direction()	
@@ -79,3 +89,7 @@ func staffPosWhenXandY(zIndex:int): #when both action both x and y are pressed
 	parent.staff.z_index = zIndex
 	#parent.staff.rotation = 1.5708
 	#parent.staff.position = parent.staff.originalPos
+	
+func toggle_menu():
+	# Toggle the visibility of the menu
+	parent.playerInventory.visible = !parent.playerInventory.visible 

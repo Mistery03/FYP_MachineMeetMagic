@@ -8,10 +8,8 @@ const MIN_MANA_THRESHOLD: float = 0.0001
 
 @onready var sprite = $Sprite
 
-var currMana:float
 var prevMana:float
 var isIncreasing:bool
-var percentage:float
 var batteryBar:int = 0
 var maxBatteryBar:int = 4 #this is dependent on frames
 var lastPercentage: float
@@ -52,12 +50,7 @@ func _process(delta):
 			
 	changeSpriteFrame(batteryBar)
 	
-	"""for machine in withinWireList:
-		if percentage > 0 and machine.machineUI.power_switch.button_pressed:
-			consumeMana(machine.manaConsumptionPerSecond,delta)
-			machine.isThereFuel = true
-		else:
-			machine.isThereFuel = false"""
+	
 	
 
 	
@@ -67,11 +60,14 @@ func _on_interectable_input_event(viewport, event, shape_idx):
 	if event is InputEventMouseButton and !player.isBuildMode:
 		if event.is_action_pressed("ACTION"):
 			machineUI.visible = true
+			player.itemHUDPlaceholder.visible = false
 
 func _input(event):
 	if machineUI.visible:
 		if Input.is_action_just_pressed("EXIT"):
 			machineUI.visible = false
+			player.itemHUDPlaceholder.visible = true
+			player.isPressable = false
 			
 			
 func changeSpriteFrame(frame:int):

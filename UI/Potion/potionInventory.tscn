@@ -44,6 +44,7 @@ potionAmount = 10
 
 [node name="PotionSlot2" parent="PotionGridContainer/GridContainer" index="1"]
 potionData = ExtResource("5_e0rmr")
+potionAmount = 10
 
 [node name="DescriptionBoard" type="NinePatchRect" parent="."]
 visible = false

@@ -33,6 +33,7 @@ var isOccupied:bool
 func enter() -> void:
 	super()
 	destroyHUD.visible = true
+	parent.itemHUDPlaceholder.visible = false
 
 
 func process_input(event: InputEvent) -> State:

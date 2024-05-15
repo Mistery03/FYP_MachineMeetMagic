@@ -15,6 +15,7 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
+
 	if potionData:
 		potion_texture.texture = potionData.texture
 		
@@ -23,6 +24,7 @@ func _process(delta):
 				darkened.visible = false
 			else:
 				darkened.visible = true
+				potionAmount = clamp(potionAmount,0,99)
 			potion_amount.visible = potionInventory.isPotionAmountShown
 			potion_amount.text = str(potionAmount)
 
@@ -31,10 +33,10 @@ func _process(delta):
 
 func _on_button_pressed():
 	if potionData:
-		if potionAmount > 0:
-			print(potionData.name)
-	else:
-		potionInventory.visible = true
+		if potionAmount > 0:	
+			potionInventory.currSlot.potionData = potionData
+			potionInventory.currSlot.potionAmount = potionAmount
+	
 
 
 func _on_button_mouse_entered():

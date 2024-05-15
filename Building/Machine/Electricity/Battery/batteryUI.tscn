@@ -11,6 +11,7 @@ atlas = ExtResource("6_7dah2")
 region = Rect2(0, 384, 160, 32)
 
 [node name="BatteryUI" type="Control"]
+z_index = 10
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0

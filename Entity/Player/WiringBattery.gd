@@ -50,6 +50,7 @@ func enter() -> void:
 	super()
 	enterBuildMode()
 	updateAccumulativeCurrMana()
+	parent.itemHUDPlaceholder.visible = false
 	
 
 func process_input(event: InputEvent) -> State:

@@ -16,3 +16,4 @@ func _process(delta):
 	if potion_inventory:
 		for potionSlot in grid_container.get_children():
 			potionSlot.potionInventory = potion_inventory
+			

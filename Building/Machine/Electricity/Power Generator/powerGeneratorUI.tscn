@@ -60,10 +60,10 @@ texture = ExtResource("2_j57ox")
 
 [node name="FuelSlot" parent="." instance=ExtResource("3_m6gjl")]
 layout_mode = 0
-offset_left = 163.0
-offset_top = 600.0
-offset_right = 203.0
-offset_bottom = 640.0
+offset_left = 256.0
+offset_top = 566.0
+offset_right = 296.0
+offset_bottom = 606.0
 
 [node name="PowerSwitch" parent="." instance=ExtResource("4_c2tfc")]
 texture_filter = 1
@@ -92,7 +92,7 @@ tint_progress = Color(1, 0, 0, 1)
 
 [node name="MachineAnimation" type="AnimatedSprite2D" parent="."]
 texture_filter = 1
-position = Vector2(373, 346)
+position = Vector2(320, 346)
 scale = Vector2(7, 7)
 sprite_frames = ExtResource("8_imixk")
 animation = &"Idle"
@@ -101,7 +101,7 @@ animation = &"Idle"
 layout_mode = 0
 offset_left = 91.0
 offset_top = 470.0
-offset_right = 678.0
+offset_right = 571.0
 offset_bottom = 613.0
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("9_078kl")
@@ -112,14 +112,28 @@ horizontal_alignment = 1
 
 [node name="ManaStatus" type="Label" parent="."]
 layout_mode = 0
-offset_left = 424.0
-offset_top = 677.0
-offset_right = 1011.0
-offset_bottom = 747.0
+offset_left = 686.0
+offset_top = 684.0
+offset_right = 770.0
+offset_bottom = 720.0
 theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 1
 theme_override_fonts/font = ExtResource("9_078kl")
-theme_override_font_sizes/font_size = 60
-text = "MANA STATUS"
+theme_override_font_sizes/font_size = 30
+text = "STATUS"
+horizontal_alignment = 1
+
+[node name="Burning" type="Label" parent="."]
+layout_mode = 0
+offset_left = 545.0
+offset_top = 684.0
+offset_right = 644.0
+offset_bottom = 720.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 1
+theme_override_fonts/font = ExtResource("9_078kl")
+theme_override_font_sizes/font_size = 30
+text = "CONVERT"
 horizontal_alignment = 1
 
 [node name="BorderIndicator" type="TextureRect" parent="."]
@@ -185,3 +199,15 @@ theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("9_078kl")
 theme_override_font_sizes/font_size = 20
 text = "No Fuel"
+
+[node name="FuelBurning" type="TextureProgressBar" parent="."]
+offset_left = 458.0
+offset_top = 677.0
+offset_right = 1098.0
+offset_bottom = 997.0
+rotation = -1.5708
+scale = Vector2(0.8, 0.8)
+value = 100.0
+texture_over = ExtResource("6_dud0o")
+texture_progress = ExtResource("7_brem5")
+tint_progress = Color(0.533333, 0.407843, 1, 1)

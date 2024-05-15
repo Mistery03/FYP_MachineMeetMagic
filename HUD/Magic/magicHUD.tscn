@@ -1,14 +1,14 @@
-[gd_scene load_steps=5 format=3 uid="uid://3lfapx60drmh"]
+[gd_scene load_steps=5 format=3 uid="uid://dab70bjir0c00"]
 
-[ext_resource type="Script" path="res://HUD/Item/itemHUD.gd" id="1_fw3q6"]
-[ext_resource type="Texture2D" uid="uid://7r2f7a1fj1mb" path="res://Asset/UIUX/blackBox.png" id="2_0wsce"]
-[ext_resource type="Texture2D" uid="uid://dw0wj1ftq8uye" path="res://Asset/potionSS.png" id="3_58t25"]
+[ext_resource type="Script" path="res://HUD/Magic/magicHUD.gd" id="1_utk8n"]
+[ext_resource type="Texture2D" uid="uid://7r2f7a1fj1mb" path="res://Asset/UIUX/blackBox.png" id="2_kqm1r"]
+[ext_resource type="Texture2D" uid="uid://dw0wj1ftq8uye" path="res://Asset/potionSS.png" id="3_b4tkn"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_xovp4"]
-atlas = ExtResource("3_58t25")
+atlas = ExtResource("3_b4tkn")
 region = Rect2(0, 0, 32, 32)
 
-[node name="itemHUD" type="Control"]
+[node name="MagicHUD" type="Control"]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -16,14 +16,14 @@ anchor_bottom = 1.0
 offset_right = -1008.0
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("1_fw3q6")
+script = ExtResource("1_utk8n")
 
 [node name="border" type="TextureRect" parent="."]
 texture_filter = 1
 layout_mode = 0
 offset_right = 595.0
 offset_bottom = 908.0
-texture = ExtResource("2_0wsce")
+texture = ExtResource("2_kqm1r")
 
 [node name="TextureRect" type="TextureRect" parent="border"]
 visible = false
