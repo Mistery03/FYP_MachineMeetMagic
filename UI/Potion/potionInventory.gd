@@ -7,9 +7,11 @@ var isInMenu:bool = false
 var potionName:String = "default"
 var texture:Texture2D
 var description:String
+var potionData:PotionData
 @onready var description_board = $DescriptionBoard
 @onready var timer = $Timer
 
+var currSlot:PotionSlotPlayer
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	pass

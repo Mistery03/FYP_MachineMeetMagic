@@ -8,12 +8,14 @@ const JUMP_VELOCITY = 4.5
 @export var potionObject:PotionData
 @export var staff:Staff = null
 @export var isStaffEquipped:bool
+@export var playerInventory:Control
 
 @onready var potion_manager = $PotionManager
 @onready var state_manager = $StateManager
 @onready var animation = $Animation
 @onready var move_component = $MoveComponent
 @onready var camera = $Camera
+
 
 var potion:Potion
 var isBuildEnabled:bool
@@ -32,6 +34,7 @@ func _ready() -> void:
 
 func _unhandled_input(event: InputEvent) -> void:
 	state_manager.process_input(event)
+	
 
 func _physics_process(delta) -> void:
 	state_manager.process_physics(delta)

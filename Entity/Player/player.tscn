@@ -1,4 +1,4 @@
-[gd_scene load_steps=67 format=3 uid="uid://c1vsfoc55pk0w"]
+[gd_scene load_steps=66 format=3 uid="uid://c1vsfoc55pk0w"]
 
 [ext_resource type="Texture2D" uid="uid://bd32dcnew3uvf" path="res://Asset/L.png" id="1_ksidj"]
 [ext_resource type="Script" path="res://Entity/Player/player.gd" id="1_xfdxb"]
@@ -21,15 +21,15 @@
 [ext_resource type="Script" path="res://Entity/Player/InteractComponent.gd" id="15_wh8qd"]
 [ext_resource type="Script" path="res://UI/Wiring/Wiring.gd" id="18_3q6sb"]
 [ext_resource type="PackedScene" uid="uid://cdgpv7wki70or" path="res://Staff/staffHUD.tscn" id="20_qac2v"]
-[ext_resource type="PackedScene" uid="uid://3lfapx60drmh" path="res://HUD/Item/itemHUD.tscn" id="20_rjv8u"]
 [ext_resource type="Script" path="res://Entity/Player/MachineUpdater.gd" id="21_iegje"]
 [ext_resource type="Texture2D" uid="uid://cgi863ww3hb3g" path="res://Asset/fantasyAssets.png" id="21_kqu6c"]
 [ext_resource type="PackedScene" uid="uid://ca71hsm6y7dur" path="res://Staff/staff.tscn" id="22_01tsa"]
 [ext_resource type="Texture2D" uid="uid://dw0wj1ftq8uye" path="res://Asset/potionSS.png" id="22_hr68s"]
+[ext_resource type="PackedScene" uid="uid://3lfapx60drmh" path="res://HUD/Potion/potionHUD.tscn" id="22_lae4u"]
+[ext_resource type="PackedScene" uid="uid://dab70bjir0c00" path="res://HUD/Magic/magicHUD.tscn" id="24_71sui"]
 [ext_resource type="Texture2D" uid="uid://bmw2uy10i1kwr" path="res://Asset/UIUX/scroll_UI.png" id="24_e53mk"]
 [ext_resource type="PackedScene" uid="uid://bm2u5jp0exc2h" path="res://UI/Potion/PotionGridContainerPlayer.tscn" id="25_km84l"]
 [ext_resource type="PackedScene" uid="uid://dpthqxsb7e3fk" path="res://UI/Potion/potionInventory.tscn" id="26_eb02i"]
-[ext_resource type="Script" path="res://UI/Potion/PotionGridContainerPlayer.gd" id="26_eee1f"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_o46v5"]
 atlas = ExtResource("1_ksidj")
@@ -253,255 +253,11 @@ height = 164.0
 atlas = ExtResource("21_kqu6c")
 region = Rect2(48, 192, 24, 24)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_3g7ta"]
-atlas = ExtResource("22_hr68s")
-region = Rect2(0, 0, 32, 32)
-
 [sub_resource type="AtlasTexture" id="AtlasTexture_e1oi2"]
 atlas = ExtResource("22_hr68s")
 region = Rect2(32, 0, 32, 32)
 
 [sub_resource type="Animation" id="Animation_4m4tr"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(10, 0)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath(".:rotation")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [1.5708]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath(".:scale")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(8, 8)]
-}
-tracks/3/type = "value"
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/path = NodePath(".:z_index")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [-1]
-}
-
-[sub_resource type="Animation" id="Animation_76tdj"]
-resource_name = "idleFront"
-length = 2.6
-loop_mode = 1
-step = 0.4
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.4, 1.2, 2),
-"transitions": PackedFloat32Array(1, 1, 1, 1),
-"update": 0,
-"values": [Vector2(120, -10), Vector2(110, -30), Vector2(120, -10), Vector2(110, -50)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath(".:rotation")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [0.785398]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath(".:scale")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(8, 8)]
-}
-
-[sub_resource type="Animation" id="Animation_o074o"]
-resource_name = "idleBack"
-length = 2.6
-loop_mode = 1
-step = 0.4
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.4, 1.2, 2),
-"transitions": PackedFloat32Array(1, 1, 1, 1),
-"update": 0,
-"values": [Vector2(-120, -10), Vector2(-110, -30), Vector2(-120, -10), Vector2(-110, -50)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath(".:rotation")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [-0.785398]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath(".:scale")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(-8, 8)]
-}
-
-[sub_resource type="Animation" id="Animation_wgpxl"]
-resource_name = "RESETRIGHT"
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(-50, -20)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath(".:rotation")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [-0.523599]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath(".:z_index")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [-1]
-}
-tracks/3/type = "value"
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/path = NodePath(".:scale")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(-8, 8)]
-}
-
-[sub_resource type="Animation" id="Animation_gdreg"]
-resource_name = "RESETLEFT"
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(50, -20)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath(".:rotation")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [0.523599]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath(".:z_index")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [-1]
-}
-tracks/3/type = "value"
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/path = NodePath(".:scale")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(8, 8)]
-}
-
-[sub_resource type="Animation" id="Animation_cipcf"]
-resource_name = "RESETFRONT"
 length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -604,6 +360,246 @@ tracks/3/keys = {
 "values": [1]
 }
 
+[sub_resource type="Animation" id="Animation_cipcf"]
+resource_name = "RESETFRONT"
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(10, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [1.5708]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(8, 8)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath(".:z_index")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [-1]
+}
+
+[sub_resource type="Animation" id="Animation_gdreg"]
+resource_name = "RESETLEFT"
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(50, -20)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.523599]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:z_index")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [-1]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath(".:scale")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(8, 8)]
+}
+
+[sub_resource type="Animation" id="Animation_wgpxl"]
+resource_name = "RESETRIGHT"
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-50, -20)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [-0.523599]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:z_index")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [-1]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath(".:scale")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-8, 8)]
+}
+
+[sub_resource type="Animation" id="Animation_o074o"]
+resource_name = "idleBack"
+length = 2.6
+loop_mode = 1
+step = 0.4
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.4, 1.2, 2),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(-120, -10), Vector2(-110, -30), Vector2(-120, -10), Vector2(-110, -50)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [-0.785398]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-8, 8)]
+}
+
+[sub_resource type="Animation" id="Animation_76tdj"]
+resource_name = "idleFront"
+length = 2.6
+loop_mode = 1
+step = 0.4
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.4, 1.2, 2),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(120, -10), Vector2(110, -30), Vector2(120, -10), Vector2(110, -50)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.785398]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(8, 8)]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_htq8g"]
 _data = {
 "RESET": SubResource("Animation_4m4tr"),
@@ -615,12 +611,13 @@ _data = {
 "idleFront": SubResource("Animation_76tdj")
 }
 
-[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("staff") groups=["invalidPosition"]]
+[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("staff", "playerInventory") groups=["invalidPosition"]]
 scale = Vector2(0.1, 0.1)
 script = ExtResource("1_xfdxb")
 playerData = ExtResource("2_g17go")
 potionObject = ExtResource("3_41una")
 staff = NodePath("Staff")
+playerInventory = NodePath("ROOT_UI/Inventory")
 
 [node name="Camera" type="Camera2D" parent="."]
 zoom = Vector2(7, 7)
@@ -736,6 +733,7 @@ inputList = {
 
 [node name="Build" type="Control" parent="ROOT_UI"]
 visible = false
+z_index = 10
 layout_mode = 3
 anchors_preset = 0
 offset_right = 40.0
@@ -891,7 +889,7 @@ offset_top = 80.0
 offset_right = 40.0
 offset_bottom = 120.0
 
-[node name="staffHUD" parent="ROOT_UI/ItemHUDPlaceholder" node_paths=PackedStringArray("player") instance=ExtResource("20_qac2v")]
+[node name="StaffHUD" parent="ROOT_UI/ItemHUDPlaceholder" node_paths=PackedStringArray("player") instance=ExtResource("20_qac2v")]
 layout_mode = 1
 offset_left = 147.0
 offset_top = 525.0
@@ -902,17 +900,7 @@ actionInput = "EQUIP"
 texture = SubResource("AtlasTexture_1dcaq")
 player = NodePath("../../..")
 
-[node name="itemHUD1" parent="ROOT_UI/ItemHUDPlaceholder" instance=ExtResource("20_rjv8u")]
-layout_mode = 1
-offset_left = 273.0
-offset_top = 612.0
-offset_right = 233.0
-offset_bottom = 612.0
-scale = Vector2(0.2, 0.2)
-actionInput = "EQUIPMAGIC"
-texture = SubResource("AtlasTexture_3g7ta")
-
-[node name="itemHUD2" parent="ROOT_UI/ItemHUDPlaceholder" instance=ExtResource("20_rjv8u")]
+[node name="PotionHUD" parent="ROOT_UI/ItemHUDPlaceholder" node_paths=PackedStringArray("potionGridHolderData") instance=ExtResource("22_lae4u")]
 layout_mode = 1
 offset_left = 16.0
 offset_top = 612.0
@@ -921,8 +909,18 @@ offset_bottom = 612.0
 scale = Vector2(0.2, 0.2)
 actionInput = "EQUIPPOTION"
 texture = SubResource("AtlasTexture_e1oi2")
+potionGridHolderData = NodePath("../../Inventory/PotionGridContainer")
+
+[node name="MagicHUD" parent="ROOT_UI/ItemHUDPlaceholder" instance=ExtResource("24_71sui")]
+layout_mode = 1
+offset_left = 281.0
+offset_top = 612.0
+offset_right = 241.0
+offset_bottom = 612.0
+scale = Vector2(0.2, 0.2)
 
 [node name="Inventory" type="Control" parent="ROOT_UI"]
+visible = false
 layout_mode = 3
 anchors_preset = 8
 anchor_left = 0.5
@@ -952,16 +950,15 @@ offset_top = 94.0
 offset_right = -498.0
 offset_bottom = 94.0
 scale = Vector2(2.5, 2.5)
-script = ExtResource("26_eee1f")
 potion_inventory = NodePath("../PotionInventory")
 
 [node name="PotionInventory" parent="ROOT_UI/Inventory" instance=ExtResource("26_eb02i")]
 visible = false
 layout_mode = 1
 offset_left = -503.0
-offset_top = -224.0
+offset_top = -257.0
 offset_right = -503.0
-offset_bottom = -224.0
+offset_bottom = -257.0
 scale = Vector2(0.7, 0.7)
 
 [node name="InteractComponent" type="Node" parent="." node_paths=PackedStringArray("parent")]

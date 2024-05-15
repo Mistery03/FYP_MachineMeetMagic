@@ -39,7 +39,9 @@ func process_input(event: InputEvent) -> State:
 	
 	if Input.is_action_just_pressed(inputList.find_key("Build").to_upper()) and isBuildEnabled:
 		return build_state
-
+	
+	if Input.is_action_just_pressed("EXIT"):
+		toggle_menu()
 	return null
 
 func process_frame(delta: float) -> State:
@@ -50,3 +52,7 @@ func process_frame(delta: float) -> State:
 		parent.staff.customAnimation.play("RESET")
 	
 	return null
+
+func toggle_menu():
+	# Toggle the visibility of the menu
+	parent.playerInventory.visible = !parent.playerInventory.visible 
