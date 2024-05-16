@@ -1,28 +1,36 @@
 extends Panel
 
-@export var buildingName:String = "Generic"
-@export var texture:Texture2D
-@export var atlasCoord:Vector2i = Vector2i(5,5)
+@export var buildingData:BuildingData
 
 @onready var build_menu = $"../../.."
 @onready var texture_rect = $TextureRect
 
+
+
 func _ready():
-	texture_rect.texture = texture
+	texture_rect.texture = buildingData.texture
 
+	
 func _on_button_pressed():
-	build_menu.atlasCoord = atlasCoord
+	build_menu.atlasCoord =  buildingData.atlasCoord
 	build_menu.parentUI.visible = false
-	build_menu.machineName = buildingName
+
+
+func _on_button_mouse_entered():
+	build_menu.timer.paused = true
+	build_menu.description_board.visible = true
+	build_menu.buildingName = buildingData.name
+	build_menu.texture = buildingData.texture
+	build_menu.description = buildingData.description
+
+func _on_button_mouse_exited():
+	build_menu.timer.paused = false
+	build_menu.timer.start()
+	
 
 
 
 
 
-func _on_mouse_entered():
-	build_menu.isInMenu = true
 
 
-
-func _on_mouse_exited():
-	build_menu.isInMenu = false

@@ -1,0 +1,8 @@
+[gd_scene format=3 uid="uid://ciyq3cn8pdvwd"]
+
+[node name="FuelSlot" type="Panel"]
+offset_left = 78.0
+offset_top = 606.0
+offset_right = 118.0
+offset_bottom = 646.0
+scale = Vector2(3, 3)

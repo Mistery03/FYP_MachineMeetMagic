@@ -1,22 +1,24 @@
-[gd_scene load_steps=9 format=3 uid="uid://dgn61wamn10el"]
+[gd_scene load_steps=14 format=3 uid="uid://dgn61wamn10el"]
 
 [ext_resource type="Script" path="res://UI/Build/build_menu.gd" id="1_0ur8d"]
 [ext_resource type="Texture2D" uid="uid://dy6bsmjnf8u44" path="res://Asset/UIUX/Container.png" id="1_bxykf"]
 [ext_resource type="PackedScene" uid="uid://b8l6h6q66lu2w" path="res://UI/Build/build_slot.tscn" id="2_gxta4"]
 [ext_resource type="FontFile" uid="uid://cl3rxpo58micg" path="res://Asset/Font/Lambda-Regular.ttf" id="3_88haw"]
 [ext_resource type="Texture2D" uid="uid://cy01yfe162ynm" path="res://Asset/Machine.png" id="5_25chw"]
+[ext_resource type="Resource" uid="uid://b7tm5f2vprc8a" path="res://Building/Machine/Data/extractor.tres" id="5_mgpqo"]
+[ext_resource type="Resource" uid="uid://dqo00x1g854h3" path="res://Building/Machine/Data/scrollScriber.tres" id="6_ft3vg"]
+[ext_resource type="Script" path="res://UI/Build/DescriptionBoard.gd" id="6_ulo5r"]
+[ext_resource type="Texture2D" uid="uid://dw0wj1ftq8uye" path="res://Asset/potionSS.png" id="6_wdmht"]
+[ext_resource type="Resource" uid="uid://ch3ruj8fn022x" path="res://Building/Machine/Data/powerGenerator.tres" id="7_1tdyj"]
+[ext_resource type="Resource" uid="uid://b4ot4cdrsegxs" path="res://Building/Machine/Data/battery.tres" id="8_vgx31"]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_t5h55"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_spxpk"]
 atlas = ExtResource("5_25chw")
-region = Rect2(0, 32, 32, 32)
+region = Rect2(0, 0, 32, 32)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_pyrnu"]
-atlas = ExtResource("5_25chw")
-region = Rect2(0, 64, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_vqshy"]
-atlas = ExtResource("5_25chw")
-region = Rect2(0, 96, 32, 32)
+[sub_resource type="AtlasTexture" id="AtlasTexture_358ys"]
+atlas = ExtResource("6_wdmht")
+region = Rect2(0, 0, 32, 32)
 
 [node name="BuildMenu" type="Control"]
 layout_mode = 3
@@ -28,7 +30,7 @@ grow_vertical = 2
 scale = Vector2(3, 3)
 script = ExtResource("1_0ur8d")
 
-[node name="NinePatchRect" type="NinePatchRect" parent="."]
+[node name="BuildMenu" type="NinePatchRect" parent="."]
 texture_filter = 1
 layout_mode = 0
 offset_left = 0.333333
@@ -38,7 +40,7 @@ offset_bottom = 213.333
 texture = ExtResource("1_bxykf")
 region_rect = Rect2(0, 0, 32, 32)
 
-[node name="Label" type="Label" parent="NinePatchRect"]
+[node name="Label" type="Label" parent="BuildMenu"]
 texture_filter = 1
 layout_mode = 1
 anchors_preset = 5
@@ -56,7 +58,7 @@ theme_override_font_sizes/font_size = 400
 text = "BUILD MENU"
 horizontal_alignment = 1
 
-[node name="GridContainer" type="GridContainer" parent="NinePatchRect"]
+[node name="GridContainer" type="GridContainer" parent="BuildMenu"]
 layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
@@ -68,26 +70,141 @@ offset_bottom = 99.0
 grow_horizontal = 2
 columns = 4
 
-[node name="BuildSlot" parent="NinePatchRect/GridContainer" instance=ExtResource("2_gxta4")]
+[node name="BuildSlot" parent="BuildMenu/GridContainer" instance=ExtResource("2_gxta4")]
 layout_mode = 2
-buildingName = "Extractor"
-texture = SubResource("AtlasTexture_t5h55")
-atlasCoord = Vector2i(0, 1)
+buildingData = ExtResource("5_mgpqo")
 
-[node name="BuildSlot2" parent="NinePatchRect/GridContainer" instance=ExtResource("2_gxta4")]
+[node name="BuildSlot2" parent="BuildMenu/GridContainer" instance=ExtResource("2_gxta4")]
 layout_mode = 2
-buildingName = "Scroll Scriber"
-texture = SubResource("AtlasTexture_pyrnu")
-atlasCoord = Vector2i(0, 2)
+buildingData = ExtResource("6_ft3vg")
 
-[node name="BuildSlot3" parent="NinePatchRect/GridContainer" instance=ExtResource("2_gxta4")]
+[node name="BuildSlot3" parent="BuildMenu/GridContainer" instance=ExtResource("2_gxta4")]
 layout_mode = 2
-buildingName = "Power Generator"
-texture = SubResource("AtlasTexture_vqshy")
-atlasCoord = Vector2i(0, 3)
+buildingData = ExtResource("7_1tdyj")
 
-[node name="BuildSlot4" parent="NinePatchRect/GridContainer" instance=ExtResource("2_gxta4")]
+[node name="BuildSlot4" parent="BuildMenu/GridContainer" instance=ExtResource("2_gxta4")]
 layout_mode = 2
+buildingData = ExtResource("8_vgx31")
 
-[node name="BuildSlot5" parent="NinePatchRect/GridContainer" instance=ExtResource("2_gxta4")]
+[node name="DescriptionBoard" type="NinePatchRect" parent="."]
+visible = false
+texture_filter = 1
+layout_mode = 0
+offset_left = 180.0
+offset_top = 5.0
+offset_right = 475.0
+offset_bottom = 213.0
+texture = ExtResource("1_bxykf")
+region_rect = Rect2(0.595047, 0.0548, 30.9449, 31.9452)
+script = ExtResource("6_ulo5r")
+
+[node name="BuildingIcon" type="TextureRect" parent="DescriptionBoard"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -40.1667
+offset_top = 7.0
+offset_right = -0.166656
+offset_bottom = 47.0
+grow_horizontal = 2
+scale = Vector2(2, 2)
+texture = SubResource("AtlasTexture_spxpk")
+
+[node name="BuidlingName" type="Label" parent="DescriptionBoard"]
+layout_mode = 0
+offset_left = 80.6667
+offset_top = 82.6667
+offset_right = 2702.67
+offset_bottom = 653.667
+scale = Vector2(0.05, 0.05)
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("3_88haw")
+theme_override_font_sizes/font_size = 500
+text = "MACHINENAME"
+horizontal_alignment = 1
+
+[node name="MaterialContainer" type="HBoxContainer" parent="DescriptionBoard"]
+custom_minimum_size = Vector2(32, 0)
+layout_mode = 1
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_top = 6.0
+offset_bottom = 38.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+
+[node name="tempMaterial" type="TextureRect" parent="DescriptionBoard/MaterialContainer"]
 layout_mode = 2
+texture = SubResource("AtlasTexture_358ys")
+
+[node name="Label" type="Label" parent="DescriptionBoard/MaterialContainer/tempMaterial"]
+layout_mode = 0
+offset_left = 19.0
+offset_top = 18.3333
+offset_right = 301.0
+offset_bottom = 361.333
+scale = Vector2(0.05, 0.05)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 10
+theme_override_fonts/font = ExtResource("3_88haw")
+theme_override_font_sizes/font_size = 200
+text = "99
+"
+
+[node name="tempMaterial2" type="TextureRect" parent="DescriptionBoard/MaterialContainer"]
+layout_mode = 2
+texture = SubResource("AtlasTexture_358ys")
+
+[node name="Label" type="Label" parent="DescriptionBoard/MaterialContainer/tempMaterial2"]
+layout_mode = 0
+offset_left = 19.0
+offset_top = 18.3333
+offset_right = 301.0
+offset_bottom = 361.333
+scale = Vector2(0.05, 0.05)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 10
+theme_override_fonts/font = ExtResource("3_88haw")
+theme_override_font_sizes/font_size = 200
+text = "99
+"
+
+[node name="tempMaterial3" type="TextureRect" parent="DescriptionBoard/MaterialContainer"]
+layout_mode = 2
+texture = SubResource("AtlasTexture_358ys")
+
+[node name="Label" type="Label" parent="DescriptionBoard/MaterialContainer/tempMaterial3"]
+layout_mode = 0
+offset_left = 19.0
+offset_top = 18.3333
+offset_right = 301.0
+offset_bottom = 361.333
+scale = Vector2(0.05, 0.05)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 10
+theme_override_fonts/font = ExtResource("3_88haw")
+theme_override_font_sizes/font_size = 200
+text = "99
+"
+
+[node name="BuildingDescription" type="Label" parent="DescriptionBoard"]
+layout_mode = 0
+offset_left = 25.6667
+offset_top = 142.0
+offset_right = 4865.67
+offset_bottom = 1182.0
+scale = Vector2(0.05, 0.05)
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("3_88haw")
+theme_override_font_sizes/font_size = 220
+text = "Taken from the Latin words \"dolorem ipsum\", which translates to \"pain itself\", Lorem Ipsum text saw a revival in the mid-20th century as placeholder text in printing and design."
+horizontal_alignment = 1
+autowrap_mode = 2
+
+[node name="Timer" type="Timer" parent="."]
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

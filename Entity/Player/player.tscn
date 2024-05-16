@@ -1,22 +1,35 @@
-[gd_scene load_steps=43 format=3 uid="uid://c1vsfoc55pk0w"]
+[gd_scene load_steps=66 format=3 uid="uid://c1vsfoc55pk0w"]
 
 [ext_resource type="Texture2D" uid="uid://bd32dcnew3uvf" path="res://Asset/L.png" id="1_ksidj"]
 [ext_resource type="Script" path="res://Entity/Player/player.gd" id="1_xfdxb"]
 [ext_resource type="Resource" uid="uid://c6joqno41m2ls" path="res://Entity/Player/playerData.tres" id="2_g17go"]
 [ext_resource type="Resource" uid="uid://doo0oqvv31wtn" path="res://Potion/Buff/Defence Potion/DefencePotion.tres" id="3_41una"]
-[ext_resource type="PackedScene" uid="uid://cl8x5v0c3h1cq" path="res://Magic/IgnisNormalAttack.tscn" id="4_f5joi"]
 [ext_resource type="Script" path="res://Potion/PotionManager.gd" id="5_5bgkf"]
 [ext_resource type="Script" path="res://Entity/State/StateMachine.gd" id="7_0owwg"]
-[ext_resource type="Resource" uid="uid://b0rx68wwi0q20" path="res://Potion/Heal/Healing Potion/HealingPotion.tres" id="7_asdtf"]
 [ext_resource type="Script" path="res://Entity/State/Idle.gd" id="8_5d7eh"]
 [ext_resource type="Script" path="res://Entity/State/Move.gd" id="9_5ji7g"]
 [ext_resource type="Script" path="res://Entity/State/Build.gd" id="10_10mal"]
 [ext_resource type="Script" path="res://Entity/Player/MoveComponent.gd" id="10_gim7i"]
 [ext_resource type="Script" path="res://Entity/State/Destroy.gd" id="11_7uhfu"]
 [ext_resource type="PackedScene" uid="uid://dgn61wamn10el" path="res://UI/Build/build_menu.tscn" id="12_58i1p"]
+[ext_resource type="Script" path="res://Entity/State/Wiring.gd" id="12_ii11w"]
+[ext_resource type="Script" path="res://Entity/Player/WiringBattery.gd" id="13_3c3kb"]
+[ext_resource type="PackedScene" uid="uid://htlhwdgl8ast" path="res://HUD/DynamicLabel/dynamicLabel.tscn" id="14_8yknx"]
 [ext_resource type="FontFile" uid="uid://cl3rxpo58micg" path="res://Asset/Font/Lambda-Regular.ttf" id="14_me7n8"]
-[ext_resource type="PackedScene" uid="uid://biincpe1d1eek" path="res://UI/UIUX/Player_HUD.tscn" id="15_lr4a8"]
+[ext_resource type="PackedScene" uid="uid://dd2ysdc77pxkq" path="res://UI/Build/build_hud.tscn" id="15_otihl"]
 [ext_resource type="Script" path="res://Entity/Player/InteractComponent.gd" id="15_wh8qd"]
+[ext_resource type="Script" path="res://UI/Wiring/Wiring.gd" id="18_3q6sb"]
+[ext_resource type="PackedScene" uid="uid://cdgpv7wki70or" path="res://Staff/staffHUD.tscn" id="20_qac2v"]
+[ext_resource type="Script" path="res://Entity/Player/MachineUpdater.gd" id="21_iegje"]
+[ext_resource type="Texture2D" uid="uid://cgi863ww3hb3g" path="res://Asset/fantasyAssets.png" id="21_kqu6c"]
+[ext_resource type="PackedScene" uid="uid://ca71hsm6y7dur" path="res://Staff/staff.tscn" id="22_01tsa"]
+[ext_resource type="Texture2D" uid="uid://dw0wj1ftq8uye" path="res://Asset/potionSS.png" id="22_hr68s"]
+[ext_resource type="PackedScene" uid="uid://3lfapx60drmh" path="res://HUD/Potion/potionHUD.tscn" id="22_lae4u"]
+[ext_resource type="PackedScene" uid="uid://dab70bjir0c00" path="res://HUD/Magic/magicHUD.tscn" id="24_71sui"]
+[ext_resource type="Texture2D" uid="uid://bmw2uy10i1kwr" path="res://Asset/UIUX/scroll_UI.png" id="24_e53mk"]
+[ext_resource type="Script" path="res://UI/Inventory/Inventory.gd" id="24_o1enl"]
+[ext_resource type="PackedScene" uid="uid://bm2u5jp0exc2h" path="res://UI/Potion/PotionGridContainerPlayer.tscn" id="25_km84l"]
+[ext_resource type="PackedScene" uid="uid://dpthqxsb7e3fk" path="res://UI/Potion/potionInventory.tscn" id="26_eb02i"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_o46v5"]
 atlas = ExtResource("1_ksidj")
@@ -236,12 +249,376 @@ animations = [{
 radius = 56.0
 height = 164.0
 
-[node name="Player" type="CharacterBody2D" groups=["invalidPosition"]]
+[sub_resource type="AtlasTexture" id="AtlasTexture_1dcaq"]
+atlas = ExtResource("21_kqu6c")
+region = Rect2(48, 192, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_e1oi2"]
+atlas = ExtResource("22_hr68s")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="Animation" id="Animation_4m4tr"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(10, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [1.5708]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(8, 8)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath(".:z_index")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [-1]
+}
+
+[sub_resource type="Animation" id="Animation_ffrp5"]
+resource_name = "RESETBACK"
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(10, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [-1.5708]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-8, 8)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath(".:z_index")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [1]
+}
+
+[sub_resource type="Animation" id="Animation_cipcf"]
+resource_name = "RESETFRONT"
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(10, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [1.5708]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(8, 8)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath(".:z_index")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [-1]
+}
+
+[sub_resource type="Animation" id="Animation_gdreg"]
+resource_name = "RESETLEFT"
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(50, -20)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.523599]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:z_index")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [-1]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath(".:scale")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(8, 8)]
+}
+
+[sub_resource type="Animation" id="Animation_wgpxl"]
+resource_name = "RESETRIGHT"
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-50, -20)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [-0.523599]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:z_index")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [-1]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath(".:scale")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-8, 8)]
+}
+
+[sub_resource type="Animation" id="Animation_o074o"]
+resource_name = "idleBack"
+length = 2.6
+loop_mode = 1
+step = 0.4
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.4, 1.2, 2),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(-120, -10), Vector2(-110, -30), Vector2(-120, -10), Vector2(-110, -50)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [-0.785398]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-8, 8)]
+}
+
+[sub_resource type="Animation" id="Animation_76tdj"]
+resource_name = "idleFront"
+length = 2.6
+loop_mode = 1
+step = 0.4
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.4, 1.2, 2),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(120, -10), Vector2(110, -30), Vector2(120, -10), Vector2(110, -50)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.785398]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(8, 8)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_htq8g"]
+_data = {
+"RESET": SubResource("Animation_4m4tr"),
+"RESETBACK": SubResource("Animation_ffrp5"),
+"RESETFRONT": SubResource("Animation_cipcf"),
+"RESETLEFT": SubResource("Animation_gdreg"),
+"RESETRIGHT": SubResource("Animation_wgpxl"),
+"idleBack": SubResource("Animation_o074o"),
+"idleFront": SubResource("Animation_76tdj")
+}
+
+[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("staff", "playerInventory", "itemHUDPlaceholder") groups=["invalidPosition"]]
 scale = Vector2(0.1, 0.1)
 script = ExtResource("1_xfdxb")
 playerData = ExtResource("2_g17go")
 potionObject = ExtResource("3_41una")
-IgnisNormalAttack = ExtResource("4_f5joi")
+staff = NodePath("Staff")
+playerInventory = NodePath("ROOT_UI/Inventory")
+itemHUDPlaceholder = NodePath("ROOT_UI/ItemHUDPlaceholder")
 
 [node name="Camera" type="Camera2D" parent="."]
 zoom = Vector2(7, 7)
@@ -251,20 +628,17 @@ position_smoothing_speed = 4.0
 texture_filter = 1
 scale = Vector2(5, 5)
 sprite_frames = SubResource("SpriteFrames_47nfc")
-animation = &"WALKSIDE"
+animation = &"WALKFRONT"
 autoplay = "IDLE"
 
 [node name="CollisionShape3D" type="CollisionShape2D" parent="."]
 shape = SubResource("CapsuleShape2D_5n34a")
 
-[node name="PotionManager" type="Node" parent="."]
+[node name="PotionManager" type="Node" parent="." node_paths=PackedStringArray("potionInventory", "potionGridInventory", "potionHUD")]
 script = ExtResource("5_5bgkf")
-potionDataList = Array[Resource("res://Potion/Data/PotionData.gd")]([ExtResource("3_41una"), ExtResource("7_asdtf")])
-inputList = {
-"ChangePotion": "ChangePotion",
-"DrinkPotion": "DrinkPotion",
-"UseUtility": "UseUtility"
-}
+potionInventory = NodePath("../ROOT_UI/Inventory/PotionInventory")
+potionGridInventory = NodePath("../ROOT_UI/Inventory/PotionGridContainer")
+potionHUD = NodePath("../ROOT_UI/ItemHUDPlaceholder/PotionHUD")
 
 [node name="StateManager" type="Node" parent="." node_paths=PackedStringArray("starting_state")]
 script = ExtResource("7_0owwg")
@@ -289,10 +663,13 @@ animationList = {
 "WalkFront": "WalkFront"
 }
 
-[node name="Build" type="Node" parent="StateManager" node_paths=PackedStringArray("idle_state", "delete_state", "buildUI", "buildMenu")]
+[node name="Build" type="Node" parent="StateManager" node_paths=PackedStringArray("move_state", "idle_state", "delete_state", "wiring_machine_state", "wiring_battery_state", "buildUI", "buildMenu")]
 script = ExtResource("10_10mal")
+move_state = NodePath("../Move")
 idle_state = NodePath("../Idle")
 delete_state = NodePath("../Destroy")
+wiring_machine_state = NodePath("../WiringMachine")
+wiring_battery_state = NodePath("../WiringBattery")
 buildUI = NodePath("../../ROOT_UI/Build")
 buildMenu = NodePath("../../ROOT_UI/Build/BuildMenu")
 inputList = {
@@ -301,9 +678,11 @@ inputList = {
 }
 move_speed = 10000.0
 
-[node name="Destroy" type="Node" parent="StateManager" node_paths=PackedStringArray("build_state", "buildUI", "buildMenu", "destroyHUD")]
+[node name="Destroy" type="Node" parent="StateManager" node_paths=PackedStringArray("build_state", "wiring_machine_state", "wiring_battery_state", "buildUI", "buildMenu", "destroyHUD")]
 script = ExtResource("11_7uhfu")
 build_state = NodePath("../Build")
+wiring_machine_state = NodePath("../WiringMachine")
+wiring_battery_state = NodePath("../WiringBattery")
 buildUI = NodePath("../../ROOT_UI/Build")
 buildMenu = NodePath("../../ROOT_UI/Build/BuildMenu")
 destroyHUD = NodePath("../../ROOT_UI/Destroy")
@@ -312,6 +691,32 @@ inputList = {
 "Exit": "Exit"
 }
 move_speed = 10000.0
+
+[node name="WiringMachine" type="Node" parent="StateManager" node_paths=PackedStringArray("build_state", "buildUI", "buildMenu", "wiring_battery", "HUD")]
+script = ExtResource("12_ii11w")
+build_state = NodePath("../Build")
+buildUI = NodePath("../../ROOT_UI/Build")
+buildMenu = NodePath("../../ROOT_UI/Build/BuildMenu")
+wiring_battery = NodePath("../WiringBattery")
+HUD = NodePath("../../ROOT_UI/Wiring")
+inputList = {
+"Build": "Build",
+"Exit": "Exit"
+}
+move_speed = 10000.0
+
+[node name="WiringBattery" type="Node" parent="StateManager" node_paths=PackedStringArray("build_state", "buildUI", "buildMenu", "wiring_machine", "machineUpdater", "HUD")]
+script = ExtResource("13_3c3kb")
+build_state = NodePath("../Build")
+buildUI = NodePath("../../ROOT_UI/Build")
+buildMenu = NodePath("../../ROOT_UI/Build/BuildMenu")
+wiring_machine = NodePath("../WiringMachine")
+machineUpdater = NodePath("../../MachineUpdater")
+HUD = NodePath("../../ROOT_UI/Wiring")
+inputList = {
+"Build": "Build",
+"Exit": "Exit"
+}
 
 [node name="MoveComponent" type="Node" parent="."]
 script = ExtResource("10_gim7i")
@@ -324,11 +729,9 @@ inputList = {
 
 [node name="ROOT_UI" type="CanvasLayer" parent="."]
 
-[node name="Player_hud" parent="ROOT_UI" node_paths=PackedStringArray("player") instance=ExtResource("15_lr4a8")]
-player = NodePath("../..")
-
 [node name="Build" type="Control" parent="ROOT_UI"]
 visible = false
+z_index = 10
 layout_mode = 3
 anchors_preset = 0
 offset_right = 40.0
@@ -347,39 +750,18 @@ offset_bottom = 28.0
 grow_horizontal = 1
 parentUI = NodePath("..")
 
-[node name="BuildHud" type="VBoxContainer" parent="ROOT_UI/Build"]
+[node name="BuildHud" parent="ROOT_UI/Build" instance=ExtResource("15_otihl")]
 layout_mode = 1
-anchors_preset = 12
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_top = 760.0
-offset_right = 430.0
-offset_bottom = 824.0
-grow_horizontal = 2
-grow_vertical = 0
-size_flags_horizontal = 3
-alignment = 1
-
-[node name="HBoxContainer" type="HBoxContainer" parent="ROOT_UI/Build/BuildHud"]
-custom_minimum_size = Vector2(32, 32)
-layout_mode = 2
-theme_override_constants/separation = 100
-
-[node name="Control" type="Control" parent="ROOT_UI/Build/BuildHud/HBoxContainer"]
-layout_mode = 2
-
-[node name="CLOSEMENU" type="Label" parent="ROOT_UI/Build/BuildHud/HBoxContainer"]
-custom_minimum_size = Vector2(100, 32)
-layout_mode = 2
-text = "ESC: GO BACK
-"
-
-[node name="CHANGETODESTROY" type="Label" parent="ROOT_UI/Build/BuildHud/HBoxContainer"]
-custom_minimum_size = Vector2(32, 32)
-layout_mode = 2
-text = "Z:DESTORY MACHINE
-"
+anchors_preset = 0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+offset_left = -1.0
+offset_top = 800.0
+offset_right = 620.0
+offset_bottom = 864.0
+grow_horizontal = 1
+grow_vertical = 1
 
 [node name="Destroy" type="Control" parent="ROOT_UI"]
 visible = false
@@ -412,23 +794,188 @@ theme_override_font_sizes/font_size = 40
 text = "Select the machine to destroy"
 horizontal_alignment = 1
 
-[node name="CLOSEMENU" type="Label" parent="ROOT_UI/Destroy"]
+[node name="CloseBuildMenu" parent="ROOT_UI/Destroy" instance=ExtResource("14_8yknx")]
+layout_mode = 0
+offset_left = 100.0
+offset_top = 815.0
+offset_right = 207.0
+offset_bottom = 847.0
+
+[node name="Wiring" type="Control" parent="ROOT_UI"]
+visible = false
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("18_3q6sb")
+text = "WIRING MODE"
+
+[node name="WiringLabel" type="Label" parent="ROOT_UI/Wiring"]
 layout_mode = 1
+offset_left = 383.0
+offset_top = 51.0
+offset_right = 1182.0
+offset_bottom = 189.0
+theme_override_fonts/font = ExtResource("14_me7n8")
+theme_override_font_sizes/font_size = 90
+text = "WIRING MODE
+"
+horizontal_alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="ROOT_UI/Wiring"]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 515.0
+offset_top = 683.0
+offset_right = 778.0
+offset_bottom = 715.0
+grow_horizontal = 2
+grow_vertical = 0
+scale = Vector2(1.5, 1.5)
+theme_override_constants/separation = 100
+
+[node name="CreateWire" parent="ROOT_UI/Wiring/HBoxContainer" instance=ExtResource("14_8yknx")]
+layout_mode = 2
+text = "CREATE WIRE
+"
+promptMessage = ": Create Wire"
+promptAction = "ACTION"
+
+[node name="DestroyWire" parent="ROOT_UI/Wiring/HBoxContainer" instance=ExtResource("14_8yknx")]
+layout_mode = 2
+text = "Destroy Wire
+"
+promptMessage = ": Destroy Wire"
+promptAction = "ACTION2"
+
+[node name="CloseBuildMenu" parent="ROOT_UI/Wiring" instance=ExtResource("14_8yknx")]
+layout_mode = 0
+offset_left = 100.0
+offset_top = 815.0
+offset_right = 207.0
+offset_bottom = 847.0
+
+[node name="WiringMachine" parent="ROOT_UI/Wiring" instance=ExtResource("14_8yknx")]
+layout_mode = 0
+offset_left = 300.0
+offset_top = 815.0
+offset_right = 509.0
+offset_bottom = 847.0
+text = "NUMKEY1: Wire Machine
+"
+promptMessage = ": Wire Machine"
+promptAction = "NUMKEY1"
+
+[node name="WiringBattery" parent="ROOT_UI/Wiring" instance=ExtResource("14_8yknx")]
+layout_mode = 0
+offset_left = 520.0
+offset_top = 815.0
+offset_right = 729.0
+offset_bottom = 847.0
+text = "NUMKEY1: Wire Machine
+"
+promptMessage = ": Wire Battery"
+promptAction = "NUMKEY2"
+
+[node name="ItemHUDPlaceholder" type="Control" parent="ROOT_UI"]
+layout_mode = 3
+anchors_preset = 0
+offset_top = 80.0
+offset_right = 40.0
+offset_bottom = 120.0
+
+[node name="StaffHUD" parent="ROOT_UI/ItemHUDPlaceholder" node_paths=PackedStringArray("player") instance=ExtResource("20_qac2v")]
+layout_mode = 1
+offset_left = 147.0
+offset_top = 525.0
+offset_right = 107.0
+offset_bottom = 525.0
+scale = Vector2(0.2, 0.2)
+actionInput = "EQUIP"
+texture = SubResource("AtlasTexture_1dcaq")
+player = NodePath("../../..")
+
+[node name="PotionHUD" parent="ROOT_UI/ItemHUDPlaceholder" node_paths=PackedStringArray("potionGridHolderData") instance=ExtResource("22_lae4u")]
+layout_mode = 1
+offset_left = 16.0
+offset_top = 612.0
+offset_right = -24.0
+offset_bottom = 612.0
+scale = Vector2(0.2, 0.2)
+actionInput = "EQUIPPOTION"
+texture = SubResource("AtlasTexture_e1oi2")
+potionGridHolderData = NodePath("../../Inventory/PotionGridContainer")
+
+[node name="MagicHUD" parent="ROOT_UI/ItemHUDPlaceholder" instance=ExtResource("24_71sui")]
+layout_mode = 1
+offset_left = 281.0
+offset_top = 612.0
+offset_right = 241.0
+offset_bottom = 612.0
+scale = Vector2(0.2, 0.2)
+
+[node name="Inventory" type="Control" parent="ROOT_UI" node_paths=PackedStringArray("potionInventory")]
+visible = false
+layout_mode = 3
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = 100.0
-offset_top = 780.0
-offset_right = 233.0
-offset_bottom = 808.0
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_font_sizes/font_size = 20
-text = "ESC: GO BACK
-"
+script = ExtResource("24_o1enl")
+potionInventory = NodePath("PotionInventory")
+
+[node name="Border" type="TextureRect" parent="ROOT_UI/Inventory"]
+texture_filter = 1
+layout_mode = 1
+offset_left = -637.0
+offset_top = -720.0
+offset_right = 323.0
+offset_bottom = 240.0
+scale = Vector2(1.35, 1.35)
+texture = ExtResource("24_e53mk")
+
+[node name="PotionGridContainer" parent="ROOT_UI/Inventory" node_paths=PackedStringArray("potion_inventory") instance=ExtResource("25_km84l")]
+offset_left = -498.0
+offset_top = 94.0
+offset_right = -498.0
+offset_bottom = 94.0
+scale = Vector2(2.5, 2.5)
+potion_inventory = NodePath("../PotionInventory")
+
+[node name="PotionInventory" parent="ROOT_UI/Inventory" instance=ExtResource("26_eb02i")]
+visible = false
+layout_mode = 1
+offset_left = -503.0
+offset_top = -257.0
+offset_right = -503.0
+offset_bottom = -257.0
+scale = Vector2(0.7, 0.7)
 
 [node name="InteractComponent" type="Node" parent="." node_paths=PackedStringArray("parent")]
 script = ExtResource("15_wh8qd")
 parent = NodePath("..")
+
+[node name="MachineUpdater" type="Node" parent="."]
+script = ExtResource("21_iegje")
+
+[node name="Staff" parent="." node_paths=PackedStringArray("customAnimation") instance=ExtResource("22_01tsa")]
+z_index = -1
+position = Vector2(10, 0)
+rotation = 1.5708
+scale = Vector2(8, 8)
+customAnimation = NodePath("StaffAnimation")
+
+[node name="StaffAnimation" type="AnimationPlayer" parent="Staff"]
+libraries = {
+"": SubResource("AnimationLibrary_htq8g")
+}

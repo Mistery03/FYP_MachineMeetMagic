@@ -1,3 +1,4 @@
+class_name Build
 extends State
 
 @export
@@ -6,6 +7,10 @@ var move_state: State
 var idle_state: State
 @export 
 var delete_state:State
+@export
+var wiring_machine_state:State
+@export
+var wiring_battery_state:State
 
 @export
 var buildUI:Control
@@ -28,6 +33,8 @@ var machineInstance:PackedScene
 func enter() -> void:
 	super()
 	buildUI.visible = true
+	parent.isBuildMode = true
+	parent.itemHUDPlaceholder.visible = false
 	
 
 	
@@ -37,17 +44,22 @@ func process_input(event: InputEvent) -> State:
 		buildUI.visible = false
 		buildMenu.atlasCoord = Vector2i(-1,-1)
 		parent.homeTilemap.erase_cell(1,prevMouseTilePos)
+		parent.isBuildMode = false
 		return idle_state
 	
 	if Input.is_action_just_pressed("DELETE"):
 		buildUI.visible = false
 		return delete_state
+	
+	if Input.is_action_just_pressed("WIRING"):
+		buildUI.visible = false
+		return wiring_machine_state
 
 	return null
 
 func process_physics(delta: float) -> State:
 	camera.position = move_component.get_movement_direction() * move_speed * delta
-	
+	camera.position_smoothing_enabled = true
 	
 	return null
 	
@@ -70,7 +82,7 @@ func process_frame(delta:float) -> State:
 		var machinePreviewData:TileData = parent.homeTilemap.get_cell_tile_data(1,mouseTilePos)
 		
 		if machinePreviewData:
-			machineInstance =  machinePreviewData.get_custom_data(buildMenu.machineName.to_pascal_case())
+			machineInstance =  machinePreviewData.get_custom_data(buildMenu.buildingName.to_pascal_case())
 			
 		if machineData:
 			isOccupied = machineData.get_custom_data("occupied")
@@ -82,9 +94,13 @@ func process_frame(delta:float) -> State:
 
 			if Input.is_action_just_pressed("ACTION") and !buildMenu.isInMenu and mouseTilePos != parentPos and machinePreviewData:
 				set_tile_in_tilemap(mouseTilePos, buildMenu)
+				buildMenu.description_board.visible = false
 				var instance = machineInstance.instantiate()
 				instance.position = parent.homeTilemap.map_to_local(mouseTilePos)
 				parent.localLevel.machineList.add_child(instance)
+			
+			wiring_machine_state.updateWithinWireList()
+			wiring_battery_state.updateWithinWireList()
 				
 	return null
 

@@ -1,0 +1,214 @@
+[gd_scene load_steps=14 format=3 uid="uid://pbbfmyagu1u7"]
+
+[ext_resource type="Script" path="res://Building/Machine/Electricity/Power Generator/powerGeneratorUI.gd" id="1_vq0e8"]
+[ext_resource type="Texture2D" uid="uid://daap0c1p135gi" path="res://Asset/UIUX/machineContainer.png" id="2_j57ox"]
+[ext_resource type="PackedScene" uid="uid://ciyq3cn8pdvwd" path="res://UI/MachineSlot/fuel_slot.tscn" id="3_m6gjl"]
+[ext_resource type="PackedScene" uid="uid://ckanenxxawbfv" path="res://UI/PowerSwitch/power_switch.tscn" id="4_c2tfc"]
+[ext_resource type="Texture2D" uid="uid://d3gb5b0josq6g" path="res://Asset/UIUX/powerSwitch.png" id="5_wkhqa"]
+[ext_resource type="Texture2D" uid="uid://dc5gs43kepf3r" path="res://Asset/UIUX/loadingBorderBar.png" id="6_dud0o"]
+[ext_resource type="Texture2D" uid="uid://cflagpst0f4c5" path="res://Asset/UIUX/loadingBarWhite.png" id="7_brem5"]
+[ext_resource type="SpriteFrames" uid="uid://cktdrmvvswus8" path="res://Building/Machine/Electricity/Power Generator/powerGeneratorAnimation.tres" id="8_imixk"]
+[ext_resource type="FontFile" uid="uid://cl3rxpo58micg" path="res://Asset/Font/Lambda-Regular.ttf" id="9_078kl"]
+[ext_resource type="Texture2D" uid="uid://dhtpnpyw6djst" path="res://Asset/UIUX/indicators.png" id="10_u36gu"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5ottv"]
+atlas = ExtResource("5_wkhqa")
+region = Rect2(64, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fyj1n"]
+atlas = ExtResource("5_wkhqa")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_5b7l7"]
+
+[node name="PowerGeneratorUI" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("1_vq0e8")
+
+[node name="Background" type="TextureRect" parent="."]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 5.0
+offset_top = 82.0
+offset_right = 1085.0
+offset_bottom = 802.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_j57ox")
+
+[node name="TempBackGround" type="TextureRect" parent="."]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 1100.0
+offset_top = 80.0
+offset_right = 1587.0
+offset_bottom = 800.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_j57ox")
+
+[node name="FuelSlot" parent="." instance=ExtResource("3_m6gjl")]
+layout_mode = 0
+offset_left = 256.0
+offset_top = 566.0
+offset_right = 296.0
+offset_bottom = 606.0
+
+[node name="PowerSwitch" parent="." instance=ExtResource("4_c2tfc")]
+texture_filter = 1
+layout_mode = 0
+offset_left = 104.0
+offset_top = 105.0
+offset_right = 180.0
+offset_bottom = 177.0
+theme_override_icons/checked = SubResource("AtlasTexture_5ottv")
+theme_override_icons/unchecked = SubResource("AtlasTexture_fyj1n")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_5b7l7")
+
+[node name="StatusBar" type="TextureProgressBar" parent="."]
+layout_mode = 0
+offset_left = 864.0
+offset_top = 164.0
+offset_right = 1504.0
+offset_bottom = 484.0
+rotation = 1.5708
+scale = Vector2(0.8, 0.8)
+min_value = 100.0
+value = 100.0
+texture_over = ExtResource("6_dud0o")
+texture_progress = ExtResource("7_brem5")
+tint_progress = Color(1, 0, 0, 1)
+
+[node name="MachineAnimation" type="AnimatedSprite2D" parent="."]
+texture_filter = 1
+position = Vector2(320, 346)
+scale = Vector2(7, 7)
+sprite_frames = ExtResource("8_imixk")
+animation = &"Idle"
+
+[node name="BuffDisplay" type="Label" parent="."]
+layout_mode = 0
+offset_left = 91.0
+offset_top = 470.0
+offset_right = 571.0
+offset_bottom = 613.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("9_078kl")
+theme_override_font_sizes/font_size = 60
+text = "NO ACTIVE BUFF
+"
+horizontal_alignment = 1
+
+[node name="ManaStatus" type="Label" parent="."]
+layout_mode = 0
+offset_left = 686.0
+offset_top = 684.0
+offset_right = 770.0
+offset_bottom = 720.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 1
+theme_override_fonts/font = ExtResource("9_078kl")
+theme_override_font_sizes/font_size = 30
+text = "STATUS"
+horizontal_alignment = 1
+
+[node name="Burning" type="Label" parent="."]
+layout_mode = 0
+offset_left = 545.0
+offset_top = 684.0
+offset_right = 644.0
+offset_bottom = 720.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 1
+theme_override_fonts/font = ExtResource("9_078kl")
+theme_override_font_sizes/font_size = 30
+text = "CONVERT"
+horizontal_alignment = 1
+
+[node name="BorderIndicator" type="TextureRect" parent="."]
+texture_filter = 1
+layout_mode = 0
+offset_left = 789.0
+offset_top = 211.0
+offset_right = 1022.0
+offset_bottom = 600.0
+texture = ExtResource("2_j57ox")
+
+[node name="Indicator" type="TextureRect" parent="."]
+layout_mode = 0
+offset_left = 810.0
+offset_top = 484.0
+offset_right = 1002.0
+offset_bottom = 548.0
+rotation = 4.71239
+texture = ExtResource("10_u36gu")
+
+[node name="HeaderIndicator" type="Label" parent="."]
+layout_mode = 0
+offset_left = 834.0
+offset_top = 219.0
+offset_right = 985.0
+offset_bottom = 289.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("9_078kl")
+theme_override_font_sizes/font_size = 60
+text = "Labels"
+horizontal_alignment = 1
+
+[node name="IndactorLabel" type="Label" parent="."]
+layout_mode = 0
+offset_left = 879.0
+offset_top = 309.0
+offset_right = 1013.0
+offset_bottom = 333.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("9_078kl")
+theme_override_font_sizes/font_size = 20
+text = "Mana is produced"
+
+[node name="IndactorLabel2" type="Label" parent="."]
+layout_mode = 0
+offset_left = 881.0
+offset_top = 365.0
+offset_right = 1015.0
+offset_bottom = 416.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("9_078kl")
+theme_override_font_sizes/font_size = 20
+text = "Not connected/
+Idle"
+
+[node name="IndactorLabel3" type="Label" parent="."]
+layout_mode = 0
+offset_left = 881.0
+offset_top = 439.0
+offset_right = 936.0
+offset_bottom = 463.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("9_078kl")
+theme_override_font_sizes/font_size = 20
+text = "No Fuel"
+
+[node name="FuelBurning" type="TextureProgressBar" parent="."]
+layout_mode = 0
+offset_left = 458.0
+offset_top = 677.0
+offset_right = 1098.0
+offset_bottom = 997.0
+rotation = -1.5708
+scale = Vector2(0.8, 0.8)
+value = 100.0
+texture_over = ExtResource("6_dud0o")
+texture_progress = ExtResource("7_brem5")
+tint_progress = Color(0.533333, 0.407843, 1, 1)

@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://htlhwdgl8ast"]
+
+[ext_resource type="FontFile" uid="uid://cl3rxpo58micg" path="res://Asset/Font/Lambda-Regular.ttf" id="1_ctwwv"]
+[ext_resource type="Script" path="res://UI/Build/CloseBuildMenu.gd" id="1_gduyg"]
+
+[node name="CloseBuildMenu" type="Label"]
+custom_minimum_size = Vector2(100, 32)
+theme_override_fonts/font = ExtResource("1_ctwwv")
+theme_override_font_sizes/font_size = 24
+text = "ESC: GO BACK
+"
+script = ExtResource("1_gduyg")
+promptMessage = ": go back"
+promptAction = "EXIT"
