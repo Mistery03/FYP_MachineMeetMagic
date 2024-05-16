@@ -1,0 +1,149 @@
+[gd_scene load_steps=15 format=3 uid="uid://cbpifgpelsijg"]
+
+[ext_resource type="Script" path="res://Building/Machine/Material Exchange/Extractor/extractorUI.gd" id="1_q5y3h"]
+[ext_resource type="Texture2D" uid="uid://daap0c1p135gi" path="res://Asset/UIUX/machineContainer.png" id="2_ssxv3"]
+[ext_resource type="SpriteFrames" uid="uid://cbtw4dcn8pny6" path="res://Building/Machine/Material Exchange/Extractor/extractorAnimation.tres" id="3_bofy2"]
+[ext_resource type="PackedScene" uid="uid://ckanenxxawbfv" path="res://UI/PowerSwitch/power_switch.tscn" id="4_ayn0i"]
+[ext_resource type="Texture2D" uid="uid://d3gb5b0josq6g" path="res://Asset/UIUX/powerSwitch.png" id="5_63tcs"]
+[ext_resource type="PackedScene" uid="uid://18gib6v62tlc" path="res://UI/MachineSlot/material_slot.tscn" id="5_l467h"]
+[ext_resource type="PackedScene" uid="uid://dsnw47taoamf7" path="res://UI/MachineSlot/result_slot.tscn" id="6_yhepd"]
+[ext_resource type="PackedScene" uid="uid://ciyq3cn8pdvwd" path="res://UI/MachineSlot/fuel_slot.tscn" id="7_ndds1"]
+[ext_resource type="PackedScene" uid="uid://3etlyd8c2p38" path="res://UI/ProgressBar/progress_bar.tscn" id="8_xpyir"]
+[ext_resource type="PackedScene" uid="uid://cxsbrurialksc" path="res://UI/MachineManaBar/machine_mana_bar.tscn" id="9_j8etu"]
+[ext_resource type="FontFile" uid="uid://cl3rxpo58micg" path="res://Asset/Font/Lambda-Regular.ttf" id="10_jqk1g"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nyk3b"]
+atlas = ExtResource("5_63tcs")
+region = Rect2(192, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dc6cc"]
+atlas = ExtResource("5_63tcs")
+region = Rect2(128, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_a4t5i"]
+
+[node name="ExtractorUI" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("1_q5y3h")
+
+[node name="Background" type="TextureRect" parent="."]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 5.0
+offset_top = 82.0
+offset_right = 1085.0
+offset_bottom = 802.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_ssxv3")
+
+[node name="MachineAnimation" type="AnimatedSprite2D" parent="."]
+texture_filter = 1
+position = Vector2(550, 240)
+scale = Vector2(7, 7)
+sprite_frames = ExtResource("3_bofy2")
+animation = &"Processing"
+
+[node name="PowerSwitch" parent="." instance=ExtResource("4_ayn0i")]
+layout_mode = 0
+offset_left = 106.0
+offset_top = 126.0
+offset_right = 182.0
+offset_bottom = 198.0
+theme_override_icons/checked_disabled = SubResource("AtlasTexture_nyk3b")
+theme_override_icons/unchecked_disabled = SubResource("AtlasTexture_dc6cc")
+theme_override_icons/checked_mirrored = SubResource("AtlasTexture_a4t5i")
+disabled = true
+button_pressed = true
+
+[node name="MaterialSlot" parent="." instance=ExtResource("5_l467h")]
+layout_mode = 0
+offset_left = 68.0
+offset_top = 413.0
+offset_right = 108.0
+offset_bottom = 453.0
+
+[node name="ResultSlot" parent="." instance=ExtResource("6_yhepd")]
+layout_mode = 0
+offset_left = 901.0
+offset_top = 412.0
+offset_right = 941.0
+offset_bottom = 452.0
+
+[node name="FuelSlot" parent="." instance=ExtResource("7_ndds1")]
+layout_mode = 0
+offset_left = 68.0
+offset_top = 576.0
+offset_right = 108.0
+offset_bottom = 616.0
+
+[node name="MagicSlot" type="Panel" parent="."]
+layout_mode = 0
+offset_left = 906.0
+offset_top = 578.0
+offset_right = 946.0
+offset_bottom = 618.0
+scale = Vector2(3, 3)
+
+[node name="ProgressBar" parent="." instance=ExtResource("8_xpyir")]
+layout_mode = 0
+offset_left = 300.0
+offset_top = 346.0
+offset_right = 940.0
+offset_bottom = 666.0
+value = 0.0
+
+[node name="MachineManaBar" parent="." instance=ExtResource("9_j8etu")]
+layout_mode = 0
+offset_left = 229.0
+offset_top = 467.0
+offset_right = 869.0
+offset_bottom = 787.0
+value = 0.0
+
+[node name="ManaCapaity" type="Label" parent="."]
+layout_mode = 0
+offset_left = 260.0
+offset_top = 680.0
+offset_right = 847.0
+offset_bottom = 750.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("10_jqk1g")
+theme_override_font_sizes/font_size = 60
+text = "MANA CAPACITY"
+horizontal_alignment = 1
+
+[node name="BuffDisplay" type="Label" parent="."]
+layout_mode = 0
+offset_left = 270.0
+offset_top = 353.0
+offset_right = 857.0
+offset_bottom = 496.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("10_jqk1g")
+theme_override_font_sizes/font_size = 60
+text = "NO ACTIVE BUFF
+"
+horizontal_alignment = 1
+
+[node name="TempBackGround" type="TextureRect" parent="."]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 1100.0
+offset_top = 80.0
+offset_right = 1587.0
+offset_bottom = 800.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_ssxv3")

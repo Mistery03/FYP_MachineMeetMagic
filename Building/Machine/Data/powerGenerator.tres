@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="BuildingData" load_steps=3 format=3 uid="uid://ch3ruj8fn022x"]
+
+[ext_resource type="Script" path="res://Building/Data/buildingData.gd" id="1_egi2o"]
+[ext_resource type="Texture2D" uid="uid://bftpbm6jtqly5" path="res://Building/Machine/Electricity/Power Generator/powerGeneratorTexture.tres" id="2_am16k"]
+
+[resource]
+script = ExtResource("1_egi2o")
+name = "Mana Generator"
+category = "Electricity"
+texture = ExtResource("2_am16k")
+atlasCoord = Vector2i(0, 3)
+description = "Need power? Just build a generator!"

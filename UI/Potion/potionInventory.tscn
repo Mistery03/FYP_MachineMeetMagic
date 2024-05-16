@@ -1,0 +1,117 @@
+[gd_scene load_steps=10 format=3 uid="uid://dpthqxsb7e3fk"]
+
+[ext_resource type="Texture2D" uid="uid://dy6bsmjnf8u44" path="res://Asset/UIUX/Container.png" id="1_a6l5k"]
+[ext_resource type="Script" path="res://UI/Potion/potionInventory.gd" id="1_nux41"]
+[ext_resource type="PackedScene" uid="uid://g6fcu5xcdnaa" path="res://UI/Potion/PotionGridContainer.tscn" id="2_cycir"]
+[ext_resource type="Resource" uid="uid://b0rx68wwi0q20" path="res://Potion/Heal/Healing Potion/HealingPotion.tres" id="4_25qxv"]
+[ext_resource type="Resource" uid="uid://doo0oqvv31wtn" path="res://Potion/Buff/Defence Potion/DefencePotion.tres" id="5_e0rmr"]
+[ext_resource type="Texture2D" uid="uid://dw0wj1ftq8uye" path="res://Asset/potionSS.png" id="6_1234l"]
+[ext_resource type="Script" path="res://UI/Potion/DescriptionBoard.gd" id="6_spmlp"]
+[ext_resource type="FontFile" uid="uid://cl3rxpo58micg" path="res://Asset/Font/Lambda-Regular.ttf" id="7_g8gme"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7ys3t"]
+atlas = ExtResource("6_1234l")
+region = Rect2(0, 0, 32, 32)
+
+[node name="PotionInventory" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_nux41")
+isPotionAmountShown = true
+
+[node name="NinePatchRect" type="NinePatchRect" parent="."]
+texture_filter = 1
+layout_mode = 0
+offset_right = 899.0
+offset_bottom = 459.0
+texture = ExtResource("1_a6l5k")
+region_rect = Rect2(0.662186, 0.107, 30.6746, 32)
+
+[node name="PotionGridContainer" parent="." instance=ExtResource("2_cycir")]
+offset_left = 78.0
+offset_top = 120.0
+offset_right = 78.0
+offset_bottom = 120.0
+scale = Vector2(3.5, 3.5)
+
+[node name="PotionSlot" parent="PotionGridContainer/GridContainer" index="0"]
+potionData = ExtResource("4_25qxv")
+potionAmount = 10
+
+[node name="PotionSlot2" parent="PotionGridContainer/GridContainer" index="1"]
+potionData = ExtResource("5_e0rmr")
+potionAmount = 10
+
+[node name="DescriptionBoard" type="NinePatchRect" parent="."]
+visible = false
+texture_filter = 1
+layout_mode = 0
+offset_left = 920.0
+offset_top = 2.0
+offset_right = 1105.0
+offset_bottom = 254.0
+scale = Vector2(3.5, 3.5)
+texture = ExtResource("1_a6l5k")
+region_rect = Rect2(0.595047, 0.32476, 30.9449, 31.3503)
+script = ExtResource("6_spmlp")
+
+[node name="PotionIcon" type="TextureRect" parent="DescriptionBoard"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -40.1667
+offset_top = 7.0
+offset_right = -0.166656
+offset_bottom = 47.0
+grow_horizontal = 2
+scale = Vector2(2, 2)
+texture = SubResource("AtlasTexture_7ys3t")
+
+[node name="PotionName" type="Label" parent="DescriptionBoard"]
+layout_mode = 0
+offset_left = 22.0
+offset_top = 86.2857
+offset_right = 2926.0
+offset_bottom = 657.286
+scale = Vector2(0.05, 0.05)
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("7_g8gme")
+theme_override_font_sizes/font_size = 500
+text = "POTIONNAME"
+horizontal_alignment = 1
+
+[node name="PotionDescription" type="Label" parent="DescriptionBoard"]
+layout_mode = 0
+offset_left = 20.8571
+offset_top = 133.429
+offset_right = 2991.86
+offset_bottom = 1660.43
+scale = Vector2(0.05, 0.05)
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("7_g8gme")
+theme_override_font_sizes/font_size = 220
+text = "Taken from the Latin words \"dolorem ipsum\", which translates to \"pain itself\", Lorem Ipsum text saw a revival in the mid-20th century as placeholder text in printing and design."
+horizontal_alignment = 1
+autowrap_mode = 2
+
+[node name="Timer" type="Timer" parent="."]
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 0
+offset_left = 154.0
+offset_top = 15.0
+offset_right = 736.0
+offset_bottom = 107.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("7_g8gme")
+theme_override_font_sizes/font_size = 80
+text = "POTION INVENTORY"
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
+
+[editable path="PotionGridContainer"]

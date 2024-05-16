@@ -1,0 +1,32 @@
+[gd_scene load_steps=5 format=3 uid="uid://dprxecily2808"]
+
+[ext_resource type="Script" path="res://Building/Machine/Material Exchange/Extractor/extractor.gd" id="1_tl5kv"]
+[ext_resource type="SpriteFrames" uid="uid://cbtw4dcn8pny6" path="res://Building/Machine/Material Exchange/Extractor/extractorAnimation.tres" id="2_fc8e1"]
+[ext_resource type="PackedScene" uid="uid://cbpifgpelsijg" path="res://Building/Machine/Material Exchange/Extractor/extractorUI.tscn" id="3_po1mx"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_310v6"]
+size = Vector2(26, 28)
+
+[node name="Extractor" type="Node2D" node_paths=PackedStringArray("machineUI")]
+z_index = 20
+script = ExtResource("1_tl5kv")
+machineUI = NodePath("Root/ExtractorUI")
+manaConsumptionPerSecond = 100.0
+maxMana = 1000.0
+
+[node name="Animation" type="AnimatedSprite2D" parent="."]
+texture_filter = 1
+sprite_frames = ExtResource("2_fc8e1")
+animation = &"Processing"
+
+[node name="Root" type="CanvasLayer" parent="."]
+
+[node name="ExtractorUI" parent="Root" instance=ExtResource("3_po1mx")]
+visible = false
+
+[node name="Interectable" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Interectable"]
+shape = SubResource("RectangleShape2D_310v6")
+
+[connection signal="input_event" from="Interectable" to="." method="_on_interectable_input_event"]

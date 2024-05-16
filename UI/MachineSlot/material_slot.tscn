@@ -1,0 +1,8 @@
+[gd_scene format=3 uid="uid://18gib6v62tlc"]
+
+[node name="MaterialSlot" type="Panel"]
+offset_left = 79.0
+offset_top = 455.0
+offset_right = 119.0
+offset_bottom = 495.0
+scale = Vector2(3, 3)

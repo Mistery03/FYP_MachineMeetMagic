@@ -5,6 +5,12 @@ extends State
 var build_state: State
 
 @export
+var wiring_machine_state: State
+
+@export
+var wiring_battery_state: State
+
+@export
 var buildUI:Control
 
 @export
@@ -26,8 +32,8 @@ var isOccupied:bool
 
 func enter() -> void:
 	super()
-	buildUI.visible = false
 	destroyHUD.visible = true
+	parent.itemHUDPlaceholder.visible = false
 
 
 func process_input(event: InputEvent) -> State:
@@ -55,14 +61,25 @@ func process_frame(delta:float) -> State:
 			parent.homeTilemap.set_layer_modulate(1,Color.RED)
 			
 			var machineList = parent.localLevel.machineList.get_children()
-			
+			for machine in machineList:
+					if machine.position == parent.homeTilemap.map_to_local(mouseTilePos) and !(machine is Battery):
+						machine.animation.stop()
 			if Input.is_action_just_pressed("ACTION"):
 				for machine in machineList:
 					if machine.position == parent.homeTilemap.map_to_local(mouseTilePos):
-						machine.queue_free()
+							machine.queue_free()
+							if machine is PowerGenerator:
+								machine.wireList.clear()
+							elif machine is Battery:
+								machine.wireList.clear()
 				parent.homeTilemap.erase_cell(2,mouseTilePos)
 				parent.homeTilemap.erase_cell(1,mouseTilePos)
-	
+				wiring_machine_state.prevGenPos = Vector2i(-100,-100)
+				wiring_battery_state.prevBattPos = Vector2i(-100,-100)
+				parent.homeTilemap.clear_layer(wiring_machine_state.wireLayer)
+				parent.homeTilemap.clear_layer(wiring_battery_state.wireLayer)
+				
+	wiring_machine_state.updateWithinWireList()
 	if mouseTilePos != prevMouseTilePos:
 		parent.homeTilemap.erase_cell(1,prevMouseTilePos)
 	prevMouseTilePos = mouseTilePos
