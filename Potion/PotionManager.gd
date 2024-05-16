@@ -31,7 +31,7 @@ func _input(event):
 				potionInventory.decreasePotionAmount(potionData)
 				potionGridInventory.decreasePotionAmount(potionData)
 				print("drank")
-				
+			
 		
 	
 	
