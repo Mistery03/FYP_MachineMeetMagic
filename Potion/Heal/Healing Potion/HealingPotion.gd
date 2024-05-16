@@ -4,5 +4,5 @@ extends Potion
 
 func execute():
 	master.currHealth += healingPoints
-	master.OnHealthIncrease.emit()
 	print(master.currHealth)
+	master.OnHealthIncrease.emit()

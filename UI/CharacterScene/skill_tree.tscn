@@ -1,0 +1,35 @@
+[gd_scene load_steps=2 format=3 uid="uid://daji0h3vfh4k5"]
+
+[ext_resource type="PackedScene" uid="uid://404eqowmraym" path="res://UI/CharacterScene/skill_button.tscn" id="1_avgvp"]
+
+[node name="skillTree" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = -1344.0
+offset_bottom = -836.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 0
+
+[node name="skillButton" parent="." instance=ExtResource("1_avgvp")]
+layout_mode = 0
+
+[node name="skillButton" parent="skillButton" instance=ExtResource("1_avgvp")]
+layout_mode = 0
+offset_left = 64.0
+offset_right = 96.0
+disabled = true
+
+[node name="skillButton" parent="skillButton/skillButton" instance=ExtResource("1_avgvp")]
+layout_mode = 0
+offset_left = 64.0
+offset_right = 96.0
+disabled = true
+
+[node name="skillButton" parent="skillButton/skillButton/skillButton" instance=ExtResource("1_avgvp")]
+layout_mode = 0
+offset_left = 64.0
+offset_right = 96.0
+disabled = true
