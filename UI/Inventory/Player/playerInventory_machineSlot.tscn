@@ -1,0 +1,29 @@
+[gd_scene load_steps=3 format=3 uid="uid://d3a8b5m3ju4nv"]
+
+[ext_resource type="Script" path="res://UI/Inventory/Player/playerInventory_machineSlot.gd" id="1_ssw13"]
+[ext_resource type="Texture2D" uid="uid://daap0c1p135gi" path="res://Asset/UIUX/machineContainer.png" id="2_1uxep"]
+
+[node name="PlayerInventoryMachineSlot" type="Panel"]
+self_modulate = Color(1, 1, 1, 0)
+custom_minimum_size = Vector2(200, 200)
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = -1400.0
+offset_bottom = -700.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_ssw13")
+
+[node name="Border" type="TextureRect" parent="."]
+texture_filter = 1
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+scale = Vector2(5, 5)
+texture = ExtResource("2_1uxep")
+
+[node name="Item" type="TextureRect" parent="Border"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0

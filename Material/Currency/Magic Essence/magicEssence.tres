@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="Materials" load_steps=6 format=3 uid="uid://cchhf0shqvfkr"]
+
+[ext_resource type="Script" path="res://Material/Data/materialData.gd" id="1_cc426"]
+[ext_resource type="PackedScene" uid="uid://dx07atspskdy5" path="res://Material/Currency/Magic Essence/magicEssence.tscn" id="1_v5432"]
+[ext_resource type="Texture2D" uid="uid://cruxbb2jv2vmx" path="res://Asset/Materials1.png" id="3_i40me"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_865ne"]
+atlas = ExtResource("3_i40me")
+region = Rect2(160, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2gnla"]
+atlas = SubResource("AtlasTexture_865ne")
+
+[resource]
+script = ExtResource("1_cc426")
+name = "Magic Essence"
+scene = ExtResource("1_v5432")
+texture = SubResource("AtlasTexture_2gnla")

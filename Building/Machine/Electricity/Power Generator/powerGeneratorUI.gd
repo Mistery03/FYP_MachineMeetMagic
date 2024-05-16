@@ -8,6 +8,7 @@ extends Control
 
 @export var maxValue:float = 100
 var currValue:float = 100
+var player:Player
 
 func _ready():
 	fuel_burning.value = currValue

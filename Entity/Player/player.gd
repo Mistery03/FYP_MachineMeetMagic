@@ -10,12 +10,14 @@ const JUMP_VELOCITY = 4.5
 @export var isStaffEquipped:bool
 @export var playerInventory:Control
 @export var itemHUDPlaceholder:Control
+@export var playerMaxInventorySize:int
 
 @onready var potion_manager = $PotionManager
 @onready var state_manager = $StateManager
 @onready var animation = $Animation
 @onready var move_component = $MoveComponent
 @onready var camera = $Camera
+@onready var localLevel:Node2D
 
 
 var potion:Potion
@@ -23,8 +25,9 @@ var isBuildEnabled:bool
 var isBuildMode:bool
 var homeTilemap:TileMap
 var mousePos:Vector2
-var localLevel:Node2D
+
 var isPressable:bool = false
+var isMachineUI:bool = false
 
 
 func _ready() -> void:
@@ -32,6 +35,7 @@ func _ready() -> void:
 	currMana = playerData.MaxMana
 	currStamina = playerData.MaxStamina
 	state_manager.init(self,animation,move_component,camera)
+	
 
 func _unhandled_input(event: InputEvent) -> void:
 	state_manager.process_input(event)
@@ -43,6 +47,7 @@ func _physics_process(delta) -> void:
 func _process(delta) -> void:
 	mousePos = get_global_mouse_position()
 	state_manager.process_frame(delta)
+
 	
 func on_item_picked_up(material:Materials):
 	print("I got a ", material.name)			

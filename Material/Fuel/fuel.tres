@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="Materials" load_steps=5 format=3 uid="uid://bdk3htb64qaf7"]
+
+[ext_resource type="PackedScene" uid="uid://c7kvuyk6bbmvv" path="res://Material/Fuel/fuel.tscn" id="1_6uymy"]
+[ext_resource type="Script" path="res://Material/Data/materialData.gd" id="2_midm7"]
+[ext_resource type="Texture2D" uid="uid://cruxbb2jv2vmx" path="res://Asset/Materials1.png" id="3_eidsh"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_865ne"]
+atlas = ExtResource("3_eidsh")
+region = Rect2(64, 128, 32, 32)
+
+[resource]
+script = ExtResource("2_midm7")
+name = "Fuel"
+scene = ExtResource("1_6uymy")
+texture = SubResource("AtlasTexture_865ne")

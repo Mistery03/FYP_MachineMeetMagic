@@ -1,4 +1,4 @@
-[gd_scene load_steps=66 format=3 uid="uid://c1vsfoc55pk0w"]
+[gd_scene load_steps=71 format=3 uid="uid://c1vsfoc55pk0w"]
 
 [ext_resource type="Texture2D" uid="uid://bd32dcnew3uvf" path="res://Asset/L.png" id="1_ksidj"]
 [ext_resource type="Script" path="res://Entity/Player/player.gd" id="1_xfdxb"]
@@ -17,8 +17,8 @@
 [ext_resource type="PackedScene" uid="uid://htlhwdgl8ast" path="res://HUD/DynamicLabel/dynamicLabel.tscn" id="14_8yknx"]
 [ext_resource type="FontFile" uid="uid://cl3rxpo58micg" path="res://Asset/Font/Lambda-Regular.ttf" id="14_me7n8"]
 [ext_resource type="PackedScene" path="res://UI/Build/build_hud.tscn" id="15_otihl"]
-[ext_resource type="Script" path="res://Entity/Player/InteractComponent.gd" id="15_wh8qd"]
 [ext_resource type="Script" path="res://UI/Wiring/Wiring.gd" id="18_3q6sb"]
+[ext_resource type="Script" path="res://Entity/Player/ItemHUDPlaceholder.gd" id="19_4bbe1"]
 [ext_resource type="PackedScene" path="res://Staff/staffHUD.tscn" id="20_qac2v"]
 [ext_resource type="Script" path="res://Entity/Player/MachineUpdater.gd" id="21_iegje"]
 [ext_resource type="Texture2D" uid="uid://cgi863ww3hb3g" path="res://Asset/fantasyAssets.png" id="21_kqu6c"]
@@ -27,7 +27,7 @@
 [ext_resource type="PackedScene" uid="uid://3lfapx60drmh" path="res://HUD/Potion/potionHUD.tscn" id="22_lae4u"]
 [ext_resource type="PackedScene" uid="uid://dab70bjir0c00" path="res://HUD/Magic/magicHUD.tscn" id="24_71sui"]
 [ext_resource type="Texture2D" uid="uid://bmw2uy10i1kwr" path="res://Asset/UIUX/scroll_UI.png" id="24_e53mk"]
-[ext_resource type="Script" path="res://UI/Inventory/Inventory.gd" id="24_o1enl"]
+[ext_resource type="Script" path="res://UI/Inventory/InventoryController.gd" id="24_o1enl"]
 [ext_resource type="PackedScene" uid="uid://bm2u5jp0exc2h" path="res://UI/Potion/PotionGridContainerPlayer.tscn" id="25_km84l"]
 [ext_resource type="PackedScene" uid="uid://dpthqxsb7e3fk" path="res://UI/Potion/potionInventory.tscn" id="26_eb02i"]
 
@@ -256,6 +256,75 @@ region = Rect2(48, 192, 24, 24)
 [sub_resource type="AtlasTexture" id="AtlasTexture_e1oi2"]
 atlas = ExtResource("22_hr68s")
 region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="Animation" id="Animation_dkvrn"]
+resource_name = "fadeOut"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_y4e7q"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_b1wcj"]
+resource_name = "fadeIn"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_gojmo"]
+resource_name = "popIn"
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_4077c"]
+_data = {
+"RESET": SubResource("Animation_y4e7q"),
+"fadeIn": SubResource("Animation_b1wcj"),
+"fadeOut": SubResource("Animation_dkvrn"),
+"popIn": SubResource("Animation_gojmo")
+}
 
 [sub_resource type="Animation" id="Animation_4m4tr"]
 length = 0.001
@@ -619,6 +688,7 @@ potionObject = ExtResource("3_41una")
 staff = NodePath("Staff")
 playerInventory = NodePath("ROOT_UI/Inventory")
 itemHUDPlaceholder = NodePath("ROOT_UI/ItemHUDPlaceholder")
+playerMaxInventorySize = 20
 
 [node name="Camera" type="Camera2D" parent="."]
 zoom = Vector2(7, 7)
@@ -879,12 +949,15 @@ text = "NUMKEY1: Wire Machine
 promptMessage = ": Wire Battery"
 promptAction = "NUMKEY2"
 
-[node name="ItemHUDPlaceholder" type="Control" parent="ROOT_UI"]
+[node name="ItemHUDPlaceholder" type="Control" parent="ROOT_UI" node_paths=PackedStringArray("player", "animation")]
 layout_mode = 3
 anchors_preset = 0
 offset_top = 80.0
 offset_right = 40.0
 offset_bottom = 120.0
+script = ExtResource("19_4bbe1")
+player = NodePath("../..")
+animation = NodePath("ItemHUDAnimation")
 
 [node name="StaffHUD" parent="ROOT_UI/ItemHUDPlaceholder" node_paths=PackedStringArray("player") instance=ExtResource("20_qac2v")]
 layout_mode = 1
@@ -915,6 +988,14 @@ offset_top = 612.0
 offset_right = 241.0
 offset_bottom = 612.0
 scale = Vector2(0.2, 0.2)
+
+[node name="ItemHUDAnimation" type="AnimationPlayer" parent="ROOT_UI/ItemHUDPlaceholder"]
+libraries = {
+"": SubResource("AnimationLibrary_4077c")
+}
+
+[node name="Timer" type="Timer" parent="ROOT_UI/ItemHUDPlaceholder"]
+one_shot = true
 
 [node name="Inventory" type="Control" parent="ROOT_UI" node_paths=PackedStringArray("potionInventory")]
 visible = false
@@ -960,10 +1041,6 @@ offset_right = -503.0
 offset_bottom = -257.0
 scale = Vector2(0.7, 0.7)
 
-[node name="InteractComponent" type="Node" parent="." node_paths=PackedStringArray("parent")]
-script = ExtResource("15_wh8qd")
-parent = NodePath("..")
-
 [node name="MachineUpdater" type="Node" parent="."]
 script = ExtResource("21_iegje")
 
@@ -978,3 +1055,5 @@ customAnimation = NodePath("StaffAnimation")
 libraries = {
 "": SubResource("AnimationLibrary_htq8g")
 }
+
+[connection signal="timeout" from="ROOT_UI/ItemHUDPlaceholder/Timer" to="ROOT_UI/ItemHUDPlaceholder" method="_on_timer_timeout"]

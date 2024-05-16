@@ -1,9 +1,0 @@
-[gd_resource type="Resource" script_class="Materials" load_steps=3 format=3 uid="uid://cchhf0shqvfkr"]
-
-[ext_resource type="Script" path="res://Materials/Data/materialData.gd" id="1_cc426"]
-[ext_resource type="PackedScene" uid="uid://dx07atspskdy5" path="res://Materials/materialScene/magicEssence.tscn" id="1_v5432"]
-
-[resource]
-script = ExtResource("1_cc426")
-name = "Magic Essence"
-scene = ExtResource("1_v5432")
