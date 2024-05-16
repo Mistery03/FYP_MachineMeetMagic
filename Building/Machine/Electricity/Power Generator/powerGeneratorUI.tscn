@@ -201,6 +201,7 @@ theme_override_font_sizes/font_size = 20
 text = "No Fuel"
 
 [node name="FuelBurning" type="TextureProgressBar" parent="."]
+layout_mode = 0
 offset_left = 458.0
 offset_top = 677.0
 offset_right = 1098.0
