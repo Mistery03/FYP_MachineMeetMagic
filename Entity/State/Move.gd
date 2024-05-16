@@ -40,19 +40,20 @@ func updatePlayerVelocity(delta, movement_direction):
 	
 	changeAnimationVelocity()
 	
-	if !parent.isStaffEquipped:
-		#parent.staff.animation.flip_v = movement_direction.y < 0
-		updateStaffPosX()
-		updateStaffPosY()
-	else:
-		if parent.velocity.y >0:
-			parent.staff.customAnimation.play("idleFront")
-		if parent.velocity.y < 0:
-			parent.staff.customAnimation.play("idleBack")
-		if parent.velocity.x <0:
-			parent.staff.customAnimation.play("idleFront")
-		if parent.velocity.x > 0:
-			parent.staff.customAnimation.play("idleBack")
+	if parent.staff:
+		if !parent.isStaffEquipped:
+			#parent.staff.animation.flip_v = movement_direction.y < 0
+			updateStaffPosX()
+			updateStaffPosY()
+		else:
+			if parent.velocity.y >0:
+				parent.staff.customAnimation.play("idleFront")
+			if parent.velocity.y < 0:
+				parent.staff.customAnimation.play("idleBack")
+			if parent.velocity.x <0:
+				parent.staff.customAnimation.play("idleFront")
+			if parent.velocity.x > 0:
+				parent.staff.customAnimation.play("idleBack")
 
 		
 func changeAnimationVelocity():
