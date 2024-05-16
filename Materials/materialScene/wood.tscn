@@ -6,26 +6,21 @@
 atlas = ExtResource("1_2jlwc")
 region = Rect2(48, 48, 24, 24)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_7gkcm"]
-size = Vector2(6, 6)
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_h45oc"]
+radius = 4.75
+height = 24.3952
 
 [node name="Node2D" type="Node2D"]
-position = Vector2(202, -112)
 scale = Vector2(2, 2)
 
-[node name="TextureRect" type="TextureRect" parent="."]
+[node name="Sprite" type="Sprite2D" parent="."]
 texture_filter = 1
-offset_left = -101.0
-offset_top = 56.0
-offset_right = -95.0
-offset_bottom = 62.0
-size_flags_horizontal = 0
 texture = SubResource("AtlasTexture_dmqar")
-expand_mode = 1
 
 [node name="Area2D" type="Area2D" parent="."]
 position = Vector2(-101, 56)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-position = Vector2(3, 3)
-shape = SubResource("RectangleShape2D_7gkcm")
+position = Vector2(101.25, -56)
+rotation = 0.785398
+shape = SubResource("CapsuleShape2D_h45oc")

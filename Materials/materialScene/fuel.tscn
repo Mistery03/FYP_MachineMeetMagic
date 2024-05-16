@@ -16,15 +16,6 @@ scale = Vector2(2, 2)
 texture_filter = 1
 texture = SubResource("AtlasTexture_865ne")
 
-[node name="TextureRect" type="TextureRect" parent="."]
-visible = false
-texture_filter = 1
-offset_right = 6.0
-offset_bottom = 6.0
-size_flags_horizontal = 0
-texture = SubResource("AtlasTexture_865ne")
-expand_mode = 1
-
 [node name="Area2D" type="Area2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
