@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="Magic" load_steps=3 format=3 uid="uid://35rh1uae3k62"]
+
+[ext_resource type="Script" path="res://Magic/Data/magicData.gd" id="1_1gl0f"]
+[ext_resource type="PackedScene" uid="uid://cl8x5v0c3h1cq" path="res://Magic/IgnisNormalAttack.tscn" id="1_4llb0"]
+
+[resource]
+script = ExtResource("1_1gl0f")
+name = "Ignis Normal Attack"
+scene = ExtResource("1_4llb0")
+manaRequirement = 20.0

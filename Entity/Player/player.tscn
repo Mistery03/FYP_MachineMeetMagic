@@ -1,9 +1,10 @@
-[gd_scene load_steps=42 format=3 uid="uid://c1vsfoc55pk0w"]
+[gd_scene load_steps=43 format=3 uid="uid://c1vsfoc55pk0w"]
 
 [ext_resource type="Texture2D" uid="uid://bd32dcnew3uvf" path="res://Asset/L.png" id="1_ksidj"]
 [ext_resource type="Script" path="res://Entity/Player/player.gd" id="1_xfdxb"]
 [ext_resource type="Resource" uid="uid://c6joqno41m2ls" path="res://Entity/Player/playerData.tres" id="2_g17go"]
 [ext_resource type="Resource" uid="uid://doo0oqvv31wtn" path="res://Potion/Buff/Defence Potion/DefencePotion.tres" id="3_41una"]
+[ext_resource type="PackedScene" uid="uid://cl8x5v0c3h1cq" path="res://Magic/IgnisNormalAttack.tscn" id="4_f5joi"]
 [ext_resource type="Script" path="res://Potion/PotionManager.gd" id="5_5bgkf"]
 [ext_resource type="Script" path="res://Entity/State/StateMachine.gd" id="7_0owwg"]
 [ext_resource type="Resource" uid="uid://b0rx68wwi0q20" path="res://Potion/Heal/Healing Potion/HealingPotion.tres" id="7_asdtf"]
@@ -240,6 +241,7 @@ scale = Vector2(0.1, 0.1)
 script = ExtResource("1_xfdxb")
 playerData = ExtResource("2_g17go")
 potionObject = ExtResource("3_41una")
+IgnisNormalAttack = ExtResource("4_f5joi")
 
 [node name="Camera" type="Camera2D" parent="."]
 zoom = Vector2(7, 7)

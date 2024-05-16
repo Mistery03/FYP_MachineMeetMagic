@@ -1,0 +1,7 @@
+[gd_resource type="Resource" script_class="Materials" load_steps=2 format=3 uid="uid://b1hhe8ton06ay"]
+
+[ext_resource type="Script" path="res://Materials/Data/materialData.gd" id="1_vmvy4"]
+
+[resource]
+script = ExtResource("1_vmvy4")
+name = ""

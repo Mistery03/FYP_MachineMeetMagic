@@ -6,6 +6,7 @@ const JUMP_VELOCITY = 4.5
 
 @export var playerData:EntityData
 @export var potionObject:PotionData
+@export var IgnisNormalAttack:PackedScene #change
 
 @onready var potion_manager = $PotionManager
 @onready var state_manager = $StateManager
@@ -37,5 +38,15 @@ func _process(delta) -> void:
 	state_manager.process_frame(delta)
 	
 func on_item_picked_up(material:Materials):
-	print("I got a ", material.name)			
+	print("I got a ", material.name)
+	
+func _input(event):
+	if event is InputEventMouseButton and event.pressed:
+		if event.button_index == MOUSE_BUTTON_LEFT:
+			var IgnisAttack = IgnisNormalAttack.instance()
+			add_child(IgnisAttack)
+				
+			IgnisAttack.position = position
+			IgnisAttack.set("target_position", get_global_mouse_position())
+	
 
