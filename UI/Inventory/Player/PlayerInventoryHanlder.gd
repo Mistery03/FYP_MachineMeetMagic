@@ -41,7 +41,7 @@ func _ready():
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	##@NOTE The function below is for debug purposes only
-	#_showDebugList()
+	_showDebugList()
 	if !parentControl.isDragging:
 		gridMousePos = Vector2i(get_global_mouse_position()/slotSize)
 		if gridMousePos in getSlotPositions():
@@ -80,3 +80,12 @@ func getSlotPositions()->Array[Vector2i]:
 		gridSlotPos = Vector2i(slot.position/slotSize)
 		gridSlotPosList.append(gridSlotPos)
 	return gridSlotPosList
+	
+func removeItem(item:MaterialData,currAmount) -> bool:
+	for slot in slotList:
+		var GridSlotPos = Vector2i(slot.position/slotSize)
+		if slot.item == item:
+			slot.item = null
+			itemList.erase(item)
+			return true
+	return false
