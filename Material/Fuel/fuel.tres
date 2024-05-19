@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="Materials" load_steps=5 format=3 uid="uid://bdk3htb64qaf7"]
+[gd_resource type="Resource" script_class="MaterialData" load_steps=5 format=3 uid="uid://bdk3htb64qaf7"]
 
 [ext_resource type="PackedScene" uid="uid://c7kvuyk6bbmvv" path="res://Material/Fuel/fuel.tscn" id="1_6uymy"]
 [ext_resource type="Script" path="res://Material/Data/materialData.gd" id="2_midm7"]

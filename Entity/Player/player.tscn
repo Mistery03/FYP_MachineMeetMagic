@@ -680,15 +680,14 @@ _data = {
 "idleFront": SubResource("Animation_76tdj")
 }
 
-[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("staff", "playerInventory", "itemHUDPlaceholder") groups=["invalidPosition"]]
+[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("staff", "playerInventoryController", "itemHUDPlaceholder") groups=["invalidPosition"]]
 scale = Vector2(0.1, 0.1)
 script = ExtResource("1_xfdxb")
 playerData = ExtResource("2_g17go")
 potionObject = ExtResource("3_41una")
 staff = NodePath("Staff")
-playerInventory = NodePath("ROOT_UI/Inventory")
+playerInventoryController = NodePath("ROOT_UI/Inventory")
 itemHUDPlaceholder = NodePath("ROOT_UI/ItemHUDPlaceholder")
-playerMaxInventorySize = 20
 
 [node name="Camera" type="Camera2D" parent="."]
 zoom = Vector2(7, 7)

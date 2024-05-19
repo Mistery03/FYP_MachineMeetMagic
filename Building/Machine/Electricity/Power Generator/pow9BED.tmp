@@ -1,11 +1,10 @@
-[gd_scene load_steps=19 format=3 uid="uid://pbbfmyagu1u7"]
+[gd_scene load_steps=18 format=3 uid="uid://pbbfmyagu1u7"]
 
 [ext_resource type="Script" path="res://Building/Machine/Electricity/Power Generator/powerGeneratorUI.gd" id="1_vq0e8"]
-[ext_resource type="Resource" uid="uid://bdk3htb64qaf7" path="res://Material/Fuel/fuel.tres" id="2_bsoy7"]
 [ext_resource type="Texture2D" uid="uid://daap0c1p135gi" path="res://Asset/UIUX/machineContainer.png" id="2_j57ox"]
-[ext_resource type="Resource" uid="uid://o5mvep14jmlk" path="res://Material/Construction/wood.tres" id="3_lfwvn"]
 [ext_resource type="PackedScene" uid="uid://ciyq3cn8pdvwd" path="res://UI/MachineSlot/fuel_slot.tscn" id="3_m6gjl"]
 [ext_resource type="PackedScene" uid="uid://ckanenxxawbfv" path="res://UI/PowerSwitch/power_switch.tscn" id="4_c2tfc"]
+[ext_resource type="PackedScene" uid="uid://df8xuu04yb0eh" path="res://UI/Inventory/Player/playerinventory_slot.tscn" id="4_hxm2s"]
 [ext_resource type="Texture2D" uid="uid://d3gb5b0josq6g" path="res://Asset/UIUX/powerSwitch.png" id="5_wkhqa"]
 [ext_resource type="Texture2D" uid="uid://dc5gs43kepf3r" path="res://Asset/UIUX/loadingBorderBar.png" id="6_dud0o"]
 [ext_resource type="Texture2D" uid="uid://cflagpst0f4c5" path="res://Asset/UIUX/loadingBarWhite.png" id="7_brem5"]
@@ -26,13 +25,10 @@ region = Rect2(0, 0, 64, 64)
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_5b7l7"]
 
-[node name="PowerGeneratorUI" type="Control" node_paths=PackedStringArray("inventoryHandler")]
+[node name="PowerGeneratorUI" type="Control"]
 layout_mode = 3
 anchors_preset = 0
 script = ExtResource("1_vq0e8")
-inventoryHandler = NodePath("PlayerInventoryHanlder")
-debugInventory = Array[Resource("res://Material/Data/materialData.gd")]([ExtResource("2_bsoy7"), ExtResource("3_lfwvn")])
-debugMaxSlot = 20
 
 [node name="Background" type="TextureRect" parent="."]
 texture_filter = 1
@@ -72,7 +68,7 @@ offset_right = 40.0
 offset_bottom = 40.0
 script = ExtResource("11_i0iq0")
 parentControl = NodePath("..")
-inventorySlot = ExtResource("12_vksxu")
+inventorySlot = ExtResource("4_hxm2s")
 
 [node name="PlayerGridInventory" parent="PlayerInventoryHanlder" instance=ExtResource("11_8ysx8")]
 layout_mode = 1
@@ -81,16 +77,15 @@ offset_top = 200.0
 offset_right = 1949.0
 offset_bottom = 1216.0
 scale = Vector2(0.5, 0.5)
-script = null
+inventorySlot = ExtResource("12_vksxu")
+maxInventorySlot = 20
 
-[node name="FuelSlot" parent="." node_paths=PackedStringArray("parentControl") instance=ExtResource("3_m6gjl")]
+[node name="FuelSlot" parent="." instance=ExtResource("3_m6gjl")]
 layout_mode = 0
 offset_left = 256.0
 offset_top = 566.0
 offset_right = 296.0
 offset_bottom = 606.0
-scale = Vector2(0.6, 0.6)
-parentControl = NodePath("..")
 
 [node name="PowerSwitch" parent="." instance=ExtResource("4_c2tfc")]
 texture_filter = 1

@@ -8,9 +8,10 @@ const JUMP_VELOCITY = 4.5
 @export var potionObject:PotionData
 @export var staff:Staff = null
 @export var isStaffEquipped:bool
-@export var playerInventory:Control
+@export var playerInventoryController:Control
 @export var itemHUDPlaceholder:Control
-@export var playerMaxInventorySize:int
+@export var maxInventorySize:int
+@export var inventory:Array[MaterialData]
 
 @onready var potion_manager = $PotionManager
 @onready var state_manager = $StateManager
@@ -49,6 +50,6 @@ func _process(delta) -> void:
 	state_manager.process_frame(delta)
 
 	
-func on_item_picked_up(material:Materials):
+func on_item_picked_up(material:MaterialData):
 	print("I got a ", material.name)			
 

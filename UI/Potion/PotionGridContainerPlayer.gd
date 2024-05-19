@@ -17,7 +17,7 @@ func _process(delta):
 			potionSlot.potionInventory = potion_inventory
 			potionList.append(potionSlot.potionData)
 	
-	#print(potionList)
+	print(potionList)
 
 func decreasePotionAmount(potionData:PotionData):
 	for potion in grid_container.get_children():
