@@ -10,14 +10,14 @@ atlas = ExtResource("3_yanya")
 region = Rect2(448, 480, 32, 32)
 
 [node name="FuelSlot" type="Panel"]
-custom_minimum_size = Vector2(200, 200)
+custom_minimum_size = Vector2(180, 180)
 offset_right = 40.0
 offset_bottom = 40.0
-scale = Vector2(3, 3)
 script = ExtResource("1_0ckax")
 
 [node name="Border" type="TextureRect" parent="."]
 texture_filter = 1
+layout_mode = 0
 offset_right = 40.0
 offset_bottom = 40.0
 scale = Vector2(5, 5)
@@ -31,6 +31,7 @@ offset_bottom = 40.0
 texture = SubResource("AtlasTexture_go8od")
 
 [node name="Label" type="Label" parent="."]
+layout_mode = 0
 offset_left = 103.0
 offset_top = 103.0
 offset_right = 179.0

@@ -11,6 +11,7 @@ extends Panel
 
 var dragOffset: Vector2
 var isMousePressed:bool = false
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	pass
@@ -40,10 +41,12 @@ func _on_item_texture_gui_input(event):
 				item_texture.set_z_index(100)
 				label.set_z_index(100)
 				parentControl.currItem = self
+				isMousePressed = true
 			else:
 				parentControl.isDragging = false
 				item_texture.set_z_index(1)
 				label.set_z_index(1)
+				isMousePressed = false
 				#parentControl.currItemFromparentControl = null
 
 					

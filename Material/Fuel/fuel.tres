@@ -13,3 +13,4 @@ script = ExtResource("2_midm7")
 name = "Fuel"
 scene = ExtResource("1_6uymy")
 texture = SubResource("AtlasTexture_865ne")
+amount = 0

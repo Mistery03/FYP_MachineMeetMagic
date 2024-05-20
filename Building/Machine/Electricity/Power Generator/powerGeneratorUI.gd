@@ -12,7 +12,9 @@ extends Control
 @onready var fuel_burning = $FuelBurning
 
 @export var debugInventory:Array[MaterialData]
+@export var debugItem:MaterialData
 @export var debugMaxSlot:int
+@export var debugMode:bool = false
 
 
 var currValue:float = 100
@@ -20,8 +22,12 @@ var player:Player
 
 var isDragging:bool = false
 var gridMousePos:Vector2i
+var slotMousPos:Vector2i
 
 var currItem:Panel
+var prevSlot:Panel
+
+var isMousePressed:bool
 
 func _ready():
 	fuel_burning.value = currValue
@@ -30,9 +36,13 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	print(isDragging)
+	#print(isDragging)
 	fuel_burning.value = currValue
 	
+	##@WARNING Does not take account if the inventory slots are different size to the machine slot (in this file fuel_slot)
+	gridMousePos = Vector2i(get_global_mouse_position()/fuel_slot.custom_minimum_size)
+
+
 	if inventoryHandler:
 		if player:
 			inventoryHandler.playerInventory = player.inventory
@@ -40,19 +50,45 @@ func _process(delta):
 		else:
 			inventoryHandler.playerInventory = debugInventory
 			inventoryHandler.maxInventorySlot = debugMaxSlot
-	
+	#print(gridMousePos)
+	#print(fuel_slot.getSlotPosition())
+	#print(inventoryHandler.getSlotBasedOnPosition(get_global_mouse_position()))
 	if !isDragging:
-		##@WARNING Does not take account if the inventory slots are different size to the machine slot (in this file fuel_slot)
-		gridMousePos = Vector2i(get_global_mouse_position()/fuel_slot.custom_minimum_size)
 		if gridMousePos == fuel_slot.getSlotPosition():
-				if fuel_slot.item ==  null:
-					isDragging = false
+			if fuel_slot.item ==  null:
+				isDragging = false
+				if inventoryHandler.currSlot:
 					fuel_slot.item = inventoryHandler.currSlot.item
 					fuel_slot.amount = inventoryHandler.currSlot.amount
 					fuel_slot.item_texture.global_position = fuel_slot.border.global_position 
 					fuel_slot.label.global_position =fuel_slot.border.global_position + Vector2(80,60)
 					inventoryHandler.currSlot = null
 					inventoryHandler.removeItem(fuel_slot.item,fuel_slot.amount)
+	
+		if inventoryHandler.globalMousePosToLocalGrid(get_global_mouse_position()) in inventoryHandler.getSlotPositions():
+			if inventoryHandler.currSlot:
+				inventoryHandler.swap(inventoryHandler.currSlot.item,inventoryHandler.currSlot.amount,get_global_mouse_position())
+			if fuel_slot.item:
+				isDragging = false
+				var currSlot = inventoryHandler.getSlotBasedOnPosition(get_global_mouse_position())
+				currSlot.item = fuel_slot.item
+				currSlot.amount = fuel_slot.amount
+				currSlot.item_texture.global_position = currSlot.border.global_position
+				currSlot.label.global_position = currSlot.border.global_position + Vector2(80,60)
+				fuel_slot.item = null
+			
+			
+
+func _input(event):
+	if event is InputEventMouseButton:
+		if event.is_pressed():
+			isMousePressed = true
+		else:
+			isMousePressed = false
+	if debugMode:
+		if event is InputEventKey:
+			if event.is_action_pressed("MOVERIGHT"):
+				inventoryHandler.insertItem(debugItem,10)	
 
 
 func changeAnimation(animationName:String):

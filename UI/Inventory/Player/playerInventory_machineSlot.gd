@@ -45,6 +45,7 @@ func _on_item_texture_gui_input(event):
 
 			else:
 				if inventoryHandler.currSlot:	
+					inventoryHandler.parentControl.prevSlot = self
 					inventoryHandler.parentControl.isDragging= false
 					item_texture.set_z_index(1)
 					var gridPos = Vector2i(get_global_mouse_position()/custom_minimum_size)

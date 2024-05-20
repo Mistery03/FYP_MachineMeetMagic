@@ -30,12 +30,9 @@ region = Rect2(0, 0, 64, 64)
 layout_mode = 3
 anchors_preset = 0
 script = ExtResource("1_vq0e8")
-maxValue = null
 inventoryHandler = NodePath("PlayerInventoryHanlder")
 debugInventory = Array[Resource("res://Material/Data/materialData.gd")]([ExtResource("2_bsoy7"), ExtResource("3_lfwvn")])
-debugItem = ExtResource("2_bsoy7")
 debugMaxSlot = 20
-debugMode = true
 
 [node name="Background" type="TextureRect" parent="."]
 texture_filter = 1
@@ -75,14 +72,16 @@ offset_right = 40.0
 offset_bottom = 40.0
 script = ExtResource("11_i0iq0")
 parentControl = NodePath("..")
+playerInventory = null
 inventorySlot = ExtResource("12_vksxu")
+maxInventorySlot = null
 
 [node name="PlayerGridInventory" parent="PlayerInventoryHanlder" instance=ExtResource("11_8ysx8")]
 layout_mode = 1
 offset_left = 1137.0
 offset_top = 200.0
-offset_right = 1903.0
-offset_bottom = 1214.0
+offset_right = 1949.0
+offset_bottom = 1216.0
 scale = Vector2(0.5, 0.5)
 script = null
 
