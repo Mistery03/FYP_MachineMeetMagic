@@ -8,8 +8,9 @@ extends Control
 var isPressing:bool = false
 func _ready():
 	await get_tree().create_timer(0.5).timeout
-	if player.localLevel.levelName == "Home":
-		animation.play("fadeOut")
+	if player.localLevel:
+		if player.localLevel.levelName == "Home":
+			animation.play("fadeOut")
 		
 
 

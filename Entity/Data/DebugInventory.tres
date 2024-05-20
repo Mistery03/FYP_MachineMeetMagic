@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="InventoryData" load_steps=5 format=3 uid="uid://3i6e8fn76hs"]
+
+[ext_resource type="Script" path="res://Entity/Data/inventoryData.gd" id="1_ogd84"]
+[ext_resource type="Resource" uid="uid://bdk3htb64qaf7" path="res://Material/Fuel/fuel.tres" id="2_r5h4c"]
+[ext_resource type="Script" path="res://Entity/Data/slotData.gd" id="3_8l2xx"]
+
+[sub_resource type="Resource" id="Resource_eg602"]
+script = ExtResource("3_8l2xx")
+item = ExtResource("2_r5h4c")
+amount = 20
+
+[resource]
+script = ExtResource("1_ogd84")
+slotDataList = Array[ExtResource("3_8l2xx")]([SubResource("Resource_eg602")])

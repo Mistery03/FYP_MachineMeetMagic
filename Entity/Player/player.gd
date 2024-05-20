@@ -11,7 +11,8 @@ const JUMP_VELOCITY = 4.5
 @export var playerInventoryController:Control
 @export var itemHUDPlaceholder:Control
 @export var maxInventorySize:int
-@export var inventory:Array[MaterialData]
+
+@export var inventory:Array[SlotData]
 
 @onready var potion_manager = $PotionManager
 @onready var state_manager = $StateManager
@@ -36,6 +37,7 @@ func _ready() -> void:
 	currMana = playerData.MaxMana
 	currStamina = playerData.MaxStamina
 	state_manager.init(self,animation,move_component,camera)
+
 	
 
 func _unhandled_input(event: InputEvent) -> void:

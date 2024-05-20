@@ -2,7 +2,7 @@ class_name InventoryHanlder
 extends Control
 
 @export var parentControl:Control
-@export var playerInventory:Array[MaterialData]
+@export var playerInventory:Array[SlotData]
 @export var inventorySlot:PackedScene
 @export var maxInventorySlot:int
 
@@ -25,7 +25,7 @@ var gridMousePos:Vector2i
 
 
 func _ready():
-	await get_tree().create_timer(0.5).timeout
+	await get_tree().create_timer(0.3).timeout
 	for child in player_grid_inventory.get_children():
 		child.queue_free()
 	
@@ -34,15 +34,14 @@ func _ready():
 		player_grid_inventory.add_child(slot)
 		slot.item = null
 		slot.inventoryHandler = self
-		#slot.connect("dropped",on_item_dropped)
+		
 		slotList.append(slot)
 		slotSize = slot.custom_minimum_size	
 
-	for item in playerInventory:
-		if itemList.size() < maxInventorySlot:
-			item.amount = 1
-			itemList.push_back(item)
-			update_slots()
+	if playerInventory.size() > 0:
+		update_slots()
+
+		
 			
 	
 
@@ -73,9 +72,10 @@ func _showDebugList():
 
 func update_slots():
 	for i in range(maxInventorySlot):
-		if i < len(itemList):
+		if i < len(playerInventory):
 			var GridSlotPos = Vector2i(slotList[i].position/slotSize)
-			slotList[i].item = itemList[i]
+			slotList[i].item = playerInventory[i].item
+			slotList[i].amount =playerInventory[i].amount
 			slotList[i].item_texture.position = GridSlotPos 
 			slotList[i].label.position = GridSlotPos + Vector2i(120,100)
 		else:
@@ -136,34 +136,43 @@ func insertItem(item:MaterialData,currAmount:int)->int:
 					slotList[index].amount += availableSpace
 					overflow -= availableSpace
 	return overflow
-
-"""func remove_item(item_amount: int) -> int:
+func removeItem(item_amount: int,globalMousePos:Vector2) -> int:
+	randomize()
 	var to_remove = item_amount
 	var removed = 0
-
-	for index in range(maxInventorySlot):
-		if slotList[index].amount > 0:
-			if to_remove <= slotList[index].amount:
-				slotList[index].amount -= to_remove
+	if globalMousePosToLocalGrid(globalMousePos) in getSlotPositions():
+		var currGotSlot = getSlotBasedOnPosition(globalMousePos)
+		
+		if currGotSlot.amount > 0:
+			if to_remove <= currGotSlot.amount:
+				currGotSlot.amount -= to_remove
+				if currGotSlot.amount == 0:
+					if parentControl.player:
+						print("test")
+						var itemDropped = currGotSlot.item.scene.instantiate()
+						itemDropped.global_position = parentControl.player.global_position + Vector2(randi_range(-5,5),randi_range(5,20))
+						parentControl.player.localLevel.add_child(itemDropped)
+					
+					currGotSlot.item = null
+				else:
+					if parentControl.player:
+						print("test")
+						var itemDropped = currGotSlot.item.scene.instantiate()
+						itemDropped.global_position = parentControl.player.global_position + Vector2(randi_range(-5,5),randi_range(5,20))
+						parentControl.player.localLevel.add_child(itemDropped)
+					
 				removed += to_remove
 				to_remove = 0
-				break
-			else:
-				removed += slotList[index].amount
-				to_remove -= slotList[index].amount
-				slotList[index].amount = 0
+		
+				
+			
+				
+				
 
-	return removed"""
+
+	return removed
 	
-func removeItem(item:MaterialData,currAmount:int) -> bool:
-	scaledSlotSize = slotSize * player_grid_inventory.scale
-	for slot in slotList:
-		var GridSlotPos = Vector2i(slot.global_position/scaledSlotSize)
-		if slot.item == item:
-			slot.item = null
-			itemList.erase(item)
-			return true
-	return false
+
 
 ##@NOTE Name purposely vague to fit cases for item and no item
 func swap(item:MaterialData,currAmount:int, globalMousePos:Vector2):
@@ -185,17 +194,17 @@ func swap(item:MaterialData,currAmount:int, globalMousePos:Vector2):
 				if currGotSlot .item != item:
 					_swapSlotsWithinInventory(currGotSlot,prevSlot)
 		else:
-			if currSlot.item and currSlot.amount >= 99:
-				_swapSlotsWithinInventory(currSlot,prevSlot)
+			if currSlot.item:
+				if currSlot.item != prevSlot.item:
+					_swapSlotsWithinInventory(currSlot,prevSlot)
+				elif currSlot.item == item and currSlot.amount <= 99:
+					if currSlot != prevSlot:
+						_addStack(currSlot,prevSlot,prevSlot.amount)
+						prevSlot = null
 			else:
-				_addStack(currSlot,prevSlot,prevSlot.amount)
-				prevSlot = null
+				_swapSlotsWithinInventory(currSlot,prevSlot)
 				
-			
-			prevSlot = null
-			currSlot = null
-			
-				
+
 			#if currSlot.item == prevSlot.item:
 				#if currSlot.amount >= 99:
 					
@@ -213,16 +222,17 @@ func _swapSlotsWithinInventory(oldPanel:Panel =null,newPanel:Panel=null) ->bool:
 	newPanel.item = temp_item
 	newPanel.amount = temp_amount
 		
-	print(index1)
-	print(index2)
 	
 	
 	
 	return true	
 
-func _addStack(currSlot:Panel=null,prevSlot:Panel=null,currAmount:int = 0):
+func _addStack(currSlot:Panel=null,prevSlot:Panel=null,currAmount:int = 0)->bool:
 	if currSlot.amount < MAXSTACKSIZE:
 		currSlot.amount += currAmount
+		prevSlot.item = null
+		return true
+	return false
 	
 
 

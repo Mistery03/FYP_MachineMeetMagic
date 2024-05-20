@@ -1,10 +1,10 @@
-[gd_scene load_steps=19 format=3 uid="uid://pbbfmyagu1u7"]
+[gd_scene load_steps=20 format=3 uid="uid://pbbfmyagu1u7"]
 
 [ext_resource type="Script" path="res://Building/Machine/Electricity/Power Generator/powerGeneratorUI.gd" id="1_vq0e8"]
 [ext_resource type="Resource" uid="uid://bdk3htb64qaf7" path="res://Material/Fuel/fuel.tres" id="2_bsoy7"]
 [ext_resource type="Texture2D" uid="uid://daap0c1p135gi" path="res://Asset/UIUX/machineContainer.png" id="2_j57ox"]
-[ext_resource type="Resource" uid="uid://o5mvep14jmlk" path="res://Material/Construction/wood.tres" id="3_lfwvn"]
 [ext_resource type="PackedScene" uid="uid://ciyq3cn8pdvwd" path="res://UI/MachineSlot/fuel_slot.tscn" id="3_m6gjl"]
+[ext_resource type="Script" path="res://Entity/Data/slotData.gd" id="3_nrage"]
 [ext_resource type="PackedScene" uid="uid://ckanenxxawbfv" path="res://UI/PowerSwitch/power_switch.tscn" id="4_c2tfc"]
 [ext_resource type="Texture2D" uid="uid://d3gb5b0josq6g" path="res://Asset/UIUX/powerSwitch.png" id="5_wkhqa"]
 [ext_resource type="Texture2D" uid="uid://dc5gs43kepf3r" path="res://Asset/UIUX/loadingBorderBar.png" id="6_dud0o"]
@@ -15,6 +15,11 @@
 [ext_resource type="PackedScene" uid="uid://cawvmrg7mckvi" path="res://UI/Inventory/Player/player_grid_inventory.tscn" id="11_8ysx8"]
 [ext_resource type="Script" path="res://UI/Inventory/Player/PlayerInventoryHanlder.gd" id="11_i0iq0"]
 [ext_resource type="PackedScene" uid="uid://d3a8b5m3ju4nv" path="res://UI/Inventory/Player/playerInventory_machineSlot.tscn" id="12_vksxu"]
+
+[sub_resource type="Resource" id="Resource_kdv0v"]
+script = ExtResource("3_nrage")
+item = ExtResource("2_bsoy7")
+amount = 20
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_5ottv"]
 atlas = ExtResource("5_wkhqa")
@@ -30,12 +35,10 @@ region = Rect2(0, 0, 64, 64)
 layout_mode = 3
 anchors_preset = 0
 script = ExtResource("1_vq0e8")
-maxValue = null
 inventoryHandler = NodePath("PlayerInventoryHanlder")
-debugInventory = Array[Resource("res://Material/Data/materialData.gd")]([ExtResource("2_bsoy7"), ExtResource("3_lfwvn")])
+debugInventory = Array[ExtResource("3_nrage")]([SubResource("Resource_kdv0v")])
 debugItem = ExtResource("2_bsoy7")
 debugMaxSlot = 20
-debugMode = true
 
 [node name="Background" type="TextureRect" parent="."]
 texture_filter = 1
