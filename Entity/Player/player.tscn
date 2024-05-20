@@ -1,12 +1,13 @@
-[gd_scene load_steps=74 format=3 uid="uid://c1vsfoc55pk0w"]
+[gd_scene load_steps=75 format=3 uid="uid://c1vsfoc55pk0w"]
 
 [ext_resource type="Texture2D" uid="uid://bd32dcnew3uvf" path="res://Asset/L.png" id="1_ksidj"]
 [ext_resource type="Script" path="res://Entity/Player/player.gd" id="1_xfdxb"]
 [ext_resource type="Resource" uid="uid://c6joqno41m2ls" path="res://Entity/Player/playerData.tres" id="2_g17go"]
 [ext_resource type="Resource" uid="uid://doo0oqvv31wtn" path="res://Potion/Buff/Defence Potion/DefencePotion.tres" id="3_41una"]
-[ext_resource type="Resource" uid="uid://bdk3htb64qaf7" path="res://Material/Fuel/fuel.tres" id="4_ee3yi"]
+[ext_resource type="Resource" uid="uid://bf2wpudjl6wu5" path="res://Entity/Data/testSlot1.tres" id="4_e4jpf"]
 [ext_resource type="Script" path="res://Potion/PotionManager.gd" id="5_5bgkf"]
 [ext_resource type="Script" path="res://Entity/Data/slotData.gd" id="5_bpvti"]
+[ext_resource type="Resource" uid="uid://o5mvep14jmlk" path="res://Material/Construction/wood.tres" id="6_bqc6p"]
 [ext_resource type="Script" path="res://Entity/State/StateMachine.gd" id="7_0owwg"]
 [ext_resource type="Script" path="res://Entity/State/Idle.gd" id="8_5d7eh"]
 [ext_resource type="Script" path="res://Entity/State/Move.gd" id="9_5ji7g"]
@@ -33,10 +34,10 @@
 [ext_resource type="PackedScene" uid="uid://bm2u5jp0exc2h" path="res://UI/Potion/PotionGridContainerPlayer.tscn" id="25_km84l"]
 [ext_resource type="PackedScene" uid="uid://dpthqxsb7e3fk" path="res://UI/Potion/potionInventory.tscn" id="26_eb02i"]
 
-[sub_resource type="Resource" id="Resource_pkamb"]
+[sub_resource type="Resource" id="Resource_a3h7a"]
 script = ExtResource("5_bpvti")
-item = ExtResource("4_ee3yi")
-amount = 20
+item = ExtResource("6_bqc6p")
+amount = 5
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_o46v5"]
 atlas = ExtResource("1_ksidj")
@@ -696,7 +697,8 @@ staff = NodePath("Staff")
 playerInventoryController = NodePath("ROOT_UI/Inventory")
 itemHUDPlaceholder = NodePath("ROOT_UI/ItemHUDPlaceholder")
 maxInventorySize = 20
-inventory = Array[ExtResource("5_bpvti")]([SubResource("Resource_pkamb")])
+initSlot = ExtResource("4_e4jpf")
+inventory = Array[ExtResource("5_bpvti")]([SubResource("Resource_a3h7a"), ExtResource("4_e4jpf")])
 
 [node name="Camera" type="Camera2D" parent="."]
 zoom = Vector2(7, 7)

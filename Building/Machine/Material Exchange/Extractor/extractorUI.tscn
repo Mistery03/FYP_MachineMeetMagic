@@ -76,12 +76,14 @@ offset_top = 412.0
 offset_right = 941.0
 offset_bottom = 452.0
 
-[node name="FuelSlot" parent="." instance=ExtResource("7_ndds1")]
+[node name="FuelSlot" parent="." node_paths=PackedStringArray("parentControl") instance=ExtResource("7_ndds1")]
 layout_mode = 0
-offset_left = 68.0
-offset_top = 576.0
-offset_right = 108.0
-offset_bottom = 616.0
+offset_left = 67.0
+offset_top = 584.0
+offset_right = 247.0
+offset_bottom = 764.0
+scale = Vector2(0.6, 0.6)
+parentControl = NodePath("..")
 
 [node name="MagicSlot" type="Panel" parent="."]
 layout_mode = 0

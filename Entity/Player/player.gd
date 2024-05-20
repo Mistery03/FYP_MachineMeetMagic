@@ -6,13 +6,18 @@ const JUMP_VELOCITY = 4.5
 
 @export var playerData:EntityData
 @export var potionObject:PotionData
+
 @export var staff:Staff = null
 @export var isStaffEquipped:bool
+
 @export var playerInventoryController:Control
 @export var itemHUDPlaceholder:Control
 @export var maxInventorySize:int
 
-@export var inventory:Array[SlotData]
+##InitSlot is just to ensure the inventory will return data, do not remove
+@export var initSlot:SlotData
+##Takes in Slot Data so we have a "dictionary"
+@export var inventory:Array[SlotData] = [initSlot]
 
 @onready var potion_manager = $PotionManager
 @onready var state_manager = $StateManager

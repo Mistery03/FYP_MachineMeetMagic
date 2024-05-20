@@ -14,7 +14,6 @@ script = ExtResource("1_sb6xt")
 machineUI = NodePath("Root/PowerGeneratorUI")
 manaPerSecond = 1000.0
 burnPerSecond = 1.0
-isThereFuel = true
 
 [node name="Animation" type="AnimatedSprite2D" parent="."]
 sprite_frames = ExtResource("2_tmhor")
@@ -22,8 +21,9 @@ animation = &"Delete"
 
 [node name="Root" type="CanvasLayer" parent="."]
 
-[node name="PowerGeneratorUI" parent="Root" instance=ExtResource("3_fit56")]
+[node name="PowerGeneratorUI" parent="Root" node_paths=PackedStringArray("parentMachine") instance=ExtResource("3_fit56")]
 visible = false
+parentMachine = NodePath("../..")
 
 [node name="Interectable" type="Area2D" parent="."]
 

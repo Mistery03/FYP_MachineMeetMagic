@@ -11,6 +11,8 @@ region = Rect2(64, 128, 32, 32)
 [resource]
 script = ExtResource("2_midm7")
 name = "Fuel"
+type = "Fuel"
 scene = ExtResource("1_6uymy")
 texture = SubResource("AtlasTexture_865ne")
 amount = 0
+burnPerSecond = 50

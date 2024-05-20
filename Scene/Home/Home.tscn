@@ -981,7 +981,7 @@ layer_8/tile_data = PackedInt32Array()
 z_index = 5
 position = Vector2(-16, 9)
 collision_mask = 18
-inventory = Array[Resource("res://Entity/Data/slotData.gd")]([])
+inventory = null
 
 [node name="MachineList" type="Node" parent="."]
 script = ExtResource("8_g4svt")

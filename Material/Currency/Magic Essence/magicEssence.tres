@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="Materials" load_steps=6 format=3 uid="uid://cchhf0shqvfkr"]
+[gd_resource type="Resource" script_class="MaterialData" load_steps=6 format=3 uid="uid://cchhf0shqvfkr"]
 
 [ext_resource type="Script" path="res://Material/Data/materialData.gd" id="1_cc426"]
 [ext_resource type="PackedScene" uid="uid://dx07atspskdy5" path="res://Material/Currency/Magic Essence/magicEssence.tscn" id="1_v5432"]
@@ -14,5 +14,7 @@ atlas = SubResource("AtlasTexture_865ne")
 [resource]
 script = ExtResource("1_cc426")
 name = "Magic Essence"
+type = "Currency"
 scene = ExtResource("1_v5432")
 texture = SubResource("AtlasTexture_2gnla")
+amount = 0

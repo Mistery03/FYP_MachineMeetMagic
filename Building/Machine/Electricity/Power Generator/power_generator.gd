@@ -76,7 +76,8 @@ func changeAnimation(animationName:String):
 	machineUI.machine_animation.play(animationName.to_pascal_case())
 	
 func burnDisplay(delta):
-	machineUI.currValue -= burnPerSecond * delta
+	if machineUI.fuel_slot.item:
+		machineUI.currValue -= machineUI.fuel_slot.item.burnPerSecond * delta
 	machineUI.currValue = clamp(machineUI.currValue, 0, machineUI.maxValue)
 	
 

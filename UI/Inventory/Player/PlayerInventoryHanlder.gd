@@ -142,27 +142,27 @@ func removeItem(item_amount: int,globalMousePos:Vector2) -> int:
 	var removed = 0
 	if globalMousePosToLocalGrid(globalMousePos) in getSlotPositions():
 		var currGotSlot = getSlotBasedOnPosition(globalMousePos)
-		
-		if currGotSlot.amount > 0:
-			if to_remove <= currGotSlot.amount:
-				currGotSlot.amount -= to_remove
-				if currGotSlot.amount == 0:
-					if parentControl.player:
-						print("test")
-						var itemDropped = currGotSlot.item.scene.instantiate()
-						itemDropped.global_position = parentControl.player.global_position + Vector2(randi_range(-5,5),randi_range(5,20))
-						parentControl.player.localLevel.add_child(itemDropped)
-					
-					currGotSlot.item = null
-				else:
-					if parentControl.player:
-						print("test")
-						var itemDropped = currGotSlot.item.scene.instantiate()
-						itemDropped.global_position = parentControl.player.global_position + Vector2(randi_range(-5,5),randi_range(5,20))
-						parentControl.player.localLevel.add_child(itemDropped)
-					
-				removed += to_remove
-				to_remove = 0
+		if currGotSlot.item:
+			if currGotSlot.amount > 0:
+				if to_remove <= currGotSlot.amount:
+					currGotSlot.amount -= to_remove
+					if currGotSlot.amount == 0:
+						if parentControl.player:
+							print("test")
+							var itemDropped = currGotSlot.item.scene.instantiate()
+							itemDropped.global_position = parentControl.player.global_position + Vector2(randi_range(-5,5),randi_range(5,20))
+							parentControl.player.localLevel.add_child(itemDropped)
+						
+						currGotSlot.item = null
+					else:
+						if parentControl.player:
+							print("test")
+							var itemDropped = currGotSlot.item.scene.instantiate()
+							itemDropped.global_position = parentControl.player.global_position + Vector2(randi_range(-5,5),randi_range(5,20))
+							parentControl.player.localLevel.add_child(itemDropped)
+						
+					removed += to_remove
+					to_remove = 0
 		
 				
 			

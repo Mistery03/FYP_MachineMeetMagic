@@ -1,6 +1,8 @@
 class_name PowerGeneratorUI
 extends Control
 
+@export var parentMachine:Machine
+
 @export var maxValue:float = 100
 @export var inventoryHandler:InventoryHanlder
 
@@ -36,7 +38,14 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	#print(isDragging)
+
+	if currValue <= 0:
+		currValue = maxValue
+		if fuel_slot.item and fuel_slot.amount-1 > 0:
+			fuel_slot.amount -= 1
+		else:
+			fuel_slot.item = null
+	
 	fuel_burning.value = currValue
 	
 	##@WARNING Does not take account if the inventory slots are different size to the machine slot (in this file fuel_slot)
@@ -58,7 +67,7 @@ func _process(delta):
 		if gridMousePos == fuel_slot.getSlotPosition():
 			if fuel_slot.item ==  null:
 				isDragging = false
-				if inventoryHandler.currSlot:
+				if inventoryHandler.currSlot and inventoryHandler.currSlot.item.type == "Fuel":
 					fuel_slot.item = inventoryHandler.currSlot.item
 					fuel_slot.amount = inventoryHandler.currSlot.amount
 					fuel_slot.item_texture.global_position = fuel_slot.border.global_position 
@@ -85,7 +94,7 @@ func _process(delta):
 			if inventoryHandler.currSlot:
 				inventoryHandler.swap(inventoryHandler.currSlot.item,inventoryHandler.currSlot.amount,get_global_mouse_position())
 			
-			if currItem:
+			if currItem :
 				isDragging = false
 				var currSlot = inventoryHandler.getSlotBasedOnPosition(get_global_mouse_position())
 				if currSlot.item == null:

@@ -11,6 +11,7 @@ region = Rect2(48, 48, 24, 24)
 [resource]
 script = ExtResource("2_3ongc")
 name = "Wood"
+type = "Construction"
 scene = ExtResource("1_osd6q")
 texture = SubResource("AtlasTexture_dmqar")
 amount = 0

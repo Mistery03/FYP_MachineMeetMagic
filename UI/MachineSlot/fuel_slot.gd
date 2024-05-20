@@ -12,10 +12,12 @@ extends Panel
 var dragOffset: Vector2
 var isMousePressed:bool = false
 
+var scaledSlotSize 
+
 var currSlot:Panel
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	pass
+	scaledSlotSize = custom_minimum_size * scale
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -25,9 +27,14 @@ func _process(delta):
 		item_texture.visible = true
 		label.visible = true
 		label.text = str(amount)
+		if parentControl.parentMachine:
+			parentControl.parentMachine.isThereFuel = true
 	else:
 		item_texture.visible = false
 		label.visible = false
+		if parentControl.parentMachine:
+			parentControl.parentMachine.isThereFuel = false
+		
 	
 	if !parentControl.isDragging:
 		item_texture.global_position =  border.global_position 
@@ -56,6 +63,7 @@ func _on_item_texture_gui_input(event):
 		label.set_global_position(get_global_mouse_position() - dragOffset + Vector2(75,70))
 
 func getSlotPosition()->Vector2i:
+	
 	var gridSlotPos:Vector2i
 	gridSlotPos = Vector2i(position/custom_minimum_size)
 	return gridSlotPos
