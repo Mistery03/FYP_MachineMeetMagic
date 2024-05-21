@@ -10,6 +10,7 @@ atlas = ExtResource("3_aj532")
 region = Rect2(0, 672, 32, 32)
 
 [node name="ResultSlot" type="Panel"]
+custom_minimum_size = Vector2(180, 180)
 offset_right = 40.0
 offset_bottom = 40.0
 script = ExtResource("1_qnqh8")

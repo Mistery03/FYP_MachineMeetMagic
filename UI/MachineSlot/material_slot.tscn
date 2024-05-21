@@ -10,6 +10,7 @@ atlas = ExtResource("2_xrnnx")
 region = Rect2(288, 0, 32, 32)
 
 [node name="MaterialSlot" type="Panel"]
+custom_minimum_size = Vector2(180, 180)
 offset_right = 40.0
 offset_bottom = 40.0
 script = ExtResource("1_1bb8h")
@@ -18,17 +19,18 @@ script = ExtResource("1_1bb8h")
 texture_filter = 1
 offset_right = 40.0
 offset_bottom = 40.0
-scale = Vector2(5, 5)
+scale = Vector2(4.5, 4.5)
 texture = ExtResource("1_b5nys")
 
 [node name="ItemTexture" type="TextureRect" parent="Border"]
-custom_minimum_size = Vector2(32, 32)
+custom_minimum_size = Vector2(40, 40)
 layout_mode = 0
 offset_right = 40.0
 offset_bottom = 40.0
 texture = SubResource("AtlasTexture_skj8k")
 
 [node name="Label" type="Label" parent="."]
+custom_minimum_size = Vector2(180, 180)
 offset_left = 103.0
 offset_top = 103.0
 offset_right = 179.0

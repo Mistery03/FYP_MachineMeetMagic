@@ -29,6 +29,7 @@ var slotMousPos:Vector2i
 var isMousePressed:bool
 
 var currFuelItem:Panel
+var currMaterialSlotItem:Panel
 var prevSlot:Panel
 
 func _ready():
@@ -55,36 +56,16 @@ func _process(delta):
 	if !isDragging:
 		if gridMousePos == fuel_slot.getSlotPosition():
 			fuelSlotLogic()
+		if gridMousePos == material_slot.getSlotPosition():
+			materialSlotLogic()
 					
 	
 		if inventoryHandler.globalMousePosToLocalGrid(get_global_mouse_position()) in inventoryHandler.getSlotPositions():
 			if inventoryHandler.currSlot:
 				inventoryHandler.swap(inventoryHandler.currSlot.item,inventoryHandler.currSlot.amount,get_global_mouse_position())
 			
-			if currFuelItem :
-				isDragging = false
-				var currSlot = inventoryHandler.getSlotBasedOnPosition(get_global_mouse_position())
-				if currSlot.item == null:
-					currSlot.item = fuel_slot.item
-					currSlot.amount = fuel_slot.amount
-					currSlot.item_texture.global_position = currSlot.border.global_position
-					currSlot.label.global_position = currSlot.border.global_position + Vector2(80,60)
-					if player:
-						for index in len(player.inventory):
-							if player.inventory[index] == null:
-								var slotToBeAdded = SlotData.new()
-								slotToBeAdded.item = fuel_slot.item
-								slotToBeAdded.amount = fuel_slot.amount
-								player.inventory[index] = slotToBeAdded
-								break
-					fuel_slot.item = null
-					
-				elif currSlot.item == fuel_slot.item:
-					currSlot.amount += fuel_slot.amount
-					currSlot.item_texture.global_position = currSlot.border.global_position
-					currSlot.label.global_position = currSlot.border.global_position + Vector2(80,60)
-					fuel_slot.item = null
-				currFuelItem = null
+			removeItemFromFuelSlotUI()
+			removeItemFromMaterialSlotUI()
 
 func changeAnimation(animationName:String):
 	machine_animation.play(animationName.to_pascal_case())
@@ -137,14 +118,14 @@ func fuelSlotLogic():
 				inventoryHandler.currSlot = null
 
 func materialSlotLogic():
-	if fuel_slot.item ==  null:
+	if material_slot.item ==  null:
 		isDragging = false
-		if inventoryHandler.currSlot and inventoryHandler.currSlot.item.type == "Fuel":
+		if inventoryHandler.currSlot:
 			inventoryHandler.isForExternalSlot = true
-			fuel_slot.item = inventoryHandler.currSlot.item
-			fuel_slot.amount = inventoryHandler.currSlot.amount
-			fuel_slot.item_texture.global_position = fuel_slot.border.global_position 
-			fuel_slot.label.global_position =fuel_slot.border.global_position + Vector2(80,60)
+			material_slot.item = inventoryHandler.currSlot.item
+			material_slot.amount = inventoryHandler.currSlot.amount
+			material_slot.item_texture.global_position = material_slot.border.global_position 
+			material_slot.label.global_position =material_slot.border.global_position + Vector2(80,60)
 			
 			inventoryHandler.currSlot.item_texture.global_position = inventoryHandler.currSlot.border.global_position
 			inventoryHandler.currSlot.label.global_position = inventoryHandler.currSlot.border.global_position + Vector2(80,60)
@@ -154,14 +135,65 @@ func materialSlotLogic():
 			inventoryHandler.currSlot = null
 					
 					
-	if fuel_slot.item:
+	if material_slot.item:
 		if inventoryHandler.currSlot:
-			if fuel_slot.item == inventoryHandler.currSlot.item:
-				fuel_slot.amount += inventoryHandler.currSlot.amount
-				fuel_slot.item_texture.global_position = fuel_slot.border.global_position 
-				fuel_slot.label.global_position =fuel_slot.border.global_position + Vector2(80,60)
+			if material_slot.item == inventoryHandler.currSlot.item:
+				material_slot.amount += inventoryHandler.currSlot.amount
+				material_slot.item_texture.global_position = material_slot.border.global_position 
+				material_slot.label.global_position =material_slot.border.global_position + Vector2(80,60)
 				inventoryHandler.currSlot.item_texture.global_position = inventoryHandler.currSlot.border.global_position
 				inventoryHandler.currSlot.label.global_position = inventoryHandler.currSlot.border.global_position + Vector2(80,60)
 				inventoryHandler.currSlot.item = null
 				inventoryHandler.currSlot = null
-	
+
+func removeItemFromFuelSlotUI():
+	if currFuelItem :
+		isDragging = false
+		var currSlot = inventoryHandler.getSlotBasedOnPosition(get_global_mouse_position())
+		if currSlot.item == null:
+			currSlot.item = fuel_slot.item
+			currSlot.amount = fuel_slot.amount
+			currSlot.item_texture.global_position = currSlot.border.global_position
+			currSlot.label.global_position = currSlot.border.global_position + Vector2(80,60)
+			if player:
+				for index in len(player.inventory):
+					if player.inventory[index] == null:
+						var slotToBeAdded = SlotData.new()
+						slotToBeAdded.item = fuel_slot.item
+						slotToBeAdded.amount = fuel_slot.amount
+						player.inventory[index] = slotToBeAdded
+						break
+			fuel_slot.item = null
+			
+		elif currSlot.item == fuel_slot.item:
+			currSlot.amount += fuel_slot.amount
+			currSlot.item_texture.global_position = currSlot.border.global_position
+			currSlot.label.global_position = currSlot.border.global_position + Vector2(80,60)
+			fuel_slot.item = null
+		currFuelItem = null
+
+func removeItemFromMaterialSlotUI():
+	if currMaterialSlotItem :
+		isDragging = false
+		var currSlot = inventoryHandler.getSlotBasedOnPosition(get_global_mouse_position())
+		if currSlot.item == null:
+			currSlot.item = material_slot.item
+			currSlot.amount = material_slot.amount
+			currSlot.item_texture.global_position = currSlot.border.global_position
+			currSlot.label.global_position = currSlot.border.global_position + Vector2(80,60)
+			if player:
+				for index in len(player.inventory):
+					if player.inventory[index] == null:
+						var slotToBeAdded = SlotData.new()
+						slotToBeAdded.item = material_slot.item
+						slotToBeAdded.amount = material_slot.amount
+						player.inventory[index] = slotToBeAdded
+						break
+			material_slot.item = null
+			
+		elif currSlot.item == material_slot.item:
+			currSlot.amount += material_slot.amount
+			currSlot.item_texture.global_position = currSlot.border.global_position
+			currSlot.label.global_position = currSlot.border.global_position + Vector2(80,60)
+			material_slot.item = null
+		currMaterialSlotItem = null

@@ -27,13 +27,11 @@ func _process(delta):
 		item_texture.visible = true
 		label.visible = true
 		label.text = str(amount)
-		if parentControl.parentMachine:
-			parentControl.parentMachine.isThereFuel = true
+
 	else:
 		item_texture.visible = false
 		label.visible = false
-		if parentControl.parentMachine:
-			parentControl.parentMachine.isThereFuel = false
+
 		
 	
 	if !parentControl.isDragging:
@@ -48,7 +46,7 @@ func _on_item_texture_gui_input(event):
 				dragOffset = get_global_mouse_position() - get_global_position()
 				item_texture.set_z_index(100)
 				label.set_z_index(100)
-				parentControl.currItem = self
+				parentControl.currMaterialSlotItem = self
 				isMousePressed = true
 			else:
 				parentControl.isDragging = false
