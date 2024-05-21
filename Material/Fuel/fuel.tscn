@@ -1,6 +1,8 @@
-[gd_scene load_steps=7 format=3 uid="uid://c7kvuyk6bbmvv"]
+[gd_scene load_steps=9 format=3 uid="uid://c7kvuyk6bbmvv"]
 
+[ext_resource type="Script" path="res://Material/Fuel/fuel.gd" id="1_1byod"]
 [ext_resource type="Texture2D" uid="uid://cruxbb2jv2vmx" path="res://Asset/Materials1.png" id="1_be73i"]
+[ext_resource type="Resource" uid="uid://bdk3htb64qaf7" path="res://Material/Fuel/fuel.tres" id="2_ocyvx"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_865ne"]
 atlas = ExtResource("1_be73i")
@@ -50,6 +52,8 @@ _data = {
 
 [node name="Fuel" type="Node2D"]
 scale = Vector2(0.5, 0.5)
+script = ExtResource("1_1byod")
+materialData = ExtResource("2_ocyvx")
 
 [node name="Sprite" type="Sprite2D" parent="."]
 z_index = 5
@@ -67,3 +71,5 @@ libraries = {
 "": SubResource("AnimationLibrary_emjvh")
 }
 autoplay = "floating"
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]

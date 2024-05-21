@@ -19,6 +19,7 @@ const JUMP_VELOCITY = 4.5
 ##Takes in Slot Data so we have a "dictionary"
 @export var inventory:Array[SlotData] = [initSlot]
 
+@onready var inventory_manager = $InventoryManager
 @onready var potion_manager = $PotionManager
 @onready var state_manager = $StateManager
 @onready var animation = $Animation
@@ -41,6 +42,7 @@ func _ready() -> void:
 	currHealth = playerData.MaxHealth
 	currMana = playerData.MaxMana
 	currStamina = playerData.MaxStamina
+	inventory_manager.init(self)
 	state_manager.init(self,animation,move_component,camera)
 
 	
@@ -57,6 +59,4 @@ func _process(delta) -> void:
 	state_manager.process_frame(delta)
 
 	
-func on_item_picked_up(material:MaterialData):
-	print("I got a ", material.name)			
 

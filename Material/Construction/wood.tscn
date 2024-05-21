@@ -1,6 +1,8 @@
-[gd_scene load_steps=7 format=3 uid="uid://bkeb2e31j7xy7"]
+[gd_scene load_steps=9 format=3 uid="uid://bkeb2e31j7xy7"]
 
 [ext_resource type="Texture2D" uid="uid://bi05jqai8a2ss" path="res://Asset/materials.png" id="1_2jlwc"]
+[ext_resource type="Script" path="res://Material/Construction/wood.gd" id="1_ofpyq"]
+[ext_resource type="Resource" uid="uid://o5mvep14jmlk" path="res://Material/Construction/wood.tres" id="2_vsc6w"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_dmqar"]
 atlas = ExtResource("1_2jlwc")
@@ -52,6 +54,8 @@ _data = {
 [node name="Wood" type="Node2D"]
 position = Vector2(0, -2)
 scale = Vector2(0.5, 0.5)
+script = ExtResource("1_ofpyq")
+materialData = ExtResource("2_vsc6w")
 
 [node name="Sprite" type="Sprite2D" parent="."]
 z_index = 5
@@ -60,6 +64,7 @@ texture = SubResource("AtlasTexture_dmqar")
 
 [node name="Area2D" type="Area2D" parent="."]
 position = Vector2(-101, 56)
+collision_layer = 8
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 position = Vector2(101.25, -56)
@@ -71,3 +76,5 @@ libraries = {
 "": SubResource("AnimationLibrary_emjvh")
 }
 autoplay = "floating"
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
