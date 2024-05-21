@@ -23,13 +23,6 @@ var overflow:int = 0
 
 var gridMousePos:Vector2i
 
-var player:Player
-
-func init(player:Player):
-	self.player = player
-	self.player.inventory_manager.connect("OnInventoryChanged",OnInventoryChanged)
-	print(player)
-
 
 func _ready():
 	await get_tree().create_timer(0.3).timeout
@@ -46,7 +39,10 @@ func _ready():
 		slotSize = slot.custom_minimum_size	
 
 	if playerInventory.size() > 0:
-		update_slots(playerInventory)
+		update_slots()
+
+		
+			
 	
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -74,15 +70,15 @@ func _showDebugList():
 		debugList.append(slotList[i].item)
 	print(debugList)
 
-func update_slots(inventory:Array[SlotData]):
+func update_slots():
 	for i in range(maxInventorySlot):
-		if i < len(inventory):
+		if i < len(playerInventory):
 			var GridSlotPos = Vector2i(slotList[i].position/slotSize)
-			slotList[i].item = inventory[i].item
-			slotList[i].amount =inventory[i].amount
+			slotList[i].item = playerInventory[i].item
+			slotList[i].amount =playerInventory[i].amount
 			slotList[i].item_texture.position = GridSlotPos 
 			slotList[i].label.position = GridSlotPos + Vector2i(120,100)
-		else: 
+		else:
 			slotList[i].item = null
 
 func getSlotPositions()->Array[Vector2i]:
@@ -154,8 +150,7 @@ func removeItem(item_amount: int,globalMousePos:Vector2) -> int:
 						if parentControl.player:
 							print("test")
 							var itemDropped = currGotSlot.item.scene.instantiate()
-							itemDropped.amount = to_remove
-							itemDropped.global_position = parentControl.player.global_position + Vector2(randi_range(-5,5),randi_range(10,20))
+							itemDropped.global_position = parentControl.player.global_position + Vector2(randi_range(-5,5),randi_range(5,20))
 							parentControl.player.localLevel.add_child(itemDropped)
 						
 						currGotSlot.item = null
@@ -163,8 +158,7 @@ func removeItem(item_amount: int,globalMousePos:Vector2) -> int:
 						if parentControl.player:
 							print("test")
 							var itemDropped = currGotSlot.item.scene.instantiate()
-							itemDropped.amount = to_remove
-							itemDropped.global_position = parentControl.player.global_position + Vector2(randi_range(-5,5),randi_range(10,20))
+							itemDropped.global_position = parentControl.player.global_position + Vector2(randi_range(-5,5),randi_range(5,20))
 							parentControl.player.localLevel.add_child(itemDropped)
 						
 					removed += to_remove
@@ -257,6 +251,4 @@ func getSameItemCount(item:MaterialData)->int:
 		if slotList[slot].item == item:
 			count +=1
 	return count
-
-func OnInventoryChanged(inventory):
-	pass
+	

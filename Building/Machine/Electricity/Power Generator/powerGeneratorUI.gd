@@ -31,19 +31,14 @@ var prevSlot:Panel
 
 var isMousePressed:bool
 
-var isPlayerInit:bool = false
-
 func _ready():
 	fuel_burning.value = currValue
 	fuel_burning.max_value = maxValue
-	await get_tree().create_timer(0.2).timeout
-	inventoryHandler.init(player)
 	
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 
-		
 	if currValue <= 0:
 		currValue = maxValue
 		if fuel_slot.item and fuel_slot.amount-1 > 0:

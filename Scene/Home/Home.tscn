@@ -1,4 +1,4 @@
-[gd_scene load_steps=34 format=3 uid="uid://dm1j4it5oof3n"]
+[gd_scene load_steps=33 format=3 uid="uid://dm1j4it5oof3n"]
 
 [ext_resource type="Script" path="res://Scene/Home/Home.gd" id="1_iycag"]
 [ext_resource type="PackedScene" uid="uid://c1vsfoc55pk0w" path="res://Entity/Player/player.tscn" id="1_jnw16"]
@@ -9,7 +9,6 @@
 [ext_resource type="PackedScene" uid="uid://cq2cn78jyocyj" path="res://Building/Machine/Electricity/Battery/battery.tscn" id="3_ywwl8"]
 [ext_resource type="PackedScene" uid="uid://dinksu5e5vepb" path="res://Building/Machine/Electricity/Power Generator/power_generator.tscn" id="4_rrroh"]
 [ext_resource type="Script" path="res://Scene/Home/MachineList.gd" id="8_g4svt"]
-[ext_resource type="PackedScene" uid="uid://bkeb2e31j7xy7" path="res://Material/Construction/wood.tscn" id="10_hbuwq"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_klcm4"]
 texture = ExtResource("1_vetej")
@@ -986,6 +985,3 @@ inventory = null
 
 [node name="MachineList" type="Node" parent="."]
 script = ExtResource("8_g4svt")
-
-[node name="Wood" parent="." instance=ExtResource("10_hbuwq")]
-position = Vector2(77, 34)

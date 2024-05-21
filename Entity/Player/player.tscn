@@ -1,4 +1,4 @@
-[gd_scene load_steps=76 format=3 uid="uid://c1vsfoc55pk0w"]
+[gd_scene load_steps=75 format=3 uid="uid://c1vsfoc55pk0w"]
 
 [ext_resource type="Texture2D" uid="uid://bd32dcnew3uvf" path="res://Asset/L.png" id="1_ksidj"]
 [ext_resource type="Script" path="res://Entity/Player/player.gd" id="1_xfdxb"]
@@ -10,7 +10,6 @@
 [ext_resource type="Resource" uid="uid://o5mvep14jmlk" path="res://Material/Construction/wood.tres" id="6_bqc6p"]
 [ext_resource type="Script" path="res://Entity/State/StateMachine.gd" id="7_0owwg"]
 [ext_resource type="Script" path="res://Entity/State/Idle.gd" id="8_5d7eh"]
-[ext_resource type="Script" path="res://Entity/Player/InventoryManager.gd" id="8_jcsv3"]
 [ext_resource type="Script" path="res://Entity/State/Move.gd" id="9_5ji7g"]
 [ext_resource type="Script" path="res://Entity/State/Build.gd" id="10_10mal"]
 [ext_resource type="Script" path="res://Entity/Player/MoveComponent.gd" id="10_gim7i"]
@@ -691,7 +690,6 @@ _data = {
 
 [node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("staff", "playerInventoryController", "itemHUDPlaceholder") groups=["invalidPosition"]]
 scale = Vector2(0.1, 0.1)
-collision_mask = 30
 script = ExtResource("1_xfdxb")
 playerData = ExtResource("2_g17go")
 potionObject = ExtResource("3_41una")
@@ -700,7 +698,7 @@ playerInventoryController = NodePath("ROOT_UI/Inventory")
 itemHUDPlaceholder = NodePath("ROOT_UI/ItemHUDPlaceholder")
 maxInventorySize = 20
 initSlot = ExtResource("4_e4jpf")
-inventory = Array[ExtResource("5_bpvti")]([SubResource("Resource_a3h7a"), ExtResource("4_e4jpf"), ExtResource("4_e4jpf")])
+inventory = Array[ExtResource("5_bpvti")]([SubResource("Resource_a3h7a"), ExtResource("4_e4jpf")])
 
 [node name="Camera" type="Camera2D" parent="."]
 zoom = Vector2(7, 7)
@@ -715,10 +713,6 @@ autoplay = "IDLE"
 
 [node name="CollisionShape3D" type="CollisionShape2D" parent="."]
 shape = SubResource("CapsuleShape2D_5n34a")
-
-[node name="InventoryManager" type="Node" parent="."]
-script = ExtResource("8_jcsv3")
-initSlot = ExtResource("4_e4jpf")
 
 [node name="PotionManager" type="Node" parent="." node_paths=PackedStringArray("potionInventory", "potionGridInventory", "potionHUD")]
 script = ExtResource("5_5bgkf")
