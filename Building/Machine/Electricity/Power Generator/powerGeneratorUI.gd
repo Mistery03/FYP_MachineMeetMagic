@@ -26,7 +26,7 @@ var isDragging:bool = false
 var gridMousePos:Vector2i
 var slotMousPos:Vector2i
 
-var currItem:Panel
+var currFuelItem:Panel
 var prevSlot:Panel
 
 var isMousePressed:bool
@@ -100,7 +100,7 @@ func _process(delta):
 			if inventoryHandler.currSlot:
 				inventoryHandler.swap(inventoryHandler.currSlot.item,inventoryHandler.currSlot.amount,get_global_mouse_position())
 			
-			if currItem :
+			if currFuelItem :
 				isDragging = false
 				var currSlot = inventoryHandler.getSlotBasedOnPosition(get_global_mouse_position())
 				if currSlot.item == null:
@@ -122,7 +122,7 @@ func _process(delta):
 					currSlot.item_texture.global_position = currSlot.border.global_position
 					currSlot.label.global_position = currSlot.border.global_position + Vector2(80,60)
 					fuel_slot.item = null
-				currItem = null
+				currFuelItem = null
 			
 			
 

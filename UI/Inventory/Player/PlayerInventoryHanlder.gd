@@ -163,16 +163,17 @@ func removeItem(item_amount: int,globalMousePos:Vector2) -> int:
 					currGotSlot.amount -= to_remove
 					if currGotSlot.amount <= 0:
 						for index in range(maxInventorySlot):
-							if currGotSlot.item == playerInventory[index].item:
-								playerInventory[index] = null
-								if parentControl.player and !isForExternalSlot:
-									var itemDropped = materialInstance.instantiate()
-									itemDropped .itemData = currGotSlot.item
-									itemDropped.amount = to_remove
-									itemDropped.global_position = parentControl.player.global_position + Vector2(randi_range(-5,5),20)
-									parentControl.player.localLevel.add_child(itemDropped)
-								currGotSlot.item = null	
-								break
+							if player:
+								if currGotSlot.item == playerInventory[index].item:
+									playerInventory[index] = null
+									if parentControl.player and !isForExternalSlot:
+										var itemDropped = materialInstance.instantiate()
+										itemDropped .itemData = currGotSlot.item
+										itemDropped.amount = to_remove
+										itemDropped.global_position = parentControl.player.global_position + Vector2(randi_range(-5,5),20)
+										parentControl.player.localLevel.add_child(itemDropped)
+									currGotSlot.item = null	
+									break
 					else:
 						for index in range(maxInventorySlot):
 							if currGotSlot.item == playerInventory[index].item:

@@ -48,7 +48,7 @@ func _on_item_texture_gui_input(event):
 				dragOffset = get_global_mouse_position() - get_global_position()
 				item_texture.set_z_index(100)
 				label.set_z_index(100)
-				parentControl.currFuelItem = self
+				parentControl.currItem = self
 				isMousePressed = true
 			else:
 				parentControl.isDragging = false

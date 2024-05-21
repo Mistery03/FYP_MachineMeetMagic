@@ -3,6 +3,7 @@ extends Machine
 
 @export var machineUI:Control
 
+
 @onready var animation = $Animation
 
 const MIN_MANA_THRESHOLD: float = 0.0001
