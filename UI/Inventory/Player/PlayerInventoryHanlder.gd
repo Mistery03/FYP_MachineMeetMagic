@@ -23,6 +23,13 @@ var overflow:int = 0
 
 var gridMousePos:Vector2i
 
+var player:Player
+
+func init(player:Player):
+	self.player = player
+	self.player.inventory_manager.connect("OnInventoryChanged",OnInventoryChanged)
+	print(player)
+
 
 func _ready():
 	await get_tree().create_timer(0.3).timeout
@@ -251,4 +258,6 @@ func getSameItemCount(item:MaterialData)->int:
 		if slotList[slot].item == item:
 			count +=1
 	return count
-	
+
+func OnInventoryChanged(inventory):
+	pass

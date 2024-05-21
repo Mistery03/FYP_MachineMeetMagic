@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="MaterialData" load_steps=5 format=3 uid="uid://o5mvep14jmlk"]
+[gd_resource type="Resource" script_class="MaterialData" load_steps=5 format=3 uid="uid://b0mv13gn6qdxo"]
 
 [ext_resource type="PackedScene" uid="uid://bkeb2e31j7xy7" path="res://Material/Construction/wood.tscn" id="1_osd6q"]
 [ext_resource type="Script" path="res://Material/Data/materialData.gd" id="2_3ongc"]
@@ -15,3 +15,4 @@ type = "Construction"
 scene = ExtResource("1_osd6q")
 texture = SubResource("AtlasTexture_dmqar")
 amount = 0
+burnPerSecond = 0

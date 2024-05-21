@@ -1,4 +1,4 @@
-[gd_scene load_steps=75 format=3 uid="uid://c1vsfoc55pk0w"]
+[gd_scene load_steps=76 format=3 uid="uid://c1vsfoc55pk0w"]
 
 [ext_resource type="Texture2D" uid="uid://bd32dcnew3uvf" path="res://Asset/L.png" id="1_ksidj"]
 [ext_resource type="Script" path="res://Entity/Player/player.gd" id="1_xfdxb"]
@@ -7,7 +7,7 @@
 [ext_resource type="Resource" uid="uid://bf2wpudjl6wu5" path="res://Entity/Data/testSlot1.tres" id="4_e4jpf"]
 [ext_resource type="Script" path="res://Potion/PotionManager.gd" id="5_5bgkf"]
 [ext_resource type="Script" path="res://Entity/Data/slotData.gd" id="5_bpvti"]
-[ext_resource type="Resource" uid="uid://o5mvep14jmlk" path="res://Material/Construction/wood.tres" id="6_bqc6p"]
+[ext_resource type="Resource" uid="uid://b0mv13gn6qdxo" path="res://Material/Construction/wood.tres" id="6_bqc6p"]
 [ext_resource type="Script" path="res://Entity/State/StateMachine.gd" id="7_0owwg"]
 [ext_resource type="Script" path="res://Entity/State/Idle.gd" id="8_5d7eh"]
 [ext_resource type="Script" path="res://Entity/State/Move.gd" id="9_5ji7g"]
@@ -256,6 +256,37 @@ animations = [{
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_5n34a"]
 radius = 56.0
 height = 164.0
+
+[sub_resource type="GDScript" id="GDScript_3ckag"]
+script/source = "class_name  InventoryManager
+extends Node
+
+##InitSlot is just to ensure the inventory will return data, do not remove
+@export var initSlot:SlotData
+
+signal OnInventoryChanged(Inventory)
+signal OnInventoryAdded(Inventory)
+
+var inventory:Array[SlotData]  = [initSlot]
+
+func init(player:Player):
+	inventory = player.inventory
+
+
+func insert(item:GameMaterial,amount:int):
+	for slot in inventory:
+		if slot.item == item.materialData:
+			slot.amount += 1
+		else:
+			var slotToBeAdded = SlotData.new()
+			slotToBeAdded.item = item.materialData
+			slotToBeAdded.amount = amount
+			
+			inventory.append(slotToBeAdded)
+			
+			OnInventoryChanged.emit(inventory)
+	print(inventory)
+"
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_1dcaq"]
 atlas = ExtResource("21_kqu6c")
@@ -713,6 +744,9 @@ autoplay = "IDLE"
 
 [node name="CollisionShape3D" type="CollisionShape2D" parent="."]
 shape = SubResource("CapsuleShape2D_5n34a")
+
+[node name="InventoryManager" type="Node" parent="."]
+script = SubResource("GDScript_3ckag")
 
 [node name="PotionManager" type="Node" parent="." node_paths=PackedStringArray("potionInventory", "potionGridInventory", "potionHUD")]
 script = ExtResource("5_5bgkf")
