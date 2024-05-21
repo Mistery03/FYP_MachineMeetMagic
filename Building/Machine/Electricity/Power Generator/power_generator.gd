@@ -60,6 +60,8 @@ func _on_interectable_input_event(viewport, event, shape_idx):
 			machineUI.visible = true
 			player.itemHUDPlaceholder.visible = false
 			player.isMachineUI = true
+			if machineUI.inventoryHandler.slotList.size()>0:
+				machineUI.inventoryHandler.update_slots()
 		
 
 func _input(event):
@@ -69,6 +71,9 @@ func _input(event):
 			player.itemHUDPlaceholder.visible = true
 			player.isPressable = false
 			player.isMachineUI = false
+			##NOTE Dear future programemr either me or someone else, fix this bug to polish the inventory ok
+			##The bug is this inventory function will break everything and give a lot of error needing to fix
+			#machineUI.inventoryHandler.convertSlotListToInventoryData()
 		
 
 func changeAnimation(animationName:String):

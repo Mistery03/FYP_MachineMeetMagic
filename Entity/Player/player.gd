@@ -42,6 +42,10 @@ func _ready() -> void:
 	currHealth = playerData.MaxHealth
 	currMana = playerData.MaxMana
 	currStamina = playerData.MaxStamina
+	
+	for i in range(maxInventorySize):
+		inventory.append(null)
+	#print(inventory.size())
 	inventory_manager.init(self)
 	state_manager.init(self,animation,move_component,camera)
 
