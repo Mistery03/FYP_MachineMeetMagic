@@ -984,7 +984,6 @@ layer_8/tile_data = PackedInt32Array()
 z_index = 5
 position = Vector2(-16, 9)
 collision_mask = 18
-inventory = null
 
 [node name="MachineList" type="Node" parent="."]
 script = ExtResource("8_g4svt")
@@ -992,9 +991,19 @@ script = ExtResource("8_g4svt")
 [node name="Material" parent="." instance=ExtResource("10_8llvn")]
 position = Vector2(53, 48)
 itemData = ExtResource("11_7hxp8")
-amount = 98
+amount = 95
 
 [node name="Material2" parent="." instance=ExtResource("10_8llvn")]
 position = Vector2(74, 49)
+itemData = ExtResource("12_ljy7j")
+amount = 20
+
+[node name="Material3" parent="." instance=ExtResource("10_8llvn")]
+position = Vector2(53, 1)
+itemData = ExtResource("11_7hxp8")
+amount = 5
+
+[node name="Material4" parent="." instance=ExtResource("10_8llvn")]
+position = Vector2(74, 2)
 itemData = ExtResource("12_ljy7j")
 amount = 20
