@@ -1,7 +1,9 @@
-[gd_scene load_steps=18 format=3 uid="uid://pbbfmyagu1u7"]
+[gd_scene load_steps=20 format=3 uid="uid://pbbfmyagu1u7"]
 
 [ext_resource type="Script" path="res://Building/Machine/Electricity/Power Generator/powerGeneratorUI.gd" id="1_vq0e8"]
 [ext_resource type="Texture2D" uid="uid://daap0c1p135gi" path="res://Asset/UIUX/machineContainer.png" id="2_j57ox"]
+[ext_resource type="Resource" uid="uid://bf2wpudjl6wu5" path="res://Entity/Data/testSlot1.tres" id="2_q12u1"]
+[ext_resource type="Resource" uid="uid://dnawlrv34finb" path="res://Material/Fuel/Data/fuel.tres" id="2_r71rn"]
 [ext_resource type="PackedScene" uid="uid://ciyq3cn8pdvwd" path="res://UI/MachineSlot/fuel_slot.tscn" id="3_m6gjl"]
 [ext_resource type="PackedScene" uid="uid://ckanenxxawbfv" path="res://UI/PowerSwitch/power_switch.tscn" id="4_c2tfc"]
 [ext_resource type="PackedScene" uid="uid://cnj7jj8r34b1q" path="res://Material/Material.tscn" id="5_4drpe"]
@@ -30,8 +32,9 @@ layout_mode = 3
 anchors_preset = 0
 script = ExtResource("1_vq0e8")
 inventoryHandler = NodePath("PlayerInventoryHanlder")
+debugInventory = Array[Resource("res://Entity/Data/slotData.gd")]([ExtResource("2_q12u1")])
+debugItem = ExtResource("2_r71rn")
 debugMaxSlot = 20
-debugMode = true
 
 [node name="Background" type="TextureRect" parent="."]
 texture_filter = 1

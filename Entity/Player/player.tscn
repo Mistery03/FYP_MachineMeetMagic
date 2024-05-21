@@ -1,4 +1,4 @@
-[gd_scene load_steps=76 format=3 uid="uid://c1vsfoc55pk0w"]
+[gd_scene load_steps=77 format=3 uid="uid://c1vsfoc55pk0w"]
 
 [ext_resource type="Texture2D" uid="uid://bd32dcnew3uvf" path="res://Asset/L.png" id="1_ksidj"]
 [ext_resource type="Script" path="res://Entity/Player/player.gd" id="1_xfdxb"]
@@ -38,6 +38,11 @@
 script = ExtResource("5_bpvti")
 item = ExtResource("6_bqc6p")
 amount = 5
+
+[sub_resource type="Resource" id="Resource_uut6b"]
+script = ExtResource("5_bpvti")
+item = ExtResource("6_bqc6p")
+amount = 20
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_o46v5"]
 atlas = ExtResource("1_ksidj")
@@ -264,28 +269,69 @@ extends Node
 ##InitSlot is just to ensure the inventory will return data, do not remove
 @export var initSlot:SlotData
 
+const MAXSTACKSIZE:int = 99
+
 signal OnInventoryChanged(Inventory)
 signal OnInventoryAdded(Inventory)
 
 var inventory:Array[SlotData]  = [initSlot]
+var player:Player
+
+var overflow:int = 0
 
 func init(player:Player):
 	inventory = player.inventory
+	self.player = player
+	
 
 
 func insert(droppedItem:GameMaterial,amount:int):
+	if overflow <= 0:
+		overflow = amount
+	else:
+		overflow += amount
+		
 	for slot in inventory:
 		if slot.item == droppedItem.itemData:
-			slot.amount += 1
+			if slot.amount < MAXSTACKSIZE:
+				var availableSpace = MAXSTACKSIZE - slot.amount 
+				if overflow <= availableSpace:
+					slot.amount += overflow
+					overflow = 0
+					break
+				else:
+					if inventory.size() <= 1:
+						slot.amount += availableSpace
+						overflow -= availableSpace
+					elif inventory.size() > 1:
+						var slotToBeAdded = SlotData.new()
+						slotToBeAdded.item = droppedItem.itemData
+						slotToBeAdded.amount = overflow
+						
+						inventory.append(slotToBeAdded)
+						overflow = 0
+						break
 		else:
 			var slotToBeAdded = SlotData.new()
 			slotToBeAdded.item = droppedItem.itemData
-			slotToBeAdded.amount = amount
+			slotToBeAdded.amount = overflow
 			
 			inventory.append(slotToBeAdded)
+			overflow = 0
+			break
 			
-			OnInventoryChanged.emit(inventory)
-	print(inventory)
+	if inventory.size() <=0:
+		var slotToBeAdded = SlotData.new()
+		slotToBeAdded.item = droppedItem.itemData
+		slotToBeAdded.amount = overflow
+		
+		inventory.append(slotToBeAdded)
+		overflow = 0
+			
+			
+	OnInventoryChanged.emit(inventory)
+
+
 "
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_1dcaq"]
@@ -729,7 +775,7 @@ playerInventoryController = NodePath("ROOT_UI/Inventory")
 itemHUDPlaceholder = NodePath("ROOT_UI/ItemHUDPlaceholder")
 maxInventorySize = 20
 initSlot = ExtResource("4_e4jpf")
-inventory = Array[ExtResource("5_bpvti")]([SubResource("Resource_a3h7a")])
+inventory = Array[ExtResource("5_bpvti")]([SubResource("Resource_a3h7a"), SubResource("Resource_uut6b")])
 
 [node name="Camera" type="Camera2D" parent="."]
 zoom = Vector2(7, 7)

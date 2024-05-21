@@ -29,9 +29,12 @@ var player:Player
 
 
 func init(player:Player):
+	await get_tree().create_timer(0.3).timeout
 	self.player = player
-	self.player.inventory_manager.connect("OnInventoryChanged",OnInventoryChanged)
-	print(player)
+	if self.player:
+		self.player.inventory_manager.connect("OnInventoryChanged",OnInventoryChanged)
+
+	
 
 
 func _ready():
@@ -157,11 +160,14 @@ func removeItem(item_amount: int,globalMousePos:Vector2) -> int:
 				if to_remove <= currGotSlot.amount:
 					currGotSlot.amount -= to_remove
 					if currGotSlot.amount == 0:
+						for item in playerInventory:
+							if currGotSlot.item == item.item:
+								playerInventory.erase(item)
+								break
 						currGotSlot.item = null	
 						
 					else:
 						if parentControl.player:
-							print("test")
 							var itemDropped = materialInstance.instantiate()
 							itemDropped .itemData = currGotSlot.item
 							itemDropped .amount = to_remove
@@ -260,4 +266,17 @@ func getSameItemCount(item:MaterialData)->int:
 	return count
 
 func OnInventoryChanged(inventory):
-	pass
+	for index in range(maxInventorySlot):
+		var GridSlotPos = Vector2i(slotList[index].position/slotSize)
+		if index < len(inventory):
+			if slotList[index].item == inventory[index].item and slotList[index].amount <= MAXSTACKSIZE:
+				slotList[index].amount = inventory[index].amount
+			if slotList[index].item == null:
+				slotList[index].item = inventory[index].item
+				slotList[index].amount = inventory[index].amount
+				slotList[index].item_texture.position = GridSlotPos 
+				slotList[index].label.position = GridSlotPos + Vector2i(120,100)
+				break
+				
+			
+				

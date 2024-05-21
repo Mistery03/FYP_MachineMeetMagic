@@ -34,6 +34,8 @@ var isMousePressed:bool
 func _ready():
 	fuel_burning.value = currValue
 	fuel_burning.max_value = maxValue
+	await get_tree().create_timer(0.2).timeout
+	inventoryHandler.init(player)
 	
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.

@@ -9,7 +9,7 @@ extends Panel
 var inventoryHandler:Control
 var dragOffset: Vector2
 
-var amount:int = 1
+var amount:int = 0
 
 var original_global_position:Vector2
 var original_label_global_position:Vector2
@@ -20,7 +20,7 @@ func _process(delta):
 		item_texture.texture = item.texture
 		item_texture.visible = true
 		label.visible = true
-		amount = clamp(amount,1,99)
+		amount = clamp(amount,0,99)
 		label.text = str(amount)
 	else:
 		item_texture.visible = false

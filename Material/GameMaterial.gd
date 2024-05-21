@@ -9,7 +9,7 @@ extends Node2D
 
 func _ready():
 	sprite.texture = itemData.texture
-	amount = itemData.amount
+	#amount = itemData.amount
 
 func _on_area_2d_body_entered(body):
 	if body is Player:
