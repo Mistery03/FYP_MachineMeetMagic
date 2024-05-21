@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://0445xnsvsr82"]
 
 [ext_resource type="Script" path="res://Scene/Pickup/pickup.gd" id="1_rfgpa"]
-[ext_resource type="Resource" uid="uid://o5mvep14jmlk" path="res://Materials/Data/wood.tres" id="2_ij1os"]
+[ext_resource type="Resource" uid="uid://o5mvep14jmlk" path="res://Material/Construction/wood.tres" id="2_ij1os"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_3ftgm"]
 size = Vector2(6, 6)

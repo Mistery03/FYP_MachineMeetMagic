@@ -1,9 +1,0 @@
-[gd_resource type="Resource" script_class="Materials" load_steps=3 format=3 uid="uid://bdk3htb64qaf7"]
-
-[ext_resource type="PackedScene" uid="uid://c7kvuyk6bbmvv" path="res://Materials/materialScene/fuel.tscn" id="1_kfhnt"]
-[ext_resource type="Script" path="res://Materials/Data/materialData.gd" id="1_xmj32"]
-
-[resource]
-script = ExtResource("1_xmj32")
-name = "Fuel"
-scene = ExtResource("1_kfhnt")

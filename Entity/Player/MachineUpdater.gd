@@ -1,11 +1,10 @@
+"""@NOTE Dear future programmers, the machine updater is to update the batteries and machine process relationship
+	The machine updater is used by the WiringBattery state
+"""
 extends Node
 
 var batteryList:Array
 var machineList:Array
-# Called when the node enters the scene tree for the first time.
-func _ready():
-	pass # Replace with function body.
-
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.

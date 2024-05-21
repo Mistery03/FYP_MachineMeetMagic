@@ -19,6 +19,10 @@ func _unhandled_key_input(event):
 			if event.is_action_pressed(actionInput.to_upper()) and !texture_rect.visible:
 				texture_rect.visible = true
 				player.isStaffEquipped = true
+				player.staff.isEquipped = true
+		
 			elif event.is_action_pressed(actionInput.to_upper()) and texture_rect.visible:
 				texture_rect.visible = false
 				player.isStaffEquipped = false
+				player.staff.isEquipped = false
+			

@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="SlotData" load_steps=3 format=3 uid="uid://bf2wpudjl6wu5"]
+
+[ext_resource type="Script" path="res://Entity/Data/slotData.gd" id="1_epio5"]
+[ext_resource type="Resource" uid="uid://dnawlrv34finb" path="res://Material/Fuel/Data/fuel.tres" id="1_r03c1"]
+
+[resource]
+script = ExtResource("1_epio5")
+item = ExtResource("1_r03c1")
+amount = 3
