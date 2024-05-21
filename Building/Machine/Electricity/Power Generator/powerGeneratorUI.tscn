@@ -1,12 +1,10 @@
-[gd_scene load_steps=22 format=3 uid="uid://pbbfmyagu1u7"]
+[gd_scene load_steps=18 format=3 uid="uid://pbbfmyagu1u7"]
 
 [ext_resource type="Script" path="res://Building/Machine/Electricity/Power Generator/powerGeneratorUI.gd" id="1_vq0e8"]
-[ext_resource type="Resource" uid="uid://bp8cat26man8n" path="res://Material/Fuel/fuel.tres" id="2_bsoy7"]
 [ext_resource type="Texture2D" uid="uid://daap0c1p135gi" path="res://Asset/UIUX/machineContainer.png" id="2_j57ox"]
 [ext_resource type="PackedScene" uid="uid://ciyq3cn8pdvwd" path="res://UI/MachineSlot/fuel_slot.tscn" id="3_m6gjl"]
-[ext_resource type="Script" path="res://Entity/Data/slotData.gd" id="3_nrage"]
-[ext_resource type="Resource" uid="uid://b0mv13gn6qdxo" path="res://Material/Construction/wood.tres" id="4_3v4vn"]
 [ext_resource type="PackedScene" uid="uid://ckanenxxawbfv" path="res://UI/PowerSwitch/power_switch.tscn" id="4_c2tfc"]
+[ext_resource type="PackedScene" uid="uid://cnj7jj8r34b1q" path="res://Material/Material.tscn" id="5_4drpe"]
 [ext_resource type="Texture2D" uid="uid://d3gb5b0josq6g" path="res://Asset/UIUX/powerSwitch.png" id="5_wkhqa"]
 [ext_resource type="Texture2D" uid="uid://dc5gs43kepf3r" path="res://Asset/UIUX/loadingBorderBar.png" id="6_dud0o"]
 [ext_resource type="Texture2D" uid="uid://cflagpst0f4c5" path="res://Asset/UIUX/loadingBarWhite.png" id="7_brem5"]
@@ -16,16 +14,6 @@
 [ext_resource type="PackedScene" uid="uid://cawvmrg7mckvi" path="res://UI/Inventory/Player/player_grid_inventory.tscn" id="11_8ysx8"]
 [ext_resource type="Script" path="res://UI/Inventory/Player/PlayerInventoryHanlder.gd" id="11_i0iq0"]
 [ext_resource type="PackedScene" uid="uid://d3a8b5m3ju4nv" path="res://UI/Inventory/Player/playerInventory_machineSlot.tscn" id="12_vksxu"]
-
-[sub_resource type="Resource" id="Resource_kdv0v"]
-script = ExtResource("3_nrage")
-item = ExtResource("2_bsoy7")
-amount = 20
-
-[sub_resource type="Resource" id="Resource_w4vrn"]
-script = ExtResource("3_nrage")
-item = ExtResource("4_3v4vn")
-amount = 10
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_5ottv"]
 atlas = ExtResource("5_wkhqa")
@@ -42,8 +30,6 @@ layout_mode = 3
 anchors_preset = 0
 script = ExtResource("1_vq0e8")
 inventoryHandler = NodePath("PlayerInventoryHanlder")
-debugInventory = Array[ExtResource("3_nrage")]([SubResource("Resource_kdv0v"), SubResource("Resource_w4vrn")])
-debugItem = ExtResource("2_bsoy7")
 debugMaxSlot = 20
 debugMode = true
 
@@ -86,6 +72,7 @@ offset_bottom = 40.0
 script = ExtResource("11_i0iq0")
 parentControl = NodePath("..")
 inventorySlot = ExtResource("12_vksxu")
+materialInstance = ExtResource("5_4drpe")
 
 [node name="PlayerGridInventory" parent="PlayerInventoryHanlder" instance=ExtResource("11_8ysx8")]
 layout_mode = 1

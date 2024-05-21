@@ -5,6 +5,7 @@ extends Control
 @export var playerInventory:Array[SlotData]
 @export var inventorySlot:PackedScene
 @export var maxInventorySlot:int
+@export var materialInstance:PackedScene
 
 @onready var player_grid_inventory = $PlayerGridInventory
 
@@ -24,6 +25,8 @@ var overflow:int = 0
 var gridMousePos:Vector2i
 
 var player:Player
+
+
 
 func init(player:Player):
 	self.player = player
@@ -154,18 +157,15 @@ func removeItem(item_amount: int,globalMousePos:Vector2) -> int:
 				if to_remove <= currGotSlot.amount:
 					currGotSlot.amount -= to_remove
 					if currGotSlot.amount == 0:
-						if parentControl.player:
-							print("test")
-							var itemDropped = currGotSlot.item.scene.instantiate()
-							itemDropped.global_position = parentControl.player.global_position + Vector2(randi_range(-5,5),randi_range(5,20))
-							parentControl.player.localLevel.add_child(itemDropped)
+						currGotSlot.item = null	
 						
-						currGotSlot.item = null
 					else:
 						if parentControl.player:
 							print("test")
-							var itemDropped = currGotSlot.item.scene.instantiate()
-							itemDropped.global_position = parentControl.player.global_position + Vector2(randi_range(-5,5),randi_range(5,20))
+							var itemDropped = materialInstance.instantiate()
+							itemDropped .itemData = currGotSlot.item
+							itemDropped .amount = to_remove
+							itemDropped.global_position = parentControl.player.global_position + Vector2(randi_range(-5,5),20)
 							parentControl.player.localLevel.add_child(itemDropped)
 						
 					removed += to_remove

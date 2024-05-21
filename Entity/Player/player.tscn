@@ -273,13 +273,13 @@ func init(player:Player):
 	inventory = player.inventory
 
 
-func insert(item:GameMaterial,amount:int):
+func insert(droppedItem:GameMaterial,amount:int):
 	for slot in inventory:
-		if slot.item == item.materialData:
+		if slot.item == droppedItem.itemData:
 			slot.amount += 1
 		else:
 			var slotToBeAdded = SlotData.new()
-			slotToBeAdded.item = item.materialData
+			slotToBeAdded.item = droppedItem.itemData
 			slotToBeAdded.amount = amount
 			
 			inventory.append(slotToBeAdded)
@@ -729,7 +729,7 @@ playerInventoryController = NodePath("ROOT_UI/Inventory")
 itemHUDPlaceholder = NodePath("ROOT_UI/ItemHUDPlaceholder")
 maxInventorySize = 20
 initSlot = ExtResource("4_e4jpf")
-inventory = Array[ExtResource("5_bpvti")]([SubResource("Resource_a3h7a"), ExtResource("4_e4jpf")])
+inventory = Array[ExtResource("5_bpvti")]([SubResource("Resource_a3h7a")])
 
 [node name="Camera" type="Camera2D" parent="."]
 zoom = Vector2(7, 7)
