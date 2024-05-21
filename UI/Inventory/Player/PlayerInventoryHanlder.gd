@@ -26,6 +26,8 @@ var gridMousePos:Vector2i
 
 var player:Player
 
+var isForExternalSlot:bool = false
+
 
 
 func init(player:Player):
@@ -38,7 +40,7 @@ func init(player:Player):
 
 
 func _ready():
-	await get_tree().create_timer(0.3).timeout
+	await get_tree().create_timer(0.4).timeout
 	for child in player_grid_inventory.get_children():
 		child.queue_free()
 	
@@ -62,7 +64,6 @@ func _ready():
 func _process(delta):
 	##@NOTE The function below is for debug purposes only
 	#_showDebugList()
-	
 	if !parentControl.isDragging:
 		gridMousePos = Vector2i(get_global_mouse_position()/slotSize)
 		if gridMousePos in getSlotPositions():
@@ -85,7 +86,7 @@ func _showDebugList():
 
 func update_slots():
 	for i in range(maxInventorySlot):
-		if i < len(playerInventory):
+		if playerInventory[i]:
 			var GridSlotPos = Vector2i(slotList[i].position/slotSize)
 			slotList[i].item = playerInventory[i].item
 			slotList[i].amount =playerInventory[i].amount
@@ -153,34 +154,41 @@ func removeItem(item_amount: int,globalMousePos:Vector2) -> int:
 	randomize()
 	var to_remove = item_amount
 	var removed = 0
+
 	if globalMousePosToLocalGrid(globalMousePos) in getSlotPositions():
 		var currGotSlot = getSlotBasedOnPosition(globalMousePos)
 		if currGotSlot.item:
 			if currGotSlot.amount > 0:
 				if to_remove <= currGotSlot.amount:
 					currGotSlot.amount -= to_remove
-					if currGotSlot.amount == 0:
-						for item in playerInventory:
-							if currGotSlot.item == item.item:
-								playerInventory.erase(item)
+					if currGotSlot.amount <= 0:
+						for index in range(maxInventorySlot):
+							if currGotSlot.item == playerInventory[index].item:
+								playerInventory[index] = null
+								if parentControl.player and !isForExternalSlot:
+									var itemDropped = materialInstance.instantiate()
+									itemDropped .itemData = currGotSlot.item
+									itemDropped.amount = to_remove
+									itemDropped.global_position = parentControl.player.global_position + Vector2(randi_range(-5,5),20)
+									parentControl.player.localLevel.add_child(itemDropped)
+								currGotSlot.item = null	
 								break
-						currGotSlot.item = null	
-						
 					else:
+						for index in range(maxInventorySlot):
+							if currGotSlot.item == playerInventory[index].item:
+								playerInventory[index].amount -= to_remove
+								break
 						if parentControl.player:
 							var itemDropped = materialInstance.instantiate()
 							itemDropped .itemData = currGotSlot.item
-							itemDropped .amount = to_remove
+							itemDropped.amount = to_remove
 							itemDropped.global_position = parentControl.player.global_position + Vector2(randi_range(-5,5),20)
 							parentControl.player.localLevel.add_child(itemDropped)
 						
 					removed += to_remove
 					to_remove = 0
-		
-				
-			
-				
-				
+	
+	
 
 
 	return removed
@@ -217,12 +225,11 @@ func swap(item:MaterialData,currAmount:int, globalMousePos:Vector2):
 			else:
 				_swapSlotsWithinInventory(currSlot,prevSlot)
 				
-
 			#if currSlot.item == prevSlot.item:
 				#if currSlot.amount >= 99:
 					
 					#_swapSlotsWithinInventory(currSlot.item,prevSlot.item)
-			
+	
 		
 func _swapSlotsWithinInventory(oldPanel:Panel =null,newPanel:Panel=null) ->bool:
 	var index1:int
@@ -266,17 +273,22 @@ func getSameItemCount(item:MaterialData)->int:
 	return count
 
 func OnInventoryChanged(inventory):
-	for index in range(maxInventorySlot):
-		var GridSlotPos = Vector2i(slotList[index].position/slotSize)
-		if index < len(inventory):
-			if slotList[index].item == inventory[index].item and slotList[index].amount <= MAXSTACKSIZE:
-				slotList[index].amount = inventory[index].amount
-			if slotList[index].item == null:
-				slotList[index].item = inventory[index].item
-				slotList[index].amount = inventory[index].amount
-				slotList[index].item_texture.position = GridSlotPos 
-				slotList[index].label.position = GridSlotPos + Vector2i(120,100)
-				break
-				
+	update_slots()
+	
+func convertSlotListToInventoryData():
+	var tempArray:Array[SlotData]
+	tempArray.clear()
+	for index in len(slotList):
+		var slotToBeAdded = SlotData.new()
+		if slotList[index].item:
+			slotToBeAdded.item = slotList[index].item
+			slotToBeAdded.amount = slotList[index].amount
+			tempArray.append(slotToBeAdded)
+		else:
+			tempArray.append(null)
+		
+		slotList[index].item = null
+	player.inventory = tempArray
+	
 			
 				

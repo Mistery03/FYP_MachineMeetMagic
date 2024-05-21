@@ -1,4 +1,4 @@
-[gd_scene load_steps=36 format=3 uid="uid://dm1j4it5oof3n"]
+[gd_scene load_steps=33 format=3 uid="uid://dm1j4it5oof3n"]
 
 [ext_resource type="Script" path="res://Scene/Home/Home.gd" id="1_iycag"]
 [ext_resource type="PackedScene" uid="uid://c1vsfoc55pk0w" path="res://Entity/Player/player.tscn" id="1_jnw16"]
@@ -9,9 +9,6 @@
 [ext_resource type="PackedScene" uid="uid://cq2cn78jyocyj" path="res://Building/Machine/Electricity/Battery/battery.tscn" id="3_ywwl8"]
 [ext_resource type="PackedScene" uid="uid://dinksu5e5vepb" path="res://Building/Machine/Electricity/Power Generator/power_generator.tscn" id="4_rrroh"]
 [ext_resource type="Script" path="res://Scene/Home/MachineList.gd" id="8_g4svt"]
-[ext_resource type="PackedScene" uid="uid://cnj7jj8r34b1q" path="res://Material/Material.tscn" id="10_8llvn"]
-[ext_resource type="Resource" uid="uid://b0mv13gn6qdxo" path="res://Material/Construction/wood.tres" id="11_7hxp8"]
-[ext_resource type="Resource" uid="uid://dnawlrv34finb" path="res://Material/Fuel/Data/fuel.tres" id="12_ljy7j"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_klcm4"]
 texture = ExtResource("1_vetej")
@@ -984,17 +981,6 @@ layer_8/tile_data = PackedInt32Array()
 z_index = 5
 position = Vector2(-16, 9)
 collision_mask = 18
-inventory = null
 
 [node name="MachineList" type="Node" parent="."]
 script = ExtResource("8_g4svt")
-
-[node name="Material" parent="." instance=ExtResource("10_8llvn")]
-position = Vector2(53, 48)
-itemData = ExtResource("11_7hxp8")
-amount = 98
-
-[node name="Material2" parent="." instance=ExtResource("10_8llvn")]
-position = Vector2(74, 49)
-itemData = ExtResource("12_ljy7j")
-amount = 20
