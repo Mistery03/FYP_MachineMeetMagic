@@ -40,6 +40,15 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
+	if inventoryHandler:
+		if player:
+			inventoryHandler.playerInventory = player.inventory
+			inventoryHandler.maxInventorySlot = player.maxInventorySize
+		else:
+			if debugMode:
+				inventoryHandler.playerInventory = debugInventory
+				inventoryHandler.maxInventorySlot = debugMaxSlot
+		
 
 	if currValue <= 0:
 		currValue = maxValue
@@ -50,21 +59,10 @@ func _process(delta):
 	
 	fuel_burning.value = currValue
 	
+	
 	##@WARNING Does not take account if the inventory slots are different size to the machine slot (in this file fuel_slot)
 	gridMousePos = Vector2i(get_global_mouse_position()/fuel_slot.custom_minimum_size)
 
-
-	if inventoryHandler:
-		if player:
-			inventoryHandler.playerInventory = player.inventory
-			inventoryHandler.maxInventorySlot = player.maxInventorySize
-		else:
-			if debugMode:
-				inventoryHandler.playerInventory = debugInventory
-				inventoryHandler.maxInventorySlot = debugMaxSlot
-	#print(gridMousePos)
-	#print(fuel_slot.getSlotPosition())
-	#print(inventoryHandler.getSlotBasedOnPosition(get_global_mouse_position()))
 	if !isDragging:
 		if gridMousePos == fuel_slot.getSlotPosition():
 			if fuel_slot.item ==  null:
@@ -123,8 +121,7 @@ func _process(delta):
 					currSlot.label.global_position = currSlot.border.global_position + Vector2(80,60)
 					fuel_slot.item = null
 				currFuelItem = null
-			
-			
+					
 
 func _input(event):
 	if event is InputEventMouseButton:
@@ -146,3 +143,8 @@ func _input(event):
 
 func changeAnimation(animationName:String):
 	machine_animation.play(animationName.to_pascal_case())
+
+func burnDisplay(delta):
+	if fuel_slot.item:
+		currValue -= fuel_slot.item.burnPerSecond * delta
+	currValue = clamp(currValue, 0, maxValue)

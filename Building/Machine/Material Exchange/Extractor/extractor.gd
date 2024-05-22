@@ -69,3 +69,13 @@ func consumeMana(delta:float):
 	if percentage <= MIN_MANA_THRESHOLD:
 		currMana = 0
 	machineUI.machine_mana_bar.currValue = currMana
+
+func burnDisplay(delta):
+	if machineUI.fuel_slot.item:
+		machineUI.currValue -= machineUI.fuel_slot.item.burnPerSecond * delta
+	machineUI.currValue = clamp(machineUI.currValue, 0, machineUI.maxValue)
+
+func processDisplay(delta):
+	if machineUI.material_slot.item:
+		machineUI.progress_bar.value += machineUI.material_slot.item.burnPerSecond * delta
+	machineUI.currValue = clamp(machineUI.currValue, 0, machineUI.maxValue)

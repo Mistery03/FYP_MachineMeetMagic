@@ -33,6 +33,8 @@ var currMaterialSlotItem:Panel
 var prevSlot:Panel
 
 func _ready():
+	if debugMode:
+		power_switch.disabled = !debugMode
 	await get_tree().create_timer(0.2).timeout
 	inventoryHandler.init(player)
 	

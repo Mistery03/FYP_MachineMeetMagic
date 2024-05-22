@@ -27,13 +27,12 @@ func _process(delta):
 		item_texture.visible = true
 		label.visible = true
 		label.text = str(amount)
+		
 
 	else:
 		item_texture.visible = false
 		label.visible = false
 
-		
-	
 	if !parentControl.isDragging:
 		item_texture.global_position =  border.global_position 
 		label.global_position = border.global_position + Vector2(80,60)

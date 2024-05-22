@@ -1,8 +1,9 @@
-[gd_scene load_steps=5 format=3 uid="uid://dinksu5e5vepb"]
+[gd_scene load_steps=6 format=3 uid="uid://dinksu5e5vepb"]
 
 [ext_resource type="Script" path="res://Building/Machine/Electricity/Power Generator/power_generator.gd" id="1_sb6xt"]
 [ext_resource type="SpriteFrames" uid="uid://cktdrmvvswus8" path="res://Building/Machine/Electricity/Power Generator/powerGeneratorAnimation.tres" id="2_tmhor"]
 [ext_resource type="PackedScene" uid="uid://pbbfmyagu1u7" path="res://Building/Machine/Electricity/Power Generator/powerGeneratorUI.tscn" id="3_fit56"]
+[ext_resource type="Resource" uid="uid://bf2wpudjl6wu5" path="res://Entity/Data/testSlot1.tres" id="4_3vbcn"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_oek2j"]
 size = Vector2(24, 29)
@@ -24,6 +25,7 @@ animation = &"Delete"
 [node name="PowerGeneratorUI" parent="Root" node_paths=PackedStringArray("parentMachine") instance=ExtResource("3_fit56")]
 visible = false
 parentMachine = NodePath("../..")
+debugInventory = Array[Resource("res://Entity/Data/slotData.gd")]([ExtResource("4_3vbcn"), null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null])
 
 [node name="Interectable" type="Area2D" parent="."]
 
