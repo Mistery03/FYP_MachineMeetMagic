@@ -54,20 +54,17 @@ func _process(delta):
 				machine.currMana += manaPerSecond * delta
 		
 func _on_interectable_input_event(viewport, event, shape_idx):
-	if event is InputEventMouseButton:  
-		if player:
-			if !player.isBuildMode:
-				if event.is_action_pressed("ACTION"):
+	if event is InputEventMouseButton:
+		if event.is_action_pressed("ACTION"):
+			machineUI.visible = true
+			if machineUI.inventoryHandler.slotList.size() > 0:
+				machineUI.inventoryHandler.update_slots()
+			
+			if player:
+				if !player.isBuildMode:
 					player.itemHUDPlaceholder.visible = false
 					player.isMachineUI = true
-					machineUI.visible = true
-					if machineUI.inventoryHandler.slotList.size()>0:
-						machineUI.inventoryHandler.update_slots()
-		else:
-			if event.is_action_pressed("ACTION"):
-					machineUI.visible = true
-					if machineUI.inventoryHandler.slotList.size()>0:
-						machineUI.inventoryHandler.update_slots()
+	
 		
 
 func _input(event):
@@ -87,7 +84,6 @@ func changeAnimation(animationName:String):
 	animation.play(animationName.to_pascal_case())
 	machineUI.machine_animation.play(animationName.to_pascal_case())
 	
-
 	
 
 

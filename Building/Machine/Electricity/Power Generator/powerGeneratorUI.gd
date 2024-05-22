@@ -49,14 +49,20 @@ func _process(delta):
 				inventoryHandler.playerInventory = debugInventory
 				inventoryHandler.maxInventorySlot = debugMaxSlot
 		
-
+	print(fuel_slot.amount)
 	if currValue <= 0:
-		currValue = maxValue
-		if fuel_slot.item and fuel_slot.amount-1 > 0:
-			fuel_slot.amount -= 1
+		if fuel_slot.item and fuel_slot.amount > 0:
+			currValue = maxValue
+			fuel_slot.fuelDurability -= 1
+			if fuel_slot.fuelDurability <= 0:
+				fuel_slot.amount -= 1
+				if fuel_slot.amount > 0:
+					fuel_slot.fuelDurability = fuel_slot.item.durability
+				else:
+					fuel_slot.item = null
 		else:
 			fuel_slot.item = null
-	
+
 	fuel_burning.value = currValue
 	
 	

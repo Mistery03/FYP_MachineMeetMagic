@@ -17,6 +17,7 @@ script = ExtResource("1_1bb8h")
 
 [node name="Border" type="TextureRect" parent="."]
 texture_filter = 1
+layout_mode = 0
 offset_right = 40.0
 offset_bottom = 40.0
 scale = Vector2(4.5, 4.5)
@@ -31,6 +32,7 @@ texture = SubResource("AtlasTexture_skj8k")
 
 [node name="Label" type="Label" parent="."]
 custom_minimum_size = Vector2(180, 180)
+layout_mode = 0
 offset_left = 103.0
 offset_top = 103.0
 offset_right = 179.0

@@ -9,12 +9,16 @@ extends Panel
 @onready var item_texture = $Border/ItemTexture
 @onready var label = $Label
 
+var fuelDurability:int
+
 var dragOffset: Vector2
 var isMousePressed:bool = false
 
 var scaledSlotSize 
 
 var currSlot:Panel
+
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	scaledSlotSize = custom_minimum_size * scale
@@ -27,6 +31,8 @@ func _process(delta):
 		item_texture.visible = true
 		label.visible = true
 		label.text = str(amount)
+		if fuelDurability <= 0:
+			fuelDurability = item.durability
 		if parentControl.parentMachine:
 			parentControl.parentMachine.isThereFuel = true
 	else:

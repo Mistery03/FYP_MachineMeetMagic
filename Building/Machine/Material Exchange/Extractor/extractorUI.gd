@@ -4,10 +4,15 @@ extends Control
 @onready var machine_animation = $MachineAnimation
 @onready var power_switch = $PowerSwitch
 @onready var machine_mana_bar = $MachineManaBar
-@onready var fuel_slot = $FuelSlot
-@onready var material_slot = $MaterialSlot
 @onready var progress_bar = $ProgressBar
 
+@onready var fuel_slot = $FuelSlot
+@onready var material_slot = $MaterialSlot
+@onready var result_slot = $ResultSlot
+
+
+
+@export var maxValue:float = 100
 
 @export var parentMachine:Machine
 @export var inventoryHandler:InventoryHanlder
@@ -20,6 +25,7 @@ extends Control
 @export var resultedItem:MaterialData
 
 var currValue:float = 100
+var currLoadingValue:float = 0
 var player:Player
 
 var isDragging:bool = false
@@ -33,6 +39,8 @@ var currMaterialSlotItem:Panel
 var prevSlot:Panel
 
 func _ready():
+	progress_bar.value = currLoadingValue
+	progress_bar.max_value = maxValue
 	if debugMode:
 		power_switch.disabled = !debugMode
 	await get_tree().create_timer(0.2).timeout
@@ -41,8 +49,6 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-
-	
 	##@WARNING Does not take account if the inventory slots are different size to the machine slot (in this file fuel_slot)
 	gridMousePos = Vector2i(get_global_mouse_position()/fuel_slot.custom_minimum_size)
 	
@@ -54,6 +60,36 @@ func _process(delta):
 			if debugMode:
 				inventoryHandler.playerInventory = debugInventory
 				inventoryHandler.maxInventorySlot = debugMaxSlot
+	
+	if currLoadingValue >= 100:
+		currLoadingValue  = 0
+		if material_slot.item and material_slot.amount-1 > 0:
+			material_slot.amount -= 1
+			fuel_slot.fuelDurability -= 1
+					
+			if result_slot.item == null:
+				result_slot.item = resultedItem
+				result_slot.amount = 1
+			else:
+				result_slot.amount += 1
+		else:
+			if result_slot.item == null:
+				result_slot.item = resultedItem
+				result_slot.amount = 1
+			else:
+				result_slot.amount += 1
+			material_slot.item = null
+					
+	progress_bar.value = currLoadingValue 
+	
+	if fuel_slot.item and fuel_slot.amount > 0:
+		if fuel_slot.fuelDurability <= 0:
+			fuel_slot.amount -= 1
+			fuel_slot.fuelDurability = fuel_slot.item.durability
+					
+			
+	else:
+		fuel_slot.item = null
 	
 	if !isDragging:
 		if gridMousePos == fuel_slot.getSlotPosition():
@@ -131,10 +167,10 @@ func materialSlotLogic():
 			
 			inventoryHandler.currSlot.item_texture.global_position = inventoryHandler.currSlot.border.global_position
 			inventoryHandler.currSlot.label.global_position = inventoryHandler.currSlot.border.global_position + Vector2(80,60)
-			inventoryHandler.removeItem(inventoryHandler.currSlot.amount,inventoryHandler.currSlot.global_position)
+			if inventoryHandler.removeItem(inventoryHandler.currSlot.amount,inventoryHandler.currSlot.global_position):
 			
-			inventoryHandler.currSlot.item = null
-			inventoryHandler.currSlot = null
+				inventoryHandler.currSlot.item = null
+				inventoryHandler.currSlot = null
 					
 					
 	if material_slot.item:
@@ -175,7 +211,7 @@ func removeItemFromFuelSlotUI():
 		currFuelItem = null
 
 func removeItemFromMaterialSlotUI():
-	if currMaterialSlotItem :
+	if currMaterialSlotItem:
 		isDragging = false
 		var currSlot = inventoryHandler.getSlotBasedOnPosition(get_global_mouse_position())
 		if currSlot.item == null:
@@ -199,3 +235,13 @@ func removeItemFromMaterialSlotUI():
 			currSlot.label.global_position = currSlot.border.global_position + Vector2(80,60)
 			material_slot.item = null
 		currMaterialSlotItem = null
+
+func burnDisplay(delta):
+	if fuel_slot.item:
+		currValue -= fuel_slot.item.burnPerSecond * delta
+	currValue = clamp(currValue, 0, maxValue)
+
+func processDisplay(delta):
+	if material_slot.item:
+		currLoadingValue += material_slot.item.burnPerSecond * delta
+	currLoadingValue = clamp(currLoadingValue , 0, maxValue)

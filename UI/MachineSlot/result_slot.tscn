@@ -17,6 +17,7 @@ script = ExtResource("1_qnqh8")
 
 [node name="Border" type="TextureRect" parent="."]
 texture_filter = 1
+layout_mode = 0
 offset_right = 40.0
 offset_bottom = 40.0
 scale = Vector2(5, 5)
@@ -30,6 +31,7 @@ offset_bottom = 40.0
 texture = SubResource("AtlasTexture_04xho")
 
 [node name="Label" type="Label" parent="."]
+layout_mode = 0
 offset_left = 103.0
 offset_top = 103.0
 offset_right = 179.0
@@ -40,3 +42,5 @@ theme_override_constants/outline_size = 20
 theme_override_fonts/font = ExtResource("4_ytnev")
 theme_override_font_sizes/font_size = 80
 text = "99"
+
+[connection signal="gui_input" from="Border/ItemTexture" to="." method="_on_item_texture_gui_input"]

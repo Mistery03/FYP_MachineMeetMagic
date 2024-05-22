@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://cbpifgpelsijg"]
+[gd_scene load_steps=22 format=3 uid="uid://cbpifgpelsijg"]
 
 [ext_resource type="Script" path="res://Building/Machine/Material Exchange/Extractor/extractorUI.gd" id="1_q5y3h"]
 [ext_resource type="Resource" uid="uid://bf2wpudjl6wu5" path="res://Entity/Data/testSlot1.tres" id="2_2j1w6"]
@@ -6,6 +6,7 @@
 [ext_resource type="Resource" uid="uid://b0mv13gn6qdxo" path="res://Material/Construction/wood.tres" id="3_4sgsv"]
 [ext_resource type="SpriteFrames" uid="uid://cbtw4dcn8pny6" path="res://Building/Machine/Material Exchange/Extractor/extractorAnimation.tres" id="3_bofy2"]
 [ext_resource type="PackedScene" uid="uid://ckanenxxawbfv" path="res://UI/PowerSwitch/power_switch.tscn" id="4_ayn0i"]
+[ext_resource type="Resource" uid="uid://cchhf0shqvfkr" path="res://Material/Currency/Magic Essence/magicEssence.tres" id="4_uecce"]
 [ext_resource type="Texture2D" uid="uid://d3gb5b0josq6g" path="res://Asset/UIUX/powerSwitch.png" id="5_63tcs"]
 [ext_resource type="PackedScene" uid="uid://18gib6v62tlc" path="res://UI/MachineSlot/material_slot.tscn" id="5_l467h"]
 [ext_resource type="PackedScene" uid="uid://dsnw47taoamf7" path="res://UI/MachineSlot/result_slot.tscn" id="6_yhepd"]
@@ -37,6 +38,7 @@ debugInventory = Array[Resource("res://Entity/Data/slotData.gd")]([ExtResource("
 debugItem = ExtResource("3_4sgsv")
 debugMaxSlot = 20
 debugMode = true
+resultedItem = ExtResource("4_uecce")
 
 [node name="Background" type="TextureRect" parent="."]
 texture_filter = 1
@@ -82,13 +84,14 @@ offset_bottom = 453.0
 scale = Vector2(0.6, 0.6)
 parentControl = NodePath("..")
 
-[node name="ResultSlot" parent="." instance=ExtResource("6_yhepd")]
+[node name="ResultSlot" parent="." node_paths=PackedStringArray("parentControl") instance=ExtResource("6_yhepd")]
 layout_mode = 0
 offset_left = 901.0
 offset_top = 412.0
 offset_right = 941.0
 offset_bottom = 452.0
 scale = Vector2(0.6, 0.6)
+parentControl = NodePath("..")
 
 [node name="FuelSlot" parent="." node_paths=PackedStringArray("parentControl") instance=ExtResource("7_ndds1")]
 layout_mode = 0

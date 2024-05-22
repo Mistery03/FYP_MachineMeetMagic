@@ -13,6 +13,8 @@ const MIN_MANA_THRESHOLD: float = 0.0001
 func _ready():
 	changeAnimation("IDLE")
 	machineUI.machine_mana_bar.max_value = maxMana
+	await get_tree().create_timer(0.1).timeout
+	machineUI.player = player
 	
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
@@ -29,7 +31,6 @@ func _process(delta):
 		
 	if  currMana > 0:
 		if machineUI.power_switch.button_pressed:
-			changeAnimation("Processing")
 			isSwitchedOn = true
 		else:
 			changeAnimation("IDLE")
@@ -37,14 +38,29 @@ func _process(delta):
 		
 	if isSwitchedOn and currMana > 0:
 		consumeMana(delta)
+		
+	if isSwitchedOn and machineUI.material_slot.item and machineUI.fuel_slot.item:
+		changeAnimation("Processing")
+		machineUI.processDisplay(delta)
 
 
 func _on_interectable_input_event(viewport, event, shape_idx):
-	if event is InputEventMouseButton and !player.isBuildMode:
-		if event.is_action_pressed("ACTION"):
-			machineUI.visible = true
-			player.itemHUDPlaceholder.visible = false
-			player.isMachineUI = true
+	if event is InputEventMouseButton:
+		if machineUI.debugMode:
+			if event.is_action_pressed("ACTION"):
+				machineUI.visible = true
+				if machineUI.inventoryHandler.slotList.size() > 0:
+					machineUI.inventoryHandler.update_slots()
+			
+		if player:
+			if event.is_action_pressed("ACTION"):
+				if !player.isBuildMode:
+					machineUI.visible = true
+					if machineUI.inventoryHandler.slotList.size() > 0:
+						machineUI.inventoryHandler.update_slots()
+					
+						player.itemHUDPlaceholder.visible = false
+						player.isMachineUI = true
 
 
 func _input(event):
@@ -70,12 +86,4 @@ func consumeMana(delta:float):
 		currMana = 0
 	machineUI.machine_mana_bar.currValue = currMana
 
-func burnDisplay(delta):
-	if machineUI.fuel_slot.item:
-		machineUI.currValue -= machineUI.fuel_slot.item.burnPerSecond * delta
-	machineUI.currValue = clamp(machineUI.currValue, 0, machineUI.maxValue)
 
-func processDisplay(delta):
-	if machineUI.material_slot.item:
-		machineUI.progress_bar.value += machineUI.material_slot.item.burnPerSecond * delta
-	machineUI.currValue = clamp(machineUI.currValue, 0, machineUI.maxValue)

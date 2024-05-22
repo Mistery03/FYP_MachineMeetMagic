@@ -6,3 +6,4 @@ extends Resource
 @export var texture:Texture2D
 @export var amount:int
 @export var burnPerSecond:int 
+@export var durability:int

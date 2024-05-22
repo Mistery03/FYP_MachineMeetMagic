@@ -56,10 +56,6 @@ func _ready():
 	if playerInventory.size() > 0:
 		update_slots()
 
-		
-			
-	
-
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	##@NOTE The function below is for debug purposes only
@@ -150,7 +146,7 @@ func insertItem(item:MaterialData,currAmount:int)->int:
 					slotList[index].amount += availableSpace
 					overflow -= availableSpace
 	return overflow
-func removeItem(item_amount: int,globalMousePos:Vector2) -> int:
+func removeItem(item_amount: int,globalMousePos:Vector2) -> bool:
 	randomize()
 	var to_remove = item_amount
 	var removed = 0
@@ -164,16 +160,17 @@ func removeItem(item_amount: int,globalMousePos:Vector2) -> int:
 					if currGotSlot.amount <= 0:
 						for index in range(maxInventorySlot):
 							if player:
-								if currGotSlot.item == playerInventory[index].item:
-									playerInventory[index] = null
-									if parentControl.player and !isForExternalSlot:
-										var itemDropped = materialInstance.instantiate()
-										itemDropped .itemData = currGotSlot.item
-										itemDropped.amount = to_remove
-										itemDropped.global_position = parentControl.player.global_position + Vector2(randi_range(-5,5),20)
-										parentControl.player.localLevel.add_child(itemDropped)
-									currGotSlot.item = null	
-									break
+								if playerInventory[index] != null:
+									if currGotSlot.item == playerInventory[index].item:
+										playerInventory[index] = null
+										if parentControl.player and !isForExternalSlot:
+											var itemDropped = materialInstance.instantiate()
+											itemDropped .itemData = currGotSlot.item
+											itemDropped.amount = to_remove
+											itemDropped.global_position = parentControl.player.global_position + Vector2(randi_range(-5,5),20)
+											parentControl.player.localLevel.add_child(itemDropped)
+										currGotSlot.item = null	
+										break
 					else:
 						for index in range(maxInventorySlot):
 							if currGotSlot.item == playerInventory[index].item:
@@ -192,7 +189,7 @@ func removeItem(item_amount: int,globalMousePos:Vector2) -> int:
 	
 
 
-	return removed
+	return true
 	
 
 
