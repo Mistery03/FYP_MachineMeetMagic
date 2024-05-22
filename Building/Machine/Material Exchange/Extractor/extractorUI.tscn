@@ -1,9 +1,12 @@
-[gd_scene load_steps=15 format=3 uid="uid://cbpifgpelsijg"]
+[gd_scene load_steps=22 format=3 uid="uid://cbpifgpelsijg"]
 
 [ext_resource type="Script" path="res://Building/Machine/Material Exchange/Extractor/extractorUI.gd" id="1_q5y3h"]
+[ext_resource type="Resource" uid="uid://bf2wpudjl6wu5" path="res://Entity/Data/testSlot1.tres" id="2_2j1w6"]
 [ext_resource type="Texture2D" uid="uid://daap0c1p135gi" path="res://Asset/UIUX/machineContainer.png" id="2_ssxv3"]
+[ext_resource type="Resource" uid="uid://b0mv13gn6qdxo" path="res://Material/Construction/wood.tres" id="3_4sgsv"]
 [ext_resource type="SpriteFrames" uid="uid://cbtw4dcn8pny6" path="res://Building/Machine/Material Exchange/Extractor/extractorAnimation.tres" id="3_bofy2"]
 [ext_resource type="PackedScene" uid="uid://ckanenxxawbfv" path="res://UI/PowerSwitch/power_switch.tscn" id="4_ayn0i"]
+[ext_resource type="Resource" uid="uid://cchhf0shqvfkr" path="res://Material/Currency/Magic Essence/magicEssence.tres" id="4_uecce"]
 [ext_resource type="Texture2D" uid="uid://d3gb5b0josq6g" path="res://Asset/UIUX/powerSwitch.png" id="5_63tcs"]
 [ext_resource type="PackedScene" uid="uid://18gib6v62tlc" path="res://UI/MachineSlot/material_slot.tscn" id="5_l467h"]
 [ext_resource type="PackedScene" uid="uid://dsnw47taoamf7" path="res://UI/MachineSlot/result_slot.tscn" id="6_yhepd"]
@@ -11,6 +14,10 @@
 [ext_resource type="PackedScene" uid="uid://3etlyd8c2p38" path="res://UI/ProgressBar/progress_bar.tscn" id="8_xpyir"]
 [ext_resource type="PackedScene" uid="uid://cxsbrurialksc" path="res://UI/MachineManaBar/machine_mana_bar.tscn" id="9_j8etu"]
 [ext_resource type="FontFile" uid="uid://cl3rxpo58micg" path="res://Asset/Font/Lambda-Regular.ttf" id="10_jqk1g"]
+[ext_resource type="Script" path="res://UI/Inventory/Player/PlayerInventoryHanlder.gd" id="12_fr8w3"]
+[ext_resource type="PackedScene" uid="uid://d3a8b5m3ju4nv" path="res://UI/Inventory/Player/playerInventory_machineSlot.tscn" id="13_5uffe"]
+[ext_resource type="PackedScene" uid="uid://cnj7jj8r34b1q" path="res://Material/Material.tscn" id="14_s7a5o"]
+[ext_resource type="PackedScene" uid="uid://cawvmrg7mckvi" path="res://UI/Inventory/Player/player_grid_inventory.tscn" id="15_3fl7q"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_nyk3b"]
 atlas = ExtResource("5_63tcs")
@@ -22,10 +29,16 @@ region = Rect2(128, 0, 64, 64)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_a4t5i"]
 
-[node name="ExtractorUI" type="Control"]
+[node name="ExtractorUI" type="Control" node_paths=PackedStringArray("inventoryHandler")]
 layout_mode = 3
 anchors_preset = 0
 script = ExtResource("1_q5y3h")
+inventoryHandler = NodePath("PlayerInventoryHanlder")
+debugInventory = Array[Resource("res://Entity/Data/slotData.gd")]([ExtResource("2_2j1w6"), null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null])
+debugItem = ExtResource("3_4sgsv")
+debugMaxSlot = 20
+debugMode = true
+resultedItem = ExtResource("4_uecce")
 
 [node name="Background" type="TextureRect" parent="."]
 texture_filter = 1
@@ -62,19 +75,23 @@ theme_override_icons/checked_mirrored = SubResource("AtlasTexture_a4t5i")
 disabled = true
 button_pressed = true
 
-[node name="MaterialSlot" parent="." instance=ExtResource("5_l467h")]
+[node name="MaterialSlot" parent="." node_paths=PackedStringArray("parentControl") instance=ExtResource("5_l467h")]
 layout_mode = 0
 offset_left = 68.0
 offset_top = 413.0
 offset_right = 108.0
 offset_bottom = 453.0
+scale = Vector2(0.6, 0.6)
+parentControl = NodePath("..")
 
-[node name="ResultSlot" parent="." instance=ExtResource("6_yhepd")]
+[node name="ResultSlot" parent="." node_paths=PackedStringArray("parentControl") instance=ExtResource("6_yhepd")]
 layout_mode = 0
 offset_left = 901.0
 offset_top = 412.0
 offset_right = 941.0
 offset_bottom = 452.0
+scale = Vector2(0.6, 0.6)
+parentControl = NodePath("..")
 
 [node name="FuelSlot" parent="." node_paths=PackedStringArray("parentControl") instance=ExtResource("7_ndds1")]
 layout_mode = 0
@@ -86,12 +103,12 @@ scale = Vector2(0.6, 0.6)
 parentControl = NodePath("..")
 
 [node name="MagicSlot" type="Panel" parent="."]
+visible = false
 layout_mode = 0
 offset_left = 906.0
 offset_top = 578.0
 offset_right = 946.0
 offset_bottom = 618.0
-scale = Vector2(3, 3)
 
 [node name="ProgressBar" parent="." instance=ExtResource("8_xpyir")]
 layout_mode = 0
@@ -149,3 +166,35 @@ offset_bottom = 800.0
 grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("2_ssxv3")
+
+[node name="PlayerInventory" type="Label" parent="."]
+layout_mode = 0
+offset_left = 1130.0
+offset_top = 124.0
+offset_right = 1562.0
+offset_bottom = 194.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("10_jqk1g")
+theme_override_font_sizes/font_size = 50
+text = "PLAYER INVENTORY"
+horizontal_alignment = 1
+
+[node name="PlayerInventoryHanlder" type="Control" parent="." node_paths=PackedStringArray("parentControl")]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("12_fr8w3")
+parentControl = NodePath("..")
+inventorySlot = ExtResource("13_5uffe")
+maxInventorySlot = 20
+materialInstance = ExtResource("14_s7a5o")
+
+[node name="PlayerGridInventory" parent="PlayerInventoryHanlder" instance=ExtResource("15_3fl7q")]
+layout_mode = 1
+offset_left = 1137.0
+offset_top = 200.0
+offset_right = 1903.0
+offset_bottom = 1214.0
+scale = Vector2(0.5, 0.5)
+script = null

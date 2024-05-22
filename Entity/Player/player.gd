@@ -10,6 +10,9 @@ const JUMP_VELOCITY = 4.5
 @export var staff:Staff = null
 @export var isStaffEquipped:bool
 
+@export var MagicEssenceCurrency:int
+@export var ResearchPointCurrency:int
+
 @export var playerInventoryController:Control
 @export var itemHUDPlaceholder:Control
 @export var maxInventorySize:int
