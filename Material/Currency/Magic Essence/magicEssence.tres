@@ -14,3 +14,4 @@ type = "Currency"
 texture = SubResource("AtlasTexture_2gnla")
 amount = 0
 burnPerSecond = 0
+durability = 0
