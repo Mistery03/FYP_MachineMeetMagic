@@ -14,3 +14,4 @@ type = "Construction"
 texture = SubResource("AtlasTexture_dmqar")
 amount = 0
 burnPerSecond = 50
+durability = 0

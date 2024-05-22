@@ -24,7 +24,6 @@ animation = &"Processing"
 [node name="ExtractorUI" parent="Root" node_paths=PackedStringArray("parentMachine") instance=ExtResource("3_po1mx")]
 visible = false
 parentMachine = NodePath("../..")
-debugMode = false
 
 [node name="Interectable" type="Area2D" parent="."]
 
