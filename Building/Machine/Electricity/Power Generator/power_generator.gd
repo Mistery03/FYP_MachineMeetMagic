@@ -55,15 +55,21 @@ func _process(delta):
 		
 func _on_interectable_input_event(viewport, event, shape_idx):
 	if event is InputEventMouseButton:
-		if event.is_action_pressed("ACTION"):
-			machineUI.visible = true
-			if machineUI.inventoryHandler.slotList.size() > 0:
-				machineUI.inventoryHandler.update_slots()
+		if machineUI.debugMode:
+			if event.is_action_pressed("ACTION"):
+				machineUI.visible = true
+				if machineUI.inventoryHandler.slotList.size() > 0:
+					machineUI.inventoryHandler.update_slots()
 			
-			if player:
+		if player:
+			if event.is_action_pressed("ACTION"):
 				if !player.isBuildMode:
-					player.itemHUDPlaceholder.visible = false
-					player.isMachineUI = true
+					machineUI.visible = true
+					if machineUI.inventoryHandler.slotList.size() > 0:
+						machineUI.inventoryHandler.update_slots()
+					
+						player.itemHUDPlaceholder.visible = false
+						player.isMachineUI = true
 	
 		
 
