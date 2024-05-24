@@ -15,7 +15,7 @@ extends Control
 @export var maxValue:float = 100
 
 @export var parentMachine:Machine
-@export var inventoryHandler:InventoryHanlder
+@export var inventoryHandler:InventoryHandler
 
 @export var debugInventory:Array[SlotData]
 @export var debugItem:MaterialData

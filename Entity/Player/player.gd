@@ -46,6 +46,7 @@ func _ready() -> void:
 	currMana = playerData.MaxMana
 	currStamina = playerData.MaxStamina
 	
+	##NOTE we must declare an inventory of null items size of N max inventory or else there will be a bug
 	for i in range(maxInventorySize):
 		inventory.append(null)
 	#print(inventory.size())
@@ -64,4 +65,4 @@ func _physics_process(delta) -> void:
 func _process(delta) -> void:
 	mousePos = get_global_mouse_position()
 	state_manager.process_frame(delta)
-	print(inventory)
+	#print(inventory)

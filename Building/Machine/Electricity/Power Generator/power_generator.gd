@@ -81,6 +81,7 @@ func _input(event):
 				player.itemHUDPlaceholder.visible = true
 				player.isPressable = false
 				player.isMachineUI = false
+				machineUI.inventoryHandler.update_slots()
 			##NOTE Dear future programemr either me or someone else, fix this bug to polish the inventory ok
 			##The bug is this inventory function will break everything and give a lot of error needing to fix
 			#machineUI.inventoryHandler.convertSlotListToInventoryData()

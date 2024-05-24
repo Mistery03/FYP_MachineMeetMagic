@@ -254,32 +254,40 @@ height = 164.0
 script/source = "class_name  InventoryManager
 extends Node
 
-##InitSlot is just to ensure the inventory will return data, do not remove
+##WARNING InitSlot is just to ensure the inventory will return data, DO NOT REMOVE
 @export var initSlot:SlotData
 
+##Max Stack size
 const MAXSTACKSIZE:int = 99
 
-signal OnInventoryChanged(Inventory)
-signal OnInventoryAdded(Inventory)
+##To communicate to other objects that have the inventory system
+signal OnInventoryChanged
 
 var inventory:Array[SlotData]  = [initSlot]
-var tempInventory:Array[SlotData] = [initSlot]
+
+##Of course we need reference to the player's inventory
 var player:Player
 
 var overflow:int = 0
 
+##To ensure everything is assigned
 func init(player:Player):
 	inventory = player.inventory
 	self.player = player
 	#print(inventory)
 
+##Insert item have several logics that must take in for consideration
+##1: We check for overflow of items because that we set max stacks to be 99, it's important to take account the chances that it will overflow (exp:99 + 5 then what?)
+##2: Hence we check for overflow
 
 func insert(droppedItem:GameMaterial,amount:int):
+	##Because overflow is a class variable rather than a local variable, we need to check if it's zero else we add alongside with the other overflows
 	if overflow <= 0:
 		overflow = amount
 	else:
 		overflow += amount
 	
+	##CASE 1 when there no item then simply insert
 	for index in len(inventory):
 		if inventory[index] ==null:
 			var slotToBeAdded = SlotData.new()
@@ -289,24 +297,25 @@ func insert(droppedItem:GameMaterial,amount:int):
 
 			overflow = 0
 			break
+		##CASE 2 when there are items then we need to check if it's the same and is the amount below the max stack size		
 		elif inventory[index].item == droppedItem.itemData:
 			if  inventory[index].amount < MAXSTACKSIZE:
+				##We keep track of available space to easily check for overflow 
 				var availableSpace = MAXSTACKSIZE -  inventory[index].amount 
-		
+				##If the overflow is below the available space we just increase the amount
 				if overflow <= availableSpace:
 					inventory[index].amount += overflow
 					overflow = 0
 					break
 				else:
+					##Overflow too much? Just add the availablespace to the next slot
 					inventory[index].amount += availableSpace
 					overflow -= availableSpace
 
-	
-	#print(inventory)
-	#print(inventory.size())
-	OnInventoryChanged.emit(inventory)
+	##To communicate to other objects
+	OnInventoryChanged.emit()
 
-func remove(droppedItem:GameMaterial,amount:int):
+func remove(selectedItem:GameMaterial,amount:int):
 	pass
 
 func getSameItemCount(item:MaterialData)->int:
@@ -316,6 +325,7 @@ func getSameItemCount(item:MaterialData)->int:
 			count +=1
 	return count
 
+##NOTE I forgot why I coded this so just keep it
 func _getItemIndex(item:MaterialData) -> int:
 	for slot in len(inventory):
 		if inventory[slot].item == item:
@@ -785,6 +795,7 @@ shape = SubResource("CapsuleShape2D_5n34a")
 
 [node name="InventoryManager" type="Node" parent="."]
 script = SubResource("GDScript_3ckag")
+initSlot = ExtResource("4_e4jpf")
 
 [node name="PotionManager" type="Node" parent="." node_paths=PackedStringArray("potionInventory", "potionGridInventory", "potionHUD")]
 script = ExtResource("5_5bgkf")

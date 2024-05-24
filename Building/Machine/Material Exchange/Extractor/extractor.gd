@@ -67,6 +67,7 @@ func _input(event):
 	if machineUI.visible:
 		if Input.is_action_just_pressed("EXIT"):
 			machineUI.visible = false
+			machineUI.inventoryHandler.update_slots()
 			player.itemHUDPlaceholder.visible = true
 			player.isPressable = false
 			player.isMachineUI = false
