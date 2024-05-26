@@ -10,8 +10,6 @@ extends Control
 func _ready():
 	texture_rect.texture = texture
 
-
-
 	
 func _unhandled_key_input(event):
 	if player.staff:

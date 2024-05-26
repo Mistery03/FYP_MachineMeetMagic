@@ -6,12 +6,12 @@
 [ext_resource type="Script" path="res://Scene/Forest/Rooms/ThreeWayRoom/Up.gd" id="4_k4ykc"]
 [ext_resource type="Script" path="res://Scene/Forest/Rooms/Door/Door.gd" id="4_mn04y"]
 
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_e53mp"]
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_iigc0"]
 texture = ExtResource("1_8tr5c")
 texture_region_size = Vector2i(32, 32)
 0:0/0 = 0
 
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_6aav3"]
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_31y7f"]
 texture = ExtResource("2_jnwbk")
 texture_region_size = Vector2i(32, 32)
 0:0/0 = 0
@@ -53,8 +53,8 @@ texture_region_size = Vector2i(32, 32)
 
 [sub_resource type="TileSet" id="TileSet_58spw"]
 tile_size = Vector2i(32, 32)
-sources/2 = SubResource("TileSetAtlasSource_6aav3")
-sources/1 = SubResource("TileSetAtlasSource_e53mp")
+sources/2 = SubResource("TileSetAtlasSource_31y7f")
+sources/1 = SubResource("TileSetAtlasSource_iigc0")
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_7rtlc"]
 size = Vector2(163, 48)

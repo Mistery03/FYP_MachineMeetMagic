@@ -1,3 +1,23 @@
-[gd_scene format=3 uid="uid://6hetoebu3te7"]
+[gd_scene load_steps=7 format=3 uid="uid://6hetoebu3te7"]
 
-[node name="Forest" type="Node2D"]
+[ext_resource type="Script" path="res://Scene/Forest/Forest.gd" id="1_cclsm"]
+[ext_resource type="PackedScene" uid="uid://cb317k1h3nxy1" path="res://Scene/Forest/Rooms/DeadEndRoom/DeadEnd.tscn" id="2_1qmg0"]
+[ext_resource type="PackedScene" uid="uid://djmx7drmjteqn" path="res://Scene/Forest/Rooms/TwoWayRoom/TwoWay.tscn" id="3_qmw5k"]
+[ext_resource type="PackedScene" uid="uid://b8pwwvahwlh4a" path="res://Scene/Forest/Rooms/ThreeWayRoom/ThreeWay.tscn" id="4_lfebw"]
+[ext_resource type="PackedScene" uid="uid://dtt2wcpi7wi7r" path="res://Scene/Forest/Rooms/FourWayRoom/FourWay.tscn" id="5_h8lfp"]
+[ext_resource type="PackedScene" uid="uid://c1vsfoc55pk0w" path="res://Entity/Player/player.tscn" id="6_7w6c7"]
+
+[node name="Forest" type="Node2D" node_paths=PackedStringArray("player")]
+script = ExtResource("1_cclsm")
+DegreeRoom = {
+1: ExtResource("2_1qmg0"),
+2: ExtResource("3_qmw5k"),
+3: ExtResource("4_lfebw"),
+4: ExtResource("5_h8lfp")
+}
+player = NodePath("Player")
+maxNodes = 6
+
+[node name="Rooms" type="Node2D" parent="."]
+
+[node name="Player" parent="." instance=ExtResource("6_7w6c7")]
