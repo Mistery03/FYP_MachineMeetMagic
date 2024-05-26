@@ -15,7 +15,7 @@ func _ready():
 		area_2d.monitoring = false
 	else:
 		area_2d.monitoring = true
-	if dead_end.player:
-		dead_end.player.position = door_right.position - Vector2(30,0)
-		dead_end.player.animation.play("IDLESIDE")
-		dead_end.player.animation.flip_h = true
+#	if dead_end.player:
+		#dead_end.player.position = door_right.position - Vector2(30,0)
+		#dead_end.player.animation.play("IDLESIDE")
+		#dead_end.player.animation.flip_h = true

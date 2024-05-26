@@ -15,6 +15,6 @@ func _ready():
 		area_2d.monitoring = false
 	else:
 		area_2d.monitoring = true
-	if dead_end.player:
-		dead_end.player.position = door_down.position - Vector2(0,30)
-		dead_end.player.animation.play("WALKBACKWARD")
+	#if dead_end.player:
+		#dead_end.player.position = door_down.position - Vector2(0,30)
+		#dead_end.player.animation.play("WALKBACKWARD")

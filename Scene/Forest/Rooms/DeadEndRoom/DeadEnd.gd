@@ -14,10 +14,11 @@ func _ready():
 	for room in room_sets.get_children():
 		IDList.append(room.ID)
 		
-	if !isStartingRoom:
+	if isStartingRoom:
 		roomID  = IDList.pick_random()
-	else:
 		player.position = Vector2(0,0)
+
+		
 
 	for room in room_sets.get_children():
 		if room.ID != roomID:

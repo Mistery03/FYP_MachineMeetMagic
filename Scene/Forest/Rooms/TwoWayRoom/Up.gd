@@ -19,6 +19,6 @@ func _ready():
 			door.get_child(0).monitoring = false
 		else:
 			door.get_child(0).monitoring = true
-	if two_way.player:
-		two_way.player.position = door_up.position + Vector2(0,30)
+	#if two_way.player:
+		#two_way.player.position = door_up.position + Vector2(0,30)
 		#dead_end.player.animation.play("WALKFRONT")
