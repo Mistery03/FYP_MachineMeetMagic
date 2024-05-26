@@ -52,6 +52,7 @@ func _ready() -> void:
 	#print(inventory.size())
 	inventory_manager.init(self)
 	state_manager.init(self,animation,move_component,camera)
+	
 
 	
 

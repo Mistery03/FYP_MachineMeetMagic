@@ -1,4 +1,4 @@
-[gd_scene load_steps=73 format=3 uid="uid://c1vsfoc55pk0w"]
+[gd_scene load_steps=75 format=3 uid="uid://c1vsfoc55pk0w"]
 
 [ext_resource type="Texture2D" uid="uid://bd32dcnew3uvf" path="res://Asset/L.png" id="1_ksidj"]
 [ext_resource type="Script" path="res://Entity/Player/player.gd" id="1_xfdxb"]
@@ -63,6 +63,14 @@ region = Rect2(32, 0, 32, 32)
 [sub_resource type="AtlasTexture" id="AtlasTexture_x610m"]
 atlas = ExtResource("1_ksidj")
 region = Rect2(128, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_r1i55"]
+atlas = ExtResource("1_ksidj")
+region = Rect2(0, 128, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_icok0"]
+atlas = ExtResource("1_ksidj")
+region = Rect2(32, 128, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_lx3k1"]
 atlas = ExtResource("1_ksidj")
@@ -163,7 +171,18 @@ animations = [{
 }],
 "loop": true,
 "name": &"IDLE",
-"speed": 5.0
+"speed": 2.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_r1i55")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_icok0")
+}],
+"loop": true,
+"name": &"IDLESIDE",
+"speed": 2.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -780,14 +799,14 @@ initSlot = ExtResource("4_e4jpf")
 inventory = Array[Object]([])
 
 [node name="Camera" type="Camera2D" parent="."]
-zoom = Vector2(7, 7)
+zoom = Vector2(6, 6)
 position_smoothing_speed = 4.0
 
 [node name="Animation" type="AnimatedSprite2D" parent="."]
 texture_filter = 1
 scale = Vector2(5, 5)
 sprite_frames = SubResource("SpriteFrames_47nfc")
-animation = &"WALKFRONT"
+animation = &"FALLING"
 autoplay = "IDLE"
 
 [node name="CollisionShape3D" type="CollisionShape2D" parent="."]
