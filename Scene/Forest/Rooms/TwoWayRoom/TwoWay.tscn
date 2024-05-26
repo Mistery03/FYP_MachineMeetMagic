@@ -141,5 +141,5 @@ shape = SubResource("RectangleShape2D_nv5v6")
 
 [connection signal="body_entered" from="RoomSets/Up/Doors/DoorUp/Area2D" to="RoomSets/Up/Doors/DoorUp" method="_on_area_2d_body_entered"]
 [connection signal="body_entered" from="RoomSets/Up/Doors/DoorDown/Area2D" to="RoomSets/Up/Doors/DoorDown" method="_on_area_2d_body_entered"]
-[connection signal="body_entered" from="RoomSets/Right/Doors/DoorRight/Area2D" to="RoomSets/Up/Doors/DoorUp" method="_on_area_2d_body_entered"]
-[connection signal="body_entered" from="RoomSets/Right/Doors/DoorLeft/Area2D" to="RoomSets/Up/Doors/DoorUp" method="_on_area_2d_body_entered"]
+[connection signal="body_entered" from="RoomSets/Right/Doors/DoorRight/Area2D" to="RoomSets/Right/Doors/DoorRight" method="_on_area_2d_body_entered"]
+[connection signal="body_entered" from="RoomSets/Right/Doors/DoorLeft/Area2D" to="RoomSets/Right/Doors/DoorLeft" method="_on_area_2d_body_entered"]

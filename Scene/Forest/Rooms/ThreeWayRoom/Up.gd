@@ -1,11 +1,20 @@
 extends TileMap
 
+@export var ID:int = 2
 
-# Called when the node enters the scene tree for the first time.
+@onready var doors = $Doors
+
+@onready var door_right = $Doors/DoorRight
+@onready var door_left = $Doors/DoorLeft
+@onready var door_down = $Doors/DoorDown
+
+
+@onready var two_way = $"../.."
+
+
 func _ready():
-	pass # Replace with function body.
-
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
-	pass
+	await get_tree().create_timer(0.1).timeout
+	if two_way.player:
+		pass
+		#two_way.player.position = door_up.position + Vector2(0,30)
+		#dead_end.player.animation.play("WALKFRONT")
