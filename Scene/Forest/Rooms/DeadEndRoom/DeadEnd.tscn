@@ -1,21 +1,20 @@
-[gd_scene load_steps=15 format=3 uid="uid://cb317k1h3nxy1"]
+[gd_scene load_steps=14 format=3 uid="uid://cb317k1h3nxy1"]
 
 [ext_resource type="Script" path="res://Scene/Forest/Rooms/DeadEndRoom/DeadEnd.gd" id="1_10yak"]
 [ext_resource type="Texture2D" uid="uid://bm6sn1f05g1ub" path="res://Asset/Level/FYPTilemap.png" id="2_kpuii"]
 [ext_resource type="Texture2D" uid="uid://b7p1vl7hrge60" path="res://Asset/Level/backgroundChecker.png" id="2_sb3fs"]
 [ext_resource type="Script" path="res://Scene/Forest/Rooms/DeadEndRoom/Up.gd" id="3_4givn"]
 [ext_resource type="Script" path="res://Scene/Forest/Rooms/Door/Door.gd" id="3_ah1wf"]
-[ext_resource type="PackedScene" uid="uid://c1vsfoc55pk0w" path="res://Entity/Player/player.tscn" id="5_3uj01"]
 [ext_resource type="Script" path="res://Scene/Forest/Rooms/DeadEndRoom/Right.gd" id="6_ori48"]
 [ext_resource type="Script" path="res://Scene/Forest/Rooms/DeadEndRoom/Down.gd" id="7_r3p3l"]
 [ext_resource type="Script" path="res://Scene/Forest/Rooms/DeadEndRoom/Left.gd" id="8_023vm"]
 
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_e53mp"]
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_emsj1"]
 texture = ExtResource("2_sb3fs")
 texture_region_size = Vector2i(32, 32)
 0:0/0 = 0
 
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_6aav3"]
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_yefhf"]
 texture = ExtResource("2_kpuii")
 texture_region_size = Vector2i(32, 32)
 0:0/0 = 0
@@ -57,8 +56,8 @@ texture_region_size = Vector2i(32, 32)
 
 [sub_resource type="TileSet" id="TileSet_voory"]
 tile_size = Vector2i(32, 32)
-sources/2 = SubResource("TileSetAtlasSource_6aav3")
-sources/1 = SubResource("TileSetAtlasSource_e53mp")
+sources/2 = SubResource("TileSetAtlasSource_yefhf")
+sources/1 = SubResource("TileSetAtlasSource_emsj1")
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_f7sus"]
 size = Vector2(164, 34)
@@ -70,7 +69,7 @@ size = Vector2(30, 103)
 script = ExtResource("1_10yak")
 isStartingRoom = true
 roomID = 128
-player = NodePath("Player")
+player = NodePath("")
 
 [node name="RoomOritentation" type="Node2D" parent="."]
 
@@ -161,8 +160,6 @@ collision_layer = 32
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="RoomOritentation/Left/DoorLeft/Area2D"]
 shape = SubResource("RectangleShape2D_luqwj")
-
-[node name="Player" parent="." instance=ExtResource("5_3uj01")]
 
 [connection signal="body_entered" from="RoomOritentation/Up/DoorUp/Area2D" to="RoomOritentation/Up/DoorUp" method="_on_area_2d_body_entered"]
 [connection signal="body_entered" from="RoomOritentation/Right/DoorRight/Area2D" to="RoomOritentation/Right/DoorRight" method="_on_area_2d_body_entered"]
