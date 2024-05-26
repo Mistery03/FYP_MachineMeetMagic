@@ -1,6 +1,7 @@
 extends Node2D
 
 @export var isStartingRoom:bool
+@export var PK_roomID:int = 128
 @export var roomID:int
 @export var player:Player
 

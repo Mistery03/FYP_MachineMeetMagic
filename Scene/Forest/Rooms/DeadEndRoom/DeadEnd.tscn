@@ -69,7 +69,7 @@ size = Vector2(30, 103)
 [node name="DeadEnd" type="Node2D" node_paths=PackedStringArray("player")]
 script = ExtResource("1_10yak")
 isStartingRoom = true
-roomID = 130
+roomID = 128
 player = NodePath("Player")
 
 [node name="RoomOritentation" type="Node2D" parent="."]
