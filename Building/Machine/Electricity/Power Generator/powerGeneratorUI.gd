@@ -47,6 +47,7 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
+	
 	if inventoryHandler:
 		if player:
 			inventoryHandler.playerInventory = player.inventory
@@ -73,6 +74,9 @@ func _process(delta):
 	
 	fuelSlotLogic()
 	
+	if inventoryHandler.currSlot:
+		print(inventoryHandler.currSlot.amount)
+	
 	
 	
 					
@@ -85,8 +89,7 @@ func _input(event):
 			isMousePressed = false
 		
 		
-		if event.is_action_pressed("ACTION2"):
-			inventoryHandler.removeItem(1,get_global_mouse_position())
+			
 	if debugMode:
 		if event is InputEventKey:
 			if event.is_action_pressed("MOVERIGHT"):
@@ -208,3 +211,7 @@ func whenInventorySlotIsNotEmpty():
 		##NOTE function in playerInventoryHandler
 		inventoryHandler.swap(inventoryHandler.currSlot.item,inventoryHandler.currSlot.amount,get_global_mouse_position())
 		
+
+func _on_area_of_pressing_gui_input(event):
+	if event.is_action_pressed("ACTION2"):
+		inventoryHandler.removeItem(1,get_global_mouse_position())

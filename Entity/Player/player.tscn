@@ -261,7 +261,7 @@ extends Node
 const MAXSTACKSIZE:int = 99
 
 ##To communicate to other objects that have the inventory system
-signal OnInventoryChanged
+signal OnInventoryChanged(inventory)
 
 var inventory:Array[SlotData]  = [initSlot]
 
@@ -313,7 +313,7 @@ func insert(droppedItem:GameMaterial,amount:int):
 					overflow -= availableSpace
 
 	##To communicate to other objects
-	OnInventoryChanged.emit()
+	OnInventoryChanged.emit(inventory)
 
 func remove(selectedItem:GameMaterial,amount:int):
 	pass

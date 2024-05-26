@@ -256,3 +256,12 @@ theme_override_fonts/font = ExtResource("9_078kl")
 theme_override_font_sizes/font_size = 50
 text = "PLAYER INVENTORY"
 horizontal_alignment = 1
+
+[node name="AreaOfPressing" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_top = 85.0
+offset_right = 1597.0
+offset_bottom = 801.0
+
+[connection signal="gui_input" from="AreaOfPressing" to="." method="_on_area_of_pressing_gui_input"]

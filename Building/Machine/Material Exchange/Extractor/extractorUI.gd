@@ -116,8 +116,7 @@ func _input(event):
 			isMousePressed = false
 		
 		
-		if event.is_action_pressed("ACTION2"):
-			inventoryHandler.removeItem(1,get_global_mouse_position())
+		
 	if debugMode:
 		if event is InputEventKey:
 			if event.is_action_pressed("MOVERIGHT"):
@@ -245,3 +244,11 @@ func processDisplay(delta):
 	if material_slot.item:
 		currLoadingValue += material_slot.item.burnPerSecond * delta
 	currLoadingValue = clamp(currLoadingValue , 0, maxValue)
+
+
+
+
+func _on_area_of_pressing_gui_input(event):
+	if event.is_action_pressed("ACTION2"):
+		print("extractor")
+		inventoryHandler.removeItem(1,get_global_mouse_position())

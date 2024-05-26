@@ -22,6 +22,7 @@ func _ready():
 	changeAnimation("NoPower")
 	await get_tree().create_timer(0.1).timeout
 	machineUI.player = player
+	
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -55,7 +56,7 @@ func _process(delta):
 		
 func _on_interectable_input_event(viewport, event, shape_idx):
 	if event is InputEventMouseButton:
-		if machineUI.debugMode:
+		if machineUI.debugMode and !player:
 			if event.is_action_pressed("ACTION"):
 				machineUI.visible = true
 				if machineUI.inventoryHandler.slotList.size() > 0:
@@ -65,11 +66,12 @@ func _on_interectable_input_event(viewport, event, shape_idx):
 			if event.is_action_pressed("ACTION"):
 				if !player.isBuildMode:
 					machineUI.visible = true
+					##The checks for when slotList is not defined
 					if machineUI.inventoryHandler.slotList.size() > 0:
 						machineUI.inventoryHandler.update_slots()
 					
-						player.itemHUDPlaceholder.visible = false
-						player.isMachineUI = true
+					player.itemHUDPlaceholder.visible = false
+					player.isMachineUI = true
 	
 		
 
@@ -81,10 +83,10 @@ func _input(event):
 				player.itemHUDPlaceholder.visible = true
 				player.isPressable = false
 				player.isMachineUI = false
-				machineUI.inventoryHandler.update_slots()
 			##NOTE Dear future programemr either me or someone else, fix this bug to polish the inventory ok
 			##The bug is this inventory function will break everything and give a lot of error needing to fix
-			#machineUI.inventoryHandler.convertSlotListToInventoryData()
+			
+				machineUI.inventoryHandler.convertSlotListToInventoryData()
 		
 
 func changeAnimation(animationName:String):

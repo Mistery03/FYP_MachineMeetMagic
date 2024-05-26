@@ -66,3 +66,6 @@ func _process(delta) -> void:
 	mousePos = get_global_mouse_position()
 	state_manager.process_frame(delta)
 	#print(inventory)
+	#for amount in inventory:
+		#if amount:
+			#print(amount.amount)

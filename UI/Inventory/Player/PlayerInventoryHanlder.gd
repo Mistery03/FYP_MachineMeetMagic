@@ -93,7 +93,7 @@ func _showDebugList():##Shows what data is in what slots
 	print(debugList)
 
 ##Whenever there changes to the slots we update the list accordingly
-func update_slots():
+func update_slots()->bool:
 	for i in range(maxInventorySlot):
 		if playerInventory[i]:
 			var GridSlotPos = Vector2i(slotList[i].position/slotSize)
@@ -103,6 +103,7 @@ func update_slots():
 			slotList[i].label.position = GridSlotPos + Vector2i(120,100)
 		else:
 			slotList[i].item = null
+	return true
 
 ##The reason we getting the slot positions is to do check logics with these, for example I want to check if the mouse is within the slot positions
 ##NOTE The position is converted from global to grid position similar to local_to_map() function
@@ -187,7 +188,6 @@ func insertItem(item:MaterialData,currAmount:int)->int:
 ##WARNING removeItem function is unfortunately messy
 ##Similar to the InsertItem we need to take account several scenerios
 func removeItem(item_amount: int,globalMousePos:Vector2) -> bool:
-	
 	##NOTE Only use when player is in the picture, when testing in debugmode it doesnt care if there player or not
 	randomize()
 	
@@ -250,6 +250,8 @@ func removeItem(item_amount: int,globalMousePos:Vector2) -> bool:
 					removed += to_remove
 					to_remove = 0
 	return true
+
+
 
 
 ##@NOTE Name purposely vague to fit cases for item and no item
@@ -341,12 +343,12 @@ func getSameItemCount(item:MaterialData)->int:
 	return count
 
 ##To communicate changes made by other objects (i.e Player object)
-func OnInventoryChanged():
+func OnInventoryChanged(inventory):
 	update_slots()
 
 
 ##NOTE not yet workin, prob will fix it during polishing stage
-func convertSlotListToInventoryData():
+"""func convertSlotListToInventoryData():
 	var tempArray:Array[SlotData]
 	tempArray.clear()
 	for index in len(slotList):
@@ -359,7 +361,32 @@ func convertSlotListToInventoryData():
 			tempArray.append(null)
 		
 		slotList[index].item = null
-	player.inventory = tempArray
+	
+			
+	playerInventory = tempArray.duplicate()
+	tempArray.clear()"""
+func convertSlotListToInventoryData():
+	var tempArray: Array = []
+	for index in len(slotList):
+		var slotToBeAdded = SlotData.new()
+		if slotList[index].item:
+			slotToBeAdded.item = slotList[index].item
+			slotToBeAdded.amount = slotList[index].amount
+			tempArray.append(slotToBeAdded)
+		else:
+			tempArray.append(null)
+
+		slotList[index].item = null
+
+	# Directly update the player inventory
+		if player:
+			for i in range(maxInventorySlot):
+				if i < tempArray.size():
+					player.inventory[i] = tempArray[i]
+				
+
+	tempArray.clear()	
+	
 	
 			
 				

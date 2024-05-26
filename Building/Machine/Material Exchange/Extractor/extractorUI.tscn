@@ -192,3 +192,11 @@ offset_right = 1903.0
 offset_bottom = 1214.0
 scale = Vector2(0.5, 0.5)
 script = null
+
+[node name="AreaOfPressing" type="Control" parent="."]
+anchors_preset = 0
+offset_top = 85.0
+offset_right = 1597.0
+offset_bottom = 801.0
+
+[connection signal="gui_input" from="AreaOfPressing" to="." method="_on_area_of_pressing_gui_input"]
