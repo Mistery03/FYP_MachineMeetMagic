@@ -1,8 +1,8 @@
 extends Node2D
 
 @export var isStartingRoom:bool
-@export var PK_roomID:int = 128
-@export var roomID:int
+@export var PK_roomID:int = 2
+@export var roomID:int = 2
 @export var player:Player
 
 @onready var room_sets = $RoomSets
@@ -16,6 +16,7 @@ func _ready():
 		
 	if !isStartingRoom:
 		roomID  = IDList.pick_random()
+	
 
 	for room in room_sets.get_children():
 		if room.ID != roomID:

@@ -5,16 +5,19 @@ extends Node2D
 @export var roomID:int = 2
 @export var player:Player
 
-@onready var room_oritentation = $RoomOritentation
+@onready var room_sets = $RoomSets
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	randomize()
+	var IDList:Array = []
+	for room in room_sets.get_children():
+		IDList.append(room.ID)
+		
 	if !isStartingRoom:
-		roomID  = randi_range(2,3)
-	
+		roomID  = IDList.pick_random()
 
-	for room in room_oritentation.get_children():
+	for room in room_sets.get_children():
 		if room.ID != roomID:
 			room.queue_free()
 
