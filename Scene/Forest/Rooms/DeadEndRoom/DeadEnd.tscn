@@ -152,11 +152,10 @@ size = Vector2(164, 34)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_luqwj"]
 size = Vector2(30, 103)
 
-[node name="DeadEnd" type="Node2D" node_paths=PackedStringArray("player")]
+[node name="DeadEnd" type="Node2D"]
 script = ExtResource("1_10yak")
 isStartingRoom = true
 roomID = 128
-player = NodePath("")
 
 [node name="RoomSets" type="Node2D" parent="."]
 
