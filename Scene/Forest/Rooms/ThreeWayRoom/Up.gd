@@ -19,6 +19,7 @@ func _ready():
 			door.get_child(0).monitoring = false
 		else:
 			door.get_child(0).monitoring = true
+			three_way.doorList = doors.duplicate()
 	if three_way.player:
 		pass
 		#two_way.player.position = door_up.position + Vector2(0,30)

@@ -2,7 +2,7 @@ extends TileMap
 
 @export var ID:int = 130
 
-@onready var door_down = $DoorDown
+@onready var doors = $Doors
 
 
 @onready var dead_end = $"../.."
@@ -11,10 +11,12 @@ extends TileMap
 func _ready():
 	
 	await get_tree().create_timer(0.1).timeout
-	if !dead_end.visible:
-		area_2d.monitoring = false
-	else:
-		area_2d.monitoring = true
+	for door in doors.get_children():
+		if !dead_end.visible:
+			door.get_child(0).monitoring = false
+		else:
+			door.get_child(0).monitoring = true
+			dead_end.doorList = doors.duplicate()
 	#if dead_end.player:
 		#dead_end.player.position = door_down.position - Vector2(0,30)
 		#dead_end.player.animation.play("WALKBACKWARD")

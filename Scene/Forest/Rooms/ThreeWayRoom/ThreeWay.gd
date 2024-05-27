@@ -6,7 +6,7 @@ extends Node2D
 @export var player:Player
 
 @onready var room_sets = $RoomSets
-
+var doorList:Array = []
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	randomize()

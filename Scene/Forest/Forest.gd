@@ -24,3 +24,7 @@ func _ready():
 	roomList[0].position = Vector2.ZERO	
 	roomList[0].visible = true
 	roomList[0].isStartingRoom = true
+	for door in roomList[0].doorList:
+		door.visible = false
+		
+	
