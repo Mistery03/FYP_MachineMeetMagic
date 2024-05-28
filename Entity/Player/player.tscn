@@ -786,15 +786,15 @@ _data = {
 "idleFront": SubResource("Animation_76tdj")
 }
 
-[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("staff", "playerInventoryController", "itemHUDPlaceholder") groups=["invalidPosition"]]
+[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("staff", "itemHUDPlaceholder", "playerInventoryController") groups=["invalidPosition"]]
 scale = Vector2(0.1, 0.1)
 collision_mask = 16
 script = ExtResource("1_xfdxb")
 playerData = ExtResource("2_g17go")
 potionObject = ExtResource("3_41una")
 staff = NodePath("Staff")
-playerInventoryController = NodePath("ROOT_UI/Inventory")
 itemHUDPlaceholder = NodePath("ROOT_UI/ItemHUDPlaceholder")
+playerInventoryController = NodePath("ROOT_UI/Inventory")
 maxInventorySize = 20
 initSlot = ExtResource("4_e4jpf")
 inventory = Array[Object]([])

@@ -5,18 +5,26 @@ const SPEED = 5.0
 const JUMP_VELOCITY = 4.5
 
 @export var playerData:EntityData
+
+@export_category("Potion")
 @export var potionObject:PotionData
 
+@export_category("Staff")
 @export var staff:Staff = null
 @export var isStaffEquipped:bool
 
+@export_category("Player currency")
 @export var MagicEssenceCurrency:int
 @export var ResearchPointCurrency:int
 
-@export var playerInventoryController:Control
+@export_category("HUD")
 @export var itemHUDPlaceholder:Control
-@export var maxInventorySize:int
 
+
+
+@export_category("Player Inventory")
+@export var playerInventoryController:Control
+@export var maxInventorySize:int
 ##InitSlot is just to ensure the inventory will return data, do not remove
 @export var initSlot:SlotData
 ##Takes in Slot Data so we have a "dictionary"

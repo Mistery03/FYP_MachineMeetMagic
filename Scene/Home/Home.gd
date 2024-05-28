@@ -1,10 +1,13 @@
 extends Node2D
 
 
-@export var isBuildEnabled:bool = false
+@export_category("Level")
 @export var levelName:String = "Home"
 
-@onready var player = $Player
+@export_category("Player Settings")
+@export var player:Player
+@export var isBuildEnabled:bool = false
+
 @onready var tile_map = $TileMap
 @onready var machineList = $MachineList
 

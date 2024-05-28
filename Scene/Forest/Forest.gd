@@ -1,9 +1,19 @@
 extends TreeGraphGeneration
 
-@export var DegreeRoom:Dictionary
-@onready var rooms = $Rooms
+
+
+@export var degreeRoom:Dictionary
+@export var orientationLookUp:Dictionary ={
+	"UP":"",
+	"RIGHT":"",
+	"DOWN":"",
+	"LEFT":""
+}
+
+
 @export var player:Player
 
+@onready var rooms = $Rooms
 var roomList:Array = []
 var doorList:Array = []
 
@@ -20,7 +30,7 @@ func _ready():
 	roomList.clear()
 	index = 0
 	for node in getAdjacencyDegreeList():
-		var room = DegreeRoom.get(getAdjacencyDegree(int(node))).instantiate()
+		var room = degreeRoom.get(getAdjacencyDegree(int(node))).instantiate()
 		room.position = Vector2(1600,1600)
 		if player:
 			room.player = player
@@ -42,7 +52,6 @@ func _ready():
 	
 	
 func changeRoom(roomNumber,roomID,doorOrientation):
-	
 	doorList.clear()
 	doorList = roomList[roomNumber].room_sets.get_child(0).doors.get_children()
 	var entrance

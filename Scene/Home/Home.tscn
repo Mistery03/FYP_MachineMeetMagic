@@ -946,8 +946,9 @@ custom_data_layer_7/type = 1
 sources/0 = SubResource("TileSetAtlasSource_klcm4")
 sources/1 = SubResource("TileSetAtlasSource_23vbt")
 
-[node name="Home" type="Node2D"]
+[node name="Home" type="Node2D" node_paths=PackedStringArray("player")]
 script = ExtResource("1_iycag")
+player = NodePath("Player")
 isBuildEnabled = true
 
 [node name="TileMap" type="TileMap" parent="."]

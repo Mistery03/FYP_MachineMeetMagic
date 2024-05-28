@@ -9,11 +9,17 @@
 
 [node name="Forest" type="Node2D" node_paths=PackedStringArray("player")]
 script = ExtResource("1_cclsm")
-DegreeRoom = {
+degreeRoom = {
 1: ExtResource("2_1qmg0"),
 2: ExtResource("3_qmw5k"),
 3: ExtResource("4_lfebw"),
 4: ExtResource("5_h8lfp")
+}
+orientationLookUp = {
+"DOWN": "UP",
+"LEFT": "RIGHT",
+"RIGHT": "LEFT",
+"UP": "DOWN"
 }
 player = NodePath("Player")
 maxNodes = 6
