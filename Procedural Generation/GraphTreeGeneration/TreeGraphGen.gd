@@ -88,5 +88,12 @@ func getAdjacencyDegreeList():
 		degreeList[node].append(degree)
 	return degreeList
 
+func getAdjacencyValueByKey(key:int):
+	var valueList = []
+	valueList.clear()
+	for node in adjacency_list.get(str(key)):
+		valueList.append(int(node))
+	return valueList
+
 func getAdjacencyDegree(key:int):
 	return adjacency_list.get(str(key)).size()

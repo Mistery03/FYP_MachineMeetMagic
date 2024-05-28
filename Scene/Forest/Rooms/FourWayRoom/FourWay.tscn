@@ -168,20 +168,10 @@ script = ExtResource("4_t231l")
 
 [node name="Doors" type="Node2D" parent="RoomSets/SquareFourWay"]
 
-[node name="DoorDown" type="Node2D" parent="RoomSets/SquareFourWay/Doors"]
-position = Vector2(0, 335)
-script = ExtResource("4_tietu")
-
-[node name="Area2D" type="Area2D" parent="RoomSets/SquareFourWay/Doors/DoorDown"]
-collision_layer = 32
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="RoomSets/SquareFourWay/Doors/DoorDown/Area2D"]
-position = Vector2(0.5, 0.5)
-shape = SubResource("RectangleShape2D_3tk78")
-
 [node name="DoorUp" type="Node2D" parent="RoomSets/SquareFourWay/Doors"]
 position = Vector2(0, -230)
 script = ExtResource("4_tietu")
+orientation = "UP"
 
 [node name="Area2D" type="Area2D" parent="RoomSets/SquareFourWay/Doors/DoorUp"]
 collision_layer = 32
@@ -193,6 +183,7 @@ shape = SubResource("RectangleShape2D_3tk78")
 [node name="DoorRight" type="Node2D" parent="RoomSets/SquareFourWay/Doors"]
 position = Vector2(320, 30)
 script = ExtResource("4_tietu")
+orientation = "RIGHT"
 
 [node name="Area2D" type="Area2D" parent="RoomSets/SquareFourWay/Doors/DoorRight"]
 collision_layer = 32
@@ -200,9 +191,22 @@ collision_layer = 32
 [node name="CollisionShape2D" type="CollisionShape2D" parent="RoomSets/SquareFourWay/Doors/DoorRight/Area2D"]
 shape = SubResource("RectangleShape2D_qrtl6")
 
+[node name="DoorDown" type="Node2D" parent="RoomSets/SquareFourWay/Doors"]
+position = Vector2(0, 335)
+script = ExtResource("4_tietu")
+orientation = "DOWN"
+
+[node name="Area2D" type="Area2D" parent="RoomSets/SquareFourWay/Doors/DoorDown"]
+collision_layer = 32
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RoomSets/SquareFourWay/Doors/DoorDown/Area2D"]
+position = Vector2(0.5, 0.5)
+shape = SubResource("RectangleShape2D_3tk78")
+
 [node name="DoorLeft" type="Node2D" parent="RoomSets/SquareFourWay/Doors"]
 position = Vector2(-320, 32)
 script = ExtResource("4_tietu")
+orientation = "LEFT"
 
 [node name="Area2D" type="Area2D" parent="RoomSets/SquareFourWay/Doors/DoorLeft"]
 collision_layer = 32
@@ -210,7 +214,7 @@ collision_layer = 32
 [node name="CollisionShape2D" type="CollisionShape2D" parent="RoomSets/SquareFourWay/Doors/DoorLeft/Area2D"]
 shape = SubResource("RectangleShape2D_qrtl6")
 
-[connection signal="body_entered" from="RoomSets/SquareFourWay/Doors/DoorDown/Area2D" to="RoomSets/SquareFourWay/Doors/DoorDown" method="_on_area_2d_body_entered"]
 [connection signal="body_entered" from="RoomSets/SquareFourWay/Doors/DoorUp/Area2D" to="RoomSets/SquareFourWay/Doors/DoorUp" method="_on_area_2d_body_entered"]
 [connection signal="body_entered" from="RoomSets/SquareFourWay/Doors/DoorRight/Area2D" to="RoomSets/SquareFourWay/Doors/DoorRight" method="_on_area_2d_body_entered"]
+[connection signal="body_entered" from="RoomSets/SquareFourWay/Doors/DoorDown/Area2D" to="RoomSets/SquareFourWay/Doors/DoorDown" method="_on_area_2d_body_entered"]
 [connection signal="body_entered" from="RoomSets/SquareFourWay/Doors/DoorLeft/Area2D" to="RoomSets/SquareFourWay/Doors/DoorLeft" method="_on_area_2d_body_entered"]

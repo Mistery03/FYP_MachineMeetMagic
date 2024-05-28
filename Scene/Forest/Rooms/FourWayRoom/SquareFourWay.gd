@@ -17,12 +17,7 @@ func _ready():
 	
 			
 	await get_tree().create_timer(0.1).timeout
-	for door in doors.get_children():
-		if !four_way.visible:
-			door.get_child(0).monitoring = false
-		else:
-			door.get_child(0).monitoring = true
-			four_way.doorList = doors.duplicate()
+	
 	if four_way.player:
 		pass
 		#two_way.player.position = door_up.position + Vector2(0,30)

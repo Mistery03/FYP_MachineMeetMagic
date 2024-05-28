@@ -172,6 +172,7 @@ script = ExtResource("3_sb27r")
 [node name="DoorUp" type="Node2D" parent="RoomSets/Up/Doors"]
 position = Vector2(0, -270)
 script = ExtResource("4_6n357")
+orientation = "UP"
 
 [node name="Area2D" type="Area2D" parent="RoomSets/Up/Doors/DoorUp"]
 collision_layer = 32
@@ -183,6 +184,7 @@ shape = SubResource("RectangleShape2D_113v4")
 [node name="DoorDown" type="Node2D" parent="RoomSets/Up/Doors"]
 position = Vector2(0, 335)
 script = ExtResource("4_6n357")
+orientation = "DOWN"
 
 [node name="Area2D" type="Area2D" parent="RoomSets/Up/Doors/DoorDown"]
 collision_layer = 32
