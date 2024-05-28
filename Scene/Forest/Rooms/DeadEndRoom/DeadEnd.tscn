@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://cb317k1h3nxy1"]
+[gd_scene load_steps=15 format=3 uid="uid://cb317k1h3nxy1"]
 
 [ext_resource type="Script" path="res://Scene/Forest/Rooms/DeadEndRoom/DeadEnd.gd" id="1_10yak"]
 [ext_resource type="Texture2D" uid="uid://bm6sn1f05g1ub" path="res://Asset/Level/FYPTilemap.png" id="2_kpuii"]
@@ -152,6 +152,9 @@ size = Vector2(164, 34)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_luqwj"]
 size = Vector2(30, 103)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_2p72n"]
+size = Vector2(165, 20)
+
 [node name="DeadEnd" type="Node2D"]
 script = ExtResource("1_10yak")
 roomID = 128
@@ -231,10 +234,11 @@ roomID = 130
 orientation = "DOWN"
 
 [node name="Area2D" type="Area2D" parent="RoomSets/Down/Doors/DoorDown"]
-collision_layer = 32
+collision_mask = 32
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="RoomSets/Down/Doors/DoorDown/Area2D"]
-shape = SubResource("RectangleShape2D_f7sus")
+position = Vector2(0.5, 0)
+shape = SubResource("RectangleShape2D_2p72n")
 
 [node name="Left" type="TileMap" parent="RoomSets"]
 texture_filter = 1

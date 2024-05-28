@@ -3,6 +3,7 @@ extends Node2D
 @export var isStartingRoom:bool
 @export var PK_roomID:int = 2
 @export var roomID:int = 2
+@export var debugRoomID:int = 0
 @export var player:Player
 @export var roomNum:int = 0
 
@@ -23,7 +24,6 @@ func _ready():
 func _process(delta):
 	if isStartingRoom:
 		selectedRoom(roomID)
-		
 		
 
 func selectedRoom(roomID:int):

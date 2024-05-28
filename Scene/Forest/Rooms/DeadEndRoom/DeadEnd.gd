@@ -26,10 +26,12 @@ func _process(delta):
 		selectedRoom(self.roomID)
 
 
-func selectedRoom(roomID:int):
+func selectedRoom(roomID:int)->bool:
 	for room in room_sets.get_children():
 		if room.ID != roomID:
 			room.queue_free()
+			return false
+	return true
 	
 	#print(room_sets.get_child(0).doors.get_child(0).roomNumber)
 

@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://djmx7drmjteqn"]
+[gd_scene load_steps=13 format=3 uid="uid://djmx7drmjteqn"]
 
 [ext_resource type="Script" path="res://Scene/Forest/Rooms/TwoWayRoom/TwoWay.gd" id="1_cbbql"]
 [ext_resource type="Texture2D" uid="uid://b7p1vl7hrge60" path="res://Asset/Level/backgroundChecker.png" id="1_p1w2t"]
@@ -145,7 +145,10 @@ sources/2 = SubResource("TileSetAtlasSource_3i0qv")
 sources/1 = SubResource("TileSetAtlasSource_5bpp7")
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_113v4"]
-size = Vector2(227, 67)
+size = Vector2(227, 28)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_jy7fx"]
+size = Vector2(20, 102)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_nv5v6"]
 size = Vector2(30, 100.5)
@@ -179,7 +182,7 @@ orientation = "UP"
 collision_layer = 32
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="RoomSets/Up/Doors/DoorUp/Area2D"]
-position = Vector2(0.5, -16.5)
+position = Vector2(0.5, -36)
 shape = SubResource("RectangleShape2D_113v4")
 
 [node name="DoorDown" type="Node2D" parent="RoomSets/Up/Doors"]
@@ -215,10 +218,9 @@ script = ExtResource("4_6n357")
 roomID = 3
 
 [node name="Area2D" type="Area2D" parent="RoomSets/Right/Doors/DoorRight"]
-collision_layer = 32
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="RoomSets/Right/Doors/DoorRight/Area2D"]
-shape = SubResource("RectangleShape2D_nv5v6")
+shape = SubResource("RectangleShape2D_jy7fx")
 
 [node name="DoorLeft" type="Node2D" parent="RoomSets/Right/Doors"]
 position = Vector2(-280, 190)
