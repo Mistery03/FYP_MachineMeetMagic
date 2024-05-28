@@ -2,16 +2,17 @@ extends TileMap
 
 @export var ID:int = 8
 
-@onready var doors = $Doors
+
 
 @onready var door_right = $Doors/DoorRight
 @onready var door_left = $Doors/DoorLeft
 
 @onready var three_way = $"../.."
+@onready var doors = $Doors
 
 
 func _ready():
-	for door in doors:
+	for door in doors.get_children():
 		door.roomID = ID
 	await get_tree().create_timer(0.1).timeout
 	

@@ -48,7 +48,7 @@ func changeRoom(roomNumber,roomID,doorOrientation):
 	var entrance
 	for door in doorList:
 		if door.orientation == doorOrientation:
-			print(door)
+			print(door.roomID)
 	for index in len(roomList):
 		if roomList[index].roomNum == roomNumber:
 			currRoom.position = Vector2(1600,1600)

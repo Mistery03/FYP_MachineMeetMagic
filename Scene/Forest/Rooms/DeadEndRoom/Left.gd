@@ -10,7 +10,7 @@ extends TileMap
 
 
 func _ready():
-	for door in doors:
+	for door in doors.get_children():
 		door.roomID = ID
 	await get_tree().create_timer(0.1).timeout
 	
