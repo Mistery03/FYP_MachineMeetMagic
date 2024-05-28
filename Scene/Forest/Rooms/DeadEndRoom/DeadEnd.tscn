@@ -175,6 +175,7 @@ script = ExtResource("3_4givn")
 [node name="DoorUp" type="Node2D" parent="RoomSets/Up/Doors"]
 position = Vector2(0, -220)
 script = ExtResource("3_ah1wf")
+roomID = 128
 orientation = "UP"
 
 [node name="Area2D" type="Area2D" parent="RoomSets/Up/Doors/DoorUp"]
@@ -200,6 +201,7 @@ script = ExtResource("6_ori48")
 [node name="DoorRight" type="Node2D" parent="RoomSets/Right/Doors"]
 position = Vector2(240, 0)
 script = ExtResource("3_ah1wf")
+roomID = 129
 orientation = "RIGHT"
 
 [node name="Area2D" type="Area2D" parent="RoomSets/Right/Doors/DoorRight"]
@@ -225,6 +227,7 @@ script = ExtResource("7_r3p3l")
 [node name="DoorDown" type="Node2D" parent="RoomSets/Down/Doors"]
 position = Vector2(0, 240)
 script = ExtResource("3_ah1wf")
+roomID = 130
 orientation = "DOWN"
 
 [node name="Area2D" type="Area2D" parent="RoomSets/Down/Doors/DoorDown"]
@@ -250,6 +253,7 @@ script = ExtResource("8_023vm")
 [node name="DoorLeft" type="Node2D" parent="RoomSets/Left/Doors"]
 position = Vector2(-240, 0)
 script = ExtResource("3_ah1wf")
+roomID = 131
 orientation = "LEFT"
 
 [node name="Area2D" type="Area2D" parent="RoomSets/Left/Doors/DoorLeft"]

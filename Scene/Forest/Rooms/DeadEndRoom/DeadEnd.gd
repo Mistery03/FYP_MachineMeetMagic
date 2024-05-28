@@ -17,17 +17,13 @@ func _ready():
 	for room in room_sets.get_children():
 		IDList.append(room.ID)
 		
+	roomID  = IDList.pick_random()	
+	
+	
+
+func _process(delta):
 	if isStartingRoom:
-		roomID  = IDList.pick_random()
-		if player:
-			player.position = Vector2(0,0)
-
-		for room in room_sets.get_children():
-			if room.ID != roomID:
-				room.queue_free()
-	
-
-	
+		selectedRoom(self.roomID)
 
 
 func selectedRoom(roomID:int):

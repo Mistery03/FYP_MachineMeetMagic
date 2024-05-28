@@ -33,8 +33,9 @@ func _ready():
 		setDoorRoomNumber(index)
 		
 	currRoom = roomList[0]
-	currRoom.position = Vector2.ZERO	
 	currRoom.isStartingRoom = true
+	currRoom.position = Vector2.ZERO	
+	
 
 
 	

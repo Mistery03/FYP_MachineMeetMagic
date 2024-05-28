@@ -10,7 +10,8 @@ extends TileMap
 @onready var door_left = $Doors/DoorLeft
 
 func _ready():
-	
+	for door in doors:
+		door.roomID = ID
 	await get_tree().create_timer(0.1).timeout
 	
 	if two_way.player:
