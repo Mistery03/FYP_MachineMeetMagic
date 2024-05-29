@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://pffje6rhngjq"]
+
+[ext_resource type="Script" path="res://Scene/Forest/Rooms/EnemyRush/battle_room_1.gd" id="1_1bv4w"]
+
+[node name="BattleRoom1" type="Node2D"]
+script = ExtResource("1_1bv4w")
