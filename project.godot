@@ -151,6 +151,7 @@ EQUIPMAGIC={
 2d_physics/layer_4="pickable"
 2d_physics/layer_5="wall"
 2d_physics/layer_6="door"
+2d_physics/layer_7="treeBG"
 
 [rendering]
 
