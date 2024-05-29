@@ -1,6 +1,18 @@
-[gd_scene load_steps=2 format=3 uid="uid://d1gxkrikxon85"]
+[gd_scene load_steps=3 format=3 uid="uid://d1gxkrikxon85"]
 
 [ext_resource type="Script" path="res://Scene/Forest/Rooms/BossRoom/BossArena.gd" id="1_imlmd"]
+[ext_resource type="TileSet" uid="uid://bckra1sdqvx78" path="res://Scene/Forest/Rooms/ForestTilemap.tres" id="2_63v6e"]
 
 [node name="BossArena" type="Node2D"]
 script = ExtResource("1_imlmd")
+
+[node name="TileMap" type="TileMap" parent="."]
+tile_set = ExtResource("2_63v6e")
+format = 2
+layer_0/name = "Background"
+layer_1/name = "Grass"
+layer_1/tile_data = PackedInt32Array()
+layer_2/name = "PlayerSpawnArea"
+layer_2/tile_data = PackedInt32Array()
+layer_3/name = "TreeBG"
+layer_3/tile_data = PackedInt32Array()
