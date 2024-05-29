@@ -97,3 +97,5 @@ func getAdjacencyValueByKey(key:int):
 
 func getAdjacencyDegree(key:int):
 	return adjacency_list.get(str(key)).size()
+
+

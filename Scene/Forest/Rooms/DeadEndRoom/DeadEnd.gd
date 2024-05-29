@@ -18,22 +18,14 @@ func _ready():
 		IDList.append(room.ID)
 		
 	roomID  = IDList.pick_random()	
-	
-	
-
-func _process(delta):
-	if isStartingRoom:
-		selectedRoom(self.roomID)
-
-
-func selectedRoom(roomID:int)->bool:
 	for room in room_sets.get_children():
 		if room.ID != roomID:
 			room.queue_free()
-			return false
-	return true
 	
-	#print(room_sets.get_child(0).doors.get_child(0).roomNumber)
+
+
+	
+
 
 
 

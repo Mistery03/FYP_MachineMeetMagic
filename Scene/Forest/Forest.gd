@@ -3,23 +3,23 @@ extends TreeGraphGeneration
 
 
 @export var degreeRoom:Dictionary
-@export var orientationLookUp:Dictionary ={
-	"UP":"",
-	"RIGHT":"",
-	"DOWN":"",
-	"LEFT":""
-}
+
 
 
 @export var player:Player
 
 @onready var rooms = $Rooms
+@onready var fade_out = $CanvasLayer/FadeOut
+
 var roomList:Array = []
 var doorList:Array = []
 
 var currRoom
 
 var index:int = 0
+
+var didPlayerEntered:bool = false
+
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -40,35 +40,42 @@ func _ready():
 		index+= 1
 	
 
+	await get_tree().create_timer(0.5).timeout
+	var tween = get_tree().create_tween()
+	tween.tween_property(fade_out,"modulate:a",0,0.5)
+	#for index in len(roomList):
+		#initDoorFunction(index)
 	for index in len(roomList):
-		initDoorFunction(index)
+		initDoorFunction(index)	
 		
 	currRoom = roomList[0]
+	setDoorRoomNumber(0)
 	currRoom.position = Vector2.ZERO	
-	
-
-
 	
 	
 	
 func changeRoom(roomNumber,roomID,doorOrientation):
 	print("Player entered door")
 	print(roomNumber)
-	currRoom.isStartingRoom = false
-	doorList.clear()
-	var getDirection = orientationLookUp.get(doorOrientation)
 	
-	#print(roomID)
-	#roomList[roomNumber].selectedRoom(roomID)
-	
-	var doorSets
-	for sets in roomList[roomNumber].room_sets.get_children():
-		doorSets = sets.doors.get_children()
-	
-	for doors in doorSets:
-		print(doors)
-		if doors.orientation == getDirection:
-			print(doors)
+	#var tween = get_tree().create_tween()
+	#tween.tween_property(fade_out,"modulate:a",0,1.5)
+	#doorList.clear()
+	await get_tree().create_timer(0.6).timeout
+	var tween = get_tree().create_tween()
+	tween.tween_property(fade_out,"modulate:a",0,1)
+	if !didPlayerEntered:
+		for index in len(roomList):
+			if roomList[index].roomNum == roomNumber:
+				currRoom.position = Vector2(1600,1600)
+				roomList[index].position = Vector2(0,0)
+				player.position =  Vector2(0,0)
+				currRoom = roomList[index]
+				setDoorRoomNumber(currRoom.roomNum)
+				didPlayerEntered = true
+				
+	await get_tree().create_timer(0.5).timeout
+	didPlayerEntered = false
 	
 	#doorList = roomList[roomNumber].room_sets.get_children()
 
@@ -79,33 +86,21 @@ func changeRoom(roomNumber,roomID,doorOrientation):
 			#print(entrance)
 			#roomList[entrance.roomNumber].selectedRoom(entrance.roomID)
 		
-	"""var getDirection = orientationLookUp.get(doorOrientation)
-
-	var entrance
-	for door in doorList:
-		if door.orientation == getDirection:
-			entrance = door
-			#roomList[entrance.roomNumber].selectedRoom(entrance.roomID)
-			
-	for index in len(roomList):
-		if roomList[index].roomNum == roomNumber:
-			
-			currRoom.position = Vector2(1600,1600)
-			roomList[index].position = Vector2(0,0)
-			if entrance.orientation == "UP":
-				player.position = entrance.position + Vector2(0,30)
-			if entrance.orientation == "DOWN":
-				player.position = entrance.position - Vector2(0,30)
-			if entrance.orientation == "RIGHT":
-				player.position = entrance.position + Vector2(30,0)
-			if entrance.orientation == "LEFT":
-				player.position = entrance.position - Vector2(30,0)
-			currRoom = roomList[index]
-	#print(roomID)"""
 
 func initDoorFunction(currRoomNum:int):
 	doorList.clear()
+	#print(roomList[currRoomNum].room_sets.get_children())
+	for sets in roomList[currRoomNum].room_sets.get_children():
+		print(currRoomNum,sets)
+		for door in sets.doors.get_children():
+			print(door)
+			door.connect("OnDoorEntered",changeRoom)
+			door.fadeOut = fade_out
 	
+	
+		#doorList[i].connect("OnDoorEntered",changeRoom)
+
+func setDoorRoomNumber(currRoomNum:int):	
 	doorList = roomList[currRoomNum].room_sets.get_child(0).doors.get_children()
 	var adjacency_values = getAdjacencyValueByKey(currRoomNum)
 
@@ -114,6 +109,3 @@ func initDoorFunction(currRoomNum:int):
 	
 	for i in range(limit):
 		doorList[i].roomNumber = adjacency_values[i]
-		doorList[i].connect("OnDoorEntered",changeRoom)
-
-	

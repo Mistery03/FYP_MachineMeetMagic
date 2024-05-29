@@ -166,7 +166,6 @@ size = Vector2(20, 71)
 script = ExtResource("1_pvyr7")
 PK_roomID = 8
 roomID = 8
-debugRoomID = 9
 
 [node name="RoomSets" type="Node2D" parent="."]
 

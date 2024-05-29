@@ -17,3 +17,5 @@ func _ready():
 	#if dead_end.player:
 		#dead_end.player.position = door_down.position - Vector2(0,30)
 		#dead_end.player.animation.play("WALKBACKWARD")
+
+
