@@ -41,10 +41,9 @@ func _ready():
 	
 
 	for index in len(roomList):
-		setDoorRoomNumber(index)
+		initDoorFunction(index)
 		
 	currRoom = roomList[0]
-	currRoom.isStartingRoom = true
 	currRoom.position = Vector2.ZERO	
 	
 
@@ -53,23 +52,31 @@ func _ready():
 	
 	
 func changeRoom(roomNumber,roomID,doorOrientation):
+	print("Player entered door")
+	print(roomNumber)
 	currRoom.isStartingRoom = false
 	doorList.clear()
 	var getDirection = orientationLookUp.get(doorOrientation)
 	
-	if roomList[roomNumber].room_sets.get_child_count() > 1:
-		var roomSets = roomList[roomNumber].room_sets.get_children()
-		for room in roomSets:
-			doorList =room.doors.get_children()
-	else:
-		doorList = roomList[roomNumber].room_sets.get_child(0).doors.get_children()
+	#print(roomID)
+	#roomList[roomNumber].selectedRoom(roomID)
+	
+	var doorSets
+	for sets in roomList[roomNumber].room_sets.get_children():
+		doorSets = sets.doors.get_children()
+	
+	for doors in doorSets:
+		print(doors)
+		if doors.orientation == getDirection:
+			print(doors)
+	
+	#doorList = roomList[roomNumber].room_sets.get_children()
 
-	var entrance
-	for door in doorList:
-		print(door.orientation)
-		if door.orientation == getDirection:
-			entrance = door
-			print(entrance)
+	#var entrance
+	#for door in doorList:
+		#if door.orientation == getDirection:
+			#entrance = door
+			#print(entrance)
 			#roomList[entrance.roomNumber].selectedRoom(entrance.roomID)
 		
 	"""var getDirection = orientationLookUp.get(doorOrientation)
@@ -96,32 +103,17 @@ func changeRoom(roomNumber,roomID,doorOrientation):
 			currRoom = roomList[index]
 	#print(roomID)"""
 
-func setDoorRoomNumber(currRoomNum:int):
+func initDoorFunction(currRoomNum:int):
 	doorList.clear()
-	if roomList[currRoomNum].room_sets.get_child_count() > 1:
-		print("Numvered test")
-		var roomSets = roomList[currRoomNum].room_sets.get_children()
-		for room in roomSets:
-			doorList =room.doors.get_children()
-			
-		var adjacency_values = getAdjacencyValueByKey(currRoomNum)
+	
+	doorList = roomList[currRoomNum].room_sets.get_child(0).doors.get_children()
+	var adjacency_values = getAdjacencyValueByKey(currRoomNum)
 
-		# Ensure you only iterate over the minimum length of both arrays
-		var limit = min(adjacency_values.size(), doorList.size())
-		
-		for i in range(limit):
-			doorList[i].roomNumber = adjacency_values[i]
-			doorList[i].connect("OnDoorEntered",changeRoom)
-	else:
-		print("one test")
-		doorList = roomList[currRoomNum].room_sets.get_child(0).doors.get_children()
-		
-		var adjacency_values = getAdjacencyValueByKey(currRoomNum)
+	# Ensure you only iterate over the minimum length of both arrays
+	var limit = min(adjacency_values.size(), doorList.size())
+	
+	for i in range(limit):
+		doorList[i].roomNumber = adjacency_values[i]
+		doorList[i].connect("OnDoorEntered",changeRoom)
 
-		# Ensure you only iterate over the minimum length of both arrays
-		var limit = min(adjacency_values.size(), doorList.size())
-		
-		for i in range(limit):
-			doorList[i].roomNumber = adjacency_values[i]
-			doorList[i].connect("OnDoorEntered",changeRoom)
 	
