@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://6hetoebu3te7"]
 
-[ext_resource type="Script" path="res://Scene/Forest/LinearForest.gd" id="1_5y603"]
+[ext_resource type="Script" path="res://Scene/Forest/Forest.gd" id="1_5y603"]
 [ext_resource type="PackedScene" uid="uid://c1vsfoc55pk0w" path="res://Entity/Player/player.tscn" id="6_7w6c7"]
 [ext_resource type="Texture2D" uid="uid://b7p1vl7hrge60" path="res://Asset/Level/backgroundChecker.png" id="7_nwmnj"]
 
