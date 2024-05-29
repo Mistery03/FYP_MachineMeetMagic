@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://cb317k1h3nxy1"]
+[gd_scene load_steps=14 format=3 uid="uid://cb317k1h3nxy1"]
 
 [ext_resource type="Script" path="res://Scene/Forest/Rooms/DeadEndRoom/DeadEnd.gd" id="1_10yak"]
 [ext_resource type="Texture2D" uid="uid://bm6sn1f05g1ub" path="res://Asset/Level/FYPTilemap.png" id="2_kpuii"]
@@ -6,6 +6,7 @@
 [ext_resource type="Script" path="res://Scene/Forest/Rooms/DeadEndRoom/Up.gd" id="3_4givn"]
 [ext_resource type="Script" path="res://Scene/Forest/Rooms/Door/Door.gd" id="3_ah1wf"]
 [ext_resource type="Script" path="res://Scene/Forest/Rooms/DeadEndRoom/Right.gd" id="6_ori48"]
+[ext_resource type="Texture2D" uid="uid://cgcgvpehcs00e" path="res://Asset/bannerL.png" id="6_upqx3"]
 [ext_resource type="Script" path="res://Scene/Forest/Rooms/DeadEndRoom/Left.gd" id="8_023vm"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_emsj1"]
@@ -171,17 +172,24 @@ script = ExtResource("3_4givn")
 
 [node name="Doors" type="Node2D" parent="RoomSets/Up"]
 
-[node name="DoorUp" type="Node2D" parent="RoomSets/Up/Doors"]
+[node name="DoorUp" type="Node2D" parent="RoomSets/Up/Doors" node_paths=PackedStringArray("flag")]
 position = Vector2(0, -220)
 script = ExtResource("3_ah1wf")
 roomID = 128
 orientation = "UP"
+flag = NodePath("Flag")
 
 [node name="Area2D" type="Area2D" parent="RoomSets/Up/Doors/DoorUp"]
 collision_layer = 32
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="RoomSets/Up/Doors/DoorUp/Area2D"]
 shape = SubResource("RectangleShape2D_f7sus")
+
+[node name="Flag" type="Sprite2D" parent="RoomSets/Up/Doors/DoorUp"]
+visible = false
+texture_filter = 1
+position = Vector2(-60, 0)
+texture = ExtResource("6_upqx3")
 
 [node name="Right" type="TileMap" parent="RoomSets"]
 texture_filter = 1
@@ -197,17 +205,24 @@ script = ExtResource("6_ori48")
 
 [node name="Doors" type="Node2D" parent="RoomSets/Right"]
 
-[node name="DoorRight" type="Node2D" parent="RoomSets/Right/Doors"]
+[node name="DoorRight" type="Node2D" parent="RoomSets/Right/Doors" node_paths=PackedStringArray("flag")]
 position = Vector2(240, 0)
 script = ExtResource("3_ah1wf")
 roomID = 129
 orientation = "RIGHT"
+flag = NodePath("Flag")
 
 [node name="Area2D" type="Area2D" parent="RoomSets/Right/Doors/DoorRight"]
 collision_layer = 32
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="RoomSets/Right/Doors/DoorRight/Area2D"]
 shape = SubResource("RectangleShape2D_luqwj")
+
+[node name="Flag" type="Sprite2D" parent="RoomSets/Right/Doors/DoorRight"]
+visible = false
+texture_filter = 1
+position = Vector2(0, -30)
+texture = ExtResource("6_upqx3")
 
 [node name="Left" type="TileMap" parent="RoomSets"]
 texture_filter = 1

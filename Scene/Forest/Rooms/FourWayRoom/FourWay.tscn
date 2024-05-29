@@ -1,10 +1,11 @@
-[gd_scene load_steps=11 format=3 uid="uid://dtt2wcpi7wi7r"]
+[gd_scene load_steps=12 format=3 uid="uid://dtt2wcpi7wi7r"]
 
 [ext_resource type="Script" path="res://Scene/Forest/Rooms/FourWayRoom/FourWay.gd" id="1_hs8ux"]
 [ext_resource type="Texture2D" uid="uid://b7p1vl7hrge60" path="res://Asset/Level/backgroundChecker.png" id="1_xvgpn"]
 [ext_resource type="Texture2D" uid="uid://bm6sn1f05g1ub" path="res://Asset/Level/FYPTilemap.png" id="2_uyhp2"]
 [ext_resource type="Script" path="res://Scene/Forest/Rooms/FourWayRoom/SquareFourWay.gd" id="4_t231l"]
 [ext_resource type="Script" path="res://Scene/Forest/Rooms/Door/Door.gd" id="4_tietu"]
+[ext_resource type="Texture2D" uid="uid://cgcgvpehcs00e" path="res://Asset/bannerL.png" id="6_5ti82"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_e53mp"]
 texture = ExtResource("1_xvgpn")
@@ -168,10 +169,11 @@ script = ExtResource("4_t231l")
 
 [node name="Doors" type="Node2D" parent="RoomSets/SquareFourWay"]
 
-[node name="DoorUp" type="Node2D" parent="RoomSets/SquareFourWay/Doors"]
+[node name="DoorUp" type="Node2D" parent="RoomSets/SquareFourWay/Doors" node_paths=PackedStringArray("flag")]
 position = Vector2(0, -230)
 script = ExtResource("4_tietu")
 orientation = "UP"
+flag = NodePath("Flag")
 
 [node name="Area2D" type="Area2D" parent="RoomSets/SquareFourWay/Doors/DoorUp"]
 collision_layer = 32
@@ -180,10 +182,17 @@ collision_layer = 32
 position = Vector2(0.5, 0.5)
 shape = SubResource("RectangleShape2D_3tk78")
 
-[node name="DoorRight" type="Node2D" parent="RoomSets/SquareFourWay/Doors"]
+[node name="Flag" type="Sprite2D" parent="RoomSets/SquareFourWay/Doors/DoorUp"]
+visible = false
+texture_filter = 1
+position = Vector2(-60, 0)
+texture = ExtResource("6_5ti82")
+
+[node name="DoorRight" type="Node2D" parent="RoomSets/SquareFourWay/Doors" node_paths=PackedStringArray("flag")]
 position = Vector2(320, 30)
 script = ExtResource("4_tietu")
 orientation = "RIGHT"
+flag = NodePath("Flag")
 
 [node name="Area2D" type="Area2D" parent="RoomSets/SquareFourWay/Doors/DoorRight"]
 collision_layer = 32
@@ -191,10 +200,17 @@ collision_layer = 32
 [node name="CollisionShape2D" type="CollisionShape2D" parent="RoomSets/SquareFourWay/Doors/DoorRight/Area2D"]
 shape = SubResource("RectangleShape2D_qrtl6")
 
-[node name="DoorDown" type="Node2D" parent="RoomSets/SquareFourWay/Doors"]
+[node name="Flag" type="Sprite2D" parent="RoomSets/SquareFourWay/Doors/DoorRight"]
+visible = false
+texture_filter = 1
+position = Vector2(0, -50)
+texture = ExtResource("6_5ti82")
+
+[node name="DoorDown" type="Node2D" parent="RoomSets/SquareFourWay/Doors" node_paths=PackedStringArray("flag")]
 position = Vector2(0, 335)
 script = ExtResource("4_tietu")
 orientation = "DOWN"
+flag = NodePath("Flag")
 
 [node name="Area2D" type="Area2D" parent="RoomSets/SquareFourWay/Doors/DoorDown"]
 collision_layer = 32
@@ -203,16 +219,29 @@ collision_layer = 32
 position = Vector2(0.5, 0.5)
 shape = SubResource("RectangleShape2D_3tk78")
 
-[node name="DoorLeft" type="Node2D" parent="RoomSets/SquareFourWay/Doors"]
+[node name="Flag" type="Sprite2D" parent="RoomSets/SquareFourWay/Doors/DoorDown"]
+visible = false
+texture_filter = 1
+position = Vector2(60, -40)
+texture = ExtResource("6_5ti82")
+
+[node name="DoorLeft" type="Node2D" parent="RoomSets/SquareFourWay/Doors" node_paths=PackedStringArray("flag")]
 position = Vector2(-320, 32)
 script = ExtResource("4_tietu")
 orientation = "LEFT"
+flag = NodePath("Flag")
 
 [node name="Area2D" type="Area2D" parent="RoomSets/SquareFourWay/Doors/DoorLeft"]
 collision_layer = 32
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="RoomSets/SquareFourWay/Doors/DoorLeft/Area2D"]
 shape = SubResource("RectangleShape2D_qrtl6")
+
+[node name="Flag" type="Sprite2D" parent="RoomSets/SquareFourWay/Doors/DoorLeft"]
+visible = false
+texture_filter = 1
+position = Vector2(0, -50)
+texture = ExtResource("6_5ti82")
 
 [connection signal="body_entered" from="RoomSets/SquareFourWay/Doors/DoorUp/Area2D" to="RoomSets/SquareFourWay/Doors/DoorUp" method="_on_area_2d_body_entered"]
 [connection signal="body_entered" from="RoomSets/SquareFourWay/Doors/DoorRight/Area2D" to="RoomSets/SquareFourWay/Doors/DoorRight" method="_on_area_2d_body_entered"]

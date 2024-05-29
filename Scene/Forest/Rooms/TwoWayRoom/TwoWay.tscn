@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://djmx7drmjteqn"]
+[gd_scene load_steps=14 format=3 uid="uid://djmx7drmjteqn"]
 
 [ext_resource type="Script" path="res://Scene/Forest/Rooms/TwoWayRoom/TwoWay.gd" id="1_cbbql"]
 [ext_resource type="Texture2D" uid="uid://b7p1vl7hrge60" path="res://Asset/Level/backgroundChecker.png" id="1_p1w2t"]
@@ -6,6 +6,7 @@
 [ext_resource type="Script" path="res://Scene/Forest/Rooms/TwoWayRoom/Up.gd" id="3_sb27r"]
 [ext_resource type="Script" path="res://Scene/Forest/Rooms/Door/Door.gd" id="4_6n357"]
 [ext_resource type="Script" path="res://Scene/Forest/Rooms/TwoWayRoom/Right.gd" id="6_1qe1d"]
+[ext_resource type="Texture2D" uid="uid://cgcgvpehcs00e" path="res://Asset/bannerL.png" id="6_e1po6"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_5bpp7"]
 texture = ExtResource("1_p1w2t")
@@ -172,11 +173,12 @@ script = ExtResource("3_sb27r")
 
 [node name="Doors" type="Node2D" parent="RoomSets/Up"]
 
-[node name="DoorUp" type="Node2D" parent="RoomSets/Up/Doors"]
+[node name="DoorUp" type="Node2D" parent="RoomSets/Up/Doors" node_paths=PackedStringArray("flag")]
 position = Vector2(0, -270)
 script = ExtResource("4_6n357")
 roomID = 2
 orientation = "UP"
+flag = NodePath("Flag")
 
 [node name="Area2D" type="Area2D" parent="RoomSets/Up/Doors/DoorUp"]
 collision_layer = 32
@@ -185,11 +187,18 @@ collision_layer = 32
 position = Vector2(0.5, -36)
 shape = SubResource("RectangleShape2D_113v4")
 
-[node name="DoorDown" type="Node2D" parent="RoomSets/Up/Doors"]
+[node name="Flag" type="Sprite2D" parent="RoomSets/Up/Doors/DoorUp"]
+visible = false
+texture_filter = 1
+position = Vector2(-100, 0)
+texture = ExtResource("6_e1po6")
+
+[node name="DoorDown" type="Node2D" parent="RoomSets/Up/Doors" node_paths=PackedStringArray("flag")]
 position = Vector2(0, 335)
 script = ExtResource("4_6n357")
 roomID = 2
 orientation = "DOWN"
+flag = NodePath("Flag")
 
 [node name="Area2D" type="Area2D" parent="RoomSets/Up/Doors/DoorDown"]
 collision_layer = 32
@@ -197,6 +206,12 @@ collision_layer = 32
 [node name="CollisionShape2D" type="CollisionShape2D" parent="RoomSets/Up/Doors/DoorDown/Area2D"]
 position = Vector2(0.5, -16.5)
 shape = SubResource("RectangleShape2D_113v4")
+
+[node name="Flag" type="Sprite2D" parent="RoomSets/Up/Doors/DoorDown"]
+visible = false
+texture_filter = 1
+position = Vector2(100, -60)
+texture = ExtResource("6_e1po6")
 
 [node name="Right" type="TileMap" parent="RoomSets"]
 texture_filter = 1
@@ -212,20 +227,28 @@ script = ExtResource("6_1qe1d")
 
 [node name="Doors" type="Node2D" parent="RoomSets/Right"]
 
-[node name="DoorRight" type="Node2D" parent="RoomSets/Right/Doors"]
+[node name="DoorRight" type="Node2D" parent="RoomSets/Right/Doors" node_paths=PackedStringArray("flag")]
 position = Vector2(320, -160)
 script = ExtResource("4_6n357")
 roomID = 3
+flag = NodePath("Flag")
 
 [node name="Area2D" type="Area2D" parent="RoomSets/Right/Doors/DoorRight"]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="RoomSets/Right/Doors/DoorRight/Area2D"]
 shape = SubResource("RectangleShape2D_jy7fx")
 
-[node name="DoorLeft" type="Node2D" parent="RoomSets/Right/Doors"]
+[node name="Flag" type="Sprite2D" parent="RoomSets/Right/Doors/DoorRight"]
+visible = false
+texture_filter = 1
+position = Vector2(0, -50)
+texture = ExtResource("6_e1po6")
+
+[node name="DoorLeft" type="Node2D" parent="RoomSets/Right/Doors" node_paths=PackedStringArray("flag")]
 position = Vector2(-280, 190)
 script = ExtResource("4_6n357")
 roomID = 3
+flag = NodePath("Flag")
 
 [node name="Area2D" type="Area2D" parent="RoomSets/Right/Doors/DoorLeft"]
 collision_layer = 32
@@ -233,6 +256,12 @@ collision_layer = 32
 [node name="CollisionShape2D" type="CollisionShape2D" parent="RoomSets/Right/Doors/DoorLeft/Area2D"]
 position = Vector2(0, 1.25)
 shape = SubResource("RectangleShape2D_nv5v6")
+
+[node name="Flag" type="Sprite2D" parent="RoomSets/Right/Doors/DoorLeft"]
+visible = false
+texture_filter = 1
+position = Vector2(0, -40)
+texture = ExtResource("6_e1po6")
 
 [connection signal="body_entered" from="RoomSets/Up/Doors/DoorUp/Area2D" to="RoomSets/Up/Doors/DoorUp" method="_on_area_2d_body_entered"]
 [connection signal="body_entered" from="RoomSets/Up/Doors/DoorDown/Area2D" to="RoomSets/Up/Doors/DoorDown" method="_on_area_2d_body_entered"]

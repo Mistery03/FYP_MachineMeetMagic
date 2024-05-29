@@ -54,9 +54,9 @@ func _ready():
 	
 	
 	
-func changeRoom(roomNumber,roomID,doorOrientation):
+func changeRoom(roomNumber,roomID,prevRoomNumber):
 	print("Player entered door")
-	print(roomNumber)
+	print("The curr Room number: ",roomNumber)
 	
 	#var tween = get_tree().create_tween()
 	#tween.tween_property(fade_out,"modulate:a",0,1.5)
@@ -69,12 +69,22 @@ func changeRoom(roomNumber,roomID,doorOrientation):
 			if roomList[index].roomNum == roomNumber:
 				currRoom.position = Vector2(1600,1600)
 				roomList[index].position = Vector2(0,0)
-				player.position =  Vector2(0,0)
+				
 				currRoom = roomList[index]
+				
 				setDoorRoomNumber(currRoom.roomNum)
+				doorList = currRoom.room_sets.get_child(0).doors.get_children()
+				for door in doorList:
+					print("Check no:",door.roomNumber)
+					if door.roomNumber == prevRoomNumber:
+						print("test")
+						door.flag.visible = true
+				player.position =  Vector2(0,0)
+					
+				
 				didPlayerEntered = true
 				
-	await get_tree().create_timer(0.5).timeout
+	await get_tree().create_timer(2).timeout
 	didPlayerEntered = false
 	
 	#doorList = roomList[roomNumber].room_sets.get_children()
@@ -91,9 +101,9 @@ func initDoorFunction(currRoomNum:int):
 	doorList.clear()
 	#print(roomList[currRoomNum].room_sets.get_children())
 	for sets in roomList[currRoomNum].room_sets.get_children():
-		print(currRoomNum,sets)
+		#print(currRoomNum,sets)
 		for door in sets.doors.get_children():
-			print(door)
+			#print(door)
 			door.connect("OnDoorEntered",changeRoom)
 			door.fadeOut = fade_out
 	
@@ -109,3 +119,4 @@ func setDoorRoomNumber(currRoomNum:int):
 	
 	for i in range(limit):
 		doorList[i].roomNumber = adjacency_values[i]
+		doorList[i].prevRoomNumber = i
