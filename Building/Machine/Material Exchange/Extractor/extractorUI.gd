@@ -14,9 +14,11 @@ extends Control
 
 @export var maxValue:float = 100
 
+
 @export var parentMachine:Machine
 @export var inventoryHandler:InventoryHandler
 
+@export_category("Debug System")
 @export var debugInventory:Array[SlotData]
 @export var debugItem:MaterialData
 @export var debugMaxSlot:int
@@ -244,8 +246,6 @@ func processDisplay(delta):
 	if material_slot.item:
 		currLoadingValue += material_slot.item.burnPerSecond * delta
 	currLoadingValue = clamp(currLoadingValue , 0, maxValue)
-
-
 
 
 func _on_area_of_pressing_gui_input(event):

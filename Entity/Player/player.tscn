@@ -20,7 +20,7 @@
 [ext_resource type="PackedScene" path="res://UI/Build/build_hud.tscn" id="15_otihl"]
 [ext_resource type="Script" path="res://UI/Wiring/Wiring.gd" id="18_3q6sb"]
 [ext_resource type="Script" path="res://Entity/Player/ItemHUDPlaceholder.gd" id="19_4bbe1"]
-[ext_resource type="PackedScene" uid="uid://crsbugvcqu5mn" path="res://Staff/staffHUD.tscn" id="20_qac2v"]
+[ext_resource type="PackedScene" uid="uid://cdgpv7wki70or" path="res://Staff/staffHUD.tscn" id="20_qac2v"]
 [ext_resource type="Script" path="res://Entity/Player/MachineUpdater.gd" id="21_iegje"]
 [ext_resource type="Texture2D" uid="uid://cgi863ww3hb3g" path="res://Asset/fantasyAssets.png" id="21_kqu6c"]
 [ext_resource type="PackedScene" uid="uid://ca71hsm6y7dur" path="res://Staff/staff.tscn" id="22_01tsa"]
