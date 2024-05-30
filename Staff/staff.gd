@@ -7,6 +7,7 @@ extends Node2D
 
 #var isEquipped:bool
 var mousePos
+var staffMana:float
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
