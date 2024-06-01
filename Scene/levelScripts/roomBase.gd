@@ -7,6 +7,8 @@ extends Node2D
 @export var roomNum:int = 0
 @export_category("Player")
 @export var player:Player
+@export var fadeOut:TextureRect
+@export var door:Node2D
 
 @export var tile_map:TileMap
 func setPlayer(player:Player):

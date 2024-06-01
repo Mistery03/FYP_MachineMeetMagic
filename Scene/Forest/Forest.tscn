@@ -1,13 +1,18 @@
-[gd_scene load_steps=5 format=3 uid="uid://6hetoebu3te7"]
+[gd_scene load_steps=8 format=3 uid="uid://6hetoebu3te7"]
 
 [ext_resource type="Script" path="res://Scene/Forest/Forest.gd" id="1_5y603"]
 [ext_resource type="PackedScene" uid="uid://d2ydrp0fee631" path="res://Scene/Forest/Rooms/Starting/StartingArea.tscn" id="2_xtj4a"]
+[ext_resource type="PackedScene" uid="uid://pffje6rhngjq" path="res://Scene/Forest/Rooms/EnemyRush/battle_room_1.tscn" id="3_j10gy"]
+[ext_resource type="PackedScene" uid="uid://m4gebh6dm0in" path="res://Scene/Forest/Rooms/EnemyRush/battle_room_2.tscn" id="4_af1n7"]
+[ext_resource type="PackedScene" uid="uid://d1gxkrikxon85" path="res://Scene/Forest/Rooms/BossRoom/BossArena.tscn" id="5_gdfwr"]
 [ext_resource type="PackedScene" uid="uid://c1vsfoc55pk0w" path="res://Entity/Player/player.tscn" id="6_7w6c7"]
 [ext_resource type="Texture2D" uid="uid://b7p1vl7hrge60" path="res://Asset/Level/backgroundChecker.png" id="7_nwmnj"]
 
 [node name="Forest" type="Node2D" node_paths=PackedStringArray("player")]
 script = ExtResource("1_5y603")
 startingArea = ExtResource("2_xtj4a")
+enemyRooms = Array[PackedScene]([ExtResource("3_j10gy"), ExtResource("4_af1n7")])
+bossArea = ExtResource("5_gdfwr")
 player = NodePath("Player")
 
 [node name="Rooms" type="Node2D" parent="."]
