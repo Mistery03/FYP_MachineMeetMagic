@@ -30,6 +30,11 @@ const JUMP_VELOCITY = 4.5
 ##Takes in Slot Data so we have a "dictionary"
 @export var inventory:Array[SlotData] = [initSlot]
 
+@export var min_zoom = 6
+@export var max_zoom = 12
+@export var zoom_step = 0.1
+@export var zoom_duration = 0.3 # Duration for the zoom transition
+
 @onready var inventory_manager = $InventoryManager
 @onready var potion_manager = $PotionManager
 @onready var state_manager = $StateManager
@@ -37,7 +42,7 @@ const JUMP_VELOCITY = 4.5
 @onready var move_component = $MoveComponent
 @onready var camera = $Camera
 @onready var localLevel:Node2D
-
+@export var cameraZoom:float = 6
 
 var potion:Potion
 var isBuildEnabled:bool
@@ -48,8 +53,11 @@ var mousePos:Vector2
 var isPressable:bool = false
 var isMachineUI:bool = false
 
+var zoomValue:float = 6
+
 
 func _ready() -> void:
+	camera.zoom = Vector2(cameraZoom,cameraZoom)
 	currHealth = playerData.MaxHealth
 	currMana = playerData.MaxMana
 	currStamina = playerData.MaxStamina
@@ -61,7 +69,6 @@ func _ready() -> void:
 	inventory_manager.init(self)
 	state_manager.init(self,animation,move_component,camera)
 	
-
 	
 
 func _unhandled_input(event: InputEvent) -> void:
@@ -78,3 +85,19 @@ func _process(delta) -> void:
 	#for amount in inventory:
 		#if amount:
 			#print(amount.amount)
+
+func _input(event):
+
+	if event is InputEventMouse:
+		if event.is_action_released("ZOOMIN"):
+			zoomValue+=zoom_step
+			zoomValue = clamp(zoomValue,6,12)
+			smooth_zoom(zoomValue)
+		elif event.is_action_released("ZOOMOUT"):
+			zoomValue-=zoom_step
+			zoomValue = clamp(zoomValue,6,12)
+			smooth_zoom(zoomValue)
+			
+func smooth_zoom(new_zoom):
+	var tween = get_tree().create_tween()
+	tween.tween_property(camera, "zoom", Vector2(new_zoom, new_zoom), zoom_duration)			

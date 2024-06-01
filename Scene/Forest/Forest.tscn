@@ -10,6 +10,8 @@ script = ExtResource("1_5y603")
 [node name="Rooms" type="Node2D" parent="."]
 
 [node name="Player" parent="." instance=ExtResource("6_7w6c7")]
+zoom_step = 0.5
+zoom_duration = 0.2
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 layer = 2
