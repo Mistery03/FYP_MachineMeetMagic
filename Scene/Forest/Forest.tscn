@@ -13,6 +13,7 @@ script = ExtResource("1_5y603")
 startingArea = ExtResource("2_xtj4a")
 enemyRooms = Array[PackedScene]([ExtResource("3_j10gy"), ExtResource("4_af1n7")])
 bossArea = ExtResource("5_gdfwr")
+maxEnemyRooms = 3
 player = NodePath("Player")
 
 [node name="Rooms" type="Node2D" parent="."]

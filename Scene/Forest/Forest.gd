@@ -33,11 +33,13 @@ func _process(delta):
 	pass 	
 	
 func clearCurrentRoom():
+	rooms.get_child(0).door.disconnect("OnDoorEntered",goNextRoom)
 	rooms.get_child(0).queue_free()
 
 func randomiseEnemyRoom():
 	var selectedRoom = enemyRooms.pick_random()
 	enemyRoomQueue.push_front(selectedRoom)
+	print(enemyRoomQueue)
 
 func spawnRoom():
 	var tween = get_tree().create_tween()
