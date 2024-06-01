@@ -7,6 +7,7 @@
 script = ExtResource("1_imlmd")
 
 [node name="TileMap" type="TileMap" parent="."]
+texture_filter = 1
 tile_set = ExtResource("2_63v6e")
 format = 2
 layer_0/name = "Background"

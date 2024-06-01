@@ -7,9 +7,10 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ky2ka"]
 size = Vector2(53, 198)
 
-[node name="Starting" type="Node2D"]
+[node name="Starting" type="Node2D" node_paths=PackedStringArray("tile_map")]
 script = ExtResource("1_5uh1g")
 PK_roomID = 2
+tile_map = NodePath("TileMap")
 
 [node name="TileMap" type="TileMap" parent="."]
 texture_filter = 1
