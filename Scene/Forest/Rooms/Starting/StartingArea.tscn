@@ -9,6 +9,7 @@ size = Vector2(53, 198)
 
 [node name="Starting" type="Node2D" node_paths=PackedStringArray("door", "tile_map")]
 script = ExtResource("1_5uh1g")
+roomName = "StartArea"
 PK_roomID = 2
 door = NodePath("Door")
 tile_map = NodePath("TileMap")

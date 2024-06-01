@@ -22,6 +22,7 @@ func _ready():
 	rooms.add_child(room)
 	room.placePlayer()
 	room.door.connect("OnDoorEntered",goNextRoom)
+	room.fadeOut = fade_out
 	enemyRoomQueue.push_back(bossArea)
 	for i in range(maxEnemyRooms):
 		randomiseEnemyRoom()
@@ -39,14 +40,25 @@ func randomiseEnemyRoom():
 	enemyRoomQueue.push_front(selectedRoom)
 
 func spawnRoom():
+	var tween = get_tree().create_tween()
+	tween.tween_property(fade_out,"modulate:a",0,1.5)
 	var selectedRoom = enemyRoomQueue.pop_front()
-	selectedRoom.instantiate()
-	selectedRoom.setPlayer(player)
-	rooms.add_child(selectedRoom)
-	selectedRoom.position = Vector2(0,0)
-	selectedRoom.placePlayer()
+	print(selectedRoom)
+	var roomInstance = selectedRoom.instantiate()
+	roomInstance.setPlayer(player)
+	roomInstance.position = Vector2(0,0)
+	if roomInstance.roomName != "BossRoom":
+		roomInstance.door.connect("OnDoorEntered",goNextRoom)
+	roomInstance.fadeOut = fade_out
+	rooms.add_child(roomInstance)
+	roomInstance.placePlayer()
+	
 
 func goNextRoom():
+	var tween = get_tree().create_tween()
+	tween.tween_property(fade_out,"modulate:a",1,0.3)
+	await  get_tree().create_timer(0.5).timeout
 	clearCurrentRoom()
+	await  get_tree().create_timer(1).timeout
 	spawnRoom()
 	

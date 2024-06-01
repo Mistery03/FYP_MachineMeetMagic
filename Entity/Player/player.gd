@@ -91,11 +91,11 @@ func _input(event):
 	if event is InputEventMouse:
 		if event.is_action_released("ZOOMIN"):
 			zoomValue+=zoom_step
-			zoomValue = clamp(zoomValue,6,12)
+			zoomValue = clamp(zoomValue,min_zoom,max_zoom)
 			smooth_zoom(zoomValue)
 		elif event.is_action_released("ZOOMOUT"):
 			zoomValue-=zoom_step
-			zoomValue = clamp(zoomValue,6,12)
+			zoomValue = clamp(zoomValue,min_zoom,max_zoom)
 			smooth_zoom(zoomValue)
 			
 func smooth_zoom(new_zoom):

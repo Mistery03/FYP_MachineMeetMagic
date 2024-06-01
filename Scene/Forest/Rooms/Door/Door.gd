@@ -10,8 +10,8 @@ extends Node2D
 signal OnDoorEntered
 
 func _on_area_2d_body_entered(body):
-	if parent.fadeOut:
-		var tween = get_tree().create_tween()
-		tween.tween_property(parent.fadeOut,"modulate:a",1,0.5)
+	print("test")
+
+		
 	OnDoorEntered.emit()
 	

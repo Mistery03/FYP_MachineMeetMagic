@@ -798,7 +798,8 @@ playerInventoryController = NodePath("ROOT_UI/Inventory")
 maxInventorySize = 20
 initSlot = ExtResource("4_e4jpf")
 inventory = Array[Object]([])
-min_zoom = 4
+min_zoom = 5
+zoom_step = 0.5
 
 [node name="Camera" type="Camera2D" parent="."]
 zoom = Vector2(6, 6)
