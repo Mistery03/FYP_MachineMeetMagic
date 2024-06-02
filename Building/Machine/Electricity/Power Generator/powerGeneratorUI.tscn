@@ -35,7 +35,6 @@ inventoryHandler = NodePath("PlayerInventoryHanlder")
 debugInventory = Array[Resource("res://UI/Inventory/Data/slotData.gd")]([ExtResource("2_q12u1"), null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null])
 debugItem = ExtResource("2_r71rn")
 debugMaxSlot = 20
-debugMode = true
 
 [node name="Background" type="TextureRect" parent="."]
 texture_filter = 1

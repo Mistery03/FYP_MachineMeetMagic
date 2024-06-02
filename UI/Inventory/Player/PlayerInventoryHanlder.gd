@@ -347,24 +347,7 @@ func OnInventoryChanged(inventory):
 	update_slots()
 
 
-##NOTE not yet workin, prob will fix it during polishing stage
-"""func convertSlotListToInventoryData():
-	var tempArray:Array[SlotData]
-	tempArray.clear()
-	for index in len(slotList):
-		var slotToBeAdded = SlotData.new()
-		if slotList[index].item:
-			slotToBeAdded.item = slotList[index].item
-			slotToBeAdded.amount = slotList[index].amount
-			tempArray.append(slotToBeAdded)
-		else:
-			tempArray.append(null)
-		
-		slotList[index].item = null
-	
-			
-	playerInventory = tempArray.duplicate()
-	tempArray.clear()"""
+
 func convertSlotListToInventoryData():
 	var tempArray: Array = []
 	for index in len(slotList):

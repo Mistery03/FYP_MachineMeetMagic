@@ -2,27 +2,32 @@ class_name PowerGeneratorUI
 extends Control
 
 ##The parent machine is what this UI is under what machine [Example: if it's power generator then the parent is power generator
+@export_category("Machine Setting")
 @export var parentMachine:Machine
 
+@export_category("Invetory Controller")
 ##The inventory handler is what enables the entities to access the player's inventory
 @export var inventoryHandler: InventoryHandler
 
+@export_category("Fuel Bar Progress")
 ##Used for Fuel progress bar
 @export var maxValue:float = 100
 
-
-@onready var fuel_slot = $FuelSlot
-
-@onready var machine_animation = $MachineAnimation
-@onready var power_switch = $PowerSwitch
-@onready var status_bar = $StatusBar
-@onready var fuel_burning = $FuelBurning
-
-
+@export_category("Debug Settings")
 @export var debugInventory:Array[SlotData]
 @export var debugItem:MaterialData
 @export var debugMaxSlot:int
 @export var debugMode:bool = false
+
+
+@onready var fuel_slot = $FuelSlot
+@onready var machine_animation = $MachineAnimation
+@onready var power_switch = $PowerSwitch
+@onready var status_bar = $StatusBar
+@onready var fuel_burning = $FuelBurning
+@onready var area_of_pressing = $AreaOfPressing
+
+
 
 
 var currValue:float = 100
@@ -87,6 +92,11 @@ func _input(event):
 			isMousePressed = true
 		else:
 			isMousePressed = false
+		
+		if event.is_action_pressed("ACTION"):
+			area_of_pressing.mouse_filter = Control.MOUSE_FILTER_IGNORE
+		elif event.is_action_pressed("ACTION2"):
+			area_of_pressing.mouse_filter = Control.MOUSE_FILTER_STOP
 		
 		
 			

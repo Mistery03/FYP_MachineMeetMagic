@@ -1,14 +1,7 @@
 class_name ExtractorUI
 extends Control
 
-@onready var machine_animation = $MachineAnimation
-@onready var power_switch = $PowerSwitch
-@onready var machine_mana_bar = $MachineManaBar
-@onready var progress_bar = $ProgressBar
 
-@onready var fuel_slot = $FuelSlot
-@onready var material_slot = $MaterialSlot
-@onready var result_slot = $ResultSlot
 
 
 
@@ -25,6 +18,16 @@ extends Control
 @export var debugMode:bool = false
 
 @export var resultedItem:MaterialData
+
+@onready var machine_animation = $MachineAnimation
+@onready var power_switch = $PowerSwitch
+@onready var machine_mana_bar = $MachineManaBar
+@onready var progress_bar = $ProgressBar
+
+@onready var fuel_slot = $FuelSlot
+@onready var material_slot = $MaterialSlot
+@onready var result_slot = $ResultSlot
+@onready var area_of_pressing = $AreaOfPressing
 
 var currValue:float = 100
 var currLoadingValue:float = 0
@@ -114,10 +117,15 @@ func _input(event):
 	if event is InputEventMouseButton:
 		if event.is_pressed():
 			isMousePressed = true
+			
 		else:
 			isMousePressed = false
-		
-		
+			
+	
+		if event.is_action_pressed("ACTION"):
+			area_of_pressing.mouse_filter = Control.MOUSE_FILTER_IGNORE
+		elif event.is_action_pressed("ACTION2"):
+			area_of_pressing.mouse_filter = Control.MOUSE_FILTER_STOP
 		
 	if debugMode:
 		if event is InputEventKey:
@@ -250,5 +258,6 @@ func processDisplay(delta):
 
 func _on_area_of_pressing_gui_input(event):
 	if event.is_action_pressed("ACTION2"):
-		print("extractor")
+	
+	
 		inventoryHandler.removeItem(1,get_global_mouse_position())
