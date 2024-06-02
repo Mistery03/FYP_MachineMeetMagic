@@ -3,10 +3,9 @@
 [ext_resource type="Script" path="res://Scene/Forest/Rooms/BossRoom/BossArena.gd" id="1_imlmd"]
 [ext_resource type="TileSet" uid="uid://bckra1sdqvx78" path="res://Scene/Forest/Rooms/ForestTilemap.tres" id="2_63v6e"]
 
-[node name="BossArena" type="Node2D" node_paths=PackedStringArray("door", "tile_map")]
+[node name="BossArena" type="Node2D" node_paths=PackedStringArray("tile_map")]
 script = ExtResource("1_imlmd")
 roomName = "BossRoom"
-door = NodePath("")
 tile_map = NodePath("TileMap")
 
 [node name="TileMap" type="TileMap" parent="."]

@@ -7,7 +7,6 @@ var batteryList:Array
 var machineList:Array
 
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	
 	for battery in batteryList:
