@@ -7,3 +7,4 @@ extends Resource
 @export var amount:int
 @export var burnPerSecond:int 
 @export var durability:int
+

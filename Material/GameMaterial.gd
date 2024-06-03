@@ -5,6 +5,7 @@ extends Node2D
 @export var amount:int
 
 @onready var sprite = $Sprite
+@onready var collision_shape_2d = $Area2D/CollisionShape2D
 
 
 func _ready():

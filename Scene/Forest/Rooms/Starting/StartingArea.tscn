@@ -1,6 +1,7 @@
-[gd_scene load_steps=5 format=3 uid="uid://d2ydrp0fee631"]
+[gd_scene load_steps=6 format=3 uid="uid://d2ydrp0fee631"]
 
 [ext_resource type="Script" path="res://Scene/Forest/Rooms/Starting/StartingArea.gd" id="1_5uh1g"]
+[ext_resource type="PackedScene" uid="uid://cnj7jj8r34b1q" path="res://Material/Material.tscn" id="2_0awh5"]
 [ext_resource type="TileSet" uid="uid://bckra1sdqvx78" path="res://Scene/Forest/Rooms/ForestTilemap.tres" id="2_7nsx7"]
 [ext_resource type="Script" path="res://Scene/Forest/Rooms/Door/Door.gd" id="4_1bka2"]
 
@@ -9,6 +10,7 @@ size = Vector2(53, 198)
 
 [node name="Starting" type="Node2D" node_paths=PackedStringArray("door", "tile_map")]
 script = ExtResource("1_5uh1g")
+materialInstance = ExtResource("2_0awh5")
 roomName = "StartArea"
 PK_roomID = 2
 door = NodePath("Door")
@@ -33,6 +35,10 @@ layer_3/tile_data = PackedInt32Array(-196612, 65536, 1, -131076, 65536, 1, -6554
 layer_4/name = "Collectable"
 layer_4/z_index = -1
 layer_4/tile_data = PackedInt32Array()
+layer_5/name = "CollectableStone"
+layer_5/tile_data = PackedInt32Array()
+layer_6/name = "CollectableCrystal"
+layer_6/tile_data = PackedInt32Array()
 
 [node name="Door" type="Node2D" parent="." node_paths=PackedStringArray("parent")]
 position = Vector2(1243, 0)
