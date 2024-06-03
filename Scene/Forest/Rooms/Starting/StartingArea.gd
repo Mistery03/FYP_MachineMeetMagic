@@ -21,7 +21,7 @@ func _ready():
 func _process(delta):
 	if player:
 		var mouseTilePos = tile_map.local_to_map(player.mousePos)
-		if Input.is_action_just_pressed("ACTION"):
+		if Input.is_action_just_pressed("ACTION") and player.isStaffEquipped:
 			var materialDroppedData = tile_map.get_cell_tile_data(4,mouseTilePos)
 			if materialDroppedData:
 				var materialRes = materialDroppedData.get_custom_data("materialDropped")
