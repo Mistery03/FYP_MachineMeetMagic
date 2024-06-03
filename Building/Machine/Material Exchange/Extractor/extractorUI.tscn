@@ -32,10 +32,10 @@ region = Rect2(128, 0, 64, 64)
 layout_mode = 3
 anchors_preset = 0
 script = ExtResource("1_q5y3h")
+resultedItem = ExtResource("4_uecce")
 inventoryHandler = NodePath("PlayerInventoryHanlder")
 debugInventory = Array[Resource("res://UI/Inventory/Data/slotData.gd")]([ExtResource("2_5ci2n"), null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null])
 debugMaxSlot = 20
-resultedItem = ExtResource("4_uecce")
 
 [node name="Background" type="TextureRect" parent="."]
 texture_filter = 1

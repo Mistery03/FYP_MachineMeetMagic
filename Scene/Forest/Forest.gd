@@ -1,11 +1,12 @@
 extends Node2D
 
+@export_category("Level Settings")
 @export var startingArea:PackedScene
 @export var enemyRooms:Array[PackedScene]
 @export var bossArea:PackedScene
 @export var maxEnemyRooms:int = 2
 
-
+@export_category("Player Setting")
 @export var player:Player
 
 @onready var rooms = $Rooms

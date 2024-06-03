@@ -5,19 +5,25 @@ extends Control
 
 
 
-@export var maxValue:float = 100
 
 
+@export_category("Machine Setting")
 @export var parentMachine:Machine
+@export var resultedItem:MaterialData
+
+@export_category("Inventory Controller")
 @export var inventoryHandler:InventoryHandler
 
-@export_category("Debug System")
+@export_category("Fuelbar Settings")
+@export var maxValue:float = 100
+
+@export_category("Debug Settings")
 @export var debugInventory:Array[SlotData]
 @export var debugItem:MaterialData
 @export var debugMaxSlot:int
 @export var debugMode:bool = false
 
-@export var resultedItem:MaterialData
+
 
 @onready var machine_animation = $MachineAnimation
 @onready var power_switch = $PowerSwitch
