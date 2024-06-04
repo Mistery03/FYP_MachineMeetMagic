@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="MaterialData" load_steps=4 format=3 uid="uid://cl2aq7010wrxp"]
+
+[ext_resource type="Script" path="res://Material/Data/materialData.gd" id="1_hf5ls"]
+[ext_resource type="Texture2D" uid="uid://cruxbb2jv2vmx" path="res://Asset/Materials1.png" id="2_fec8q"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_a1ww5"]
+atlas = ExtResource("2_fec8q")
+region = Rect2(384, 448, 32, 32)
+
+[resource]
+script = ExtResource("1_hf5ls")
+name = "Brown Mushroom"
+type = "Ingredient"
+texture = SubResource("AtlasTexture_a1ww5")
+amount = 0
+magicEssenceAmountResult = 1
+burnPerSecond = 20
+durability = 0
