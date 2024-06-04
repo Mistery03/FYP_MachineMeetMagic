@@ -1,4 +1,4 @@
-[gd_scene load_steps=73 format=3 uid="uid://c1vsfoc55pk0w"]
+[gd_scene load_steps=75 format=3 uid="uid://c1vsfoc55pk0w"]
 
 [ext_resource type="Texture2D" uid="uid://bd32dcnew3uvf" path="res://Asset/L.png" id="1_ksidj"]
 [ext_resource type="Script" path="res://Entity/Player/player.gd" id="1_xfdxb"]
@@ -17,10 +17,10 @@
 [ext_resource type="Script" path="res://Entity/Player/WiringBattery.gd" id="13_3c3kb"]
 [ext_resource type="PackedScene" uid="uid://htlhwdgl8ast" path="res://HUD/DynamicLabel/dynamicLabel.tscn" id="14_8yknx"]
 [ext_resource type="FontFile" uid="uid://cl3rxpo58micg" path="res://Asset/Font/Lambda-Regular.ttf" id="14_me7n8"]
-[ext_resource type="PackedScene" path="res://UI/Build/build_hud.tscn" id="15_otihl"]
+[ext_resource type="PackedScene" uid="uid://dd2ysdc77pxkq" path="res://UI/Build/build_hud.tscn" id="15_otihl"]
 [ext_resource type="Script" path="res://UI/Wiring/Wiring.gd" id="18_3q6sb"]
 [ext_resource type="Script" path="res://Entity/Player/ItemHUDPlaceholder.gd" id="19_4bbe1"]
-[ext_resource type="PackedScene" path="res://Staff/staffHUD.tscn" id="20_qac2v"]
+[ext_resource type="PackedScene" uid="uid://cdgpv7wki70or" path="res://Staff/staffHUD.tscn" id="20_qac2v"]
 [ext_resource type="Script" path="res://Entity/Player/MachineUpdater.gd" id="21_iegje"]
 [ext_resource type="Texture2D" uid="uid://cgi863ww3hb3g" path="res://Asset/fantasyAssets.png" id="21_kqu6c"]
 [ext_resource type="PackedScene" uid="uid://ca71hsm6y7dur" path="res://Staff/staff.tscn" id="22_01tsa"]
@@ -31,6 +31,8 @@
 [ext_resource type="Script" path="res://UI/Inventory/InventoryController.gd" id="24_o1enl"]
 [ext_resource type="PackedScene" uid="uid://bm2u5jp0exc2h" path="res://UI/Potion/PotionGridContainerPlayer.tscn" id="25_km84l"]
 [ext_resource type="PackedScene" uid="uid://dpthqxsb7e3fk" path="res://UI/Potion/potionInventory.tscn" id="26_eb02i"]
+[ext_resource type="PackedScene" uid="uid://eu0xsfmexgdv" path="res://UI/CharacterScene/magic_tree_ui.tscn" id="30_gr14u"]
+[ext_resource type="Script" path="res://Magic/Data/magicManager.gd" id="32_asc35"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_o46v5"]
 atlas = ExtResource("1_ksidj")
@@ -1123,6 +1125,9 @@ offset_right = -503.0
 offset_bottom = -257.0
 scale = Vector2(0.7, 0.7)
 
+[node name="MagicTreeUI" parent="ROOT_UI" instance=ExtResource("30_gr14u")]
+visible = false
+
 [node name="MachineUpdater" type="Node" parent="."]
 script = ExtResource("21_iegje")
 
@@ -1137,5 +1142,9 @@ customAnimation = NodePath("StaffAnimation")
 libraries = {
 "": SubResource("AnimationLibrary_htq8g")
 }
+
+[node name="MagicManager" type="Node" parent="." node_paths=PackedStringArray("magic_tree_ui")]
+script = ExtResource("32_asc35")
+magic_tree_ui = NodePath("../ROOT_UI/MagicTreeUI")
 
 [connection signal="timeout" from="ROOT_UI/ItemHUDPlaceholder/Timer" to="ROOT_UI/ItemHUDPlaceholder" method="_on_timer_timeout"]

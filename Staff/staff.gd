@@ -13,6 +13,16 @@ func _ready():
 	pass
 	#position = originalPos
 	#customAnimation.play("RESET")
+	
+	#to cast magic
 
+func cast():
+	if isEquipped == true:
+		#what magic call the use that magic
+		#if equip then call normal attack
+		#if collision need enemy take damage
+					
+		#signal when finish call func
+		pass
 
 

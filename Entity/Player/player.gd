@@ -26,6 +26,7 @@ const JUMP_VELOCITY = 4.5
 @onready var move_component = $MoveComponent
 @onready var camera = $Camera
 @onready var localLevel:Node2D
+@onready var magic_manager = $MagicManager
 
 
 var potion:Potion
@@ -48,7 +49,7 @@ func _ready() -> void:
 	#print(inventory.size())
 	inventory_manager.init(self)
 	state_manager.init(self,animation,move_component,camera)
-
+	magic_manager.init(self, mousePos)
 	
 
 func _unhandled_input(event: InputEvent) -> void:

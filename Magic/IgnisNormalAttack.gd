@@ -9,6 +9,7 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
+	#check position then play animation
 	if target_position != position:
 		var direction = (target_position - position).normalized()
 		position += direction * speed * delta
