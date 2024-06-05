@@ -22,6 +22,7 @@ func _ready():
 	player.homeTilemap = tile_map
 	player.localLevel = self
 	machineList.player = player 
+	
 	var teleporterGridCoords = tile_map.get_used_cells(2)
 	var teleporterData = tile_map.get_cell_tile_data(2,teleporterGridCoords[0])
 	print(teleporterGridCoords[0])

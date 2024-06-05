@@ -48,6 +48,7 @@ var potion:Potion
 var isBuildEnabled:bool
 var isBuildMode:bool
 var homeTilemap:TileMap
+var levelTilemap:TileMap
 var mousePos:Vector2
 
 var isPressable:bool = false

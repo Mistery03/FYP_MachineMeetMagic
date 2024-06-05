@@ -1,4 +1,4 @@
-[gd_scene load_steps=78 format=3 uid="uid://c1vsfoc55pk0w"]
+[gd_scene load_steps=81 format=3 uid="uid://c1vsfoc55pk0w"]
 
 [ext_resource type="Texture2D" uid="uid://bd32dcnew3uvf" path="res://Asset/L.png" id="1_ksidj"]
 [ext_resource type="Script" path="res://Entity/Player/player.gd" id="1_xfdxb"]
@@ -16,8 +16,10 @@
 [ext_resource type="Script" path="res://Entity/State/Wiring.gd" id="12_ii11w"]
 [ext_resource type="Script" path="res://Entity/Player/WiringBattery.gd" id="13_3c3kb"]
 [ext_resource type="PackedScene" uid="uid://htlhwdgl8ast" path="res://HUD/DynamicLabel/dynamicLabel.tscn" id="14_8yknx"]
+[ext_resource type="Script" path="res://Entity/Player/Action.gd" id="14_h6fpb"]
 [ext_resource type="FontFile" uid="uid://cl3rxpo58micg" path="res://Asset/Font/Lambda-Regular.ttf" id="14_me7n8"]
 [ext_resource type="PackedScene" path="res://UI/Build/build_hud.tscn" id="15_otihl"]
+[ext_resource type="PackedScene" uid="uid://cnj7jj8r34b1q" path="res://Material/Material.tscn" id="15_qe768"]
 [ext_resource type="Script" path="res://UI/Wiring/Wiring.gd" id="18_3q6sb"]
 [ext_resource type="Script" path="res://Entity/Player/ItemHUDPlaceholder.gd" id="19_4bbe1"]
 [ext_resource type="PackedScene" uid="uid://crsbugvcqu5mn" path="res://Staff/staffHUD.tscn" id="20_qac2v"]
@@ -32,6 +34,7 @@
 [ext_resource type="PackedScene" uid="uid://bm2u5jp0exc2h" path="res://UI/Potion/PotionGridContainerPlayer.tscn" id="25_km84l"]
 [ext_resource type="PackedScene" uid="uid://dpthqxsb7e3fk" path="res://UI/Potion/potionInventory.tscn" id="26_eb02i"]
 [ext_resource type="Texture2D" uid="uid://bi05jqai8a2ss" path="res://Asset/materials.png" id="32_6ejnk"]
+[ext_resource type="AudioStream" uid="uid://bua4cy3mumrw8" path="res://Asset/SFX/magicSfx.mp3" id="35_wv3w5"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_o46v5"]
 atlas = ExtResource("1_ksidj")
@@ -459,10 +462,10 @@ tracks/1/path = NodePath("Animation:rotation")
 tracks/1/interp = 2
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.4, 0.5),
-"transitions": PackedFloat32Array(1, 1, 1),
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.5, 0.6),
+"transitions": PackedFloat32Array(1, 1, 0.499999, 1, 1),
 "update": 0,
-"values": [0.0, -1.0472, 1.0472]
+"values": [0.0, -1.5708, -1.0472, 0.872665, 0.872665]
 }
 tracks/2/type = "value"
 tracks/2/imported = false
@@ -476,6 +479,33 @@ tracks/2/keys = {
 "update": 1,
 "values": [true]
 }
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Animation:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.5, 0.6),
+"transitions": PackedFloat32Array(1.7411, 16.5641, 0.0877998, 0.0883885),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(-40, -40), Vector2(-5, 0), Vector2(-5, 5)]
+}
+tracks/4/type = "audio"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("AudioStreamPlayer2D")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"clips": [{
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource("35_wv3w5")
+}],
+"times": PackedFloat32Array(0)
+}
+tracks/4/use_blend = true
 
 [sub_resource type="Animation" id="Animation_4m4tr"]
 length = 0.001
@@ -1271,10 +1301,11 @@ potionHUD = NodePath("../ROOT_UI/ItemHUDPlaceholder/PotionHUD")
 script = ExtResource("7_0owwg")
 starting_state = NodePath("Idle")
 
-[node name="Idle" type="Node" parent="StateManager" node_paths=PackedStringArray("move_state", "build_state")]
+[node name="Idle" type="Node" parent="StateManager" node_paths=PackedStringArray("move_state", "build_state", "cut_state")]
 script = ExtResource("8_5d7eh")
 move_state = NodePath("../Move")
 build_state = NodePath("../Build")
+cut_state = NodePath("../Cut")
 inputList = {
 "Build": "Build"
 }
@@ -1344,6 +1375,12 @@ inputList = {
 "Build": "Build",
 "Exit": "Exit"
 }
+
+[node name="Cut" type="Node" parent="StateManager" node_paths=PackedStringArray("idle_state", "move_state")]
+script = ExtResource("14_h6fpb")
+idle_state = NodePath("../Idle")
+move_state = NodePath("../Move")
+materialInstance = ExtResource("15_qe768")
 
 [node name="MoveComponent" type="Node" parent="."]
 script = ExtResource("10_gim7i")
@@ -1625,6 +1662,15 @@ libraries = {
 "": SubResource("AnimationLibrary_htq8g")
 }
 
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="Staff"]
+position = Vector2(-5.96046e-07, -2.98023e-07)
+scale = Vector2(1, 1)
+volume_db = 10.0
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.65
+
 [connection signal="timeout" from="ROOT_UI/ItemHUDPlaceholder/Timer" to="ROOT_UI/ItemHUDPlaceholder" method="_on_timer_timeout"]
+[connection signal="timeout" from="Timer" to="StateManager/Cut" method="_on_timer_timeout"]
 
 [editable path="Staff"]

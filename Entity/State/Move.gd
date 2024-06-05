@@ -3,15 +3,34 @@ extends State
 @export
 var idle_state: State
 
+
+var prevMouseTilePos = Vector2i(-1,-1)
+
 func enter() -> void:
 	super()
 	parent.itemHUDPlaceholder.visible = true
 
 func process_input(event: InputEvent) -> State:
-
-
+	
 	if Input.is_action_just_pressed("EXIT"):
 		toggle_menu()
+	return null
+
+func process_frame(delta: float) -> State:
+	if parent.levelTilemap:
+		var mouseTilePos = parent.levelTilemap.local_to_map(parent.mousePos)
+		var parentPos = parent.levelTilemap.local_to_map(parent.position)
+		
+		var validLocation = parent.levelTilemap.get_surrounding_cells(mouseTilePos)
+		
+		var materialDroppedData = parent.levelTilemap.get_cell_tile_data(4,mouseTilePos)
+		if materialDroppedData:
+			parent.levelTilemap.set_cell(5,mouseTilePos,2,parent.levelTilemap.get_cell_atlas_coords(4,mouseTilePos))
+			parent.levelTilemap.set_layer_modulate(5,Color8(255,255,255,255))
+			
+		if mouseTilePos != prevMouseTilePos:
+			parent.levelTilemap.erase_cell(5,prevMouseTilePos)
+		prevMouseTilePos = mouseTilePos
 	return null
 
 func process_physics(delta: float) -> State:
