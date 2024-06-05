@@ -57,7 +57,7 @@ func process_input(event: InputEvent) -> State:
 	return null
 
 func process_frame(delta: float) -> State:
-	if parent.levelTilemap:
+	if parent.levelTilemap and !parent.isLevelTransitioning:
 		var mouseTilePos = parent.levelTilemap.local_to_map(parent.mousePos)
 		var parentPos = parent.levelTilemap.local_to_map(parent.position)
 		

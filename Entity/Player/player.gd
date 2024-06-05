@@ -53,6 +53,7 @@ var mousePos:Vector2
 
 var isPressable:bool = false
 var isMachineUI:bool = false
+var isLevelTransitioning:bool = false
 
 var zoomValue:float = 6
 
