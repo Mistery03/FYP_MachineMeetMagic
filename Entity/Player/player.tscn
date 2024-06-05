@@ -1,4 +1,4 @@
-[gd_scene load_steps=81 format=3 uid="uid://c1vsfoc55pk0w"]
+[gd_scene load_steps=82 format=3 uid="uid://c1vsfoc55pk0w"]
 
 [ext_resource type="Texture2D" uid="uid://bd32dcnew3uvf" path="res://Asset/L.png" id="1_ksidj"]
 [ext_resource type="Script" path="res://Entity/Player/player.gd" id="1_xfdxb"]
@@ -34,7 +34,8 @@
 [ext_resource type="PackedScene" uid="uid://bm2u5jp0exc2h" path="res://UI/Potion/PotionGridContainerPlayer.tscn" id="25_km84l"]
 [ext_resource type="PackedScene" uid="uid://dpthqxsb7e3fk" path="res://UI/Potion/potionInventory.tscn" id="26_eb02i"]
 [ext_resource type="Texture2D" uid="uid://bi05jqai8a2ss" path="res://Asset/materials.png" id="32_6ejnk"]
-[ext_resource type="AudioStream" uid="uid://bua4cy3mumrw8" path="res://Asset/SFX/magicSfx.mp3" id="35_wv3w5"]
+[ext_resource type="AudioStream" uid="uid://6ccgh63311io" path="res://Asset/SFX/whooshSound.mp3" id="35_4dsxo"]
+[ext_resource type="AudioStream" uid="uid://6h2e77jv6p4a" path="res://Asset/SFX/woodBreak.mp3" id="36_a4jww"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_o46v5"]
 atlas = ExtResource("1_ksidj")
@@ -491,21 +492,30 @@ tracks/3/keys = {
 "update": 0,
 "values": [Vector2(0, 0), Vector2(-40, -40), Vector2(-5, 0), Vector2(-5, 5)]
 }
-tracks/4/type = "audio"
+tracks/4/type = "value"
 tracks/4/imported = false
 tracks/4/enabled = true
-tracks/4/path = NodePath("AudioStreamPlayer2D")
+tracks/4/path = NodePath("windSFX:playing")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
-"clips": [{
-"end_offset": 0.0,
-"start_offset": 0.0,
-"stream": ExtResource("35_wv3w5")
-}],
-"times": PackedFloat32Array(0)
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
 }
-tracks/4/use_blend = true
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("woodBreakSFX:playing")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0.6),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
 
 [sub_resource type="Animation" id="Animation_4m4tr"]
 length = 0.001
@@ -616,6 +626,18 @@ tracks/8/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 0,
 "values": [Vector2(-4.41942, -2.65165)]
+}
+tracks/9/type = "value"
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/path = NodePath("windSFX:playing")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
 }
 
 [sub_resource type="Animation" id="Animation_ffrp5"]
@@ -1662,10 +1684,17 @@ libraries = {
 "": SubResource("AnimationLibrary_htq8g")
 }
 
-[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="Staff"]
+[node name="windSFX" type="AudioStreamPlayer2D" parent="Staff"]
 position = Vector2(-5.96046e-07, -2.98023e-07)
 scale = Vector2(1, 1)
+stream = ExtResource("35_4dsxo")
 volume_db = 10.0
+max_distance = 500.0
+
+[node name="woodBreakSFX" type="AudioStreamPlayer2D" parent="Staff"]
+stream = ExtResource("36_a4jww")
+pitch_scale = 0.8
+attenuation = 1.36604
 
 [node name="Timer" type="Timer" parent="."]
 wait_time = 0.65
