@@ -51,9 +51,9 @@ func updatePlayerVelocity(delta, movement_direction):
 			if parent.velocity.y < 0:
 				parent.staff.customAnimation.play("idleBack")
 			if parent.velocity.x <0:
-				parent.staff.customAnimation.play("idleFront")
-			if parent.velocity.x > 0:
 				parent.staff.customAnimation.play("idleBack")
+			if parent.velocity.x > 0:
+				parent.staff.customAnimation.play("idleFront")
 
 		
 func changeAnimationVelocity():
@@ -67,20 +67,18 @@ func changeAnimationVelocity():
 func updateStaffPosX():
 	#parent.staff.z_index = -1
 	if parent.velocity.x < 0:
-		parent.staff.customAnimation.play("RESETLEFT")
+		parent.staff.customAnimation.play("RESETRIGHT")
 		#parent.staff.position = Vector2(50, -20) 
 	elif parent.velocity.x > 0:
-		parent.staff.customAnimation.play("RESETRIGHT")
+		parent.staff.customAnimation.play("RESETLEFT")
 		#parent.staff.position = Vector2(-50, -20)
 
 
 func updateStaffPosY():
 	
 	if parent.velocity.y < 0:
-
 		parent.staff.customAnimation.play("RESETBACK")
 	elif parent.velocity.y >0:
-
 		parent.staff.customAnimation.play("RESETFRONT")
 		
 

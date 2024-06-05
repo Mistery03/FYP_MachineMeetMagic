@@ -13,5 +13,6 @@ name = "Fuel"
 type = "Fuel"
 texture = SubResource("AtlasTexture_wqgbf")
 amount = 0
+magicEssenceAmountResult = 0
 burnPerSecond = 50
 durability = 2

@@ -11,7 +11,8 @@ var staffMana:float
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	animation.play("CUTTING")
+	pass
+	#customAnimation.play("CUTTING")
 	#position = originalPos
 	#customAnimation.play("RESET")
 

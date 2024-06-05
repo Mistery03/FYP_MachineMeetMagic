@@ -85,10 +85,8 @@ func _process(delta) -> void:
 	#for amount in inventory:
 		#if amount:
 			#print(amount.amount)
-	print(isPressable)
 
 func _input(event):
-
 	if event is InputEventMouse:
 		if event.is_action_released("ZOOMIN"):
 			zoomValue+=zoom_step

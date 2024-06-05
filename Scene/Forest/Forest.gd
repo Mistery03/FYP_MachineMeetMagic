@@ -40,13 +40,13 @@ func clearCurrentRoom():
 func randomiseEnemyRoom():
 	var selectedRoom = enemyRooms.pick_random()
 	enemyRoomQueue.push_front(selectedRoom)
-	print(enemyRoomQueue)
+	#print(enemyRoomQueue)
 
 func spawnRoom():
 	var tween = get_tree().create_tween()
 	tween.tween_property(fade_out,"modulate:a",0,1.5)
 	var selectedRoom = enemyRoomQueue.pop_front()
-	print(selectedRoom)
+	#print(selectedRoom)
 	var roomInstance = selectedRoom.instantiate()
 	roomInstance.setPlayer(player)
 	roomInstance.position = Vector2(0,0)

@@ -52,7 +52,8 @@ func process_frame(delta: float) -> State:
 	isBuildEnabled = parent.isBuildEnabled
 	if parent.staff:
 		if parent.isStaffEquipped:
-			parent.staff.customAnimation.play("idleFront")
+			pass
+			#parent.staff.customAnimation.play("idleFront")
 		else:
 			parent.staff.customAnimation.play("RESET")
 	
