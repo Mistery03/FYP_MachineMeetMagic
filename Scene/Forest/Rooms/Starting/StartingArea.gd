@@ -23,6 +23,7 @@ func _process(delta):
 		var mouseTilePos = tile_map.local_to_map(player.mousePos)
 		if Input.is_action_just_pressed("ACTION") and player.isStaffEquipped:
 			var materialDroppedData = tile_map.get_cell_tile_data(4,mouseTilePos)
+			player.staff.animation.play("cutting")
 			if materialDroppedData:
 				var materialRes = materialDroppedData.get_custom_data("materialDropped")
 				var num_items_to_drop = randi_range(1, max_drop_items)

@@ -1,4 +1,4 @@
-[gd_scene load_steps=75 format=3 uid="uid://c1vsfoc55pk0w"]
+[gd_scene load_steps=78 format=3 uid="uid://c1vsfoc55pk0w"]
 
 [ext_resource type="Texture2D" uid="uid://bd32dcnew3uvf" path="res://Asset/L.png" id="1_ksidj"]
 [ext_resource type="Script" path="res://Entity/Player/player.gd" id="1_xfdxb"]
@@ -31,6 +31,7 @@
 [ext_resource type="Script" path="res://UI/Inventory/InventoryController.gd" id="24_o1enl"]
 [ext_resource type="PackedScene" uid="uid://bm2u5jp0exc2h" path="res://UI/Potion/PotionGridContainerPlayer.tscn" id="25_km84l"]
 [ext_resource type="PackedScene" uid="uid://dpthqxsb7e3fk" path="res://UI/Potion/potionInventory.tscn" id="26_eb02i"]
+[ext_resource type="Texture2D" uid="uid://bi05jqai8a2ss" path="res://Asset/materials.png" id="32_6ejnk"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_o46v5"]
 atlas = ExtResource("1_ksidj")
@@ -482,6 +483,18 @@ tracks/3/keys = {
 "update": 1,
 "values": [-1]
 }
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("axe:visible")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
 
 [sub_resource type="Animation" id="Animation_ffrp5"]
 resource_name = "RESETBACK"
@@ -533,6 +546,18 @@ tracks/3/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [1]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("axe:visible")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
 }
 
 [sub_resource type="Animation" id="Animation_cipcf"]
@@ -586,6 +611,18 @@ tracks/3/keys = {
 "update": 1,
 "values": [-1]
 }
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("axe:visible")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
 
 [sub_resource type="Animation" id="Animation_gdreg"]
 resource_name = "RESETLEFT"
@@ -638,6 +675,18 @@ tracks/3/keys = {
 "update": 0,
 "values": [Vector2(8, 8)]
 }
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("axe:visible")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
 
 [sub_resource type="Animation" id="Animation_wgpxl"]
 resource_name = "RESETRIGHT"
@@ -689,6 +738,18 @@ tracks/3/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 0,
 "values": [Vector2(-8, 8)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("axe:visible")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
 }
 
 [sub_resource type="Animation" id="Animation_o074o"]
@@ -775,8 +836,38 @@ tracks/2/keys = {
 "values": [Vector2(8, 8)]
 }
 
+[sub_resource type="Animation" id="Animation_jatb2"]
+resource_name = "CUTTING"
+length = 0.4
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [0.785398, 1.74533, 0.349066]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("axe:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_htq8g"]
 _data = {
+"CUTTING": SubResource("Animation_jatb2"),
 "RESET": SubResource("Animation_4m4tr"),
 "RESETBACK": SubResource("Animation_ffrp5"),
 "RESETFRONT": SubResource("Animation_cipcf"),
@@ -785,6 +876,10 @@ _data = {
 "idleBack": SubResource("Animation_o074o"),
 "idleFront": SubResource("Animation_76tdj")
 }
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jc7sf"]
+atlas = ExtResource("32_6ejnk")
+region = Rect2(0, 264, 24, 24)
 
 [node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("staff", "itemHUDPlaceholder", "playerInventoryController") groups=["invalidPosition"]]
 scale = Vector2(0.1, 0.1)
@@ -1170,5 +1265,13 @@ customAnimation = NodePath("StaffAnimation")
 libraries = {
 "": SubResource("AnimationLibrary_htq8g")
 }
+
+[node name="axe" type="Sprite2D" parent="Staff"]
+visible = false
+modulate = Color(0, 0.792157, 1, 0.54902)
+texture_filter = 1
+position = Vector2(-4.41942, -2.65165)
+rotation = -0.020944
+texture = SubResource("AtlasTexture_jc7sf")
 
 [connection signal="timeout" from="ROOT_UI/ItemHUDPlaceholder/Timer" to="ROOT_UI/ItemHUDPlaceholder" method="_on_timer_timeout"]
