@@ -1711,6 +1711,16 @@ volume_db = -12.0
 wait_time = 0.5
 one_shot = true
 
+[node name="TextOnMouse" type="Label" parent="."]
+visible = false
+z_index = 100
+offset_right = 40.0
+offset_bottom = 23.0
+theme_override_fonts/font = ExtResource("14_me7n8")
+theme_override_font_sizes/font_size = 80
+text = "Mouse Text"
+horizontal_alignment = 1
+
 [connection signal="timeout" from="ROOT_UI/ItemHUDPlaceholder/Timer" to="ROOT_UI/ItemHUDPlaceholder" method="_on_timer_timeout"]
 [connection signal="timeout" from="Timer" to="StateManager/Cut" method="_on_timer_timeout"]
 

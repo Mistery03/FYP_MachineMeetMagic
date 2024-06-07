@@ -47,6 +47,7 @@ const JUMP_VELOCITY = 4.5
 @onready var place_sfx = $PlaceSFX
 @onready var walking_on_wood_sfx = $walkingOnWoodSFX
 
+@onready var text_on_mouse = $TextOnMouse
 
 var potion:Potion
 var isBuildEnabled:bool
@@ -58,6 +59,8 @@ var mousePos:Vector2
 var isPressable:bool = false
 var isMachineUI:bool = false
 var isLevelTransitioning:bool = false
+##NOTE prob need a better name
+var isActionable:bool = false
 
 var zoomValue:float = 6
 

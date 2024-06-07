@@ -62,14 +62,32 @@ func process_frame(delta: float) -> State:
 		var parentPos = parent.levelTilemap.local_to_map(parent.position)
 		
 		var validLocation = parent.levelTilemap.get_surrounding_cells(mouseTilePos)
-		
 		var materialDroppedData = parent.levelTilemap.get_cell_tile_data(4,mouseTilePos)
-		if materialDroppedData:
-			parent.levelTilemap.set_cell(5,mouseTilePos,2,parent.levelTilemap.get_cell_atlas_coords(4,mouseTilePos))
-			parent.levelTilemap.set_layer_modulate(5,Color8(255,255,255,255))
+		for validPos in validLocation:
+			if parentPos == validPos or parentPos == mouseTilePos:
+				print(parentPos == validPos)
+				if materialDroppedData:
+					var materialName = materialDroppedData.get_custom_data("materialName")
+					parent.text_on_mouse.text = "Cut " + materialName
+					parent.text_on_mouse.global_position = parent.mousePos + Vector2(-20,-10)
+					parent.text_on_mouse.visible = true
+					parent.levelTilemap.set_cell(5,mouseTilePos,2,parent.levelTilemap.get_cell_atlas_coords(4,mouseTilePos))
+					parent.levelTilemap.set_layer_modulate(5,Color8(255,255,255,255))
+				
+					
+			#else:	
+				#if materialDroppedData:
+					#var materialName = materialDroppedData.get_custom_data("materialName")
+					#parent.levelTilemap.set_cell(5,mouseTilePos,2,parent.levelTilemap.get_cell_atlas_coords(4,mouseTilePos))
+					#parent.levelTilemap.set_layer_modulate(5,Color8(255,255,255,255))
+				
+					#parent.text_on_mouse.text = materialName
+					#parent.text_on_mouse.global_position = parent.mousePos + Vector2(-20,-10)
+					#parent.text_on_mouse.visible = true
 			
 		if mouseTilePos != prevMouseTilePos:
 			parent.levelTilemap.erase_cell(5,prevMouseTilePos)
+			parent.text_on_mouse.visible = false
 		prevMouseTilePos = mouseTilePos
 	
 	isBuildEnabled = parent.isBuildEnabled

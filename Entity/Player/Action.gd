@@ -18,6 +18,8 @@ var clickedPos
 func enter() -> void:
 	super()
 	isDropped = false
+
+
 	
 
 func process_frame(delta:float) -> State:
@@ -29,24 +31,23 @@ func process_frame(delta:float) -> State:
 		
 	mouseTilePos = parent.levelTilemap.local_to_map(parent.mousePos)
 	var parentPos = parent.levelTilemap.local_to_map(parent.position)
-	
 	var validLocation = parent.levelTilemap.get_surrounding_cells(mouseTilePos)
-	
 	materialDroppedData = parent.levelTilemap.get_cell_tile_data(4,mouseTilePos)
-	
+
 	for validPos in validLocation:
 		if parentPos == validPos or parentPos == mouseTilePos:
-			if Input.is_action_just_pressed("ACTION") and parent.isStaffEquipped:
-				parent.staff.global_position = parent.levelTilemap.map_to_local(mouseTilePos) 
-				if materialDroppedData:
+			if materialDroppedData and parent.isStaffEquipped:
+				if Input.is_action_just_pressed("ACTION"):
+					parent.text_on_mouse.visible = false
+					parent.staff.global_position = parent.levelTilemap.map_to_local(mouseTilePos) 
 					parent.staff.customAnimation.play("CUTTING")
 					parent.staff.z_index = 5
 					timer.start()
 					materialRes = materialDroppedData.get_custom_data("materialDropped")
 					clickedPos = mouseTilePos
-					
-					#parent.staff.customAnimation.stop()
-					#await parent.staff.customAnimation.animation_finished
+						
+						#parent.staff.customAnimation.stop()
+						#await parent.staff.customAnimation.animation_finished
 	if isDropped:			
 		return idle_state
 					
