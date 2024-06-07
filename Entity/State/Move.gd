@@ -1,8 +1,11 @@
 extends State
 
+
+
 @export
 var idle_state: State
 
+@onready var walk_timer = $"../../walkSFX"
 
 var prevMouseTilePos = Vector2i(-1,-1)
 
@@ -17,7 +20,15 @@ func process_input(event: InputEvent) -> State:
 	return null
 
 func process_frame(delta: float) -> State:
-	if parent.levelTilemap:
+	if parent.homeTilemap:
+		var parentPos = parent.homeTilemap.local_to_map(parent.position)
+		var floorData:TileData = parent.homeTilemap.get_cell_tile_data(0,parentPos) 
+		if floorData:
+			if walk_timer.time_left <=0:
+				parent.walking_on_wood_sfx.pitch_scale = randf_range(0.8,1.2)
+				parent.walking_on_wood_sfx.play()
+				walk_timer.start(0.5)
+	if parent.levelTilemap and !parent.isLevelTransitioning:
 		var mouseTilePos = parent.levelTilemap.local_to_map(parent.mousePos)
 		var parentPos = parent.levelTilemap.local_to_map(parent.position)
 		

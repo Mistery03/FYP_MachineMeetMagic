@@ -34,6 +34,7 @@ const JUMP_VELOCITY = 4.5
 @export var max_zoom = 12
 @export var zoom_step = 0.1
 @export var zoom_duration = 0.3 # Duration for the zoom transition
+@export var cameraZoom:float = 6
 
 @onready var inventory_manager = $InventoryManager
 @onready var potion_manager = $PotionManager
@@ -42,7 +43,10 @@ const JUMP_VELOCITY = 4.5
 @onready var move_component = $MoveComponent
 @onready var camera = $Camera
 @onready var localLevel:Node2D
-@export var cameraZoom:float = 6
+
+@onready var place_sfx = $PlaceSFX
+@onready var walking_on_wood_sfx = $walkingOnWoodSFX
+
 
 var potion:Potion
 var isBuildEnabled:bool
