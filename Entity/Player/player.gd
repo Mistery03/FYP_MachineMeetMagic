@@ -46,6 +46,7 @@ const JUMP_VELOCITY = 4.5
 
 @onready var place_sfx = $PlaceSFX
 @onready var walking_on_wood_sfx = $walkingOnWoodSFX
+@onready var walking_on_grass_sfx = $walkingOnGrassSFX
 
 @onready var text_on_mouse = $TextOnMouse
 

@@ -1,4 +1,4 @@
-[gd_scene load_steps=84 format=3 uid="uid://c1vsfoc55pk0w"]
+[gd_scene load_steps=85 format=3 uid="uid://c1vsfoc55pk0w"]
 
 [ext_resource type="Texture2D" uid="uid://bd32dcnew3uvf" path="res://Asset/L.png" id="1_ksidj"]
 [ext_resource type="Script" path="res://Entity/Player/player.gd" id="1_xfdxb"]
@@ -38,6 +38,7 @@
 [ext_resource type="AudioStream" uid="uid://6h2e77jv6p4a" path="res://Asset/SFX/woodBreak.mp3" id="36_a4jww"]
 [ext_resource type="AudioStream" uid="uid://k857dg5qycjv" path="res://Asset/SFX/placingObject.mp3" id="37_raash"]
 [ext_resource type="AudioStream" uid="uid://t8eii58rce5c" path="res://Asset/SFX/walkingOnWood.mp3" id="38_o8wch"]
+[ext_resource type="AudioStream" uid="uid://2lu5if0yp64i" path="res://Asset/SFX/forestWalkSFX.mp3" id="39_wma1b"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_o46v5"]
 atlas = ExtResource("1_ksidj")
@@ -1689,7 +1690,7 @@ libraries = {
 [node name="windSFX" type="AudioStreamPlayer2D" parent="Staff"]
 position = Vector2(-5.96046e-07, -2.98023e-07)
 stream = ExtResource("35_4dsxo")
-volume_db = 10.0
+volume_db = 5.0
 max_distance = 500.0
 
 [node name="woodBreakSFX" type="AudioStreamPlayer2D" parent="Staff"]
@@ -1699,13 +1700,6 @@ attenuation = 1.36604
 
 [node name="Timer" type="Timer" parent="."]
 wait_time = 0.8
-
-[node name="PlaceSFX" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("37_raash")
-
-[node name="walkingOnWoodSFX" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("38_o8wch")
-volume_db = -12.0
 
 [node name="walkSFX" type="Timer" parent="."]
 wait_time = 0.5
@@ -1720,6 +1714,17 @@ theme_override_fonts/font = ExtResource("14_me7n8")
 theme_override_font_sizes/font_size = 80
 text = "Mouse Text"
 horizontal_alignment = 1
+
+[node name="PlaceSFX" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("37_raash")
+
+[node name="walkingOnWoodSFX" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("38_o8wch")
+volume_db = -12.0
+
+[node name="walkingOnGrassSFX" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("39_wma1b")
+volume_db = -12.0
 
 [connection signal="timeout" from="ROOT_UI/ItemHUDPlaceholder/Timer" to="ROOT_UI/ItemHUDPlaceholder" method="_on_timer_timeout"]
 [connection signal="timeout" from="Timer" to="StateManager/Cut" method="_on_timer_timeout"]

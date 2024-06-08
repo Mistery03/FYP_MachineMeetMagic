@@ -16,9 +16,13 @@ extends Node2D
 @export_category("Trees")
 @export var treeSelection:Array[Vector2i] = [Vector2i(0,0),Vector2i(3,0)]	
 
+@export_category("Stones")
+@export var rockSelection:Array[Vector2i]
+
 var objectPosList:Array[Vector2i] = []
 
 var _forest = FastNoiseLite.new()
+var _stone = FastNoiseLite.new()
 var grassData:TileData
 var prevMouseTilePos = Vector2i(-1000,-1000)
 
@@ -30,9 +34,10 @@ func _ready():
 		var canPlace = grassData.get_custom_data("canGenerateCollectibles")
 		if canPlace:
 			#objectPosList.clear()
-			spawnforest(coords.x,coords.y)					
+			spawnForest(coords.x,coords.y)	
+			spawnStone(coords.x,coords.y)				
 
-func spawnforest(x, y):
+func spawnForest(x, y):
 	randomize()
 	_forest.noise_type = FastNoiseLite.TYPE_PERLIN
 	_forest.seed = randi() 
@@ -43,6 +48,19 @@ func spawnforest(x, y):
 	if noiseValue > 0.3 and noiseValue < density:  # Adjusted threshold for more controlled spawning
 		var random_tree = treeSelection[randi_range(0, treeSelection.size() - 1)]
 		tile_map.set_cell(4, Vector2(x, y), 2, random_tree, 0)
+		objectPosList.append(Vector2i(x, y))
+
+func spawnStone(x, y):
+	randomize()
+	_stone.noise_type = FastNoiseLite.TYPE_PERLIN
+	_stone.seed = randi() 
+	_stone.frequency = 0.0005  # Lower frequency for larger patches
+	
+	var noiseValue = _stone.get_noise_2d(x, y)* 10
+	var density = randf_range(0, 2)  # Lower density range for less frequent spawns
+	if noiseValue > 0.3 and noiseValue < density:  # Adjusted threshold for more controlled spawning
+		var random_stone = rockSelection[randi_range(0, rockSelection.size() - 1)]
+		tile_map.set_cell(4, Vector2(x, y), 2, random_stone, 0)
 		objectPosList.append(Vector2i(x, y))
 		
 func setPlayer(player:Player):

@@ -45,9 +45,13 @@ func process_input(event: InputEvent) -> State:
 
 	if move_component.axis:
 		return move_state
-	
-	if Input.is_action_pressed("ACTION") and parent.levelTilemap:
-		return cut_state
+	if parent.levelTilemap and !parent.isLevelTransitioning:
+		var mouseTilePos = parent.levelTilemap.local_to_map(parent.mousePos)
+		var materialDroppedData = parent.levelTilemap.get_cell_tile_data(4,mouseTilePos)
+		if materialDroppedData:
+			var materialCategory = materialDroppedData.get_custom_data("materialCategory")
+			if Input.is_action_pressed("ACTION") and materialCategory == "wood":
+				return cut_state
 	
 	if Input.is_action_just_pressed(inputList.find_key("Build").to_upper()) and isBuildEnabled and !parent.playerInventoryController.visible:
 		parent.isPressable = false
@@ -73,9 +77,11 @@ func process_frame(delta: float) -> State:
 					
 		if materialDroppedData:
 			var materialName = materialDroppedData.get_custom_data("materialName")
-			if is_in_area:
-				print("in area")
+			var materialCategory = materialDroppedData.get_custom_data("materialCategory")
+			if is_in_area and materialCategory == "wood":
 				update_text_on_mouse(materialName, "Cut ")
+			elif is_in_area and materialCategory == "rock":
+				update_text_on_mouse(materialName, "Mine ")
 			else:
 				update_text_on_mouse(materialName)
 			set_tilemap_cell(mouseTilePos)

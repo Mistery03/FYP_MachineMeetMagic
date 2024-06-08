@@ -12,10 +12,13 @@ extends Node2D
 @onready var rooms = $Rooms
 @onready var fade_out = $CanvasLayer/FadeOut
 
+@onready var wind_sfx = $windSFX
+
 var enemyRoomQueue:Array = []
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	wind_sfx.play()
 	var tween = get_tree().create_tween()
 	tween.tween_property(fade_out,"modulate:a",0,1.5)
 	var room = startingArea.instantiate()

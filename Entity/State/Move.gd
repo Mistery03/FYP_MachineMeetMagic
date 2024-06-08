@@ -34,7 +34,12 @@ func process_frame(delta: float) -> State:
 		var parentPos = parent.levelTilemap.local_to_map(parent.position)
 		
 		var materialDroppedData = parent.levelTilemap.get_cell_tile_data(4,mouseTilePos)
-		
+		var floorData:TileData = parent.levelTilemap.get_cell_tile_data(1,parentPos) 
+		if floorData:
+			if walk_timer.time_left <=0:
+				parent.walking_on_grass_sfx.pitch_scale = randf_range(0.8,1.2)
+				parent.walking_on_grass_sfx.play()
+				walk_timer.start(0.5)
 		var is_in_area:bool = false
 		for pos in parent.objectsPosInLevelList:
 			for validPos in parent.levelTilemap.get_surrounding_cells(pos):
@@ -45,9 +50,11 @@ func process_frame(delta: float) -> State:
 						
 		if materialDroppedData:
 			var materialName = materialDroppedData.get_custom_data("materialName")
-			if is_in_area:
-				print("in area")
+			var materialCategory = materialDroppedData.get_custom_data("materialCategory")
+			if is_in_area and materialCategory == "wood":
 				update_text_on_mouse(materialName, "Cut ")
+			elif is_in_area and materialCategory == "rock":
+				update_text_on_mouse(materialName, "Mine ")
 			else:
 				update_text_on_mouse(materialName)
 			set_tilemap_cell(mouseTilePos)
