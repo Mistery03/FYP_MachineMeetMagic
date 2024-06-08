@@ -20,14 +20,19 @@ func _ready():
 	tween.tween_property(fade_out,"modulate:a",0,1.5)
 	var room = startingArea.instantiate()
 	room.setPlayer(player)
-	
+	player.levelTilemap = room.tile_map
 	rooms.add_child(room)
 	room.placePlayer()
 	room.door.connect("OnDoorEntered",goNextRoom)
 	room.fadeOut = fade_out
+	
 	enemyRoomQueue.push_back(bossArea)
 	for i in range(maxEnemyRooms):
 		randomiseEnemyRoom()
+	
+	await get_tree().create_timer(0.2).timeout
+	player.objectsPosInLevelList.clear()
+	player.objectsPosInLevelList = room.objectPosList
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -58,6 +63,10 @@ func spawnRoom():
 	rooms.add_child(roomInstance)
 	roomInstance.placePlayer()
 	player.isLevelTransitioning = false
+	
+	await get_tree().create_timer(0.2).timeout
+	player.objectsPosInLevelList.clear()
+	player.objectsPosInLevelList = roomInstance.objectPosList
 	
 
 func goNextRoom():

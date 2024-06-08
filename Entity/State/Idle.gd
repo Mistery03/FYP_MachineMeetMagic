@@ -19,6 +19,7 @@ var lerp_timer: Timer
 var isBuildEnabled:bool = true
 
 
+
 func enter() -> void:
 	super()
 	camera.position_smoothing_enabled = false
@@ -61,30 +62,26 @@ func process_frame(delta: float) -> State:
 		var mouseTilePos = parent.levelTilemap.local_to_map(parent.mousePos)
 		var parentPos = parent.levelTilemap.local_to_map(parent.position)
 		
-		var validLocation = parent.levelTilemap.get_surrounding_cells(mouseTilePos)
 		var materialDroppedData = parent.levelTilemap.get_cell_tile_data(4,mouseTilePos)
-		for validPos in validLocation:
-			if parentPos == validPos or parentPos == mouseTilePos:
-				print(parentPos == validPos)
-				if materialDroppedData:
-					var materialName = materialDroppedData.get_custom_data("materialName")
-					parent.text_on_mouse.text = "Cut " + materialName
-					parent.text_on_mouse.global_position = parent.mousePos + Vector2(-20,-10)
-					parent.text_on_mouse.visible = true
-					parent.levelTilemap.set_cell(5,mouseTilePos,2,parent.levelTilemap.get_cell_atlas_coords(4,mouseTilePos))
-					parent.levelTilemap.set_layer_modulate(5,Color8(255,255,255,255))
-				
+		var is_in_area:bool = false
+		for pos in parent.objectsPosInLevelList:
+				for validPos in parent.levelTilemap.get_surrounding_cells(pos):
+					if parentPos == validPos or parentPos == pos :
+						if mouseTilePos == pos and parent.isStaffEquipped:
+							is_in_area = true
+							break
 					
-			#else:	
-				#if materialDroppedData:
-					#var materialName = materialDroppedData.get_custom_data("materialName")
-					#parent.levelTilemap.set_cell(5,mouseTilePos,2,parent.levelTilemap.get_cell_atlas_coords(4,mouseTilePos))
-					#parent.levelTilemap.set_layer_modulate(5,Color8(255,255,255,255))
-				
-					#parent.text_on_mouse.text = materialName
-					#parent.text_on_mouse.global_position = parent.mousePos + Vector2(-20,-10)
-					#parent.text_on_mouse.visible = true
-			
+		if materialDroppedData:
+			var materialName = materialDroppedData.get_custom_data("materialName")
+			if is_in_area:
+				print("in area")
+				update_text_on_mouse(materialName, "Cut ")
+			else:
+				update_text_on_mouse(materialName)
+			set_tilemap_cell(mouseTilePos)
+	
+	
+	
 		if mouseTilePos != prevMouseTilePos:
 			parent.levelTilemap.erase_cell(5,prevMouseTilePos)
 			parent.text_on_mouse.visible = false
@@ -103,3 +100,12 @@ func process_frame(delta: float) -> State:
 func toggle_menu():
 	# Toggle the visibility of the menu
 	parent.playerInventoryController.visible = !parent.playerInventoryController.visible 
+
+func update_text_on_mouse(material_name, prefix=""):
+	parent.text_on_mouse.text = prefix + material_name
+	parent.text_on_mouse.global_position = parent.mousePos + Vector2(-20, -10)
+	parent.text_on_mouse.visible = true
+
+func set_tilemap_cell(mouseTilePos):
+	parent.levelTilemap.set_cell(5, mouseTilePos, 2, parent.levelTilemap.get_cell_atlas_coords(4, mouseTilePos))
+	parent.levelTilemap.set_layer_modulate(5, Color8(255, 255, 255, 255))

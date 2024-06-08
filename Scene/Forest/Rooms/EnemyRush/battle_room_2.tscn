@@ -30,6 +30,11 @@ layer_2/tile_data = PackedInt32Array(-983052, 65539, 0, -917516, 65539, 0, -8519
 layer_3/name = "playerSpawnArea"
 layer_3/z_index = -1
 layer_3/tile_data = PackedInt32Array(-9, 65536, 1, -65545, 65536, 1, -65544, 65536, 1, -8, 65536, 1, -65543, 65536, 1, -7, 65536, 1, 65527, 65536, 1, 131063, 65536, 1, 196599, 65536, 1, 65528, 65536, 1, 131064, 65536, 1, 196600, 65536, 1, 65529, 65536, 1, 131065, 65536, 1, 196601, 65536, 1, -65542, 65536, 1, -6, 65536, 1, 65530, 65536, 1, 131066, 65536, 1, 196602, 65536, 1, -65541, 65536, 1, -5, 65536, 1, 65531, 65536, 1, 131067, 65536, 1, 196603, 65536, 1)
+layer_4/name = "Collectable"
+layer_4/modulate = Color(0.784314, 0.784314, 0.784314, 1)
+layer_4/tile_data = PackedInt32Array()
+layer_5/name = "highlight"
+layer_5/tile_data = PackedInt32Array()
 
 [node name="Door" type="Node2D" parent="." node_paths=PackedStringArray("parent")]
 position = Vector2(250, 0)

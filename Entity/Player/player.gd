@@ -59,8 +59,9 @@ var mousePos:Vector2
 var isPressable:bool = false
 var isMachineUI:bool = false
 var isLevelTransitioning:bool = false
-##NOTE prob need a better name
-var isActionable:bool = false
+var isInDestroyArea:bool = false
+
+var objectsPosInLevelList:Array[Vector2i]
 
 var zoomValue:float = 6
 
