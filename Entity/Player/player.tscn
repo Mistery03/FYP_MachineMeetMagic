@@ -1,9 +1,10 @@
-[gd_scene load_steps=66 format=3 uid="uid://c1vsfoc55pk0w"]
+[gd_scene load_steps=72 format=3 uid="uid://c1vsfoc55pk0w"]
 
 [ext_resource type="Texture2D" uid="uid://bd32dcnew3uvf" path="res://Asset/L.png" id="1_ksidj"]
 [ext_resource type="Script" path="res://Entity/Player/player.gd" id="1_xfdxb"]
 [ext_resource type="Resource" uid="uid://c6joqno41m2ls" path="res://Entity/Player/playerData.tres" id="2_g17go"]
 [ext_resource type="Resource" uid="uid://doo0oqvv31wtn" path="res://Potion/Buff/Defence Potion/DefencePotion.tres" id="3_41una"]
+[ext_resource type="Resource" uid="uid://bf2wpudjl6wu5" path="res://Entity/Data/testSlot1.tres" id="4_e4jpf"]
 [ext_resource type="Script" path="res://Potion/PotionManager.gd" id="5_5bgkf"]
 [ext_resource type="Script" path="res://Entity/State/StateMachine.gd" id="7_0owwg"]
 [ext_resource type="Script" path="res://Entity/State/Idle.gd" id="8_5d7eh"]
@@ -16,20 +17,19 @@
 [ext_resource type="Script" path="res://Entity/Player/WiringBattery.gd" id="13_3c3kb"]
 [ext_resource type="PackedScene" uid="uid://htlhwdgl8ast" path="res://HUD/DynamicLabel/dynamicLabel.tscn" id="14_8yknx"]
 [ext_resource type="FontFile" uid="uid://cl3rxpo58micg" path="res://Asset/Font/Lambda-Regular.ttf" id="14_me7n8"]
-[ext_resource type="PackedScene" path="res://UI/Build/build_hud.tscn" id="15_otihl"]
-[ext_resource type="Script" path="res://Entity/Player/InteractComponent.gd" id="15_wh8qd"]
+[ext_resource type="PackedScene" uid="uid://dd2ysdc77pxkq" path="res://UI/Build/build_hud.tscn" id="15_otihl"]
 [ext_resource type="Script" path="res://UI/Wiring/Wiring.gd" id="18_3q6sb"]
-[ext_resource type="PackedScene" path="res://Staff/staffHUD.tscn" id="20_qac2v"]
+[ext_resource type="Script" path="res://Entity/Player/ItemHUDPlaceholder.gd" id="19_4bbe1"]
+[ext_resource type="PackedScene" uid="uid://cdgpv7wki70or" path="res://Staff/staffHUD.tscn" id="20_qac2v"]
 [ext_resource type="Script" path="res://Entity/Player/MachineUpdater.gd" id="21_iegje"]
 [ext_resource type="Texture2D" uid="uid://cgi863ww3hb3g" path="res://Asset/fantasyAssets.png" id="21_kqu6c"]
 [ext_resource type="PackedScene" uid="uid://ca71hsm6y7dur" path="res://Staff/staff.tscn" id="22_01tsa"]
 [ext_resource type="Texture2D" uid="uid://dw0wj1ftq8uye" path="res://Asset/potionSS.png" id="22_hr68s"]
 [ext_resource type="PackedScene" uid="uid://3lfapx60drmh" path="res://HUD/Potion/potionHUD.tscn" id="22_lae4u"]
 [ext_resource type="PackedScene" uid="uid://dab70bjir0c00" path="res://HUD/Magic/magicHUD.tscn" id="24_71sui"]
-[ext_resource type="Texture2D" uid="uid://bmw2uy10i1kwr" path="res://Asset/UIUX/scroll_UI.png" id="24_e53mk"]
-[ext_resource type="Script" path="res://UI/Inventory/Inventory.gd" id="24_o1enl"]
-[ext_resource type="PackedScene" uid="uid://bm2u5jp0exc2h" path="res://UI/Potion/PotionGridContainerPlayer.tscn" id="25_km84l"]
-[ext_resource type="PackedScene" uid="uid://dpthqxsb7e3fk" path="res://UI/Potion/potionInventory.tscn" id="26_eb02i"]
+[ext_resource type="PackedScene" uid="uid://eu0xsfmexgdv" path="res://UI/CharacterScene/magic_tree_ui.tscn" id="30_gr14u"]
+[ext_resource type="PackedScene" uid="uid://nsa7v0ybio12" path="res://UI/CharacterScene/inventorySheet.tscn" id="31_xnb4y"]
+[ext_resource type="Script" path="res://Magic/Data/magicManager.gd" id="32_asc35"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_o46v5"]
 atlas = ExtResource("1_ksidj")
@@ -249,6 +249,82 @@ animations = [{
 radius = 56.0
 height = 164.0
 
+[sub_resource type="GDScript" id="GDScript_3ckag"]
+script/source = "class_name  InventoryManager
+extends Node
+
+##InitSlot is just to ensure the inventory will return data, do not remove
+@export var initSlot:SlotData
+
+const MAXSTACKSIZE:int = 99
+
+signal OnInventoryChanged(Inventory)
+signal OnInventoryAdded(Inventory)
+
+var inventory:Array[SlotData]  = [initSlot]
+var tempInventory:Array[SlotData] = [initSlot]
+var player:Player
+
+var overflow:int = 0
+
+func init(player:Player):
+	inventory = player.inventory
+	self.player = player
+	#print(inventory)
+
+
+func insert(droppedItem:GameMaterial,amount:int):
+	if overflow <= 0:
+		overflow = amount
+	else:
+		overflow += amount
+	
+	for index in len(inventory):
+		if inventory[index] ==null:
+			var slotToBeAdded = SlotData.new()
+			slotToBeAdded.item = droppedItem.itemData
+			slotToBeAdded.amount = overflow
+			inventory[index] = slotToBeAdded
+
+			overflow = 0
+			break
+		elif inventory[index].item == droppedItem.itemData:
+			if  inventory[index].amount < MAXSTACKSIZE:
+				var availableSpace = MAXSTACKSIZE -  inventory[index].amount 
+		
+				if overflow <= availableSpace:
+					inventory[index].amount += overflow
+					overflow = 0
+					break
+				else:
+					inventory[index].amount += availableSpace
+					overflow -= availableSpace
+
+	
+	#print(inventory)
+	#print(inventory.size())
+	OnInventoryChanged.emit(inventory)
+
+func remove(droppedItem:GameMaterial,amount:int):
+	pass
+
+func getSameItemCount(item:MaterialData)->int:
+	var count:int = 0
+	for slot in len(inventory):
+		if inventory[slot].item == item:
+			count +=1
+	return count
+
+func _getItemIndex(item:MaterialData) -> int:
+	for slot in len(inventory):
+		if inventory[slot].item == item:
+			return slot
+	
+	return -1
+
+
+"
+
 [sub_resource type="AtlasTexture" id="AtlasTexture_1dcaq"]
 atlas = ExtResource("21_kqu6c")
 region = Rect2(48, 192, 24, 24)
@@ -256,6 +332,75 @@ region = Rect2(48, 192, 24, 24)
 [sub_resource type="AtlasTexture" id="AtlasTexture_e1oi2"]
 atlas = ExtResource("22_hr68s")
 region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="Animation" id="Animation_y4e7q"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_b1wcj"]
+resource_name = "fadeIn"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_dkvrn"]
+resource_name = "fadeOut"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_gojmo"]
+resource_name = "popIn"
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_4077c"]
+_data = {
+"RESET": SubResource("Animation_y4e7q"),
+"fadeIn": SubResource("Animation_b1wcj"),
+"fadeOut": SubResource("Animation_dkvrn"),
+"popIn": SubResource("Animation_gojmo")
+}
 
 [sub_resource type="Animation" id="Animation_4m4tr"]
 length = 0.001
@@ -611,14 +756,17 @@ _data = {
 "idleFront": SubResource("Animation_76tdj")
 }
 
-[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("staff", "playerInventory", "itemHUDPlaceholder") groups=["invalidPosition"]]
+[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("staff", "playerInventoryController", "itemHUDPlaceholder") groups=["invalidPosition"]]
 scale = Vector2(0.1, 0.1)
 script = ExtResource("1_xfdxb")
 playerData = ExtResource("2_g17go")
 potionObject = ExtResource("3_41una")
 staff = NodePath("Staff")
-playerInventory = NodePath("ROOT_UI/Inventory")
+playerInventoryController = NodePath("ROOT_UI/InventoryUI")
 itemHUDPlaceholder = NodePath("ROOT_UI/ItemHUDPlaceholder")
+maxInventorySize = 20
+initSlot = ExtResource("4_e4jpf")
+inventory = Array[Object]([])
 
 [node name="Camera" type="Camera2D" parent="."]
 zoom = Vector2(7, 7)
@@ -634,10 +782,12 @@ autoplay = "IDLE"
 [node name="CollisionShape3D" type="CollisionShape2D" parent="."]
 shape = SubResource("CapsuleShape2D_5n34a")
 
-[node name="PotionManager" type="Node" parent="." node_paths=PackedStringArray("potionInventory", "potionGridInventory", "potionHUD")]
+[node name="InventoryManager" type="Node" parent="."]
+script = SubResource("GDScript_3ckag")
+
+[node name="PotionManager" type="Node" parent="." node_paths=PackedStringArray("inventoryUI", "potionHUD")]
 script = ExtResource("5_5bgkf")
-potionInventory = NodePath("../ROOT_UI/Inventory/PotionInventory")
-potionGridInventory = NodePath("../ROOT_UI/Inventory/PotionGridContainer")
+inventoryUI = NodePath("../ROOT_UI/InventoryUI")
 potionHUD = NodePath("../ROOT_UI/ItemHUDPlaceholder/PotionHUD")
 
 [node name="StateManager" type="Node" parent="." node_paths=PackedStringArray("starting_state")]
@@ -879,12 +1029,15 @@ text = "NUMKEY1: Wire Machine
 promptMessage = ": Wire Battery"
 promptAction = "NUMKEY2"
 
-[node name="ItemHUDPlaceholder" type="Control" parent="ROOT_UI"]
+[node name="ItemHUDPlaceholder" type="Control" parent="ROOT_UI" node_paths=PackedStringArray("player", "animation")]
 layout_mode = 3
 anchors_preset = 0
 offset_top = 80.0
 offset_right = 40.0
 offset_bottom = 120.0
+script = ExtResource("19_4bbe1")
+player = NodePath("../..")
+animation = NodePath("ItemHUDAnimation")
 
 [node name="StaffHUD" parent="ROOT_UI/ItemHUDPlaceholder" node_paths=PackedStringArray("player") instance=ExtResource("20_qac2v")]
 layout_mode = 1
@@ -897,7 +1050,7 @@ actionInput = "EQUIP"
 texture = SubResource("AtlasTexture_1dcaq")
 player = NodePath("../../..")
 
-[node name="PotionHUD" parent="ROOT_UI/ItemHUDPlaceholder" node_paths=PackedStringArray("potionGridHolderData") instance=ExtResource("22_lae4u")]
+[node name="PotionHUD" parent="ROOT_UI/ItemHUDPlaceholder" node_paths=PackedStringArray("inventoryUI") instance=ExtResource("22_lae4u")]
 layout_mode = 1
 offset_left = 16.0
 offset_top = 612.0
@@ -906,7 +1059,7 @@ offset_bottom = 612.0
 scale = Vector2(0.2, 0.2)
 actionInput = "EQUIPPOTION"
 texture = SubResource("AtlasTexture_e1oi2")
-potionGridHolderData = NodePath("../../Inventory/PotionGridContainer")
+inventoryUI = NodePath("../../InventoryUI")
 
 [node name="MagicHUD" parent="ROOT_UI/ItemHUDPlaceholder" instance=ExtResource("24_71sui")]
 layout_mode = 1
@@ -916,53 +1069,20 @@ offset_right = 241.0
 offset_bottom = 612.0
 scale = Vector2(0.2, 0.2)
 
-[node name="Inventory" type="Control" parent="ROOT_UI" node_paths=PackedStringArray("potionInventory")]
+[node name="ItemHUDAnimation" type="AnimationPlayer" parent="ROOT_UI/ItemHUDPlaceholder"]
+libraries = {
+"": SubResource("AnimationLibrary_4077c")
+}
+
+[node name="Timer" type="Timer" parent="ROOT_UI/ItemHUDPlaceholder"]
+one_shot = true
+
+[node name="InventoryUI" parent="ROOT_UI" node_paths=PackedStringArray("player") instance=ExtResource("31_xnb4y")]
 visible = false
-layout_mode = 3
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -20.0
-offset_top = -20.0
-offset_right = 20.0
-offset_bottom = 20.0
-grow_horizontal = 2
-grow_vertical = 2
-script = ExtResource("24_o1enl")
-potionInventory = NodePath("PotionInventory")
+player = NodePath("../..")
 
-[node name="Border" type="TextureRect" parent="ROOT_UI/Inventory"]
-texture_filter = 1
-layout_mode = 1
-offset_left = -637.0
-offset_top = -720.0
-offset_right = 323.0
-offset_bottom = 240.0
-scale = Vector2(1.35, 1.35)
-texture = ExtResource("24_e53mk")
-
-[node name="PotionGridContainer" parent="ROOT_UI/Inventory" node_paths=PackedStringArray("potion_inventory") instance=ExtResource("25_km84l")]
-offset_left = -498.0
-offset_top = 94.0
-offset_right = -498.0
-offset_bottom = 94.0
-scale = Vector2(2.5, 2.5)
-potion_inventory = NodePath("../PotionInventory")
-
-[node name="PotionInventory" parent="ROOT_UI/Inventory" instance=ExtResource("26_eb02i")]
+[node name="MagicTreeUI" parent="ROOT_UI" instance=ExtResource("30_gr14u")]
 visible = false
-layout_mode = 1
-offset_left = -503.0
-offset_top = -257.0
-offset_right = -503.0
-offset_bottom = -257.0
-scale = Vector2(0.7, 0.7)
-
-[node name="InteractComponent" type="Node" parent="." node_paths=PackedStringArray("parent")]
-script = ExtResource("15_wh8qd")
-parent = NodePath("..")
 
 [node name="MachineUpdater" type="Node" parent="."]
 script = ExtResource("21_iegje")
@@ -978,3 +1098,9 @@ customAnimation = NodePath("StaffAnimation")
 libraries = {
 "": SubResource("AnimationLibrary_htq8g")
 }
+
+[node name="MagicManager" type="Node" parent="." node_paths=PackedStringArray("magic_tree_ui")]
+script = ExtResource("32_asc35")
+magic_tree_ui = NodePath("../ROOT_UI/MagicTreeUI")
+
+[connection signal="timeout" from="ROOT_UI/ItemHUDPlaceholder/Timer" to="ROOT_UI/ItemHUDPlaceholder" method="_on_timer_timeout"]

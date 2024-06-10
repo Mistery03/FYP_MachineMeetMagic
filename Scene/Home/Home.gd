@@ -2,6 +2,7 @@ extends Node2D
 
 
 @export var isBuildEnabled:bool = false
+@export var levelName:String = "Home"
 
 @onready var player = $Player
 @onready var tile_map = $TileMap
@@ -14,6 +15,7 @@ func _ready():
 	player.localLevel = self
 	machineList.player = player 
 	
+
 
 	
 

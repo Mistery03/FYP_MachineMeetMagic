@@ -15,7 +15,7 @@ var potionData:PotionData
 var currSlot:PotionSlotPlayer
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	pass
+	print("inventory")
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -35,6 +35,11 @@ func decreasePotionAmount(potionData:PotionData):
 	for potion in potion_grid_container.grid_container.get_children():
 		if potion.potionData == potionData:
 			potion.potionAmount -= 1
+
+func increasePotionAmount(potionData:PotionData):
+	for potion in potion_grid_container.grid_container.get_children():
+		if potion.potionData == potionData:
+			potion.potionAmount += 1
 
 func getPotionAmount(potionData:PotionData) -> int:
 	for potion in potion_grid_container.grid_container.get_children():

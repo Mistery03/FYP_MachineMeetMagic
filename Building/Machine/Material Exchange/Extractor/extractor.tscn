@@ -21,8 +21,9 @@ animation = &"Processing"
 
 [node name="Root" type="CanvasLayer" parent="."]
 
-[node name="ExtractorUI" parent="Root" instance=ExtResource("3_po1mx")]
+[node name="ExtractorUI" parent="Root" node_paths=PackedStringArray("parentMachine") instance=ExtResource("3_po1mx")]
 visible = false
+parentMachine = NodePath("../..")
 
 [node name="Interectable" type="Area2D" parent="."]
 

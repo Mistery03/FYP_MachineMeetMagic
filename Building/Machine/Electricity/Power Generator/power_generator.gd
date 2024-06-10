@@ -20,6 +20,9 @@ var currManaProduced:float
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	changeAnimation("NoPower")
+	await get_tree().create_timer(0.1).timeout
+	machineUI.player = player
+
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -56,6 +59,10 @@ func _on_interectable_input_event(viewport, event, shape_idx):
 		if event.is_action_pressed("ACTION"):
 			machineUI.visible = true
 			player.itemHUDPlaceholder.visible = false
+			player.isMachineUI = true
+			if machineUI.inventoryHandler.slotList.size()>0:
+				machineUI.inventoryHandler.update_slots()
+		
 
 func _input(event):
 	if machineUI.visible:
@@ -63,13 +70,19 @@ func _input(event):
 			machineUI.visible = false
 			player.itemHUDPlaceholder.visible = true
 			player.isPressable = false
+			player.isMachineUI = false
+			##NOTE Dear future programemr either me or someone else, fix this bug to polish the inventory ok
+			##The bug is this inventory function will break everything and give a lot of error needing to fix
+			#machineUI.inventoryHandler.convertSlotListToInventoryData()
+		
 
 func changeAnimation(animationName:String):
 	animation.play(animationName.to_pascal_case())
 	machineUI.machine_animation.play(animationName.to_pascal_case())
 	
 func burnDisplay(delta):
-	machineUI.currValue -= burnPerSecond * delta
+	if machineUI.fuel_slot.item:
+		machineUI.currValue -= machineUI.fuel_slot.item.burnPerSecond * delta
 	machineUI.currValue = clamp(machineUI.currValue, 0, machineUI.maxValue)
 	
 

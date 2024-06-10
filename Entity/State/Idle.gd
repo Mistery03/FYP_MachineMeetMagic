@@ -40,11 +40,11 @@ func process_input(event: InputEvent) -> State:
 	if move_component.axis:
 		return move_state
 	
-	if Input.is_action_just_pressed(inputList.find_key("Build").to_upper()) and isBuildEnabled and !parent.playerInventory.visible:
+	if Input.is_action_just_pressed(inputList.find_key("Build").to_upper()) and isBuildEnabled and !parent.playerInventoryController.visible:
 		parent.isPressable = false
 		return build_state
 	
-	if Input.is_action_just_pressed("EXIT") and parent.isPressable:
+	if Input.is_action_just_pressed("INVENTORY") and parent.isPressable:
 		toggle_menu()
 	return null
 
@@ -60,4 +60,4 @@ func process_frame(delta: float) -> State:
 
 func toggle_menu():
 	# Toggle the visibility of the menu
-	parent.playerInventory.visible = !parent.playerInventory.visible 
+	parent.playerInventoryController.visible = !parent.playerInventoryController.visible 

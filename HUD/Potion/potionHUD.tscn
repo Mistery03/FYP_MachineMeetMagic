@@ -46,6 +46,7 @@ offset_bottom = 900.0
 
 [node name="PotionAmount" type="Label" parent="."]
 visible = false
+layout_mode = 0
 offset_left = 363.0
 offset_top = 572.0
 offset_right = 3175.0

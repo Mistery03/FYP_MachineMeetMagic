@@ -93,4 +93,4 @@ func staffPosWhenXandY(zIndex:int): #when both action both x and y are pressed
 	
 func toggle_menu():
 	# Toggle the visibility of the menu
-	parent.playerInventory.visible = !parent.playerInventory.visible 
+	parent.playerInventoryController.visible = !parent.playerInventoryController.visible 
