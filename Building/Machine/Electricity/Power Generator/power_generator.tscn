@@ -24,6 +24,7 @@ animation = &"Delete"
 [node name="PowerGeneratorUI" parent="Root" node_paths=PackedStringArray("parentMachine") instance=ExtResource("3_fit56")]
 visible = false
 parentMachine = NodePath("../..")
+debugMode = false
 
 [node name="Interectable" type="Area2D" parent="."]
 

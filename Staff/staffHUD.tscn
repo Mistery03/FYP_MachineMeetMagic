@@ -1,8 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://cdgpv7wki70or"]
+[gd_scene load_steps=5 format=3 uid="uid://crsbugvcqu5mn"]
 
 [ext_resource type="Script" path="res://Staff/staffHUD.gd" id="1_27xof"]
 [ext_resource type="Texture2D" uid="uid://7r2f7a1fj1mb" path="res://Asset/UIUX/blackBox.png" id="2_t7rmt"]
-[ext_resource type="Texture2D" uid="uid://buxxf1wap3msj" path="res://Asset/staff.tres" id="3_x8kbf"]
+[ext_resource type="Texture2D" path="res://Asset/staff.tres" id="3_x8kbf"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_xovp4"]
 atlas = ExtResource("3_x8kbf")

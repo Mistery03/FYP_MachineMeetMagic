@@ -20,7 +20,9 @@ func _input(event):
 	if event is InputEventKey:
 		if event.is_action_pressed("EQUIP") and !player.isMachineUI:
 			animation.play("popIn")
-			timer.start()
+			if player.localLevel:
+				if player.localLevel.levelName == "Home":
+					timer.start()
 	
 	
 

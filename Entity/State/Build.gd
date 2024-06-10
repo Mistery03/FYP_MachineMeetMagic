@@ -93,6 +93,7 @@ func process_frame(delta:float) -> State:
 			set_tile_color_based_on_occupation(false, mouseTilePos, parentPos)
 
 			if Input.is_action_just_pressed("ACTION") and !buildMenu.isInMenu and mouseTilePos != parentPos and machinePreviewData:
+				parent.place_sfx.play()
 				set_tile_in_tilemap(mouseTilePos, buildMenu)
 				buildMenu.description_board.visible = false
 				var instance = machineInstance.instantiate()

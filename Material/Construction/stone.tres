@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="MaterialData" load_steps=4 format=3 uid="uid://kyrinrin1ktm"]
+
+[ext_resource type="Script" path="res://Material/Data/materialData.gd" id="1_g6bqw"]
+[ext_resource type="Texture2D" uid="uid://bi05jqai8a2ss" path="res://Asset/materials.png" id="2_ybpq2"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_r20km"]
+atlas = ExtResource("2_ybpq2")
+region = Rect2(96, 0, 24, 24)
+
+[resource]
+script = ExtResource("1_g6bqw")
+name = "Stone"
+type = "Construction"
+texture = SubResource("AtlasTexture_r20km")
+amount = 0
+magicEssenceAmountResult = 2
+burnPerSecond = 50
+durability = 0

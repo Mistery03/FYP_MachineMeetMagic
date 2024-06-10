@@ -14,7 +14,7 @@ var animationList: Dictionary={
 }
 
 # Hold a reference to the parent so that it can be controlled by the state
-var parent: Player
+var parent: Entity
 var animations: AnimatedSprite2D
 var move_component: IMoveComponent
 var camera:Camera2D

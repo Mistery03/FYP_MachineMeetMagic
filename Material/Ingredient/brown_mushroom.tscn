@@ -1,14 +1,10 @@
-[gd_scene load_steps=7 format=3 uid="uid://bkeb2e31j7xy7"]
+[gd_scene load_steps=6 format=3 uid="uid://dtpdwvdctpycm"]
 
-[ext_resource type="Texture2D" uid="uid://bi05jqai8a2ss" path="res://Asset/materials.png" id="1_2jlwc"]
+[ext_resource type="Texture2D" uid="uid://cruxbb2jv2vmx" path="res://Asset/Materials1.png" id="1_sq2qu"]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_dmqar"]
-atlas = ExtResource("1_2jlwc")
-region = Rect2(48, 48, 24, 24)
-
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_h45oc"]
-radius = 4.75
-height = 24.3952
+[sub_resource type="AtlasTexture" id="AtlasTexture_avlv6"]
+atlas = ExtResource("1_sq2qu")
+region = Rect2(384, 448, 32, 32)
 
 [sub_resource type="Animation" id="Animation_ofsl6"]
 length = 0.001
@@ -49,22 +45,12 @@ _data = {
 "floating": SubResource("Animation_ujyux")
 }
 
-[node name="Wood" type="Node2D"]
-position = Vector2(0, -2)
-scale = Vector2(0.5, 0.5)
+[node name="BrownMushroom" type="Node2D"]
 
 [node name="Sprite" type="Sprite2D" parent="."]
 z_index = 5
 texture_filter = 1
-texture = SubResource("AtlasTexture_dmqar")
-
-[node name="Area2D" type="Area2D" parent="."]
-position = Vector2(-101, 56)
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-position = Vector2(101.25, -56)
-rotation = 0.785398
-shape = SubResource("CapsuleShape2D_h45oc")
+texture = SubResource("AtlasTexture_avlv6")
 
 [node name="Animation" type="AnimationPlayer" parent="."]
 libraries = {

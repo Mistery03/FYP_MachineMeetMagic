@@ -1,6 +1,22 @@
 class_name ExtractorUI
 extends Control
 
+@export_category("Machine Setting")
+@export var parentMachine:Machine
+@export var resultedItem:MaterialData
+
+@export_category("Inventory Controller")
+@export var inventoryHandler:InventoryHandler
+
+@export_category("Fuelbar Settings")
+@export var maxValue:float = 100
+
+@export_category("Debug Settings")
+@export var debugInventory:Array[SlotData]
+@export var debugItem:MaterialData
+@export var debugMaxSlot:int
+@export var debugMode:bool = false
+
 @onready var machine_animation = $MachineAnimation
 @onready var power_switch = $PowerSwitch
 @onready var machine_mana_bar = $MachineManaBar
@@ -9,20 +25,7 @@ extends Control
 @onready var fuel_slot = $FuelSlot
 @onready var material_slot = $MaterialSlot
 @onready var result_slot = $ResultSlot
-
-
-
-@export var maxValue:float = 100
-
-@export var parentMachine:Machine
-@export var inventoryHandler:InventoryHanlder
-
-@export var debugInventory:Array[SlotData]
-@export var debugItem:MaterialData
-@export var debugMaxSlot:int
-@export var debugMode:bool = false
-
-@export var resultedItem:MaterialData
+@onready var area_of_pressing = $AreaOfPressing
 
 var currValue:float = 100
 var currLoadingValue:float = 0
@@ -61,33 +64,12 @@ func _process(delta):
 				inventoryHandler.playerInventory = debugInventory
 				inventoryHandler.maxInventorySlot = debugMaxSlot
 	
-	if currLoadingValue >= 100:
-		currLoadingValue  = 0
-		if material_slot.item and material_slot.amount-1 > 0:
-			material_slot.amount -= 1
-			fuel_slot.fuelDurability -= 1
-					
-			if result_slot.item == null:
-				result_slot.item = resultedItem
-				result_slot.amount = 1
-			else:
-				result_slot.amount += 1
-		else:
-			if result_slot.item == null:
-				result_slot.item = resultedItem
-				result_slot.amount = 1
-			else:
-				result_slot.amount += 1
-			material_slot.item = null
-					
-	progress_bar.value = currLoadingValue 
+	processMaterial()
 	
 	if fuel_slot.item and fuel_slot.amount > 0:
 		if fuel_slot.fuelDurability <= 0:
 			fuel_slot.amount -= 1
-			fuel_slot.fuelDurability = fuel_slot.item.durability
-					
-			
+			fuel_slot.fuelDurability = fuel_slot.item.durability					
 	else:
 		fuel_slot.item = null
 	
@@ -112,12 +94,16 @@ func _input(event):
 	if event is InputEventMouseButton:
 		if event.is_pressed():
 			isMousePressed = true
+			
 		else:
 			isMousePressed = false
+			
+	
+		if event.is_action_pressed("ACTION"):
+			area_of_pressing.mouse_filter = Control.MOUSE_FILTER_IGNORE
+		elif event.is_action_pressed("ACTION2"):
+			area_of_pressing.mouse_filter = Control.MOUSE_FILTER_STOP
 		
-		
-		if event.is_action_pressed("ACTION2"):
-			inventoryHandler.removeItem(1,get_global_mouse_position())
 	if debugMode:
 		if event is InputEventKey:
 			if event.is_action_pressed("MOVERIGHT"):
@@ -245,3 +231,29 @@ func processDisplay(delta):
 	if material_slot.item:
 		currLoadingValue += material_slot.item.burnPerSecond * delta
 	currLoadingValue = clamp(currLoadingValue , 0, maxValue)
+
+func processMaterial():
+	if currLoadingValue >= 100:
+		currLoadingValue  = 0
+		if material_slot.item and material_slot.amount-1 > 0:
+			material_slot.amount -= 1
+			fuel_slot.fuelDurability -= 1	
+			produceResult()
+		else:
+			produceResult()
+			material_slot.item = null
+					
+	progress_bar.value = currLoadingValue 
+
+func produceResult():
+	if result_slot.item == null:
+		result_slot.item = resultedItem
+		result_slot.amount = material_slot.item.magicEssenceAmountResult
+	else:
+		result_slot.amount += material_slot.item.magicEssenceAmountResult
+
+func _on_area_of_pressing_gui_input(event):
+	if event.is_action_pressed("ACTION2"):
+	
+	
+		inventoryHandler.removeItem(1,get_global_mouse_position())
