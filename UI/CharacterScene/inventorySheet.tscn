@@ -1,16 +1,22 @@
-[gd_scene load_steps=4 format=3 uid="uid://nsa7v0ybio12"]
+[gd_scene load_steps=8 format=3 uid="uid://nsa7v0ybio12"]
 
+[ext_resource type="Script" path="res://UI/Inventory/InventoryController.gd" id="1_jf3nx"]
 [ext_resource type="Texture2D" uid="uid://bmw2uy10i1kwr" path="res://Asset/UIUX/scroll_UI.png" id="1_n6fxj"]
 [ext_resource type="FontFile" uid="uid://cl3rxpo58micg" path="res://Asset/Font/Lambda-Regular.ttf" id="2_68bw5"]
-[ext_resource type="PackedScene" uid="uid://daji0h3vfh4k5" path="res://UI/CharacterScene/skill_tree.tscn" id="3_r33xu"]
+[ext_resource type="PackedScene" uid="uid://dpthqxsb7e3fk" path="res://UI/Potion/potionInventory.tscn" id="4_k46g2"]
+[ext_resource type="PackedScene" uid="uid://bobtsiv8tnhdn" path="res://UI/Inventory/Player/inventory_grid.tscn" id="6_lpnm7"]
+[ext_resource type="PackedScene" uid="uid://cnj7jj8r34b1q" path="res://Material/Material.tscn" id="6_qvb7u"]
+[ext_resource type="PackedScene" uid="uid://bm2u5jp0exc2h" path="res://UI/Potion/PotionGridContainerPlayer.tscn" id="6_reqvi"]
 
-[node name="MagicTreeUI" type="Control"]
+[node name="InventoryUI" type="Control" node_paths=PackedStringArray("potionInventory")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1_jf3nx")
+potionInventory = NodePath("PotionInventory")
 
 [node name="ScrollUi" type="Sprite2D" parent="."]
 z_index = -1
@@ -32,6 +38,7 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="Label" type="Label" parent="NinePatchRect"]
+z_index = 100
 layout_mode = 1
 anchors_preset = 10
 anchor_right = 1.0
@@ -42,13 +49,32 @@ scale = Vector2(2, 2)
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("2_68bw5")
 theme_override_font_sizes/font_size = 40
-text = "MAGIC TREE"
+text = "INVENTORY"
 horizontal_alignment = 1
 
-[node name="skillTree" parent="." instance=ExtResource("3_r33xu")]
+[node name="InventoryGrid" parent="." node_paths=PackedStringArray("parentControl") instance=ExtResource("6_lpnm7")]
 layout_mode = 1
-offset_left = 544.0
-offset_top = 320.0
-offset_right = -821.0
-offset_bottom = -539.0
+offset_left = 300.0
+offset_top = 250.0
+offset_right = 300.0
+offset_bottom = 250.0
+scale = Vector2(0.5, 0.5)
+parentControl = NodePath("..")
+materialInstance = ExtResource("6_qvb7u")
+
+[node name="PotionGridContainerPlayer" parent="." node_paths=PackedStringArray("potion_inventory") instance=ExtResource("6_reqvi")]
+offset_left = 572.0
+offset_top = 563.0
+offset_right = 572.0
+offset_bottom = 563.0
 scale = Vector2(2, 2)
+potion_inventory = NodePath("../PotionInventory")
+
+[node name="PotionInventory" parent="." instance=ExtResource("4_k46g2")]
+visible = false
+layout_mode = 1
+offset_left = 572.0
+offset_top = 330.0
+offset_right = 572.0
+offset_bottom = 330.0
+scale = Vector2(0.5, 0.5)

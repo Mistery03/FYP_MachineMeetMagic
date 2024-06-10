@@ -1,4 +1,4 @@
-[gd_scene load_steps=75 format=3 uid="uid://c1vsfoc55pk0w"]
+[gd_scene load_steps=72 format=3 uid="uid://c1vsfoc55pk0w"]
 
 [ext_resource type="Texture2D" uid="uid://bd32dcnew3uvf" path="res://Asset/L.png" id="1_ksidj"]
 [ext_resource type="Script" path="res://Entity/Player/player.gd" id="1_xfdxb"]
@@ -27,11 +27,8 @@
 [ext_resource type="Texture2D" uid="uid://dw0wj1ftq8uye" path="res://Asset/potionSS.png" id="22_hr68s"]
 [ext_resource type="PackedScene" uid="uid://3lfapx60drmh" path="res://HUD/Potion/potionHUD.tscn" id="22_lae4u"]
 [ext_resource type="PackedScene" uid="uid://dab70bjir0c00" path="res://HUD/Magic/magicHUD.tscn" id="24_71sui"]
-[ext_resource type="Texture2D" uid="uid://bmw2uy10i1kwr" path="res://Asset/UIUX/scroll_UI.png" id="24_e53mk"]
-[ext_resource type="Script" path="res://UI/Inventory/InventoryController.gd" id="24_o1enl"]
-[ext_resource type="PackedScene" uid="uid://bm2u5jp0exc2h" path="res://UI/Potion/PotionGridContainerPlayer.tscn" id="25_km84l"]
-[ext_resource type="PackedScene" uid="uid://dpthqxsb7e3fk" path="res://UI/Potion/potionInventory.tscn" id="26_eb02i"]
 [ext_resource type="PackedScene" uid="uid://eu0xsfmexgdv" path="res://UI/CharacterScene/magic_tree_ui.tscn" id="30_gr14u"]
+[ext_resource type="PackedScene" uid="uid://nsa7v0ybio12" path="res://UI/CharacterScene/inventorySheet.tscn" id="31_xnb4y"]
 [ext_resource type="Script" path="res://Magic/Data/magicManager.gd" id="32_asc35"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_o46v5"]
@@ -765,7 +762,7 @@ script = ExtResource("1_xfdxb")
 playerData = ExtResource("2_g17go")
 potionObject = ExtResource("3_41una")
 staff = NodePath("Staff")
-playerInventoryController = NodePath("ROOT_UI/Inventory")
+playerInventoryController = NodePath("ROOT_UI/InventoryUI")
 itemHUDPlaceholder = NodePath("ROOT_UI/ItemHUDPlaceholder")
 maxInventorySize = 20
 initSlot = ExtResource("4_e4jpf")
@@ -788,10 +785,9 @@ shape = SubResource("CapsuleShape2D_5n34a")
 [node name="InventoryManager" type="Node" parent="."]
 script = SubResource("GDScript_3ckag")
 
-[node name="PotionManager" type="Node" parent="." node_paths=PackedStringArray("potionInventory", "potionGridInventory", "potionHUD")]
+[node name="PotionManager" type="Node" parent="." node_paths=PackedStringArray("inventoryUI", "potionHUD")]
 script = ExtResource("5_5bgkf")
-potionInventory = NodePath("../ROOT_UI/Inventory/PotionInventory")
-potionGridInventory = NodePath("../ROOT_UI/Inventory/PotionGridContainer")
+inventoryUI = NodePath("../ROOT_UI/InventoryUI")
 potionHUD = NodePath("../ROOT_UI/ItemHUDPlaceholder/PotionHUD")
 
 [node name="StateManager" type="Node" parent="." node_paths=PackedStringArray("starting_state")]
@@ -1054,7 +1050,7 @@ actionInput = "EQUIP"
 texture = SubResource("AtlasTexture_1dcaq")
 player = NodePath("../../..")
 
-[node name="PotionHUD" parent="ROOT_UI/ItemHUDPlaceholder" node_paths=PackedStringArray("potionGridHolderData") instance=ExtResource("22_lae4u")]
+[node name="PotionHUD" parent="ROOT_UI/ItemHUDPlaceholder" node_paths=PackedStringArray("inventoryUI") instance=ExtResource("22_lae4u")]
 layout_mode = 1
 offset_left = 16.0
 offset_top = 612.0
@@ -1063,7 +1059,7 @@ offset_bottom = 612.0
 scale = Vector2(0.2, 0.2)
 actionInput = "EQUIPPOTION"
 texture = SubResource("AtlasTexture_e1oi2")
-potionGridHolderData = NodePath("../../Inventory/PotionGridContainer")
+inventoryUI = NodePath("../../InventoryUI")
 
 [node name="MagicHUD" parent="ROOT_UI/ItemHUDPlaceholder" instance=ExtResource("24_71sui")]
 layout_mode = 1
@@ -1081,49 +1077,9 @@ libraries = {
 [node name="Timer" type="Timer" parent="ROOT_UI/ItemHUDPlaceholder"]
 one_shot = true
 
-[node name="Inventory" type="Control" parent="ROOT_UI" node_paths=PackedStringArray("potionInventory")]
+[node name="InventoryUI" parent="ROOT_UI" node_paths=PackedStringArray("player") instance=ExtResource("31_xnb4y")]
 visible = false
-layout_mode = 3
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -20.0
-offset_top = -20.0
-offset_right = 20.0
-offset_bottom = 20.0
-grow_horizontal = 2
-grow_vertical = 2
-script = ExtResource("24_o1enl")
-potionInventory = NodePath("PotionInventory")
-
-[node name="Border" type="TextureRect" parent="ROOT_UI/Inventory"]
-texture_filter = 1
-layout_mode = 1
-offset_left = -637.0
-offset_top = -720.0
-offset_right = 323.0
-offset_bottom = 240.0
-scale = Vector2(1.35, 1.35)
-texture = ExtResource("24_e53mk")
-
-[node name="PotionGridContainer" parent="ROOT_UI/Inventory" node_paths=PackedStringArray("potion_inventory") instance=ExtResource("25_km84l")]
-offset_left = -498.0
-offset_top = 94.0
-offset_right = -498.0
-offset_bottom = 94.0
-scale = Vector2(2.5, 2.5)
-potion_inventory = NodePath("../PotionInventory")
-
-[node name="PotionInventory" parent="ROOT_UI/Inventory" instance=ExtResource("26_eb02i")]
-visible = false
-layout_mode = 1
-offset_left = -503.0
-offset_top = -257.0
-offset_right = -503.0
-offset_bottom = -257.0
-scale = Vector2(0.7, 0.7)
+player = NodePath("../..")
 
 [node name="MagicTreeUI" parent="ROOT_UI" instance=ExtResource("30_gr14u")]
 visible = false

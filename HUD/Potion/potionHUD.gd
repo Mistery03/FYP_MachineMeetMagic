@@ -2,7 +2,7 @@ extends Control
 
 @export var actionInput:String
 @export var texture:Texture2D
-@export var potionGridHolderData:Control
+@export var inventoryUI:Control
 
 
 @onready var texture_rect = $border/TextureRect
@@ -28,36 +28,35 @@ func _ready():
 	texture_rect.texture = texture
 
 func _process(delta):
-	if potionGridHolderData:
-		
-		if Input.is_action_just_pressed("EQUIPPOTION"):
 
-			potionList = potionGridHolderData.potionList
+	if Input.is_action_just_pressed("EQUIPPOTION"):
+
+		potionList = inventoryUI.potion_grid_container_player.potionList
+		
+		if potionList.size() > 0:
+			prevIndex = currIndex
 			
-			if potionList.size() > 0:
-				prevIndex = currIndex
-				
-				print("Incre ",currIncreament)
-				currIndex = currIncreament % potionList.size()
-				print("Index ",currIndex)
-				currIncreament += 1
-				
-				if currIncreament == potionList.size() and currIndex != prevIndex:
-					currIncreament = 0
-				
-				if potionList[currIndex]:
-					var amount = potionGridHolderData.getPotionAmount(potionList[currIndex])
-					texture_rect.visible = true
-					potion_amount.visible = true
-					texture_rect.texture = potionList[currIndex].texture
-					potion_amount.text = str(amount)
-					player.potion_manager.potionData = potionList[currIndex]
-				else:
-					texture_rect.visible = false
-					potion_amount.visible = false
-					player.potion_manager.potionData = null
-					isPotionNull = true
-				print(potionList)	
+			print("Incre ",currIncreament)
+			currIndex = currIncreament % potionList.size()
+			print("Index ",currIndex)
+			currIncreament += 1
+			
+			if currIncreament == potionList.size() and currIndex != prevIndex:
+				currIncreament = 0
+			
+			if potionList[currIndex]:
+				var amount = inventoryUI.potion_grid_container_player.getPotionAmount(potionList[currIndex])
+				texture_rect.visible = true
+				potion_amount.visible = true
+				texture_rect.texture = potionList[currIndex].texture
+				potion_amount.text = str(amount)
+				player.potion_manager.potionData = potionList[currIndex]
+			else:
+				texture_rect.visible = false
+				potion_amount.visible = false
+				player.potion_manager.potionData = null
+				isPotionNull = true
+			print(potionList)	
 				
 	if isPotionNull:
 		currIncreament += 1

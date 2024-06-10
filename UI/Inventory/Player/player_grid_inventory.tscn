@@ -1,6 +1,4 @@
-[gd_scene load_steps=2 format=3 uid="uid://cawvmrg7mckvi"]
-
-[ext_resource type="Script" path="res://UI/Inventory/Player/player_grid_inventory.gd" id="1_pt40x"]
+[gd_scene format=3 uid="uid://cawvmrg7mckvi"]
 
 [node name="PlayerGridInventory" type="GridContainer"]
 anchors_preset = 15
@@ -10,4 +8,3 @@ offset_right = -782.0
 grow_horizontal = 2
 grow_vertical = 2
 columns = 4
-script = ExtResource("1_pt40x")

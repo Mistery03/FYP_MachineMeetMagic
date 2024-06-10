@@ -36,9 +36,6 @@ func init(player:Player):
 	if self.player:
 		self.player.inventory_manager.connect("OnInventoryChanged",OnInventoryChanged)
 
-	
-
-
 func _ready():
 	await get_tree().create_timer(0.4).timeout
 	for child in player_grid_inventory.get_children():

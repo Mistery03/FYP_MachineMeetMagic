@@ -15,3 +15,6 @@ skillButton = SubResource("AtlasTexture_vhwpq")
 scene = ExtResource("1_4llb0")
 manaRequirement = 20.0
 isUnlocked = false
+burningTime = 0.0
+efficientTime = 0.0
+damangeAmount = 0.0

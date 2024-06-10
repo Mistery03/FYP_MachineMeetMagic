@@ -15,3 +15,4 @@ manaRequirement = 20.0
 isUnlocked = false
 burningTime = 20.0
 efficientTime = 0.0
+damangeAmount = 0.0

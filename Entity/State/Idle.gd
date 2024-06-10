@@ -44,7 +44,7 @@ func process_input(event: InputEvent) -> State:
 		parent.isPressable = false
 		return build_state
 	
-	if Input.is_action_just_pressed("EXIT") and parent.isPressable:
+	if Input.is_action_just_pressed("INVENTORY") and parent.isPressable:
 		toggle_menu()
 	return null
 
