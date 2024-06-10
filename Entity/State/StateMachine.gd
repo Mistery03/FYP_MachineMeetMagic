@@ -6,12 +6,13 @@ extends Node
 var current_state: State
 
 
-func init(parent: Player, animations: AnimatedSprite2D,moveComponent:IMoveComponent,camera:Camera2D) -> void:
+func init(parent: Entity, animations: AnimatedSprite2D,moveComponent:IMoveComponent = null,camera:Camera2D = null) -> void:
 	for child in get_children():
 		child.parent = parent
 		child.animations = animations
-		child.move_component = moveComponent
-		child.camera = camera
+		if parent is Player:
+			child.move_component = moveComponent
+			child.camera = camera
 	
 	change_state(starting_state)
 # Change to the new state by first calling any exit logic on the current state.
