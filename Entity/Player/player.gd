@@ -21,7 +21,6 @@ const JUMP_VELOCITY = 4.5
 
 @onready var inventory_manager = $InventoryManager
 @onready var potion_manager = $PotionManager
-@onready var state_manager = $StateManager
 @onready var animation = $Animation
 @onready var move_component = $MoveComponent
 @onready var camera = $Camera
@@ -48,18 +47,10 @@ func _ready() -> void:
 		inventory.append(null)
 	#print(inventory.size())
 	inventory_manager.init(self)
-	state_manager.init(self,animation,move_component,camera)
 	magic_manager.init(self, mousePos)
 	
 
-func _unhandled_input(event: InputEvent) -> void:
-	state_manager.process_input(event)
-	
-
-func _physics_process(delta) -> void:
-	state_manager.process_physics(delta)
 	
 func _process(delta) -> void:
 	mousePos = get_global_mouse_position()
-	state_manager.process_frame(delta)
 	#print(inventory)
