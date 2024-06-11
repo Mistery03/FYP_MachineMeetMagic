@@ -46,6 +46,8 @@ const JUMP_VELOCITY = 4.5
 @onready var camera = $Camera
 @onready var localLevel:Node2D
 
+@onready var magic_manager = $MagicManager
+
 @onready var place_sfx = $PlaceSFX
 @onready var walking_on_wood_sfx = $walkingOnWoodSFX
 @onready var walking_on_grass_sfx = $walkingOnGrassSFX
@@ -81,17 +83,13 @@ func _ready() -> void:
 	#print(inventory.size())
 	inventory_manager.init(self)
 	stateController.init(self,animation,move_component,camera)
+	magic_manager.init(self, mousePos)
 	
 	
-
-
 	
 func _process(delta) -> void:
 	mousePos = get_global_mouse_position()
-	#print(inventory)
-	#for amount in inventory:
-		#if amount:
-			#print(amount.amount)
+
 
 func _input(event):
 	if event is InputEventMouse:

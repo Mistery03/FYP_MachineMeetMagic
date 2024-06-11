@@ -1359,6 +1359,8 @@ potionInventory = NodePath("../ROOT_UI/Inventory/PotionInventory")
 potionGridInventory = NodePath("../ROOT_UI/Inventory/PotionGridContainer")
 potionHUD = NodePath("../ROOT_UI/ItemHUDPlaceholder/PotionHUD")
 
+[node name="MagicManager" type="Node" parent="."]
+
 [node name="StateController" type="Node" parent="." node_paths=PackedStringArray("current_state")]
 script = ExtResource("7_xedn3")
 current_state = NodePath("Idle")
@@ -1367,9 +1369,8 @@ current_state = NodePath("Idle")
 script = ExtResource("8_5d7eh")
 animation_name = "Idle"
 
-[node name="Move" type="Node" parent="StateController" node_paths=PackedStringArray("idle_state")]
+[node name="Move" type="Node" parent="StateController"]
 script = ExtResource("9_5ji7g")
-idle_state = NodePath("")
 animation_name = "walkSide"
 
 [node name="Build" type="Node" parent="StateController" node_paths=PackedStringArray("wiring_machine_state", "wiring_battery_state", "buildUI", "buildMenu")]
@@ -1405,12 +1406,10 @@ inputList = {
 "Exit": "Exit"
 }
 
-[node name="WiringBattery" type="Node" parent="StateController" node_paths=PackedStringArray("build_state", "buildUI", "buildMenu", "wiring_machine", "machineUpdater", "HUD")]
+[node name="WiringBattery" type="Node" parent="StateController" node_paths=PackedStringArray("buildUI", "buildMenu", "machineUpdater", "HUD")]
 script = ExtResource("13_3c3kb")
-build_state = NodePath("")
 buildUI = NodePath("../../ROOT_UI/Build")
 buildMenu = NodePath("../../ROOT_UI/Build/BuildMenu")
-wiring_machine = NodePath("")
 machineUpdater = NodePath("../../MachineUpdater")
 HUD = NodePath("../../ROOT_UI/Wiring")
 inputList = {
