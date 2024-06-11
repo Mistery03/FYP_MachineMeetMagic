@@ -1,11 +1,14 @@
 class_name Build
 extends State
 
+##@NOTE to keep track of wire states
+@export_category("Data Tracking")
 @export
 var wiring_machine_state:State
 @export
 var wiring_battery_state:State
 
+@export_category("Build Menu")
 @export
 var buildUI:Control
 @export
@@ -20,7 +23,6 @@ var inputList:Dictionary= {
 var cameraSpeed:float = 0
 var prevMouseTilePos = Vector2i(-1,-1)
 var isOccupied:bool
-var isFloor:bool
 var machineInstance:PackedScene
 
 
@@ -29,18 +31,21 @@ func enter() -> void:
 	buildUI.visible = true
 	parent.isBuildMode = true
 	parent.itemHUDPlaceholder.visible = false
-	
+	camera.position_smoothing_enabled = true
+	parent.isPressable = false
+
+func exit() -> void:
+	camera.position_smoothing_enabled = false
 
 func update(delta: float) -> void:
 	var parentPos = parent.homeTilemap.local_to_map(parent.position)
 	var mouseTilePos = parent.homeTilemap.local_to_map(parent.mousePos)
-	
-	#named it floorData but really the data is to check if there is floor in the world
-	var floorData:TileData = parent.homeTilemap.get_cell_tile_data(0,mouseTilePos) 
+
+	var isFloor:TileData = parent.homeTilemap.get_cell_tile_data(0,mouseTilePos) 
 	#Now this one actually give u data about machine lmao
 	var machineData:TileData = parent.homeTilemap.get_cell_tile_data(2,mouseTilePos)
 	
-	if floorData:
+	if isFloor:
 		parent.homeTilemap.set_cell(1,mouseTilePos,0,buildMenu.atlasCoord)
 		
 		if mouseTilePos != prevMouseTilePos:
@@ -55,7 +60,6 @@ func update(delta: float) -> void:
 		if machineData:
 			isOccupied = machineData.get_custom_data("occupied")
 			set_tile_color_based_on_occupation(isOccupied, mouseTilePos, parentPos)
-
 		else:
 			#No need to use isOccupied here cause there no machine to be found
 			set_tile_color_based_on_occupation(false, mouseTilePos, parentPos)
@@ -71,12 +75,9 @@ func update(delta: float) -> void:
 			wiring_machine_state.updateWithinWireList()
 			wiring_battery_state.updateWithinWireList()
 				
-
 func physics_update(delta: float) -> void:
 	camera.position = moveComponent.get_movement_direction() * parent.moveSpeed * delta
-	camera.position_smoothing_enabled = true
 	
-
 func process_input(event)->void:
 	if Input.is_action_just_pressed(inputList.find_key("Exit").to_upper()) or Input.is_action_just_pressed(inputList.find_key("Build").to_upper()):
 		buildUI.visible = false
@@ -92,11 +93,6 @@ func process_input(event)->void:
 	if Input.is_action_just_pressed("WIRING"):
 		buildUI.visible = false
 		transitioned.emit("wiringMachine")
-
-
-	
-
-	
 
 # Function to check if a tile is occupied and set the layer color accordingly
 func set_tile_color_based_on_occupation(is_occupied, mousePos, parentPos):

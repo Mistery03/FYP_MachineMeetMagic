@@ -6,6 +6,7 @@ extends Control
 @onready var inventory_grid = $InventoryGrid
 
 var isDragging
+var isPotionMenuOpened:bool
 
 func _ready():
 	potion_grid_container_player.player = player

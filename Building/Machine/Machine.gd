@@ -10,10 +10,10 @@ var next:Machine = null
 var player:Player
 var currMana:float
 var percentage:float
+
 var isSwitchedOn:bool
 
-
-
+@onready var maxPercentage:float = maxMana/maxMana * 100
 
 func _ready():
 	pass
@@ -21,7 +21,6 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-
 	print("test")
 
 

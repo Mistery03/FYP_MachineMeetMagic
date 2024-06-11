@@ -2,8 +2,6 @@ class_name Extractor
 extends Machine
 
 @export var machineUI:Control
-
-
 @onready var animation = $Animation
 
 const MIN_MANA_THRESHOLD: float = 0.0001
@@ -24,25 +22,27 @@ func _process(delta):
 	
 	if isThereFuel:
 		machineUI.power_switch.disabled = false	
-		fillManaCapacity(delta)
+		#fillManaCapacity(delta)
 	else:
 		if currMana <= 0:
 			machineUI.power_switch.disabled = true
 			changeAnimation("IDLE")
-		
-	if  currMana > 0:
-		if machineUI.power_switch.button_pressed:
-			isSwitchedOn = true
-		else:
+			
+	if machineUI.power_switch.button_pressed:
+		isSwitchedOn = true
+	else:
 			changeAnimation("IDLE")
 			isSwitchedOn = false
-		
-	if isSwitchedOn and currMana > 0:
-		consumeMana(delta)
-		
-	if isSwitchedOn and machineUI.material_slot.item and machineUI.fuel_slot.item:
-		changeAnimation("Processing")
-		machineUI.processDisplay(delta)
+				
+	if isSwitchedOn:
+		if machineUI.material_slot.item and machineUI.fuel_slot.item:
+			changeAnimation("Processing")
+			machineUI.processDisplay(delta)
+		elif machineUI.material_slot.item and currMana > 0:
+			changeAnimation("Processing")
+			machineUI.processDisplay(delta)
+			consumeMana(machineUI.material_slot.item.burnPerSecond,delta)	
+	
 
 
 func _on_interectable_input_event(viewport, event, shape_idx):
@@ -52,7 +52,6 @@ func _on_interectable_input_event(viewport, event, shape_idx):
 				machineUI.visible = true
 				#if machineUI.inventoryHandler.slotList.size() > 0:
 					#machineUI.inventoryHandler.update_slots()
-			
 		if player:
 			if event.is_action_pressed("ACTION"):
 				if !player.isBuildMode:
@@ -73,22 +72,24 @@ func _input(event):
 				player.itemHUDPlaceholder.visible = true
 				player.isPressable = false
 				player.isMachineUI = false
-				
 				machineUI.inventoryHandler.convertSlotListToInventoryData()
+				await get_tree().create_timer(0.1).timeout
+				player.isPressable = true
 
 func changeAnimation(animationName:String):
 	animation.play(animationName.to_pascal_case())
 	machineUI.machine_animation.play(animationName.to_pascal_case())
 
-func fillManaCapacity(delta:float):
+func fillManaCapacity(manaConsumptionPerSecond,delta:float):
 	currMana+= manaConsumptionPerSecond * delta
 	machineUI.machine_mana_bar.currValue = currMana
 
 #To be used in process function
-func consumeMana(delta:float): 
+func consumeMana(manaConsumptionPerSecond,delta:float): 
 	currMana -= manaConsumptionPerSecond * delta
 	if percentage <= MIN_MANA_THRESHOLD:
 		currMana = 0
 	machineUI.machine_mana_bar.currValue = currMana
+
 
 

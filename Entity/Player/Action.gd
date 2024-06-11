@@ -1,10 +1,9 @@
 extends State
 
 @export var timer:Timer
-
-
 @export var materialInstance:PackedScene 
 @export var max_drop_items: int = 5 
+
 var prevMouseTilePos = Vector2i(-1000,-1000)
 var mouseTilePos
 var materialDroppedData
@@ -53,10 +52,6 @@ func process_input(event)->void:
 		transitioned.emit("idle")	
 
 
-
-
-	
-
 func dropMaterials()->bool:
 	var num_items_to_drop = randi_range(1, max_drop_items)
 	for i in range(num_items_to_drop-1):
@@ -68,10 +63,6 @@ func dropMaterials()->bool:
 		add_child(instance)
 	
 	return true	
-
-
-
-
 
 func _on_timer_timeout():
 	timer.stop()

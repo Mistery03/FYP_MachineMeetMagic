@@ -1294,7 +1294,7 @@ itemHUDPlaceholder = NodePath("ROOT_UI/ItemHUDPlaceholder")
 playerInventoryController = NodePath("ROOT_UI/InventoryUI")
 maxInventorySize = 20
 initSlot = ExtResource("4_e4jpf")
-inventory = Array[Object]([])
+inventory = Array[Object]([null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null])
 min_zoom = 1
 zoom_step = 0.5
 stateController = NodePath("StateController")
@@ -1384,32 +1384,27 @@ inputList = {
 "Exit": "Exit"
 }
 
-[node name="Destroy" type="Node" parent="StateController" node_paths=PackedStringArray("wiring_machine_state", "wiring_battery_state", "buildUI", "buildMenu", "destroyHUD")]
+[node name="Destroy" type="Node" parent="StateController" node_paths=PackedStringArray("wiring_machine_state", "wiring_battery_state", "destroyHUD")]
 script = ExtResource("11_7uhfu")
 wiring_machine_state = NodePath("../WiringMachine")
 wiring_battery_state = NodePath("../WiringBattery")
-buildUI = NodePath("../../ROOT_UI/Build")
-buildMenu = NodePath("../../ROOT_UI/Build/BuildMenu")
 destroyHUD = NodePath("../../ROOT_UI/Destroy")
 inputList = {
 "Build": "Build",
 "Exit": "Exit"
 }
+materialInstance = ExtResource("15_qe768")
 
-[node name="WiringMachine" type="Node" parent="StateController" node_paths=PackedStringArray("buildUI", "buildMenu", "HUD")]
+[node name="WiringMachine" type="Node" parent="StateController" node_paths=PackedStringArray("HUD")]
 script = ExtResource("12_ii11w")
-buildUI = NodePath("../../ROOT_UI/Build")
-buildMenu = NodePath("../../ROOT_UI/Build/BuildMenu")
 HUD = NodePath("../../ROOT_UI/Wiring")
 inputList = {
 "Build": "Build",
 "Exit": "Exit"
 }
 
-[node name="WiringBattery" type="Node" parent="StateController" node_paths=PackedStringArray("buildUI", "buildMenu", "machineUpdater", "HUD")]
+[node name="WiringBattery" type="Node" parent="StateController" node_paths=PackedStringArray("machineUpdater", "HUD")]
 script = ExtResource("13_3c3kb")
-buildUI = NodePath("../../ROOT_UI/Build")
-buildMenu = NodePath("../../ROOT_UI/Build/BuildMenu")
 machineUpdater = NodePath("../../MachineUpdater")
 HUD = NodePath("../../ROOT_UI/Wiring")
 inputList = {
@@ -1658,16 +1653,22 @@ theme_override_font_sizes/font_size = 80
 text = "Mouse Text"
 horizontal_alignment = 1
 
-[node name="PlaceSFX" type="AudioStreamPlayer" parent="."]
+[node name="Audio" type="Node" parent="."]
+
+[node name="PlaceSFX" type="AudioStreamPlayer" parent="Audio"]
 stream = ExtResource("37_raash")
 
-[node name="walkingOnWoodSFX" type="AudioStreamPlayer" parent="."]
+[node name="walkingOnWoodSFX" type="AudioStreamPlayer" parent="Audio"]
 stream = ExtResource("38_o8wch")
 volume_db = -12.0
 
-[node name="walkingOnGrassSFX" type="AudioStreamPlayer" parent="."]
+[node name="walkingOnGrassSFX" type="AudioStreamPlayer" parent="Audio"]
 stream = ExtResource("39_wma1b")
 volume_db = -12.0
+
+[node name="breakingSFX" type="AudioStreamPlayer2D" parent="Audio"]
+stream = ExtResource("36_a4jww")
+pitch_scale = 2.5
 
 [connection signal="timeout" from="ROOT_UI/ItemHUDPlaceholder/Timer" to="ROOT_UI/ItemHUDPlaceholder" method="_on_timer_timeout"]
 [connection signal="timeout" from="Timer" to="StateController/Cut" method="_on_timer_timeout"]

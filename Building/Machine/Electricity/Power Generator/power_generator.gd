@@ -14,8 +14,11 @@ var withinWireList:Array = []
 
 var currManaProduced:float
 
+var accumulativePerctange:float = 0
+var accumulativeMaxPerctange:float = 0
 
-
+var accumulativeMachineMaxCapacity = 0
+var isCalculationsDone:bool
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -24,15 +27,26 @@ func _ready():
 	machineUI.player = player
 	
 
-
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	if isThereFuel:
 		if machineUI.power_switch.button_pressed:
-			changeAnimation("Processing")
-			machineUI.status_bar.tint_progress = Color.GREEN
-			isSwitchedOn = true
-			isManaProduced = true
+			if withinWireList.size() >0:
+				for machine in withinWireList:
+					if !machine is Battery:
+						accumulativeMaxPerctange += machine.maxPercentage
+						print(accumulativeMaxPerctange)
+						print(accumulativePerctange)
+					
+						accumulativePerctange += machine.percentage
+						
+						
+			if accumulativePerctange < accumulativeMaxPerctange:
+				changeAnimation("Processing")
+				machineUI.status_bar.tint_progress = Color.GREEN
+				isSwitchedOn = true
+				isManaProduced = true
+						
 		else:
 			changeAnimation("idle")
 			machineUI.status_bar.tint_progress = Color.YELLOW
@@ -47,12 +61,13 @@ func _process(delta):
 	if isSwitchedOn:
 		machineUI.burnDisplay(delta)
 	
-	for machine in self.withinWireList:
+	for machine in withinWireList:
 		if is_instance_valid(machine):
 			machine.isThereFuel = isManaProduced
 		if isManaProduced:
-			if machine is Battery:
-				machine.currMana += manaPerSecond * delta
+			machine.currMana += machineUI.fuel_slot.item.burnPerSecond * delta
+			if !machine is Battery:
+				machine.fillManaCapacity(machineUI.fuel_slot.item.burnPerSecond,delta)
 		
 func _on_interectable_input_event(viewport, event, shape_idx):
 	if event is InputEventMouseButton:
@@ -83,10 +98,12 @@ func _input(event):
 				player.itemHUDPlaceholder.visible = true
 				player.isPressable = false
 				player.isMachineUI = false
-			##NOTE Dear future programemr either me or someone else, fix this bug to polish the inventory ok
-			##The bug is this inventory function will break everything and give a lot of error needing to fix
-			
 				machineUI.inventoryHandler.convertSlotListToInventoryData()
+				await get_tree().create_timer(0.1).timeout
+				player.isPressable = true
+
+			
+			
 		
 
 func changeAnimation(animationName:String):
@@ -94,5 +111,13 @@ func changeAnimation(animationName:String):
 	machineUI.machine_animation.play(animationName.to_pascal_case())
 	
 	
-
+func accumulateMachineMaxCapacity():
+	accumulativeMachineMaxCapacity = 0
+	if withinWireList.size() > 0 and !isCalculationsDone:
+		for machine in withinWireList:
+			if !machine is Battery:
+				accumulativeMachineMaxCapacity += machine.maxMana
+		
+		print(accumulativeMachineMaxCapacity)	
+		isCalculationsDone = true
 

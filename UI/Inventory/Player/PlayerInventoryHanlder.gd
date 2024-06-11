@@ -41,10 +41,11 @@ var isForExternalSlot:bool = false
 
 ##@NOTE The init function takes in player cause of the nature of fast loading, to ensure there no error I put a delay to ensure everything is assigned
 func init(player:Player):
-	await get_tree().create_timer(0.3).timeout
 	self.player = player
 	if self.player:
 		self.player.inventory_manager.connect("OnInventoryChanged",OnInventoryChanged)
+		playerInventory = player.inventory
+		maxInventorySlot = player.maxInventorySize
 
 ##NOTE same case for init function 
 func _ready():

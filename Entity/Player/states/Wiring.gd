@@ -1,12 +1,6 @@
 class_name WiringMachine
 extends State
 
-
-@export
-var buildUI:Control
-@export
-var buildMenu:Control
-
 @export	
 var HUD:Control
 
@@ -75,9 +69,6 @@ func process_input(event)->void:
 		transitioned.emit("wiringBattery")
 
 
-
-
-
 func enterBuildMode():
 	parent.homeTilemap.set_layer_modulate(4,Color8(255,255,255,255))
 	parent.isBuildMode = true
@@ -110,8 +101,6 @@ func handleManaGenerator(machineData, wireData, mouseTilePos):
 	if Input.is_action_pressed("ACTION") and isManaGenerator and not isOccupied:
 		isCreating = true
 		
-
-		
 func handleWireCreation(mouseTilePos, wireData):
 	if wireTiles.size() <=0:
 		if isCreating and !isOccupied:	
@@ -139,10 +128,6 @@ func handleWireRemoval():
 			isCreating = false
 		prevMouseTilePos = Vector2i(-1, -1)
 	
-
-
-
-
 func updateWithinWireList():
 	var machineList = parent.localLevel.machineList.get_children()
 	var mouseTilePos = parent.homeTilemap.local_to_map(parent.mousePos)

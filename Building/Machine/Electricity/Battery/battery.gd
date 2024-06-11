@@ -51,9 +51,7 @@ func _process(delta):
 	changeSpriteFrame(batteryBar)
 	
 	
-	
 
-	
 	
 
 func _on_interectable_input_event(viewport, event, shape_idx):

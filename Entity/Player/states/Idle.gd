@@ -6,12 +6,11 @@ var isBuildEnabled:bool = true
 
 func enter() -> void:
 	super()
-	camera.position_smoothing_enabled = false
-	
 	lerp_to_zero()
-	
 	parent.itemHUDPlaceholder.visible = true
+	
 	await parent.get_tree().create_timer(0.2).timeout
+	
 	parent.isPressable = true
 	parent.velocity.x = 0.0
 	
@@ -65,12 +64,10 @@ func process_input(event)->void:
 		
 		if materialDroppedData:
 			var materialCategory = materialDroppedData.get_custom_data("materialCategory")
-			
 			if Input.is_action_pressed("ACTION") and materialCategory == "wood":
 				transitioned.emit("cut")
 	
 	if Input.is_action_just_pressed("BUILD") and isBuildEnabled and !parent.playerInventoryController.visible:
-		parent.isPressable = false
 		transitioned.emit("build")
 	
 	if Input.is_action_just_pressed("EXIT") and parent.isPressable:

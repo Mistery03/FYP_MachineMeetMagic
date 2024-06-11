@@ -55,15 +55,6 @@ func _process(delta):
 	##@WARNING Does not take account if the inventory slots are different size to the machine slot (in this file fuel_slot)
 	gridMousePos = Vector2i(get_global_mouse_position()/fuel_slot.custom_minimum_size)
 	
-	if inventoryHandler:
-		if player:
-			inventoryHandler.playerInventory = player.inventory
-			inventoryHandler.maxInventorySlot = player.maxInventorySize
-		else:
-			if debugMode:
-				inventoryHandler.playerInventory = debugInventory
-				inventoryHandler.maxInventorySlot = debugMaxSlot
-	
 	processMaterial()
 	
 	if fuel_slot.item and fuel_slot.amount > 0:

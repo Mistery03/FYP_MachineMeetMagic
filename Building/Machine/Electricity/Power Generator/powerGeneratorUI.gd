@@ -53,15 +53,6 @@ func _ready():
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	
-	if inventoryHandler:
-		if player:
-			inventoryHandler.playerInventory = player.inventory
-			inventoryHandler.maxInventorySlot = player.maxInventorySize
-		else:
-			if debugMode:
-				inventoryHandler.playerInventory = debugInventory
-				inventoryHandler.maxInventorySlot = debugMaxSlot
-		
 	if currValue <= 0:
 		if fuel_slot.item and fuel_slot.amount > 0:
 			currValue = maxValue
@@ -79,8 +70,8 @@ func _process(delta):
 	
 	fuelSlotLogic()
 	
-	if inventoryHandler.currSlot:
-		print(inventoryHandler.currSlot.amount)
+	#if inventoryHandler.currSlot:
+		#print(inventoryHandler.currSlot.amount)
 	
 	
 	

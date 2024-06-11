@@ -42,7 +42,8 @@ func on_state_transitioned(new_state_name: StringName) -> void:
 			# Update the current state to the new one
 			current_state = new_state
 	else:
-		push_warning("Called transition on a state that does not exist")
+		print("Called transition on a state that does not exist")
+	
 
 func _process(delta):
 	current_state.update(delta)

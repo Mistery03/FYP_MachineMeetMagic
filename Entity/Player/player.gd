@@ -48,9 +48,11 @@ const JUMP_VELOCITY = 4.5
 
 @onready var magic_manager = $MagicManager
 
-@onready var place_sfx = $PlaceSFX
-@onready var walking_on_wood_sfx = $walkingOnWoodSFX
-@onready var walking_on_grass_sfx = $walkingOnGrassSFX
+@onready var place_sfx = $Audio/PlaceSFX
+@onready var walking_on_wood_sfx = $Audio/walkingOnWoodSFX
+@onready var walking_on_grass_sfx = $Audio/walkingOnGrassSFX
+@onready var breaking_sfx = $Audio/breakingSFX
+
 
 @onready var text_on_mouse = $TextOnMouse
 
@@ -83,11 +85,12 @@ func _ready() -> void:
 	magic_manager.init(self)
 	
 	##NOTE we must declare an inventory of null items size of N max inventory or else there will be a bug
-	for i in range(maxInventorySize):
-		inventory.append(null)
+	#for i in range(maxInventorySize):
+		#inventory.append(null)
 	
 func _process(delta) -> void:
 	mousePos = get_global_mouse_position()
+	
 
 
 func _input(event):

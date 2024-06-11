@@ -1,19 +1,13 @@
 extends State
 
-
-
+##@NOTE to keep track of wire states
+@export_category("Data Tracking")
 @export
-var wiring_machine_state: State
-
+var wiring_machine_state:State
 @export
-var wiring_battery_state: State
+var wiring_battery_state:State
 
-@export
-var buildUI:Control
-
-@export
-var buildMenu:Control
-
+@export_category("Build Menu")
 @export	
 var destroyHUD:Control
 
@@ -22,6 +16,8 @@ var inputList:Dictionary= {
 	"Exit":"",
 	"Build":""
 }
+
+@export var materialInstance:PackedScene
 
 var cameraSpeed:float = 0
 var prevMouseTilePos = Vector2i(-1,-1)
@@ -48,13 +44,20 @@ func update(delta: float) -> void:
 					if machine.position == parent.homeTilemap.map_to_local(mouseTilePos) and !(machine is Battery):
 						machine.animation.stop()
 			if Input.is_action_just_pressed("ACTION"):
+				parent.breaking_sfx.play()
 				for machine in machineList:
 					if machine.position == parent.homeTilemap.map_to_local(mouseTilePos):
-							machine.queue_free()
-							if machine is PowerGenerator:
-								machine.wireList.clear()
-							elif machine is Battery:
-								machine.wireList.clear()
+						if machine is PowerGenerator:
+							machine.wireList.clear()
+							dropItemsFromFuelSlot(machine)
+						elif machine is Battery:
+							machine.wireList.clear()
+						elif !machine is PowerGenerator:
+							dropItemsFromFuelSlot(machine)
+							dropItemsFromMaterialSlot(machine)
+						
+						machine.queue_free()
+							
 				parent.homeTilemap.erase_cell(2,mouseTilePos)
 				parent.homeTilemap.erase_cell(1,mouseTilePos)
 				wiring_machine_state.prevGenPos = Vector2i(-100,-100)
@@ -75,9 +78,29 @@ func process_input(event)->void:
 		destroyHUD.visible = false
 		transitioned.emit("build")
 
-
-	
-
+func dropItemsFromFuelSlot(machine):
+	if machine.machineUI.fuel_slot.item:
+		randomize() 
+		for i in range(machine.machineUI.fuel_slot.amount):
+			var itemDropped = materialInstance.instantiate()
+			itemDropped.itemData = machine.machineUI.fuel_slot.item
+			itemDropped.amount = 1
+			##This is why randomize() is used so it can spawn in different positions relative to the player
+			itemDropped.global_position = machine.global_position + Vector2(randi_range(-5,5),20)
+			##So it spawns in the level and not the player or anywhere
+			parent.localLevel.add_child(itemDropped)
+			
+func dropItemsFromMaterialSlot(machine):
+	if machine.machineUI.material_slot.item:
+		randomize() 
+		for i in range(machine.machineUI.material_slot.amount):
+			var itemDropped = materialInstance.instantiate()
+			itemDropped.itemData = machine.machineUI.material_slot.item
+			itemDropped.amount = 1
+			##This is why randomize() is used so it can spawn in different positions relative to the player
+			itemDropped.global_position = machine.global_position + Vector2(randi_range(-5,5),20)
+			##So it spawns in the level and not the player or anywhere
+			parent.localLevel.add_child(itemDropped)
 
 
 

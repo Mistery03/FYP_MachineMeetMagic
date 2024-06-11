@@ -1,7 +1,5 @@
 extends State
 
-
-
 @export
 var idle_state: State
 
@@ -77,12 +75,6 @@ func process_input(event)->void:
 	if Input.is_action_just_pressed("EXIT"):
 		toggle_menu()
 
-
-	
-
-
-	
-
 func resetStaffPosition():
 	parent.staff.z_index = -1
 	#parent.staff.rotation = 1.5708
@@ -135,8 +127,6 @@ func updateStaffPosY():
 	elif parent.velocity.y >0:
 		parent.staff.customAnimation.play("RESETFRONT")
 		
-
-
 	
 func staffPosWhenXandY(zIndex:int): #when both action both x and y are pressed
 	parent.staff.z_index = zIndex

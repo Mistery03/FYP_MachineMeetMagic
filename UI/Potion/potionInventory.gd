@@ -13,6 +13,7 @@ var potionData:PotionData
 @onready var potion_grid_container = $PotionGridContainer
 
 var currSlot:PotionSlotPlayer
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	pass

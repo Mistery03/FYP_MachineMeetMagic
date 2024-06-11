@@ -75,6 +75,7 @@ offset_bottom = 40.0
 script = ExtResource("11_i0iq0")
 parentControl = NodePath("..")
 inventorySlot = ExtResource("12_vksxu")
+maxInventorySlot = 20
 materialInstance = ExtResource("5_4drpe")
 
 [node name="PlayerGridInventory" parent="PlayerInventoryHanlder" instance=ExtResource("11_8ysx8")]

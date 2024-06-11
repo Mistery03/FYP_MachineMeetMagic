@@ -23,7 +23,6 @@ var currSlot:Panel
 func _ready():
 	scaledSlotSize = custom_minimum_size * scale
 
-
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	if item:

@@ -1,14 +1,7 @@
 class_name WiringBattery
 extends State
 
-@export
-var build_state: State
-@export
-var buildUI:Control
-@export
-var buildMenu:Control
-@export
-var wiring_machine:State
+
 
 @export
 var machineUpdater:Node
@@ -61,11 +54,8 @@ func update(delta: float) -> void:
 	
 	var machineList = parent.localLevel.machineList.get_children()
 	
-	#handleMachineInteraction(mouseTilePos)
-	
 	if machineData:
 		handleBattery(machineData, wireData, mouseTilePos)
-		
 		
 	handleWireCreation(mouseTilePos, wireData)
 	print(wireTiles)
@@ -75,7 +65,7 @@ func update(delta: float) -> void:
 	parent.homeTilemap.set_cells_terrain_connect(wireLayer,wireTiles,0,0)	
 	
 	updateAccumulativeCurrMana()
-	#accumulateBatteryMaxCapacity()
+
 	machineUpdater.setMachineUpdaterData(batteryList,withinWire)
 	updateWithinWireList()
 	
