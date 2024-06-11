@@ -1324,9 +1324,8 @@ potionInventory = NodePath("../ROOT_UI/Inventory/PotionInventory")
 potionGridInventory = NodePath("../ROOT_UI/Inventory/PotionGridContainer")
 potionHUD = NodePath("../ROOT_UI/ItemHUDPlaceholder/PotionHUD")
 
-[node name="StateController" type="Node" parent="." node_paths=PackedStringArray("current_state")]
+[node name="StateController" type="Node" parent="."]
 script = ExtResource("7_xedn3")
-current_state = NodePath("Idle")
 
 [node name="Idle" type="Node" parent="StateController"]
 script = ExtResource("8_5d7eh")
@@ -1335,12 +1334,15 @@ animation_name = "Idle"
 [node name="Move" type="Node" parent="StateController" node_paths=PackedStringArray("idle_state")]
 script = ExtResource("9_5ji7g")
 idle_state = NodePath("")
-animation_name = "walkSide"
+animation_name = "WalkSide"
 
-[node name="Build" type="Node" parent="StateController" node_paths=PackedStringArray("wiring_machine_state", "wiring_battery_state", "buildUI", "buildMenu")]
+[node name="Build" type="Node" parent="StateController" node_paths=PackedStringArray("move_state", "idle_state", "delete_state", "wiring_machine_state", "wiring_battery_state", "buildUI", "buildMenu")]
 script = ExtResource("10_10mal")
-wiring_machine_state = NodePath("../WiringMachine")
-wiring_battery_state = NodePath("../WiringBattery")
+move_state = NodePath("")
+idle_state = NodePath("")
+delete_state = NodePath("")
+wiring_machine_state = NodePath("")
+wiring_battery_state = NodePath("")
 buildUI = NodePath("../../ROOT_UI/Build")
 buildMenu = NodePath("../../ROOT_UI/Build/BuildMenu")
 inputList = {
@@ -1348,10 +1350,11 @@ inputList = {
 "Exit": "Exit"
 }
 
-[node name="Destroy" type="Node" parent="StateController" node_paths=PackedStringArray("wiring_machine_state", "wiring_battery_state", "buildUI", "buildMenu", "destroyHUD")]
+[node name="Destroy" type="Node" parent="StateController" node_paths=PackedStringArray("build_state", "wiring_machine_state", "wiring_battery_state", "buildUI", "buildMenu", "destroyHUD")]
 script = ExtResource("11_7uhfu")
-wiring_machine_state = NodePath("../WiringMachine")
-wiring_battery_state = NodePath("../WiringBattery")
+build_state = NodePath("")
+wiring_machine_state = NodePath("")
+wiring_battery_state = NodePath("")
 buildUI = NodePath("../../ROOT_UI/Build")
 buildMenu = NodePath("../../ROOT_UI/Build/BuildMenu")
 destroyHUD = NodePath("../../ROOT_UI/Destroy")
@@ -1360,10 +1363,12 @@ inputList = {
 "Exit": "Exit"
 }
 
-[node name="WiringMachine" type="Node" parent="StateController" node_paths=PackedStringArray("buildUI", "buildMenu", "HUD")]
+[node name="WiringMachine" type="Node" parent="StateController" node_paths=PackedStringArray("build_state", "buildUI", "buildMenu", "wiring_battery", "HUD")]
 script = ExtResource("12_ii11w")
+build_state = NodePath("")
 buildUI = NodePath("../../ROOT_UI/Build")
 buildMenu = NodePath("../../ROOT_UI/Build/BuildMenu")
+wiring_battery = NodePath("")
 HUD = NodePath("../../ROOT_UI/Wiring")
 inputList = {
 "Build": "Build",
@@ -1709,6 +1714,5 @@ stream = ExtResource("39_wma1b")
 volume_db = -12.0
 
 [connection signal="timeout" from="ROOT_UI/ItemHUDPlaceholder/Timer" to="ROOT_UI/ItemHUDPlaceholder" method="_on_timer_timeout"]
-[connection signal="timeout" from="Timer" to="StateController/Cut" method="_on_timer_timeout"]
 
 [editable path="Staff"]

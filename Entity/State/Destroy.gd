@@ -1,8 +1,6 @@
 extends State
 
 
-@export
-var build_state: State
 
 @export
 var wiring_machine_state: State
@@ -35,22 +33,7 @@ func enter() -> void:
 	destroyHUD.visible = true
 	parent.itemHUDPlaceholder.visible = false
 
-
-func process_input(event: InputEvent) -> State:
-	if Input.is_action_just_pressed(inputList.find_key("Exit").to_upper()) or Input.is_action_just_pressed(inputList.find_key("Build").to_upper()) or Input.is_action_just_pressed("DELETE"):
-		destroyHUD.visible = false
-		return build_state
-	
-
-	return null
-
-func process_physics(delta: float) -> State:
-	camera.position = move_component.get_movement_direction() * move_speed * delta
-	
-	
-	return null
-	
-func process_frame(delta:float) -> State:
+func update(delta: float) -> void:
 	var parentPos = parent.homeTilemap.local_to_map(parent.position)
 	var mouseTilePos = parent.homeTilemap.local_to_map(parent.mousePos)
 	var machineData:TileData = parent.homeTilemap.get_cell_tile_data(2,mouseTilePos) 
@@ -84,8 +67,16 @@ func process_frame(delta:float) -> State:
 		parent.homeTilemap.erase_cell(1,prevMouseTilePos)
 	prevMouseTilePos = mouseTilePos
 
+func physics_update(delta: float) -> void:
+	camera.position = moveComponent.get_movement_direction() * parent.moveSpeed * delta
+
+func process_input(event)->void:
+	if Input.is_action_just_pressed(inputList.find_key("Exit").to_upper()) or Input.is_action_just_pressed(inputList.find_key("Build").to_upper()) or Input.is_action_just_pressed("DELETE"):
+		destroyHUD.visible = false
+		transitioned.emit("build")
+
+
 	
-	return null
 
 
 

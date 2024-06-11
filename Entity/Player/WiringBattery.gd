@@ -51,27 +51,8 @@ func enter() -> void:
 	enterBuildMode()
 	updateAccumulativeCurrMana()
 	parent.itemHUDPlaceholder.visible = false
-	
 
-func process_input(event: InputEvent) -> State:
-	if Input.is_action_just_pressed(inputList.find_key("Exit").to_upper()) or Input.is_action_just_pressed(inputList.find_key("Build").to_upper()):
-		hideWiresOrbuildMode()
-		return build_state
-	if Input.is_action_just_pressed(inputList.find_key("Exit").to_upper()) and isCreating:
-		isCreating = false
-	if Input.is_action_just_pressed("NUMKEY1"):
-		hideWiresOrbuildMode()
-		return wiring_machine
-	
-	return null
-
-func process_physics(delta: float) -> State:
-	camera.position = move_component.get_movement_direction() * move_speed * delta
-	camera.position_smoothing_enabled = true
-	
-	return null
-	
-func process_frame(delta:float) -> State:
+func update(delta: float) -> void:
 	var parentPos = parent.homeTilemap.local_to_map(parent.position)
 	var mouseTilePos = parent.homeTilemap.local_to_map(parent.mousePos)
 	
@@ -98,9 +79,24 @@ func process_frame(delta:float) -> State:
 	machineUpdater.setMachineUpdaterData(batteryList,withinWire)
 	updateWithinWireList()
 	
-	
-		
-	return null
+
+func physics_update(delta: float) -> void:
+	camera.position = moveComponent.get_movement_direction() * parent.moveSpeed * delta
+	camera.position_smoothing_enabled = true
+
+func process_input(event)->void:
+	if Input.is_action_just_pressed(inputList.find_key("Exit").to_upper()) or Input.is_action_just_pressed(inputList.find_key("Build").to_upper()):
+		hideWiresOrbuildMode()
+		transitioned.emit("build")
+	if Input.is_action_just_pressed(inputList.find_key("Exit").to_upper()) and isCreating:
+		isCreating = false
+	if Input.is_action_just_pressed("NUMKEY1"):
+		hideWiresOrbuildMode()
+		transitioned.emit("wiringMachine")
+
+
+
+
 	
 func enterBuildMode():
 	parent.homeTilemap.set_layer_modulate(wireLayer,Color8(0,255,0,255))

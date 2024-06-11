@@ -1,4 +1,4 @@
-class_name StateMachine
+class_name StateController
 extends Node
 
 @export var starting_state: State

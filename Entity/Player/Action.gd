@@ -6,6 +6,7 @@ var idle_state:State
 var move_state: State
 @onready var timer = $"../../Timer"
 
+
 @export var materialInstance:PackedScene 
 @export var max_drop_items: int = 5 
 var prevMouseTilePos = Vector2i(-1000,-1000)
@@ -20,14 +21,12 @@ func enter() -> void:
 	isDropped = false
 
 
-	
+func update(delta: float) -> void:
+	moveComponent.axis = moveComponent.get_movement_direction()
 
-func process_frame(delta:float) -> State:
-	move_component.axis = move_component.get_movement_direction()
-
-	if move_component.axis:
+	if moveComponent.axis:
 		timer.stop()
-		return move_state
+		transitioned.emit("move")
 		
 	mouseTilePos = parent.levelTilemap.local_to_map(parent.mousePos)
 	var parentPos = parent.levelTilemap.local_to_map(parent.position)
@@ -49,14 +48,17 @@ func process_frame(delta:float) -> State:
 						#parent.staff.customAnimation.stop()
 						#await parent.staff.customAnimation.animation_finished
 	if isDropped:			
-		return idle_state
-					
-	return null
+		transitioned.emit("idle")
 
-func process_input(event: InputEvent) -> State:
+
+
+func process_input(event)->void:
 	if Input.is_action_just_pressed("EXIT"):
-		return idle_state	
-	return null
+		transitioned.emit("idle")	
+
+
+
+
 	
 
 func dropMaterials()->bool:

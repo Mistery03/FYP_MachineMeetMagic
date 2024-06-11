@@ -3,20 +3,12 @@ extends Node
 
 @export
 var animation_name: String = "IDLE"
-@export
-var move_speed: float = 100
-@export
-var accel:float = 10
-@export
-var animationList: Dictionary={
-	"WalkFront":"",
-	"WalkBackward":""
-}
 
+signal transitioned(new_state_name: StringName)
 # Hold a reference to the parent so that it can be controlled by the state
 var parent: Entity
 var animations: AnimatedSprite2D
-var move_component: IMoveComponent
+var moveComponent: IMoveComponent
 var camera:Camera2D
 
 func enter() -> void:
@@ -25,11 +17,13 @@ func enter() -> void:
 func exit() -> void:
 	pass
 
-func process_input(event: InputEvent) -> State:
-	return null
+func update(delta: float) -> void:
+	pass
 
-func process_frame(delta: float) -> State:
-	return null
+func physics_update(delta: float) -> void:
+	pass
 
-func process_physics(delta: float) -> State:
-	return null
+func process_input(event)->void:
+	pass
+
+

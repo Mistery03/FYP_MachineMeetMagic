@@ -1,16 +1,11 @@
 class_name WiringMachine
 extends State
 
-@export
-var build_state: State
+
 @export
 var buildUI:Control
 @export
 var buildMenu:Control
-@export
-var wiring_battery:State
-
-
 
 @export	
 var HUD:Control
@@ -42,27 +37,8 @@ func enter() -> void:
 	super()
 	enterBuildMode()
 	parent.itemHUDPlaceholder.visible = false
-	
 
-func process_input(event: InputEvent) -> State:
-	if Input.is_action_just_pressed(inputList.find_key("Exit").to_upper()) or Input.is_action_just_pressed(inputList.find_key("Build").to_upper()):
-		hideWiresOrbuildMode()
-		return build_state
-	if Input.is_action_just_pressed(inputList.find_key("Exit").to_upper()) and isCreating:
-		isCreating = false
-	if Input.is_action_just_pressed("NUMKEY2"):
-		hideWiresOrbuildMode()
-		return wiring_battery
-	
-	return null
-
-func process_physics(delta: float) -> State:
-	camera.position = move_component.get_movement_direction() * move_speed * delta
-	camera.position_smoothing_enabled = true
-	
-	return null
-	
-func process_frame(delta:float) -> State:
+func update(delta: float) -> void:
 	var parentPos = parent.homeTilemap.local_to_map(parent.position)
 	var mouseTilePos = parent.homeTilemap.local_to_map(parent.mousePos)
 	
@@ -83,9 +59,25 @@ func process_frame(delta:float) -> State:
 	parent.homeTilemap.set_cells_terrain_connect(wireLayer,wireTiles,0,0)	
 	
 	updateWithinWireList()
-	
-	
-	return null
+
+func physics_update(delta: float) -> void:
+	camera.position = moveComponent.get_movement_direction() * parent.moveSpeed * delta
+	camera.position_smoothing_enabled = true
+
+func process_input(event)->void:
+	if Input.is_action_just_pressed(inputList.find_key("Exit").to_upper()) or Input.is_action_just_pressed(inputList.find_key("Build").to_upper()):
+		hideWiresOrbuildMode()
+		transitioned.emit("build")
+	if Input.is_action_just_pressed(inputList.find_key("Exit").to_upper()) and isCreating:
+		isCreating = false
+	if Input.is_action_just_pressed("NUMKEY2"):
+		hideWiresOrbuildMode()
+		transitioned.emit("wiringBattery")
+
+
+
+
+
 func enterBuildMode():
 	parent.homeTilemap.set_layer_modulate(4,Color8(255,255,255,255))
 	parent.isBuildMode = true
