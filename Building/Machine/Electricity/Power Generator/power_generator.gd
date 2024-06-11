@@ -32,7 +32,7 @@ func _ready():
 func _process(delta):
 	accumulateMachineMaxCapacity()
 	updateAccumulativeCurrMana()
-	print(accumulativeCurrMana < accumulativeMachineMaxCapacity)
+	print(withinWireList)
 	if isThereFuel:
 		if machineUI.power_switch.button_pressed:
 			if withinWireList.size() >0:
@@ -63,9 +63,9 @@ func _process(delta):
 		if is_instance_valid(machine):
 			machine.isThereFuel = isManaProduced
 		if isManaProduced:
-			machine.currMana += machineUI.fuel_slot.item.burnPerSecond * delta
+			machine.currMana += machineUI.fuel_slot.item.manaProducedPerSecond * delta
 			if !machine is Battery:
-				machine.fillManaCapacity(machineUI.fuel_slot.item.burnPerSecond,delta)
+				machine.fillManaCapacity(machineUI.fuel_slot.item.manaProducedPerSecond,delta)
 		
 func _on_interectable_input_event(viewport, event, shape_idx):
 	if event is InputEventMouseButton:
