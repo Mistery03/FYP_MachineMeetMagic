@@ -83,7 +83,7 @@ func _ready() -> void:
 	#print(inventory.size())
 	inventory_manager.init(self)
 	stateController.init(self,animation,move_component,camera)
-	magic_manager.init(self, mousePos)
+
 	
 	
 	
