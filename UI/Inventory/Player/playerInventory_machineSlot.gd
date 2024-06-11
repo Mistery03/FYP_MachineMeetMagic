@@ -25,10 +25,10 @@ func _process(delta):
 		item_texture.visible = false
 		label.visible = false
 	
-	if !inventoryHandler.parentControl.isDragging:
-		if inventoryHandler.currSlot:
-			inventoryHandler.currSlot.item_texture.global_position = inventoryHandler.currSlot.original_global_position
-			inventoryHandler.currSlot.label.global_position = inventoryHandler.currSlot.original_label_global_position
+	#if !inventoryHandler.parentControl.isDragging:
+		#if inventoryHandler.currSlot:
+			#inventoryHandler.currSlot.item_texture.global_position = inventoryHandler.currSlot.original_global_position
+			#inventoryHandler.currSlot.label.global_position = inventoryHandler.currSlot.original_label_global_position
 
 func _on_item_texture_gui_input(event):
 	if event is InputEventMouseButton:

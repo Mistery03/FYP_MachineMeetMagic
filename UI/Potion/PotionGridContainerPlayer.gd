@@ -8,6 +8,8 @@ extends Control
 var gridList:Array = []
 var potionList:Array = []
 
+func _ready():
+	print("here")
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	gridList = grid_container.get_children()
