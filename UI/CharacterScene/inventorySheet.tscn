@@ -60,6 +60,7 @@ offset_right = 300.0
 offset_bottom = 250.0
 scale = Vector2(0.5, 0.5)
 parentControl = NodePath("..")
+playerInventory = Array[Resource("res://Entity/Data/slotData.gd")]([null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null])
 materialInstance = ExtResource("6_qvb7u")
 
 [node name="PotionGridContainerPlayer" parent="." node_paths=PackedStringArray("potion_inventory") instance=ExtResource("6_reqvi")]

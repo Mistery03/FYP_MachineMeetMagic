@@ -23,12 +23,20 @@ var gridMousePos:Vector2i
 var player:Player
 
 var isForExternalSlot:bool = false
+
+func init(player:Player):
+	await get_tree().create_timer(0.3).timeout
+	self.player = player
+	if self.player:
+		self.player.inventory_manager.connect("OnInventoryChanged",OnInventoryChanged)
+		playerInventory = player.inventory
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	#initInventorySlot()
 	#if player:
 		#maxInventorySlot = player.playerMaxInventorySize
-	await get_tree().create_timer(0.4).timeout
+	#await get_tree().create_timer(0.4).timeout
 	for child in get_children():
 		child.queue_free()
 	
@@ -70,6 +78,7 @@ func update_slots():
 			slotList[i].amount =playerInventory[i].amount
 			slotList[i].item_texture.position = GridSlotPos 
 			slotList[i].label.position = GridSlotPos + Vector2i(120,100)
+			print(slotList[i].item)
 		else:
 			slotList[i].item = null
 
@@ -254,6 +263,7 @@ func getSameItemCount(item:MaterialData)->int:
 
 func OnInventoryChanged(inventory):
 	update_slots()
+	print("Test")
 	
 func convertSlotListToInventoryData():
 	var tempArray:Array[SlotData]
