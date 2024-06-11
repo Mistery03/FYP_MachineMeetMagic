@@ -1,4 +1,3 @@
-#warnings-disable
 extends Control
 
 @export var parentUI:Control

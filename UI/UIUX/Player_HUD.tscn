@@ -1,10 +1,11 @@
-[gd_scene load_steps=6 format=3 uid="uid://biincpe1d1eek"]
+[gd_scene load_steps=7 format=3 uid="uid://biincpe1d1eek"]
 
 [ext_resource type="Script" path="res://UI/UIUX/Hud.gd" id="1_tnpfs"]
 [ext_resource type="Texture2D" uid="uid://bg5c8m1a5wibs" path="res://Asset/UIUX/healthbarUnder.png" id="2_ek56v"]
 [ext_resource type="Texture2D" uid="uid://cqm4lwbhuhlqd" path="res://Asset/UIUX/healthbarProgress.png" id="3_qft53"]
 [ext_resource type="Script" path="res://UI/UIUX/HPProgressBar.gd" id="4_w6vbs"]
 [ext_resource type="Script" path="res://UI/UIUX/ManaProgressBar.gd" id="5_io7js"]
+[ext_resource type="PackedScene" uid="uid://oq5f260mrj2o" path="res://UI/UIUX/characterSheet.tscn" id="6_n11gv"]
 
 [node name="Player_hud" type="Control"]
 layout_mode = 3
@@ -39,3 +40,9 @@ nine_patch_stretch = true
 texture_under = ExtResource("2_ek56v")
 texture_progress = ExtResource("3_qft53")
 script = ExtResource("5_io7js")
+
+[node name="CharacterSheet" parent="." instance=ExtResource("6_n11gv")]
+offset_left = 28.0
+offset_top = 534.0
+offset_right = 28.0
+offset_bottom = 534.0

@@ -12,7 +12,7 @@ func _ready():
 func update(player: Player):
 	value = player.currHealth
 	self.player = player
-	#connect("OnHealthIncrease", increaseHealth)
+	connect("OnHealthIncrease", increaseHealth)
 	
 	
 
