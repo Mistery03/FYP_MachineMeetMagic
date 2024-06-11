@@ -1,4 +1,4 @@
-[gd_scene load_steps=85 format=3 uid="uid://c1vsfoc55pk0w"]
+[gd_scene load_steps=81 format=3 uid="uid://c1vsfoc55pk0w"]
 
 [ext_resource type="Texture2D" uid="uid://bd32dcnew3uvf" path="res://Asset/L.png" id="1_ksidj"]
 [ext_resource type="Script" path="res://Entity/Player/player.gd" id="1_xfdxb"]
@@ -29,10 +29,6 @@
 [ext_resource type="Texture2D" uid="uid://dw0wj1ftq8uye" path="res://Asset/potionSS.png" id="22_hr68s"]
 [ext_resource type="PackedScene" uid="uid://3lfapx60drmh" path="res://HUD/Potion/potionHUD.tscn" id="22_lae4u"]
 [ext_resource type="PackedScene" uid="uid://dab70bjir0c00" path="res://HUD/Magic/magicHUD.tscn" id="24_71sui"]
-[ext_resource type="Texture2D" uid="uid://bmw2uy10i1kwr" path="res://Asset/UIUX/scroll_UI.png" id="24_e53mk"]
-[ext_resource type="Script" path="res://UI/Inventory/InventoryController.gd" id="24_o1enl"]
-[ext_resource type="PackedScene" uid="uid://bm2u5jp0exc2h" path="res://UI/Potion/PotionGridContainerPlayer.tscn" id="25_km84l"]
-[ext_resource type="PackedScene" uid="uid://dpthqxsb7e3fk" path="res://UI/Potion/potionInventory.tscn" id="26_eb02i"]
 [ext_resource type="Texture2D" uid="uid://bi05jqai8a2ss" path="res://Asset/materials.png" id="32_6ejnk"]
 [ext_resource type="AudioStream" uid="uid://6ccgh63311io" path="res://Asset/SFX/whooshSound.mp3" id="35_4dsxo"]
 [ext_resource type="AudioStream" uid="uid://6h2e77jv6p4a" path="res://Asset/SFX/woodBreak.mp3" id="36_a4jww"]
@@ -1292,7 +1288,7 @@ moveSpeed = 7000.0
 potionObject = ExtResource("3_41una")
 staff = NodePath("Staff")
 itemHUDPlaceholder = NodePath("ROOT_UI/ItemHUDPlaceholder")
-playerInventoryController = NodePath("ROOT_UI/Inventory")
+playerInventoryController = NodePath("")
 maxInventorySize = 20
 initSlot = ExtResource("4_e4jpf")
 inventory = Array[Object]([])
@@ -1355,8 +1351,8 @@ initSlot = ExtResource("4_e4jpf")
 
 [node name="PotionManager" type="Node" parent="." node_paths=PackedStringArray("potionInventory", "potionGridInventory", "potionHUD")]
 script = ExtResource("5_5bgkf")
-potionInventory = NodePath("../ROOT_UI/Inventory/PotionInventory")
-potionGridInventory = NodePath("../ROOT_UI/Inventory/PotionGridContainer")
+potionInventory = NodePath("")
+potionGridInventory = NodePath("")
 potionHUD = NodePath("../ROOT_UI/ItemHUDPlaceholder/PotionHUD")
 
 [node name="MagicManager" type="Node" parent="."]
@@ -1613,7 +1609,7 @@ offset_bottom = 612.0
 scale = Vector2(0.2, 0.2)
 actionInput = "EQUIPPOTION"
 texture = SubResource("AtlasTexture_e1oi2")
-potionGridHolderData = NodePath("../../Inventory/PotionGridContainer")
+potionGridHolderData = NodePath("")
 
 [node name="MagicHUD" parent="ROOT_UI/ItemHUDPlaceholder" instance=ExtResource("24_71sui")]
 layout_mode = 1
@@ -1630,50 +1626,6 @@ libraries = {
 
 [node name="Timer" type="Timer" parent="ROOT_UI/ItemHUDPlaceholder"]
 one_shot = true
-
-[node name="Inventory" type="Control" parent="ROOT_UI" node_paths=PackedStringArray("potionInventory")]
-visible = false
-layout_mode = 3
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -20.0
-offset_top = -20.0
-offset_right = 20.0
-offset_bottom = 20.0
-grow_horizontal = 2
-grow_vertical = 2
-script = ExtResource("24_o1enl")
-potionInventory = NodePath("PotionInventory")
-
-[node name="Border" type="TextureRect" parent="ROOT_UI/Inventory"]
-texture_filter = 1
-layout_mode = 1
-offset_left = -637.0
-offset_top = -720.0
-offset_right = 323.0
-offset_bottom = 240.0
-scale = Vector2(1.35, 1.35)
-texture = ExtResource("24_e53mk")
-
-[node name="PotionGridContainer" parent="ROOT_UI/Inventory" node_paths=PackedStringArray("potion_inventory") instance=ExtResource("25_km84l")]
-offset_left = -498.0
-offset_top = 94.0
-offset_right = -498.0
-offset_bottom = 94.0
-scale = Vector2(2.5, 2.5)
-potion_inventory = NodePath("../PotionInventory")
-
-[node name="PotionInventory" parent="ROOT_UI/Inventory" instance=ExtResource("26_eb02i")]
-visible = false
-layout_mode = 1
-offset_left = -503.0
-offset_top = -257.0
-offset_right = -503.0
-offset_bottom = -257.0
-scale = Vector2(0.7, 0.7)
 
 [node name="MachineUpdater" type="Node" parent="."]
 script = ExtResource("21_iegje")
