@@ -73,19 +73,18 @@ var zoomValue:float = 6
 
 func _ready() -> void:
 	camera.zoom = Vector2(cameraZoom,cameraZoom)
+	
 	currHealth = playerData.MaxHealth
 	currMana = playerData.MaxMana
 	currStamina = playerData.MaxStamina
 	
-	##NOTE we must declare an inventory of null items size of N max inventory or else there will be a bug
-	for i in range(maxInventorySize):
-		inventory.append(null)
-	#print(inventory.size())
 	inventory_manager.init(self)
 	stateController.init(self,animation,move_component,camera)
 	magic_manager.init(self)
 	
-	
+	##NOTE we must declare an inventory of null items size of N max inventory or else there will be a bug
+	for i in range(maxInventorySize):
+		inventory.append(null)
 	
 func _process(delta) -> void:
 	mousePos = get_global_mouse_position()

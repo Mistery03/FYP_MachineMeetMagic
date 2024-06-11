@@ -6,15 +6,15 @@
 [ext_resource type="Resource" uid="uid://doo0oqvv31wtn" path="res://Potion/Buff/Defence Potion/DefencePotion.tres" id="3_41una"]
 [ext_resource type="Resource" uid="uid://bf2wpudjl6wu5" path="res://Entity/Data/testSlot1.tres" id="4_e4jpf"]
 [ext_resource type="Script" path="res://Potion/PotionManager.gd" id="5_5bgkf"]
-[ext_resource type="Script" path="res://Entity/State/StateController.gd" id="7_xedn3"]
-[ext_resource type="Script" path="res://Entity/State/Idle.gd" id="8_5d7eh"]
-[ext_resource type="Script" path="res://Entity/State/Move.gd" id="9_5ji7g"]
-[ext_resource type="Script" path="res://Entity/State/Build.gd" id="10_10mal"]
+[ext_resource type="Script" path="res://Entity/State/StateMachine.gd" id="7_xedn3"]
+[ext_resource type="Script" path="res://Entity/Player/states/Idle.gd" id="8_5d7eh"]
+[ext_resource type="Script" path="res://Entity/Player/states/Move.gd" id="9_5ji7g"]
+[ext_resource type="Script" path="res://Entity/Player/states/Build.gd" id="10_10mal"]
 [ext_resource type="Script" path="res://Entity/Player/MoveComponent.gd" id="10_gim7i"]
-[ext_resource type="Script" path="res://Entity/State/Destroy.gd" id="11_7uhfu"]
+[ext_resource type="Script" path="res://Entity/Player/states/Destroy.gd" id="11_7uhfu"]
 [ext_resource type="Script" path="res://Magic/MagicManager.gd" id="11_ur7hc"]
 [ext_resource type="PackedScene" uid="uid://dgn61wamn10el" path="res://UI/Build/build_menu.tscn" id="12_58i1p"]
-[ext_resource type="Script" path="res://Entity/State/Wiring.gd" id="12_ii11w"]
+[ext_resource type="Script" path="res://Entity/Player/states/Wiring.gd" id="12_ii11w"]
 [ext_resource type="Script" path="res://Entity/Player/WiringBattery.gd" id="13_3c3kb"]
 [ext_resource type="PackedScene" uid="uid://htlhwdgl8ast" path="res://HUD/DynamicLabel/dynamicLabel.tscn" id="14_8yknx"]
 [ext_resource type="Script" path="res://Entity/Player/Action.gd" id="14_h6fpb"]
@@ -1291,7 +1291,7 @@ moveSpeed = 7000.0
 potionObject = ExtResource("3_41una")
 staff = NodePath("Staff")
 itemHUDPlaceholder = NodePath("ROOT_UI/ItemHUDPlaceholder")
-playerInventoryController = NodePath("ROOT_UI/InventorySheet")
+playerInventoryController = NodePath("ROOT_UI/InventoryUI")
 maxInventorySize = 20
 initSlot = ExtResource("4_e4jpf")
 inventory = Array[Object]([])
@@ -1354,7 +1354,7 @@ initSlot = ExtResource("4_e4jpf")
 
 [node name="PotionManager" type="Node" parent="." node_paths=PackedStringArray("inventoryUI", "potionHUD")]
 script = ExtResource("5_5bgkf")
-inventoryUI = NodePath("../ROOT_UI/InventorySheet")
+inventoryUI = NodePath("../ROOT_UI/InventoryUI")
 potionHUD = NodePath("../ROOT_UI/ItemHUDPlaceholder/PotionHUD")
 
 [node name="MagicManager" type="Node" parent="." node_paths=PackedStringArray("magic_tree_ui")]
@@ -1613,7 +1613,7 @@ offset_bottom = 612.0
 scale = Vector2(0.2, 0.2)
 actionInput = "EQUIPPOTION"
 texture = SubResource("AtlasTexture_e1oi2")
-inventoryUI = NodePath("../../InventorySheet")
+inventoryUI = NodePath("../../InventoryUI")
 
 [node name="MagicHUD" parent="ROOT_UI/ItemHUDPlaceholder" instance=ExtResource("24_71sui")]
 layout_mode = 1
@@ -1631,7 +1631,7 @@ libraries = {
 [node name="Timer" type="Timer" parent="ROOT_UI/ItemHUDPlaceholder"]
 one_shot = true
 
-[node name="InventorySheet" parent="ROOT_UI" node_paths=PackedStringArray("player") instance=ExtResource("32_dbx42")]
+[node name="InventoryUI" parent="ROOT_UI" node_paths=PackedStringArray("player") instance=ExtResource("32_dbx42")]
 visible = false
 player = NodePath("../..")
 
