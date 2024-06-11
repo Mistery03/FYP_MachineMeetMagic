@@ -59,7 +59,7 @@ func process_input(event)->void:
 
 func dropMaterials()->bool:
 	var num_items_to_drop = randi_range(1, max_drop_items)
-	for i in range(num_items_to_drop):
+	for i in range(num_items_to_drop-1):
 		var instance = materialInstance.instantiate()
 		instance.itemData = materialRes
 		instance.amount = 1

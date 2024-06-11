@@ -1,0 +1,20 @@
+[gd_resource type="Resource" script_class="Magic" load_steps=5 format=3 uid="uid://60imtm71g3ri"]
+
+[ext_resource type="Script" path="res://Magic/Data/magicData.gd" id="1_1gl0f"]
+[ext_resource type="PackedScene" path="res://Magic/IgnisNormalAttack.tscn" id="1_4llb0"]
+[ext_resource type="Texture2D" uid="uid://u1h6oyjt8kdh" path="res://Asset/Skill_Btn.png" id="3_4mqqy"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vhwpq"]
+atlas = ExtResource("3_4mqqy")
+region = Rect2(32, 0, 32, 32)
+
+[resource]
+script = ExtResource("1_1gl0f")
+name = "Ignis Normal Attack"
+skillButton = SubResource("AtlasTexture_vhwpq")
+scene = ExtResource("1_4llb0")
+manaRequirement = 20.0
+isUnlocked = false
+burningTime = 0.0
+efficientTime = 0.0
+damangeAmount = 0.0

@@ -1,6 +1,10 @@
-[gd_scene load_steps=2 format=3 uid="uid://daji0h3vfh4k5"]
+[gd_scene load_steps=6 format=3 uid="uid://daji0h3vfh4k5"]
 
 [ext_resource type="PackedScene" uid="uid://404eqowmraym" path="res://UI/CharacterScene/skill_button.tscn" id="1_avgvp"]
+[ext_resource type="Resource" uid="uid://60imtm71g3ri" path="res://Magic/Data/IgnisNormalAttack.tres" id="2_qf24l"]
+[ext_resource type="Resource" uid="uid://b5wauuhno0qg2" path="res://Magic/Data/IgnisSkill1.tres" id="3_yu1t0"]
+[ext_resource type="Resource" uid="uid://dcf0tfhforbdf" path="res://Magic/Data/IgnisSkill2.tres" id="4_kuefp"]
+[ext_resource type="Resource" uid="uid://djb03olcdq404" path="res://Magic/Data/IgnisSkill3.tres" id="5_jijta"]
 
 [node name="skillTree" type="Control"]
 layout_mode = 3
@@ -15,21 +19,25 @@ size_flags_horizontal = 0
 
 [node name="skillButton" parent="." instance=ExtResource("1_avgvp")]
 layout_mode = 0
+MagicData = ExtResource("2_qf24l")
 
 [node name="skillButton" parent="skillButton" instance=ExtResource("1_avgvp")]
 layout_mode = 0
 offset_left = 64.0
 offset_right = 96.0
 disabled = true
+MagicData = ExtResource("3_yu1t0")
 
 [node name="skillButton" parent="skillButton/skillButton" instance=ExtResource("1_avgvp")]
 layout_mode = 0
 offset_left = 64.0
 offset_right = 96.0
 disabled = true
+MagicData = ExtResource("4_kuefp")
 
 [node name="skillButton" parent="skillButton/skillButton/skillButton" instance=ExtResource("1_avgvp")]
 layout_mode = 0
 offset_left = 64.0
 offset_right = 96.0
 disabled = true
+MagicData = ExtResource("5_jijta")
