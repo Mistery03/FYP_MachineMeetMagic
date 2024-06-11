@@ -18,7 +18,8 @@ var accumulativePerctange:float = 0
 var accumulativeMaxPerctange:float = 0
 
 var accumulativeMachineMaxCapacity = 0
-var isCalculationsDone:bool
+var accumulativeCurrMana:float = 0
+var isCalculationsDone:bool = false
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -29,19 +30,12 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
+	accumulateMachineMaxCapacity()
+	updateAccumulativeCurrMana()
+	print(accumulativeCurrMana < accumulativeMachineMaxCapacity)
 	if isThereFuel:
 		if machineUI.power_switch.button_pressed:
 			if withinWireList.size() >0:
-				for machine in withinWireList:
-					if !machine is Battery:
-						accumulativeMaxPerctange += machine.maxPercentage
-						print(accumulativeMaxPerctange)
-						print(accumulativePerctange)
-					
-						accumulativePerctange += machine.percentage
-						
-						
-			if accumulativePerctange < accumulativeMaxPerctange:
 				changeAnimation("Processing")
 				machineUI.status_bar.tint_progress = Color.GREEN
 				isSwitchedOn = true
@@ -59,7 +53,11 @@ func _process(delta):
 		isManaProduced = false
 	
 	if isSwitchedOn:
-		machineUI.burnDisplay(delta)
+		if accumulativeCurrMana < accumulativeMachineMaxCapacity:
+			machineUI.burnDisplay(delta)
+		else:
+			changeAnimation("idle")
+			machineUI.status_bar.tint_progress = Color.YELLOW
 	
 	for machine in withinWireList:
 		if is_instance_valid(machine):
@@ -103,21 +101,25 @@ func _input(event):
 				player.isPressable = true
 
 			
-			
-		
 
 func changeAnimation(animationName:String):
 	animation.play(animationName.to_pascal_case())
 	machineUI.machine_animation.play(animationName.to_pascal_case())
-	
-	
+
 func accumulateMachineMaxCapacity():
 	accumulativeMachineMaxCapacity = 0
-	if withinWireList.size() > 0 and !isCalculationsDone:
+	if withinWireList.size() > 0:
 		for machine in withinWireList:
-			if !machine is Battery:
-				accumulativeMachineMaxCapacity += machine.maxMana
+			accumulativeMachineMaxCapacity += machine.maxMana
 		
-		print(accumulativeMachineMaxCapacity)	
 		isCalculationsDone = true
+	print("INSIDE powergen ",accumulativeMachineMaxCapacity)	
+		
+func updateAccumulativeCurrMana():
+	accumulativeCurrMana = 0.0  # Reset the accumulative current mana
+	if withinWireList.size() > 0:
+		for machine in withinWireList:
+			accumulativeCurrMana += machine.currMana
+
+	print("Accumulative Current Mana: ", accumulativeCurrMana)
 

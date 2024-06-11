@@ -78,8 +78,8 @@ func process_input(event)->void:
 	if Input.is_action_just_pressed(inputList.find_key("Exit").to_upper()) or Input.is_action_just_pressed(inputList.find_key("Build").to_upper()):
 		hideWiresOrbuildMode()
 		transitioned.emit("build")
-	if Input.is_action_just_pressed(inputList.find_key("Exit").to_upper()) and isCreating:
-		isCreating = false
+	#if Input.is_action_just_pressed(inputList.find_key("Exit").to_upper()) and isCreating:
+		#isCreating = false
 	if Input.is_action_just_pressed("NUMKEY1"):
 		hideWiresOrbuildMode()
 		transitioned.emit("wiringMachine")
@@ -196,7 +196,7 @@ func accumulateBatteryMaxCapacity():
 			
 		isCalculationsDone = true
 	
-	#print(accumulativeBatteryMaxCapacity)
+	print(accumulativeBatteryMaxCapacity)
 
 func updateAccumulativeCurrMana():
 	accumulativeCurrMana = 0.0  # Reset the accumulative current mana

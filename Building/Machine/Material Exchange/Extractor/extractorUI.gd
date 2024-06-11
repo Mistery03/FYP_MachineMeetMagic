@@ -211,6 +211,7 @@ func removeItemFromMaterialSlotUI():
 			currSlot.item_texture.global_position = currSlot.border.global_position
 			currSlot.label.global_position = currSlot.border.global_position + Vector2(80,60)
 			material_slot.item = null
+		currLoadingValue  = 0
 		currMaterialSlotItem = null
 
 func burnDisplay(delta):
@@ -224,7 +225,7 @@ func processDisplay(delta):
 	currLoadingValue = clamp(currLoadingValue , 0, maxValue)
 
 func processMaterial():
-	if currLoadingValue >= 100:
+	if currLoadingValue >= 99:
 		currLoadingValue  = 0
 		if material_slot.item and material_slot.amount-1 > 0:
 			material_slot.amount -= 1

@@ -25,12 +25,19 @@ var wireLayer:int = 4
 var machineLayer:int = 2
 
 var powerGenPosList = []
+var machineList = []
+
+var accumulativeMachineMaxCapacity = 0
+var accumulativeCurrMana:float = 0
+var isCalculationsDone:bool
 
 
 func enter() -> void:
 	super()
 	enterBuildMode()
+	#updateAccumulativeCurrMana()
 	parent.itemHUDPlaceholder.visible = false
+
 
 func update(delta: float) -> void:
 	var parentPos = parent.homeTilemap.local_to_map(parent.position)
@@ -52,6 +59,8 @@ func update(delta: float) -> void:
 	
 	parent.homeTilemap.set_cells_terrain_connect(wireLayer,wireTiles,0,0)	
 	
+	#updateAccumulativeCurrMana()
+	
 	updateWithinWireList()
 
 func physics_update(delta: float) -> void:
@@ -62,8 +71,8 @@ func process_input(event)->void:
 	if Input.is_action_just_pressed(inputList.find_key("Exit").to_upper()) or Input.is_action_just_pressed(inputList.find_key("Build").to_upper()):
 		hideWiresOrbuildMode()
 		transitioned.emit("build")
-	if Input.is_action_just_pressed(inputList.find_key("Exit").to_upper()) and isCreating:
-		isCreating = false
+	#if Input.is_action_just_pressed(inputList.find_key("Exit").to_upper()) and isCreating:
+		#isCreating = false
 	if Input.is_action_just_pressed("NUMKEY2"):
 		hideWiresOrbuildMode()
 		transitioned.emit("wiringBattery")
@@ -92,7 +101,8 @@ func handleMachineInteraction(mouseTilePos):
 					prevGenPos = mouseTilePos
 					wireTiles = machine.wireList
 					withinWire = machine.withinWireList
-					print(machine.name)
+					
+					#print(machine.name)
 					
 func handleManaGenerator(machineData, wireData, mouseTilePos):
 	var isManaGenerator = machineData.get_custom_data("ManaGenerator")
@@ -110,7 +120,9 @@ func handleWireCreation(mouseTilePos, wireData):
 	else:
 		for pos in wireTiles:
 			for validPos in parent.homeTilemap.get_surrounding_cells(pos):
-				if isCreating and Input.is_action_pressed("ACTION") and mouseTilePos == validPos and !wireData and validPos != prevGenPos:		
+		
+				if isCreating and Input.is_action_pressed("ACTION") and mouseTilePos == validPos and !wireData and validPos != prevGenPos:	
+				
 					if prevMouseTilePos != mouseTilePos:
 						wireTiles.append(mouseTilePos)
 					prevMouseTilePos = mouseTilePos
@@ -135,8 +147,36 @@ func updateWithinWireList():
 	for machine in machineList:
 		for pos in wireTiles:
 			if parent.homeTilemap.local_to_map(machine.position) == pos and !(machine is PowerGenerator):
-				withinWire.append(machine)
+				addMachine(machine)
 
 	#print(withinWire)
 	
 	#print(withinWire)
+func addMachine(machine):
+	if machine not in withinWire:
+		withinWire.append(machine)
+		isCalculationsDone = false
+		accumulateMachineMaxCapacity()
+
+func removeBattery(machine):
+	if machine in withinWire:
+		withinWire.erase(machine)
+		isCalculationsDone = false
+		accumulateMachineMaxCapacity()
+		
+func accumulateMachineMaxCapacity():
+	accumulativeMachineMaxCapacity = 0
+	if withinWire.size() > 0 and !isCalculationsDone:
+		for machine in withinWire:
+			accumulativeMachineMaxCapacity += machine.maxMana
+		
+		isCalculationsDone = true
+	print(accumulativeMachineMaxCapacity)	
+	
+func updateAccumulativeCurrMana():
+	accumulativeCurrMana = 0.0  # Reset the accumulative current mana
+	if withinWire.size() > 0:
+		for machine in withinWire:
+			accumulativeCurrMana += machine.currMana
+
+	print("Accumulative Current Mana: ", accumulativeCurrMana)

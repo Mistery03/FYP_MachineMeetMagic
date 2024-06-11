@@ -7,6 +7,7 @@ extends Machine
 const MIN_MANA_THRESHOLD: float = 0.0001
 
 
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	changeAnimation("IDLE")
@@ -90,6 +91,5 @@ func consumeMana(manaConsumptionPerSecond,delta:float):
 	if percentage <= MIN_MANA_THRESHOLD:
 		currMana = 0
 	machineUI.machine_mana_bar.currValue = currMana
-
 
 
