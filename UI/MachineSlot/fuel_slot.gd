@@ -54,12 +54,12 @@ func _on_item_texture_gui_input(event):
 				item_texture.set_z_index(100)
 				label.set_z_index(100)
 				parentControl.currFuelItem = self
-				isMousePressed = true
+				
 			else:
 				parentControl.isDragging = false
 				item_texture.set_z_index(1)
 				label.set_z_index(1)
-				isMousePressed = false
+			
 				#parentControl.currItemFromparentControl = null
 	
 					

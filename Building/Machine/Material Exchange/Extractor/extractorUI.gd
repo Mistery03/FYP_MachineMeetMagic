@@ -1,53 +1,37 @@
 class_name ExtractorUI
-extends Control
+extends MachineControlUI
 
-@export_category("Machine Setting")
-@export var parentMachine:Machine
+
 @export var resultedItem:MaterialData
 
-@export_category("Inventory Controller")
-@export var inventoryHandler:InventoryHandler
 
 @export_category("Fuelbar Settings")
 @export var maxValue:float = 100
-
-@export_category("Debug Settings")
-@export var debugInventory:Array[SlotData]
-@export var debugItem:MaterialData
-@export var debugMaxSlot:int
-@export var debugMode:bool = false
 
 @onready var machine_animation = $MachineAnimation
 @onready var power_switch = $PowerSwitch
 @onready var machine_mana_bar = $MachineManaBar
 @onready var progress_bar = $ProgressBar
 
-@onready var fuel_slot = $FuelSlot
+
 @onready var material_slot = $MaterialSlot
 @onready var result_slot = $ResultSlot
 @onready var area_of_pressing = $AreaOfPressing
 
 var currValue:float = 100
 var currLoadingValue:float = 0
-var player:Player
 
-var isDragging:bool = false
-var gridMousePos:Vector2i
-var slotMousPos:Vector2i
 
-var isMousePressed:bool
-
-var currFuelItem:Panel
 var currMaterialSlotItem:Panel
-var prevSlot:Panel
+
 
 func _ready():
+	super()
 	progress_bar.value = currLoadingValue
 	progress_bar.max_value = maxValue
 	if debugMode:
 		power_switch.disabled = !debugMode
-	await get_tree().create_timer(0.2).timeout
-	inventoryHandler.init(player)
+	
 	
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -63,6 +47,11 @@ func _process(delta):
 			fuel_slot.fuelDurability = fuel_slot.item.durability					
 	else:
 		fuel_slot.item = null
+		
+	whenFuelSlotIsEmptyMouseShortcut()
+	whenFuelSlotIsNotEmptyMouseShortcut()
+	whenMaterialSlotIsEmptyMouseShortcut()
+	fuelToInventoryShortcut()
 	
 	if !isDragging:
 		if gridMousePos == fuel_slot.getSlotPosition():
@@ -72,11 +61,13 @@ func _process(delta):
 					
 	
 		if inventoryHandler.globalMousePosToLocalGrid(get_global_mouse_position()) in inventoryHandler.getSlotPositions():
-			if inventoryHandler.currSlot:
-				inventoryHandler.swap(inventoryHandler.currSlot.item,inventoryHandler.currSlot.amount,get_global_mouse_position())
+			whenInventorySlotIsEmptyFromFuelSlot()
+			whenInventorySlotIsNotEmpty()
+			#if inventoryHandler.currSlot:
+				#inventoryHandler.swap(inventoryHandler.currSlot.item,inventoryHandler.currSlot.amount,get_global_mouse_position())
 			
-			removeItemFromFuelSlotUI()
-			removeItemFromMaterialSlotUI()
+			#removeItemFromFuelSlotUI()
+			#removeItemFromMaterialSlotUI()
 
 func changeAnimation(animationName:String):
 	machine_animation.play(animationName.to_pascal_case())
@@ -243,6 +234,32 @@ func produceResult():
 		result_slot.amount = material_slot.item.magicEssenceAmountResult
 	else:
 		result_slot.amount += material_slot.item.magicEssenceAmountResult
+
+func whenMaterialSlotIsEmptyMouseShortcut():
+	if inventoryHandler.globalMousePosToLocalGrid(get_global_mouse_position()) in inventoryHandler.getSlotPositions():
+		var currSlot = inventoryHandler.getSlotBasedOnPosition(get_global_mouse_position())
+		if currSlot.item:
+			if material_slot.item == null:
+				if Input.is_action_just_pressed("AUTOLOADINITEM"):
+					isDragging = false
+					##NOTE To prevent item spawning in the world
+					inventoryHandler.isForExternalSlot = true
+					##Assign the item and amount
+					material_slot.item = inventoryHandler.currSlot.item
+					material_slot.amount = inventoryHandler.currSlot.amount
+					##@NOTE resets to it's original position
+					material_slot.item_texture.global_position = material_slot.border.global_position 
+					material_slot.label.global_position =material_slot.border.global_position + Vector2(80,60)
+					##@NOTE resets to it's original position
+					inventoryHandler.currSlot.item_texture.global_position = inventoryHandler.currSlot.border.global_position
+					inventoryHandler.currSlot.label.global_position = inventoryHandler.currSlot.border.global_position + Vector2(80,60)
+					
+					##Refer to the function in playerInventoryHandler
+					inventoryHandler.removeItem(inventoryHandler.currSlot.amount,inventoryHandler.currSlot.global_position)
+			
+					##@NOTE to prevent duplication
+					inventoryHandler.currSlot.item = null
+					inventoryHandler.currSlot = null
 
 func _on_area_of_pressing_gui_input(event):
 	if event.is_action_pressed("ACTION2"):

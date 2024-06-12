@@ -366,6 +366,7 @@ func swap(item:MaterialData,currAmount:int, globalMousePos:Vector2):
 						currGotSlot.item = item
 						currGotSlot.amount = currAmount
 						temp.item = null
+						temp.amount = 0  ## Clear amount as well
 						temp = null
 						currGotSlot = null
 						break##Break to ensure things run only once
@@ -383,7 +384,9 @@ func swap(item:MaterialData,currAmount:int, globalMousePos:Vector2):
 				elif currSlot.item == item and currSlot.amount <= 99:
 					if currSlot != prevSlot:
 						_addStack(currSlot,prevSlot,prevSlot.amount)
-						prevSlot = null
+						#prevSlot = null
+						if prevSlot.amount == 0:  ## Clear previous slot if amount is zero
+							prevSlot.item = null
 			else:
 				##To ensure we can swap with null items
 				_swapSlotsWithinInventory(currSlot,prevSlot)
@@ -395,8 +398,7 @@ func swap(item:MaterialData,currAmount:int, globalMousePos:Vector2):
 	
 		
 func _swapSlotsWithinInventory(oldPanel:Panel =null,newPanel:Panel=null) ->bool:
-	var index1:int
-	var index2 :int
+
 	
 	var temp_item = oldPanel.item
 	var temp_amount = oldPanel.amount
@@ -411,19 +413,23 @@ func _swapSlotsWithinInventory(oldPanel:Panel =null,newPanel:Panel=null) ->bool:
 ##Responsible to add the amount of the same item
 func _addStack(currSlot:Panel=null,prevSlot:Panel=null,currAmount:int = 0)->bool:
 	if currSlot.amount < MAXSTACKSIZE:
+		var availableSpace = MAXSTACKSIZE - currSlot.amount
+		if currAmount <= availableSpace:
+			currSlot.amount += currAmount
+			prevSlot.amount = 0
+		else:
+			currSlot.amount = MAXSTACKSIZE
+			prevSlot.amount -= availableSpace
+		return true
+	return false
+	"""if currSlot.amount < MAXSTACKSIZE:
 		currSlot.amount += currAmount
 		prevSlot.item = null
 		return true
-	return false
+	return false"""
 	
 
-##NOTE I forgot why I coded this so just keep it
-func _getItemIndex(item:MaterialData) -> int:
-	for slot in range(maxInventorySlot):
-		if slotList[slot].item == item:
-			return slot
-	
-	return -1
+
 
 
 func getSameItemCount(item:MaterialData)->int:
@@ -432,6 +438,14 @@ func getSameItemCount(item:MaterialData)->int:
 		if slotList[slot].item == item:
 			count +=1
 	return count
+
+##NOTE I forgot why I coded this so just keep it
+func _getItemIndex(item:MaterialData) -> int:
+	for slot in range(maxInventorySlot):
+		if slotList[slot].item == item:
+			return slot
+	
+	return -1
 
 ##To communicate changes made by other objects (i.e Player object)
 func OnInventoryChanged(inventory):

@@ -27,14 +27,17 @@ region = Rect2(0, 0, 64, 64)
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_5b7l7"]
 
-[node name="PowerGeneratorUI" type="Control" node_paths=PackedStringArray("inventoryHandler")]
+[node name="PowerGeneratorUI" type="Control" node_paths=PackedStringArray("fuel_slot", "inventoryHandler")]
 layout_mode = 3
 anchors_preset = 0
 script = ExtResource("1_vq0e8")
+maxValue = null
+fuel_slot = NodePath("FuelSlot")
 inventoryHandler = NodePath("PlayerInventoryHanlder")
 debugInventory = Array[Resource("res://UI/Inventory/Data/slotData.gd")]([ExtResource("2_q12u1"), null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null])
 debugItem = ExtResource("2_r71rn")
 debugMaxSlot = 20
+debugMode = null
 
 [node name="Background" type="TextureRect" parent="."]
 texture_filter = 1
