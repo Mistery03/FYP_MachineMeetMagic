@@ -27,10 +27,11 @@ region = Rect2(0, 0, 64, 64)
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_5b7l7"]
 
-[node name="PowerGeneratorUI" type="Control" node_paths=PackedStringArray("inventoryHandler")]
+[node name="PowerGeneratorUI" type="Control" node_paths=PackedStringArray("fuel_slot", "inventoryHandler")]
 layout_mode = 3
 anchors_preset = 0
 script = ExtResource("1_vq0e8")
+fuel_slot = NodePath("FuelSlot")
 inventoryHandler = NodePath("PlayerInventoryHanlder")
 debugInventory = Array[Resource("res://UI/Inventory/Data/slotData.gd")]([ExtResource("2_q12u1"), null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null])
 debugItem = ExtResource("2_r71rn")
@@ -75,6 +76,7 @@ offset_bottom = 40.0
 script = ExtResource("11_i0iq0")
 parentControl = NodePath("..")
 inventorySlot = ExtResource("12_vksxu")
+maxInventorySlot = 20
 materialInstance = ExtResource("5_4drpe")
 
 [node name="PlayerGridInventory" parent="PlayerInventoryHanlder" instance=ExtResource("11_8ysx8")]

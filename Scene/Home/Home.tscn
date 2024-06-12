@@ -1008,14 +1008,24 @@ collision_mask = 18
 script = ExtResource("8_g4svt")
 
 [node name="Material" parent="." instance=ExtResource("10_nl125")]
-position = Vector2(56, -23)
+position = Vector2(31, -194)
 itemData = ExtResource("11_rj2gd")
-amount = 20
+amount = 297
 
 [node name="Material2" parent="." instance=ExtResource("10_nl125")]
-position = Vector2(91, 26)
+position = Vector2(-84, -176)
 itemData = ExtResource("12_pn2ej")
-amount = 5
+amount = 25
+
+[node name="Material3" parent="." instance=ExtResource("10_nl125")]
+position = Vector2(-51, -152)
+itemData = ExtResource("12_pn2ej")
+amount = 30
+
+[node name="Material4" parent="." instance=ExtResource("10_nl125")]
+position = Vector2(-65, -210)
+itemData = ExtResource("12_pn2ej")
+amount = 80
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 layer = 2

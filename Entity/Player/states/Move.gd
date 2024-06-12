@@ -1,7 +1,5 @@
 extends State
 
-
-
 @export
 var idle_state: State
 
@@ -13,13 +11,8 @@ func enter() -> void:
 	super()
 	parent.itemHUDPlaceholder.visible = true
 
-func process_input(event: InputEvent) -> State:
 	
-	if Input.is_action_just_pressed("EXIT"):
-		toggle_menu()
-	return null
-
-func process_frame(delta: float) -> State:
+func update(delta: float) -> void:
 	if parent.homeTilemap:
 		var parentPos = parent.homeTilemap.local_to_map(parent.position)
 		var floorData:TileData = parent.homeTilemap.get_cell_tile_data(0,parentPos) 
@@ -63,21 +56,24 @@ func process_frame(delta: float) -> State:
 			parent.levelTilemap.erase_cell(5,prevMouseTilePos)
 			parent.text_on_mouse.visible = false
 		prevMouseTilePos = mouseTilePos
-	return null
 
-func process_physics(delta: float) -> State:
-	var movement_direction = move_component.get_movement_direction()	
+func physics_update(delta: float) -> void:
+	var movement_direction = moveComponent.get_movement_direction()	
 	
 	if !movement_direction:
 		#resetStaffPosition()
-		return idle_state
+		transitioned.emit("idle")
 
 	updatePlayerVelocity(delta,movement_direction)
 	#parent.velocity.x =  clamp(parent.velocity.x,-move_speed,move_speed)
 	parent.move_and_slide()
 	
 
-	return null
+
+
+func process_input(event)->void:
+	if Input.is_action_just_pressed("EXIT"):
+		toggle_menu()
 
 func resetStaffPosition():
 	parent.staff.z_index = -1
@@ -86,9 +82,8 @@ func resetStaffPosition():
 	#parent.staff.animation.flip_v = false
 
 func updatePlayerVelocity(delta, movement_direction):
-	parent.velocity = movement_direction * move_speed * delta
+	parent.velocity = movement_direction * parent.moveSpeed * delta
 	parent.animation.flip_h = movement_direction.x < 0
-	
 	changeAnimationVelocity()
 	
 	if parent.staff:
@@ -109,10 +104,10 @@ func updatePlayerVelocity(delta, movement_direction):
 		
 func changeAnimationVelocity():
 	if parent.velocity.y < 0:
-		animations.play(animationList.find_key("WalkBackward").to_upper())
+		animations.play("WALKBACKWARD")
 	elif parent.velocity.y >0:
-		animations.play(animationList.find_key("WalkFront").to_upper())
-	else:
+		animations.play("WALKFRONT")
+	elif parent.velocity.x < 0 or parent.velocity.x > 0:
 		animations.play(animation_name.to_upper())
 
 func updateStaffPosX():
@@ -132,13 +127,10 @@ func updateStaffPosY():
 	elif parent.velocity.y >0:
 		parent.staff.customAnimation.play("RESETFRONT")
 		
-
-
 	
 func staffPosWhenXandY(zIndex:int): #when both action both x and y are pressed
 	parent.staff.z_index = zIndex
-	#parent.staff.rotation = 1.5708
-	#parent.staff.position = parent.staff.originalPos
+
 	
 func toggle_menu():
 	# Toggle the visibility of the menu

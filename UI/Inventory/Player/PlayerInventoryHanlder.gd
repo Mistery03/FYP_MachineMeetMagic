@@ -41,10 +41,11 @@ var isForExternalSlot:bool = false
 
 ##@NOTE The init function takes in player cause of the nature of fast loading, to ensure there no error I put a delay to ensure everything is assigned
 func init(player:Player):
-	await get_tree().create_timer(0.3).timeout
 	self.player = player
 	if self.player:
 		self.player.inventory_manager.connect("OnInventoryChanged",OnInventoryChanged)
+		playerInventory = player.inventory
+		maxInventorySlot = player.maxInventorySize
 
 ##NOTE same case for init function 
 func _ready():
@@ -147,10 +148,9 @@ func globalMousePosToLocalGrid(globalMousePos:Vector2)->Vector2i:
 	return slotPos
 
 ##Insert item have several logics that must take in for consideration
-func insertItem(item:MaterialData,currAmount:int)->int:
+"""func insertItem(item:MaterialData,currAmount:int)->int:
 	##1: We check for overflow of items because that we set max stacks to be 99, it's important to take account the chances that it will overflow (exp:99 + 5 then what?)
 	##2: Hence we check for overflow
-	
 	##Because overflow is a class variable rather than a local variable, we need to check if it's zero else we add alongside with the other overflows
 	if overflow <= 0:
 		overflow = currAmount
@@ -183,8 +183,99 @@ func insertItem(item:MaterialData,currAmount:int)->int:
 					##Overflow too much? Just add the availablespace to the next slot
 					slotList[index].amount += availableSpace
 					overflow -= availableSpace
+	return overflow"""
+
+func insertItem(item: MaterialData, currAmount: int) -> int:
+	var overflow = currAmount
+	
+	while overflow > 0:
+		var inserted = false
+
+		## CASE 1: Check for existing items with the same type and available space
+		for index in range(maxInventorySlot):
+			if slotList[index].item == item:
+				if slotList[index].amount < MAXSTACKSIZE:
+					var availableSpace = MAXSTACKSIZE - slotList[index].amount
+					if overflow <= availableSpace:
+						slotList[index].amount += overflow
+						overflow = 0
+						inserted = true
+						break
+					else:
+						slotList[index].amount += availableSpace
+						overflow -= availableSpace
+						inserted = true
+		
+		## CASE 2: Insert into an empty slot if overflow still exists
+		if overflow > 0:
+			for index in range(maxInventorySlot):
+				if slotList[index].item == null:
+					var GridSlotPos = Vector2i(slotList[index].position /slotSize)
+					slotList[index].item = item
+					if overflow <= MAXSTACKSIZE:
+						slotList[index].amount = overflow
+						overflow = 0
+					else:
+						slotList[index].amount = MAXSTACKSIZE
+						overflow -= MAXSTACKSIZE
+					slotList[index].item_texture.position = GridSlotPos
+					slotList[index].label.position = GridSlotPos + Vector2i(120, 100)
+					inserted = true
+					break
+
+	## Break the loop if no suitable slot was found to prevent infinite loops
+		if not inserted:
+			break
+
+	#update_slots()
 	return overflow
 
+func insertItemAtInventorySlot(globalMousePos:Vector2,item: MaterialData, currAmount: int):
+	var currGotSlot 
+	if globalMousePosToLocalGrid(globalMousePos) in getSlotPositions():
+		currGotSlot = getSlotBasedOnPosition(globalMousePos)
+	
+	var overflow = currAmount
+	
+	while overflow > 0:
+		var inserted = false
+
+		## CASE 1: Check for existing items with the same type and available space
+		for index in range(maxInventorySlot):
+			if currGotSlot.item == item:
+				if currGotSlot.amount < MAXSTACKSIZE:
+					var availableSpace = MAXSTACKSIZE -currGotSlot.amount
+					if overflow <= availableSpace:
+						currGotSlot.amount += overflow
+						overflow = 0
+						inserted = true
+						break
+					else:
+						currGotSlot.amount += availableSpace
+						overflow -= availableSpace
+						inserted = true
+		
+		## CASE 2: Insert into an empty slot if overflow still exists
+		if overflow > 0:
+			for index in range(maxInventorySlot):
+				if slotList[index].item == null:
+					var GridSlotPos = Vector2i(slotList[index].position /slotSize)
+					slotList[index].item = item
+					if overflow <= MAXSTACKSIZE:
+						slotList[index].amount = overflow
+						overflow = 0
+					else:
+						slotList[index].amount = MAXSTACKSIZE
+						overflow -= MAXSTACKSIZE
+					slotList[index].item_texture.position = GridSlotPos
+					slotList[index].label.position = GridSlotPos + Vector2i(120, 100)
+					inserted = true
+					break
+
+	## Break the loop if no suitable slot was found to prevent infinite loops
+		if not inserted:
+			break
+		
 ##WARNING removeItem function is unfortunately messy
 ##Similar to the InsertItem we need to take account several scenerios
 func removeItem(item_amount: int,globalMousePos:Vector2) -> bool:
@@ -275,6 +366,7 @@ func swap(item:MaterialData,currAmount:int, globalMousePos:Vector2):
 						currGotSlot.item = item
 						currGotSlot.amount = currAmount
 						temp.item = null
+						temp.amount = 0  ## Clear amount as well
 						temp = null
 						currGotSlot = null
 						break##Break to ensure things run only once
@@ -292,7 +384,9 @@ func swap(item:MaterialData,currAmount:int, globalMousePos:Vector2):
 				elif currSlot.item == item and currSlot.amount <= 99:
 					if currSlot != prevSlot:
 						_addStack(currSlot,prevSlot,prevSlot.amount)
-						prevSlot = null
+						#prevSlot = null
+						if prevSlot.amount == 0:  ## Clear previous slot if amount is zero
+							prevSlot.item = null
 			else:
 				##To ensure we can swap with null items
 				_swapSlotsWithinInventory(currSlot,prevSlot)
@@ -304,8 +398,7 @@ func swap(item:MaterialData,currAmount:int, globalMousePos:Vector2):
 	
 		
 func _swapSlotsWithinInventory(oldPanel:Panel =null,newPanel:Panel=null) ->bool:
-	var index1:int
-	var index2 :int
+
 	
 	var temp_item = oldPanel.item
 	var temp_amount = oldPanel.amount
@@ -320,19 +413,23 @@ func _swapSlotsWithinInventory(oldPanel:Panel =null,newPanel:Panel=null) ->bool:
 ##Responsible to add the amount of the same item
 func _addStack(currSlot:Panel=null,prevSlot:Panel=null,currAmount:int = 0)->bool:
 	if currSlot.amount < MAXSTACKSIZE:
+		var availableSpace = MAXSTACKSIZE - currSlot.amount
+		if currAmount <= availableSpace:
+			currSlot.amount += currAmount
+			prevSlot.amount = 0
+		else:
+			currSlot.amount = MAXSTACKSIZE
+			prevSlot.amount -= availableSpace
+		return true
+	return false
+	"""if currSlot.amount < MAXSTACKSIZE:
 		currSlot.amount += currAmount
 		prevSlot.item = null
 		return true
-	return false
+	return false"""
 	
 
-##NOTE I forgot why I coded this so just keep it
-func _getItemIndex(item:MaterialData) -> int:
-	for slot in range(maxInventorySlot):
-		if slotList[slot].item == item:
-			return slot
-	
-	return -1
+
 
 
 func getSameItemCount(item:MaterialData)->int:
@@ -341,6 +438,14 @@ func getSameItemCount(item:MaterialData)->int:
 		if slotList[slot].item == item:
 			count +=1
 	return count
+
+##NOTE I forgot why I coded this so just keep it
+func _getItemIndex(item:MaterialData) -> int:
+	for slot in range(maxInventorySlot):
+		if slotList[slot].item == item:
+			return slot
+	
+	return -1
 
 ##To communicate changes made by other objects (i.e Player object)
 func OnInventoryChanged(inventory):

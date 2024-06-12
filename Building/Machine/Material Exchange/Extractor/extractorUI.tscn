@@ -28,11 +28,12 @@ region = Rect2(128, 0, 64, 64)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_a4t5i"]
 
-[node name="ExtractorUI" type="Control" node_paths=PackedStringArray("inventoryHandler")]
+[node name="ExtractorUI" type="Control" node_paths=PackedStringArray("fuel_slot", "inventoryHandler")]
 layout_mode = 3
 anchors_preset = 0
 script = ExtResource("1_q5y3h")
 resultedItem = ExtResource("4_uecce")
+fuel_slot = NodePath("FuelSlot")
 inventoryHandler = NodePath("PlayerInventoryHanlder")
 debugInventory = Array[Resource("res://UI/Inventory/Data/slotData.gd")]([ExtResource("2_5ci2n"), null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null])
 debugMaxSlot = 20
@@ -184,7 +185,6 @@ offset_bottom = 40.0
 script = ExtResource("12_fr8w3")
 parentControl = NodePath("..")
 inventorySlot = ExtResource("13_5uffe")
-maxInventorySlot = 20
 materialInstance = ExtResource("14_s7a5o")
 
 [node name="PlayerGridInventory" parent="PlayerInventoryHanlder" instance=ExtResource("15_3fl7q")]

@@ -23,7 +23,6 @@ var currSlot:Panel
 func _ready():
 	scaledSlotSize = custom_minimum_size * scale
 
-
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	if item:
@@ -55,18 +54,22 @@ func _on_item_texture_gui_input(event):
 				item_texture.set_z_index(100)
 				label.set_z_index(100)
 				parentControl.currFuelItem = self
-				isMousePressed = true
+				
 			else:
 				parentControl.isDragging = false
 				item_texture.set_z_index(1)
 				label.set_z_index(1)
-				isMousePressed = false
+			
 				#parentControl.currItemFromparentControl = null
-
+	
 					
 	elif event is InputEventMouseMotion and parentControl.isDragging:
 		item_texture.set_global_position(get_global_mouse_position() - dragOffset )
 		label.set_global_position(get_global_mouse_position() - dragOffset + Vector2(75,70))
+	
+	if event.is_action_pressed("AUTOLOADINITEM"):
+		isMousePressed = true
+
 
 func getSlotPosition()->Vector2i:
 	

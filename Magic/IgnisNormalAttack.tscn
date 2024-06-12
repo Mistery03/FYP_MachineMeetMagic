@@ -1,0 +1,128 @@
+[gd_scene load_steps=21 format=3 uid="uid://cbpcjmtv6eke7"]
+
+[ext_resource type="Script" path="res://Magic/IgnisNormalAttack.gd" id="1_0lex2"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0j1ps"]
+region = Rect2(0, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_v8ik1"]
+region = Rect2(48, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_i78vx"]
+region = Rect2(96, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_n57hf"]
+region = Rect2(144, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pkjfu"]
+region = Rect2(192, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_08num"]
+region = Rect2(240, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rtg5e"]
+region = Rect2(288, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5311g"]
+region = Rect2(336, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_l8ug8"]
+region = Rect2(384, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_a6cqq"]
+region = Rect2(432, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pv6ol"]
+region = Rect2(480, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_si6yj"]
+region = Rect2(528, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3eps7"]
+region = Rect2(576, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5l7eb"]
+region = Rect2(624, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_u5esn"]
+region = Rect2(672, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fsu3g"]
+region = Rect2(720, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4xwfx"]
+region = Rect2(768, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fbk6m"]
+region = Rect2(816, 0, 48, 48)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_7qpqw"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0j1ps")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_v8ik1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_i78vx")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_n57hf")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pkjfu")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_08num")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rtg5e")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5311g")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_l8ug8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_a6cqq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pv6ol")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_si6yj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3eps7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5l7eb")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_u5esn")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fsu3g")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4xwfx")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fbk6m")
+}],
+"loop": true,
+"name": &"default",
+"speed": 10.0
+}]
+
+[node name="IgnisNormalAttack" type="Node2D"]
+script = ExtResource("1_0lex2")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+texture_filter = 1
+scale = Vector2(2, 2)
+sprite_frames = SubResource("SpriteFrames_7qpqw")
+frame_progress = 0.648255

@@ -1,17 +1,14 @@
 class_name Build
 extends State
 
-@export
-var move_state: State
-@export
-var idle_state: State
-@export 
-var delete_state:State
+##@NOTE to keep track of wire states
+@export_category("Data Tracking")
 @export
 var wiring_machine_state:State
 @export
 var wiring_battery_state:State
 
+@export_category("Build Menu")
 @export
 var buildUI:Control
 @export
@@ -26,7 +23,6 @@ var inputList:Dictionary= {
 var cameraSpeed:float = 0
 var prevMouseTilePos = Vector2i(-1,-1)
 var isOccupied:bool
-var isFloor:bool
 var machineInstance:PackedScene
 
 
@@ -35,44 +31,21 @@ func enter() -> void:
 	buildUI.visible = true
 	parent.isBuildMode = true
 	parent.itemHUDPlaceholder.visible = false
-	
-
-	
-
-func process_input(event: InputEvent) -> State:
-	if Input.is_action_just_pressed(inputList.find_key("Exit").to_upper()) or Input.is_action_just_pressed(inputList.find_key("Build").to_upper()):
-		buildUI.visible = false
-		buildMenu.atlasCoord = Vector2i(-1,-1)
-		parent.homeTilemap.erase_cell(1,prevMouseTilePos)
-		parent.isBuildMode = false
-		return idle_state
-	
-	if Input.is_action_just_pressed("DELETE"):
-		buildUI.visible = false
-		return delete_state
-	
-	if Input.is_action_just_pressed("WIRING"):
-		buildUI.visible = false
-		return wiring_machine_state
-
-	return null
-
-func process_physics(delta: float) -> State:
-	camera.position = move_component.get_movement_direction() * move_speed * delta
 	camera.position_smoothing_enabled = true
-	
-	return null
-	
-func process_frame(delta:float) -> State:
+	parent.isPressable = false
+
+func exit() -> void:
+	camera.position_smoothing_enabled = false
+
+func update(delta: float) -> void:
 	var parentPos = parent.homeTilemap.local_to_map(parent.position)
 	var mouseTilePos = parent.homeTilemap.local_to_map(parent.mousePos)
-	
-	#named it floorData but really the data is to check if there is floor in the world
-	var floorData:TileData = parent.homeTilemap.get_cell_tile_data(0,mouseTilePos) 
+
+	var isFloor:TileData = parent.homeTilemap.get_cell_tile_data(0,mouseTilePos) 
 	#Now this one actually give u data about machine lmao
 	var machineData:TileData = parent.homeTilemap.get_cell_tile_data(2,mouseTilePos)
 	
-	if floorData:
+	if isFloor:
 		parent.homeTilemap.set_cell(1,mouseTilePos,0,buildMenu.atlasCoord)
 		
 		if mouseTilePos != prevMouseTilePos:
@@ -87,7 +60,6 @@ func process_frame(delta:float) -> State:
 		if machineData:
 			isOccupied = machineData.get_custom_data("occupied")
 			set_tile_color_based_on_occupation(isOccupied, mouseTilePos, parentPos)
-
 		else:
 			#No need to use isOccupied here cause there no machine to be found
 			set_tile_color_based_on_occupation(false, mouseTilePos, parentPos)
@@ -103,7 +75,24 @@ func process_frame(delta:float) -> State:
 			wiring_machine_state.updateWithinWireList()
 			wiring_battery_state.updateWithinWireList()
 				
-	return null
+func physics_update(delta: float) -> void:
+	camera.position = moveComponent.get_movement_direction() * parent.moveSpeed * delta
+	
+func process_input(event)->void:
+	if Input.is_action_just_pressed(inputList.find_key("Exit").to_upper()) or Input.is_action_just_pressed(inputList.find_key("Build").to_upper()):
+		buildUI.visible = false
+		buildMenu.atlasCoord = Vector2i(-1,-1)
+		parent.homeTilemap.erase_cell(1,prevMouseTilePos)
+		parent.isBuildMode = false
+		transitioned.emit("idle")
+	
+	if Input.is_action_just_pressed("DELETE"):
+		buildUI.visible = false
+		transitioned.emit("destroy")
+	
+	if Input.is_action_just_pressed("WIRING"):
+		buildUI.visible = false
+		transitioned.emit("wiringMachine")
 
 # Function to check if a tile is occupied and set the layer color accordingly
 func set_tile_color_based_on_occupation(is_occupied, mousePos, parentPos):

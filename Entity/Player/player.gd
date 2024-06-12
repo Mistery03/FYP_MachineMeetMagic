@@ -5,6 +5,7 @@ const SPEED = 5.0
 const JUMP_VELOCITY = 4.5
 
 @export var playerData:EntityData
+@export var moveSpeed:float
 
 @export_category("Potion")
 @export var potionObject:PotionData
@@ -20,8 +21,6 @@ const JUMP_VELOCITY = 4.5
 @export_category("HUD")
 @export var itemHUDPlaceholder:Control
 
-
-
 @export_category("Player Inventory")
 @export var playerInventoryController:Control
 @export var maxInventorySize:int
@@ -30,23 +29,30 @@ const JUMP_VELOCITY = 4.5
 ##Takes in Slot Data so we have a "dictionary"
 @export var inventory:Array[SlotData] = [initSlot]
 
+@export_category("Camera Settings")
 @export var min_zoom = 6
 @export var max_zoom = 12
 @export var zoom_step = 0.1
 @export var zoom_duration = 0.3 # Duration for the zoom transition
 @export var cameraZoom:float = 6
 
+@export_category("State Machine")
+@export var stateController:StateMachine
+
 @onready var inventory_manager = $InventoryManager
 @onready var potion_manager = $PotionManager
-@onready var state_manager = $StateManager
 @onready var animation = $Animation
 @onready var move_component = $MoveComponent
 @onready var camera = $Camera
 @onready var localLevel:Node2D
 
-@onready var place_sfx = $PlaceSFX
-@onready var walking_on_wood_sfx = $walkingOnWoodSFX
-@onready var walking_on_grass_sfx = $walkingOnGrassSFX
+@onready var magic_manager = $MagicManager
+
+@onready var place_sfx = $Audio/PlaceSFX
+@onready var walking_on_wood_sfx = $Audio/walkingOnWoodSFX
+@onready var walking_on_grass_sfx = $Audio/walkingOnGrassSFX
+@onready var breaking_sfx = $Audio/breakingSFX
+
 
 @onready var text_on_mouse = $TextOnMouse
 
@@ -69,33 +75,23 @@ var zoomValue:float = 6
 
 func _ready() -> void:
 	camera.zoom = Vector2(cameraZoom,cameraZoom)
+	
 	currHealth = playerData.MaxHealth
 	currMana = playerData.MaxMana
 	currStamina = playerData.MaxStamina
 	
-	##NOTE we must declare an inventory of null items size of N max inventory or else there will be a bug
-	for i in range(maxInventorySize):
-		inventory.append(null)
-	#print(inventory.size())
 	inventory_manager.init(self)
-	state_manager.init(self,animation,move_component,camera)
+	stateController.init(self,animation,move_component,camera)
+	magic_manager.init(self)
 	
-	
-
-func _unhandled_input(event: InputEvent) -> void:
-	state_manager.process_input(event)
-	
-
-func _physics_process(delta) -> void:
-	state_manager.process_physics(delta)
+	##NOTE we must declare an inventory of null items size of N max inventory or else there will be a bug
+	#for i in range(maxInventorySize):
+		#inventory.append(null)
 	
 func _process(delta) -> void:
 	mousePos = get_global_mouse_position()
-	state_manager.process_frame(delta)
-	#print(inventory)
-	#for amount in inventory:
-		#if amount:
-			#print(amount.amount)
+	
+
 
 func _input(event):
 	if event is InputEventMouse:

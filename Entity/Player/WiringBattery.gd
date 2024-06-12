@@ -1,17 +1,6 @@
 class_name WiringBattery
 extends State
 
-@export
-var build_state: State
-@export
-var buildUI:Control
-@export
-var buildMenu:Control
-@export
-var wiring_machine:State
-
-@export
-var machineUpdater:Node
 
 @export	
 var HUD:Control
@@ -49,29 +38,10 @@ var accumulativeCurrMana:float = 0
 func enter() -> void:
 	super()
 	enterBuildMode()
-	updateAccumulativeCurrMana()
+	#updateAccumulativeCurrMana()
 	parent.itemHUDPlaceholder.visible = false
-	
 
-func process_input(event: InputEvent) -> State:
-	if Input.is_action_just_pressed(inputList.find_key("Exit").to_upper()) or Input.is_action_just_pressed(inputList.find_key("Build").to_upper()):
-		hideWiresOrbuildMode()
-		return build_state
-	if Input.is_action_just_pressed(inputList.find_key("Exit").to_upper()) and isCreating:
-		isCreating = false
-	if Input.is_action_just_pressed("NUMKEY1"):
-		hideWiresOrbuildMode()
-		return wiring_machine
-	
-	return null
-
-func process_physics(delta: float) -> State:
-	camera.position = move_component.get_movement_direction() * move_speed * delta
-	camera.position_smoothing_enabled = true
-	
-	return null
-	
-func process_frame(delta:float) -> State:
+func update(delta: float) -> void:
 	var parentPos = parent.homeTilemap.local_to_map(parent.position)
 	var mouseTilePos = parent.homeTilemap.local_to_map(parent.mousePos)
 	
@@ -81,27 +51,37 @@ func process_frame(delta:float) -> State:
 	var machineList = parent.localLevel.machineList.get_children()
 	
 	#handleMachineInteraction(mouseTilePos)
-	
 	if machineData:
 		handleBattery(machineData, wireData, mouseTilePos)
 		
-		
 	handleWireCreation(mouseTilePos, wireData)
-	print(wireTiles)
+
 		
 	handleWireRemoval(machineData)
 
 	parent.homeTilemap.set_cells_terrain_connect(wireLayer,wireTiles,0,0)	
 	
-	updateAccumulativeCurrMana()
-	#accumulateBatteryMaxCapacity()
-	machineUpdater.setMachineUpdaterData(batteryList,withinWire)
+	#updateAccumulativeCurrMana()
+	#machineUpdater.setMachineUpdaterData(batteryList,withinWire)
 	updateWithinWireList()
 	
-	
-		
-	return null
-	
+	updateBatteryData()
+
+func physics_update(delta: float) -> void:
+	camera.position = moveComponent.get_movement_direction() * parent.moveSpeed * delta
+	camera.position_smoothing_enabled = true
+
+func process_input(event)->void:
+	if Input.is_action_just_pressed(inputList.find_key("Exit").to_upper()) or Input.is_action_just_pressed(inputList.find_key("Build").to_upper()):
+		hideWiresOrbuildMode()
+		transitioned.emit("build")
+	#if Input.is_action_just_pressed(inputList.find_key("Exit").to_upper()) and isCreating:
+		#isCreating = false
+	if Input.is_action_just_pressed("NUMKEY1"):
+		hideWiresOrbuildMode()
+		transitioned.emit("wiringMachine")
+
+
 func enterBuildMode():
 	parent.homeTilemap.set_layer_modulate(wireLayer,Color8(0,255,0,255))
 	parent.isBuildMode = true
@@ -113,20 +93,7 @@ func hideWiresOrbuildMode():
 	HUD.visible = false
 	parent.homeTilemap.set_layer_modulate(wireLayer, Color8(0, 255,0, 0))
 	parent.homeTilemap.erase_cell(7, prevBattPos)
-
-func handleMachineInteraction(mouseTilePos):
-	parent.homeTilemap.set_cell(7, prevBattPos, 0, Vector2i(5, 5))
-	for machine in parent.localLevel.machineList.get_children():
-		if machine.position == parent.homeTilemap.map_to_local(mouseTilePos):
-			if machine is Battery:
-				if Input.is_action_just_pressed("ACTION"):
-					parent.homeTilemap.clear_layer(wireLayer)
-					parent.homeTilemap.erase_cell(7, prevBattPos)
-					parent.homeTilemap.set_cell(7, mouseTilePos, 0, Vector2i(5, 5))
-					prevBattPos = mouseTilePos
-					wireTiles = machine.wireList
-					withinWire = machine.withinWireList
-					print(machine.name)
+			
 					
 func handleBattery(machineData, wireData, mouseTilePos):
 	var isBattery = machineData.get_custom_data("Battery")
@@ -165,9 +132,6 @@ func handleWireRemoval(machineData):
 			isCreating = false
 		prevMouseTilePos = Vector2i(-1, -1)
 
-
-
-
 func updateWithinWireList():
 	var machineList = parent.localLevel.machineList.get_children()
 	var mouseTilePos = parent.homeTilemap.local_to_map(parent.mousePos)
@@ -177,7 +141,7 @@ func updateWithinWireList():
 		var machinePos = parent.homeTilemap.local_to_map(machine.position)
 		for pos in wireTiles:
 			if machinePos == pos:
-				if !(machine is Battery):
+				if !machine is Battery and !machine is PowerGenerator:
 					withinWire.append(machine)
 				elif  machine is Battery:
 					addBattery(machine)	
@@ -191,34 +155,21 @@ func addBattery(battery):
 	if battery not in batteryList:
 		batteryList.append(battery)
 		isCalculationsDone = false
-		accumulateBatteryMaxCapacity()
+		#accumulateBatteryMaxCapacity()
 
 # Call this function whenever you remove a battery from the list
 func removeBattery(battery):
 	if battery in batteryList:
 		batteryList.erase(battery)
 		isCalculationsDone = false
-		accumulateBatteryMaxCapacity()
+		#accumulateBatteryMaxCapacity()
 	
 
-func accumulateBatteryMaxCapacity():
-	accumulativeBatteryMaxCapacity = 0
-	if batteryList.size() > 0 and !isCalculationsDone:
-		for battery in batteryList:
-			accumulativeBatteryMaxCapacity += battery.maxCapacity
-		
+func updateBatteryData():
+	for machine in parent.localLevel.machineList.get_children():
+		if machine is Battery:
+			machine.wireList = wireTiles 
+			machine.withinWireList = withinWire 
+			machine.batteryList = batteryList 
 			
-		isCalculationsDone = true
-	
-	#print(accumulativeBatteryMaxCapacity)
-
-func updateAccumulativeCurrMana():
-	accumulativeCurrMana = 0.0  # Reset the accumulative current mana
-	if batteryList.size() > 0:
-		for battery in batteryList:
-			accumulativeCurrMana += battery.currMana
-
-	print("Accumulative Current Mana: ", accumulativeCurrMana)
-
-	
 	

@@ -71,6 +71,7 @@ func _on_button_focus_entered():
 		if potionAmount > 0:
 			print(potionData.name)
 	else:
+		
 		potionInventory.visible = true
 		potionInventory.currSlot = self
 		
