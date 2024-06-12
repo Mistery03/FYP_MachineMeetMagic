@@ -50,12 +50,14 @@ func _process(delta):
 		
 	whenFuelSlotIsEmptyMouseShortcut()
 	whenFuelSlotIsNotEmptyMouseShortcut()
+	
 	whenMaterialSlotIsEmptyMouseShortcut()
 	fuelToInventoryShortcut()
 	
 	if !isDragging:
 		if gridMousePos == fuel_slot.getSlotPosition():
-			fuelSlotLogic()
+			whenFuelSlotIsEmpty()
+			whenFuelSlotIsNotEmpty()
 		if gridMousePos == material_slot.getSlotPosition():
 			materialSlotLogic()
 					
@@ -63,6 +65,7 @@ func _process(delta):
 		if inventoryHandler.globalMousePosToLocalGrid(get_global_mouse_position()) in inventoryHandler.getSlotPositions():
 			whenInventorySlotIsEmptyFromFuelSlot()
 			whenInventorySlotIsNotEmpty()
+			
 			#if inventoryHandler.currSlot:
 				#inventoryHandler.swap(inventoryHandler.currSlot.item,inventoryHandler.currSlot.amount,get_global_mouse_position())
 			

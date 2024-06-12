@@ -15,6 +15,8 @@ extends Control
 @export var debugMaxSlot:int
 @export var debugMode:bool = false
 
+const MAXSTACKSIZE = 99
+
 var player:Player
 var gridMousePos:Vector2i
 var isDragging:bool = false
@@ -69,7 +71,16 @@ func whenFuelSlotIsNotEmptyMouseShortcut():
 						isDragging = false
 						if inventoryHandler.currSlot:##Checks for null
 							if fuel_slot.item == inventoryHandler.currSlot.item:
-								fuel_slot.amount += inventoryHandler.currSlot.amount
+								var availableSpace = MAXSTACKSIZE - fuel_slot.amount
+				
+								if inventoryHandler.currSlot.amount <= availableSpace:
+									## If the current slot amount can fit in the available space
+									fuel_slot.amount += inventoryHandler.currSlot.amount
+									inventoryHandler.currSlot.item = null
+									inventoryHandler.currSlot.amount = 0
+								else:
+									fuel_slot.amount += availableSpace
+									inventoryHandler.currSlot.amount -= availableSpace
 								
 								##@NOTE resets to it's original position
 								fuel_slot.item_texture.global_position = fuel_slot.border.global_position 
@@ -79,9 +90,10 @@ func whenFuelSlotIsNotEmptyMouseShortcut():
 								inventoryHandler.currSlot.item_texture.global_position = inventoryHandler.currSlot.border.global_position
 								inventoryHandler.currSlot.label.global_position = inventoryHandler.currSlot.border.global_position + Vector2(80,60)
 								
-								##@NOTE to prevent duplication
-								inventoryHandler.currSlot.item = null
-								inventoryHandler.currSlot = null	
+								if inventoryHandler.currSlot.amount == 0:
+									inventoryHandler.currSlot = null	
+							elif inventoryHandler.currSlot.item != fuel_slot.item:
+								isDragging = false
 
 func fuelToInventoryShortcut():
 	if fuel_slot.item:
@@ -104,3 +116,60 @@ func whenInventorySlotIsNotEmpty():
 		##NOTE function in playerInventoryHandler
 		inventoryHandler.swap(inventoryHandler.currSlot.item,inventoryHandler.currSlot.amount,get_global_mouse_position())
 
+func whenFuelSlotIsEmpty():
+		if fuel_slot.item ==  null:##Checks if there no fuel item (variable is same as currFuelItem)
+			isDragging = false
+			##Checks two thing the item from the inventory and is the item type fuel
+			if inventoryHandler.currSlot and inventoryHandler.currSlot.item.type == "Fuel":
+				
+				##NOTE To prevent item spawning in the world
+				inventoryHandler.isForExternalSlot = true
+				
+				##Assign the item and amount
+				fuel_slot.item = inventoryHandler.currSlot.item
+				fuel_slot.amount = inventoryHandler.currSlot.amount
+				
+				##@NOTE resets to it's original position
+				fuel_slot.item_texture.global_position = fuel_slot.border.global_position 
+				fuel_slot.label.global_position =fuel_slot.border.global_position + Vector2(80,60)
+				##@NOTE resets to it's original position
+				inventoryHandler.currSlot.item_texture.global_position = inventoryHandler.currSlot.border.global_position
+				inventoryHandler.currSlot.label.global_position = inventoryHandler.currSlot.border.global_position + Vector2(80,60)
+				
+				##Refer to the function in playerInventoryHandler
+				inventoryHandler.removeItem(inventoryHandler.currSlot.amount,inventoryHandler.currSlot.global_position)
+				
+				##@NOTE to prevent duplication
+				inventoryHandler.currSlot.item = null
+				inventoryHandler.currSlot = null
+
+func whenFuelSlotIsNotEmpty():
+	if fuel_slot.item:##Checks if there fuel item (variable is same as currFuelItem)
+		isDragging = false
+		if inventoryHandler.currSlot:##Checks for null
+			if fuel_slot.item == inventoryHandler.currSlot.item:
+				var availableSpace = MAXSTACKSIZE - fuel_slot.amount
+				if inventoryHandler.currSlot.amount <= availableSpace:
+					## If the current slot amount can fit in the available space
+					fuel_slot.amount += inventoryHandler.currSlot.amount
+					
+					## Reset the current slot
+					inventoryHandler.currSlot.item = null
+					inventoryHandler.currSlot.amount = 0
+				else:
+					## If there is overflow
+					fuel_slot.amount += availableSpace
+					inventoryHandler.currSlot.amount -= availableSpace
+				
+				
+				##@NOTE resets to it's original position
+				fuel_slot.item_texture.global_position = fuel_slot.border.global_position 
+				fuel_slot.label.global_position =fuel_slot.border.global_position + Vector2(80,60)
+				
+				##@NOTE resets to it's original position
+				inventoryHandler.currSlot.item_texture.global_position = inventoryHandler.currSlot.border.global_position
+				inventoryHandler.currSlot.label.global_position = inventoryHandler.currSlot.border.global_position + Vector2(80,60)
+				
+				##@NOTE to prevent duplication
+				if inventoryHandler.currSlot.amount == 0:
+					inventoryHandler.currSlot = null

@@ -1025,7 +1025,7 @@ amount = 30
 [node name="Material4" parent="." instance=ExtResource("10_nl125")]
 position = Vector2(-65, -210)
 itemData = ExtResource("12_pn2ej")
-amount = 99
+amount = 80
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 layer = 2

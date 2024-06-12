@@ -15,4 +15,5 @@ texture = SubResource("AtlasTexture_2gnla")
 amount = 0
 magicEssenceAmountResult = 0
 burnPerSecond = 0
+manaProducedPerSecond = 0
 durability = 0
