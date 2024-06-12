@@ -68,6 +68,7 @@ func _on_darkened_gui_input(event):
 func _on_button_focus_entered():
 	select.visible = true
 	if potionData:
+		potionInventory.visible = true
 		if potionAmount > 0:
 			print(potionData.name)
 	else:
