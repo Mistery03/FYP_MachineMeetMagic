@@ -61,11 +61,15 @@ func _on_item_texture_gui_input(event):
 				label.set_z_index(1)
 				isMousePressed = false
 				#parentControl.currItemFromparentControl = null
-
+	
 					
 	elif event is InputEventMouseMotion and parentControl.isDragging:
 		item_texture.set_global_position(get_global_mouse_position() - dragOffset )
 		label.set_global_position(get_global_mouse_position() - dragOffset + Vector2(75,70))
+	
+	if event.is_action_pressed("AUTOLOADINITEM"):
+		isMousePressed = true
+
 
 func getSlotPosition()->Vector2i:
 	
