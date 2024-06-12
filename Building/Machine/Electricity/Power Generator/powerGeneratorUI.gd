@@ -25,6 +25,9 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
+	if fuel_slot.item == null:
+		currValue = maxValue
+		
 	if currValue <= 0:
 		if fuel_slot.item and fuel_slot.amount > 0:
 			currValue = maxValue
@@ -46,7 +49,7 @@ func _process(delta):
 	whenFuelSlotIsNotEmptyMouseShortcut()
 	
 	##Fuel to Inventory shortcut
-	fuelToInventoryShortcut()
+	fuelToInventoryShortcutFromFuelSlot()
 	
 	#if inventoryHandler.currSlot:
 		#print(inventoryHandler.currSlot.amount)
@@ -79,6 +82,7 @@ func changeAnimation(animationName:String):
 func burnDisplay(delta):
 	if fuel_slot.item:
 		currValue -= fuel_slot.item.burnPerSecond * delta
+
 	currValue = clamp(currValue, 0, maxValue)
 
 func fuelSlotLogic():
@@ -96,11 +100,6 @@ func fuelSlotLogic():
 			whenInventorySlotIsEmptyFromFuelSlot()
 			whenInventorySlotIsNotEmpty()	
 			
-
-
-	
-
-
 func _on_area_of_pressing_gui_input(event):
 	if event.is_action_pressed("ACTION2"):
 		inventoryHandler.removeItem(1,get_global_mouse_position())
