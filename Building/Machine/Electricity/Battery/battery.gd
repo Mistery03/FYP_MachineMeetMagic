@@ -5,6 +5,7 @@ const MIN_MANA_THRESHOLD: float = 0.0001
 
 @export var machineUI:Control
 @export var maxCapacity:float 
+@export var manaOutputPerSecond:int
 
 @onready var sprite = $Sprite
 
@@ -13,8 +14,16 @@ var isIncreasing:bool
 var batteryBar:int = 0
 var maxBatteryBar:int = 4 #this is dependent on frames
 var lastPercentage: float
-var withinWireList:Array = []
+
+var batteryList:Array = []
 var wireList:Array = []
+var withinWireList:Array = []
+
+var accumulativeBatteryMaxCapacity:float = 0
+var accumulativeBatteryCurrMana:float = 0
+
+var accumulativeMachineMaxCapacity:float = 0
+var accumulativeMachineCurrMana:float = 0
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -23,11 +32,14 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
+
+	updateAccumulateMachineMaxMana()
+	updateAccumulativeMachineCurrMana()
+	
 	currMana = clamp(currMana,0,maxCapacity)
 	machineUI.currValue = currMana
 	percentage = currMana/maxCapacity *100
 
-	
 	# Check if currMana is increasing or decreasing
 	if currMana > prevMana:
 		isIncreasing = true
@@ -50,8 +62,14 @@ func _process(delta):
 			
 	changeSpriteFrame(batteryBar)
 	
-	
-
+	for machine in withinWireList:
+		if is_instance_valid(machine):
+			if percentage > 0:
+				machine.isThereFuel = true
+				machine.currMana += manaOutputPerSecond * delta
+				machine.fillManaCapacity(machine.manaConsumptionPerSecond,delta)
+				if accumulativeMachineCurrMana < accumulativeMachineMaxCapacity:
+					consumeMana(machine.manaConsumptionPerSecond,delta)	
 	
 
 func _on_interectable_input_event(viewport, event, shape_idx):
@@ -80,3 +98,34 @@ func consumeMana(manaConsumptionPerSecond:float, delta:float):
 	if percentage <= MIN_MANA_THRESHOLD:
 		currMana = 0
 
+func updateAccumulateMachineMaxMana():
+	accumulativeMachineMaxCapacity = 0
+	if withinWireList.size() > 0:
+		for machine in withinWireList:
+			accumulativeMachineMaxCapacity += machine.maxMana
+		
+	print("The current max mana of machine inside Battery network: ",accumulativeMachineMaxCapacity)	
+		
+func updateAccumulativeMachineCurrMana():
+	accumulativeMachineCurrMana = 0.0  # Reset the accumulative current mana
+	if withinWireList.size() > 0:
+		for machine in withinWireList:
+			accumulativeMachineCurrMana += machine.currMana
+	
+	print("The current mana of machine inside Battery network: ",accumulativeMachineCurrMana)	
+
+func accumulateBatteryMaxCapacity():
+	accumulativeBatteryMaxCapacity = 0
+	if batteryList.size() > 0:
+		for battery in batteryList:
+			accumulativeBatteryMaxCapacity += battery.maxCapacity
+		
+	print(accumulativeBatteryMaxCapacity)
+
+func updateAccumulativeBatteryCurrMana():
+	accumulativeBatteryCurrMana = 0.0  # Reset the accumulative current mana
+	if batteryList.size() > 0:
+		for battery in batteryList:
+			accumulativeBatteryCurrMana += battery.currMana
+
+	print("Accumulative Current Mana: ", accumulativeBatteryCurrMana)

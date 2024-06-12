@@ -8,7 +8,7 @@ extends Machine
 @onready var animation = $Animation
 
 var isManaProduced:bool
-var machineList:Array = []
+
 var wireList:Array = []
 var withinWireList:Array = []
 
@@ -30,9 +30,9 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	accumulateMachineMaxCapacity()
-	updateAccumulativeCurrMana()
-	print(withinWireList)
+	updateAccumulateMachineMaxCapacity()
+	updateAccumulativeMachineCurrMana()
+	
 	if isThereFuel:
 		if machineUI.power_switch.button_pressed:
 			if withinWireList.size() >0:
@@ -106,20 +106,20 @@ func changeAnimation(animationName:String):
 	animation.play(animationName.to_pascal_case())
 	machineUI.machine_animation.play(animationName.to_pascal_case())
 
-func accumulateMachineMaxCapacity():
+func updateAccumulateMachineMaxCapacity():
 	accumulativeMachineMaxCapacity = 0
 	if withinWireList.size() > 0:
 		for machine in withinWireList:
 			accumulativeMachineMaxCapacity += machine.maxMana
 		
 		isCalculationsDone = true
-	print("INSIDE powergen ",accumulativeMachineMaxCapacity)	
+	#print("INSIDE powergen ",accumulativeMachineMaxCapacity)	
 		
-func updateAccumulativeCurrMana():
+func updateAccumulativeMachineCurrMana():
 	accumulativeCurrMana = 0.0  # Reset the accumulative current mana
 	if withinWireList.size() > 0:
 		for machine in withinWireList:
 			accumulativeCurrMana += machine.currMana
 
-	print("Accumulative Current Mana: ", accumulativeCurrMana)
+	#print("Accumulative Current Mana: ", accumulativeCurrMana)
 

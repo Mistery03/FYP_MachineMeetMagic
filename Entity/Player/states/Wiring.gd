@@ -24,9 +24,6 @@ var withinWire:Array = []
 var wireLayer:int = 4
 var machineLayer:int = 2
 
-var powerGenPosList = []
-var machineList = []
-
 var accumulativeMachineMaxCapacity = 0
 var accumulativeCurrMana:float = 0
 var isCalculationsDone:bool
@@ -79,7 +76,7 @@ func process_input(event)->void:
 
 
 func enterBuildMode():
-	parent.homeTilemap.set_layer_modulate(4,Color8(255,255,255,255))
+	parent.homeTilemap.set_layer_modulate(wireLayer,Color8(255,255,255,255))
 	parent.isBuildMode = true
 	HUD.visible = true
 	HUD.text = "MACHINE WIRING MODE"
@@ -96,8 +93,11 @@ func handleMachineInteraction(mouseTilePos):
 			if machine is PowerGenerator:
 				if Input.is_action_just_pressed("ACTION"):
 					parent.homeTilemap.clear_layer(wireLayer)
+					
+					##NOTE Show the select indicator
 					parent.homeTilemap.erase_cell(7, prevGenPos)
 					parent.homeTilemap.set_cell(7, mouseTilePos, 0, Vector2i(5, 5))
+					
 					prevGenPos = mouseTilePos
 					wireTiles = machine.wireList
 					withinWire = machine.withinWireList
@@ -122,7 +122,6 @@ func handleWireCreation(mouseTilePos, wireData):
 			for validPos in parent.homeTilemap.get_surrounding_cells(pos):
 		
 				if isCreating and Input.is_action_pressed("ACTION") and mouseTilePos == validPos and !wireData and validPos != prevGenPos:	
-				
 					if prevMouseTilePos != mouseTilePos:
 						wireTiles.append(mouseTilePos)
 					prevMouseTilePos = mouseTilePos
@@ -156,27 +155,11 @@ func addMachine(machine):
 	if machine not in withinWire:
 		withinWire.append(machine)
 		isCalculationsDone = false
-		accumulateMachineMaxCapacity()
+		#accumulateMachineMaxCapacity()
 
 func removeBattery(machine):
 	if machine in withinWire:
 		withinWire.erase(machine)
 		isCalculationsDone = false
-		accumulateMachineMaxCapacity()
+		#accumulateMachineMaxCapacity()
 		
-func accumulateMachineMaxCapacity():
-	accumulativeMachineMaxCapacity = 0
-	if withinWire.size() > 0 and !isCalculationsDone:
-		for machine in withinWire:
-			accumulativeMachineMaxCapacity += machine.maxMana
-		
-		isCalculationsDone = true
-	print(accumulativeMachineMaxCapacity)	
-	
-func updateAccumulativeCurrMana():
-	accumulativeCurrMana = 0.0  # Reset the accumulative current mana
-	if withinWire.size() > 0:
-		for machine in withinWire:
-			accumulativeCurrMana += machine.currMana
-
-	print("Accumulative Current Mana: ", accumulativeCurrMana)

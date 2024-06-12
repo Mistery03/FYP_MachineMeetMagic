@@ -1010,12 +1010,12 @@ script = ExtResource("8_g4svt")
 [node name="Material" parent="." instance=ExtResource("10_nl125")]
 position = Vector2(26, -207)
 itemData = ExtResource("11_rj2gd")
-amount = 20
+amount = 297
 
 [node name="Material2" parent="." instance=ExtResource("10_nl125")]
 position = Vector2(-79, -203)
 itemData = ExtResource("12_pn2ej")
-amount = 5
+amount = 100
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 layer = 2

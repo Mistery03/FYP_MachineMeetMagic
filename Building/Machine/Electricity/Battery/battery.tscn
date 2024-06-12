@@ -16,6 +16,7 @@ z_index = 20
 script = ExtResource("1_0r3hi")
 machineUI = NodePath("Root/BatteryUI")
 maxCapacity = 10000.0
+manaOutputPerSecond = 500
 maxMana = 10000.0
 
 [node name="Sprite" type="Sprite2D" parent="."]

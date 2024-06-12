@@ -1,4 +1,4 @@
-[gd_scene load_steps=84 format=3 uid="uid://c1vsfoc55pk0w"]
+[gd_scene load_steps=83 format=3 uid="uid://c1vsfoc55pk0w"]
 
 [ext_resource type="Texture2D" uid="uid://bd32dcnew3uvf" path="res://Asset/L.png" id="1_ksidj"]
 [ext_resource type="Script" path="res://Entity/Player/player.gd" id="1_xfdxb"]
@@ -24,7 +24,6 @@
 [ext_resource type="Script" path="res://UI/Wiring/Wiring.gd" id="18_3q6sb"]
 [ext_resource type="Script" path="res://Entity/Player/ItemHUDPlaceholder.gd" id="19_4bbe1"]
 [ext_resource type="PackedScene" uid="uid://crsbugvcqu5mn" path="res://Staff/staffHUD.tscn" id="20_qac2v"]
-[ext_resource type="Script" path="res://Entity/Player/MachineUpdater.gd" id="21_iegje"]
 [ext_resource type="Texture2D" uid="uid://cgi863ww3hb3g" path="res://Asset/fantasyAssets.png" id="21_kqu6c"]
 [ext_resource type="PackedScene" uid="uid://ca71hsm6y7dur" path="res://Staff/staff.tscn" id="22_01tsa"]
 [ext_resource type="Texture2D" uid="uid://dw0wj1ftq8uye" path="res://Asset/potionSS.png" id="22_hr68s"]
@@ -1148,7 +1147,7 @@ func init(player:Player):
 ##Insert item have several logics that must take in for consideration
 ##1: We check for overflow of items because that we set max stacks to be 99, it's important to take account the chances that it will overflow (exp:99 + 5 then what?)
 ##2: Hence we check for overflow
-
+\"\"\"
 func insert(droppedItem:GameMaterial,amount:int):
 	##Because overflow is a class variable rather than a local variable, we need to check if it's zero else we add alongside with the other overflows
 	if overflow <= 0:
@@ -1183,7 +1182,50 @@ func insert(droppedItem:GameMaterial,amount:int):
 
 	##To communicate to other objects
 	OnInventoryChanged.emit(inventory)
+\"\"\"
+func insert(droppedItem: GameMaterial, amount: int):
+	var overflow = amount
 
+	while overflow > 0:
+		var inserted = false
+
+	## Check existing inventory for the same item and add if there's available space
+		for index in range(len(inventory)):
+			if inventory[index] != null and inventory[index].item == droppedItem.itemData:
+				if inventory[index].amount < MAXSTACKSIZE:
+					var availableSpace = MAXSTACKSIZE - inventory[index].amount
+					if overflow <= availableSpace:
+						inventory[index].amount += overflow
+						overflow = 0
+						inserted = true
+						break
+					else:
+						inventory[index].amount += availableSpace
+						overflow -= availableSpace
+						inserted = true
+
+		## If overflow still exists and there are empty slots, create new SlotData
+		if overflow > 0:
+			for index in range(len(inventory)):
+				if inventory[index] == null:
+					var slotToBeAdded = SlotData.new()
+					slotToBeAdded.item = droppedItem.itemData
+					if overflow <= MAXSTACKSIZE:
+						slotToBeAdded.amount = overflow
+						overflow = 0
+					else:
+						slotToBeAdded.amount = MAXSTACKSIZE
+						overflow -= MAXSTACKSIZE
+					inventory[index] = slotToBeAdded
+					inserted = true
+					break
+
+		## If there was no empty slot to insert the overflow, stop the loop to prevent infinite loop
+		if not inserted:
+			break
+
+	## To communicate to other objects
+	OnInventoryChanged.emit(inventory)
 func remove(selectedItem:GameMaterial,amount:int):
 	pass
 
@@ -1403,9 +1445,8 @@ inputList = {
 "Exit": "Exit"
 }
 
-[node name="WiringBattery" type="Node" parent="StateController" node_paths=PackedStringArray("machineUpdater", "HUD")]
+[node name="WiringBattery" type="Node" parent="StateController" node_paths=PackedStringArray("HUD")]
 script = ExtResource("13_3c3kb")
-machineUpdater = NodePath("../../MachineUpdater")
 HUD = NodePath("../../ROOT_UI/Wiring")
 inputList = {
 "Build": "Build",
@@ -1632,9 +1673,6 @@ player = NodePath("../..")
 
 [node name="MagicTreeUI" parent="ROOT_UI" instance=ExtResource("34_ogpy2")]
 visible = false
-
-[node name="MachineUpdater" type="Node" parent="."]
-script = ExtResource("21_iegje")
 
 [node name="Timer" type="Timer" parent="."]
 wait_time = 0.8
