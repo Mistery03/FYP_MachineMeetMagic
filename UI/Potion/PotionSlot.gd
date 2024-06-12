@@ -32,6 +32,7 @@ func _process(delta):
 
 
 func _on_button_pressed():
+	potionInventory.visible = false
 	if potionData:
 		if potionAmount > 0:	
 			potionInventory.currSlot.potionData = potionData
