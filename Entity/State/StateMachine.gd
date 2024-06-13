@@ -1,41 +1,55 @@
 class_name StateMachine
 extends Node
 
-@export var starting_state: State
+@export var current_state: State
 
-var current_state: State
+var states: Dictionary = {}
 
-
-func init(parent: Player, animations: AnimatedSprite2D,moveComponent:IMoveComponent,camera:Camera2D) -> void:
-	for child in get_children():
-		child.parent = parent
-		child.animations = animations
-		child.move_component = moveComponent
-		child.camera = camera
-	
-	change_state(starting_state)
-# Change to the new state by first calling any exit logic on the current state.
-func change_state(new_state: State) -> void:
-	if current_state:
-		current_state.exit()
-
-	current_state = new_state
+func init(parent: Entity, animations: AnimatedSprite2D, moveComponent = null,camera:Camera2D = null) -> void:
+	for state in get_children():
+		if state is State or state.is_class("State"):
+			# Add the state to the `Dictionary` using its `name`
+			states[state.name] = state
+ 
+			# Connect the state machine to the `transitioned` signal of all stateren
+			state.transitioned.connect(on_state_transitioned)
+			
+			state.parent = parent
+			state.animations = animations
+			if parent is Player:
+				state.moveComponent = moveComponent
+				state.camera = camera
+		else:
+			print("State machine contains a node which is not a 'State' node, removing node")
+			state.queue_free()
+			
+			
 	current_state.enter()
+
 	
-# Pass through functions for the Player to call,
-# handling state changes as needed.
-func process_physics(delta: float) -> void:
-	var new_state = current_state.process_physics(delta)
-	if new_state:
-		change_state(new_state)
+func on_state_transitioned(new_state_name: StringName) -> void:
+	# Get the next state from the `Dictionary`
+	var new_state = states.get(new_state_name.to_pascal_case())
+	print(new_state_name)
+	if new_state != null:
+		if new_state != current_state:
+			# Exit the current state
+			current_state.exit()
+ 
+			# Enter the new state
+			new_state.enter()
+ 
+			# Update the current state to the new one
+			current_state = new_state
+	else:
+		print("Called transition on a state that does not exist")
+	
 
-func process_input(event: InputEvent) -> void:
-	var new_state = current_state.process_input(event)
-	if new_state:
-		change_state(new_state)
+func _process(delta):
+	current_state.update(delta)
+		
+func _physics_process(delta):
+	current_state.physics_update(delta)
 
-func process_frame(delta: float) -> void:
-	var new_state = current_state.process_frame(delta)
-	if new_state:
-		change_state(new_state)
-
+func _unhandled_input(event):
+	current_state.process_input(event)

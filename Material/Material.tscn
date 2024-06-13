@@ -1,7 +1,8 @@
-[gd_scene load_steps=8 format=3 uid="uid://cnj7jj8r34b1q"]
+[gd_scene load_steps=9 format=3 uid="uid://cnj7jj8r34b1q"]
 
 [ext_resource type="Script" path="res://Material/GameMaterial.gd" id="1_lcgbf"]
 [ext_resource type="Texture2D" uid="uid://cruxbb2jv2vmx" path="res://Asset/Materials1.png" id="2_u6hbm"]
+[ext_resource type="AudioStream" uid="uid://dig47o38sc8j6" path="res://Asset/SFX/ding.mp3" id="3_g8r8d"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_wqgbf"]
 atlas = ExtResource("2_u6hbm")
@@ -69,5 +70,9 @@ libraries = {
 "": SubResource("AnimationLibrary_emjvh")
 }
 autoplay = "floating"
+
+[node name="pickupSFX" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_g8r8d")
+pitch_scale = 1.2
 
 [connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]

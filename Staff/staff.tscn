@@ -22,6 +22,7 @@ animations = [{
 script = ExtResource("1_lhwre")
 
 [node name="Animation" type="AnimatedSprite2D" parent="."]
+visible = false
 texture_filter = 1
 sprite_frames = SubResource("SpriteFrames_d1fay")
 

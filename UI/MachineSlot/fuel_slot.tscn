@@ -20,7 +20,7 @@ texture_filter = 1
 layout_mode = 0
 offset_right = 40.0
 offset_bottom = 40.0
-scale = Vector2(5, 5)
+scale = Vector2(4.5, 4.5)
 texture = ExtResource("2_pislw")
 
 [node name="ItemTexture" type="TextureRect" parent="Border"]

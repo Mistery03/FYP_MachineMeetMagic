@@ -1,4 +1,4 @@
-[gd_scene load_steps=3 format=3 uid="uid://bl2r6xhibkiid"]
+[gd_scene load_steps=3 format=3 uid="uid://44syjttklt1l"]
 
 [ext_resource type="Texture2D" uid="uid://bmw2uy10i1kwr" path="res://Asset/UIUX/scroll_UI.png" id="1_ahomc"]
 [ext_resource type="FontFile" uid="uid://cl3rxpo58micg" path="res://Asset/Font/Lambda-Regular.ttf" id="2_rbp5b"]

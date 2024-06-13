@@ -3,6 +3,7 @@ extends Node
 
 @export var inventoryUI:Control
 @export var potionHUD:Control
+
 var potionData:PotionData
 
 

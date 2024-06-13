@@ -4,7 +4,6 @@ extends Panel
 @onready var label = $Label
 
 @export var item:MaterialData
-@export var materialAmount:int
 
 var inventoryHandler:Control
 var dragOffset: Vector2
@@ -26,10 +25,10 @@ func _process(delta):
 		item_texture.visible = false
 		label.visible = false
 	
-	#if !inventoryHandler.parentControl.isDragging:
-		#if inventoryHandler.currSlot:
-			#inventoryHandler.currSlot.item_texture.global_position = inventoryHandler.currSlot.original_global_position
-			#inventoryHandler.currSlot.label.global_position = inventoryHandler.currSlot.original_label_global_position
+	if !inventoryHandler.parentControl.isDragging:
+		if inventoryHandler.currSlot:
+			inventoryHandler.currSlot.item_texture.global_position = inventoryHandler.currSlot.original_global_position
+			inventoryHandler.currSlot.label.global_position = inventoryHandler.currSlot.original_label_global_position
 
 func _on_item_texture_gui_input(event):
 	if event is InputEventMouseButton:
@@ -49,9 +48,7 @@ func _on_item_texture_gui_input(event):
 					inventoryHandler.parentControl.isDragging= false
 					item_texture.set_z_index(1)
 					var gridPos = Vector2i(get_global_mouse_position()/custom_minimum_size)
-					#emit_signal("dropped", inventoryHandler.currSlot, item, amount, gridPos)
-					#inventoryHandler.currSlot.item_texture.global_position =  inventoryHandler.currSlot.border.global_position + Vector2(10,10)
-					#inventoryHandler.currSlot.label.global_position = inventoryHandler.currSlot.border.global_position + Vector2(75,75)
+
 
 	elif event is InputEventMouseMotion and inventoryHandler.parentControl.isDragging:
 		item_texture.set_global_position(get_global_mouse_position() - dragOffset)

@@ -5,15 +5,14 @@ extends Control
 @onready var potion_inventory = $PotionInventory
 @onready var inventory_grid = $InventoryGrid
 
+var isDragging
+var isPotionMenuOpened:bool
 
 func _ready():
 	potion_grid_container_player.player = player
 	potion_inventory.player = player
 	inventory_grid.init(player)
-	
-'func _input(event):
-	if event is InputEventKey:
-		if event.is_action_pressed("EXIT"):
-			potionInventory.visible = false'
-			
 
+func _unhandled_input(event):
+	if Input.is_action_just_pressed("EXIT") and player.isPressable:
+		inventory_grid.update_slots()

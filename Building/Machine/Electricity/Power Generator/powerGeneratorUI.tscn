@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://Building/Machine/Electricity/Power Generator/powerGeneratorUI.gd" id="1_vq0e8"]
 [ext_resource type="Texture2D" uid="uid://daap0c1p135gi" path="res://Asset/UIUX/machineContainer.png" id="2_j57ox"]
 [ext_resource type="Resource" uid="uid://bf2wpudjl6wu5" path="res://Entity/Data/testSlot1.tres" id="2_q12u1"]
-[ext_resource type="Resource" uid="uid://dnawlrv34finb" path="res://Material/Fuel/Data/fuel.tres" id="2_r71rn"]
+[ext_resource type="Resource" uid="uid://dnawlrv34finb" path="res://Material/Fuel/fuel.tres" id="2_r71rn"]
 [ext_resource type="PackedScene" uid="uid://ciyq3cn8pdvwd" path="res://UI/MachineSlot/fuel_slot.tscn" id="3_m6gjl"]
 [ext_resource type="PackedScene" uid="uid://ckanenxxawbfv" path="res://UI/PowerSwitch/power_switch.tscn" id="4_c2tfc"]
 [ext_resource type="PackedScene" uid="uid://cnj7jj8r34b1q" path="res://Material/Material.tscn" id="5_4drpe"]
@@ -27,12 +27,13 @@ region = Rect2(0, 0, 64, 64)
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_5b7l7"]
 
-[node name="PowerGeneratorUI" type="Control" node_paths=PackedStringArray("inventoryHandler")]
+[node name="PowerGeneratorUI" type="Control" node_paths=PackedStringArray("fuel_slot", "inventoryHandler")]
 layout_mode = 3
 anchors_preset = 0
 script = ExtResource("1_vq0e8")
+fuel_slot = NodePath("FuelSlot")
 inventoryHandler = NodePath("PlayerInventoryHanlder")
-debugInventory = Array[Resource("res://Entity/Data/slotData.gd")]([ExtResource("2_q12u1")])
+debugInventory = Array[Resource("res://UI/Inventory/Data/slotData.gd")]([ExtResource("2_q12u1"), null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null])
 debugItem = ExtResource("2_r71rn")
 debugMaxSlot = 20
 
@@ -75,6 +76,7 @@ offset_bottom = 40.0
 script = ExtResource("11_i0iq0")
 parentControl = NodePath("..")
 inventorySlot = ExtResource("12_vksxu")
+maxInventorySlot = 20
 materialInstance = ExtResource("5_4drpe")
 
 [node name="PlayerGridInventory" parent="PlayerInventoryHanlder" instance=ExtResource("11_8ysx8")]
@@ -84,13 +86,15 @@ offset_top = 200.0
 offset_right = 1903.0
 offset_bottom = 1214.0
 scale = Vector2(0.5, 0.5)
+script = null
 
 [node name="FuelSlot" parent="." node_paths=PackedStringArray("parentControl") instance=ExtResource("3_m6gjl")]
+self_modulate = Color(1, 1, 1, 0)
 layout_mode = 0
 offset_left = 238.0
 offset_top = 557.0
-offset_right = 438.0
-offset_bottom = 757.0
+offset_right = 418.0
+offset_bottom = 737.0
 scale = Vector2(0.7, 0.7)
 parentControl = NodePath("..")
 
@@ -253,3 +257,12 @@ theme_override_fonts/font = ExtResource("9_078kl")
 theme_override_font_sizes/font_size = 50
 text = "PLAYER INVENTORY"
 horizontal_alignment = 1
+
+[node name="AreaOfPressing" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_top = 85.0
+offset_right = 1597.0
+offset_bottom = 801.0
+
+[connection signal="gui_input" from="AreaOfPressing" to="." method="_on_area_of_pressing_gui_input"]
