@@ -5,7 +5,7 @@ const SPEED = 5.0
 const JUMP_VELOCITY = 4.5
 
 @export var playerData:EntityData
-@export var moveSpeed:float
+
 
 @export_category("Potion")
 @export var potionObject:PotionData
@@ -36,13 +36,8 @@ const JUMP_VELOCITY = 4.5
 @export var zoom_duration = 0.3 # Duration for the zoom transition
 @export var cameraZoom:float = 6
 
-@export_category("State Machine")
-@export var stateController:StateMachine
-
 @onready var inventory_manager = $InventoryManager
 @onready var potion_manager = $PotionManager
-@onready var animation = $Animation
-@onready var move_component = $MoveComponent
 @onready var camera = $Camera
 @onready var localLevel:Node2D
 
@@ -83,7 +78,7 @@ func _ready() -> void:
 	currStamina = playerData.MaxStamina
 	
 	inventory_manager.init(self)
-	stateController.init(self,animation,move_component,camera)
+	stateController.init(self,animation,moveComponent,camera)
 	magic_manager.init(self)
 	
 	##NOTE we must declare an inventory of null items size of N max inventory or else there will be a bug

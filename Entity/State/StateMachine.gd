@@ -16,8 +16,8 @@ func init(parent: Entity, animations: AnimatedSprite2D, moveComponent = null,cam
 			
 			state.parent = parent
 			state.animations = animations
+			state.moveComponent = moveComponent
 			if parent is Player:
-				state.moveComponent = moveComponent
 				state.camera = camera
 		else:
 			print("State machine contains a node which is not a 'State' node, removing node")
