@@ -1029,7 +1029,6 @@ amount = 80
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 layer = 2
-visible = false
 
 [node name="FadeOut" type="TextureRect" parent="CanvasLayer"]
 modulate = Color(0, 0, 0, 1)

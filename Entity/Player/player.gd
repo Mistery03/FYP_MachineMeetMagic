@@ -74,6 +74,8 @@ var zoomValue:float = 6
 
 
 func _ready() -> void:
+	if PlayerGlobal.playerInventory:
+		inventory = PlayerGlobal.playerInventory
 	camera.zoom = Vector2(cameraZoom,cameraZoom)
 	
 	currHealth = playerData.MaxHealth
