@@ -1,8 +1,11 @@
 extends State
 
+@export var attack:State
+
 var prevMouseTilePos = Vector2i(-1,-1)
 var lerp_timer: Timer
 var isBuildEnabled:bool = true
+
 
 func enter() -> void:
 	super()
@@ -13,6 +16,10 @@ func enter() -> void:
 	
 	parent.isPressable = true
 	parent.velocity.x = 0.0
+
+func exit()->void:
+	pass
+		
 	
 func update(delta: float) -> void:
 	if parent.levelTilemap and !parent.isLevelTransitioning:
@@ -33,6 +40,7 @@ func update(delta: float) -> void:
 			var materialName = materialDroppedData.get_custom_data("materialName")
 			var materialCategory = materialDroppedData.get_custom_data("materialCategory")
 			if is_in_area and materialCategory == "wood":
+				parent.isAttackable = false
 				update_text_on_mouse(materialName, "Cut ")
 			elif is_in_area and materialCategory == "rock":
 				update_text_on_mouse(materialName, "Mine ")
@@ -46,11 +54,13 @@ func update(delta: float) -> void:
 		prevMouseTilePos = mouseTilePos
 	
 	isBuildEnabled = parent.isBuildEnabled
+	
 	if parent.staff:
 		if parent.isStaffEquipped:
-			parent.staff.customAnimation.play("idleFront")
+			#parent.staff.customAnimation.play("idleFront")
+			pass
 		else:
-			parent.staff.customAnimation.play("RESET")
+			parent.staff.customAnimation.play("RESETFRONT")
 	
 func process_input(event)->void:
 	moveComponent.axis = moveComponent.get_movement_direction()
@@ -66,14 +76,19 @@ func process_input(event)->void:
 			var materialCategory = materialDroppedData.get_custom_data("materialCategory")
 			if Input.is_action_pressed("ACTION") and materialCategory == "wood":
 				transitioned.emit("cut")
+				
 	
 	if Input.is_action_just_pressed("BUILD") and isBuildEnabled and !parent.playerInventoryController.visible:
 		transitioned.emit("build")
 	
 	if Input.is_action_just_pressed("EXIT") and parent.isPressable:
 		toggle_menu()
-
-
+		
+	if Input.is_action_just_pressed("ACTION") and parent.isStaffEquipped and parent.isAttackable:
+		parent.staff.customAnimation.stop()
+		attack.currStateName = "idle"
+		transitioned.emit("attack")
+		
 
 func lerp_to_zero():
 	# Gradually lerp the velocity to 0

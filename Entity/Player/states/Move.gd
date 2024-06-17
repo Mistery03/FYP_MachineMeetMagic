@@ -1,11 +1,12 @@
 extends State
 
-@export
-var idle_state: State
+
+@export var attack:State
 
 @onready var walk_timer = $"../../walkSFX"
 
 var prevMouseTilePos = Vector2i(-1,-1)
+var currAnimation
 
 func enter() -> void:
 	super()
@@ -74,6 +75,9 @@ func physics_update(delta: float) -> void:
 func process_input(event)->void:
 	if Input.is_action_just_pressed("EXIT"):
 		toggle_menu()
+	if Input.is_action_pressed("ACTION") and parent.isStaffEquipped and parent.isAttackable:
+		transitioned.emit("attack")
+		
 
 func resetStaffPosition():
 	parent.staff.z_index = -1
@@ -104,12 +108,18 @@ func updatePlayerVelocity(delta, movement_direction):
 		
 func changeAnimationVelocity():
 	if parent.velocity.y < 0:
-		animations.play("WALKBACKWARD")
+		currAnimation = "WALKBACKWARD"
+		animations.play(currAnimation)
+			
 	elif parent.velocity.y >0:
-		animations.play("WALKFRONT")
-	elif parent.velocity.x < 0 or parent.velocity.x > 0:
-		animations.play(animation_name.to_upper())
+		currAnimation = "WALKFRONT"
+		animations.play(currAnimation)
 
+	elif parent.velocity.x < 0 or parent.velocity.x > 0:
+		currAnimation =animation_name.to_upper()
+		animations.play(currAnimation)
+		
+	
 func updateStaffPosX():
 	#parent.staff.z_index = -1
 	if parent.velocity.x < 0:

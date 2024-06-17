@@ -62,6 +62,9 @@ var isPressable:bool = false
 var isMachineUI:bool = false
 var isLevelTransitioning:bool = false
 var isInDestroyArea:bool = false
+var isAttackable:bool = true
+
+var canInput:bool = true
 
 var objectsPosInLevelList:Array[Vector2i]
 

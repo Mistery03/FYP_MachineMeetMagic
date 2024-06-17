@@ -1242,6 +1242,15 @@ layer_9/tile_data = PackedInt32Array(-786451, 2, 0, -720915, 2, 0, -655379, 2, 0
 z_index = 5
 position = Vector2(-16, -216)
 collision_mask = 22
+isStaffEquipped = false
+MagicEssenceCurrency = 0
+ResearchPointCurrency = 0
+max_zoom = 12
+zoom_duration = 0.3
+cameraZoom = 6.0
+maxHP = 100.0
+maxStamina = 100.0
+maxMana = 100.0
 moveSpeed = 5000.0
 
 [node name="MachineList" type="Node" parent="."]
