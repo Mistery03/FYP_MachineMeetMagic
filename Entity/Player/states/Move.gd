@@ -75,7 +75,7 @@ func physics_update(delta: float) -> void:
 func process_input(event)->void:
 	if Input.is_action_just_pressed("EXIT"):
 		toggle_menu()
-	if Input.is_action_pressed("ACTION") and parent.isStaffEquipped and parent.isAttackable:
+	if Input.is_action_pressed("ACTION") and parent.isStaffEquipped and parent.canInput:
 		transitioned.emit("attack")
 		
 

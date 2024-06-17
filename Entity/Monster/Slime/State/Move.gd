@@ -23,7 +23,7 @@ func update(delta: float) -> void:
 func physics_update(delta: float) -> void:
 	_wander(delta)
 	
-	await  get_tree().create_timer(3).timeout
+	#await  get_tree().create_timer(3).timeout
 	
 	_smooth_stop(delta)
 
@@ -63,3 +63,5 @@ func _smooth_stop(delta):
 		transitioned.emit("idle")
 
 
+func _on_collision_box_area_entered(area):
+	transitioned.emit("damaged")

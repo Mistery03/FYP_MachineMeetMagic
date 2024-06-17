@@ -11,10 +11,11 @@ func exit() -> void:
 func update(delta: float) -> void:
 	randomize()
 	await get_tree().create_timer(randi_range(2, 5)).timeout
-	transitioned.emit("Wander")
+	#transitioned.emit("Wander")
 
 func physics_update(delta: float) -> void:
 	parent.move_and_slide()
 
 
-
+func _on_collision_box_area_entered(area):
+	transitioned.emit("damaged")

@@ -3,6 +3,7 @@ extends State
 
 func enter() -> void:
 	super()
+	parent.queue_free()
 
 func exit() -> void:
 	pass

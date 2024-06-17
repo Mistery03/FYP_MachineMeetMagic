@@ -561,7 +561,7 @@ tracks/14/keys = {
 tracks/15/type = "value"
 tracks/15/imported = false
 tracks/15/enabled = true
-tracks/15/path = NodePath("Animation/sword/Area2D/CollisionShape2D:position")
+tracks/15/path = NodePath("Animation/sword/StaffCollision/CollisionShape2D:position")
 tracks/15/interp = 1
 tracks/15/loop_wrap = true
 tracks/15/keys = {
@@ -1122,7 +1122,7 @@ tracks/5/keys = {
 tracks/6/type = "value"
 tracks/6/imported = false
 tracks/6/enabled = true
-tracks/6/path = NodePath("Animation/sword/Area2D/CollisionShape2D:position")
+tracks/6/path = NodePath("Animation/sword/StaffCollision/CollisionShape2D:position")
 tracks/6/interp = 1
 tracks/6/loop_wrap = true
 tracks/6/keys = {
@@ -1307,7 +1307,7 @@ tracks/8/keys = {
 tracks/9/type = "value"
 tracks/9/imported = false
 tracks/9/enabled = true
-tracks/9/path = NodePath("Animation/sword/Area2D/CollisionShape2D:position")
+tracks/9/path = NodePath("Animation/sword/StaffCollision/CollisionShape2D:position")
 tracks/9/interp = 1
 tracks/9/loop_wrap = true
 tracks/9/keys = {
@@ -1902,7 +1902,7 @@ scale = Vector2(5, 5)
 sprite_frames = SubResource("SpriteFrames_47nfc")
 animation = &"IDLEBACK"
 autoplay = "IDLE"
-frame_progress = 0.884765
+frame_progress = 0.699501
 
 [node name="CollisionShape3D" type="CollisionShape2D" parent="."]
 shape = SubResource("CapsuleShape2D_5n34a")
@@ -1935,11 +1935,12 @@ texture = SubResource("AtlasTexture_olby7")
 flip_h = true
 flip_v = true
 
-[node name="Area2D" type="Area2D" parent="Staff/Animation/sword"]
+[node name="StaffCollision" type="Area2D" parent="Staff/Animation/sword"]
 collision_layer = 128
 collision_mask = 256
+monitorable = false
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Staff/Animation/sword/Area2D"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Staff/Animation/sword/StaffCollision"]
 position = Vector2(-4.41942, -4.41942)
 rotation = -0.785398
 shape = SubResource("CapsuleShape2D_gkpp5")
@@ -2032,6 +2033,7 @@ materialInstance = ExtResource("15_qe768")
 
 [node name="Attack" type="Node" parent="StateController"]
 script = ExtResource("22_nvrgv")
+animation_name = "WALKFRONT"
 
 [node name="MoveComponent" type="Node" parent="."]
 script = ExtResource("10_gim7i")

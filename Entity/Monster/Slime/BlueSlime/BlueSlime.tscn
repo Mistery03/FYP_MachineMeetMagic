@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://crlmmk86fjtnf"]
+[gd_scene load_steps=22 format=3 uid="uid://crlmmk86fjtnf"]
 
 [ext_resource type="Script" path="res://Entity/State/StateMachine.gd" id="2_1e76v"]
 [ext_resource type="Texture2D" uid="uid://dfbobrjgxuwbl" path="res://Asset/slime.png" id="2_o73m2"]
@@ -6,23 +6,22 @@
 [ext_resource type="Script" path="res://Entity/Monster/Slime/State/Idle.gd" id="4_8s6qj"]
 [ext_resource type="Script" path="res://Entity/Monster/Slime/State/Move.gd" id="5_emkus"]
 [ext_resource type="Script" path="res://Entity/Monster/Slime/State/Return.gd" id="6_4q6fg"]
-[ext_resource type="Script" path="res://Entity/Monster/Slime/State/Attack.gd" id="6_lpk5p"]
+[ext_resource type="Script" path="res://Entity/Monster/Slime/BlueSlime/Chase.gd" id="7_7seg2"]
 [ext_resource type="Script" path="res://Entity/Monster/Slime/State/ESCAPE.gd" id="7_dth8f"]
 [ext_resource type="Script" path="res://Entity/Monster/Slime/State/Damaged.gd" id="8_4cmn4"]
 [ext_resource type="Script" path="res://Entity/Monster/Slime/State/Death.gd" id="9_eixto"]
 [ext_resource type="Script" path="res://Entity/Monster/MoveComponent.gd" id="11_hjj1d"]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_7bh2u"]
-atlas = ExtResource("2_o73m2")
-region = Rect2(0, 0, 32, 32)
+[sub_resource type="CircleShape2D" id="CircleShape2D_3l8tp"]
+radius = 50.04
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_0o1ml"]
 atlas = ExtResource("2_o73m2")
 region = Rect2(256, 0, 32, 32)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_1injn"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_c227g"]
 atlas = ExtResource("2_o73m2")
-region = Rect2(0, 32, 32, 32)
+region = Rect2(0, 0, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_27k1j"]
 atlas = ExtResource("2_o73m2")
@@ -52,15 +51,12 @@ region = Rect2(64, 64, 32, 32)
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_7bh2u")
-}, {
-"duration": 1.0,
 "texture": SubResource("AtlasTexture_0o1ml")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_1injn")
+"texture": SubResource("AtlasTexture_c227g")
 }],
-"loop": true,
+"loop": false,
 "name": &"DAMAGED",
 "speed": 5.0
 }, {
@@ -93,35 +89,30 @@ animations = [{
 "speed": 5.0
 }]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_3l8tp"]
-radius = 50.04
-
 [node name="BlueSlime" type="CharacterBody2D" node_paths=PackedStringArray("animation", "moveComponent", "stateController")]
 z_index = 5
 scale = Vector2(0.1, 0.1)
 collision_layer = 256
 collision_mask = 213
 script = ExtResource("2_xatpo")
-maxHP = null
-maxStamina = null
-maxMana = null
 moveSpeed = 20.0
 animation = NodePath("Animation")
 moveComponent = NodePath("MoveComponent")
 stateController = NodePath("StateController")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 14)
+scale = Vector2(1, 1)
+shape = SubResource("CircleShape2D_3l8tp")
+debug_color = Color(0.917647, 0, 0.705882, 0.419608)
 
 [node name="Animation" type="AnimatedSprite2D" parent="."]
 texture_filter = 1
 scale = Vector2(5, 5)
 sprite_frames = SubResource("SpriteFrames_o3sr5")
 animation = &"DAMAGED"
-frame = 2
-frame_progress = 0.867992
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, 14)
-shape = SubResource("CircleShape2D_3l8tp")
-debug_color = Color(0.917647, 0, 0.705882, 0.419608)
+frame = 1
+frame_progress = 1.0
 
 [node name="StateController" type="Node" parent="." node_paths=PackedStringArray("current_state")]
 script = ExtResource("2_1e76v")
@@ -137,18 +128,37 @@ animation_name = "MOVE"
 [node name="Return" type="Node" parent="StateController"]
 script = ExtResource("6_4q6fg")
 
-[node name="Attack" type="Node" parent="StateController"]
-script = ExtResource("6_lpk5p")
-animation_name = "MOVE"
+[node name="Chase" type="Node" parent="StateController"]
+script = ExtResource("7_7seg2")
+chaseSpeed = 4000.0
 
-[node name="Escape" type="Node" parent="StateController"]
+[node name="Escape" type="Node" parent="StateController" node_paths=PackedStringArray("escapeTime")]
 script = ExtResource("7_dth8f")
+escapeTime = NodePath("../../EscapeTime")
 
 [node name="Damaged" type="Node" parent="StateController"]
 script = ExtResource("8_4cmn4")
+animation_name = "damaged"
 
 [node name="Death" type="Node" parent="StateController"]
 script = ExtResource("9_eixto")
 
 [node name="MoveComponent" type="Node" parent="."]
 script = ExtResource("11_hjj1d")
+
+[node name="CollisionBox" type="Area2D" parent="."]
+collision_layer = 256
+collision_mask = 129
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CollisionBox"]
+position = Vector2(0, 14)
+scale = Vector2(1, 1)
+shape = SubResource("CircleShape2D_3l8tp")
+debug_color = Color(0.917647, 0, 0.705882, 0.419608)
+
+[node name="EscapeTime" type="Timer" parent="."]
+wait_time = 5.0
+
+[connection signal="area_entered" from="CollisionBox" to="StateController/Idle" method="_on_collision_box_area_entered"]
+[connection signal="area_entered" from="CollisionBox" to="StateController/Wander" method="_on_collision_box_area_entered"]
+[connection signal="timeout" from="EscapeTime" to="StateController/Escape" method="_on_escape_time_timeout"]

@@ -62,7 +62,7 @@ var isPressable:bool = false
 var isMachineUI:bool = false
 var isLevelTransitioning:bool = false
 var isInDestroyArea:bool = false
-var isAttackable:bool = true
+var wasAttacking:bool = false
 
 var canInput:bool = true
 
