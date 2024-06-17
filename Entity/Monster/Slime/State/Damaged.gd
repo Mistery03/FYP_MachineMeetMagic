@@ -7,13 +7,7 @@ var hasEscaped = false
 
 func enter() -> void:
 	super()
-	timeSinceLastDamage = 0.0
-	hasEscaped = false
-	
-	#if randi() % 100 < escapeChance:
-		#transitioned.emit("escape")
-	#else:
-		#transitioned.emit("attack")
+
 
 func exit() -> void:
 	pass

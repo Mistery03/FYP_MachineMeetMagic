@@ -1,4 +1,4 @@
-[gd_scene load_steps=89 format=3 uid="uid://c1vsfoc55pk0w"]
+[gd_scene load_steps=92 format=3 uid="uid://c1vsfoc55pk0w"]
 
 [ext_resource type="Texture2D" uid="uid://bd32dcnew3uvf" path="res://Asset/L.png" id="1_ksidj"]
 [ext_resource type="Script" path="res://Entity/Player/player.gd" id="1_xfdxb"]
@@ -29,6 +29,7 @@
 [ext_resource type="Texture2D" uid="uid://dw0wj1ftq8uye" path="res://Asset/potionSS.png" id="22_hr68s"]
 [ext_resource type="PackedScene" uid="uid://3lfapx60drmh" path="res://HUD/Potion/potionHUD.tscn" id="22_lae4u"]
 [ext_resource type="Script" path="res://Entity/Player/states/Attack.gd" id="22_nvrgv"]
+[ext_resource type="Script" path="res://Entity/Player/Damaged.gd" id="23_i72d5"]
 [ext_resource type="PackedScene" uid="uid://dab70bjir0c00" path="res://HUD/Magic/magicHUD.tscn" id="24_71sui"]
 [ext_resource type="Texture2D" uid="uid://bi05jqai8a2ss" path="res://Asset/materials.png" id="32_6ejnk"]
 [ext_resource type="PackedScene" uid="uid://cujcp3sdk8yco" path="res://UI/CharacterScene/inventorySheet.tscn" id="32_dbx42"]
@@ -38,6 +39,14 @@
 [ext_resource type="AudioStream" uid="uid://k857dg5qycjv" path="res://Asset/SFX/placingObject.mp3" id="37_raash"]
 [ext_resource type="AudioStream" uid="uid://t8eii58rce5c" path="res://Asset/SFX/walkingOnWood.mp3" id="38_o8wch"]
 [ext_resource type="AudioStream" uid="uid://2lu5if0yp64i" path="res://Asset/SFX/forestWalkSFX.mp3" id="39_wma1b"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dykra"]
+atlas = ExtResource("1_ksidj")
+region = Rect2(0, 192, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_75ha4"]
+atlas = ExtResource("1_ksidj")
+region = Rect2(32, 0, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_o46v5"]
 atlas = ExtResource("1_ksidj")
@@ -145,6 +154,17 @@ region = Rect2(160, 32, 32, 32)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_47nfc"]
 animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dykra")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_75ha4")
+}],
+"loop": false,
+"name": &"DAMAGED",
+"speed": 5.0
+}, {
 "frames": [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_o46v5")
@@ -1900,9 +1920,10 @@ position_smoothing_speed = 4.0
 texture_filter = 1
 scale = Vector2(5, 5)
 sprite_frames = SubResource("SpriteFrames_47nfc")
-animation = &"IDLEBACK"
+animation = &"DAMAGED"
 autoplay = "IDLE"
-frame_progress = 0.699501
+frame = 1
+frame_progress = 1.0
 
 [node name="CollisionShape3D" type="CollisionShape2D" parent="."]
 shape = SubResource("CapsuleShape2D_5n34a")
@@ -2034,6 +2055,10 @@ materialInstance = ExtResource("15_qe768")
 [node name="Attack" type="Node" parent="StateController"]
 script = ExtResource("22_nvrgv")
 animation_name = "WALKFRONT"
+
+[node name="Damaged" type="Node" parent="StateController"]
+script = ExtResource("23_i72d5")
+animation_name = "Damaged"
 
 [node name="MoveComponent" type="Node" parent="."]
 script = ExtResource("10_gim7i")
@@ -2285,6 +2310,7 @@ volume_db = -12.0
 stream = ExtResource("36_a4jww")
 pitch_scale = 2.5
 
+[connection signal="OnDamageTaken" from="." to="StateController/Idle" method="_on_player_on_damage_taken"]
 [connection signal="timeout" from="ROOT_UI/ItemHUDPlaceholder/Timer" to="ROOT_UI/ItemHUDPlaceholder" method="_on_timer_timeout"]
 [connection signal="timeout" from="Timer" to="StateController/Cut" method="_on_timer_timeout"]
 

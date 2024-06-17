@@ -17,6 +17,7 @@ func physics_update(delta: float) -> void:
 	var distance_to_player = parent.global_position.distance_to(parent.player.global_position)
 	print(distance_to_player)
 	if distance_to_player <= 14:
+		parent.player.OnDamageTaken.emit()
 		transitioned.emit("death")
 	else:
 		parent.currentDirection = direction_to_player

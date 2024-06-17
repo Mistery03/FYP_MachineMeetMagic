@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://crlmmk86fjtnf"]
+[gd_scene load_steps=21 format=3 uid="uid://crlmmk86fjtnf"]
 
 [ext_resource type="Script" path="res://Entity/State/StateMachine.gd" id="2_1e76v"]
 [ext_resource type="Texture2D" uid="uid://dfbobrjgxuwbl" path="res://Asset/slime.png" id="2_o73m2"]
@@ -7,7 +7,6 @@
 [ext_resource type="Script" path="res://Entity/Monster/Slime/State/Move.gd" id="5_emkus"]
 [ext_resource type="Script" path="res://Entity/Monster/Slime/State/Return.gd" id="6_4q6fg"]
 [ext_resource type="Script" path="res://Entity/Monster/Slime/BlueSlime/Chase.gd" id="7_7seg2"]
-[ext_resource type="Script" path="res://Entity/Monster/Slime/State/ESCAPE.gd" id="7_dth8f"]
 [ext_resource type="Script" path="res://Entity/Monster/Slime/State/Damaged.gd" id="8_4cmn4"]
 [ext_resource type="Script" path="res://Entity/Monster/Slime/State/Death.gd" id="9_eixto"]
 [ext_resource type="Script" path="res://Entity/Monster/MoveComponent.gd" id="11_hjj1d"]
@@ -132,10 +131,6 @@ script = ExtResource("6_4q6fg")
 script = ExtResource("7_7seg2")
 chaseSpeed = 4000.0
 
-[node name="Escape" type="Node" parent="StateController" node_paths=PackedStringArray("escapeTime")]
-script = ExtResource("7_dth8f")
-escapeTime = NodePath("../../EscapeTime")
-
 [node name="Damaged" type="Node" parent="StateController"]
 script = ExtResource("8_4cmn4")
 animation_name = "damaged"
@@ -161,4 +156,3 @@ wait_time = 5.0
 
 [connection signal="area_entered" from="CollisionBox" to="StateController/Idle" method="_on_collision_box_area_entered"]
 [connection signal="area_entered" from="CollisionBox" to="StateController/Wander" method="_on_collision_box_area_entered"]
-[connection signal="timeout" from="EscapeTime" to="StateController/Escape" method="_on_escape_time_timeout"]

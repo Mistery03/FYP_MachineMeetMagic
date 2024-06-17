@@ -6,6 +6,7 @@ extends Node
 func _ready():
 	for entity in get_children():
 		entity.player = player
+		
 
 
 

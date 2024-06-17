@@ -113,3 +113,7 @@ func update_text_on_mouse(material_name, prefix=""):
 func set_tilemap_cell(mouseTilePos):
 	parent.levelTilemap.set_cell(5, mouseTilePos, 2, parent.levelTilemap.get_cell_atlas_coords(4, mouseTilePos))
 	parent.levelTilemap.set_layer_modulate(5, Color8(255, 255, 255, 255))
+
+
+func _on_player_on_damage_taken():
+	transitioned.emit("damaged")
