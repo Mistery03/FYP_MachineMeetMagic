@@ -1,9 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://eu0xsfmexgdv"]
+[gd_scene load_steps=4 format=3 uid="uid://c51dqab3gspk1"]
 
-[ext_resource type="Texture2D" uid="uid://bmw2uy10i1kwr" path="res://Asset/UIUX/scroll_UI.png" id="1_kiiy6"]
-[ext_resource type="Script" path="res://UI/CharacterScene/magic_tree_ui.gd" id="1_mp347"]
-[ext_resource type="FontFile" uid="uid://cl3rxpo58micg" path="res://Asset/Font/Lambda-Regular.ttf" id="2_b3vgk"]
-[ext_resource type="PackedScene" uid="uid://daji0h3vfh4k5" path="res://UI/CharacterScene/ResearchTree/skill_tree.tscn" id="4_3tfsh"]
+[ext_resource type="Texture2D" uid="uid://bmw2uy10i1kwr" path="res://Asset/UIUX/scroll_UI.png" id="1_16ksj"]
+[ext_resource type="FontFile" uid="uid://cl3rxpo58micg" path="res://Asset/Font/Lambda-Regular.ttf" id="2_6pweg"]
+[ext_resource type="PackedScene" uid="uid://daji0h3vfh4k5" path="res://UI/CharacterScene/ResearchTree/skill_tree.tscn" id="3_crxvi"]
 
 [node name="MagicTreeUI" type="Control"]
 layout_mode = 3
@@ -12,14 +11,13 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("1_mp347")
 
 [node name="ScrollUi" type="Sprite2D" parent="."]
 z_index = -1
 texture_filter = 1
 position = Vector2(801, 371.5)
 scale = Vector2(1.66458, 1.35312)
-texture = ExtResource("1_kiiy6")
+texture = ExtResource("1_16ksj")
 
 [node name="NinePatchRect" type="NinePatchRect" parent="."]
 layout_mode = 1
@@ -42,15 +40,15 @@ offset_bottom = 47.0
 grow_horizontal = 2
 scale = Vector2(2, 2)
 theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_fonts/font = ExtResource("2_b3vgk")
+theme_override_fonts/font = ExtResource("2_6pweg")
 theme_override_font_sizes/font_size = 40
-text = "MAGIC TREE"
+text = "RESEARCH TREE"
 horizontal_alignment = 1
 
-[node name="skillTree" parent="." instance=ExtResource("4_3tfsh")]
+[node name="skillTree" parent="." instance=ExtResource("3_crxvi")]
 layout_mode = 1
 offset_left = 544.0
-offset_top = 564.0
+offset_top = 320.0
 offset_right = -821.0
-offset_bottom = -295.0
+offset_bottom = -539.0
 scale = Vector2(2, 2)

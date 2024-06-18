@@ -10,3 +10,4 @@ category = "Electricity"
 texture = ExtResource("2_am16k")
 atlasCoord = Vector2i(0, 3)
 description = "Need power? Just build a generator!"
+isUnlocked = false

@@ -1,0 +1,35 @@
+[gd_scene load_steps=5 format=3 uid="uid://b7hjwyk3a1s08"]
+
+[ext_resource type="Texture2D" uid="uid://u1h6oyjt8kdh" path="res://Asset/Skill_Btn.png" id="1_rhh2f"]
+[ext_resource type="Script" path="res://UI/CharacterScene/ResearchTree/machine_button.gd" id="2_477rk"]
+[ext_resource type="Texture2D" uid="uid://bmyhgaqtdma1t" path="res://Asset/UIUX/slot.png" id="3_va6hy"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_k514t"]
+atlas = ExtResource("1_rhh2f")
+region = Rect2(0, 0, 32, 32)
+
+[node name="skillButton" type="TextureButton"]
+texture_filter = 1
+offset_right = 32.0
+offset_bottom = 32.0
+texture_normal = SubResource("AtlasTexture_k514t")
+script = ExtResource("2_477rk")
+
+[node name="Panel" type="Panel" parent="."]
+layout_mode = 1
+offset_right = 32.0
+offset_bottom = 32.0
+mouse_filter = 2
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+show_behind_parent = true
+position = Vector2(16, 16)
+texture = ExtResource("3_va6hy")
+
+[node name="Line2D" type="Line2D" parent="."]
+top_level = true
+z_index = -1
+width = 3.0
+default_color = Color(0.176471, 0.176471, 0.176471, 1)
+
+[connection signal="pressed" from="." to="." method="_on_pressed"]
