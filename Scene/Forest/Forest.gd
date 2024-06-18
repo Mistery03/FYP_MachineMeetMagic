@@ -16,6 +16,10 @@ extends Node2D
 
 var enemyRoomQueue:Array = []
 
+
+func init(player:Player):
+	self.player = player
+	print(self.player)
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	wind_sfx.play()

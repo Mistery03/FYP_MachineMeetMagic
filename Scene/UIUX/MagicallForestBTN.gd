@@ -1,11 +1,10 @@
 extends Button
 
+@onready var teleporter = $"../../.."
+
 @export var levelName:String = "Magical Forest"
 @export var levelDesc:String = ""
 @onready var level_selection = $".."
-
-
-
 
 
 func _on_mouse_entered():
@@ -21,4 +20,6 @@ func _on_mouse_exited():
 
 
 func _on_pressed():
+	PlayerGlobal.playerInventory = teleporter.player.inventory
 	get_tree().change_scene_to_file("res://Scene/Forest/Forest.tscn")
+	

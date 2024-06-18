@@ -4,7 +4,7 @@
 
 [resource]
 script = ExtResource("1_chc5a")
-Name = "Player"
+Name = "L"
 MaxHealth = 100.0
 MaxStamina = 100.0
 MaxMana = 100.0

@@ -15,6 +15,8 @@ func enter() -> void:
 	super()
 	isDropped = false
 
+func exit()->void:
+	parent.isAttackable = true
 
 func update(delta: float) -> void:
 	moveComponent.axis = moveComponent.get_movement_direction()

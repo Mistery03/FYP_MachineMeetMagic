@@ -1,8 +1,11 @@
 extends State
 
+@export var attack:State
+
 var prevMouseTilePos = Vector2i(-1,-1)
 var lerp_timer: Timer
 var isBuildEnabled:bool = true
+
 
 func enter() -> void:
 	super()
@@ -13,6 +16,12 @@ func enter() -> void:
 	
 	parent.isPressable = true
 	parent.velocity.x = 0.0
+	
+	
+
+func exit()->void:
+	pass
+		
 	
 func update(delta: float) -> void:
 	if parent.levelTilemap and !parent.isLevelTransitioning:
@@ -33,6 +42,7 @@ func update(delta: float) -> void:
 			var materialName = materialDroppedData.get_custom_data("materialName")
 			var materialCategory = materialDroppedData.get_custom_data("materialCategory")
 			if is_in_area and materialCategory == "wood":
+				parent.isAttackable = false
 				update_text_on_mouse(materialName, "Cut ")
 			elif is_in_area and materialCategory == "rock":
 				update_text_on_mouse(materialName, "Mine ")
@@ -46,11 +56,13 @@ func update(delta: float) -> void:
 		prevMouseTilePos = mouseTilePos
 	
 	isBuildEnabled = parent.isBuildEnabled
-	if parent.staff:
+	
+	if parent.staff and parent.canInput:
 		if parent.isStaffEquipped:
 			parent.staff.customAnimation.play("idleFront")
 		else:
-			parent.staff.customAnimation.play("RESET")
+			parent.staff.customAnimation.play("RESETFRONT")
+			
 	
 func process_input(event)->void:
 	moveComponent.axis = moveComponent.get_movement_direction()
@@ -66,14 +78,23 @@ func process_input(event)->void:
 			var materialCategory = materialDroppedData.get_custom_data("materialCategory")
 			if Input.is_action_pressed("ACTION") and materialCategory == "wood":
 				transitioned.emit("cut")
+				
 	
 	if Input.is_action_just_pressed("BUILD") and isBuildEnabled and !parent.playerInventoryController.visible:
 		transitioned.emit("build")
 	
 	if Input.is_action_just_pressed("EXIT") and parent.isPressable:
 		toggle_menu()
-
-
+		
+	if Input.is_action_just_pressed("ACTION") and parent.isStaffEquipped and parent.canInput:
+		parent.staff.customAnimation.stop()
+		parent.canInput = false
+		transitioned.emit("attack")
+	
+	if Input.is_action_just_pressed("ROLL") and !moveComponent.isDashing() and parent.canDash:
+		parent.set_collision_layer_value(1,false)
+		transitioned.emit("roll")
+		
 
 func lerp_to_zero():
 	# Gradually lerp the velocity to 0
@@ -96,3 +117,9 @@ func update_text_on_mouse(material_name, prefix=""):
 func set_tilemap_cell(mouseTilePos):
 	parent.levelTilemap.set_cell(5, mouseTilePos, 2, parent.levelTilemap.get_cell_atlas_coords(4, mouseTilePos))
 	parent.levelTilemap.set_layer_modulate(5, Color8(255, 255, 255, 255))
+
+
+func _on_player_on_damage_taken(damageAmount:float):
+	parent.currHealth -= damageAmount
+	parent.currHealth = clamp(parent.currHealth,0,parent.playerData.MaxHealth)
+	transitioned.emit("damaged")

@@ -29,7 +29,7 @@ texture = SubResource("AtlasTexture_jft2l")
 collision_layer = 32
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-position = Vector2(2, -2)
+position = Vector2(0, -2)
 rotation = 1.5708
 shape = SubResource("CapsuleShape2D_ypvlw")
 

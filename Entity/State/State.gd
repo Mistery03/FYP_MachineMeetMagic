@@ -8,7 +8,7 @@ signal transitioned(new_state_name: StringName)
 # Hold a reference to the parent so that it can be controlled by the state
 var parent: Entity
 var animations: AnimatedSprite2D
-var moveComponent: IMoveComponent
+var moveComponent: Node
 var camera:Camera2D
 
 func enter() -> void:

@@ -1,0 +1,157 @@
+[gd_scene load_steps=21 format=3 uid="uid://crlmmk86fjtnf"]
+
+[ext_resource type="Script" path="res://Entity/State/StateMachine.gd" id="2_1e76v"]
+[ext_resource type="Texture2D" uid="uid://dfbobrjgxuwbl" path="res://Asset/slime.png" id="2_o73m2"]
+[ext_resource type="Script" path="res://Entity/Monster/Slime/BlueSlime/BlueSlime.gd" id="2_xatpo"]
+[ext_resource type="Script" path="res://Entity/Monster/Slime/State/Idle.gd" id="4_8s6qj"]
+[ext_resource type="Script" path="res://Entity/Monster/Slime/State/Move.gd" id="5_emkus"]
+[ext_resource type="Script" path="res://Entity/Monster/Slime/State/Return.gd" id="6_4q6fg"]
+[ext_resource type="Script" path="res://Entity/Monster/Slime/BlueSlime/Chase.gd" id="7_7seg2"]
+[ext_resource type="Script" path="res://Entity/Monster/Slime/State/Damaged.gd" id="8_4cmn4"]
+[ext_resource type="Script" path="res://Entity/Monster/Slime/State/Death.gd" id="9_eixto"]
+[ext_resource type="Script" path="res://Entity/Monster/MoveComponent.gd" id="11_hjj1d"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_3l8tp"]
+radius = 50.04
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0o1ml"]
+atlas = ExtResource("2_o73m2")
+region = Rect2(256, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_c227g"]
+atlas = ExtResource("2_o73m2")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_27k1j"]
+atlas = ExtResource("2_o73m2")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wqfd2"]
+atlas = ExtResource("2_o73m2")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lv2xd"]
+atlas = ExtResource("2_o73m2")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4wyo1"]
+atlas = ExtResource("2_o73m2")
+region = Rect2(0, 64, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_205tr"]
+atlas = ExtResource("2_o73m2")
+region = Rect2(32, 64, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_23sh2"]
+atlas = ExtResource("2_o73m2")
+region = Rect2(64, 64, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_o3sr5"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0o1ml")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_c227g")
+}],
+"loop": false,
+"name": &"DAMAGED",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_27k1j")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wqfd2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lv2xd")
+}],
+"loop": true,
+"name": &"IDLE",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4wyo1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_205tr")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_23sh2")
+}],
+"loop": true,
+"name": &"MOVE",
+"speed": 5.0
+}]
+
+[node name="BlueSlime" type="CharacterBody2D" node_paths=PackedStringArray("animation", "moveComponent", "stateController")]
+z_index = 5
+scale = Vector2(0.1, 0.1)
+collision_layer = 256
+collision_mask = 213
+script = ExtResource("2_xatpo")
+moveSpeed = 20.0
+animation = NodePath("Animation")
+moveComponent = NodePath("MoveComponent")
+stateController = NodePath("StateController")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 14)
+shape = SubResource("CircleShape2D_3l8tp")
+debug_color = Color(0.917647, 0, 0.705882, 0.419608)
+
+[node name="Animation" type="AnimatedSprite2D" parent="."]
+texture_filter = 1
+scale = Vector2(5, 5)
+sprite_frames = SubResource("SpriteFrames_o3sr5")
+animation = &"DAMAGED"
+frame = 1
+frame_progress = 1.0
+
+[node name="StateController" type="Node" parent="." node_paths=PackedStringArray("current_state")]
+script = ExtResource("2_1e76v")
+current_state = NodePath("Idle")
+
+[node name="Idle" type="Node" parent="StateController"]
+script = ExtResource("4_8s6qj")
+
+[node name="Wander" type="Node" parent="StateController"]
+script = ExtResource("5_emkus")
+animation_name = "MOVE"
+
+[node name="Return" type="Node" parent="StateController"]
+script = ExtResource("6_4q6fg")
+
+[node name="Chase" type="Node" parent="StateController"]
+script = ExtResource("7_7seg2")
+chaseSpeed = 4000.0
+
+[node name="Damaged" type="Node" parent="StateController"]
+script = ExtResource("8_4cmn4")
+animation_name = "damaged"
+
+[node name="Death" type="Node" parent="StateController"]
+script = ExtResource("9_eixto")
+
+[node name="MoveComponent" type="Node" parent="."]
+script = ExtResource("11_hjj1d")
+
+[node name="CollisionBox" type="Area2D" parent="."]
+collision_layer = 256
+collision_mask = 129
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CollisionBox"]
+position = Vector2(0, 14)
+shape = SubResource("CircleShape2D_3l8tp")
+debug_color = Color(0.917647, 0, 0.705882, 0.419608)
+
+[node name="EscapeTime" type="Timer" parent="."]
+wait_time = 5.0
+
+[connection signal="area_entered" from="CollisionBox" to="StateController/Idle" method="_on_collision_box_area_entered"]
+[connection signal="area_entered" from="CollisionBox" to="StateController/Damaged" method="_on_collision_box_area_entered"]
+[connection signal="body_entered" from="CollisionBox" to="StateController/Chase" method="_on_collision_box_body_entered"]
