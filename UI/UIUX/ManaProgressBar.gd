@@ -3,12 +3,13 @@ extends TextureProgressBar
 var player: Player
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	pass # Replace with function body.
+	await get_tree().create_timer(0.2).timeout
+	value = player.playerData.MaxMana
 
-func update(player: Player):
-	value = player.currMana
+func init(player: Player):
 	self.player = player
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
+	value = player.currMana
 	pass

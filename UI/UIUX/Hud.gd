@@ -9,19 +9,17 @@ extends Control
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	hp_progress_bar.update(player)
-	mana_progress_bar.update(player)
-	print(self.player)
+	hp_progress_bar.init(player)
+	mana_progress_bar.init(player)
 	set_process(false)
 	pass
 	 # Replace with function body.
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
+	
 	pass
 
-func on_bag_pressed() -> void:
-	character_sheet.visible = true
 	
 
 
