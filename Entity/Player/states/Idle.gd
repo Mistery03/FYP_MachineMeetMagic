@@ -84,6 +84,7 @@ func process_input(event)->void:
 		transitioned.emit("build")
 	
 	if Input.is_action_just_pressed("EXIT") and parent.isPressable:
+<<<<<<< Updated upstream
 		toggle_menu()
 		
 	if Input.is_action_just_pressed("ACTION") and parent.isStaffEquipped and parent.canInput:
@@ -95,6 +96,15 @@ func process_input(event)->void:
 		parent.set_collision_layer_value(1,false)
 		transitioned.emit("roll")
 		
+=======
+		toggle_menu("EXIT")
+		
+	if Input.is_action_just_pressed("CHARACTERSHEET") and parent.isPressable:
+		print("test")
+		toggle_menu("CHARACTERSHEET")
+
+
+>>>>>>> Stashed changes
 
 func lerp_to_zero():
 	# Gradually lerp the velocity to 0
@@ -105,9 +115,13 @@ func lerp_to_zero():
 	if abs(parent.velocity.x) < 0.01:
 		parent.velocity.x = 0.0
 
-func toggle_menu():
+func toggle_menu(input: String):
 	# Toggle the visibility of the menu
-	parent.playerInventoryController.visible = !parent.playerInventoryController.visible 
+	if input == "EXIT":
+		parent.playerInventoryController.visible = !parent.playerInventoryController.visible 
+	elif input == "CHARACTERSHEET":
+		parent.magicTree.visible = !parent.magicTree.visible 
+		
 
 func update_text_on_mouse(material_name, prefix=""):
 	parent.text_on_mouse.text = prefix + material_name
