@@ -4,7 +4,7 @@ var isDamaged:bool = false
 
 func enter() -> void:
 	super()
-	parent.collision_box.set_collision_mask_value(0,false)
+	parent.collision_box.set_collision_mask_value(1,false)
 	
 
 func exit() -> void:

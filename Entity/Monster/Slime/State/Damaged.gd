@@ -7,7 +7,7 @@ var hasEscaped = false
 
 func enter() -> void:
 	super()
-	
+	parent.collision_box.set_collision_mask_value(1,true)
 
 
 func exit() -> void:
