@@ -29,6 +29,9 @@ const JUMP_VELOCITY = 4.5
 ##Takes in Slot Data so we have a "dictionary"
 @export var inventory:Array[SlotData] = [initSlot]
 
+@export_category("Character Sheet")
+@export var magicTree:Control
+
 @export_category("Camera Settings")
 @export var min_zoom = 6
 @export var max_zoom = 12
