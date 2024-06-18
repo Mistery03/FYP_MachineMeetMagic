@@ -5,7 +5,7 @@ const SPEED = 5.0
 const JUMP_VELOCITY = 4.5
 
 @export var playerData:EntityData
-@export var moveSpeed:float
+
 
 @export_category("Potion")
 @export var potionObject:PotionData
@@ -36,13 +36,8 @@ const JUMP_VELOCITY = 4.5
 @export var zoom_duration = 0.3 # Duration for the zoom transition
 @export var cameraZoom:float = 6
 
-@export_category("State Machine")
-@export var stateController:StateMachine
-
 @onready var inventory_manager = $InventoryManager
 @onready var potion_manager = $PotionManager
-@onready var animation = $Animation
-@onready var move_component = $MoveComponent
 @onready var camera = $Camera
 @onready var localLevel:Node2D
 
@@ -53,8 +48,11 @@ const JUMP_VELOCITY = 4.5
 @onready var walking_on_grass_sfx = $Audio/walkingOnGrassSFX
 @onready var breaking_sfx = $Audio/breakingSFX
 
+@onready var player_hitbox = $PlayerHitbox
 
 @onready var text_on_mouse = $TextOnMouse
+
+signal OnDamageTaken(damageAmount:float)
 
 var potion:Potion
 var isBuildEnabled:bool
@@ -67,6 +65,10 @@ var isPressable:bool = false
 var isMachineUI:bool = false
 var isLevelTransitioning:bool = false
 var isInDestroyArea:bool = false
+var wasAttacking:bool = false
+
+var canInput:bool = true
+var canDash:bool = true
 
 var objectsPosInLevelList:Array[Vector2i]
 
@@ -74,6 +76,8 @@ var zoomValue:float = 6
 
 
 func _ready() -> void:
+	if PlayerGlobal.playerInventory:
+		inventory = PlayerGlobal.playerInventory
 	camera.zoom = Vector2(cameraZoom,cameraZoom)
 	
 	currHealth = playerData.MaxHealth
@@ -81,7 +85,7 @@ func _ready() -> void:
 	currStamina = playerData.MaxStamina
 	
 	inventory_manager.init(self)
-	stateController.init(self,animation,move_component,camera)
+	stateController.init(self,animation,moveComponent,camera)
 	magic_manager.init(self)
 	
 	##NOTE we must declare an inventory of null items size of N max inventory or else there will be a bug
@@ -90,6 +94,7 @@ func _ready() -> void:
 	
 func _process(delta) -> void:
 	mousePos = get_global_mouse_position()
+	#print(currHealth)
 	
 
 
@@ -107,3 +112,9 @@ func _input(event):
 func smooth_zoom(new_zoom):
 	var tween = get_tree().create_tween()
 	tween.tween_property(camera, "zoom", Vector2(new_zoom, new_zoom), zoom_duration)			
+	
+
+
+	
+	
+

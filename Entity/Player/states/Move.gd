@@ -1,11 +1,12 @@
 extends State
 
-@export
-var idle_state: State
+
+@export var attack:State
 
 @onready var walk_timer = $"../../walkSFX"
 
 var prevMouseTilePos = Vector2i(-1,-1)
+var currAnimation
 
 func enter() -> void:
 	super()
@@ -74,6 +75,12 @@ func physics_update(delta: float) -> void:
 func process_input(event)->void:
 	if Input.is_action_just_pressed("EXIT"):
 		toggle_menu()
+	if Input.is_action_just_pressed("ACTION") and parent.isStaffEquipped and parent.canInput:
+		transitioned.emit("attack")
+	if Input.is_action_just_pressed("ROLL") and !moveComponent.isDashing() and parent.canDash:
+		parent.set_collision_layer_value(1,false)
+		transitioned.emit("roll")
+		
 
 func resetStaffPosition():
 	parent.staff.z_index = -1
@@ -104,12 +111,18 @@ func updatePlayerVelocity(delta, movement_direction):
 		
 func changeAnimationVelocity():
 	if parent.velocity.y < 0:
-		animations.play("WALKBACKWARD")
+		currAnimation = "WALKBACKWARD"
+		animations.play(currAnimation)
+			
 	elif parent.velocity.y >0:
-		animations.play("WALKFRONT")
-	elif parent.velocity.x < 0 or parent.velocity.x > 0:
-		animations.play(animation_name.to_upper())
+		currAnimation = "WALKFRONT"
+		animations.play(currAnimation)
 
+	elif parent.velocity.x < 0 or parent.velocity.x > 0:
+		currAnimation =animation_name.to_upper()
+		animations.play(currAnimation)
+		
+	
 func updateStaffPosX():
 	#parent.staff.z_index = -1
 	if parent.velocity.x < 0:
@@ -144,3 +157,5 @@ func update_text_on_mouse(material_name, prefix=""):
 func set_tilemap_cell(mouseTilePos):
 	parent.levelTilemap.set_cell(5, mouseTilePos, 2, parent.levelTilemap.get_cell_atlas_coords(4, mouseTilePos))
 	parent.levelTilemap.set_layer_modulate(5, Color8(255, 255, 255, 255))
+
+
