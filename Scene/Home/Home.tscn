@@ -1,4 +1,4 @@
-[gd_scene load_steps=41 format=3 uid="uid://dm1j4it5oof3n"]
+[gd_scene load_steps=40 format=3 uid="uid://dm1j4it5oof3n"]
 
 [ext_resource type="Script" path="res://Scene/Home/Home.gd" id="1_iycag"]
 [ext_resource type="PackedScene" uid="uid://c1vsfoc55pk0w" path="res://Entity/Player/player.tscn" id="1_jnw16"]
@@ -14,7 +14,6 @@
 [ext_resource type="Resource" uid="uid://b0mv13gn6qdxo" path="res://Material/Construction/wood.tres" id="11_rj2gd"]
 [ext_resource type="Resource" uid="uid://dnawlrv34finb" path="res://Material/Fuel/fuel.tres" id="12_pn2ej"]
 [ext_resource type="Texture2D" uid="uid://b7p1vl7hrge60" path="res://Asset/Level/backgroundChecker.png" id="13_lrcqq"]
-[ext_resource type="PackedScene" uid="uid://crlmmk86fjtnf" path="res://Entity/Monster/Slime/BlueSlime/BlueSlime.tscn" id="15_8mevs"]
 [ext_resource type="Script" path="res://Scene/monsterEntities.gd" id="15_703uy"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_klcm4"]
@@ -1269,7 +1268,8 @@ itemData = ExtResource("12_pn2ej")
 amount = 80
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
-layer = 2
+layer = 3
+visible = false
 
 [node name="FadeOut" type="TextureRect" parent="CanvasLayer"]
 modulate = Color(0, 0, 0, 1)
@@ -1281,6 +1281,3 @@ expand_mode = 2
 [node name="monsterEntities" type="Node" parent="." node_paths=PackedStringArray("player")]
 script = ExtResource("15_703uy")
 player = NodePath("../Player")
-
-[node name="BlueSlime" parent="monsterEntities" instance=ExtResource("15_8mevs")]
-position = Vector2(31, -215)

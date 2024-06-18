@@ -11,13 +11,18 @@ extends Node2D
 @onready var tile_map = $TileMap
 @onready var machineList = $MachineList
 
+@onready var canvas_layer = $CanvasLayer
+
 @onready var fade_out = $CanvasLayer/FadeOut
 
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	canvas_layer.visible = true
 	var tween = get_tree().create_tween()
 	tween.tween_property(fade_out,"modulate:a",0,1.5)
+	await get_tree().create_timer(1.5).timeout
+	canvas_layer.visible = false
 	player.isBuildEnabled = isBuildEnabled
 	player.homeTilemap = tile_map
 	player.localLevel = self

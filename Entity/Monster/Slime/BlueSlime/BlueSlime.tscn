@@ -101,7 +101,6 @@ stateController = NodePath("StateController")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, 14)
-scale = Vector2(1, 1)
 shape = SubResource("CircleShape2D_3l8tp")
 debug_color = Color(0.917647, 0, 0.705882, 0.419608)
 
@@ -147,7 +146,6 @@ collision_mask = 129
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CollisionBox"]
 position = Vector2(0, 14)
-scale = Vector2(1, 1)
 shape = SubResource("CircleShape2D_3l8tp")
 debug_color = Color(0.917647, 0, 0.705882, 0.419608)
 
@@ -155,4 +153,5 @@ debug_color = Color(0.917647, 0, 0.705882, 0.419608)
 wait_time = 5.0
 
 [connection signal="area_entered" from="CollisionBox" to="StateController/Idle" method="_on_collision_box_area_entered"]
-[connection signal="area_entered" from="CollisionBox" to="StateController/Wander" method="_on_collision_box_area_entered"]
+[connection signal="area_entered" from="CollisionBox" to="StateController/Damaged" method="_on_collision_box_area_entered"]
+[connection signal="body_entered" from="CollisionBox" to="StateController/Chase" method="_on_collision_box_body_entered"]

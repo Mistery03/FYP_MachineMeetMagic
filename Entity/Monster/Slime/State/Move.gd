@@ -13,12 +13,15 @@ var maxDistance = 200  # Maximum distance from the spawn point\
 
 func enter() -> void:
 	super()
+	parent.collision_box.set_collision_mask_value(0,false)
+	
 
 func exit() -> void:
 	pass
 
 func update(delta: float) -> void:
-	pass
+	if parent.currHealth <= 0:
+		transitioned.emit("death")
 
 func physics_update(delta: float) -> void:
 	_wander(delta)
@@ -63,5 +66,4 @@ func _smooth_stop(delta):
 		transitioned.emit("idle")
 
 
-func _on_collision_box_area_entered(area):
-	transitioned.emit("damaged")
+

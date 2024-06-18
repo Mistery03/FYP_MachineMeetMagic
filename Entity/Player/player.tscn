@@ -1,4 +1,4 @@
-[gd_scene load_steps=92 format=3 uid="uid://c1vsfoc55pk0w"]
+[gd_scene load_steps=93 format=3 uid="uid://c1vsfoc55pk0w"]
 
 [ext_resource type="Texture2D" uid="uid://bd32dcnew3uvf" path="res://Asset/L.png" id="1_ksidj"]
 [ext_resource type="Script" path="res://Entity/Player/player.gd" id="1_xfdxb"]
@@ -8,6 +8,7 @@
 [ext_resource type="Script" path="res://Potion/PotionManager.gd" id="5_5bgkf"]
 [ext_resource type="Script" path="res://Entity/State/StateMachine.gd" id="7_xedn3"]
 [ext_resource type="Script" path="res://Entity/Player/states/Idle.gd" id="8_5d7eh"]
+[ext_resource type="Script" path="res://Staff/meleeHitbox.gd" id="9_1p8cg"]
 [ext_resource type="Script" path="res://Entity/Player/states/Move.gd" id="9_5ji7g"]
 [ext_resource type="Script" path="res://Entity/Player/states/Build.gd" id="10_10mal"]
 [ext_resource type="Script" path="res://Entity/Player/MoveComponent.gd" id="10_gim7i"]
@@ -31,6 +32,7 @@
 [ext_resource type="Script" path="res://Entity/Player/states/Attack.gd" id="22_nvrgv"]
 [ext_resource type="Script" path="res://Entity/Player/Damaged.gd" id="23_i72d5"]
 [ext_resource type="PackedScene" uid="uid://dab70bjir0c00" path="res://HUD/Magic/magicHUD.tscn" id="24_71sui"]
+[ext_resource type="Script" path="res://Entity/Player/Roll.gd" id="25_j1p4y"]
 [ext_resource type="Texture2D" uid="uid://bi05jqai8a2ss" path="res://Asset/materials.png" id="32_6ejnk"]
 [ext_resource type="PackedScene" uid="uid://cujcp3sdk8yco" path="res://UI/CharacterScene/inventorySheet.tscn" id="32_dbx42"]
 [ext_resource type="PackedScene" uid="uid://eu0xsfmexgdv" path="res://UI/CharacterScene/magic_tree_ui.tscn" id="34_ogpy2"]
@@ -92,14 +94,6 @@ region = Rect2(0, 128, 32, 32)
 atlas = ExtResource("1_ksidj")
 region = Rect2(32, 128, 32, 32)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_lx3k1"]
-atlas = ExtResource("1_ksidj")
-region = Rect2(0, 128, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_eq0v3"]
-atlas = ExtResource("1_ksidj")
-region = Rect2(32, 128, 32, 32)
-
 [sub_resource type="AtlasTexture" id="AtlasTexture_qdy4d"]
 atlas = ExtResource("1_ksidj")
 region = Rect2(64, 128, 32, 32)
@@ -115,6 +109,10 @@ region = Rect2(128, 128, 32, 32)
 [sub_resource type="AtlasTexture" id="AtlasTexture_u18op"]
 atlas = ExtResource("1_ksidj")
 region = Rect2(160, 128, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_eq0v3"]
+atlas = ExtResource("1_ksidj")
+region = Rect2(32, 128, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_03y7p"]
 atlas = ExtResource("1_ksidj")
@@ -225,12 +223,6 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_lx3k1")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_eq0v3")
-}, {
-"duration": 1.0,
 "texture": SubResource("AtlasTexture_qdy4d")
 }, {
 "duration": 1.0,
@@ -248,9 +240,9 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_eq0v3")
 }],
-"loop": true,
+"loop": false,
 "name": &"ROLL",
-"speed": 5.0
+"speed": 8.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -581,7 +573,7 @@ tracks/14/keys = {
 tracks/15/type = "value"
 tracks/15/imported = false
 tracks/15/enabled = true
-tracks/15/path = NodePath("Animation/sword/StaffCollision/CollisionShape2D:position")
+tracks/15/path = NodePath("Animation/sword/meleeHitbox/CollisionShape2D:position")
 tracks/15/interp = 1
 tracks/15/loop_wrap = true
 tracks/15/keys = {
@@ -1065,7 +1057,7 @@ tracks/8/keys = {
 
 [sub_resource type="Animation" id="Animation_7v28i"]
 resource_name = "SWINGBACK"
-length = 0.3
+length = 0.25
 step = 0.05
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -1142,7 +1134,7 @@ tracks/5/keys = {
 tracks/6/type = "value"
 tracks/6/imported = false
 tracks/6/enabled = true
-tracks/6/path = NodePath("Animation/sword/StaffCollision/CollisionShape2D:position")
+tracks/6/path = NodePath("Animation/sword/meleeHitbox/CollisionShape2D:position")
 tracks/6/interp = 1
 tracks/6/loop_wrap = true
 tracks/6/keys = {
@@ -1214,7 +1206,7 @@ tracks/11/keys = {
 
 [sub_resource type="Animation" id="Animation_dxdnh"]
 resource_name = "SWINGFRONT"
-length = 0.3
+length = 0.25
 step = 0.05
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -1327,7 +1319,7 @@ tracks/8/keys = {
 tracks/9/type = "value"
 tracks/9/imported = false
 tracks/9/enabled = true
-tracks/9/path = NodePath("Animation/sword/StaffCollision/CollisionShape2D:position")
+tracks/9/path = NodePath("Animation/sword/meleeHitbox/CollisionShape2D:position")
 tracks/9/interp = 1
 tracks/9/loop_wrap = true
 tracks/9/keys = {
@@ -1894,6 +1886,7 @@ _data = {
 }
 
 [node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("staff", "itemHUDPlaceholder", "playerInventoryController", "animation", "moveComponent", "stateController") groups=["invalidPosition"]]
+z_index = 10
 scale = Vector2(0.1, 0.1)
 collision_mask = 344
 script = ExtResource("1_xfdxb")
@@ -1920,12 +1913,12 @@ position_smoothing_speed = 4.0
 texture_filter = 1
 scale = Vector2(5, 5)
 sprite_frames = SubResource("SpriteFrames_47nfc")
-animation = &"DAMAGED"
+animation = &"ROLL"
 autoplay = "IDLE"
-frame = 1
+frame = 5
 frame_progress = 1.0
 
-[node name="CollisionShape3D" type="CollisionShape2D" parent="."]
+[node name="PlayerHitbox" type="CollisionShape2D" parent="."]
 shape = SubResource("CapsuleShape2D_5n34a")
 
 [node name="Staff" parent="." node_paths=PackedStringArray("customAnimation") instance=ExtResource("22_01tsa")]
@@ -1936,7 +1929,7 @@ customAnimation = NodePath("StaffAnimation")
 
 [node name="Animation" parent="Staff" index="0"]
 visible = true
-z_index = -1
+offset = Vector2(-8, -8)
 flip_h = true
 
 [node name="axe" type="Sprite2D" parent="Staff/Animation" index="0"]
@@ -1956,12 +1949,14 @@ texture = SubResource("AtlasTexture_olby7")
 flip_h = true
 flip_v = true
 
-[node name="StaffCollision" type="Area2D" parent="Staff/Animation/sword"]
+[node name="meleeHitbox" type="Area2D" parent="Staff/Animation/sword"]
 collision_layer = 128
 collision_mask = 256
 monitorable = false
+script = ExtResource("9_1p8cg")
+damagepoint = 20.0
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Staff/Animation/sword/StaffCollision"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Staff/Animation/sword/meleeHitbox"]
 position = Vector2(-4.41942, -4.41942)
 rotation = -0.785398
 shape = SubResource("CapsuleShape2D_gkpp5")
@@ -2060,8 +2055,13 @@ animation_name = "WALKFRONT"
 script = ExtResource("23_i72d5")
 animation_name = "Damaged"
 
-[node name="MoveComponent" type="Node" parent="."]
+[node name="Roll" type="Node" parent="StateController"]
+script = ExtResource("25_j1p4y")
+animation_name = "ROLL"
+
+[node name="MoveComponent" type="Node" parent="." node_paths=PackedStringArray("rollTimer")]
 script = ExtResource("10_gim7i")
+rollTimer = NodePath("../RollDuration")
 inputList = {
 "MoveBackward": "MoveBackward",
 "MoveForward": "MoveForward",
@@ -2070,9 +2070,11 @@ inputList = {
 }
 
 [node name="ROOT_UI" type="CanvasLayer" parent="."]
+layer = 2
 
 [node name="Build" type="Control" parent="ROOT_UI"]
 visible = false
+z_as_relative = false
 layout_mode = 3
 anchors_preset = 0
 offset_right = 40.0
@@ -2080,15 +2082,10 @@ offset_bottom = 40.0
 
 [node name="BuildMenu" parent="ROOT_UI/Build" node_paths=PackedStringArray("parentUI") instance=ExtResource("12_58i1p")]
 layout_mode = 1
-anchors_preset = 4
-anchor_top = 0.5
-anchor_right = 0.0
-anchor_bottom = 0.5
-offset_left = 49.0
-offset_top = 28.0
-offset_right = 49.0
-offset_bottom = 28.0
-grow_horizontal = 1
+offset_left = 48.0
+offset_top = 49.0
+offset_right = 8.0
+offset_bottom = 9.0
 parentUI = NodePath("..")
 
 [node name="BuildHud" parent="ROOT_UI/Build" instance=ExtResource("15_otihl")]
@@ -2283,6 +2280,10 @@ wait_time = 0.8
 wait_time = 0.5
 one_shot = true
 
+[node name="RollDuration" type="Timer" parent="."]
+wait_time = 0.2
+one_shot = true
+
 [node name="TextOnMouse" type="Label" parent="."]
 visible = false
 z_index = 100
@@ -2313,5 +2314,6 @@ pitch_scale = 2.5
 [connection signal="OnDamageTaken" from="." to="StateController/Idle" method="_on_player_on_damage_taken"]
 [connection signal="timeout" from="ROOT_UI/ItemHUDPlaceholder/Timer" to="ROOT_UI/ItemHUDPlaceholder" method="_on_timer_timeout"]
 [connection signal="timeout" from="Timer" to="StateController/Cut" method="_on_timer_timeout"]
+[connection signal="timeout" from="RollDuration" to="StateController/Roll" method="_on_roll_duration_timeout"]
 
 [editable path="Staff"]

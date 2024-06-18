@@ -7,6 +7,7 @@ var hasEscaped = false
 
 func enter() -> void:
 	super()
+	
 
 
 func exit() -> void:
@@ -24,3 +25,9 @@ func physics_update(delta: float) -> void:
 func process_input(event)->void:
 	pass
 
+
+
+func _on_collision_box_area_entered(area):
+	if area is staffMelee:
+		parent.currHealth -= area.damagepoint
+		parent.currHealth = clamp(parent.currHealth,0,parent.maxHP)

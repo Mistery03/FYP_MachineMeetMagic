@@ -5,7 +5,7 @@ var actionPressed:bool = false
 
 func enter() -> void:
 	super()
-	parent.staff.staff_collision.monitorable = true
+	parent.staff.melee_hitbox.monitorable = true
 	if parent.get_local_mouse_position().y > 0:
 		parent.staff.customAnimation.play("SWINGFRONT")
 	elif parent.get_local_mouse_position().y < 0: 
@@ -21,7 +21,7 @@ func enter() -> void:
 
 
 func exit() -> void:
-	parent.staff.staff_collision.monitorable = false
+	parent.staff.melee_hitbox.monitorable = false
 	parent.wasAttacking = true	
 	parent.canInput = true
 	

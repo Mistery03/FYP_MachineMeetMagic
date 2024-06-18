@@ -15,7 +15,8 @@ func exit() -> void:
 	parent.currentDirection = targetDirection  # Set current direction to new target
 
 func update(delta: float) -> void:
-	pass
+	if parent.currHealth <= 0:
+		transitioned.emit("death")
 
 func physics_update(delta: float) -> void:
 	targetDirection = (parent.spawnPoint - parent.global_position).normalized()

@@ -48,10 +48,11 @@ const JUMP_VELOCITY = 4.5
 @onready var walking_on_grass_sfx = $Audio/walkingOnGrassSFX
 @onready var breaking_sfx = $Audio/breakingSFX
 
+@onready var player_hitbox = $PlayerHitbox
 
 @onready var text_on_mouse = $TextOnMouse
 
-signal OnDamageTaken
+signal OnDamageTaken(damageAmount:float)
 
 var potion:Potion
 var isBuildEnabled:bool
@@ -67,6 +68,7 @@ var isInDestroyArea:bool = false
 var wasAttacking:bool = false
 
 var canInput:bool = true
+var canDash:bool = true
 
 var objectsPosInLevelList:Array[Vector2i]
 
@@ -92,6 +94,7 @@ func _ready() -> void:
 	
 func _process(delta) -> void:
 	mousePos = get_global_mouse_position()
+	#print(currHealth)
 	
 
 
@@ -109,3 +112,9 @@ func _input(event):
 func smooth_zoom(new_zoom):
 	var tween = get_tree().create_tween()
 	tween.tween_property(camera, "zoom", Vector2(new_zoom, new_zoom), zoom_duration)			
+	
+
+
+	
+	
+

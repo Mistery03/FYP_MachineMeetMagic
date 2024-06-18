@@ -90,6 +90,10 @@ func process_input(event)->void:
 		parent.staff.customAnimation.stop()
 		parent.canInput = false
 		transitioned.emit("attack")
+	
+	if Input.is_action_just_pressed("ROLL") and !moveComponent.isDashing() and parent.canDash:
+		parent.set_collision_layer_value(1,false)
+		transitioned.emit("roll")
 		
 
 func lerp_to_zero():
@@ -115,5 +119,7 @@ func set_tilemap_cell(mouseTilePos):
 	parent.levelTilemap.set_layer_modulate(5, Color8(255, 255, 255, 255))
 
 
-func _on_player_on_damage_taken():
+func _on_player_on_damage_taken(damageAmount:float):
+	parent.currHealth -= damageAmount
+	parent.currHealth = clamp(parent.currHealth,0,parent.playerData.MaxHealth)
 	transitioned.emit("damaged")
