@@ -28,7 +28,9 @@ func _input(event):
 	#if the magic is that then use that magicSkill
 	
 	
-	###print("pressed")
+	if event.is_action_pressed("CHARACTERSHEET"):
+		magic_tree_ui.visible = true
+		print("pressed")
 		#open ui scene
 		pass
 
