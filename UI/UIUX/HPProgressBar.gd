@@ -5,8 +5,8 @@ signal increaseHP
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	await get_tree().create_timer(0.2).timeout
+	max_value = player.playerData.MaxHealth
 	value = player.playerData.MaxHealth
-	
 	pass
 	#update() # Replace with function body.
 func init(player: Player):
@@ -16,6 +16,7 @@ func init(player: Player):
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	value = player.currHealth
-	print("Player HP: ", value)
-	pass
+	value = clamp(value,0,player.playerData.MaxHealth)
+	
+
 

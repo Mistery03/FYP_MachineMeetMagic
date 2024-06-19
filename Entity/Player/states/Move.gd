@@ -57,6 +57,9 @@ func update(delta: float) -> void:
 			parent.levelTilemap.erase_cell(5,prevMouseTilePos)
 			parent.text_on_mouse.visible = false
 		prevMouseTilePos = mouseTilePos
+	
+	if !moveComponent.isDashing():
+		parent.currStamina +=  10 * delta
 
 func physics_update(delta: float) -> void:
 	var movement_direction = moveComponent.get_movement_direction()	
@@ -77,8 +80,9 @@ func process_input(event)->void:
 		toggle_menu()
 	if Input.is_action_just_pressed("ACTION") and parent.isStaffEquipped and parent.canInput:
 		transitioned.emit("attack")
-	if Input.is_action_just_pressed("ROLL") and !moveComponent.isDashing() and parent.canDash:
+	if Input.is_action_just_pressed("ROLL") and !moveComponent.isDashing() and parent.canDash and parent.currStamina >= 20:
 		parent.set_collision_layer_value(1,false)
+		parent.currStamina -= 20
 		transitioned.emit("roll")
 	
 	if Input.is_action_just_pressed("CHARACTERSHEET") and !parent.isInInventory:
@@ -91,9 +95,7 @@ func process_input(event)->void:
 
 func resetStaffPosition():
 	parent.staff.z_index = -1
-	#parent.staff.rotation = 1.5708
-	#parent.staff.position = parent.staff.originalPos
-	#parent.staff.animation.flip_v = false
+
 
 func updatePlayerVelocity(delta, movement_direction):
 	parent.velocity = movement_direction * parent.moveSpeed * delta
@@ -134,10 +136,10 @@ func updateStaffPosX():
 	#parent.staff.z_index = -1
 	if parent.velocity.x < 0:
 		parent.staff.customAnimation.play("RESETRIGHT")
-		#parent.staff.position = Vector2(50, -20) 
+
 	elif parent.velocity.x > 0:
 		parent.staff.customAnimation.play("RESETLEFT")
-		#parent.staff.position = Vector2(-50, -20)
+
 
 
 func updateStaffPosY():

@@ -24,6 +24,9 @@ func exit()->void:
 		
 	
 func update(delta: float) -> void:
+	if !moveComponent.isDashing():
+		parent.currStamina +=  10 * delta
+		
 	if parent.levelTilemap and !parent.isLevelTransitioning:
 		var mouseTilePos = parent.levelTilemap.local_to_map(parent.mousePos)
 		var parentPos = parent.levelTilemap.local_to_map(parent.position)
@@ -92,8 +95,9 @@ func process_input(event)->void:
 		parent.canInput = false
 		transitioned.emit("attack")
 	
-	if Input.is_action_just_pressed("ROLL") and !moveComponent.isDashing() and parent.canDash:
+	if Input.is_action_just_pressed("ROLL") and !moveComponent.isDashing() and parent.canDash and parent.currStamina >= 20:
 		parent.set_collision_layer_value(1,false)
+		parent.currStamina -= 20
 		transitioned.emit("roll")
 	
 	if Input.is_action_just_pressed("CHARACTERSHEET") and !parent.isInInventory:
