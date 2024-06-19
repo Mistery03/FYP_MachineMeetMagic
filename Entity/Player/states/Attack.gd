@@ -34,7 +34,6 @@ func physics_update(delta: float) -> void:
 	lerp_to_zero()
 	
 	if   !parent.staff.customAnimation.is_playing():
-		
 		transitioned.emit("idle")
 		
 	

@@ -27,12 +27,10 @@ func _input(event):
 	#player -> manager -> magicSkill 
 	#if the magic is that then use that magicSkill
 	
-	
 	if event.is_action_pressed("CHARACTERSHEET"):
 		magic_tree_ui.visible = true
-		print("pressed")
+		player.isPressable = false
 		#open ui scene
-		pass
 
 func normalAttack():
 	#follow mouse position, when click then play attack animation

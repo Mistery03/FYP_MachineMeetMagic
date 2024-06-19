@@ -95,6 +95,7 @@ func _ready() -> void:
 func _process(delta) -> void:
 	mousePos = get_global_mouse_position()
 	print(currHealth)
+	print(canInput)
 	
 
 
