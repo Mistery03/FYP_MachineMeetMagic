@@ -1,28 +1,21 @@
 class_name CharacterSheet
 extends Control
 
+@export var player : Player
+
 @onready var hp_progress_bar = %HPProgressBar
 @onready var mana_progress_bar = $ManaProgressBar
-@export var player : Player
-@onready var character_sheet = $CharacterSheet 
-
+@onready var stamina_progress_bar = $StaminaProgressBar
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	hp_progress_bar.update(player)
-	mana_progress_bar.update(player)
-	print(self.player)
-	set_process(false)
-	pass
-	 # Replace with function body.
+	hp_progress_bar.init(player)
+	mana_progress_bar.init(player)
+	stamina_progress_bar.init(player)
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
-	pass
 
-func on_bag_pressed() -> void:
-	character_sheet.visible = true
-	
+
+
 
 
 

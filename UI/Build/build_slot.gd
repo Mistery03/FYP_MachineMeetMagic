@@ -22,6 +22,7 @@ func _on_button_mouse_entered():
 	build_menu.buildingName = buildingData.name
 	build_menu.texture = buildingData.texture
 	build_menu.description = buildingData.description
+	build_menu.instance = buildingData.instance
 
 func _on_button_mouse_exited():
 	build_menu.timer.paused = false

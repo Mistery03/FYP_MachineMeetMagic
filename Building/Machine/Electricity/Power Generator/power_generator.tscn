@@ -7,13 +7,14 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_oek2j"]
 size = Vector2(24, 29)
 
-[node name="PowerGenerator" type="Node2D" node_paths=PackedStringArray("machineUI")]
+[node name="PowerGenerator" type="Node2D" node_paths=PackedStringArray("machineUI", "animation")]
 z_index = 10
 texture_filter = 1
 script = ExtResource("1_sb6xt")
-machineUI = NodePath("Root/PowerGeneratorUI")
 manaPerSecond = 1000.0
 burnPerSecond = 1.0
+machineUI = NodePath("Root/PowerGeneratorUI")
+animation = NodePath("Animation")
 
 [node name="Animation" type="AnimatedSprite2D" parent="."]
 sprite_frames = ExtResource("2_tmhor")

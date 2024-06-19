@@ -1,6 +1,8 @@
+##@NOTE State interface
 class_name State
 extends Node
 
+@export_category("Parent Animation")
 @export
 var animation_name: String = "IDLE"
 
