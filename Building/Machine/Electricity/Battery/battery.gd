@@ -3,7 +3,6 @@ extends Machine
 
 const MIN_MANA_THRESHOLD: float = 0.0001
 
-@export var machineUI:Control
 @export var maxCapacity:float 
 @export var manaOutputPerSecond:int
 
@@ -77,6 +76,7 @@ func _on_interectable_input_event(viewport, event, shape_idx):
 		if event.is_action_pressed("ACTION"):
 			machineUI.visible = true
 			player.itemHUDPlaceholder.visible = false
+			player.playerHUD.visible = false
 			player.isMachineUI = true
 
 func _input(event):
@@ -84,6 +84,7 @@ func _input(event):
 		if Input.is_action_just_pressed("EXIT"):
 			machineUI.visible = false
 			player.itemHUDPlaceholder.visible = true
+			player.playerHUD.visible = true
 			player.isPressable = false
 			player.isMachineUI = false
 			

@@ -10,6 +10,7 @@ var isInMenu:bool = false
 var buildingName:String = "default"
 var texture:Texture2D
 var description:String
+var instance:PackedScene
 
 
 func _on_timer_timeout():

@@ -8,6 +8,7 @@ extends Node2D
 
 @export_category("Player Setting")
 @export var player:Player
+@export var isBuildEnabled:bool = false
 
 @onready var rooms = $Rooms
 @onready var fade_out = $CanvasLayer/FadeOut
@@ -22,6 +23,7 @@ func init(player:Player):
 	print(self.player)
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	player.isBuildEnabled = isBuildEnabled
 	wind_sfx.play()
 	var tween = get_tree().create_tween()
 	tween.tween_property(fade_out,"modulate:a",0,1.5)

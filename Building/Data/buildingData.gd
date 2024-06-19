@@ -6,3 +6,4 @@ extends Resource
 @export var texture:Texture2D
 @export var atlasCoord:Vector2i = Vector2i(-1,-1)
 @export var description:String = ""
+@export var instance:PackedScene 

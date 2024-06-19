@@ -31,6 +31,7 @@ func enter() -> void:
 	buildUI.visible = true
 	parent.isBuildMode = true
 	parent.itemHUDPlaceholder.visible = false
+	parent.playerHUD.visible = false
 	camera.position_smoothing_enabled = true
 	parent.isPressable = false
 
@@ -55,8 +56,9 @@ func update(delta: float) -> void:
 		var machinePreviewData:TileData = parent.homeTilemap.get_cell_tile_data(1,mouseTilePos)
 		
 		if machinePreviewData:
-			machineInstance =  machinePreviewData.get_custom_data(buildMenu.buildingName.to_pascal_case())
-			
+			#machineInstance =  machinePreviewData.get_custom_data(buildMenu.buildingName.to_pascal_case())
+			machinePreviewData.set_custom_data("MachineInstance",buildMenu.instance)
+			machineInstance =  machinePreviewData.get_custom_data("MachineInstance")
 		if machineData:
 			isOccupied = machineData.get_custom_data("occupied")
 			set_tile_color_based_on_occupation(isOccupied, mouseTilePos, parentPos)

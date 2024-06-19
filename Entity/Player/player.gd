@@ -20,6 +20,7 @@ const JUMP_VELOCITY = 4.5
 
 @export_category("HUD")
 @export var itemHUDPlaceholder:Control
+@export var playerHUD:Control
 
 @export_category("Player Inventory")
 @export var playerInventoryController:Control
@@ -64,6 +65,7 @@ var homeTilemap:TileMap
 var levelTilemap:TileMap
 var mousePos:Vector2
 
+var isAttackable:bool = true
 var isPressable:bool = false
 var isMachineUI:bool = false
 var isLevelTransitioning:bool = false
