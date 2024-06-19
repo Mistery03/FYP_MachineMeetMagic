@@ -20,6 +20,8 @@ const JUMP_VELOCITY = 4.5
 
 @export_category("HUD")
 @export var itemHUDPlaceholder:Control
+@export var playerHUD:Control
+@export var playerCurrencyHUD:Label
 
 @export_category("Player Inventory")
 @export var playerInventoryController:Control
@@ -28,6 +30,9 @@ const JUMP_VELOCITY = 4.5
 @export var initSlot:SlotData
 ##Takes in Slot Data so we have a "dictionary"
 @export var inventory:Array[SlotData] = [initSlot]
+
+@export_category("Player Magic")
+@export var magicUI:Control
 
 @export_category("Camera Settings")
 @export var min_zoom = 6
@@ -61,11 +66,13 @@ var homeTilemap:TileMap
 var levelTilemap:TileMap
 var mousePos:Vector2
 
+var isAttackable:bool = true
 var isPressable:bool = false
 var isMachineUI:bool = false
 var isLevelTransitioning:bool = false
 var isInDestroyArea:bool = false
 var wasAttacking:bool = false
+var isInInventory:bool = false
 
 var canInput:bool = true
 var canDash:bool = true
@@ -74,28 +81,29 @@ var objectsPosInLevelList:Array[Vector2i]
 
 var zoomValue:float = 6
 
-
 func _ready() -> void:
+	playerCurrencyHUD.text = str(MagicEssenceCurrency)
 	if PlayerGlobal.playerInventory:
 		inventory = PlayerGlobal.playerInventory
 	camera.zoom = Vector2(cameraZoom,cameraZoom)
-	
+
 	currHealth = playerData.MaxHealth
 	currMana = playerData.MaxMana
 	currStamina = playerData.MaxStamina
-	
+
 	inventory_manager.init(self)
 	stateController.init(self,animation,moveComponent,camera)
 	magic_manager.init(self)
-	
+
 	##NOTE we must declare an inventory of null items size of N max inventory or else there will be a bug
 	#for i in range(maxInventorySize):
 		#inventory.append(null)
-	
+
 func _process(delta) -> void:
+	playerCurrencyHUD.text = str(MagicEssenceCurrency)
 	mousePos = get_global_mouse_position()
 	print(currHealth)
-	
+	print(canInput)
 
 
 func _input(event):
@@ -108,13 +116,13 @@ func _input(event):
 			zoomValue-=zoom_step
 			zoomValue = clamp(zoomValue,min_zoom,max_zoom)
 			smooth_zoom(zoomValue)
-			
+
 func smooth_zoom(new_zoom):
 	var tween = get_tree().create_tween()
-	tween.tween_property(camera, "zoom", Vector2(new_zoom, new_zoom), zoom_duration)			
-	
+	tween.tween_property(camera, "zoom", Vector2(new_zoom, new_zoom), zoom_duration)
 
 
-	
-	
+
+
+
 

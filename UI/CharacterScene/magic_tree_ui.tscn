@@ -12,31 +12,21 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="ScrollUi" type="Sprite2D" parent="."]
-z_index = -1
-texture_filter = 1
-position = Vector2(801, 371.5)
-scale = Vector2(1.66458, 1.35312)
+[node name="ScrollBG" type="TextureRect" parent="."]
+offset_left = -8.0
+offset_top = -300.0
+offset_right = 1594.0
+offset_bottom = 1052.0
 texture = ExtResource("1_kiiy6")
 
-[node name="NinePatchRect" type="NinePatchRect" parent="."]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = 140.0
-offset_top = 118.0
-offset_right = -139.0
-offset_bottom = -118.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="Label" type="Label" parent="NinePatchRect"]
+[node name="Label" type="Label" parent="."]
 layout_mode = 1
 anchors_preset = 10
 anchor_right = 1.0
-offset_right = -683.0
-offset_bottom = 47.0
+offset_left = 566.0
+offset_top = 107.0
+offset_right = -845.0
+offset_bottom = 154.0
 grow_horizontal = 2
 scale = Vector2(2, 2)
 theme_override_colors/font_color = Color(0, 0, 0, 1)

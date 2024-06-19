@@ -1,4 +1,4 @@
-[gd_scene load_steps=94 format=3 uid="uid://c1vsfoc55pk0w"]
+[gd_scene load_steps=98 format=3 uid="uid://c1vsfoc55pk0w"]
 
 [ext_resource type="Texture2D" uid="uid://bd32dcnew3uvf" path="res://Asset/L.png" id="1_ksidj"]
 [ext_resource type="Script" path="res://Entity/Player/player.gd" id="1_xfdxb"]
@@ -14,13 +14,14 @@
 [ext_resource type="Script" path="res://Entity/Player/MoveComponent.gd" id="10_gim7i"]
 [ext_resource type="Script" path="res://Entity/Player/states/Destroy.gd" id="11_7uhfu"]
 [ext_resource type="Script" path="res://Magic/MagicManager.gd" id="11_ur7hc"]
+[ext_resource type="Script" path="res://Entity/Player/InventoryManager.gd" id="12_0atyh"]
 [ext_resource type="PackedScene" uid="uid://dgn61wamn10el" path="res://UI/Build/build_menu.tscn" id="12_58i1p"]
 [ext_resource type="Script" path="res://Entity/Player/states/Wiring.gd" id="12_ii11w"]
 [ext_resource type="Script" path="res://Entity/Player/states/WiringBattery.gd" id="13_3c3kb"]
 [ext_resource type="PackedScene" uid="uid://htlhwdgl8ast" path="res://HUD/DynamicLabel/dynamicLabel.tscn" id="14_8yknx"]
 [ext_resource type="Script" path="res://Entity/Player/states/Action.gd" id="14_h6fpb"]
 [ext_resource type="FontFile" uid="uid://cl3rxpo58micg" path="res://Asset/Font/Lambda-Regular.ttf" id="14_me7n8"]
-[ext_resource type="PackedScene" uid="uid://dd2ysdc77pxkq" path="res://UI/Build/build_hud.tscn" id="15_otihl"]
+[ext_resource type="PackedScene" path="res://UI/Build/build_hud.tscn" id="15_otihl"]
 [ext_resource type="PackedScene" uid="uid://cnj7jj8r34b1q" path="res://Material/Material.tscn" id="15_qe768"]
 [ext_resource type="Script" path="res://UI/Wiring/Wiring.gd" id="18_3q6sb"]
 [ext_resource type="Script" path="res://Entity/Player/ItemHUDPlaceholder.gd" id="19_4bbe1"]
@@ -41,7 +42,10 @@
 [ext_resource type="AudioStream" uid="uid://k857dg5qycjv" path="res://Asset/SFX/placingObject.mp3" id="37_raash"]
 [ext_resource type="AudioStream" uid="uid://t8eii58rce5c" path="res://Asset/SFX/walkingOnWood.mp3" id="38_o8wch"]
 [ext_resource type="PackedScene" uid="uid://biincpe1d1eek" path="res://UI/UIUX/Player_HUD.tscn" id="39_0xjwo"]
+[ext_resource type="Script" path="res://UI/CharacterScene/magic_tree_ui.gd" id="39_msw74"]
 [ext_resource type="AudioStream" uid="uid://2lu5if0yp64i" path="res://Asset/SFX/forestWalkSFX.mp3" id="39_wma1b"]
+[ext_resource type="Texture2D" uid="uid://dy6bsmjnf8u44" path="res://Asset/UIUX/Container.png" id="42_uk6eg"]
+[ext_resource type="Texture2D" uid="uid://cruxbb2jv2vmx" path="res://Asset/Materials1.png" id="43_wy3ce"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_dykra"]
 atlas = ExtResource("1_ksidj")
@@ -1680,135 +1684,6 @@ _data = {
 "idleFront": SubResource("Animation_76tdj")
 }
 
-[sub_resource type="GDScript" id="GDScript_3ckag"]
-script/source = "class_name  InventoryManager
-extends Node
-
-##WARNING InitSlot is just to ensure the inventory will return data, DO NOT REMOVE
-@export var initSlot:SlotData
-
-##Max Stack size
-const MAXSTACKSIZE:int = 99
-
-##To communicate to other objects that have the inventory system
-signal OnInventoryChanged(inventory)
-
-var inventory:Array[SlotData]  = [initSlot]
-
-##Of course we need reference to the player's inventory
-var player:Player
-
-var overflow:int = 0
-
-##To ensure everything is assigned
-func init(player:Player):
-	inventory = player.inventory
-	self.player = player
-	#print(inventory)
-
-##Insert item have several logics that must take in for consideration
-##1: We check for overflow of items because that we set max stacks to be 99, it's important to take account the chances that it will overflow (exp:99 + 5 then what?)
-##2: Hence we check for overflow
-\"\"\"
-func insert(droppedItem:GameMaterial,amount:int):
-	##Because overflow is a class variable rather than a local variable, we need to check if it's zero else we add alongside with the other overflows
-	if overflow <= 0:
-		overflow = amount
-	else:
-		overflow += amount
-	
-	##CASE 1 when there no item then simply insert
-	for index in len(inventory):
-		if inventory[index] ==null:
-			var slotToBeAdded = SlotData.new()
-			slotToBeAdded.item = droppedItem.itemData
-			slotToBeAdded.amount = overflow
-			inventory[index] = slotToBeAdded
-
-			overflow = 0
-			break
-		##CASE 2 when there are items then we need to check if it's the same and is the amount below the max stack size		
-		elif inventory[index].item == droppedItem.itemData:
-			if  inventory[index].amount < MAXSTACKSIZE:
-				##We keep track of available space to easily check for overflow 
-				var availableSpace = MAXSTACKSIZE -  inventory[index].amount 
-				##If the overflow is below the available space we just increase the amount
-				if overflow <= availableSpace:
-					inventory[index].amount += overflow
-					overflow = 0
-					break
-				else:
-					##Overflow too much? Just add the availablespace to the next slot
-					inventory[index].amount += availableSpace
-					overflow -= availableSpace
-
-	##To communicate to other objects
-	OnInventoryChanged.emit(inventory)
-\"\"\"
-func insert(droppedItem: GameMaterial, amount: int):
-	var overflow = amount
-
-	while overflow > 0:
-		var inserted = false
-
-	## Check existing inventory for the same item and add if there's available space
-		for index in range(len(inventory)):
-			if inventory[index] != null and inventory[index].item == droppedItem.itemData:
-				if inventory[index].amount < MAXSTACKSIZE:
-					var availableSpace = MAXSTACKSIZE - inventory[index].amount
-					if overflow <= availableSpace:
-						inventory[index].amount += overflow
-						overflow = 0
-						inserted = true
-						break
-					else:
-						inventory[index].amount += availableSpace
-						overflow -= availableSpace
-						inserted = true
-
-		## If overflow still exists and there are empty slots, create new SlotData
-		if overflow > 0:
-			for index in range(len(inventory)):
-				if inventory[index] == null:
-					var slotToBeAdded = SlotData.new()
-					slotToBeAdded.item = droppedItem.itemData
-					if overflow <= MAXSTACKSIZE:
-						slotToBeAdded.amount = overflow
-						overflow = 0
-					else:
-						slotToBeAdded.amount = MAXSTACKSIZE
-						overflow -= MAXSTACKSIZE
-					inventory[index] = slotToBeAdded
-					inserted = true
-					break
-
-		## If there was no empty slot to insert the overflow, stop the loop to prevent infinite loop
-		if not inserted:
-			break
-
-	## To communicate to other objects
-	OnInventoryChanged.emit(inventory)
-func remove(selectedItem:GameMaterial,amount:int):
-	pass
-
-func getSameItemCount(item:MaterialData)->int:
-	var count:int = 0
-	for slot in len(inventory):
-		if inventory[slot].item == item:
-			count +=1
-	return count
-
-##NOTE I forgot why I coded this so just keep it
-func _getItemIndex(item:MaterialData) -> int:
-	for slot in len(inventory):
-		if inventory[slot].item == item:
-			return slot
-	
-	return -1
-
-
-"
-
 [sub_resource type="AtlasTexture" id="AtlasTexture_1dcaq"]
 atlas = ExtResource("21_kqu6c")
 region = Rect2(48, 192, 24, 24)
@@ -1886,7 +1761,11 @@ _data = {
 "popIn": SubResource("Animation_gojmo")
 }
 
-[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("staff", "itemHUDPlaceholder", "playerInventoryController", "animation", "moveComponent", "stateController") groups=["invalidPosition"]]
+[sub_resource type="AtlasTexture" id="AtlasTexture_fg7kg"]
+atlas = ExtResource("43_wy3ce")
+region = Rect2(160, 0, 32, 32)
+
+[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("staff", "itemHUDPlaceholder", "playerHUD", "playerCurrencyHUD", "playerInventoryController", "magicUI", "animation", "moveComponent", "stateController") groups=["invalidPosition"]]
 z_index = 10
 scale = Vector2(0.1, 0.1)
 collision_mask = 344
@@ -1895,10 +1774,13 @@ playerData = ExtResource("2_g17go")
 potionObject = ExtResource("3_41una")
 staff = NodePath("Staff")
 itemHUDPlaceholder = NodePath("ROOT_UI/ItemHUDPlaceholder")
+playerHUD = NodePath("ROOT_UI/Player_hud")
+playerCurrencyHUD = NodePath("ROOT_UI/CurrencyHolder/Currency")
 playerInventoryController = NodePath("ROOT_UI/InventoryUI")
 maxInventorySize = 20
 initSlot = ExtResource("4_e4jpf")
 inventory = Array[Object]([null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null])
+magicUI = NodePath("ROOT_UI/MagicTreeUI")
 min_zoom = 2
 zoom_step = 0.4
 moveSpeed = 7000.0
@@ -1979,8 +1861,7 @@ pitch_scale = 0.8
 attenuation = 1.36604
 
 [node name="InventoryManager" type="Node" parent="."]
-script = SubResource("GDScript_3ckag")
-initSlot = ExtResource("4_e4jpf")
+script = ExtResource("12_0atyh")
 
 [node name="PotionManager" type="Node" parent="." node_paths=PackedStringArray("inventoryUI", "potionHUD")]
 script = ExtResource("5_5bgkf")
@@ -1998,11 +1879,14 @@ current_state = NodePath("Idle")
 [node name="Idle" type="Node" parent="StateController" node_paths=PackedStringArray("attack")]
 script = ExtResource("8_5d7eh")
 attack = NodePath("../Attack")
+rollStaminaComsumption = 10.0
 animation_name = "Idle"
 
-[node name="Move" type="Node" parent="StateController" node_paths=PackedStringArray("attack")]
+[node name="Move" type="Node" parent="StateController" node_paths=PackedStringArray("attack", "walk_timer")]
 script = ExtResource("9_5ji7g")
 attack = NodePath("../Attack")
+walk_timer = NodePath("../../walkSFX")
+rollStaminaComsumption = 20.0
 animation_name = "walkSide"
 
 [node name="Build" type="Node" parent="StateController" node_paths=PackedStringArray("wiring_machine_state", "wiring_battery_state", "buildUI", "buildMenu")]
@@ -2045,7 +1929,7 @@ inputList = {
 
 [node name="Cut" type="Node" parent="StateController" node_paths=PackedStringArray("timer")]
 script = ExtResource("14_h6fpb")
-timer = NodePath("../../Timer")
+timer = NodePath("../../ActionTimer")
 materialInstance = ExtResource("15_qe768")
 
 [node name="Attack" type="Node" parent="StateController"]
@@ -2072,6 +1956,10 @@ inputList = {
 
 [node name="ROOT_UI" type="CanvasLayer" parent="."]
 layer = 2
+
+[node name="Player_hud" parent="ROOT_UI" node_paths=PackedStringArray("player") instance=ExtResource("39_0xjwo")]
+player = NodePath("../..")
+metadata/_edit_use_anchors_ = true
 
 [node name="Build" type="Control" parent="ROOT_UI"]
 visible = false
@@ -2271,13 +2159,42 @@ one_shot = true
 visible = false
 player = NodePath("../..")
 
-[node name="MagicTreeUI" parent="ROOT_UI" instance=ExtResource("34_ogpy2")]
+[node name="MagicTreeUI" parent="ROOT_UI" node_paths=PackedStringArray("player") instance=ExtResource("34_ogpy2")]
 visible = false
-
-[node name="Player_hud" parent="ROOT_UI" node_paths=PackedStringArray("player") instance=ExtResource("39_0xjwo")]
+script = ExtResource("39_msw74")
 player = NodePath("../..")
 
-[node name="Timer" type="Timer" parent="."]
+[node name="CurrencyHolder" type="NinePatchRect" parent="ROOT_UI"]
+self_modulate = Color(0.0156863, 0.184314, 0.32549, 1)
+texture_filter = 1
+offset_left = 1314.0
+offset_top = 787.0
+offset_right = 1505.0
+offset_bottom = 836.0
+scale = Vector2(1.2, 1.2)
+texture = ExtResource("42_uk6eg")
+region_rect = Rect2(0, -2, 32, 37)
+
+[node name="TextureRect" type="TextureRect" parent="ROOT_UI/CurrencyHolder"]
+layout_mode = 0
+offset_left = 8.33333
+offset_top = 5.0
+offset_right = 48.3333
+offset_bottom = 45.0
+texture = SubResource("AtlasTexture_fg7kg")
+
+[node name="Currency" type="Label" parent="ROOT_UI/CurrencyHolder"]
+layout_mode = 0
+offset_left = 72.5
+offset_top = 3.33335
+offset_right = 174.5
+offset_bottom = 46.3334
+theme_override_fonts/font = ExtResource("14_me7n8")
+theme_override_font_sizes/font_size = 34
+text = "999999"
+horizontal_alignment = 2
+
+[node name="ActionTimer" type="Timer" parent="."]
 wait_time = 0.8
 
 [node name="walkSFX" type="Timer" parent="."]
@@ -2317,7 +2234,7 @@ pitch_scale = 2.5
 
 [connection signal="OnDamageTaken" from="." to="StateController/Idle" method="_on_player_on_damage_taken"]
 [connection signal="timeout" from="ROOT_UI/ItemHUDPlaceholder/Timer" to="ROOT_UI/ItemHUDPlaceholder" method="_on_timer_timeout"]
-[connection signal="timeout" from="Timer" to="StateController/Cut" method="_on_timer_timeout"]
+[connection signal="timeout" from="ActionTimer" to="StateController/Cut" method="_on_timer_timeout"]
 [connection signal="timeout" from="RollDuration" to="StateController/Roll" method="_on_roll_duration_timeout"]
 
 [editable path="Staff"]
