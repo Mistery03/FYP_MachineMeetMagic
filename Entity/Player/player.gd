@@ -21,6 +21,7 @@ const JUMP_VELOCITY = 4.5
 @export_category("HUD")
 @export var itemHUDPlaceholder:Control
 @export var playerHUD:Control
+@export var playerCurrencyHUD:Label
 
 @export_category("Player Inventory")
 @export var playerInventoryController:Control
@@ -81,6 +82,7 @@ var objectsPosInLevelList:Array[Vector2i]
 var zoomValue:float = 6
 
 func _ready() -> void:
+	playerCurrencyHUD.text = str(MagicEssenceCurrency)
 	if PlayerGlobal.playerInventory:
 		inventory = PlayerGlobal.playerInventory
 	camera.zoom = Vector2(cameraZoom,cameraZoom)
@@ -98,10 +100,10 @@ func _ready() -> void:
 		#inventory.append(null)
 
 func _process(delta) -> void:
+	playerCurrencyHUD.text = str(MagicEssenceCurrency)
 	mousePos = get_global_mouse_position()
 	print(currHealth)
 	print(canInput)
-
 
 
 func _input(event):

@@ -1,4 +1,4 @@
-[gd_scene load_steps=95 format=3 uid="uid://c1vsfoc55pk0w"]
+[gd_scene load_steps=98 format=3 uid="uid://c1vsfoc55pk0w"]
 
 [ext_resource type="Texture2D" uid="uid://bd32dcnew3uvf" path="res://Asset/L.png" id="1_ksidj"]
 [ext_resource type="Script" path="res://Entity/Player/player.gd" id="1_xfdxb"]
@@ -44,6 +44,8 @@
 [ext_resource type="PackedScene" uid="uid://biincpe1d1eek" path="res://UI/UIUX/Player_HUD.tscn" id="39_0xjwo"]
 [ext_resource type="Script" path="res://UI/CharacterScene/magic_tree_ui.gd" id="39_msw74"]
 [ext_resource type="AudioStream" uid="uid://2lu5if0yp64i" path="res://Asset/SFX/forestWalkSFX.mp3" id="39_wma1b"]
+[ext_resource type="Texture2D" uid="uid://dy6bsmjnf8u44" path="res://Asset/UIUX/Container.png" id="42_uk6eg"]
+[ext_resource type="Texture2D" uid="uid://cruxbb2jv2vmx" path="res://Asset/Materials1.png" id="43_wy3ce"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_dykra"]
 atlas = ExtResource("1_ksidj")
@@ -1759,7 +1761,11 @@ _data = {
 "popIn": SubResource("Animation_gojmo")
 }
 
-[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("staff", "itemHUDPlaceholder", "playerHUD", "playerInventoryController", "magicUI", "animation", "moveComponent", "stateController") groups=["invalidPosition"]]
+[sub_resource type="AtlasTexture" id="AtlasTexture_fg7kg"]
+atlas = ExtResource("43_wy3ce")
+region = Rect2(160, 0, 32, 32)
+
+[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("staff", "itemHUDPlaceholder", "playerHUD", "playerCurrencyHUD", "playerInventoryController", "magicUI", "animation", "moveComponent", "stateController") groups=["invalidPosition"]]
 z_index = 10
 scale = Vector2(0.1, 0.1)
 collision_mask = 344
@@ -1769,6 +1775,7 @@ potionObject = ExtResource("3_41una")
 staff = NodePath("Staff")
 itemHUDPlaceholder = NodePath("ROOT_UI/ItemHUDPlaceholder")
 playerHUD = NodePath("ROOT_UI/Player_hud")
+playerCurrencyHUD = NodePath("ROOT_UI/CurrencyHolder/Currency")
 playerInventoryController = NodePath("ROOT_UI/InventoryUI")
 maxInventorySize = 20
 initSlot = ExtResource("4_e4jpf")
@@ -1952,6 +1959,7 @@ layer = 2
 
 [node name="Player_hud" parent="ROOT_UI" node_paths=PackedStringArray("player") instance=ExtResource("39_0xjwo")]
 player = NodePath("../..")
+metadata/_edit_use_anchors_ = true
 
 [node name="Build" type="Control" parent="ROOT_UI"]
 visible = false
@@ -2155,6 +2163,36 @@ player = NodePath("../..")
 visible = false
 script = ExtResource("39_msw74")
 player = NodePath("../..")
+
+[node name="CurrencyHolder" type="NinePatchRect" parent="ROOT_UI"]
+self_modulate = Color(0.0156863, 0.184314, 0.32549, 1)
+texture_filter = 1
+offset_left = 1314.0
+offset_top = 787.0
+offset_right = 1505.0
+offset_bottom = 836.0
+scale = Vector2(1.2, 1.2)
+texture = ExtResource("42_uk6eg")
+region_rect = Rect2(0, -2, 32, 37)
+
+[node name="TextureRect" type="TextureRect" parent="ROOT_UI/CurrencyHolder"]
+layout_mode = 0
+offset_left = 8.33333
+offset_top = 5.0
+offset_right = 48.3333
+offset_bottom = 45.0
+texture = SubResource("AtlasTexture_fg7kg")
+
+[node name="Currency" type="Label" parent="ROOT_UI/CurrencyHolder"]
+layout_mode = 0
+offset_left = 72.5
+offset_top = 3.33335
+offset_right = 174.5
+offset_bottom = 46.3334
+theme_override_fonts/font = ExtResource("14_me7n8")
+theme_override_font_sizes/font_size = 34
+text = "999999"
+horizontal_alignment = 2
 
 [node name="ActionTimer" type="Timer" parent="."]
 wait_time = 0.8
