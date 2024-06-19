@@ -14,6 +14,7 @@
 [ext_resource type="Script" path="res://Entity/Player/MoveComponent.gd" id="10_gim7i"]
 [ext_resource type="Script" path="res://Entity/Player/states/Destroy.gd" id="11_7uhfu"]
 [ext_resource type="Script" path="res://Magic/MagicManager.gd" id="11_ur7hc"]
+[ext_resource type="Script" path="res://Entity/Player/InventoryManager.gd" id="12_0atyh"]
 [ext_resource type="PackedScene" uid="uid://dgn61wamn10el" path="res://UI/Build/build_menu.tscn" id="12_58i1p"]
 [ext_resource type="Script" path="res://Entity/Player/states/Wiring.gd" id="12_ii11w"]
 [ext_resource type="Script" path="res://Entity/Player/states/WiringBattery.gd" id="13_3c3kb"]
@@ -1681,100 +1682,6 @@ _data = {
 "idleFront": SubResource("Animation_76tdj")
 }
 
-[sub_resource type="GDScript" id="GDScript_3ckag"]
-script/source = "class_name  InventoryManager
-extends Node
-
-##WARNING InitSlot is just to ensure the inventory will return data, DO NOT REMOVE
-@export var initSlot:SlotData
-
-##Max Stack size
-const MAXSTACKSIZE:int = 99
-
-##To communicate to other objects that have the inventory system
-signal OnInventoryChanged(inventory)
-
-var inventory:Array[SlotData]  = [initSlot]
-
-##Of course we need reference to the player's inventory
-var player:Player
-
-var overflow:int = 0
-
-##To ensure everything is assigned
-func init(player:Player):
-	inventory = player.inventory
-	self.player = player
-	#print(inventory)
-
-##Insert item have several logics that must take in for consideration
-##1: We check for overflow of items because that we set max stacks to be 99, it's important to take account the chances that it will overflow (exp:99 + 5 then what?)
-##2: Hence we check for overflow
-
-func insert(droppedItem: GameMaterial, amount: int):
-	var overflow = amount
-
-	while overflow > 0:
-		var inserted = false
-
-	## Check existing inventory for the same item and add if there's available space
-		for index in range(len(inventory)):
-			if inventory[index] != null and inventory[index].item == droppedItem.itemData:
-				if inventory[index].amount < MAXSTACKSIZE:
-					var availableSpace = MAXSTACKSIZE - inventory[index].amount
-					if overflow <= availableSpace:
-						inventory[index].amount += overflow
-						overflow = 0
-						inserted = true
-						break
-					else:
-						inventory[index].amount += availableSpace
-						overflow -= availableSpace
-						inserted = true
-
-		## If overflow still exists and there are empty slots, create new SlotData
-		if overflow > 0:
-			for index in range(len(inventory)):
-				if inventory[index] == null:
-					var slotToBeAdded = SlotData.new()
-					slotToBeAdded.item = droppedItem.itemData
-					if overflow <= MAXSTACKSIZE:
-						slotToBeAdded.amount = overflow
-						overflow = 0
-					else:
-						slotToBeAdded.amount = MAXSTACKSIZE
-						overflow -= MAXSTACKSIZE
-					inventory[index] = slotToBeAdded
-					inserted = true
-					break
-
-		## If there was no empty slot to insert the overflow, stop the loop to prevent infinite loop
-		if not inserted:
-			break
-
-	## To communicate to other objects
-	OnInventoryChanged.emit(inventory)
-func remove(selectedItem:GameMaterial,amount:int):
-	pass
-
-func getSameItemCount(item:MaterialData)->int:
-	var count:int = 0
-	for slot in len(inventory):
-		if inventory[slot].item == item:
-			count +=1
-	return count
-
-##NOTE I forgot why I coded this so just keep it
-func _getItemIndex(item:MaterialData) -> int:
-	for slot in len(inventory):
-		if inventory[slot].item == item:
-			return slot
-	
-	return -1
-
-
-"
-
 [sub_resource type="AtlasTexture" id="AtlasTexture_1dcaq"]
 atlas = ExtResource("21_kqu6c")
 region = Rect2(48, 192, 24, 24)
@@ -1947,8 +1854,7 @@ pitch_scale = 0.8
 attenuation = 1.36604
 
 [node name="InventoryManager" type="Node" parent="."]
-script = SubResource("GDScript_3ckag")
-initSlot = ExtResource("4_e4jpf")
+script = ExtResource("12_0atyh")
 
 [node name="PotionManager" type="Node" parent="." node_paths=PackedStringArray("inventoryUI", "potionHUD")]
 script = ExtResource("5_5bgkf")
@@ -1969,9 +1875,10 @@ attack = NodePath("../Attack")
 rollStaminaComsumption = 10.0
 animation_name = "Idle"
 
-[node name="Move" type="Node" parent="StateController" node_paths=PackedStringArray("attack")]
+[node name="Move" type="Node" parent="StateController" node_paths=PackedStringArray("attack", "walk_timer")]
 script = ExtResource("9_5ji7g")
 attack = NodePath("../Attack")
+walk_timer = NodePath("../../walkSFX")
 rollStaminaComsumption = 20.0
 animation_name = "walkSide"
 
@@ -2015,7 +1922,7 @@ inputList = {
 
 [node name="Cut" type="Node" parent="StateController" node_paths=PackedStringArray("timer")]
 script = ExtResource("14_h6fpb")
-timer = NodePath("../../Timer")
+timer = NodePath("../../ActionTimer")
 materialInstance = ExtResource("15_qe768")
 
 [node name="Attack" type="Node" parent="StateController"]
@@ -2249,7 +2156,7 @@ visible = false
 script = ExtResource("39_msw74")
 player = NodePath("../..")
 
-[node name="Timer" type="Timer" parent="."]
+[node name="ActionTimer" type="Timer" parent="."]
 wait_time = 0.8
 
 [node name="walkSFX" type="Timer" parent="."]
@@ -2289,7 +2196,7 @@ pitch_scale = 2.5
 
 [connection signal="OnDamageTaken" from="." to="StateController/Idle" method="_on_player_on_damage_taken"]
 [connection signal="timeout" from="ROOT_UI/ItemHUDPlaceholder/Timer" to="ROOT_UI/ItemHUDPlaceholder" method="_on_timer_timeout"]
-[connection signal="timeout" from="Timer" to="StateController/Cut" method="_on_timer_timeout"]
+[connection signal="timeout" from="ActionTimer" to="StateController/Cut" method="_on_timer_timeout"]
 [connection signal="timeout" from="RollDuration" to="StateController/Roll" method="_on_roll_duration_timeout"]
 
 [editable path="Staff"]

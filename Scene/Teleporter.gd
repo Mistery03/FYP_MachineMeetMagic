@@ -46,25 +46,29 @@ func _on_area_2d_body_exited(body):
 	if body is Player:
 		indicator_pop_up.visible = false
 		level_selection.visible = false
+		player.itemHUDPlaceholder.visible = true
+		player.playerHUD.visible = true
 		player = null
 		
 
 func _input(event):
-		if event is InputEventKey:
-			if event.is_action("INTERACT"):
-				if player:
-					is_holding = true
-					radial_loading.visible = true
-					indicator_pop_up.visible = false
+	if event is InputEventKey:
+		if event.is_action("INTERACT"):
+			if player:
+				is_holding = true
+				radial_loading.visible = true
+				indicator_pop_up.visible = false
 					
 	
-			if event.is_action_released("INTERACT"):
-				if player:
-					is_holding = false
+		if event.is_action_released("INTERACT"):
+			if player:
+				is_holding = false
 					#ehold_time = 0.0
 
 func on_hold_complete():
 	if player:
+		player.itemHUDPlaceholder.visible = false
+		player.playerHUD.visible = false
 		level_selection.visible = true
 		player.isPressable = false
 		hold_time = 0

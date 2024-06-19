@@ -3,7 +3,7 @@ extends Node
 
 @export var magicInventory:Control
 @export var magicGridInventory:Control #OPTIONAL
-@export var magicHUD:Control 
+@export var magicHUD:Control
 @export var magic_tree_ui:Control
 
 @export var staff:Node #need to change later
@@ -18,7 +18,6 @@ func init(player:Player):
 func _process(delta):
 	#read data
 	#check which magic been unlock(magic skill tree)
-	
 	pass
 	
 	

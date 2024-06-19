@@ -80,29 +80,28 @@ var objectsPosInLevelList:Array[Vector2i]
 
 var zoomValue:float = 6
 
-
 func _ready() -> void:
 	if PlayerGlobal.playerInventory:
 		inventory = PlayerGlobal.playerInventory
 	camera.zoom = Vector2(cameraZoom,cameraZoom)
-	
+
 	currHealth = playerData.MaxHealth
 	currMana = playerData.MaxMana
 	currStamina = playerData.MaxStamina
-	
+
 	inventory_manager.init(self)
 	stateController.init(self,animation,moveComponent,camera)
 	magic_manager.init(self)
-	
+
 	##NOTE we must declare an inventory of null items size of N max inventory or else there will be a bug
 	#for i in range(maxInventorySize):
 		#inventory.append(null)
-	
+
 func _process(delta) -> void:
 	mousePos = get_global_mouse_position()
 	print(currHealth)
 	print(canInput)
-	
+
 
 
 func _input(event):
@@ -115,13 +114,13 @@ func _input(event):
 			zoomValue-=zoom_step
 			zoomValue = clamp(zoomValue,min_zoom,max_zoom)
 			smooth_zoom(zoomValue)
-			
+
 func smooth_zoom(new_zoom):
 	var tween = get_tree().create_tween()
-	tween.tween_property(camera, "zoom", Vector2(new_zoom, new_zoom), zoom_duration)			
-	
+	tween.tween_property(camera, "zoom", Vector2(new_zoom, new_zoom), zoom_duration)
 
 
-	
-	
+
+
+
 
