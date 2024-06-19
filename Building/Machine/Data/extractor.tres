@@ -1,5 +1,6 @@
-[gd_resource type="Resource" script_class="BuildingData" load_steps=4 format=3 uid="uid://b7tm5f2vprc8a"]
+[gd_resource type="Resource" script_class="BuildingData" load_steps=5 format=3 uid="uid://b7tm5f2vprc8a"]
 
+[ext_resource type="PackedScene" uid="uid://dprxecily2808" path="res://Building/Machine/Material Exchange/Extractor/extractor.tscn" id="1_806td"]
 [ext_resource type="Script" path="res://Building/Data/buildingData.gd" id="1_spsnu"]
 [ext_resource type="Texture2D" uid="uid://cy01yfe162ynm" path="res://Asset/Machine.png" id="2_jgwpy"]
 
@@ -14,3 +15,4 @@ category = "Material Exchange"
 texture = SubResource("AtlasTexture_1lkgy")
 atlasCoord = Vector2i(0, 1)
 description = "Extract magic essence from worldly materials."
+instance = ExtResource("1_806td")

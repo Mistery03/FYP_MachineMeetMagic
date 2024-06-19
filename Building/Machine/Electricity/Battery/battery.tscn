@@ -14,10 +14,10 @@ size = Vector2(26, 28)
 [node name="Battery" type="Node2D" node_paths=PackedStringArray("machineUI") groups=["Battery"]]
 z_index = 20
 script = ExtResource("1_0r3hi")
-machineUI = NodePath("Root/BatteryUI")
 maxCapacity = 10000.0
 manaOutputPerSecond = 500
 maxMana = 10000.0
+machineUI = NodePath("Root/BatteryUI")
 
 [node name="Sprite" type="Sprite2D" parent="."]
 texture_filter = 1

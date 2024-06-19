@@ -7,12 +7,13 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_310v6"]
 size = Vector2(26, 28)
 
-[node name="Extractor" type="Node2D" node_paths=PackedStringArray("machineUI")]
+[node name="Extractor" type="Node2D" node_paths=PackedStringArray("machineUI", "animation")]
 z_index = 20
 script = ExtResource("1_tl5kv")
-machineUI = NodePath("Root/ExtractorUI")
 manaConsumptionPerSecond = 100.0
 maxMana = 1000.0
+machineUI = NodePath("Root/ExtractorUI")
+animation = NodePath("Animation")
 
 [node name="Animation" type="AnimatedSprite2D" parent="."]
 texture_filter = 1

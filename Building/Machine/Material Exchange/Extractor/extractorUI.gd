@@ -217,36 +217,37 @@ func whenMaterialSlotIsEmptyMouseShortcut():
 func whenMaterialSlotIsNotEmptyMouseShortcut():
 	if inventoryHandler.globalMousePosToLocalGrid(get_global_mouse_position()) in inventoryHandler.getSlotPositions():
 		var currSlot = inventoryHandler.getSlotBasedOnPosition(get_global_mouse_position())
-		if currSlot.item:
-			if currSlot.item ==material_slot.item:
-				if material_slot.item:##Checks if there fuel item (variable is same as currFuelItem)
-					if Input.is_action_just_pressed("AUTOLOADINITEM"):
-						isDragging = false
-						if inventoryHandler.currSlot:##Checks for null
-							if material_slot.item == inventoryHandler.currSlot.item:
-								var availableSpace = MAXSTACKSIZE -material_slot.amount
-				
-								if inventoryHandler.currSlot.amount <= availableSpace:
-									## If the current slot amount can fit in the available space
-									fuel_slot.amount += inventoryHandler.currSlot.amount
-									inventoryHandler.currSlot.item = null
-									inventoryHandler.currSlot.amount = 0
-								else:
-									fuel_slot.amount += availableSpace
-									inventoryHandler.currSlot.amount -= availableSpace
-								
-								##@NOTE resets to it's original position
-								fuel_slot.item_texture.global_position =material_slot.border.global_position 
-								fuel_slot.label.global_position =fuel_slot.border.global_position + Vector2(80,60)
-								
-								##@NOTE resets to it's original position
-								inventoryHandler.currSlot.item_texture.global_position = inventoryHandler.currSlot.border.global_position
-								inventoryHandler.currSlot.label.global_position = inventoryHandler.currSlot.border.global_position + Vector2(80,60)
-								
-								if inventoryHandler.currSlot.amount == 0:
-									inventoryHandler.currSlot = null	
-							elif inventoryHandler.currSlot.item !=material_slot.item:
-								isDragging = false					
+		if currSlot:
+			if currSlot.item:
+				if currSlot.item ==material_slot.item:
+					if material_slot.item:##Checks if there fuel item (variable is same as currFuelItem)
+						if Input.is_action_just_pressed("AUTOLOADINITEM"):
+							isDragging = false
+							if inventoryHandler.currSlot:##Checks for null
+								if material_slot.item == inventoryHandler.currSlot.item:
+									var availableSpace = MAXSTACKSIZE -material_slot.amount
+					
+									if inventoryHandler.currSlot.amount <= availableSpace:
+										## If the current slot amount can fit in the available space
+										fuel_slot.amount += inventoryHandler.currSlot.amount
+										inventoryHandler.currSlot.item = null
+										inventoryHandler.currSlot.amount = 0
+									else:
+										fuel_slot.amount += availableSpace
+										inventoryHandler.currSlot.amount -= availableSpace
+									
+									##@NOTE resets to it's original position
+									fuel_slot.item_texture.global_position =material_slot.border.global_position 
+									fuel_slot.label.global_position =fuel_slot.border.global_position + Vector2(80,60)
+									
+									##@NOTE resets to it's original position
+									inventoryHandler.currSlot.item_texture.global_position = inventoryHandler.currSlot.border.global_position
+									inventoryHandler.currSlot.label.global_position = inventoryHandler.currSlot.border.global_position + Vector2(80,60)
+									
+									if inventoryHandler.currSlot.amount == 0:
+										inventoryHandler.currSlot = null	
+								elif inventoryHandler.currSlot.item !=material_slot.item:
+									isDragging = false					
 func whenMaterialSlotIsEmpty():
 	if material_slot.item ==  null:##Checks if there no fuel item (variable is same as currFuelItem)
 		isDragging = false

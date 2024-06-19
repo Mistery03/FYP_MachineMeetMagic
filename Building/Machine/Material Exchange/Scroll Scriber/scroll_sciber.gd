@@ -3,7 +3,6 @@ extends Machine
 
 @export var scrollScriberUI:Control
 
-@onready var animation = $Animation
 
 # Called when the node enters the scene tree for the first time.
 func _ready():

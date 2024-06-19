@@ -8,19 +8,21 @@ var wiring_machine_state:State
 var wiring_battery_state:State
 
 @export_category("Build Menu")
-@export	
+@export
 var destroyHUD:Control
 
+@export_category("Input Setting")
 @export
 var inputList:Dictionary= {
 	"Exit":"",
 	"Build":""
 }
 
+@export_category("Material Setting")
 @export var materialInstance:PackedScene
 
-var cameraSpeed:float = 0
 var prevMouseTilePos = Vector2i(-1,-1)
+
 var isOccupied:bool
 
 
@@ -32,13 +34,13 @@ func enter() -> void:
 func update(delta: float) -> void:
 	var parentPos = parent.homeTilemap.local_to_map(parent.position)
 	var mouseTilePos = parent.homeTilemap.local_to_map(parent.mousePos)
-	var machineData:TileData = parent.homeTilemap.get_cell_tile_data(2,mouseTilePos) 
+	var machineData:TileData = parent.homeTilemap.get_cell_tile_data(2,mouseTilePos)
 	if machineData:
 		isOccupied = machineData.get_custom_data("occupied")
 		if isOccupied:
 			parent.homeTilemap.set_cell(1,mouseTilePos,0,parent.homeTilemap.get_cell_atlas_coords(2,mouseTilePos))
 			parent.homeTilemap.set_layer_modulate(1,Color.RED)
-			
+
 			var machineList = parent.localLevel.machineList.get_children()
 			for machine in machineList:
 					if machine.position == parent.homeTilemap.map_to_local(mouseTilePos) and !(machine is Battery):
@@ -55,16 +57,16 @@ func update(delta: float) -> void:
 						elif !machine is PowerGenerator:
 							dropItemsFromFuelSlot(machine)
 							dropItemsFromMaterialSlot(machine)
-						
+
 						machine.queue_free()
-							
+
 				parent.homeTilemap.erase_cell(2,mouseTilePos)
 				parent.homeTilemap.erase_cell(1,mouseTilePos)
 				wiring_machine_state.prevGenPos = Vector2i(-100,-100)
 				wiring_battery_state.prevBattPos = Vector2i(-100,-100)
 				parent.homeTilemap.clear_layer(wiring_machine_state.wireLayer)
 				parent.homeTilemap.clear_layer(wiring_battery_state.wireLayer)
-				
+
 	wiring_machine_state.updateWithinWireList()
 	if mouseTilePos != prevMouseTilePos:
 		parent.homeTilemap.erase_cell(1,prevMouseTilePos)
@@ -80,7 +82,7 @@ func process_input(event)->void:
 
 func dropItemsFromFuelSlot(machine):
 	if machine.machineUI.fuel_slot.item:
-		randomize() 
+		randomize()
 		for i in range(machine.machineUI.fuel_slot.amount):
 			var itemDropped = materialInstance.instantiate()
 			itemDropped.itemData = machine.machineUI.fuel_slot.item
@@ -89,10 +91,10 @@ func dropItemsFromFuelSlot(machine):
 			itemDropped.global_position = machine.global_position + Vector2(randi_range(-5,5),20)
 			##So it spawns in the level and not the player or anywhere
 			parent.localLevel.add_child(itemDropped)
-			
+
 func dropItemsFromMaterialSlot(machine):
 	if machine.machineUI.material_slot.item:
-		randomize() 
+		randomize()
 		for i in range(machine.machineUI.material_slot.amount):
 			var itemDropped = materialInstance.instantiate()
 			itemDropped.itemData = machine.machineUI.material_slot.item
