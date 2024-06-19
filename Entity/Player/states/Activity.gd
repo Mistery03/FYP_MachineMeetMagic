@@ -9,7 +9,7 @@ var isBuildEnabled:bool = true
 var prevMouseTilePos = Vector2i(-1,-1)
 
 func enter() -> void:
-	animations.play(animation_name.to_upper())
+	super()
 
 func exit() -> void:
 	pass
