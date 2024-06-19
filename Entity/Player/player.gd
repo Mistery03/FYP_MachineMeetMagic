@@ -29,6 +29,9 @@ const JUMP_VELOCITY = 4.5
 ##Takes in Slot Data so we have a "dictionary"
 @export var inventory:Array[SlotData] = [initSlot]
 
+@export_category("Player Magic")
+@export var magicUI:Control
+
 @export_category("Camera Settings")
 @export var min_zoom = 6
 @export var max_zoom = 12
@@ -66,6 +69,7 @@ var isMachineUI:bool = false
 var isLevelTransitioning:bool = false
 var isInDestroyArea:bool = false
 var wasAttacking:bool = false
+var isInInventory:bool = false
 
 var canInput:bool = true
 var canDash:bool = true

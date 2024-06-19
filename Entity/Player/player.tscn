@@ -1887,7 +1887,7 @@ _data = {
 "popIn": SubResource("Animation_gojmo")
 }
 
-[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("staff", "itemHUDPlaceholder", "playerInventoryController", "animation", "moveComponent", "stateController") groups=["invalidPosition"]]
+[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("staff", "itemHUDPlaceholder", "playerInventoryController", "magicUI", "animation", "moveComponent", "stateController") groups=["invalidPosition"]]
 z_index = 10
 scale = Vector2(0.1, 0.1)
 collision_mask = 344
@@ -1900,6 +1900,7 @@ playerInventoryController = NodePath("ROOT_UI/InventoryUI")
 maxInventorySize = 20
 initSlot = ExtResource("4_e4jpf")
 inventory = Array[Object]([null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null])
+magicUI = NodePath("ROOT_UI/MagicTreeUI")
 min_zoom = 2
 zoom_step = 0.4
 moveSpeed = 7000.0
@@ -2074,6 +2075,9 @@ inputList = {
 [node name="ROOT_UI" type="CanvasLayer" parent="."]
 layer = 2
 
+[node name="Player_hud" parent="ROOT_UI" node_paths=PackedStringArray("player") instance=ExtResource("39_0xjwo")]
+player = NodePath("../..")
+
 [node name="Build" type="Control" parent="ROOT_UI"]
 visible = false
 z_as_relative = false
@@ -2219,10 +2223,6 @@ text = "NUMKEY1: Wire Machine
 "
 promptMessage = ": Wire Battery"
 promptAction = "NUMKEY2"
-
-[node name="Player_hud" parent="ROOT_UI" node_paths=PackedStringArray("player") instance=ExtResource("39_0xjwo")]
-z_as_relative = false
-player = NodePath("../..")
 
 [node name="ItemHUDPlaceholder" type="Control" parent="ROOT_UI" node_paths=PackedStringArray("player", "animation")]
 layout_mode = 3

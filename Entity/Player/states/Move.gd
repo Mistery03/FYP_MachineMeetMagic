@@ -73,13 +73,20 @@ func physics_update(delta: float) -> void:
 
 
 func process_input(event)->void:
-	if Input.is_action_just_pressed("EXIT"):
+	if Input.is_action_just_pressed("EXIT") and parent.isPressable:
 		toggle_menu()
 	if Input.is_action_just_pressed("ACTION") and parent.isStaffEquipped and parent.canInput:
 		transitioned.emit("attack")
 	if Input.is_action_just_pressed("ROLL") and !moveComponent.isDashing() and parent.canDash:
 		parent.set_collision_layer_value(1,false)
 		transitioned.emit("roll")
+	
+	if Input.is_action_just_pressed("CHARACTERSHEET") and !parent.isInInventory:
+		parent.magicUI.visible = !parent.magicUI.visible
+		parent.isPressable = !parent.isPressable 
+	if  Input.is_action_just_pressed("EXIT")  and !parent.isPressable:
+		parent.magicUI.visible = !parent.magicUI.visible
+		parent.isPressable = !parent.isPressable
 		
 
 func resetStaffPosition():

@@ -10,7 +10,4 @@ func _ready():
 func _process(delta):
 	pass
 	
-func _unhandled_input(event):
-	if Input.is_action_just_pressed("EXIT"):
-		player.isPressable = true
-		visible = false
+
