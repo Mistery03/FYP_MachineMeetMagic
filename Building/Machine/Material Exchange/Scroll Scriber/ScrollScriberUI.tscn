@@ -1,0 +1,24 @@
+[gd_scene load_steps=2 format=3 uid="uid://bbtxisy7pgk2f"]
+
+[ext_resource type="Texture2D" uid="uid://daap0c1p135gi" path="res://Asset/UIUX/machineContainer.png" id="1_exmpk"]
+
+[node name="ScrollScriberUi" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Background" type="TextureRect" parent="."]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -540.0
+offset_top = 82.0
+offset_right = 540.0
+offset_bottom = 802.0
+grow_horizontal = 2
+texture = ExtResource("1_exmpk")

@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://divwuueno2oyu"]
+[gd_scene load_steps=13 format=3 uid="uid://divwuueno2oyu"]
 
 [ext_resource type="Script" path="res://Building/Machine/Material Exchange/Scroll Scriber/scroll_sciber.gd" id="1_ukyqw"]
 [ext_resource type="Texture2D" uid="uid://cy01yfe162ynm" path="res://Asset/Machine.png" id="2_q5lp5"]
@@ -77,10 +77,24 @@ animations = [{
 "speed": 5.0
 }]
 
-[node name="ScrollSciber" type="Node2D"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_0u5fr"]
+size = Vector2(26, 28)
+
+[node name="ScrollSciber" type="Node2D" node_paths=PackedStringArray("animation")]
 script = ExtResource("1_ukyqw")
+animation = NodePath("Animation")
 
 [node name="Animation" type="AnimatedSprite2D" parent="."]
 texture_filter = 1
 sprite_frames = SubResource("SpriteFrames_g1xxe")
-animation = &"End"
+animation = &"Idle"
+frame_progress = 0.406427
+
+[node name="Root" type="CanvasLayer" parent="."]
+
+[node name="Interectable" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Interectable"]
+shape = SubResource("RectangleShape2D_0u5fr")
+
+[connection signal="input_event" from="Interectable" to="." method="_on_interectable_input_event"]
