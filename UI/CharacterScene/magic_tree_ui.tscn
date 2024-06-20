@@ -1,7 +1,8 @@
-[gd_scene load_steps=4 format=3 uid="uid://eu0xsfmexgdv"]
+[gd_scene load_steps=5 format=3 uid="uid://eu0xsfmexgdv"]
 
 [ext_resource type="Texture2D" uid="uid://bmw2uy10i1kwr" path="res://Asset/UIUX/scroll_UI.png" id="1_kiiy6"]
 [ext_resource type="FontFile" uid="uid://cl3rxpo58micg" path="res://Asset/Font/Lambda-Regular.ttf" id="2_b3vgk"]
+[ext_resource type="PackedScene" uid="uid://cptbu4xehy3nc" path="res://UI/CharacterScene/machine_tree.tscn" id="3_a4qcg"]
 [ext_resource type="PackedScene" uid="uid://daji0h3vfh4k5" path="res://UI/CharacterScene/skill_tree.tscn" id="3_t6ti8"]
 
 [node name="MagicTreeUI" type="Control"]
@@ -13,6 +14,8 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="ScrollBG" type="TextureRect" parent="."]
+z_index = -10
+layout_mode = 0
 offset_left = -8.0
 offset_top = -300.0
 offset_right = 1594.0
@@ -23,22 +26,64 @@ texture = ExtResource("1_kiiy6")
 layout_mode = 1
 anchors_preset = 10
 anchor_right = 1.0
-offset_left = 566.0
+offset_left = 131.0
 offset_top = 107.0
-offset_right = -845.0
+offset_right = -811.0
 offset_bottom = 154.0
 grow_horizontal = 2
 scale = Vector2(2, 2)
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("2_b3vgk")
 theme_override_font_sizes/font_size = 40
-text = "MAGIC TREE"
+text = "RESEARCH TREE"
 horizontal_alignment = 1
 
-[node name="skillTree" parent="." instance=ExtResource("3_t6ti8")]
+[node name="Label3" type="Label" parent="."]
 layout_mode = 1
-offset_left = 544.0
-offset_top = 320.0
-offset_right = -821.0
-offset_bottom = -539.0
+anchors_preset = 10
+anchor_right = 1.0
+offset_left = 120.0
+offset_top = 240.0
+offset_right = -1133.0
+offset_bottom = 287.0
+grow_horizontal = 2
+scale = Vector2(2, 2)
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("2_b3vgk")
+theme_override_font_sizes/font_size = 40
+text = "MACHINE"
+horizontal_alignment = 1
+
+[node name="Label2" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_left = 756.0
+offset_top = 239.0
+offset_right = -497.0
+offset_bottom = 286.0
+grow_horizontal = 2
+scale = Vector2(2, 2)
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("2_b3vgk")
+theme_override_font_sizes/font_size = 40
+text = "MAGIC"
+horizontal_alignment = 1
+
+[node name="machineTree" parent="." instance=ExtResource("3_a4qcg")]
+z_index = 10
+layout_mode = 1
+offset_left = 416.0
+offset_top = 347.0
+offset_right = -928.0
+offset_bottom = -489.0
+scale = Vector2(2, 2)
+
+[node name="skillTree" parent="." instance=ExtResource("3_t6ti8")]
+z_index = 10
+layout_mode = 1
+offset_left = 1056.0
+offset_top = 341.0
+offset_right = 800.0
+offset_bottom = 277.0
 scale = Vector2(2, 2)
