@@ -1,4 +1,4 @@
-[gd_scene load_steps=94 format=3 uid="uid://c1vsfoc55pk0w"]
+[gd_scene load_steps=93 format=3 uid="uid://c1vsfoc55pk0w"]
 
 [ext_resource type="Texture2D" uid="uid://bd32dcnew3uvf" path="res://Asset/L.png" id="1_ksidj"]
 [ext_resource type="Script" path="res://Entity/Player/player.gd" id="1_xfdxb"]
@@ -35,7 +35,6 @@
 [ext_resource type="Script" path="res://Entity/Player/Roll.gd" id="25_j1p4y"]
 [ext_resource type="Texture2D" uid="uid://bi05jqai8a2ss" path="res://Asset/materials.png" id="32_6ejnk"]
 [ext_resource type="PackedScene" uid="uid://cujcp3sdk8yco" path="res://UI/CharacterScene/inventorySheet.tscn" id="32_dbx42"]
-[ext_resource type="PackedScene" uid="uid://eu0xsfmexgdv" path="res://UI/CharacterScene/magic_tree_ui.tscn" id="34_ogpy2"]
 [ext_resource type="AudioStream" uid="uid://6ccgh63311io" path="res://Asset/SFX/whooshSound.mp3" id="35_4dsxo"]
 [ext_resource type="AudioStream" uid="uid://6h2e77jv6p4a" path="res://Asset/SFX/woodBreak.mp3" id="36_a4jww"]
 [ext_resource type="AudioStream" uid="uid://k857dg5qycjv" path="res://Asset/SFX/placingObject.mp3" id="37_raash"]
@@ -1989,7 +1988,7 @@ potionHUD = NodePath("../ROOT_UI/ItemHUDPlaceholder/PotionHUD")
 
 [node name="MagicManager" type="Node" parent="." node_paths=PackedStringArray("magic_tree_ui")]
 script = ExtResource("11_ur7hc")
-magic_tree_ui = NodePath("../ROOT_UI/MagicTreeUI")
+magic_tree_ui = NodePath("")
 
 [node name="StateController" type="Node" parent="." node_paths=PackedStringArray("current_state")]
 script = ExtResource("7_xedn3")
@@ -2072,6 +2071,9 @@ inputList = {
 
 [node name="ROOT_UI" type="CanvasLayer" parent="."]
 layer = 2
+
+[node name="Player_hud" parent="ROOT_UI" node_paths=PackedStringArray("player") instance=ExtResource("39_0xjwo")]
+player = NodePath("../..")
 
 [node name="Build" type="Control" parent="ROOT_UI"]
 visible = false
@@ -2269,12 +2271,6 @@ one_shot = true
 
 [node name="InventoryUI" parent="ROOT_UI" node_paths=PackedStringArray("player") instance=ExtResource("32_dbx42")]
 visible = false
-player = NodePath("../..")
-
-[node name="MagicTreeUI" parent="ROOT_UI" instance=ExtResource("34_ogpy2")]
-visible = false
-
-[node name="Player_hud" parent="ROOT_UI" node_paths=PackedStringArray("player") instance=ExtResource("39_0xjwo")]
 player = NodePath("../..")
 
 [node name="Timer" type="Timer" parent="."]

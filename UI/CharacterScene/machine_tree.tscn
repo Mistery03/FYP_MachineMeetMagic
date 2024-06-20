@@ -1,0 +1,17 @@
+[gd_scene load_steps=2 format=3 uid="uid://cee48nmftul7b"]
+
+[ext_resource type="PackedScene" uid="uid://d21j46d2y5uc4" path="res://UI/CharacterScene/machine_button.tscn" id="1_h1qns"]
+
+[node name="machineTree" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = -1344.0
+offset_bottom = -836.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 0
+
+[node name="machineButton" parent="." instance=ExtResource("1_h1qns")]
+layout_mode = 0
