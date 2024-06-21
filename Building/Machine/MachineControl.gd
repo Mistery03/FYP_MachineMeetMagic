@@ -7,11 +7,11 @@ extends Control
 @export var machine_animation:AnimatedSprite2D
 
 @export_category("Machine Fuel Input")
-@export var fuel_slot:Panel
+@export var fuel_slot:FuelSlot
 
 @export_category("Machine Material Input")
-@export var material_slot:Panel
-@export var result_slot:Panel
+@export var material_slot:MaterialSlot
+@export var result_slot:ResultSlot
 
 @export_category("Inventory Controller")
 @export var inventoryHandler:InventoryHandler

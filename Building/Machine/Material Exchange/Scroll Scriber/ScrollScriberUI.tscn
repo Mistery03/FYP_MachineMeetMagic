@@ -100,6 +100,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_xc5un")
+optionSize = 4
 machine_animation = NodePath("MachineAnimation")
 
 [node name="Background" type="TextureRect" parent="."]
@@ -128,7 +129,9 @@ offset_left = 540.0
 offset_top = 268.0
 offset_right = 1180.0
 offset_bottom = 588.0
-value = 0.0
+max_value = 1.0
+step = 0.01
+value = 1.0
 
 [node name="BuffDisplay" type="Label" parent="."]
 layout_mode = 0
@@ -196,3 +199,6 @@ theme_override_fonts/font = ExtResource("7_gio40")
 theme_override_font_sizes/font_size = 1600
 text = "CONVERT"
 horizontal_alignment = 1
+
+[connection signal="item_selected" from="ConverterChoice" to="." method="_on_converter_choice_item_selected"]
+[connection signal="pressed" from="convertBTN" to="." method="_on_convert_btn_pressed"]

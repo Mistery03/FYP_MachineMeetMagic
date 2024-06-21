@@ -82,6 +82,7 @@ animations = [{
 size = Vector2(26, 28)
 
 [node name="ScrollSciber" type="Node2D" node_paths=PackedStringArray("machineUI", "animation")]
+z_index = 20
 script = ExtResource("1_ukyqw")
 machineUI = NodePath("Root/ScrollScriberUi")
 animation = NodePath("Animation")
@@ -89,8 +90,7 @@ animation = NodePath("Animation")
 [node name="Animation" type="AnimatedSprite2D" parent="."]
 texture_filter = 1
 sprite_frames = SubResource("SpriteFrames_g1xxe")
-animation = &"Idle"
-frame_progress = 0.406427
+animation = &"Processing"
 
 [node name="Root" type="CanvasLayer" parent="."]
 

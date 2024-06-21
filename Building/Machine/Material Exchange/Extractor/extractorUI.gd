@@ -35,12 +35,16 @@ func _process(delta):
 	
 	processMaterial()
 	
-	if fuel_slot.item and fuel_slot.amount > 0:
-		if fuel_slot.fuelDurability <= 0:
-			fuel_slot.amount -= 1
-			fuel_slot.fuelDurability = fuel_slot.item.durability					
-	else:
-		fuel_slot.item = null
+	
+	if fuel_slot.item :
+		print(fuel_slot.amount)
+		if fuel_slot.amount > 0:
+			if fuel_slot.fuelDurability <= 0:
+				fuel_slot.amount -= 1
+
+				fuel_slot.fuelDurability = fuel_slot.item.durability					
+		else:
+			fuel_slot.item = null
 		
 	
 	##@WARNING Does not take account if the inventory slots are different size to the machine slot (in this file fuel_slot)
@@ -180,6 +184,7 @@ func processMaterial():
 
 func produceResult():
 	if result_slot.item == null:
+		print("result slot")
 		result_slot.item = resultedItem
 		result_slot.amount = material_slot.item.magicEssenceAmountResult
 	else:

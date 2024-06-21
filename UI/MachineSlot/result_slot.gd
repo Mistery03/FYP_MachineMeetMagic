@@ -1,3 +1,4 @@
+class_name ResultSlot
 extends Panel
 
 @export var parentControl:Control
@@ -16,6 +17,7 @@ var scaledSlotSize
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	scaledSlotSize = custom_minimum_size * scale
+	item = null
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
