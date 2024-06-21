@@ -1,7 +1,8 @@
-[gd_scene load_steps=13 format=3 uid="uid://divwuueno2oyu"]
+[gd_scene load_steps=14 format=3 uid="uid://divwuueno2oyu"]
 
 [ext_resource type="Script" path="res://Building/Machine/Material Exchange/Scroll Scriber/scroll_sciber.gd" id="1_ukyqw"]
 [ext_resource type="Texture2D" uid="uid://cy01yfe162ynm" path="res://Asset/Machine.png" id="2_q5lp5"]
+[ext_resource type="PackedScene" uid="uid://bbtxisy7pgk2f" path="res://Building/Machine/Material Exchange/Scroll Scriber/ScrollScriberUI.tscn" id="3_y50fr"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ccy71"]
 atlas = ExtResource("2_q5lp5")
@@ -80,8 +81,9 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_0u5fr"]
 size = Vector2(26, 28)
 
-[node name="ScrollSciber" type="Node2D" node_paths=PackedStringArray("animation")]
+[node name="ScrollSciber" type="Node2D" node_paths=PackedStringArray("machineUI", "animation")]
 script = ExtResource("1_ukyqw")
+machineUI = NodePath("Root/ScrollScriberUi")
 animation = NodePath("Animation")
 
 [node name="Animation" type="AnimatedSprite2D" parent="."]
@@ -91,6 +93,10 @@ animation = &"Idle"
 frame_progress = 0.406427
 
 [node name="Root" type="CanvasLayer" parent="."]
+
+[node name="ScrollScriberUi" parent="Root" node_paths=PackedStringArray("parentMachine") instance=ExtResource("3_y50fr")]
+visible = false
+parentMachine = NodePath("../..")
 
 [node name="Interectable" type="Area2D" parent="."]
 

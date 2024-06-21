@@ -1,12 +1,13 @@
-extends Control
+class_name ScrollScriberUI
+extends MachineControlUI
 
-@onready var option_button = $OptionButton
-@onready var machine_animation = $MachineAnimation
+@onready var progress_bar = $ProgressBar
+@onready var converter_choice = $ConverterChoice
+@onready var convert_btn = $convertBTN
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	option_button.add_item("Convert 9 magic essences to 6 research points")
-	option_button.add_item("Convert 30 magic essences to 20 research points")
+	pass
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.

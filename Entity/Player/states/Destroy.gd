@@ -81,28 +81,30 @@ func process_input(event)->void:
 		transitioned.emit("build")
 
 func dropItemsFromFuelSlot(machine):
-	if machine.machineUI.fuel_slot.item:
-		randomize()
-		for i in range(machine.machineUI.fuel_slot.amount):
-			var itemDropped = materialInstance.instantiate()
-			itemDropped.itemData = machine.machineUI.fuel_slot.item
-			itemDropped.amount = 1
-			##This is why randomize() is used so it can spawn in different positions relative to the player
-			itemDropped.global_position = machine.global_position + Vector2(randi_range(-5,5),20)
-			##So it spawns in the level and not the player or anywhere
-			parent.localLevel.add_child(itemDropped)
+	if machine.machineUI.fuel_slot != null:
+		if machine.machineUI.fuel_slot.item:
+			randomize()
+			for i in range(machine.machineUI.fuel_slot.amount):
+				var itemDropped = materialInstance.instantiate()
+				itemDropped.itemData = machine.machineUI.fuel_slot.item
+				itemDropped.amount = 1
+				##This is why randomize() is used so it can spawn in different positions relative to the player
+				itemDropped.global_position = machine.global_position + Vector2(randi_range(-5,5),20)
+				##So it spawns in the level and not the player or anywhere
+				parent.localLevel.add_child(itemDropped)
 
 func dropItemsFromMaterialSlot(machine):
-	if machine.machineUI.material_slot.item:
-		randomize()
-		for i in range(machine.machineUI.material_slot.amount):
-			var itemDropped = materialInstance.instantiate()
-			itemDropped.itemData = machine.machineUI.material_slot.item
-			itemDropped.amount = 1
-			##This is why randomize() is used so it can spawn in different positions relative to the player
-			itemDropped.global_position = machine.global_position + Vector2(randi_range(-5,5),20)
-			##So it spawns in the level and not the player or anywhere
-			parent.localLevel.add_child(itemDropped)
+	if machine.machineUI.material_slot != null:
+		if machine.machineUI.material_slot.item:
+			randomize()
+			for i in range(machine.machineUI.material_slot.amount):
+				var itemDropped = materialInstance.instantiate()
+				itemDropped.itemData = machine.machineUI.material_slot.item
+				itemDropped.amount = 1
+				##This is why randomize() is used so it can spawn in different positions relative to the player
+				itemDropped.global_position = machine.global_position + Vector2(randi_range(-5,5),20)
+				##So it spawns in the level and not the player or anywhere
+				parent.localLevel.add_child(itemDropped)
 
 
 

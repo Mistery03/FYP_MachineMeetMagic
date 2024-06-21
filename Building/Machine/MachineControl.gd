@@ -4,7 +4,14 @@ extends Control
 ##The parent machine is what this UI is under what machine [Example: if it's power generator then the parent is power generator
 @export_category("Machine Setting")
 @export var parentMachine:Machine
+@export var machine_animation:AnimatedSprite2D
+
+@export_category("Machine Fuel Input")
 @export var fuel_slot:Panel
+
+@export_category("Machine Material Input")
+@export var material_slot:Panel
+@export var result_slot:Panel
 
 @export_category("Inventory Controller")
 @export var inventoryHandler:InventoryHandler
