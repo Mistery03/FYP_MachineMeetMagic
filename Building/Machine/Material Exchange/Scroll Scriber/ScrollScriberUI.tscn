@@ -1,10 +1,12 @@
-[gd_scene load_steps=18 format=3 uid="uid://bbtxisy7pgk2f"]
+[gd_scene load_steps=20 format=3 uid="uid://bbtxisy7pgk2f"]
 
 [ext_resource type="Texture2D" uid="uid://daap0c1p135gi" path="res://Asset/UIUX/machineContainer.png" id="1_exmpk"]
+[ext_resource type="Script" path="res://Building/Machine/Material Exchange/Scroll Scriber/ScrollScriberUI.gd" id="1_xc5un"]
 [ext_resource type="Texture2D" uid="uid://cy01yfe162ynm" path="res://Asset/Machine.png" id="2_hotxe"]
 [ext_resource type="PackedScene" uid="uid://ckanenxxawbfv" path="res://UI/PowerSwitch/power_switch.tscn" id="3_jiiw7"]
 [ext_resource type="Texture2D" uid="uid://d3gb5b0josq6g" path="res://Asset/UIUX/powerSwitch.png" id="4_d23ku"]
 [ext_resource type="PackedScene" uid="uid://3etlyd8c2p38" path="res://UI/ProgressBar/progress_bar.tscn" id="5_ygtj7"]
+[ext_resource type="FontFile" uid="uid://cl3rxpo58micg" path="res://Asset/Font/Lambda-Regular.ttf" id="7_gio40"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ccy71"]
 atlas = ExtResource("2_hotxe")
@@ -97,6 +99,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1_xc5un")
 
 [node name="Background" type="TextureRect" parent="."]
 texture_filter = 1
@@ -119,6 +122,7 @@ sprite_frames = SubResource("SpriteFrames_8060x")
 animation = &"Idle"
 
 [node name="PowerSwitch" parent="." instance=ExtResource("3_jiiw7")]
+layout_mode = 0
 offset_left = 354.0
 offset_top = 106.0
 offset_right = 430.0
@@ -130,8 +134,26 @@ disabled = true
 button_pressed = true
 
 [node name="ProgressBar" parent="." instance=ExtResource("5_ygtj7")]
-offset_left = 543.0
-offset_top = 297.0
-offset_right = 1183.0
-offset_bottom = 617.0
+layout_mode = 0
+offset_left = 541.0
+offset_top = 492.0
+offset_right = 1181.0
+offset_bottom = 812.0
 value = 0.0
+
+[node name="BuffDisplay" type="Label" parent="."]
+offset_left = 496.0
+offset_top = 386.0
+offset_right = 1126.0
+offset_bottom = 439.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("7_gio40")
+theme_override_font_sizes/font_size = 45
+text = "Amount of Magic Essence to convert
+"
+horizontal_alignment = 1
+
+[node name="OptionButton" type="OptionButton" parent="."]
+layout_mode = 0
+offset_right = 45.0
+offset_bottom = 20.0
