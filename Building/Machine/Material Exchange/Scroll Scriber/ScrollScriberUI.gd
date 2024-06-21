@@ -7,11 +7,13 @@ extends MachineControlUI
 ##NOTE Assume 0.2 is slowing down the loading bar by 20%
 @export var slowMultiplier:float = 0.2
 
+@export var resultedItem:MaterialData
+
 @onready var progress_bar = $ProgressBar
 @onready var converter_choice = $ConverterChoice
 @onready var convert_btn = $convertBTN
 
-var magicEssenceInputValue:int = -10
+var magicEssenceInputValue:int = -1
 var researchPointOutValue:int
 var valueInPercentage:float = 0
 var timeToProgress:float = 0
@@ -33,6 +35,7 @@ func _process(delta):
 		parentMachine.changeAnimation("Processing")
 
 		if valueInPercentage >= 1:
+			produceResult()
 			parentMachine.changeAnimation("End")
 			isPressed = false
 			convert_btn.disabled = false
@@ -50,9 +53,16 @@ func _on_converter_choice_item_selected(index):
 
 
 func _on_convert_btn_pressed():
-	if player.MagicEssenceCurrency >= magicEssenceInputValue:
+	if player.MagicEssenceCurrency >= magicEssenceInputValue and !magicEssenceInputValue < 0:
 		player.MagicEssenceCurrency -= magicEssenceInputValue
 		researchPointOutValue = ceil(0.66 * magicEssenceInputValue)
 		timeToProgress = slowMultiplier *  abs(1.0 -  (float(magicEssenceInputValue)/100.00))
 		isPressed = true
 		convert_btn.disabled = true
+
+func produceResult():
+	if result_slot.item == null:
+		result_slot.item = resultedItem
+		result_slot.amount = researchPointOutValue
+	else:
+		result_slot.amount += researchPointOutValue

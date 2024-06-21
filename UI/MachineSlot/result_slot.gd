@@ -39,7 +39,11 @@ func _on_item_texture_gui_input(event):
 			if event.pressed:
 				if item:
 					if parentControl.player:
-						parentControl.player.MagicEssenceCurrency += amount
+						if item.type == "Currency":
+							if item.name == "Magic Essence" :
+								parentControl.player.MagicEssenceCurrency += amount
+							elif item.name == "Research Point":
+								parentControl.player.ResearchPointCurrency += amount
 					item = null
 					amount = 0
 					
