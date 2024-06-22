@@ -205,6 +205,7 @@ text = "CONVERT"
 horizontal_alignment = 1
 
 [node name="ResultSlot" parent="." node_paths=PackedStringArray("parentControl") instance=ExtResource("9_jagoc")]
+layout_mode = 0
 offset_left = 1106.0
 offset_top = 349.0
 offset_right = 1286.0
