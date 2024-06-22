@@ -102,6 +102,8 @@ func _ready() -> void:
 func _process(delta) -> void:
 	playerCurrencyHUD.text = str(MagicEssenceCurrency)
 	mousePos = get_global_mouse_position()
+	##NOTE Wai this is for you
+	print("Player's researchpoint: ",ResearchPointCurrency)
 
 
 func _input(event):

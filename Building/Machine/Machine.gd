@@ -4,6 +4,7 @@ extends Node
 @export_category("Machine Settings")
 @export var machineUI:Control
 @export var animation:AnimatedSprite2D
+@export var pickup_sfx:AudioStreamPlayer2D
 
 @export_category("Machine Logic")
 @export var isThereFuel:bool
@@ -29,7 +30,7 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	print("test")
+	pass
 
 func _on_interectable_input_event(viewport, event, shape_idx):
 	if event is InputEventMouseButton:

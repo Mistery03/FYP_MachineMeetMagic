@@ -52,4 +52,12 @@ func consumeMana(manaConsumptionPerSecond,delta:float):
 		currMana = 0
 	machineUI.machine_mana_bar.currValue = currMana
 
-
+func _on_interectable_input_event(viewport, event, shape_idx):
+	super(viewport, event, shape_idx)
+	if event is InputEventMouseButton:
+		if player and machineUI.result_slot.item:
+			if event.is_action_pressed("ACTION2"):
+				pickup_sfx.play()
+				player.MagicEssenceCurrency +=machineUI.result_slot.amount
+				machineUI.result_slot.item = null
+				machineUI.result_slot.amount = 0

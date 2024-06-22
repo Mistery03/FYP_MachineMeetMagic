@@ -37,7 +37,6 @@ func _process(delta):
 	
 	
 	if fuel_slot.item :
-		print(fuel_slot.amount)
 		if fuel_slot.amount > 0:
 			if fuel_slot.fuelDurability <= 0:
 				fuel_slot.amount -= 1
@@ -184,7 +183,6 @@ func processMaterial():
 
 func produceResult():
 	if result_slot.item == null:
-		print("result slot")
 		result_slot.item = resultedItem
 		result_slot.amount = material_slot.item.magicEssenceAmountResult
 	else:
