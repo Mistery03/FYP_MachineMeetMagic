@@ -29,7 +29,6 @@ func init(parent: Entity, animations: AnimatedSprite2D, moveComponent = null,cam
 func on_state_transitioned(new_state_name: StringName) -> void:
 	# Get the next state from the `Dictionary`
 	var new_state = states.get(new_state_name.to_pascal_case())
-	print(new_state_name)
 	if new_state != null:
 		if new_state != current_state:
 			# Exit the current state

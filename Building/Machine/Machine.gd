@@ -1,20 +1,26 @@
 class_name Machine
 extends Node
 
+@export_category("Machine Settings")
+@export var machineUI:Control
+@export var animation:AnimatedSprite2D
+@export var pickup_sfx:AudioStreamPlayer2D
+
+@export_category("Machine Logic")
 @export var isThereFuel:bool
 @export var manaConsumptionPerSecond:float
 @export var maxMana:float
-@export var machineUI:Control
-@export var animation:AnimatedSprite2D
+
 
 var machine:Machine 
 var next:Machine = null
 var player:Player
-var currMana:float
-var percentage:float
+
 
 var isSwitchedOn:bool
 
+var currMana:float
+var percentage:float
 @onready var maxPercentage:float = maxMana/maxMana * 100
 
 func _ready():
@@ -24,7 +30,7 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	print("test")
+	pass
 
 func _on_interectable_input_event(viewport, event, shape_idx):
 	if event is InputEventMouseButton:
@@ -37,8 +43,9 @@ func _on_interectable_input_event(viewport, event, shape_idx):
 				if !player.isBuildMode:
 					machineUI.visible = true
 					##The checks for when slotList is not defined
-					if machineUI.inventoryHandler.slotList.size() > 0:
-						machineUI.inventoryHandler.update_slots()
+					if machineUI.inventoryHandler:
+						if machineUI.inventoryHandler.slotList.size() > 0:
+							machineUI.inventoryHandler.update_slots()
 					
 					player.itemHUDPlaceholder.visible = false
 					player.playerHUD.visible = false
@@ -53,7 +60,8 @@ func _input(event):
 				player.playerHUD.visible = true
 				player.isPressable = false
 				player.isMachineUI = false
-				machineUI.inventoryHandler.convertSlotListToInventoryData()
+				if machineUI.inventoryHandler:
+					machineUI.inventoryHandler.convertSlotListToInventoryData()
 				await get_tree().create_timer(0.1).timeout
 				player.isPressable = true
 

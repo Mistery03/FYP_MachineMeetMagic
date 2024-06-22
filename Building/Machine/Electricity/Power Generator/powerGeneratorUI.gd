@@ -7,7 +7,6 @@ extends MachineControlUI
 @export var maxValue:float = 100
 
 
-@onready var machine_animation = $MachineAnimation
 @onready var power_switch = $PowerSwitch
 @onready var status_bar = $StatusBar
 @onready var fuel_burning = $FuelBurning

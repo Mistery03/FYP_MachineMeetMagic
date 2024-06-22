@@ -1,3 +1,4 @@
+class_name FuelSlot
 extends Panel
 
 @export var parentControl:Control

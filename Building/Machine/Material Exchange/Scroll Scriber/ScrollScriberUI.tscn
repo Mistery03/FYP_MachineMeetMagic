@@ -1,0 +1,217 @@
+[gd_scene load_steps=23 format=3 uid="uid://bbtxisy7pgk2f"]
+
+[ext_resource type="Texture2D" uid="uid://daap0c1p135gi" path="res://Asset/UIUX/machineContainer.png" id="1_exmpk"]
+[ext_resource type="Script" path="res://Building/Machine/Material Exchange/Scroll Scriber/ScrollScriberUI.gd" id="1_xc5un"]
+[ext_resource type="Resource" uid="uid://chs3odwt45si3" path="res://Material/Currency/Research Points/researchPoints.tres" id="2_br4wm"]
+[ext_resource type="Texture2D" uid="uid://cy01yfe162ynm" path="res://Asset/Machine.png" id="2_hotxe"]
+[ext_resource type="PackedScene" uid="uid://3etlyd8c2p38" path="res://UI/ProgressBar/progress_bar.tscn" id="5_ygtj7"]
+[ext_resource type="FontFile" uid="uid://cl3rxpo58micg" path="res://Asset/Font/Lambda-Regular.ttf" id="7_gio40"]
+[ext_resource type="Texture2D" uid="uid://2k6sthwgy8hq" path="res://Asset/UIUX/convertBtnEnabled.png" id="8_dppys"]
+[ext_resource type="Texture2D" uid="uid://ce8r58kfa77v8" path="res://Asset/UIUX/convertBTNDisabled.png" id="9_7y0ry"]
+[ext_resource type="PackedScene" uid="uid://dsnw47taoamf7" path="res://UI/MachineSlot/result_slot.tscn" id="9_jagoc"]
+[ext_resource type="Texture2D" uid="uid://rynqner0wqbh" path="res://Asset/UIUX/convertBTNHover.png" id="10_rhhyc"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ccy71"]
+atlas = ExtResource("2_hotxe")
+region = Rect2(160, 64, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0mcsq"]
+atlas = ExtResource("2_hotxe")
+region = Rect2(0, 64, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_oc8dc"]
+atlas = ExtResource("2_hotxe")
+region = Rect2(0, 64, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_84t2e"]
+atlas = ExtResource("2_hotxe")
+region = Rect2(32, 64, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ycyo4"]
+atlas = ExtResource("2_hotxe")
+region = Rect2(64, 64, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yvnbo"]
+atlas = ExtResource("2_hotxe")
+region = Rect2(96, 64, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ys8lv"]
+atlas = ExtResource("2_hotxe")
+region = Rect2(128, 64, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_opme2"]
+atlas = ExtResource("2_hotxe")
+region = Rect2(160, 64, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_8060x"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ccy71")
+}],
+"loop": true,
+"name": &"End",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0mcsq")
+}],
+"loop": true,
+"name": &"Idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_oc8dc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_84t2e")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ycyo4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_yvnbo")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ys8lv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_opme2")
+}],
+"loop": true,
+"name": &"Processing",
+"speed": 5.0
+}]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_27vvu"]
+bg_color = Color(0.0901961, 0.0745098, 0.254902, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_li88n"]
+bg_color = Color(0.556863, 0.537255, 0.741176, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_i552w"]
+bg_color = Color(0.556863, 0.537255, 0.741176, 1)
+
+[node name="ScrollScriberUi" type="Control" node_paths=PackedStringArray("machine_animation", "result_slot")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_xc5un")
+optionSize = 4
+resultedItem = ExtResource("2_br4wm")
+machine_animation = NodePath("MachineAnimation")
+result_slot = NodePath("ResultSlot")
+
+[node name="Background" type="TextureRect" parent="."]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -540.0
+offset_top = 82.0
+offset_right = 540.0
+offset_bottom = 802.0
+grow_horizontal = 2
+texture = ExtResource("1_exmpk")
+
+[node name="MachineAnimation" type="AnimatedSprite2D" parent="."]
+texture_filter = 1
+position = Vector2(781, 233)
+scale = Vector2(8, 8)
+sprite_frames = SubResource("SpriteFrames_8060x")
+animation = &"Idle"
+
+[node name="ProgressBar" parent="." instance=ExtResource("5_ygtj7")]
+layout_mode = 0
+offset_left = 540.0
+offset_top = 268.0
+offset_right = 1180.0
+offset_bottom = 588.0
+max_value = 1.0
+step = 0.01
+value = 1.0
+
+[node name="BuffDisplay" type="Label" parent="."]
+layout_mode = 0
+offset_left = 554.0
+offset_top = 453.0
+offset_right = 1035.0
+offset_bottom = 494.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("7_gio40")
+theme_override_font_sizes/font_size = 35
+text = "Amount of Magic Essence to convert
+"
+horizontal_alignment = 1
+
+[node name="ConverterChoice" type="OptionButton" parent="."]
+layout_mode = 0
+offset_left = 550.0
+offset_top = 511.0
+offset_right = 1040.0
+offset_bottom = 551.0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("7_gio40")
+theme_override_font_sizes/font_size = 30
+theme_override_styles/normal = SubResource("StyleBoxFlat_27vvu")
+theme_override_styles/hover = SubResource("StyleBoxFlat_li88n")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_i552w")
+alignment = 1
+language = "en"
+item_count = 4
+selected = 0
+allow_reselect = true
+popup/item_0/text = "Select amount to convert"
+popup/item_0/id = 0
+popup/item_0/disabled = true
+popup/item_1/text = "9 Magic Essence -> 6 Research Points"
+popup/item_1/id = 1
+popup/item_2/text = "30 Magic Essence -> 20 Research Points"
+popup/item_2/id = 2
+popup/item_3/text = "120 Magic Essence -> 80 Research Points"
+popup/item_3/id = 3
+
+[node name="convertBTN" type="TextureButton" parent="."]
+layout_mode = 0
+offset_left = 695.0
+offset_top = 549.0
+offset_right = 803.0
+offset_bottom = 657.0
+scale = Vector2(1.8, 1.8)
+texture_normal = ExtResource("8_dppys")
+texture_pressed = ExtResource("9_7y0ry")
+texture_hover = ExtResource("10_rhhyc")
+texture_disabled = ExtResource("9_7y0ry")
+
+[node name="Label" type="Label" parent="convertBTN"]
+layout_mode = 0
+offset_left = 15.7143
+offset_top = 45.2381
+offset_right = 7717.71
+offset_bottom = 1868.24
+scale = Vector2(0.01, 0.01)
+theme_override_colors/font_color = Color(0.858824, 0.858824, 0.858824, 1)
+theme_override_colors/font_outline_color = Color(0.192157, 0.192157, 0.192157, 1)
+theme_override_constants/outline_size = 400
+theme_override_fonts/font = ExtResource("7_gio40")
+theme_override_font_sizes/font_size = 1600
+text = "CONVERT"
+horizontal_alignment = 1
+
+[node name="ResultSlot" parent="." node_paths=PackedStringArray("parentControl") instance=ExtResource("9_jagoc")]
+layout_mode = 0
+offset_left = 1106.0
+offset_top = 349.0
+offset_right = 1286.0
+offset_bottom = 529.0
+scale = Vector2(0.6, 0.6)
+parentControl = NodePath("..")
+
+[connection signal="item_selected" from="ConverterChoice" to="." method="_on_converter_choice_item_selected"]
+[connection signal="pressed" from="convertBTN" to="." method="_on_convert_btn_pressed"]

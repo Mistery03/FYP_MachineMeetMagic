@@ -4,7 +4,14 @@ extends Control
 ##The parent machine is what this UI is under what machine [Example: if it's power generator then the parent is power generator
 @export_category("Machine Setting")
 @export var parentMachine:Machine
-@export var fuel_slot:Panel
+@export var machine_animation:AnimatedSprite2D
+
+@export_category("Machine Fuel Input")
+@export var fuel_slot:FuelSlot
+
+@export_category("Machine Material Input")
+@export var material_slot:MaterialSlot
+@export var result_slot:ResultSlot
 
 @export_category("Inventory Controller")
 @export var inventoryHandler:InventoryHandler
@@ -45,21 +52,21 @@ func whenFuelSlotIsEmptyMouseShortcut():
 						##NOTE To prevent item spawning in the world
 						inventoryHandler.isForExternalSlot = true
 						##Assign the item and amount
-						fuel_slot.item = inventoryHandler.currSlot.item
-						fuel_slot.amount = inventoryHandler.currSlot.amount
+						fuel_slot.item = currSlot.item
+						fuel_slot.amount = currSlot.amount
 						##@NOTE resets to it's original position
 						fuel_slot.item_texture.global_position = fuel_slot.border.global_position 
 						fuel_slot.label.global_position =fuel_slot.border.global_position + Vector2(80,60)
 						##@NOTE resets to it's original position
-						inventoryHandler.currSlot.item_texture.global_position = inventoryHandler.currSlot.border.global_position
-						inventoryHandler.currSlot.label.global_position = inventoryHandler.currSlot.border.global_position + Vector2(80,60)
+						currSlot.item_texture.global_position = currSlot.border.global_position
+						currSlot.label.global_position = currSlot.border.global_position + Vector2(80,60)
 						
 						##Refer to the function in playerInventoryHandler
-						inventoryHandler.removeItem(inventoryHandler.currSlot.amount,inventoryHandler.currSlot.global_position)
+						inventoryHandler.removeItem(currSlot.amount,currSlot.global_position)
 				
 						##@NOTE to prevent duplication
-						inventoryHandler.currSlot.item = null
-						inventoryHandler.currSlot = null
+						currSlot.item = null
+						currSlot = null
 
 func whenFuelSlotIsNotEmptyMouseShortcut():
 	if inventoryHandler.globalMousePosToLocalGrid(get_global_mouse_position()) in inventoryHandler.getSlotPositions():

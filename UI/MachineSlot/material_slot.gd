@@ -1,3 +1,4 @@
+class_name MaterialSlot
 extends Panel
 
 @export var parentControl:Control
