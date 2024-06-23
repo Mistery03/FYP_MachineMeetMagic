@@ -159,6 +159,7 @@ scale = Vector2(1.5, 1.5)
 texture = SubResource("AtlasTexture_ry2bs")
 
 [node name="Label" type="Label" parent="PopUp"]
+layout_mode = 0
 offset_left = 60.0
 offset_top = 42.5
 offset_right = 2310.0
