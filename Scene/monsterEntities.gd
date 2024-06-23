@@ -12,3 +12,5 @@ func init(player):
 	for entity in get_children():
 		entity.player = player
 
+func getCreatureList():
+	return get_children()
