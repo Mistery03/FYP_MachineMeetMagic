@@ -6,6 +6,7 @@ extends Node2D
 @export var PK_roomID:int = 128
 @export var roomID:int
 @export var roomNum:int = 0
+
 @export_category("Player")
 @export var player:Player
 @export var fadeOut:TextureRect
@@ -21,12 +22,19 @@ extends Node2D
 @export var rockSelection:Array[Vector2i]
 @export var stoneFrequency:float = 0.0005
 
+@export_category("Creatre Manager")
+@export var creatureManager:CreatureManager
+@export var creatureList:Array[MobData]
+@export var maxCreatureSpawn:int
+
 var objectPosList:Array[Vector2i] = []
 
 var _forest = FastNoiseLite.new()
 var _stone = FastNoiseLite.new()
 var grassData:TileData
 var prevMouseTilePos = Vector2i(-1000,-1000)
+
+var validSpawnPositions = []
 
 
 func _ready():

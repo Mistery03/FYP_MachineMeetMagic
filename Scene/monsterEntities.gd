@@ -1,3 +1,4 @@
+class_name CreatureManager
 extends Node
 
 @export var player:Player
@@ -7,6 +8,7 @@ func _ready():
 	for entity in get_children():
 		entity.player = player
 		
-
-
+func init(player):
+	for entity in get_children():
+		entity.player = player
 

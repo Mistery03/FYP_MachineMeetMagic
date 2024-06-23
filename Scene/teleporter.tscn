@@ -38,7 +38,6 @@ layer = 5
 
 [node name="LevelSelection" type="Control" parent="CanvasLayer"]
 visible = false
-z_index = 100
 layout_mode = 3
 anchors_preset = 0
 offset_right = 40.0

@@ -54,10 +54,6 @@ func clearCurrentRoom():
 	rooms.get_child(0).door.disconnect("OnDoorEntered",goNextRoom)
 	rooms.get_child(0).queue_free()
 
-"""func randomiseEnemyRoom():
-	var selectedRoom = enemyRooms.pick_random()
-	enemyRoomQueue.push_front(selectedRoom)
-	#print(enemyRoomQueue)"""
 
 func randomiseEnemyRoom():
 	if enemyRoomQueue.size() > 0:
@@ -93,6 +89,9 @@ func spawnRoom():
 	await get_tree().create_timer(0.2).timeout
 	player.objectsPosInLevelList.clear()
 	player.objectsPosInLevelList = roomInstance.objectPosList
+	
+	await get_tree().create_timer(1).timeout
+	roomInstance.spawnEnemies()
 
 
 func goNextRoom():

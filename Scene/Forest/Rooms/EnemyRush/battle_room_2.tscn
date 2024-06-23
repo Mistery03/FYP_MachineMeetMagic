@@ -1,19 +1,21 @@
-[gd_scene load_steps=5 format=3 uid="uid://m4gebh6dm0in"]
+[gd_scene load_steps=6 format=3 uid="uid://m4gebh6dm0in"]
 
 [ext_resource type="TileSet" uid="uid://bckra1sdqvx78" path="res://Scene/Forest/Rooms/ForestTilemap.tres" id="1_6vu3j"]
 [ext_resource type="Script" path="res://Scene/Forest/Rooms/Door/Door.gd" id="1_mtamu"]
 [ext_resource type="Script" path="res://Scene/Forest/Rooms/EnemyRush/battle_room_2.gd" id="1_uoagu"]
+[ext_resource type="Script" path="res://Scene/monsterEntities.gd" id="4_4reid"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_axyuy"]
 size = Vector2(18, 104)
 
-[node name="BattleRoom2" type="Node2D" node_paths=PackedStringArray("door", "tile_map")]
+[node name="BattleRoom2" type="Node2D" node_paths=PackedStringArray("door", "tile_map", "creatureManager")]
 script = ExtResource("1_uoagu")
 roomName = "EnemyRoom2"
 PK_roomID = 17
 door = NodePath("Door")
 tile_map = NodePath("TileMap")
 rockSelection = Array[Vector2i]([Vector2i(1, 0), Vector2i(0, 1)])
+creatureManager = NodePath("monsterEntities")
 
 [node name="TileMap" type="TileMap" parent="."]
 texture_filter = 1
@@ -47,5 +49,8 @@ collision_layer = 32
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Door/Area2D"]
 shape = SubResource("RectangleShape2D_axyuy")
+
+[node name="monsterEntities" type="Node" parent="."]
+script = ExtResource("4_4reid")
 
 [connection signal="body_entered" from="Door/Area2D" to="Door" method="_on_area_2d_body_entered"]

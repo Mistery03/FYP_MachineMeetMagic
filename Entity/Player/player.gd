@@ -104,7 +104,7 @@ func _process(delta) -> void:
 	mousePos = get_global_mouse_position()
 	##NOTE Wai this is for you
 	print("Player's researchpoint: ",ResearchPointCurrency)
-
+	print("Player hitbox ",get_collision_layer_value(1))
 
 func _input(event):
 	if event is InputEventMouse:

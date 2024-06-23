@@ -1,8 +1,9 @@
-[gd_scene load_steps=21 format=3 uid="uid://crlmmk86fjtnf"]
+[gd_scene load_steps=31 format=3 uid="uid://crlmmk86fjtnf"]
 
 [ext_resource type="Script" path="res://Entity/State/StateMachine.gd" id="2_1e76v"]
 [ext_resource type="Texture2D" uid="uid://dfbobrjgxuwbl" path="res://Asset/slime.png" id="2_o73m2"]
 [ext_resource type="Script" path="res://Entity/Monster/Slime/BlueSlime/BlueSlime.gd" id="2_xatpo"]
+[ext_resource type="Texture2D" uid="uid://b8m7h885sjdf6" path="res://Asset/slimeSpawn.png" id="3_3jxcv"]
 [ext_resource type="Script" path="res://Entity/Monster/Slime/State/Idle.gd" id="4_8s6qj"]
 [ext_resource type="Script" path="res://Entity/Monster/Slime/State/Move.gd" id="5_emkus"]
 [ext_resource type="Script" path="res://Entity/Monster/Slime/State/Return.gd" id="6_4q6fg"]
@@ -10,6 +11,7 @@
 [ext_resource type="Script" path="res://Entity/Monster/Slime/State/Damaged.gd" id="8_4cmn4"]
 [ext_resource type="Script" path="res://Entity/Monster/Slime/State/Death.gd" id="9_eixto"]
 [ext_resource type="Script" path="res://Entity/Monster/MoveComponent.gd" id="11_hjj1d"]
+[ext_resource type="AudioStream" uid="uid://xdl252khl462" path="res://Asset/SFX/popUpSfx.mp3" id="12_htc8t"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_3l8tp"]
 radius = 50.04
@@ -45,6 +47,38 @@ region = Rect2(32, 64, 32, 32)
 [sub_resource type="AtlasTexture" id="AtlasTexture_23sh2"]
 atlas = ExtResource("2_o73m2")
 region = Rect2(64, 64, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4sjqo"]
+atlas = ExtResource("3_3jxcv")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8vkig"]
+atlas = ExtResource("3_3jxcv")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kivgl"]
+atlas = ExtResource("3_3jxcv")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_t0e10"]
+atlas = ExtResource("3_3jxcv")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4k1pm"]
+atlas = ExtResource("3_3jxcv")
+region = Rect2(128, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8or5u"]
+atlas = ExtResource("3_3jxcv")
+region = Rect2(160, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_n5unk"]
+atlas = ExtResource("3_3jxcv")
+region = Rect2(192, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wovlm"]
+atlas = ExtResource("3_3jxcv")
+region = Rect2(224, 0, 32, 32)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_o3sr5"]
 animations = [{
@@ -86,14 +120,44 @@ animations = [{
 "loop": true,
 "name": &"MOVE",
 "speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4sjqo")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8vkig")
+}, {
+"duration": 2.0,
+"texture": SubResource("AtlasTexture_kivgl")
+}, {
+"duration": 0.5,
+"texture": SubResource("AtlasTexture_t0e10")
+}, {
+"duration": 1.2,
+"texture": SubResource("AtlasTexture_4k1pm")
+}, {
+"duration": 0.5,
+"texture": SubResource("AtlasTexture_8or5u")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_n5unk")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wovlm")
+}],
+"loop": false,
+"name": &"SPAWN",
+"speed": 5.0
 }]
 
-[node name="BlueSlime" type="CharacterBody2D" node_paths=PackedStringArray("animation", "moveComponent", "stateController")]
+[node name="BlueSlime" type="CharacterBody2D" node_paths=PackedStringArray("spawnSFX", "animation", "moveComponent", "stateController")]
 z_index = 5
 scale = Vector2(0.1, 0.1)
 collision_layer = 256
 collision_mask = 213
 script = ExtResource("2_xatpo")
+spawnSFX = NodePath("spawnSFX")
 moveSpeed = 20.0
 animation = NodePath("Animation")
 moveComponent = NodePath("MoveComponent")
@@ -108,8 +172,8 @@ debug_color = Color(0.917647, 0, 0.705882, 0.419608)
 texture_filter = 1
 scale = Vector2(5, 5)
 sprite_frames = SubResource("SpriteFrames_o3sr5")
-animation = &"DAMAGED"
-frame = 1
+animation = &"SPAWN"
+frame = 7
 frame_progress = 1.0
 
 [node name="StateController" type="Node" parent="." node_paths=PackedStringArray("current_state")]
@@ -142,7 +206,7 @@ script = ExtResource("11_hjj1d")
 
 [node name="CollisionBox" type="Area2D" parent="."]
 collision_layer = 256
-collision_mask = 129
+collision_mask = 212
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CollisionBox"]
 position = Vector2(0, 14)
@@ -151,6 +215,10 @@ debug_color = Color(0.917647, 0, 0.705882, 0.419608)
 
 [node name="EscapeTime" type="Timer" parent="."]
 wait_time = 5.0
+
+[node name="spawnSFX" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("12_htc8t")
+volume_db = -12.0
 
 [connection signal="area_entered" from="CollisionBox" to="StateController/Idle" method="_on_collision_box_area_entered"]
 [connection signal="area_entered" from="CollisionBox" to="StateController/Damaged" method="_on_collision_box_area_entered"]

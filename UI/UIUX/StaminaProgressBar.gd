@@ -12,6 +12,6 @@ func init(player: Player):
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
+	player.currStamina = clamp(player.currStamina,0,player.playerData.MaxStamina)
 	value = player.currStamina
-	value = clamp(value,0,player.playerData.MaxStamina)
 	#print("Player Stamina: ", value)
