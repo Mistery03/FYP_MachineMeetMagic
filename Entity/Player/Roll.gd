@@ -1,6 +1,8 @@
 extends State
 
-var roll_speed_multiplier = 6.0
+@export var rollSpeed:float = 9000
+
+@export var roll_speed_multiplier:float = 1
 
 func enter() -> void:
 	super()
@@ -14,7 +16,7 @@ func update(delta: float) -> void:
 	pass
 
 func physics_update(delta: float) -> void:
-	parent.velocity= moveComponent.get_movement_direction() * 9000 * delta
+	parent.velocity= moveComponent.get_movement_direction() * rollSpeed * roll_speed_multiplier * delta
 	parent.move_and_slide()
 
 func process_input(event)->void:

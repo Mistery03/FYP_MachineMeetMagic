@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://Building/Machine/Material Exchange/Extractor/extractor.gd" id="1_tl5kv"]
 [ext_resource type="SpriteFrames" uid="uid://cbtw4dcn8pny6" path="res://Building/Machine/Material Exchange/Extractor/extractorAnimation.tres" id="2_fc8e1"]
 [ext_resource type="PackedScene" uid="uid://cbpifgpelsijg" path="res://Building/Machine/Material Exchange/Extractor/extractorUI.tscn" id="3_po1mx"]
-[ext_resource type="Texture2D" uid="uid://daap0c1p135gi" path="res://Asset/UIUX/machineContainer.png" id="4_c067d"]
+[ext_resource type="Texture2D" uid="uid://bptk6f0j2t4ex" path="res://Asset/UIUX/speechBubble.png" id="4_0fbhr"]
 [ext_resource type="Script" path="res://Building/Machine/PopUp.gd" id="5_2t4a3"]
 [ext_resource type="Texture2D" uid="uid://cruxbb2jv2vmx" path="res://Asset/Materials1.png" id="6_ftpjx"]
 [ext_resource type="FontFile" uid="uid://cl3rxpo58micg" path="res://Asset/Font/Lambda-Regular.ttf" id="7_fp1ki"]
@@ -30,7 +30,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0, 0.4, 1),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
-"values": [Vector2(-13, -48), Vector2(-13, -50), Vector2(-13, -48)]
+"values": [Vector2(-21, -50), Vector2(-21, -52), Vector2(-21, -50)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_fqaq3"]
@@ -68,37 +68,37 @@ shape = SubResource("RectangleShape2D_310v6")
 visible = false
 z_index = 100
 texture_filter = 1
-offset_left = -13.0
-offset_top = -48.6355
-offset_right = 19.0
-offset_bottom = -16.6355
-scale = Vector2(0.8, 0.8)
-texture = ExtResource("4_c067d")
+offset_left = -21.0
+offset_top = -50.2044
+offset_right = 87.0
+offset_bottom = 57.7956
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("4_0fbhr")
 script = ExtResource("5_2t4a3")
 machineUI = NodePath("../Root/ExtractorUI")
 
 [node name="ItemTexture" type="TextureRect" parent="PopUp"]
 custom_minimum_size = Vector2(32, 32)
 layout_mode = 0
-offset_left = 1.25
-offset_top = 1.25
-offset_right = 33.25
-offset_bottom = 33.25
-scale = Vector2(0.9, 0.9)
+offset_left = 30.0
+offset_top = 15.0
+offset_right = 62.0
+offset_bottom = 47.0
+scale = Vector2(1.5, 1.5)
 texture = SubResource("AtlasTexture_3taye")
 
 [node name="Label" type="Label" parent="PopUp"]
 layout_mode = 0
-offset_left = 18.75
-offset_top = 17.5
-offset_right = 28.75
-offset_bottom = 30.5
+offset_left = 60.0
+offset_top = 42.5
+offset_right = 2310.0
+offset_bottom = 2776.5
 scale = Vector2(0.01, 0.01)
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
-theme_override_constants/outline_size = 300
+theme_override_constants/outline_size = 600
 theme_override_fonts/font = ExtResource("7_fp1ki")
-theme_override_font_sizes/font_size = 1200
+theme_override_font_sizes/font_size = 2400
 text = "99"
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="PopUp"]

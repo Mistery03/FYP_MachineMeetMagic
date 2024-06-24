@@ -34,7 +34,7 @@ rotation = 1.5708
 shape = SubResource("CapsuleShape2D_ypvlw")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
-layer = 2
+layer = 5
 
 [node name="LevelSelection" type="Control" parent="CanvasLayer"]
 visible = false

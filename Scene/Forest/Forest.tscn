@@ -23,10 +23,11 @@ z_index = 5
 zoom_duration = 0.2
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
-layer = 2
+layer = 5
 
 [node name="FadeOut" type="TextureRect" parent="CanvasLayer"]
 modulate = Color(0, 0, 0, 1)
+z_index = 100
 offset_right = 1600.0
 offset_bottom = 900.0
 texture = ExtResource("7_nwmnj")

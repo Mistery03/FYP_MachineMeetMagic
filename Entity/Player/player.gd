@@ -5,7 +5,7 @@ const SPEED = 5.0
 const JUMP_VELOCITY = 4.5
 
 @export var playerData:EntityData
-
+@export var localLevel:Node2D
 
 @export_category("Potion")
 @export var potionObject:PotionData
@@ -44,7 +44,6 @@ const JUMP_VELOCITY = 4.5
 @onready var inventory_manager = $InventoryManager
 @onready var potion_manager = $PotionManager
 @onready var camera = $Camera
-@onready var localLevel:Node2D
 
 @onready var magic_manager = $MagicManager
 
@@ -104,7 +103,7 @@ func _process(delta) -> void:
 	mousePos = get_global_mouse_position()
 	##NOTE Wai this is for you
 	print("Player's researchpoint: ",ResearchPointCurrency)
-
+	print("Player hitbox ",get_collision_layer_value(1))
 
 func _input(event):
 	if event is InputEventMouse:

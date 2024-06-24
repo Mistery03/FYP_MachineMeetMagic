@@ -21,28 +21,29 @@ func update(delta: float) -> void:
 	if parent.levelTilemap and !parent.isLevelTransitioning:
 		var mouseTilePos = parent.levelTilemap.local_to_map(parent.mousePos)
 		var parentPos = parent.levelTilemap.local_to_map(parent.position)
+		
+		if parent.levelTilemap.get_layer_name(4):
+			var materialDroppedData = parent.levelTilemap.get_cell_tile_data(4,mouseTilePos)
+			var is_in_area:bool = false
 
-		var materialDroppedData = parent.levelTilemap.get_cell_tile_data(4,mouseTilePos)
-		var is_in_area:bool = false
+			for pos in parent.objectsPosInLevelList:
+				for validPos in parent.levelTilemap.get_surrounding_cells(pos):
+					if parentPos == validPos or parentPos == pos :
+						if mouseTilePos == pos and parent.isStaffEquipped:
+							is_in_area = true
+							break
 
-		for pos in parent.objectsPosInLevelList:
-			for validPos in parent.levelTilemap.get_surrounding_cells(pos):
-				if parentPos == validPos or parentPos == pos :
-					if mouseTilePos == pos and parent.isStaffEquipped:
-						is_in_area = true
-						break
-
-		if materialDroppedData:
-			var materialName = materialDroppedData.get_custom_data("materialName")
-			var materialCategory = materialDroppedData.get_custom_data("materialCategory")
-			if is_in_area and materialCategory == "wood":
-				parent.isAttackable = false
-				update_text_on_mouse(materialName, "Cut ")
-			elif is_in_area and materialCategory == "rock":
-				update_text_on_mouse(materialName, "Mine ")
-			else:
-				update_text_on_mouse(materialName)
-			set_tilemap_cell(mouseTilePos)
+			if materialDroppedData:
+				var materialName = materialDroppedData.get_custom_data("materialName")
+				var materialCategory = materialDroppedData.get_custom_data("materialCategory")
+				if is_in_area and materialCategory == "wood":
+					parent.isAttackable = false
+					update_text_on_mouse(materialName, "Cut ")
+				elif is_in_area and materialCategory == "rock":
+					update_text_on_mouse(materialName, "Mine ")
+				else:
+					update_text_on_mouse(materialName)
+				set_tilemap_cell(mouseTilePos)
 
 		if mouseTilePos != prevMouseTilePos:
 			parent.levelTilemap.erase_cell(5,prevMouseTilePos)

@@ -1,9 +1,7 @@
 class_name Potion
 extends Node
 
-@export var master:Entity
-
-func execute():
+func execute(master:Entity):
 	pass
 
 

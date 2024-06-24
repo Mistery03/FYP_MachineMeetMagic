@@ -1,6 +1,7 @@
 extends State
 
 @export var chaseSpeed:float
+@export var separationWeight: float = 1.0  # Adjust the influence of separation
 const LEAP_DISTANCE = 45
 
 func enter() -> void:
@@ -32,3 +33,8 @@ func _on_collision_box_body_entered(body):
 	if body is Player:
 		parent.player.OnDamageTaken.emit(parent.damagePoint)
 		transitioned.emit("death")
+		
+func apply_separation_force(separation_force: Vector2, weight: float) -> void:
+	# Apply separation force to the current direction
+	parent.currentDirection += separation_force * weight
+	parent.currentDirection = parent.currentDirection.normalized()

@@ -392,6 +392,54 @@ tracks/5/keys = {
 "update": 1,
 "values": [true]
 }
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("Animation/sword:visible")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("Animation/axe:position")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(5, -5)]
+}
+tracks/8/type = "value"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath("Animation:offset")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+tracks/9/type = "value"
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/path = NodePath("Animation:flip_h")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
 
 [sub_resource type="Animation" id="Animation_4m4tr"]
 length = 0.001
@@ -1345,6 +1393,18 @@ tracks/10/keys = {
 "update": 1,
 "values": [true]
 }
+tracks/11/type = "value"
+tracks/11/imported = false
+tracks/11/enabled = true
+tracks/11/path = NodePath("Animation/axe:visible")
+tracks/11/interp = 1
+tracks/11/loop_wrap = true
+tracks/11/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
 
 [sub_resource type="Animation" id="Animation_o074o"]
 resource_name = "idleBack"
@@ -1768,7 +1828,7 @@ region = Rect2(160, 0, 32, 32)
 [node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("staff", "itemHUDPlaceholder", "playerHUD", "playerCurrencyHUD", "playerInventoryController", "magicUI", "animation", "moveComponent", "stateController") groups=["invalidPosition"]]
 z_index = 10
 scale = Vector2(0.1, 0.1)
-collision_mask = 344
+collision_mask = 120
 script = ExtResource("1_xfdxb")
 playerData = ExtResource("2_g17go")
 potionObject = ExtResource("3_41una")
@@ -1811,7 +1871,6 @@ customAnimation = NodePath("StaffAnimation")
 
 [node name="Animation" parent="Staff" index="0"]
 visible = true
-offset = Vector2(-8, -8)
 flip_h = true
 
 [node name="axe" type="Sprite2D" parent="Staff/Animation" index="0"]
@@ -1821,6 +1880,7 @@ texture_filter = 1
 position = Vector2(5, -5)
 rotation = -0.020944
 texture = SubResource("AtlasTexture_jc7sf")
+flip_h = true
 
 [node name="sword" type="Sprite2D" parent="Staff/Animation" index="1"]
 visible = false
@@ -1862,10 +1922,11 @@ attenuation = 1.36604
 [node name="InventoryManager" type="Node" parent="."]
 script = ExtResource("12_0atyh")
 
-[node name="PotionManager" type="Node" parent="." node_paths=PackedStringArray("inventoryUI", "potionHUD")]
+[node name="PotionManager" type="Node" parent="." node_paths=PackedStringArray("inventoryUI", "potionHUD", "player")]
 script = ExtResource("5_5bgkf")
 inventoryUI = NodePath("../ROOT_UI/InventoryUI")
 potionHUD = NodePath("../ROOT_UI/ItemHUDPlaceholder/PotionHUD")
+player = NodePath("..")
 
 [node name="MagicManager" type="Node" parent="." node_paths=PackedStringArray("magic_tree_ui")]
 script = ExtResource("11_ur7hc")
@@ -1941,6 +2002,7 @@ animation_name = "Damaged"
 
 [node name="Roll" type="Node" parent="StateController"]
 script = ExtResource("25_j1p4y")
+roll_speed_multiplier = 1.2
 animation_name = "ROLL"
 
 [node name="MoveComponent" type="Node" parent="." node_paths=PackedStringArray("rollTimer")]
@@ -2165,6 +2227,7 @@ player = NodePath("../..")
 
 [node name="CurrencyHolder" type="NinePatchRect" parent="ROOT_UI"]
 self_modulate = Color(0.0156863, 0.184314, 0.32549, 1)
+z_index = -5
 texture_filter = 1
 offset_left = 1314.0
 offset_top = 787.0
