@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="Magic" load_steps=4 format=3 uid="uid://b5wauuhno0qg2"]
+[gd_resource type="Resource" script_class="MagicData" load_steps=4 format=3 uid="uid://b5wauuhno0qg2"]
 
 [ext_resource type="Script" path="res://Magic/Data/magicData.gd" id="1_txb14"]
 [ext_resource type="Texture2D" uid="uid://u1h6oyjt8kdh" path="res://Asset/Skill_Btn.png" id="2_hr5d3"]
