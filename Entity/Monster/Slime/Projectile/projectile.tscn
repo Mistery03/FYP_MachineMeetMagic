@@ -13,8 +13,8 @@ height = 18.0
 
 [node name="Projectile" type="CharacterBody2D"]
 scale = Vector2(0.3, 0.3)
-collision_layer = 0
-collision_mask = 0
+collision_layer = 512
+collision_mask = 512
 script = ExtResource("1_ijpr6")
 speed = 4000.0
 

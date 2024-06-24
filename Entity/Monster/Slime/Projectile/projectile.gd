@@ -3,11 +3,12 @@ extends CharacterBody2D
 @export var damagePoint:float = 20
 @export var speed: float = 400
 @export var life_time: float = 5.0
+@export var spread: float = 5.0  # Spread factor for initial position offset
 var direction: Vector2
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	pass # Replace with function body.
+	position += Vector2(randf_range(-spread, spread), randf_range(-spread, spread))
 
 
 func _physics_process(delta):

@@ -81,7 +81,7 @@ func spawnRoom():
 	roomInstance.position = Vector2(0,0)
 	if roomInstance.roomName != "BossRoom":
 		roomInstance.door.connect("OnDoorEntered",goNextRoom)
-	roomInstance.fadeOut = fade_out
+	roomInstance.fadeOut = fade_out	
 	rooms.add_child(roomInstance)
 	roomInstance.placePlayer()
 	player.isLevelTransitioning = false
