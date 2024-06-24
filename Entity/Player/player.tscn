@@ -22,7 +22,7 @@
 [ext_resource type="Script" path="res://Entity/Player/states/Action.gd" id="14_h6fpb"]
 [ext_resource type="FontFile" uid="uid://cl3rxpo58micg" path="res://Asset/Font/Lambda-Regular.ttf" id="14_me7n8"]
 [ext_resource type="Resource" uid="uid://cqgrvsd8t35a3" path="res://Magic/Data/try.tres" id="15_dhv4f"]
-[ext_resource type="PackedScene" uid="uid://dd2ysdc77pxkq" path="res://UI/Build/build_hud.tscn" id="15_otihl"]
+[ext_resource type="PackedScene" path="res://UI/Build/build_hud.tscn" id="15_otihl"]
 [ext_resource type="PackedScene" uid="uid://cnj7jj8r34b1q" path="res://Material/Material.tscn" id="15_qe768"]
 [ext_resource type="Script" path="res://UI/Wiring/Wiring.gd" id="18_3q6sb"]
 [ext_resource type="Script" path="res://Entity/Player/ItemHUDPlaceholder.gd" id="19_4bbe1"]
