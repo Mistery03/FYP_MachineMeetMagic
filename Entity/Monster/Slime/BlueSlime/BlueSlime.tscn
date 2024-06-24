@@ -4,10 +4,10 @@
 [ext_resource type="Texture2D" uid="uid://dfbobrjgxuwbl" path="res://Asset/slime.png" id="2_o73m2"]
 [ext_resource type="Script" path="res://Entity/Monster/Slime/BlueSlime/BlueSlime.gd" id="2_xatpo"]
 [ext_resource type="Texture2D" uid="uid://b8m7h885sjdf6" path="res://Asset/slimeSpawn.png" id="3_3jxcv"]
-[ext_resource type="Script" path="res://Entity/Monster/Slime/State/Idle.gd" id="4_8s6qj"]
-[ext_resource type="Script" path="res://Entity/Monster/Slime/State/Move.gd" id="5_emkus"]
-[ext_resource type="Script" path="res://Entity/Monster/Slime/State/Return.gd" id="6_4q6fg"]
-[ext_resource type="Script" path="res://Entity/Monster/Slime/BlueSlime/Chase.gd" id="7_7seg2"]
+[ext_resource type="Script" path="res://Entity/Monster/Slime/BlueSlime/State/Idle.gd" id="4_8s6qj"]
+[ext_resource type="Script" path="res://Entity/Monster/Slime/BlueSlime/State/Move.gd" id="5_emkus"]
+[ext_resource type="Script" path="res://Entity/Monster/Slime/BlueSlime/State/Return.gd" id="6_4q6fg"]
+[ext_resource type="Script" path="res://Entity/Monster/Slime/BlueSlime/State/Chase.gd" id="7_7seg2"]
 [ext_resource type="Script" path="res://Entity/Monster/Slime/State/Damaged.gd" id="8_4cmn4"]
 [ext_resource type="Script" path="res://Entity/Monster/Slime/State/Death.gd" id="9_eixto"]
 [ext_resource type="Script" path="res://Entity/Monster/MoveComponent.gd" id="11_hjj1d"]
@@ -151,12 +151,13 @@ animations = [{
 "speed": 5.0
 }]
 
-[node name="BlueSlime" type="CharacterBody2D" node_paths=PackedStringArray("spawnSFX", "animation", "moveComponent", "stateController")]
+[node name="BlueSlime" type="CharacterBody2D" node_paths=PackedStringArray("collision_box", "spawnSFX", "animation", "moveComponent", "stateController")]
 z_index = 5
 scale = Vector2(0.1, 0.1)
 collision_layer = 256
 collision_mask = 213
 script = ExtResource("2_xatpo")
+collision_box = NodePath("CollisionBox")
 spawnSFX = NodePath("spawnSFX")
 moveSpeed = 20.0
 animation = NodePath("Animation")
@@ -173,8 +174,6 @@ texture_filter = 1
 scale = Vector2(5, 5)
 sprite_frames = SubResource("SpriteFrames_o3sr5")
 animation = &"SPAWN"
-frame = 7
-frame_progress = 1.0
 
 [node name="StateController" type="Node" parent="." node_paths=PackedStringArray("current_state")]
 script = ExtResource("2_1e76v")
@@ -204,7 +203,7 @@ script = ExtResource("9_eixto")
 [node name="MoveComponent" type="Node" parent="."]
 script = ExtResource("11_hjj1d")
 
-[node name="CollisionBox" type="Area2D" parent="."]
+[node name="CollisionBox" type="Area2D" parent="." groups=["Seperable"]]
 collision_layer = 256
 collision_mask = 212
 

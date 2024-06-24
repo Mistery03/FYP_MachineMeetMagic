@@ -10,6 +10,8 @@ extends CharacterBody2D
 
 @export_category("State Machine")
 @export var stateController:StateMachine
+
+@export var entityNeighbour:Array
 #Event
 signal OnHealthIncrease
 

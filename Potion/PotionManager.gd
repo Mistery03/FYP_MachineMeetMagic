@@ -3,8 +3,12 @@ extends Node
 
 @export var inventoryUI:Control
 @export var potionHUD:Control
+@export var player:Player
 
 var potionData:PotionData
+
+var current_potion_instance = null
+var previous_potion_data = null
 
 func _process(delta):
 	if potionData:
@@ -14,6 +18,7 @@ func _process(delta):
 func _input(event):
 	if potionData:
 		var potionAmount = inventoryUI.potion_inventory.getPotionAmount(potionData)
+		
 		#potionHUD.potion_amount.text = str(potionAmount)
 		print(potionAmount)
 
@@ -23,7 +28,17 @@ func _input(event):
 
 		else:
 			potionHUD.darkened.visible = false
+			
+			if potionData != previous_potion_data:
+				# If there is an existing potion instance, free it
+				if current_potion_instance:
+					current_potion_instance.queue_free()
+				
+				# Instantiate the new potion instance
+				current_potion_instance = potionData.scene.instantiate()
+				previous_potion_data = potionData  # Update the previous potion data reference
 			if event.is_action_pressed("DRINKPOTION"):
+				current_potion_instance.execute(player)
 				inventoryUI.potion_inventory.decreasePotionAmount(potionData)
 				inventoryUI.potion_grid_container_player.decreasePotionAmount(potionData)
 				print("drank")

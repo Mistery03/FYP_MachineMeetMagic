@@ -1922,10 +1922,11 @@ attenuation = 1.36604
 [node name="InventoryManager" type="Node" parent="."]
 script = ExtResource("12_0atyh")
 
-[node name="PotionManager" type="Node" parent="." node_paths=PackedStringArray("inventoryUI", "potionHUD")]
+[node name="PotionManager" type="Node" parent="." node_paths=PackedStringArray("inventoryUI", "potionHUD", "player")]
 script = ExtResource("5_5bgkf")
 inventoryUI = NodePath("../ROOT_UI/InventoryUI")
 potionHUD = NodePath("../ROOT_UI/ItemHUDPlaceholder/PotionHUD")
+player = NodePath("..")
 
 [node name="MagicManager" type="Node" parent="." node_paths=PackedStringArray("magic_tree_ui")]
 script = ExtResource("11_ur7hc")

@@ -28,6 +28,7 @@ func spawnEnemies():
 		var creatureData= creatureList.pick_random()
 		var creatureInstance = creatureData.mobInstance.instantiate()
 		creatureInstance.global_position = tile_map.map_to_local(spawnPos)
+		creatureInstance.localLevel = self
 		creatureManager.add_child(creatureInstance)
 		creatureManager.init(player)
 		creatureInstance.animation.play("SPAWN")
