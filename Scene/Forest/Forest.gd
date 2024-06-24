@@ -99,6 +99,7 @@ func goNextRoom():
 	tween.tween_property(fade_out,"modulate:a",1,0.3)
 	await  get_tree().create_timer(0.5).timeout
 	player.isLevelTransitioning = true
+	player.currStamina = player.playerData.MaxStamina
 	clearCurrentRoom()
 	await  get_tree().create_timer(1).timeout
 	spawnRoom()
