@@ -104,6 +104,8 @@ func _process(delta) -> void:
 	##NOTE Wai this is for you
 	print("Player's researchpoint: ",ResearchPointCurrency)
 	print("Player hitbox ",get_collision_layer_value(1))
+	
+	print("test")
 
 func _input(event):
 	if event is InputEventMouse:
