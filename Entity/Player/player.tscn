@@ -1868,11 +1868,12 @@ autoplay = "IDLE"
 position = Vector2(-9.53674e-07, 10)
 shape = SubResource("CapsuleShape2D_5n34a")
 
-[node name="Staff" parent="." node_paths=PackedStringArray("customAnimation") instance=ExtResource("22_01tsa")]
+[node name="Staff" parent="." node_paths=PackedStringArray("customAnimation", "magicManager") instance=ExtResource("22_01tsa")]
 z_index = -1
 position = Vector2(10, 0)
 scale = Vector2(8, 8)
 customAnimation = NodePath("StaffAnimation")
+magicManager = NodePath("../MagicManager")
 
 [node name="Animation" parent="Staff" index="0"]
 visible = true

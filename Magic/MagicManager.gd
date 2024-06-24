@@ -7,7 +7,7 @@ extends Node
 @export var magic_tree_ui:Control
 @export var magicData:MagicData
 @export var staff:Node #need to change later
-const IGNIS_NORMAL_ATTACK = preload("res://Magic/IgnisNormalAttack.tscn")
+
 var mousePos:Vector2
 var player:Player
 @export var magicDataList:Array[MagicData] = []
@@ -18,8 +18,7 @@ func init(player:Player):
 	
 	
 func _process(delta):
-	#read data
-	#check which magic been unlock(magic skill tree)
+
 	pass
 	
 	
@@ -30,17 +29,16 @@ func _input(event):
 			print("mouse button left")
 			normalAttack()
 			
-	pass
 
 	
 func normalAttack():
 	var magicScene = magicDataList[0].scene.instantiate()
 	magicScene.position = mousePos
 	get_parent().add_child(magicScene)
-	queue_free()
-	print(magicDataList[0].name)
+	print(magicDataList)
+	
 	#call trackposition
 	#play animation, call ignisNormalAttack?
 	#staff call this
-	pass
+	
 	
