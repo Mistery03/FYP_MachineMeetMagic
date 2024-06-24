@@ -10,6 +10,7 @@ extends Node
 const IGNIS_NORMAL_ATTACK = preload("res://Magic/IgnisNormalAttack.tscn")
 var mousePos:Vector2
 var player:Player
+@export var magicDataList:Array[MagicData] = []
 
 func init(player:Player):
 	self.player = player
@@ -28,20 +29,18 @@ func _input(event):
 		if event.pressed and event.button_index == MOUSE_BUTTON_LEFT:
 			print("mouse button left")
 			normalAttack()
-			print("unlocked: ", magicData.isUnlocked)
+			
 	pass
 
-func trackposition():
-	#check mouse position
-	pass
 	
 func normalAttack():
-	var magicScene = IGNIS_NORMAL_ATTACK.instantiate()
+	var magicScene = magicDataList[0].scene.instantiate()
+	magicScene.position = mousePos
 	get_parent().add_child(magicScene)
+	queue_free()
+	print(magicDataList[0].name)
 	#call trackposition
 	#play animation, call ignisNormalAttack?
 	#staff call this
-	
-	
 	pass
 	

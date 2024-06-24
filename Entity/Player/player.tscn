@@ -1,4 +1,4 @@
-[gd_scene load_steps=99 format=3 uid="uid://c1vsfoc55pk0w"]
+[gd_scene load_steps=103 format=3 uid="uid://c1vsfoc55pk0w"]
 
 [ext_resource type="Texture2D" uid="uid://bd32dcnew3uvf" path="res://Asset/L.png" id="1_ksidj"]
 [ext_resource type="Script" path="res://Entity/Player/player.gd" id="1_xfdxb"]
@@ -22,10 +22,14 @@
 [ext_resource type="Script" path="res://Entity/Player/states/Action.gd" id="14_h6fpb"]
 [ext_resource type="FontFile" uid="uid://cl3rxpo58micg" path="res://Asset/Font/Lambda-Regular.ttf" id="14_me7n8"]
 [ext_resource type="Resource" uid="uid://cqgrvsd8t35a3" path="res://Magic/Data/try.tres" id="15_dhv4f"]
-[ext_resource type="PackedScene" path="res://UI/Build/build_hud.tscn" id="15_otihl"]
+[ext_resource type="PackedScene" uid="uid://dd2ysdc77pxkq" path="res://UI/Build/build_hud.tscn" id="15_otihl"]
 [ext_resource type="PackedScene" uid="uid://cnj7jj8r34b1q" path="res://Material/Material.tscn" id="15_qe768"]
+[ext_resource type="Resource" uid="uid://60imtm71g3ri" path="res://Magic/Data/IgnisNormalAttack.tres" id="16_uflgr"]
+[ext_resource type="Resource" uid="uid://b5wauuhno0qg2" path="res://Magic/Data/IgnisSkill1.tres" id="17_45ckk"]
 [ext_resource type="Script" path="res://UI/Wiring/Wiring.gd" id="18_3q6sb"]
+[ext_resource type="Resource" uid="uid://dcf0tfhforbdf" path="res://Magic/Data/IgnisSkill2.tres" id="18_uuexe"]
 [ext_resource type="Script" path="res://Entity/Player/ItemHUDPlaceholder.gd" id="19_4bbe1"]
+[ext_resource type="Resource" uid="uid://djb03olcdq404" path="res://Magic/Data/IgnisSkill3.tres" id="19_kedec"]
 [ext_resource type="PackedScene" uid="uid://crsbugvcqu5mn" path="res://Staff/staffHUD.tscn" id="20_qac2v"]
 [ext_resource type="Texture2D" uid="uid://cgi863ww3hb3g" path="res://Asset/fantasyAssets.png" id="21_kqu6c"]
 [ext_resource type="PackedScene" uid="uid://ca71hsm6y7dur" path="res://Staff/staff.tscn" id="22_01tsa"]
@@ -1933,6 +1937,7 @@ player = NodePath("..")
 script = ExtResource("11_ur7hc")
 magic_tree_ui = NodePath("../ROOT_UI/MagicTreeUI")
 magicData = ExtResource("15_dhv4f")
+magicDataList = Array[Resource("res://Magic/Data/magicData.gd")]([ExtResource("16_uflgr"), ExtResource("17_45ckk"), ExtResource("18_uuexe"), ExtResource("19_kedec")])
 
 [node name="StateController" type="Node" parent="." node_paths=PackedStringArray("current_state")]
 script = ExtResource("7_xedn3")

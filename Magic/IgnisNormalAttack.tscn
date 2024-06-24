@@ -131,6 +131,9 @@ animations = [{
 }, {
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_c2e1s")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vp70b")
 }],
 "loop": false,
 "name": &"default",
@@ -145,5 +148,5 @@ texture_filter = 1
 position = Vector2(120, 121)
 scale = Vector2(5, 5)
 sprite_frames = SubResource("SpriteFrames_xvip3")
-frame = 17
+frame = 18
 frame_progress = 1.0
