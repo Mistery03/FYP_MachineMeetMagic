@@ -19,7 +19,8 @@ func _ready():
 	
 
 func _process(delta):
-	print("Slime HP: ",currHealth)
+	#print("Slime HP: ",currHealth)
+	pass
 	
 
 	

@@ -14,4 +14,4 @@ func init(player: Player):
 func _process(delta):
 	value = player.currStamina
 	value = clamp(value,0,player.playerData.MaxStamina)
-	print("Player Stamina: ", value)
+	#print("Player Stamina: ", value)

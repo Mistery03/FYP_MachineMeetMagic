@@ -8,14 +8,11 @@ extends MachineControlUI
 @export_category("Fuelbar Settings")
 @export var maxValue:float = 100
 
-@onready var machine_animation = $MachineAnimation
+
 @onready var power_switch = $PowerSwitch
 @onready var machine_mana_bar = $MachineManaBar
 @onready var progress_bar = $ProgressBar
 
-
-@onready var material_slot = $MaterialSlot
-@onready var result_slot = $ResultSlot
 @onready var area_of_pressing = $AreaOfPressing
 
 var currValue:float = 100
@@ -38,12 +35,15 @@ func _process(delta):
 	
 	processMaterial()
 	
-	if fuel_slot.item and fuel_slot.amount > 0:
-		if fuel_slot.fuelDurability <= 0:
-			fuel_slot.amount -= 1
-			fuel_slot.fuelDurability = fuel_slot.item.durability					
-	else:
-		fuel_slot.item = null
+	
+	if fuel_slot.item :
+		if fuel_slot.amount > 0:
+			if fuel_slot.fuelDurability <= 0:
+				fuel_slot.amount -= 1
+
+				fuel_slot.fuelDurability = fuel_slot.item.durability					
+		else:
+			fuel_slot.item = null
 		
 	
 	##@WARNING Does not take account if the inventory slots are different size to the machine slot (in this file fuel_slot)
@@ -192,27 +192,28 @@ func whenMaterialSlotIsEmptyMouseShortcut():
 	if inventoryHandler.globalMousePosToLocalGrid(get_global_mouse_position()) in inventoryHandler.getSlotPositions():
 		var currSlot = inventoryHandler.getSlotBasedOnPosition(get_global_mouse_position())
 		if currSlot.item:
-			if material_slot.item == null or material_slot.item == currSlot.item: 
+			if material_slot.item == null:
+			#if material_slot.item == null or material_slot.item == currSlot.item: 
 				if Input.is_action_just_pressed("AUTOLOADINITEM"):
 					isDragging = false
 					##NOTE To prevent item spawning in the world
 					inventoryHandler.isForExternalSlot = true
 					##Assign the item and amount
-					material_slot.item = inventoryHandler.currSlot.item
-					material_slot.amount = inventoryHandler.currSlot.amount
+					material_slot.item = currSlot.item
+					material_slot.amount = currSlot.amount
 					##@NOTE resets to it's original position
 					material_slot.item_texture.global_position = material_slot.border.global_position 
 					material_slot.label.global_position =material_slot.border.global_position + Vector2(80,60)
 					##@NOTE resets to it's original position
-					inventoryHandler.currSlot.item_texture.global_position = inventoryHandler.currSlot.border.global_position
-					inventoryHandler.currSlot.label.global_position = inventoryHandler.currSlot.border.global_position + Vector2(80,60)
+					currSlot.item_texture.global_position = currSlot.border.global_position
+					currSlot.label.global_position = currSlot.border.global_position + Vector2(80,60)
 					
 					##Refer to the function in playerInventoryHandler
-					inventoryHandler.removeItem(inventoryHandler.currSlot.amount,inventoryHandler.currSlot.global_position)
+					inventoryHandler.removeItem(currSlot.amount,currSlot.global_position)
 			
 					##@NOTE to prevent duplication
-					inventoryHandler.currSlot.item = null
-					inventoryHandler.currSlot = null
+					currSlot.item = null
+					currSlot = null
 					
 func whenMaterialSlotIsNotEmptyMouseShortcut():
 	if inventoryHandler.globalMousePosToLocalGrid(get_global_mouse_position()) in inventoryHandler.getSlotPositions():
@@ -247,7 +248,8 @@ func whenMaterialSlotIsNotEmptyMouseShortcut():
 									if inventoryHandler.currSlot.amount == 0:
 										inventoryHandler.currSlot = null	
 								elif inventoryHandler.currSlot.item !=material_slot.item:
-									isDragging = false					
+									isDragging = false
+														
 func whenMaterialSlotIsEmpty():
 	if material_slot.item ==  null:##Checks if there no fuel item (variable is same as currFuelItem)
 		isDragging = false
