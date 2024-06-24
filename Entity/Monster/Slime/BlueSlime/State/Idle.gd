@@ -15,7 +15,7 @@ func update(delta: float) -> void:
 	if parent.currHealth <= 0:
 		transitioned.emit("death")
 		
-	await get_tree().create_timer(5).timeout
+	await get_tree().create_timer(2).timeout
 	if !isDamaged:
 		transitioned.emit("Wander")
 

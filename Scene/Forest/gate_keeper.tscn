@@ -1,0 +1,20 @@
+[gd_scene load_steps=4 format=3 uid="uid://b7pgfgv6lh1ls"]
+
+[ext_resource type="Script" path="res://Scene/Forest/gate_keeper.gd" id="1_k7k1o"]
+[ext_resource type="Texture2D" uid="uid://b3mm7googsp0g" path="res://Asset/gatekeeper.png" id="2_qb1is"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_uwrv5"]
+size = Vector2(57, 62)
+
+[node name="GateKeeper" type="StaticBody2D"]
+collision_layer = 32
+collision_mask = 257
+script = ExtResource("1_k7k1o")
+
+[node name="Sprite" type="Sprite2D" parent="."]
+texture_filter = 1
+texture = ExtResource("2_qb1is")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-0.5, 1)
+shape = SubResource("RectangleShape2D_uwrv5")
