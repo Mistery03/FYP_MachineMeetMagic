@@ -11,7 +11,7 @@ region = Rect2(0, 384, 32, 32)
 [resource]
 script = ExtResource("1_6p0oj")
 name = "Battery"
-category = "Electric"
+category = "Electricity"
 texture = SubResource("AtlasTexture_am4fk")
 atlasCoord = Vector2i(0, 12)
 description = "Better call battery when you are worried about mana outages!"

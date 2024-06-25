@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://dgn61wamn10el"]
+[gd_scene load_steps=15 format=3 uid="uid://dgn61wamn10el"]
 
 [ext_resource type="Script" path="res://UI/Build/build_menu.gd" id="1_0ur8d"]
 [ext_resource type="Texture2D" uid="uid://dy6bsmjnf8u44" path="res://Asset/UIUX/Container.png" id="1_bxykf"]
@@ -11,6 +11,7 @@
 [ext_resource type="Texture2D" uid="uid://dw0wj1ftq8uye" path="res://Asset/potionSS.png" id="6_wdmht"]
 [ext_resource type="Resource" uid="uid://ch3ruj8fn022x" path="res://Building/Machine/Data/powerGenerator.tres" id="7_1tdyj"]
 [ext_resource type="Resource" uid="uid://b4ot4cdrsegxs" path="res://Building/Machine/Data/battery.tres" id="8_vgx31"]
+[ext_resource type="Resource" uid="uid://bhlc0qe5ejuxj" path="res://Building/Machine/Data/potionMaker.tres" id="9_cux2h"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_spxpk"]
 atlas = ExtResource("5_25chw")
@@ -85,6 +86,10 @@ buildingData = ExtResource("7_1tdyj")
 [node name="BuildSlot4" parent="BuildMenu/GridContainer" instance=ExtResource("2_gxta4")]
 layout_mode = 2
 buildingData = ExtResource("8_vgx31")
+
+[node name="BuildSlot5" parent="BuildMenu/GridContainer" instance=ExtResource("2_gxta4")]
+layout_mode = 2
+buildingData = ExtResource("9_cux2h")
 
 [node name="DescriptionBoard" type="NinePatchRect" parent="."]
 visible = false

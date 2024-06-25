@@ -1,3 +1,243 @@
-[gd_scene format=3 uid="uid://eul3ho43kdj"]
+[gd_scene load_steps=26 format=3 uid="uid://eul3ho43kdj"]
 
-[node name="PotionMaker" type="Node2D"]
+[ext_resource type="Script" path="res://Building/Machine/Item Maker/Potion Maker/potionMaker.gd" id="1_3k2kl"]
+[ext_resource type="Texture2D" uid="uid://cy01yfe162ynm" path="res://Asset/Machine.png" id="1_qlrj0"]
+[ext_resource type="Texture2D" uid="uid://dw0wj1ftq8uye" path="res://Asset/potionSS.png" id="2_4qn54"]
+[ext_resource type="Texture2D" uid="uid://bptk6f0j2t4ex" path="res://Asset/UIUX/speechBubble.png" id="4_b4tv3"]
+[ext_resource type="PackedScene" uid="uid://cr3ojbwvnl0ts" path="res://Building/Machine/Item Maker/Potion Maker/potionMakerUI.tscn" id="4_lg0d5"]
+[ext_resource type="Script" path="res://Building/Machine/PopUp.gd" id="5_88puf"]
+[ext_resource type="Texture2D" uid="uid://cruxbb2jv2vmx" path="res://Asset/Materials1.png" id="6_l22d1"]
+[ext_resource type="FontFile" uid="uid://cl3rxpo58micg" path="res://Asset/Font/Lambda-Regular.ttf" id="7_7tj3m"]
+[ext_resource type="AudioStream" uid="uid://dig47o38sc8j6" path="res://Asset/SFX/ding.mp3" id="8_ha7dp"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_twj1w"]
+atlas = ExtResource("1_qlrj0")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_winio"]
+atlas = ExtResource("1_qlrj0")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_drsk2"]
+atlas = ExtResource("1_qlrj0")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_j6ocp"]
+atlas = ExtResource("1_qlrj0")
+region = Rect2(128, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_l56vi"]
+atlas = ExtResource("1_qlrj0")
+region = Rect2(160, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_o4ipy"]
+atlas = ExtResource("1_qlrj0")
+region = Rect2(192, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5ojvn"]
+atlas = ExtResource("1_qlrj0")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ofie2"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_twj1w")
+}],
+"loop": true,
+"name": &"End",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_winio")
+}],
+"loop": true,
+"name": &"Idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_drsk2")
+}],
+"loop": true,
+"name": &"NoPower",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_j6ocp")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_l56vi")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_o4ipy")
+}],
+"loop": true,
+"name": &"Processing",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5ojvn")
+}],
+"loop": true,
+"name": &"Standby",
+"speed": 5.0
+}]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bms3i"]
+atlas = ExtResource("2_4qn54")
+region = Rect2(0, 64, 32, 32)
+
+[sub_resource type="Animation" id="Animation_pgnun"]
+resource_name = "floating"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("PotionSprite:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.4, 0.8),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(0, -5), Vector2(0, -6), Vector2(0, -5)]
+}
+
+[sub_resource type="Animation" id="Animation_cjuve"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("PotionSprite:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, -5)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_w5tpa"]
+_data = {
+"RESET": SubResource("Animation_cjuve"),
+"floating": SubResource("Animation_pgnun")
+}
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_jywj8"]
+size = Vector2(26, 28)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_r8b0d"]
+atlas = ExtResource("6_l22d1")
+region = Rect2(0, 672, 32, 32)
+
+[sub_resource type="Animation" id="Animation_3fvs2"]
+resource_name = "floating"
+length = 1.2
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.4, 1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(-21, -50), Vector2(-21, -52), Vector2(-21, -50)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_fqaq3"]
+_data = {
+"floating": SubResource("Animation_3fvs2")
+}
+
+[node name="PotionMaker" type="Node2D" node_paths=PackedStringArray("machineUI", "animation", "pickup_sfx")]
+z_index = 20
+script = ExtResource("1_3k2kl")
+machineUI = NodePath("Root/PotionMakerUI")
+animation = NodePath("Animation")
+pickup_sfx = NodePath("pickupSFX")
+maxMana = 3000.0
+
+[node name="Animation" type="AnimatedSprite2D" parent="."]
+texture_filter = 1
+sprite_frames = SubResource("SpriteFrames_ofie2")
+animation = &"Processing"
+frame_progress = 0.0773299
+
+[node name="PotionSprite" type="Sprite2D" parent="."]
+texture_filter = 1
+position = Vector2(0, -5)
+scale = Vector2(0.5, 0.5)
+texture = SubResource("AtlasTexture_bms3i")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_w5tpa")
+}
+
+[node name="Root" type="CanvasLayer" parent="."]
+
+[node name="PotionMakerUI" parent="Root" node_paths=PackedStringArray("parentMachine") instance=ExtResource("4_lg0d5")]
+visible = false
+parentMachine = NodePath("../..")
+
+[node name="Interectable" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Interectable"]
+shape = SubResource("RectangleShape2D_jywj8")
+
+[node name="PopUp" type="TextureRect" parent="." node_paths=PackedStringArray("machineUI")]
+visible = false
+z_index = 100
+texture_filter = 1
+offset_left = -21.0
+offset_top = -50.2044
+offset_right = 87.0
+offset_bottom = 57.7956
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("4_b4tv3")
+script = ExtResource("5_88puf")
+machineUI = NodePath("../Root/PotionMakerUI")
+
+[node name="ItemTexture" type="TextureRect" parent="PopUp"]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 0
+offset_left = 30.0
+offset_top = 15.0
+offset_right = 62.0
+offset_bottom = 47.0
+scale = Vector2(1.5, 1.5)
+texture = SubResource("AtlasTexture_r8b0d")
+
+[node name="Label" type="Label" parent="PopUp"]
+layout_mode = 0
+offset_left = 60.0
+offset_top = 42.5
+offset_right = 2310.0
+offset_bottom = 2776.5
+scale = Vector2(0.01, 0.01)
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 600
+theme_override_fonts/font = ExtResource("7_7tj3m")
+theme_override_font_sizes/font_size = 2400
+text = "99"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="PopUp"]
+libraries = {
+"": SubResource("AnimationLibrary_fqaq3")
+}
+autoplay = "floating"
+
+[node name="pickupSFX" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("8_ha7dp")
+pitch_scale = 1.2
+
+[connection signal="input_event" from="Interectable" to="." method="_on_interectable_input_event"]

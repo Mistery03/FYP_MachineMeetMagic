@@ -43,7 +43,7 @@ func _process(delta):
 			print("Index ",currIndex)
 			currIncreament += 1
 
-			if currIncreament == potionList.size() and currIndex != prevIndex:
+			if currIncreament >= potionList.size() and currIndex != prevIndex:
 				currIncreament = 0
 
 			if potionList[currIndex]:
@@ -53,7 +53,7 @@ func _process(delta):
 				texture_rect.texture = potionList[currIndex].texture
 				potion_amount.text = str(amount)
 				player.potion_manager.potionData = potionList[currIndex]
-			else:
+			else:	
 				texture_rect.visible = false
 				potion_amount.visible = false
 				player.potion_manager.potionData = null
@@ -66,7 +66,7 @@ func _process(delta):
 		currIndex = currIncreament % potionList.size()
 
 		currIncreament = clamp(currIncreament,0,potionList.size())
-		if currIncreament == potionList.size() and currIndex != prevIndex:
+		if currIncreament >= potionList.size() and currIndex != prevIndex:
 			currIncreament = 0
 		if potionList[currIndex]:
 			isPotionNull = false

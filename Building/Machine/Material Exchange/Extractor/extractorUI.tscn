@@ -28,11 +28,12 @@ region = Rect2(128, 0, 64, 64)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_a4t5i"]
 
-[node name="ExtractorUI" type="Control" node_paths=PackedStringArray("machine_animation", "fuel_slot", "material_slot", "result_slot", "inventoryHandler")]
+[node name="ExtractorUI" type="Control" node_paths=PackedStringArray("machine_mana_bar", "machine_animation", "fuel_slot", "material_slot", "result_slot", "inventoryHandler")]
 layout_mode = 3
 anchors_preset = 0
 script = ExtResource("1_q5y3h")
 resultedItem = ExtResource("4_uecce")
+machine_mana_bar = NodePath("MachineManaBar")
 machine_animation = NodePath("MachineAnimation")
 fuel_slot = NodePath("FuelSlot")
 material_slot = NodePath("MaterialSlot")
