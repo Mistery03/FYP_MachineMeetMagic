@@ -6,7 +6,7 @@ const SHOOT_DISTANCE = 80
 
 func enter() -> void:
 	super()
-	parent.set_collision_mask_value(1,false)
+	parent.set_collision_mask_value(1,true)
 	parent.collision_box.set_collision_mask_value(1,true)
 	
 

@@ -7,6 +7,7 @@ var lerp_timer: Timer
 
 func enter() -> void:
 	super()
+	parent.isDead = false
 	lerp_to_zero()
 	if !parent.isMachineUI:
 		parent.itemHUDPlaceholder.visible = true

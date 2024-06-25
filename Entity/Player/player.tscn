@@ -1,4 +1,4 @@
-[gd_scene load_steps=98 format=3 uid="uid://c1vsfoc55pk0w"]
+[gd_scene load_steps=100 format=3 uid="uid://c1vsfoc55pk0w"]
 
 [ext_resource type="Texture2D" uid="uid://bd32dcnew3uvf" path="res://Asset/L.png" id="1_ksidj"]
 [ext_resource type="Script" path="res://Entity/Player/player.gd" id="1_xfdxb"]
@@ -34,6 +34,7 @@
 [ext_resource type="Script" path="res://Entity/Player/states/Damaged.gd" id="23_i72d5"]
 [ext_resource type="PackedScene" uid="uid://dab70bjir0c00" path="res://HUD/Magic/magicHUD.tscn" id="24_71sui"]
 [ext_resource type="Script" path="res://Entity/Player/Roll.gd" id="25_j1p4y"]
+[ext_resource type="Script" path="res://Entity/Player/Death.gd" id="27_i3hmp"]
 [ext_resource type="Texture2D" uid="uid://bi05jqai8a2ss" path="res://Asset/materials.png" id="32_6ejnk"]
 [ext_resource type="PackedScene" uid="uid://cujcp3sdk8yco" path="res://UI/CharacterScene/inventorySheet.tscn" id="32_dbx42"]
 [ext_resource type="PackedScene" uid="uid://eu0xsfmexgdv" path="res://UI/CharacterScene/magic_tree_ui.tscn" id="34_ogpy2"]
@@ -78,6 +79,10 @@ region = Rect2(32, 160, 32, 32)
 [sub_resource type="AtlasTexture" id="AtlasTexture_yrotq"]
 atlas = ExtResource("1_ksidj")
 region = Rect2(64, 160, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yecut"]
+atlas = ExtResource("1_ksidj")
+region = Rect2(96, 160, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_tf0gl"]
 atlas = ExtResource("1_ksidj")
@@ -191,8 +196,11 @@ animations = [{
 }, {
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_yrotq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_yecut")
 }],
-"loop": true,
+"loop": false,
 "name": &"FALLING",
 "speed": 5.0
 }, {
@@ -1825,7 +1833,7 @@ _data = {
 atlas = ExtResource("43_wy3ce")
 region = Rect2(160, 0, 32, 32)
 
-[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("staff", "itemHUDPlaceholder", "playerHUD", "playerCurrencyHUD", "playerInventoryController", "magicUI", "animation", "moveComponent", "stateController") groups=["invalidPosition"]]
+[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("staff", "itemHUDPlaceholder", "playerHUD", "playerCurrencyText", "playerCurrencyHUD", "playerInventoryController", "magicUI", "animation", "moveComponent", "stateController") groups=["invalidPosition"]]
 z_index = 10
 scale = Vector2(0.1, 0.1)
 collision_mask = 120
@@ -1835,7 +1843,8 @@ potionObject = ExtResource("3_41una")
 staff = NodePath("Staff")
 itemHUDPlaceholder = NodePath("ROOT_UI/ItemHUDPlaceholder")
 playerHUD = NodePath("ROOT_UI/Player_hud")
-playerCurrencyHUD = NodePath("ROOT_UI/CurrencyHolder/Currency")
+playerCurrencyText = NodePath("ROOT_UI/CurrencyHolder/Currency")
+playerCurrencyHUD = NodePath("ROOT_UI/CurrencyHolder")
 playerInventoryController = NodePath("ROOT_UI/InventoryUI")
 maxInventorySize = 20
 initSlot = ExtResource("4_e4jpf")
@@ -1856,8 +1865,10 @@ position_smoothing_speed = 4.0
 texture_filter = 1
 scale = Vector2(5, 5)
 sprite_frames = SubResource("SpriteFrames_47nfc")
-animation = &"IDLE"
+animation = &"FALLING"
 autoplay = "IDLE"
+frame = 3
+frame_progress = 1.0
 
 [node name="PlayerHitbox" type="CollisionShape2D" parent="."]
 position = Vector2(-9.53674e-07, 10)
@@ -2004,6 +2015,11 @@ animation_name = "Damaged"
 script = ExtResource("25_j1p4y")
 roll_speed_multiplier = 1.2
 animation_name = "ROLL"
+
+[node name="Death" type="Node" parent="StateController"]
+script = ExtResource("27_i3hmp")
+zoom_level = 12.0
+animation_name = "Falling"
 
 [node name="MoveComponent" type="Node" parent="." node_paths=PackedStringArray("rollTimer")]
 script = ExtResource("10_gim7i")

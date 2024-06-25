@@ -24,9 +24,13 @@ func update(delta: float) -> void:
 		transitioned.emit("death")
 
 func physics_update(delta: float) -> void:
+	
 	var distance_to_player = parent.global_position.distance_to(parent.player.global_position)
 	if distance_to_player > SHOOT_DISTANCE:
 		transitioned.emit("chase")  # Transition back to chase if the player is too far
+	
+	parent.velocity = Vector2.ZERO
+	parent.move_and_slide()
 
 func shoot_projectile():
 	var projectile = projectile_scene.instantiate()

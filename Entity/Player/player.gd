@@ -21,7 +21,8 @@ const JUMP_VELOCITY = 4.5
 @export_category("HUD")
 @export var itemHUDPlaceholder:Control
 @export var playerHUD:Control
-@export var playerCurrencyHUD:Label
+@export var playerCurrencyText:Label
+@export var playerCurrencyHUD:Control
 
 @export_category("Player Inventory")
 @export var playerInventoryController:Control
@@ -72,6 +73,7 @@ var isLevelTransitioning:bool = false
 var isInDestroyArea:bool = false
 var wasAttacking:bool = false
 var isInInventory:bool = false
+var isDead:bool = false
 
 var canInput:bool = true
 var canDash:bool = true
@@ -81,9 +83,12 @@ var objectsPosInLevelList:Array[Vector2i]
 var zoomValue:float = 6
 
 func _ready() -> void:
-	playerCurrencyHUD.text = str(MagicEssenceCurrency)
 	if PlayerGlobal.playerInventory:
 		inventory = PlayerGlobal.playerInventory
+		MagicEssenceCurrency = PlayerGlobal.playerMagicEssence
+		ResearchPointCurrency = PlayerGlobal.playerResearchPoint
+		
+	playerCurrencyText.text = str(MagicEssenceCurrency)	
 	camera.zoom = Vector2(cameraZoom,cameraZoom)
 
 	currHealth = playerData.MaxHealth
@@ -99,7 +104,7 @@ func _ready() -> void:
 		#inventory.append(null)
 
 func _process(delta) -> void:
-	playerCurrencyHUD.text = str(MagicEssenceCurrency)
+	playerCurrencyText.text = str(MagicEssenceCurrency)
 	mousePos = get_global_mouse_position()
 	##NOTE Wai this is for you
 	print("Player's researchpoint: ",ResearchPointCurrency)
@@ -108,15 +113,16 @@ func _process(delta) -> void:
 	print("test")
 
 func _input(event):
-	if event is InputEventMouse:
-		if event.is_action_released("ZOOMIN"):
-			zoomValue+=zoom_step
-			zoomValue = clamp(zoomValue,min_zoom,max_zoom)
-			smooth_zoom(zoomValue)
-		elif event.is_action_released("ZOOMOUT"):
-			zoomValue-=zoom_step
-			zoomValue = clamp(zoomValue,min_zoom,max_zoom)
-			smooth_zoom(zoomValue)
+	if !isDead:
+		if event is InputEventMouse:
+			if event.is_action_released("ZOOMIN"):
+				zoomValue+=zoom_step
+				zoomValue = clamp(zoomValue,min_zoom,max_zoom)
+				smooth_zoom(zoomValue)
+			elif event.is_action_released("ZOOMOUT"):
+				zoomValue-=zoom_step
+				zoomValue = clamp(zoomValue,min_zoom,max_zoom)
+				smooth_zoom(zoomValue)
 
 func smooth_zoom(new_zoom):
 	var tween = get_tree().create_tween()

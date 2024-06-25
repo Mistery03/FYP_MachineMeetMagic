@@ -21,5 +21,7 @@ func _on_mouse_exited():
 
 func _on_pressed():
 	PlayerGlobal.playerInventory = teleporter.player.inventory
+	PlayerGlobal.playerMagicEssence = teleporter.player.MagicEssenceCurrency 
+	PlayerGlobal.playerResearchPoint =teleporter.player.ResearchPointCurrency
 	get_tree().change_scene_to_file("res://Scene/Forest/Forest.tscn")
 	

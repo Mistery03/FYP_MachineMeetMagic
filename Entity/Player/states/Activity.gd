@@ -15,6 +15,9 @@ func exit() -> void:
 	pass
 
 func update(delta: float) -> void:
+	if parent.currHealth <= 0:
+		transitioned.emit("death")
+		
 	if !moveComponent.isDashing():
 		parent.currStamina +=  rollStaminaComsumption * punishMultiplier * delta
 

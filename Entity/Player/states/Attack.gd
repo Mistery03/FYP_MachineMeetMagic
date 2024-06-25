@@ -18,7 +18,8 @@ func enter() -> void:
 	actionPressed = false
 
 func exit() -> void:
-	parent.staff.melee_hitbox.monitorable = false
+	#parent.staff.melee_hitbox.monitorable = false
+	parent.staff.melee_hitbox.set_deferred("monitorable",false)
 	parent.wasAttacking = true
 	parent.canInput = true
 
