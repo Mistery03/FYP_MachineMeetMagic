@@ -144,6 +144,8 @@ animations = [{
 }]
 
 [node name="IgnisNormalAttack" type="Node2D"]
+z_index = 100
+scale = Vector2(0.4, 0.4)
 script = ExtResource("1_0lex2")
 
 [node name="Area2D" type="Area2D" parent="."]
@@ -151,12 +153,10 @@ collision_layer = 128
 collision_mask = 256
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-position = Vector2(124.5, 124)
 shape = SubResource("RectangleShape2D_oonl1")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 texture_filter = 1
-position = Vector2(120, 121)
 scale = Vector2(5, 5)
 sprite_frames = SubResource("SpriteFrames_xvip3")
 frame = 8

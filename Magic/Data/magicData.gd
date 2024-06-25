@@ -10,4 +10,5 @@ extends Resource
 @export var efficientTime:float 
 @export var damangeAmount:float
 @export var attackBased:bool
+@export var attackCooldown:int
 

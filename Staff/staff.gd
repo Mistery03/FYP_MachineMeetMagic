@@ -10,7 +10,7 @@ extends Node2D
 #var isEquipped:bool
 var mousePos
 var staffMana:float
-
+var canCast:bool = true
 var magicData: MagicData
 
 
@@ -26,9 +26,13 @@ func _input(event):
 	#if player.isMagicAvailable:
 	if event is InputEventMouseButton:
 		print("input mouse")
-		if event.pressed and event.button_index == MOUSE_BUTTON_LEFT:
+		if event.pressed and event.button_index == MOUSE_BUTTON_LEFT and canCast:
 			print("mouse button left")
 			magicManager.normalAttack()
+			canCast = false
+			await get_tree().create_timer(2).timeout
+			canCast = true
+			
 
 
 

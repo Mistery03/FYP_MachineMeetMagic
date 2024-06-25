@@ -12,17 +12,17 @@ var player:Player
 var magicData:MagicData
 var currMagic = null
 var localLevel:Node2D
+var attackTimer:Timer
 @export var magicDataList:Array[MagicData] = []
 
 func init(player:Player):
 	self.player = player
-	self.mousePos = player.mousePos
 	await get_tree().create_timer(2.5).timeout
-	self.locallevel = player.localLevel
+	self.localLevel = player.localLevel
 	
 	
 func _process(delta):
-
+	mousePos = player.mousePos
 	pass
 
 func checkMagicUnlock() -> Array[MagicData]:
