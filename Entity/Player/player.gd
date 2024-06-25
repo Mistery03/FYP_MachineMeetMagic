@@ -72,6 +72,7 @@ var isLevelTransitioning:bool = false
 var isInDestroyArea:bool = false
 var wasAttacking:bool = false
 var isInInventory:bool = false
+var isMagicAvailable:bool = false
 
 var canInput:bool = true
 var canDash:bool = true

@@ -5,11 +5,12 @@ extends Node
 @export var magicGridInventory:Control #OPTIONAL
 @export var magicHUD:Control
 @export var magic_tree_ui:Control
-@export var magicData:MagicData
 @export var staff:Node #need to change later
 
 var mousePos:Vector2
 var player:Player
+var magicData:MagicData
+var currMagic = null
 @export var magicDataList:Array[MagicData] = []
 
 func init(player:Player):
@@ -20,22 +21,34 @@ func init(player:Player):
 func _process(delta):
 
 	pass
-	
-	
-func _input(event):
-	if event is InputEventMouseButton:
-		print("input mouse")
-		if event.pressed and event.button_index == MOUSE_BUTTON_LEFT:
-			print("mouse button left")
-			normalAttack()
-			
 
+func checkMagicUnlock() -> Array[MagicData]:
+	var unlockedIndices: Array[MagicData] = []
+	for i in range(magicDataList.size()):
+		if magicDataList[i].isUnlocked:
+			unlockedIndices.append(magicDataList[i])
+			print("unlocked : ", unlockedIndices[i])
+	return unlockedIndices
+
+func checkMagicEquip():
+	
+	pass
 	
 func normalAttack():
-	var magicScene = magicDataList[0].scene.instantiate()
-	magicScene.position = mousePos
-	get_parent().add_child(magicScene)
-	print(magicDataList)
+	if magicData:
+		currMagic = magicData
+		var magicScene = currMagic.scene.instantiate()
+		magicScene.position = mousePos
+		get_parent().add_child(magicScene)
+		
+	
+	
+	#var unlocked_magic = checkMagicUnlock()
+	#if 0 in unlocked_magic:
+		#var magicScene = magicDataList[0].scene.instantiate()
+		#magicScene.position = mousePos
+		#get_parent().add_child(magicScene)
+		#print(magicDataList)
 	
 	#call trackposition
 	#play animation, call ignisNormalAttack?

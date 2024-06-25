@@ -1,4 +1,4 @@
-[gd_scene load_steps=103 format=3 uid="uid://c1vsfoc55pk0w"]
+[gd_scene load_steps=102 format=3 uid="uid://c1vsfoc55pk0w"]
 
 [ext_resource type="Texture2D" uid="uid://bd32dcnew3uvf" path="res://Asset/L.png" id="1_ksidj"]
 [ext_resource type="Script" path="res://Entity/Player/player.gd" id="1_xfdxb"]
@@ -21,7 +21,6 @@
 [ext_resource type="PackedScene" uid="uid://htlhwdgl8ast" path="res://HUD/DynamicLabel/dynamicLabel.tscn" id="14_8yknx"]
 [ext_resource type="Script" path="res://Entity/Player/states/Action.gd" id="14_h6fpb"]
 [ext_resource type="FontFile" uid="uid://cl3rxpo58micg" path="res://Asset/Font/Lambda-Regular.ttf" id="14_me7n8"]
-[ext_resource type="Resource" uid="uid://cqgrvsd8t35a3" path="res://Magic/Data/try.tres" id="15_dhv4f"]
 [ext_resource type="PackedScene" uid="uid://dd2ysdc77pxkq" path="res://UI/Build/build_hud.tscn" id="15_otihl"]
 [ext_resource type="PackedScene" uid="uid://cnj7jj8r34b1q" path="res://Material/Material.tscn" id="15_qe768"]
 [ext_resource type="Resource" uid="uid://60imtm71g3ri" path="res://Magic/Data/IgnisNormalAttack.tres" id="16_uflgr"]
@@ -1868,12 +1867,13 @@ autoplay = "IDLE"
 position = Vector2(-9.53674e-07, 10)
 shape = SubResource("CapsuleShape2D_5n34a")
 
-[node name="Staff" parent="." node_paths=PackedStringArray("customAnimation", "magicManager") instance=ExtResource("22_01tsa")]
+[node name="Staff" parent="." node_paths=PackedStringArray("customAnimation", "magicManager", "player") instance=ExtResource("22_01tsa")]
 z_index = -1
 position = Vector2(10, 0)
 scale = Vector2(8, 8)
 customAnimation = NodePath("StaffAnimation")
 magicManager = NodePath("../MagicManager")
+player = NodePath("..")
 
 [node name="Animation" parent="Staff" index="0"]
 visible = true
@@ -1937,7 +1937,6 @@ player = NodePath("..")
 [node name="MagicManager" type="Node" parent="." node_paths=PackedStringArray("magic_tree_ui")]
 script = ExtResource("11_ur7hc")
 magic_tree_ui = NodePath("../ROOT_UI/MagicTreeUI")
-magicData = ExtResource("15_dhv4f")
 magicDataList = Array[Resource("res://Magic/Data/magicData.gd")]([ExtResource("16_uflgr"), ExtResource("17_45ckk"), ExtResource("18_uuexe"), ExtResource("19_kedec")])
 
 [node name="StateController" type="Node" parent="." node_paths=PackedStringArray("current_state")]
@@ -2208,13 +2207,14 @@ actionInput = "EQUIPPOTION"
 texture = SubResource("AtlasTexture_e1oi2")
 inventoryUI = NodePath("../../InventoryUI")
 
-[node name="MagicHUD" parent="ROOT_UI/ItemHUDPlaceholder" instance=ExtResource("24_71sui")]
+[node name="MagicHUD" parent="ROOT_UI/ItemHUDPlaceholder" node_paths=PackedStringArray("magicManager") instance=ExtResource("24_71sui")]
 layout_mode = 1
 offset_left = 281.0
 offset_top = 612.0
 offset_right = 241.0
 offset_bottom = 612.0
 scale = Vector2(0.2, 0.2)
+magicManager = NodePath("../../../MagicManager")
 
 [node name="ItemHUDAnimation" type="AnimationPlayer" parent="ROOT_UI/ItemHUDPlaceholder"]
 libraries = {

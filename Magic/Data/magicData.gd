@@ -9,15 +9,5 @@ extends Resource
 @export var burningTime:float
 @export var efficientTime:float 
 @export var damangeAmount:float
+@export var attackBased:bool
 
-func getmagicData() -> Dictionary:
-	return{
-		"name": name,
-		"skillButton": skillButton,
-		"scene": scene,
-		"manaRequirement": manaRequirement,
-		"isUnlocked": isUnlocked,
-		"burningTime": burningTime,
-		"efficientTime": efficientTime,
-		"damangeAmount": damangeAmount
-	}
