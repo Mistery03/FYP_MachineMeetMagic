@@ -11,11 +11,14 @@ var mousePos:Vector2
 var player:Player
 var magicData:MagicData
 var currMagic = null
+var localLevel:Node2D
 @export var magicDataList:Array[MagicData] = []
 
 func init(player:Player):
 	self.player = player
 	self.mousePos = player.mousePos
+	await get_tree().create_timer(2.5).timeout
+	self.locallevel = player.localLevel
 	
 	
 func _process(delta):
@@ -38,8 +41,8 @@ func normalAttack():
 	if magicData:
 		currMagic = magicData
 		var magicScene = currMagic.scene.instantiate()
-		magicScene.position = mousePos
-		get_parent().add_child(magicScene)
+		magicScene.global_position = mousePos
+		localLevel.add_child(magicScene)
 		
 	
 	

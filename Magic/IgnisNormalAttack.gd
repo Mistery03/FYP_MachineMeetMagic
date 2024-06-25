@@ -12,10 +12,10 @@ func _ready():
 	queue_free()
 	
 func _process(delta):
-	
-	
 	pass
-	#play animation
 	
-	
-	  
+func _on_area_2d_body_entered(body):
+	if body is Entity:
+		#damage
+		pass
+	pass # Replace with function body.

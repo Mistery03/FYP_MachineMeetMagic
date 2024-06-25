@@ -1,7 +1,10 @@
-[gd_scene load_steps=22 format=3 uid="uid://cbpcjmtv6eke7"]
+[gd_scene load_steps=23 format=3 uid="uid://cbpcjmtv6eke7"]
 
 [ext_resource type="Script" path="res://Magic/IgnisNormalAttack.gd" id="1_0lex2"]
 [ext_resource type="Texture2D" uid="uid://bt7sdnmsut5sw" path="res://IgnisNormalAttack.png" id="2_vhyv1"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_oonl1"]
+size = Vector2(229, 200)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_5fcaq"]
 atlas = ExtResource("2_vhyv1")
@@ -143,10 +146,19 @@ animations = [{
 [node name="IgnisNormalAttack" type="Node2D"]
 script = ExtResource("1_0lex2")
 
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 128
+collision_mask = 256
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(124.5, 124)
+shape = SubResource("RectangleShape2D_oonl1")
+
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 texture_filter = 1
 position = Vector2(120, 121)
 scale = Vector2(5, 5)
 sprite_frames = SubResource("SpriteFrames_xvip3")
-frame = 18
-frame_progress = 1.0
+frame = 8
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
