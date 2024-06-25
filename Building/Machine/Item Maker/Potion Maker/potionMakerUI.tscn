@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=3 uid="uid://cr3ojbwvnl0ts"]
+[gd_scene load_steps=36 format=3 uid="uid://cr3ojbwvnl0ts"]
 
 [ext_resource type="Script" path="res://Building/Machine/Item Maker/Potion Maker/potionMakerUI.gd" id="1_ac4ng"]
 [ext_resource type="Texture2D" uid="uid://daap0c1p135gi" path="res://Asset/UIUX/machineContainer.png" id="1_nipo4"]
@@ -13,8 +13,13 @@
 [ext_resource type="PackedScene" uid="uid://d3a8b5m3ju4nv" path="res://UI/Inventory/Player/playerInventory_machineSlot.tscn" id="10_uvwks"]
 [ext_resource type="PackedScene" uid="uid://cnj7jj8r34b1q" path="res://Material/Material.tscn" id="11_2ofam"]
 [ext_resource type="PackedScene" uid="uid://cawvmrg7mckvi" path="res://UI/Inventory/Player/player_grid_inventory.tscn" id="12_4wgqp"]
-[ext_resource type="PackedScene" uid="uid://4m1c3wrrh3sx" path="res://UI/Potion/potion_selection_slot.tscn" id="14_mblqr"]
+[ext_resource type="PackedScene" uid="uid://dy8vgwsgrnsqo" path="res://UI/Potion/potion_selection_slot.tscn" id="14_mblqr"]
+[ext_resource type="Script" path="res://Building/Machine/Item Maker/Potion Maker/PotionSelectGrid.gd" id="14_ta6wc"]
 [ext_resource type="Texture2D" uid="uid://dw0wj1ftq8uye" path="res://Asset/potionSS.png" id="15_3krqe"]
+[ext_resource type="Texture2D" uid="uid://7r2f7a1fj1mb" path="res://Asset/UIUX/blackBox.png" id="15_o40i4"]
+[ext_resource type="Resource" uid="uid://doo0oqvv31wtn" path="res://Potion/Buff/Defence Potion/DefencePotion.tres" id="16_yfr6n"]
+[ext_resource type="Script" path="res://Building/Machine/Item Maker/Potion Maker/MaterialContainer.gd" id="18_kx3ni"]
+[ext_resource type="Script" path="res://Building/Machine/Item Maker/Potion Maker/ingredientPlaceholder.gd" id="21_lq417"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_x66as"]
 atlas = ExtResource("3_auig3")
@@ -106,6 +111,20 @@ animations = [{
 [sub_resource type="AtlasTexture" id="AtlasTexture_coytm"]
 atlas = ExtResource("15_3krqe")
 region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_kd7e1"]
+bg_color = Color(0.0823529, 0.0862745, 0.231373, 1)
+border_width_left = 5
+border_width_top = 5
+border_width_right = 5
+border_width_bottom = 5
+border_color = Color(0.235294, 0, 0.34902, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_t6uca"]
+bg_color = Color(0.207843, 0.301961, 0.556863, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_86rgy"]
+bg_color = Color(0.309804, 0.517647, 0.807843, 1)
 
 [node name="PotionMakerUI" type="Control" node_paths=PackedStringArray("machine_mana_bar", "machine_animation", "result_slot", "inventoryHandler")]
 layout_mode = 3
@@ -268,86 +287,136 @@ offset_bottom = 1214.0
 scale = Vector2(0.5, 0.5)
 script = null
 
-[node name="GridContainer" type="GridContainer" parent="."]
+[node name="PotionSelectGrid" type="GridContainer" parent="." node_paths=PackedStringArray("material_container")]
 layout_mode = 0
-offset_left = 79.0
-offset_top = 193.0
-offset_right = 795.0
-offset_bottom = 1475.0
+offset_left = 46.0
+offset_top = 190.0
+offset_right = 933.0
+offset_bottom = 1234.0
 scale = Vector2(0.45, 0.45)
+script = ExtResource("14_ta6wc")
+material_container = NodePath("../TextureRect/MaterialContainer")
 
-[node name="PotionSelectionSlot" parent="GridContainer" instance=ExtResource("14_mblqr")]
+[node name="PotionSelectionSlot" parent="PotionSelectGrid" instance=ExtResource("14_mblqr")]
 layout_mode = 2
 
-[node name="MaterialContainer" type="HBoxContainer" parent="."]
+[node name="PotionSelectionSlot2" parent="PotionSelectGrid" instance=ExtResource("14_mblqr")]
+layout_mode = 2
+potionData = ExtResource("16_yfr6n")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+texture_filter = 1
+layout_mode = 0
+offset_left = 527.0
+offset_top = 387.0
+offset_right = 1052.0
+offset_bottom = 515.0
+texture = ExtResource("15_o40i4")
+
+[node name="Ingredients" type="Label" parent="TextureRect"]
+layout_mode = 0
+offset_left = 106.0
+offset_right = 6145.0
+offset_bottom = 912.0
+scale = Vector2(0.05, 0.05)
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("4_x4i1h")
+theme_override_font_sizes/font_size = 600
+text = "Ingredients Needed"
+horizontal_alignment = 1
+
+[node name="MaterialContainer" type="HBoxContainer" parent="TextureRect" node_paths=PackedStringArray("inventoryHandler")]
 custom_minimum_size = Vector2(32, 0)
 layout_mode = 1
 anchors_preset = 14
 anchor_top = 0.5
 anchor_right = 1.0
 anchor_bottom = 0.5
-offset_left = 496.0
-offset_top = -50.0
-offset_right = -912.0
-offset_bottom = -18.0
+offset_left = 125.0
+offset_top = -27.0
+offset_right = -296.0
+offset_bottom = 5.0
 grow_horizontal = 2
 grow_vertical = 2
-scale = Vector2(3, 3)
+scale = Vector2(2.5, 2.5)
 alignment = 1
+script = ExtResource("18_kx3ni")
+inventoryHandler = NodePath("../../PlayerInventoryHanlder")
 
-[node name="tempMaterial" type="TextureRect" parent="MaterialContainer"]
+[node name="ingredientPlaceholder" type="TextureRect" parent="TextureRect/MaterialContainer"]
 texture_filter = 1
 layout_mode = 2
 texture = SubResource("AtlasTexture_coytm")
+script = ExtResource("21_lq417")
 
-[node name="Label" type="Label" parent="MaterialContainer/tempMaterial"]
+[node name="amount" type="Label" parent="TextureRect/MaterialContainer/ingredientPlaceholder"]
 layout_mode = 0
 offset_left = 19.0
 offset_top = 18.3333
 offset_right = 301.0
 offset_bottom = 361.333
 scale = Vector2(0.05, 0.05)
+theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/shadow_offset_x = 10
+theme_override_constants/outline_size = 20
 theme_override_fonts/font = ExtResource("4_x4i1h")
 theme_override_font_sizes/font_size = 200
 text = "99
 "
 
-[node name="tempMaterial2" type="TextureRect" parent="MaterialContainer"]
+[node name="ingredientPlaceholder2" type="TextureRect" parent="TextureRect/MaterialContainer"]
 texture_filter = 1
 layout_mode = 2
 texture = SubResource("AtlasTexture_coytm")
+script = ExtResource("21_lq417")
 
-[node name="Label" type="Label" parent="MaterialContainer/tempMaterial2"]
-layout_mode = 0
+[node name="amount" type="Label" parent="TextureRect/MaterialContainer/ingredientPlaceholder2"]
+offset_left = 19.95
+offset_top = 19.25
+offset_right = 301.95
+offset_bottom = 362.25
+scale = Vector2(0.05, 0.05)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 10
+theme_override_constants/outline_size = 20
+theme_override_fonts/font = ExtResource("4_x4i1h")
+theme_override_font_sizes/font_size = 200
+text = "99
+"
+
+[node name="ingredientPlaceholder3" type="TextureRect" parent="TextureRect/MaterialContainer"]
+texture_filter = 1
+layout_mode = 2
+texture = SubResource("AtlasTexture_coytm")
+script = ExtResource("21_lq417")
+
+[node name="amount" type="Label" parent="TextureRect/MaterialContainer/ingredientPlaceholder3"]
 offset_left = 19.0
 offset_top = 18.3333
 offset_right = 301.0
 offset_bottom = 361.333
 scale = Vector2(0.05, 0.05)
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/shadow_offset_x = 10
+theme_override_constants/outline_size = 20
 theme_override_fonts/font = ExtResource("4_x4i1h")
 theme_override_font_sizes/font_size = 200
 text = "99
 "
 
-[node name="tempMaterial3" type="TextureRect" parent="MaterialContainer"]
-texture_filter = 1
-layout_mode = 2
-texture = SubResource("AtlasTexture_coytm")
-
-[node name="Label" type="Label" parent="MaterialContainer/tempMaterial3"]
+[node name="Button" type="Button" parent="."]
 layout_mode = 0
-offset_left = 19.0
-offset_top = 18.3333
-offset_right = 301.0
-offset_bottom = 361.333
-scale = Vector2(0.05, 0.05)
-theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
-theme_override_constants/shadow_offset_x = 10
+offset_left = 84.0
+offset_top = 682.0
+offset_right = 393.0
+offset_bottom = 760.0
 theme_override_fonts/font = ExtResource("4_x4i1h")
-theme_override_font_sizes/font_size = 200
-text = "99
-"
+theme_override_font_sizes/font_size = 60
+theme_override_styles/normal = SubResource("StyleBoxFlat_kd7e1")
+theme_override_styles/hover = SubResource("StyleBoxFlat_t6uca")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_86rgy")
+text = "BREW POTION"

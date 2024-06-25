@@ -1,6 +1,7 @@
-[gd_resource type="Resource" script_class="PotionData" load_steps=5 format=3 uid="uid://doo0oqvv31wtn"]
+[gd_resource type="Resource" script_class="PotionData" load_steps=6 format=3 uid="uid://doo0oqvv31wtn"]
 
 [ext_resource type="Script" path="res://Potion/Data/PotionData.gd" id="1_1xd70"]
+[ext_resource type="Resource" uid="uid://d3br064ytmpxk" path="res://Crafting Recipe/Potion Recipe/defencePotionRecipe.tres" id="1_efoni"]
 [ext_resource type="PackedScene" uid="uid://by4om3nil2ke3" path="res://Potion/Buff/Defence Potion/DefencePotion.tscn" id="1_mwayb"]
 [ext_resource type="Texture2D" uid="uid://dw0wj1ftq8uye" path="res://Asset/potionSS.png" id="1_r71ac"]
 
@@ -17,3 +18,4 @@ isThrowable = false
 scene = ExtResource("1_mwayb")
 texture = SubResource("AtlasTexture_5ve5i")
 description = "You cant take damage if your harden yourself"
+craftingRecipe = ExtResource("1_efoni")

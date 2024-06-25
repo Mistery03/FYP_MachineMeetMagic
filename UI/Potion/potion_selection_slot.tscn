@@ -1,40 +1,56 @@
-[gd_scene load_steps=8 format=3 uid="uid://4m1c3wrrh3sx"]
+[gd_scene load_steps=15 format=3 uid="uid://dy8vgwsgrnsqo"]
 
-[ext_resource type="Texture2D" uid="uid://daap0c1p135gi" path="res://Asset/UIUX/machineContainer.png" id="1_5rnuj"]
 [ext_resource type="Texture2D" uid="uid://7r2f7a1fj1mb" path="res://Asset/UIUX/blackBox.png" id="1_a8rbi"]
+[ext_resource type="Script" path="res://UI/Potion/potion_selection_slot.gd" id="1_jiobh"]
+[ext_resource type="Resource" uid="uid://b0rx68wwi0q20" path="res://Potion/Heal/Healing Potion/HealingPotion.tres" id="2_0cqfm"]
 [ext_resource type="Texture2D" uid="uid://dw0wj1ftq8uye" path="res://Asset/potionSS.png" id="2_ofvnm"]
 [ext_resource type="FontFile" uid="uid://cl3rxpo58micg" path="res://Asset/Font/Lambda-Regular.ttf" id="3_yfbt4"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_7244x"]
+bg_color = Color(0.0941176, 0.0627451, 0.184314, 1)
+border_width_left = 5
+border_width_top = 5
+border_width_right = 5
+border_width_bottom = 5
+border_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3lim3"]
+bg_color = Color(0.0588235, 0.0745098, 0.231373, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5es0l"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+
+[sub_resource type="ImageTexture" id="ImageTexture_1lc1h"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ty0aa"]
+bg_color = Color(0.862745, 0.862745, 0.862745, 0)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ygbr4"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_lptcd"]
+bg_color = Color(0.862745, 0.862745, 0.862745, 0.356863)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_apj8y"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_upo4a"]
 atlas = ExtResource("2_ofvnm")
 region = Rect2(0, 64, 32, 32)
 
-[sub_resource type="ImageTexture" id="ImageTexture_1lc1h"]
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ygbr4"]
-
-[node name="PotionSelectionSlot" type="Panel"]
-custom_minimum_size = Vector2(0, 160)
+[node name="PotionSelectionSlot" type="Button"]
+custom_minimum_size = Vector2(700, 160)
+offset_right = 702.0
+offset_bottom = 160.0
 scale = Vector2(0.5, 0.5)
-
-[node name="Border" type="TextureRect" parent="."]
-texture_filter = 1
-offset_right = 145.0
-offset_bottom = 32.0
-scale = Vector2(5, 5)
-texture = ExtResource("1_a8rbi")
-expand_mode = 1
-
-[node name="ItemTexture" type="TextureRect" parent="Border"]
-custom_minimum_size = Vector2(32, 32)
-layout_mode = 0
-offset_left = 3.4
-offset_top = 0.4
-offset_right = 35.4
-offset_bottom = 32.4
-texture = SubResource("AtlasTexture_upo4a")
+theme_override_styles/normal = SubResource("StyleBoxFlat_7244x")
+theme_override_styles/hover = SubResource("StyleBoxFlat_3lim3")
+theme_override_styles/focus = SubResource("StyleBoxFlat_5es0l")
+script = ExtResource("1_jiobh")
+potionData = ExtResource("2_0cqfm")
 
 [node name="Label" type="Label" parent="."]
+layout_mode = 0
 offset_left = 172.0
 offset_top = 36.0
 offset_right = 703.0
@@ -46,22 +62,30 @@ text = "Healing Potion"
 
 [node name="Border2" type="TextureRect" parent="."]
 texture_filter = 1
-offset_left = 716.0
-offset_top = 4.0
-offset_right = 750.0
-offset_bottom = 35.0
+layout_mode = 0
+offset_left = 700.0
+offset_top = -2.0
+offset_right = 736.0
+offset_bottom = 31.0
 scale = Vector2(5, 5)
-texture = ExtResource("1_5rnuj")
+texture = ExtResource("1_a8rbi")
 expand_mode = 1
 
 [node name="OptionButton" type="OptionButton" parent="Border2"]
 layout_mode = 0
-offset_left = 6.0
-offset_top = 4.8
-offset_right = 28.0
-offset_bottom = 27.8
+offset_left = 3.0
+offset_top = 4.0
+offset_right = 511.0
+offset_bottom = 460.0
+scale = Vector2(0.05, 0.05)
+theme_override_fonts/font = ExtResource("3_yfbt4")
+theme_override_font_sizes/font_size = 400
 theme_override_icons/arrow = SubResource("ImageTexture_1lc1h")
+theme_override_styles/focus = SubResource("StyleBoxFlat_ty0aa")
 theme_override_styles/normal = SubResource("StyleBoxFlat_ygbr4")
+theme_override_styles/hover = SubResource("StyleBoxFlat_lptcd")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_apj8y")
+alignment = 1
 item_count = 4
 selected = 0
 fit_to_longest_item = false
@@ -73,3 +97,15 @@ popup/item_2/text = "5x"
 popup/item_2/id = 2
 popup/item_3/text = "10x"
 popup/item_3/id = 3
+
+[node name="ItemTexture" type="TextureRect" parent="."]
+texture_filter = 1
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 0
+offset_right = 32.0
+offset_bottom = 32.0
+scale = Vector2(5, 5)
+texture = SubResource("AtlasTexture_upo4a")
+
+[connection signal="pressed" from="." to="." method="_on_pressed"]
+[connection signal="item_selected" from="Border2/OptionButton" to="." method="_on_option_button_item_selected"]

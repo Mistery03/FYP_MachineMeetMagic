@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="BuildingData" load_steps=5 format=3 uid="uid://bhlc0qe5ejuxj"]
+[gd_resource type="Resource" script_class="BuildingData" load_steps=5 format=3 uid="uid://dirfmb3120dov"]
 
 [ext_resource type="Script" path="res://Building/Data/buildingData.gd" id="1_05ckh"]
 [ext_resource type="PackedScene" uid="uid://eul3ho43kdj" path="res://Building/Machine/Item Maker/Potion Maker/potionMaker.tscn" id="1_aw2nw"]

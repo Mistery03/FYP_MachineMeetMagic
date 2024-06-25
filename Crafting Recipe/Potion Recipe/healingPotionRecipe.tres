@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="CraftingRecipe" load_steps=5 format=3 uid="uid://dpvy80ut0uqa1"]
+
+[ext_resource type="Script" path="res://Crafting Recipe/RecipeBase.gd" id="1_ejmxv"]
+[ext_resource type="Resource" uid="uid://b0mv13gn6qdxo" path="res://Material/Construction/wood.tres" id="1_ypsav"]
+[ext_resource type="Script" path="res://UI/Inventory/Data/slotData.gd" id="2_5expn"]
+
+[sub_resource type="Resource" id="Resource_wmruj"]
+script = ExtResource("2_5expn")
+item = ExtResource("1_ypsav")
+amount = 20
+
+[resource]
+script = ExtResource("1_ejmxv")
+craftingList = Array[ExtResource("2_5expn")]([SubResource("Resource_wmruj"), null, null])

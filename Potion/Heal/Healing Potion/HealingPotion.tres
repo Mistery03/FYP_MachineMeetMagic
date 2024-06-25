@@ -1,6 +1,7 @@
-[gd_resource type="Resource" script_class="PotionData" load_steps=5 format=3 uid="uid://b0rx68wwi0q20"]
+[gd_resource type="Resource" script_class="PotionData" load_steps=6 format=3 uid="uid://b0rx68wwi0q20"]
 
 [ext_resource type="Script" path="res://Potion/Data/PotionData.gd" id="1_0lskv"]
+[ext_resource type="Resource" uid="uid://dpvy80ut0uqa1" path="res://Crafting Recipe/Potion Recipe/healingPotionRecipe.tres" id="1_511a1"]
 [ext_resource type="PackedScene" uid="uid://1go2jdnplx4l" path="res://Potion/Heal/Healing Potion/HealingPotion.tscn" id="1_krgqs"]
 [ext_resource type="Texture2D" uid="uid://dw0wj1ftq8uye" path="res://Asset/potionSS.png" id="2_mp31s"]
 
@@ -17,3 +18,4 @@ isThrowable = false
 scene = ExtResource("1_krgqs")
 texture = SubResource("AtlasTexture_3hfat")
 description = "Healing potion approved by Ethan"
+craftingRecipe = ExtResource("1_511a1")

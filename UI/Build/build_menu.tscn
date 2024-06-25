@@ -11,7 +11,7 @@
 [ext_resource type="Texture2D" uid="uid://dw0wj1ftq8uye" path="res://Asset/potionSS.png" id="6_wdmht"]
 [ext_resource type="Resource" uid="uid://ch3ruj8fn022x" path="res://Building/Machine/Data/powerGenerator.tres" id="7_1tdyj"]
 [ext_resource type="Resource" uid="uid://b4ot4cdrsegxs" path="res://Building/Machine/Data/battery.tres" id="8_vgx31"]
-[ext_resource type="Resource" uid="uid://bhlc0qe5ejuxj" path="res://Building/Machine/Data/potionMaker.tres" id="9_cux2h"]
+[ext_resource type="Resource" uid="uid://dirfmb3120dov" path="res://Building/Machine/Data/potionMaker.tres" id="9_cux2h"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_spxpk"]
 atlas = ExtResource("5_25chw")

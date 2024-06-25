@@ -3,7 +3,7 @@ extends Panel
 
 @export var parentControl:Control
 
-@export var item:MaterialData = null
+@export var item:ObjectData = null
 @export var amount:int = 1
 
 @onready var border = $Border

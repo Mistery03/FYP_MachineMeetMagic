@@ -1,5 +1,5 @@
 class_name PotionData
-extends Resource
+extends ObjectData
 
 @export var name:String
 @export var category:String
@@ -8,5 +8,4 @@ extends Resource
 @export var scene:PackedScene
 @export var texture:Texture2D
 @export var description:String
-
-
+@export var craftingRecipe:CraftingRecipe
