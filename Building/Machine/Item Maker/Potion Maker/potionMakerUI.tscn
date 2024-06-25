@@ -373,6 +373,7 @@ texture = SubResource("AtlasTexture_coytm")
 script = ExtResource("21_lq417")
 
 [node name="amount" type="Label" parent="TextureRect/MaterialContainer/ingredientPlaceholder2"]
+layout_mode = 0
 offset_left = 19.95
 offset_top = 19.25
 offset_right = 301.95
@@ -394,6 +395,7 @@ texture = SubResource("AtlasTexture_coytm")
 script = ExtResource("21_lq417")
 
 [node name="amount" type="Label" parent="TextureRect/MaterialContainer/ingredientPlaceholder3"]
+layout_mode = 0
 offset_left = 19.0
 offset_top = 18.3333
 offset_right = 301.0

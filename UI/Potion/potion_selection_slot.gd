@@ -36,4 +36,7 @@ func autoOutput(n):
 
 func _on_option_button_item_selected(index):
 	multiplier = option_button.get_item_metadata(index)
+	if material_container:
+		material_container.recipe = potionData.craftingRecipe
+		material_container.multiplier= multiplier
 	
