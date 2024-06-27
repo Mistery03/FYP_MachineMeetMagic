@@ -40,11 +40,9 @@ scale = Vector2(3.5, 3.5)
 
 [node name="PotionSlot" parent="PotionGridContainer/GridContainer" index="0"]
 potionData = ExtResource("4_25qxv")
-potionAmount = 10
 
 [node name="PotionSlot2" parent="PotionGridContainer/GridContainer" index="1"]
 potionData = ExtResource("5_e0rmr")
-potionAmount = 10
 
 [node name="DescriptionBoard" type="NinePatchRect" parent="."]
 visible = false

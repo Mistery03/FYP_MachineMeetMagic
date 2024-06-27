@@ -1,5 +1,5 @@
 class_name Machine
-extends Node
+extends Node2D
 
 @export_category("Machine Settings")
 @export var machineUI:Control
@@ -68,3 +68,14 @@ func _input(event):
 func changeAnimation(animationName:String):
 	animation.play(animationName.to_pascal_case())
 	machineUI.machine_animation.play(animationName.to_pascal_case())
+
+func fillManaCapacity(manaConsumptionPerSecond,delta:float):
+	currMana+= manaConsumptionPerSecond * delta
+	machineUI.machine_mana_bar.currValue = currMana
+
+#To be used in process function
+func consumeMana(manaConsumptionPerSecond,delta:float): 
+	currMana -= manaConsumptionPerSecond * delta
+	if percentage <= MIN_MANA_THRESHOLD:
+		currMana = 0
+	machineUI.machine_mana_bar.currValue = currMana

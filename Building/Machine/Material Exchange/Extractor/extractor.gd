@@ -41,16 +41,7 @@ func _process(delta):
 
 
 
-func fillManaCapacity(manaConsumptionPerSecond,delta:float):
-	currMana+= manaConsumptionPerSecond * delta
-	machineUI.machine_mana_bar.currValue = currMana
 
-#To be used in process function
-func consumeMana(manaConsumptionPerSecond,delta:float): 
-	currMana -= manaConsumptionPerSecond * delta
-	if percentage <= MIN_MANA_THRESHOLD:
-		currMana = 0
-	machineUI.machine_mana_bar.currValue = currMana
 
 func _on_interectable_input_event(viewport, event, shape_idx):
 	super(viewport, event, shape_idx)

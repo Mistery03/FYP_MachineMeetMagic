@@ -28,6 +28,8 @@ func _on_pressed():
 	if material_container:
 		material_container.recipe = potionData.craftingRecipe
 		material_container.multiplier= multiplier
+		material_container.resultantData = potionData
+	
 
 func autoOutput(n):
 	var a = n*n - 2*n +2
@@ -39,4 +41,6 @@ func _on_option_button_item_selected(index):
 	if material_container:
 		material_container.recipe = potionData.craftingRecipe
 		material_container.multiplier= multiplier
+		material_container.resultantData = potionData
+		grab_focus()
 	

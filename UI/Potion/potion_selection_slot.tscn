@@ -18,7 +18,11 @@ border_color = Color(0, 0, 0, 1)
 bg_color = Color(0.0588235, 0.0745098, 0.231373, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5es0l"]
-bg_color = Color(0.6, 0.6, 0.6, 0)
+bg_color = Color(0.862745, 0.6, 0.929412, 0.45098)
+border_width_left = 10
+border_width_top = 10
+border_width_right = 10
+border_width_bottom = 10
 
 [sub_resource type="ImageTexture" id="ImageTexture_1lc1h"]
 

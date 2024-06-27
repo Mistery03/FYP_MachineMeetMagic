@@ -5,6 +5,7 @@ extends Control
 @export_category("Machine Setting")
 @export var parentMachine:Machine
 @export var machine_animation:AnimatedSprite2D
+@export var power_switch:CheckButton
 
 @export_category("Machine Fuel Input")
 @export var fuel_slot:FuelSlot
