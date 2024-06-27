@@ -9,11 +9,12 @@ region = Rect2(48, 48, 24, 24)
 
 [resource]
 script = ExtResource("2_3ongc")
-name = "Wood"
-type = "Construction"
-texture = SubResource("AtlasTexture_dmqar")
-amount = 0
 magicEssenceAmountResult = 2
 burnPerSecond = 50
 manaProducedPerSecond = 0
 durability = 0
+name = "Wood"
+type = "Construction"
+amount = 0
+texture = SubResource("AtlasTexture_dmqar")
+description = ""

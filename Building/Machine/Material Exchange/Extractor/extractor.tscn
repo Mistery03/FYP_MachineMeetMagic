@@ -44,14 +44,13 @@ script = ExtResource("1_tl5kv")
 machineUI = NodePath("Root/ExtractorUI")
 animation = NodePath("Animation")
 pickup_sfx = NodePath("pickupSFX")
-isThereFuel = null
 manaConsumptionPerSecond = 100.0
 maxMana = 1000.0
 
 [node name="Animation" type="AnimatedSprite2D" parent="."]
 texture_filter = 1
 sprite_frames = ExtResource("2_fc8e1")
-animation = &"Processing"
+animation = &"Idle"
 
 [node name="Root" type="CanvasLayer" parent="."]
 

@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="BuildingData" load_steps=5 format=3 uid="uid://dirfmb3120dov"]
+
+[ext_resource type="Script" path="res://Building/Data/buildingData.gd" id="1_05ckh"]
+[ext_resource type="PackedScene" uid="uid://eul3ho43kdj" path="res://Building/Machine/Item Maker/Potion Maker/potionMaker.tscn" id="1_aw2nw"]
+[ext_resource type="Texture2D" uid="uid://cy01yfe162ynm" path="res://Asset/Machine.png" id="2_yo5ua"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5wnvt"]
+atlas = ExtResource("2_yo5ua")
+region = Rect2(0, 0, 32, 32)
+
+[resource]
+script = ExtResource("1_05ckh")
+name = "Potion Maker"
+category = "Item Maker"
+texture = SubResource("AtlasTexture_5wnvt")
+atlasCoord = Vector2i(0, 0)
+description = "We need to cook"
+instance = ExtResource("1_aw2nw")

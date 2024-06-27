@@ -11,7 +11,7 @@ region = Rect2(0, 64, 32, 32)
 [resource]
 script = ExtResource("1_opnia")
 name = "Scroll Scriber"
-category = "Material Exchnage"
+category = "Material Exchange"
 texture = SubResource("AtlasTexture_mdxub")
 atlasCoord = Vector2i(0, 2)
 description = "Convert Magic into Researchable points"

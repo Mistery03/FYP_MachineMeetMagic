@@ -17,6 +17,7 @@ func _ready():
 func _process(delta):
 
 	if potionData:
+		potionAmount = potionData.amount
 		potion_texture.texture = potionData.texture
 		
 		if potionInventory.isPotionAmountShown:

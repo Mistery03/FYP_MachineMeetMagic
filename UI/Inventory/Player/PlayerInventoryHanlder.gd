@@ -47,21 +47,21 @@ func init(player:Player):
 		playerInventory = player.inventory
 		maxInventorySlot = player.maxInventorySize
 
-##NOTE same case for init function 
+##NOTE same case for init function
 func _ready():
 	await get_tree().create_timer(0.4).timeout
 	for child in player_grid_inventory.get_children():
 		child.queue_free()
-	
+
 	##WARNING To avoid any crashes or bugs, the slotList must have null items = N max inventory
 	for index in range(maxInventorySlot):
 		var slot = inventorySlot.instantiate()
 		player_grid_inventory.add_child(slot)
 		slot.item = null
 		slot.inventoryHandler = self
-		
+
 		slotList.append(slot)
-		slotSize = slot.custom_minimum_size	
+		slotSize = slot.custom_minimum_size
 
 	##NOTE keep this to avoid visual glitch
 	if playerInventory.size() > 0:
@@ -71,20 +71,20 @@ func _ready():
 func _process(delta):
 	##@NOTE The function below is for debug purposes only
 	#_showDebugList()
-	
+
 	##NOTE The reason why the isDragging is in parentControl and not within the inventoryHanlder is cause the mouse will in global position of the parent rather than the inventory
 	if !parentControl.isDragging:
 		gridMousePos = Vector2i(get_global_mouse_position()/slotSize)
-	
+
 		if currSlot:
 			##NOTE Reset the position
 			currSlot.item_texture.global_position = currSlot.original_global_position
 			currSlot.label.global_position = currSlot.original_label_global_position
-		
-		##NOTE Prevent weird bug	
+
+		##NOTE Prevent weird bug
 		parentControl.isDragging = false
 		currSlot = null
-		
+
 
 func _showDebugList():##Shows what data is in what slots
 	await get_tree().create_timer(0.5).timeout
@@ -100,7 +100,7 @@ func update_slots()->bool:
 			var GridSlotPos = Vector2i(slotList[i].position/slotSize)
 			slotList[i].item = playerInventory[i].item
 			slotList[i].amount =playerInventory[i].amount
-			slotList[i].item_texture.position = GridSlotPos 
+			slotList[i].item_texture.position = GridSlotPos
 			slotList[i].label.position = GridSlotPos + Vector2i(120,100)
 		else:
 			slotList[i].item = null
@@ -111,13 +111,13 @@ func update_slots()->bool:
 func getSlotPositions()->Array[Vector2i]:
 	##NOTE SCALES MATTERS
 	scaledSlotSize = slotSize * player_grid_inventory.scale
-	
+
 	var gridSlotPos:Vector2i
 	var gridSlotPosList:Array[Vector2i]
-	
+
 	##To avoid memory leak
 	gridSlotPosList.clear()
-	
+
 	for slot in slotList:
 		gridSlotPos = Vector2i(slot.global_position/scaledSlotSize)
 		gridSlotPosList.append(gridSlotPos)
@@ -127,19 +127,19 @@ func getSlotPositions()->Array[Vector2i]:
 func getSlotBasedOnPosition(globalMousePos:Vector2)->Panel:
 	##NOTE SCALES MATTERS
 	scaledSlotSize = slotSize * player_grid_inventory.scale
-	
+
 	gridMousePos = globalMousePosToLocalGrid(globalMousePos)
-	
+
 	##NOTE prevent weird bug
 	var foundSlot:Panel = null
-	
+
 	for slot in slotList:
 		var GridSlotPos = Vector2i(slot.global_position/scaledSlotSize)
 		if gridMousePos == GridSlotPos:
 			foundSlot = slot
-	
+
 	return foundSlot
-	
+
 ##NOTE The position is converted from global to grid position similar to local_to_map() function
 func globalMousePosToLocalGrid(globalMousePos:Vector2)->Vector2i:
 	scaledSlotSize = slotSize * player_grid_inventory.scale
@@ -156,24 +156,24 @@ func globalMousePosToLocalGrid(globalMousePos:Vector2)->Vector2i:
 		overflow = currAmount
 	else:
 		overflow += currAmount
-	
+
 	##CASE 1 when there no item then simply insert
 	for index in range(maxInventorySlot):
 		var GridSlotPos = Vector2i(slotList[index].position/slotSize)
 		if slotList[index].item ==null:
 			slotList[index].item = item
 			slotList[index].amount = overflow
-			slotList[index].item_texture.position = GridSlotPos 
+			slotList[index].item_texture.position = GridSlotPos
 			slotList[index].label.position = GridSlotPos + Vector2i(120,100)
 			overflow = 0
 			break##Break to ensure it is inserted once
-		
-		##CASE 2 when there are items then we need to check if it's the same and is the amount below the max stack size		
+
+		##CASE 2 when there are items then we need to check if it's the same and is the amount below the max stack size
 		elif slotList[index].item == item:
 			if slotList[index].amount < MAXSTACKSIZE:
-				##We keep track of available space to easily check for overflow 
-				var availableSpace = MAXSTACKSIZE - slotList[index].amount 
-				
+				##We keep track of available space to easily check for overflow
+				var availableSpace = MAXSTACKSIZE - slotList[index].amount
+
 				##If the overflow is below the available space we just increase the amount
 				if overflow <= availableSpace:
 					slotList[index].amount += overflow
@@ -187,7 +187,7 @@ func globalMousePosToLocalGrid(globalMousePos:Vector2)->Vector2i:
 
 func insertItem(item: MaterialData, currAmount: int) -> int:
 	var overflow = currAmount
-	
+
 	while overflow > 0:
 		var inserted = false
 
@@ -205,7 +205,7 @@ func insertItem(item: MaterialData, currAmount: int) -> int:
 						slotList[index].amount += availableSpace
 						overflow -= availableSpace
 						inserted = true
-		
+
 		## CASE 2: Insert into an empty slot if overflow still exists
 		if overflow > 0:
 			for index in range(maxInventorySlot):
@@ -231,12 +231,12 @@ func insertItem(item: MaterialData, currAmount: int) -> int:
 	return overflow
 
 func insertItemAtInventorySlot(globalMousePos:Vector2,item: MaterialData, currAmount: int):
-	var currGotSlot 
+	var currGotSlot
 	if globalMousePosToLocalGrid(globalMousePos) in getSlotPositions():
 		currGotSlot = getSlotBasedOnPosition(globalMousePos)
-	
+
 	var overflow = currAmount
-	
+
 	while overflow > 0:
 		var inserted = false
 
@@ -254,7 +254,7 @@ func insertItemAtInventorySlot(globalMousePos:Vector2,item: MaterialData, currAm
 						currGotSlot.amount += availableSpace
 						overflow -= availableSpace
 						inserted = true
-		
+
 		## CASE 2: Insert into an empty slot if overflow still exists
 		if overflow > 0:
 			for index in range(maxInventorySlot):
@@ -275,13 +275,13 @@ func insertItemAtInventorySlot(globalMousePos:Vector2,item: MaterialData, currAm
 	## Break the loop if no suitable slot was found to prevent infinite loops
 		if not inserted:
 			break
-		
+
 ##WARNING removeItem function is unfortunately messy
 ##Similar to the InsertItem we need to take account several scenerios
 func removeItem(item_amount: int,globalMousePos:Vector2) -> bool:
 	##NOTE Only use when player is in the picture, when testing in debugmode it doesnt care if there player or not
 	randomize()
-	
+
 	##1: We need to take account how many items the player will remove
 	##2: For FYP, we will take account scenerio where player ONLY REMOVE ONE ITEM
 	##3: In the future, this variable should take account multiple items being remove from inventory
@@ -305,21 +305,21 @@ func removeItem(item_amount: int,globalMousePos:Vector2) -> bool:
 								if currGotSlot.item == playerInventory[index].item:
 									##We found the item? Then we null it cause the current selected slot is zero
 									playerInventory[index] = null
-									
+
 									##isForExternalSlot is to prevent spawning items when the player removes the item to one of the slots in the machine
-		
+
 									##Here we create a new object called material instance and set the variables accordinly
 									var itemDropped = materialInstance.instantiate()
 									itemDropped.itemData = currGotSlot.item
 									itemDropped.amount = to_remove
 									##This is why randomize() is used so it can spawn in different positions relative to the player
 									itemDropped.global_position = parentControl.player.global_position + Vector2(randi_range(-5,5),20)
-									
+
 									##So it spawns in the level and not the player or anywhere
 									parentControl.player.localLevel.add_child(itemDropped)
-										
+
 									##To remove item from current selected slot
-									currGotSlot.item = null	
+									currGotSlot.item = null
 									break##Break to ensure things run only once
 				else:
 					for index in range(maxInventorySlot):
@@ -329,21 +329,18 @@ func removeItem(item_amount: int,globalMousePos:Vector2) -> bool:
 							if currGotSlot.item == playerInventory[index].item:
 								playerInventory[index].amount -= to_remove
 								break##Break to ensure things run only once
-					
-					##Spawn items		
+
+					##Spawn items
 					if parentControl.player:
 						var itemDropped = materialInstance.instantiate()
 						itemDropped .itemData = currGotSlot.item
 						itemDropped.amount = to_remove
 						itemDropped.global_position = parentControl.player.global_position + Vector2(randi_range(-5,5),20)
 						parentControl.player.localLevel.add_child(itemDropped)
-						
+
 					removed += to_remove
 					to_remove = 0
 	return true
-
-
-
 
 ##@NOTE Name purposely vague to fit cases for item and no item
 ##Swap is a slightly complicated function because it's responsible for the movement/swapping of items in the inventory
@@ -351,12 +348,12 @@ func swap(item:MaterialData,currAmount:int, globalMousePos:Vector2):
 	##We msut take account of two things, what is the previous Slot and what is the current slot
 	var prevSlot = currSlot
 	var currSlot = getSlotBasedOnPosition(globalMousePos)
-	
+
 	##We need to check where is the mouse is in the inventory
 	if globalMousePosToLocalGrid(globalMousePos) in getSlotPositions():
-		
+
 		var currGotSlot = getSlotBasedOnPosition(globalMousePos)
-		
+
 		##Here I am checking for the frequency of the same item to take account if we need to add item amount or not
 		if getSameItemCount(item) <= 1:
 			##If the frequency of item is less than or equal to oner then just simply insert
@@ -375,7 +372,7 @@ func swap(item:MaterialData,currAmount:int, globalMousePos:Vector2):
 				if currGotSlot .item != item:
 					_swapSlotsWithinInventory(currGotSlot,prevSlot)
 		else:
-			##Here we check if the frequency of the same item is more than one 
+			##Here we check if the frequency of the same item is more than one
 			if currSlot.item:
 				##Same thing not same then swap
 				if currSlot.item != prevSlot.item:
@@ -390,25 +387,25 @@ func swap(item:MaterialData,currAmount:int, globalMousePos:Vector2):
 			else:
 				##To ensure we can swap with null items
 				_swapSlotsWithinInventory(currSlot,prevSlot)
-	
+
 			#if currSlot.item == prevSlot.item:
 				#if currSlot.amount >= 99:
-					
+
 					#_swapSlotsWithinInventory(currSlot.item,prevSlot.item)
-	
-		
+
+
 func _swapSlotsWithinInventory(oldPanel:Panel =null,newPanel:Panel=null) ->bool:
 
-	
+
 	var temp_item = oldPanel.item
 	var temp_amount = oldPanel.amount
 	oldPanel.item = newPanel.item
 	oldPanel.amount = newPanel.amount
 	newPanel.item = temp_item
 	newPanel.amount = temp_amount
-		
-	
-	return true	
+
+
+	return true
 
 ##Responsible to add the amount of the same item
 func _addStack(currSlot:Panel=null,prevSlot:Panel=null,currAmount:int = 0)->bool:
@@ -427,9 +424,6 @@ func _addStack(currSlot:Panel=null,prevSlot:Panel=null,currAmount:int = 0)->bool
 		prevSlot.item = null
 		return true
 	return false"""
-	
-
-
 
 
 func getSameItemCount(item:MaterialData)->int:
@@ -444,14 +438,12 @@ func _getItemIndex(item:MaterialData) -> int:
 	for slot in range(maxInventorySlot):
 		if slotList[slot].item == item:
 			return slot
-	
+
 	return -1
 
 ##To communicate changes made by other objects (i.e Player object)
 func OnInventoryChanged(inventory):
 	update_slots()
-
-
 
 func convertSlotListToInventoryData():
 	var tempArray: Array = []
@@ -471,10 +463,20 @@ func convertSlotListToInventoryData():
 			for i in range(maxInventorySlot):
 				if i < tempArray.size():
 					player.inventory[i] = tempArray[i]
-				
 
-	tempArray.clear()	
-	
-	
-			
-				
+
+	tempArray.clear()
+
+func getItemAmount(item:MaterialData)->int:
+	for slot in range(maxInventorySlot):
+		if slotList[slot].item == item:
+			return 	slotList[slot].amount
+	return 0
+
+func checkTotalItemAmount(item: MaterialData) -> int:
+	var total_amount = 0
+	for slot in slotList:
+		if slot.item == item:
+			total_amount += slot.amount
+	return total_amount
+

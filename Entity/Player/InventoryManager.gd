@@ -71,8 +71,30 @@ func insert(droppedItem: GameMaterial, amount: int):
 	## To communicate to other objects
 	OnInventoryChanged.emit(inventory)
 
-func remove(selectedItem:GameMaterial,amount:int):
-	pass
+func remove(selectedItem:MaterialData,amount:int):
+	var remainingToRemove:int = amount
+
+	while remainingToRemove > 0:
+		var removed:bool = false
+
+		for index in range(len(inventory)):
+			if inventory[index] != null && inventory[index].item == selectedItem:
+				if inventory[index].amount >= remainingToRemove:
+					inventory[index].amount -= remainingToRemove
+					remainingToRemove = 0
+
+					if inventory[index].amount == 0:
+						inventory[index] = null
+
+					removed = true
+					break
+				else:
+					remainingToRemove -= inventory[index].amount
+					inventory[index] = null
+					removed = true
+		if !removed:
+			break
+	OnInventoryChanged.emit(inventory)
 
 func getSameItemCount(item:MaterialData)->int:
 	var count:int = 0

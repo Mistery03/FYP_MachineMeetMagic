@@ -8,9 +8,10 @@ extends MachineControlUI
 @export_category("Fuelbar Settings")
 @export var maxValue:float = 100
 
+@export_category("Machine Mana Bar Settings")
+@export var machine_mana_bar:TextureProgressBar
 
-@onready var power_switch = $PowerSwitch
-@onready var machine_mana_bar = $MachineManaBar
+#@onready var machine_mana_bar = $MachineManaBar
 @onready var progress_bar = $ProgressBar
 
 @onready var area_of_pressing = $AreaOfPressing

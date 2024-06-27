@@ -1,45 +1,35 @@
-class_name Extractor
+class_name PotionMaker
 extends Machine
 
-# Called when the node enters the scene tree for the first time.
+@export var originalTexture:Texture2D
+@onready var potion_sprite = $PotionSprite
+
+
+
 func _ready():
+	potion_sprite.texture = originalTexture
 	changeAnimation("IDLE")
 	machineUI.machine_mana_bar.max_value = maxMana
 	super()
-
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
+	
 func _process(delta):
 	currMana = clamp(currMana,0,maxMana)
 	percentage = currMana/maxMana *100
-
+	
 	if isThereFuel:
-		machineUI.power_switch.disabled = false
+		machineUI.power_switch.disabled = false	
+		changeAnimation("Standby")
 		#fillManaCapacity(delta)
 	else:
 		if currMana <= 0:
 			machineUI.power_switch.disabled = true
-			changeAnimation("IDLE")
-
+			changeAnimation("NoPower")
+	
 	if machineUI.power_switch.button_pressed:
 		isSwitchedOn = true
 	else:
-		changeAnimation("IDLE")
+		changeAnimation("Standby")
 		isSwitchedOn = false
-
-	if isSwitchedOn:
-		if machineUI.material_slot.item and machineUI.fuel_slot.item:
-			changeAnimation("Processing")
-			machineUI.processDisplay(delta)
-		elif machineUI.material_slot.item and currMana > 0:
-			changeAnimation("Processing")
-			machineUI.processDisplay(delta)
-			consumeMana(machineUI.material_slot.item.burnPerSecond,delta)
-
-
-
-
-
 
 func _on_interectable_input_event(viewport, event, shape_idx):
 	super(viewport, event, shape_idx)
@@ -47,6 +37,7 @@ func _on_interectable_input_event(viewport, event, shape_idx):
 		if player and machineUI.result_slot.item:
 			if event.is_action_pressed("ACTION2"):
 				pickup_sfx.play()
-				player.MagicEssenceCurrency +=machineUI.result_slot.amount
+				machineUI.result_slot.item.amount +=machineUI.result_slot.amount
+				potion_sprite.texture = originalTexture
 				machineUI.result_slot.item = null
 				machineUI.result_slot.amount = 0
