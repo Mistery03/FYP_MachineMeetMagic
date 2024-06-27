@@ -30,8 +30,10 @@ func _ready():
 func _process(delta):
 	if isBrewPressed and parentMachine.isSwitchedOn:
 		parentMachine.consumeMana(5000 * float(materialContainer.multiplier)/100.00,delta)
+		
 		valueInPercentage += timeToProgress * delta
 		valueInPercentage = clamp(valueInPercentage,0,1)
+		
 		parentMachine.changeAnimation("Processing")
 		
 		if valueInPercentage >= 1:
