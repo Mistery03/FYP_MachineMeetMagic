@@ -21,7 +21,7 @@
 [ext_resource type="PackedScene" uid="uid://htlhwdgl8ast" path="res://HUD/DynamicLabel/dynamicLabel.tscn" id="14_8yknx"]
 [ext_resource type="Script" path="res://Entity/Player/states/Action.gd" id="14_h6fpb"]
 [ext_resource type="FontFile" uid="uid://cl3rxpo58micg" path="res://Asset/Font/Lambda-Regular.ttf" id="14_me7n8"]
-[ext_resource type="PackedScene" path="res://UI/Build/build_hud.tscn" id="15_otihl"]
+[ext_resource type="PackedScene" uid="uid://dd2ysdc77pxkq" path="res://UI/Build/build_hud.tscn" id="15_otihl"]
 [ext_resource type="PackedScene" uid="uid://cnj7jj8r34b1q" path="res://Material/Material.tscn" id="15_qe768"]
 [ext_resource type="Script" path="res://UI/Wiring/Wiring.gd" id="18_3q6sb"]
 [ext_resource type="Script" path="res://Entity/Player/ItemHUDPlaceholder.gd" id="19_4bbe1"]
@@ -2246,9 +2246,9 @@ self_modulate = Color(0.0156863, 0.184314, 0.32549, 1)
 z_index = -5
 texture_filter = 1
 offset_left = 1314.0
-offset_top = 787.0
+offset_top = 805.0
 offset_right = 1505.0
-offset_bottom = 836.0
+offset_bottom = 854.0
 scale = Vector2(1.2, 1.2)
 texture = ExtResource("42_uk6eg")
 region_rect = Rect2(0, -2, 32, 37)
