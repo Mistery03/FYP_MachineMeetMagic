@@ -9,11 +9,12 @@ region = Rect2(160, 0, 32, 32)
 
 [resource]
 script = ExtResource("1_cc426")
-name = "Magic Essence"
-type = "Currency"
-texture = SubResource("AtlasTexture_2gnla")
-amount = 0
 magicEssenceAmountResult = 0
 burnPerSecond = 0
 manaProducedPerSecond = 0
 durability = 0
+name = "Magic Essence"
+type = "Currency"
+amount = 0
+texture = SubResource("AtlasTexture_2gnla")
+description = ""

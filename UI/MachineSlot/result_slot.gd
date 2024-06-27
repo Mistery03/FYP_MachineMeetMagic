@@ -33,8 +33,6 @@ func _process(delta):
 		item_texture.visible = false
 		label.visible = false
 
-
-
 func _on_item_texture_gui_input(event):
 	if event is InputEventMouseButton:
 		if event.button_index == MOUSE_BUTTON_LEFT:
@@ -49,6 +47,8 @@ func _on_item_texture_gui_input(event):
 									parentControl.player.ResearchPointCurrency += amount
 							"Potion":
 								item.amount += amount
+								if parentControl.parentMachine.potion_sprite:
+									parentControl.parentMachine.potion_sprite.texture = parentControl.parentMachine.originalTexture
 
 					pickup_sfx.play()
 					item = null

@@ -9,11 +9,12 @@ region = Rect2(64, 128, 32, 32)
 
 [resource]
 script = ExtResource("1_vx1nj")
-name = "Fuel"
-type = "Fuel"
-texture = SubResource("AtlasTexture_wqgbf")
-amount = 0
 magicEssenceAmountResult = 2
 burnPerSecond = 50
 manaProducedPerSecond = 300
 durability = 2
+name = "Fuel"
+type = "Fuel"
+amount = 0
+texture = SubResource("AtlasTexture_wqgbf")
+description = ""

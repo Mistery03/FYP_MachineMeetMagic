@@ -11,6 +11,8 @@ extends Button
 var material_container
 var multiplier:int = 1
 
+var parentControl
+
 func _ready():
 	if potionData == null:
 		print("WARNING: Missing Potion Data")

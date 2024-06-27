@@ -1,8 +1,6 @@
 class_name Battery
 extends Machine
 
-const MIN_MANA_THRESHOLD: float = 0.0001
-
 @export var maxCapacity:float 
 @export var manaOutputPerSecond:int
 

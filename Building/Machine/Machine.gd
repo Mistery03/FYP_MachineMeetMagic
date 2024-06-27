@@ -17,6 +17,8 @@ var next:Machine = null
 var player:Player
 
 
+const MIN_MANA_THRESHOLD: float = 0.0001
+
 var isSwitchedOn:bool
 
 var currMana:float

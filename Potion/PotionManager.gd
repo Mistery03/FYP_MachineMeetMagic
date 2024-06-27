@@ -39,7 +39,8 @@ func _input(event):
 				previous_potion_data = potionData  # Update the previous potion data reference
 			if event.is_action_pressed("DRINKPOTION"):
 				current_potion_instance.execute(player)
-				inventoryUI.potion_inventory.decreasePotionAmount(potionData)
+				potionData.amount -= 1
+				#inventoryUI.potion_inventory.decreasePotionAmount(potionData)
 				inventoryUI.potion_grid_container_player.decreasePotionAmount(potionData)
 				print("drank")
 

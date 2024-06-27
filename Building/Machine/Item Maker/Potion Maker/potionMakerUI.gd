@@ -26,15 +26,14 @@ func _ready():
 	super()
 	progressbar.value = valueInPercentage
 
-
-
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	if isBrewPressed:
+	if isBrewPressed and parentMachine.isSwitchedOn:
+		parentMachine.consumeMana(5000 * float(materialContainer.multiplier)/100.00,delta)
 		valueInPercentage += timeToProgress * delta
 		valueInPercentage = clamp(valueInPercentage,0,1)
 		parentMachine.changeAnimation("Processing")
-
+		
 		if valueInPercentage >= 1:
 			if result_slot.item:
 					result_slot.amount += materialContainer.multiplier
@@ -43,7 +42,9 @@ func _process(delta):
 				result_slot.item = materialContainer.resultantData
 				result_slot.amount = materialContainer.multiplier
 				#materialContainer.resultantData.amount = materialContainer.multiplier
+				
 			parentMachine.changeAnimation("End")
+			parentMachine.potion_sprite.texture = materialContainer.resultantData.texture
 			isBrewPressed = false
 			brew_btn.disabled = false
 			valueInPercentage = 0
@@ -57,10 +58,11 @@ func _process(delta):
 func _on_brew_btn_pressed():
 	if materialContainer.ingredients and !result_slot.item or result_slot.item == materialContainer.resultantData:
 		for ingredient in materialContainer.ingredients:
-			if ingredient and materialContainer.isMeetCraftingRequirement:
+			if ingredient and materialContainer.isMeetCraftingRequirement and  parentMachine.isSwitchedOn and !power_switch.disabled:
 				parentMachine.player.inventory_manager.remove(ingredient.item,materialContainer.required_amount)
 
 				timeToProgress = slowMultiplier *  abs(1.0 - (float(materialContainer.multiplier)/100.00))
+				
 				brew_btn.disabled = true
 				isBrewPressed = true
 

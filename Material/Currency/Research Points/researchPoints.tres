@@ -9,11 +9,12 @@ region = Rect2(256, 416, 32, 32)
 
 [resource]
 script = ExtResource("1_5b80d")
-name = "Research Point"
-type = "Currency"
-texture = SubResource("AtlasTexture_0vnx4")
-amount = 0
 magicEssenceAmountResult = 0
 burnPerSecond = 0
 manaProducedPerSecond = 0
 durability = 0
+name = "Research Point"
+type = "Currency"
+amount = 0
+texture = SubResource("AtlasTexture_0vnx4")
+description = ""
