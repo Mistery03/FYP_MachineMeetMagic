@@ -19,7 +19,7 @@ func _process(delta):
 	#mousePos = player.mousePos
 	var offset = player.mousePos - global_position
 	rotation = atan2(offset.y,offset.x)
-	
+	#need to fix
 	pass
 	
 func _physics_process(delta):
