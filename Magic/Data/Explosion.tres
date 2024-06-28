@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="MagicData" load_steps=5 format=3 uid="uid://dcf0tfhforbdf"]
 
 [ext_resource type="Script" path="res://Magic/Data/magicData.gd" id="1_5nvhh"]
-[ext_resource type="PackedScene" uid="uid://d4lqnyuddq6a7" path="res://Magic/IgnisSkillAttack.tscn" id="1_q5if6"]
+[ext_resource type="PackedScene" uid="uid://d4lqnyuddq6a7" path="res://Magic/Explosion.tscn" id="1_q5if6"]
 [ext_resource type="Texture2D" uid="uid://u1h6oyjt8kdh" path="res://Asset/Skill_Btn.png" id="2_i7e5o"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_51f6o"]
@@ -10,7 +10,7 @@ region = Rect2(0, 0, 32, 32)
 
 [resource]
 script = ExtResource("1_5nvhh")
-name = "IgnisSkill2"
+name = "Explosion"
 skillButton = SubResource("AtlasTexture_51f6o")
 scene = ExtResource("1_q5if6")
 manaRequirement = 10.0

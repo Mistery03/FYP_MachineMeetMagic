@@ -11,22 +11,16 @@ region = Rect2(288, 128, 32, 32)
 radius = 9.0
 height = 18.0
 
-[node name="Projectile" type="CharacterBody2D"]
+[node name="Projectile" type="Area2D"]
 scale = Vector2(0.3, 0.3)
 collision_layer = 512
-collision_mask = 512
+collision_mask = 513
 script = ExtResource("1_ijpr6")
-speed = 4000.0
+speed = 12000.0
 
 [node name="ballSprite" type="Sprite2D" parent="."]
 texture_filter = 1
 texture = SubResource("AtlasTexture_hqcbw")
-
-[node name="Area2D" type="Area2D" parent="."]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-position = Vector2(0, 3)
-shape = SubResource("CapsuleShape2D_lyb0x")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, 3)
@@ -37,5 +31,5 @@ wait_time = 5.0
 one_shot = true
 autostart = true
 
-[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

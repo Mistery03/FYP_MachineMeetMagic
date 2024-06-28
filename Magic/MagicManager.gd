@@ -17,14 +17,12 @@ var attackTimer:Timer
 
 func init(player:Player):
 	self.player = player
-	
-	
-	
-	
+
+
 func _process(delta):
 	mousePos = player.mousePos
 	self.localLevel = player.localLevel
-	
+
 	pass
 
 func checkMagicUnlock() -> Array[MagicData]:
@@ -32,42 +30,34 @@ func checkMagicUnlock() -> Array[MagicData]:
 	for i in range(magicDataList.size()):
 		if magicDataList[i].isUnlocked:
 			unlockedIndices.append(magicDataList[i])
-			print("unlocked : ", unlockedIndices[i])
 	return unlockedIndices
-	
+
 func normalAttack():
 	if magicData:
 		currMagic = magicData
-		if currMagic.name == "Ignis Normal Attack":
-			var magicScene = currMagic.scene.instantiate()
-			
-			magicScene.global_position = staff.magic_spawn_point.global_position
-			magicScene.player = player
-			#magicScene.mousePos = mousePos
-			magicScene.magicData = currMagic
-			magicScene.staff = staff
-			
-			player.currMana -= currMagic.manaRequirement
-			localLevel.add_child(magicScene)
-			
-		elif currMagic.name == "IgnisSkill2":
-			var magicScene = currMagic.scene.instantiate()
-			magicScene.global_position = mousePos
-			magicScene.magicData = currMagic
-			player.currMana -= currMagic.manaRequirement
-			localLevel.add_child(magicScene)
+		if currMagic.scene:
+			if currMagic.name == "Seeking Fireball":
 
-	
-	
-	#var unlocked_magic = checkMagicUnlock()
-	#if 0 in unlocked_magic:
-		#var magicScene = magicDataList[0].scene.instantiate()
-		#magicScene.position = mousePos
-		#get_parent().add_child(magicScene)
-		#print(magicDataList)
-	
-	#call trackposition
-	#play animation, call ignisNormalAttack?
-	#staff call this
-	
-	
+				var magicScene = currMagic.scene.instantiate()
+
+				magicScene.global_position = staff.magic_spawn_point.global_position
+				magicScene.player = player
+					#magicScene.mousePos = mousePos
+				magicScene.magicData = currMagic
+				magicScene.staff = staff
+
+				player.currMana -= currMagic.manaRequirement
+				localLevel.add_child(magicScene)
+
+			elif currMagic.name == "Explosion":
+				var magicScene = currMagic.scene.instantiate()
+				magicScene.global_position = mousePos
+				magicScene.magicData = currMagic
+				player.currMana -= currMagic.manaRequirement
+				localLevel.add_child(magicScene)
+
+
+
+
+
+
