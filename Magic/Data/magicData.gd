@@ -12,4 +12,4 @@ extends Resource
 @export var attackBased:bool
 @export var attackCooldown:int
 @export var speed:float
-
+@export var description:String

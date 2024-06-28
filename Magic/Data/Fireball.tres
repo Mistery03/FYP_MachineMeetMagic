@@ -21,3 +21,4 @@ damage = 0.0
 attackBased = true
 attackCooldown = 0
 speed = 0.0
+description = ""
