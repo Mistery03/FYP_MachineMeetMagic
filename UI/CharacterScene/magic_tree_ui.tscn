@@ -1,6 +1,7 @@
-[gd_scene load_steps=8 format=3 uid="uid://eu0xsfmexgdv"]
+[gd_scene load_steps=9 format=3 uid="uid://eu0xsfmexgdv"]
 
 [ext_resource type="Texture2D" uid="uid://bmw2uy10i1kwr" path="res://Asset/UIUX/scroll_UI.png" id="1_kiiy6"]
+[ext_resource type="Script" path="res://UI/CharacterScene/character_ui.gd" id="1_ue2wr"]
 [ext_resource type="FontFile" uid="uid://cl3rxpo58micg" path="res://Asset/Font/Lambda-Regular.ttf" id="2_b3vgk"]
 [ext_resource type="PackedScene" uid="uid://cptbu4xehy3nc" path="res://UI/CharacterScene/machine_tree.tscn" id="3_a4qcg"]
 [ext_resource type="PackedScene" uid="uid://daji0h3vfh4k5" path="res://UI/CharacterScene/skill_tree.tscn" id="3_t6ti8"]
@@ -11,13 +12,14 @@
 atlas = ExtResource("6_t8fl4")
 region = Rect2(256, 416, 32, 32)
 
-[node name="MagicTreeUI" type="Control"]
+[node name="CharacterUI" type="Control"]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1_ue2wr")
 
 [node name="ScrollBG" type="TextureRect" parent="."]
 z_index = -10

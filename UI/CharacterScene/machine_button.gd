@@ -3,6 +3,12 @@ class_name machineButton
 
 @export var machineData:Resource
 @export var machineTree: Node2D
+@onready var descriptionbox = $Descriptionbox
+@onready var machinename = $Descriptionbox/Name
+@onready var description = $Descriptionbox/Description
+
+
+
 #take magic tree check if this magic unlock or not
 var machineName: String
 var isUnlock: bool 
@@ -31,3 +37,17 @@ func _on_pressed():
 	for machine in machines:
 		if machine is machineButton:
 			machine.disabled = false # Replace with function body.
+
+
+func _on_mouse_entered():
+	descriptionbox.visible = true
+	machinename.visible = true
+	description.visible = true
+	machinename.text = machineData.name
+	description.text = machineData.description
+
+
+func _on_mouse_exited():
+	descriptionbox.visible = false
+	machinename.visible = false
+	description.visible = false
