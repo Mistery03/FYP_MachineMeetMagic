@@ -27,3 +27,10 @@ func _on_collision_box_area_entered(area):
 	if area is staffMelee:
 		isDamaged = true
 		transitioned.emit("damaged")
+
+
+func _on_blue_slime_on_damage_taken(damageAmount):
+	parent.currHealth -= damageAmount
+	parent.currHealth = clamp(parent.currHealth,0,parent.maxHP)
+	transitioned.emit("damaged")
+	pass # Replace with function body.

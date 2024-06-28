@@ -1,6 +1,6 @@
 class_name IgnisNormalAttack extends CharacterBody2D
 
-@export var MagicData:Resource
+@export var magicData:MagicData
 @onready var animation = $AnimatedSprite2D
 
 var target_position = Vector2.ZERO
@@ -35,6 +35,6 @@ func shoot_in_direction_of_mouse() -> void:
 	
 func _on_area_2d_body_entered(body):
 	if body is Entity:
-		#damage
+		body.OnDamageTaken.emit(magicData.damage)
 		pass
 	pass # Replace with function body.

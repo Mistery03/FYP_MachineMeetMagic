@@ -1,7 +1,6 @@
-[gd_scene load_steps=29 format=3 uid="uid://cbpcjmtv6eke7"]
+[gd_scene load_steps=28 format=3 uid="uid://cbpcjmtv6eke7"]
 
 [ext_resource type="Script" path="res://Magic/IgnisNormalAttack.gd" id="1_0lex2"]
-[ext_resource type="Resource" uid="uid://60imtm71g3ri" path="res://Magic/Data/IgnisNormalAttack.tres" id="2_5o5mm"]
 [ext_resource type="Texture2D" uid="uid://0hdsh20r7wqf" path="res://Asset/normalAttack.png" id="2_txd66"]
 [ext_resource type="Texture2D" uid="uid://bt7sdnmsut5sw" path="res://IgnisNormalAttack.png" id="2_vhyv1"]
 
@@ -182,7 +181,6 @@ animations = [{
 z_index = 100
 scale = Vector2(0.4, 0.4)
 script = ExtResource("1_0lex2")
-MagicData = ExtResource("2_5o5mm")
 
 [node name="Area2D" type="Area2D" parent="."]
 collision_layer = 128

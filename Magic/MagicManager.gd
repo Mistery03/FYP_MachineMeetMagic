@@ -41,11 +41,15 @@ func normalAttack():
 			magicScene.global_position = player.global_position
 			magicScene.player = player
 			magicScene.mousePos = mousePos
+			magicScene.magicData = currMagic
+			player.currMana -= currMagic.manaRequirement
 			localLevel.add_child(magicScene)
 			
 		elif currMagic.name == "IgnisSkill2":
 			var magicScene = currMagic.scene.instantiate()
 			magicScene.global_position = mousePos
+			magicScene.magicData = currMagic
+			player.currMana -= currMagic.manaRequirement
 			localLevel.add_child(magicScene)
 
 	

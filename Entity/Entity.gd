@@ -14,6 +14,7 @@ extends CharacterBody2D
 @export var entityNeighbour:Array
 #Event
 signal OnHealthIncrease
+signal OnDamageTaken(damageAmount:float)
 
 var currHealth:float = 0
 var currStamina:float = 0
