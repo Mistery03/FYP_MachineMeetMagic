@@ -1,4 +1,4 @@
-[gd_scene load_steps=103 format=3 uid="uid://c1vsfoc55pk0w"]
+[gd_scene load_steps=102 format=3 uid="uid://c1vsfoc55pk0w"]
 
 [ext_resource type="Texture2D" uid="uid://bd32dcnew3uvf" path="res://Asset/L.png" id="1_ksidj"]
 [ext_resource type="Script" path="res://Entity/Player/player.gd" id="1_xfdxb"]
@@ -46,7 +46,6 @@
 [ext_resource type="AudioStream" uid="uid://k857dg5qycjv" path="res://Asset/SFX/placingObject.mp3" id="37_raash"]
 [ext_resource type="AudioStream" uid="uid://t8eii58rce5c" path="res://Asset/SFX/walkingOnWood.mp3" id="38_o8wch"]
 [ext_resource type="PackedScene" uid="uid://biincpe1d1eek" path="res://UI/UIUX/Player_HUD.tscn" id="39_0xjwo"]
-[ext_resource type="Script" path="res://UI/CharacterScene/magic_tree_ui.gd" id="39_msw74"]
 [ext_resource type="AudioStream" uid="uid://2lu5if0yp64i" path="res://Asset/SFX/forestWalkSFX.mp3" id="39_wma1b"]
 [ext_resource type="Texture2D" uid="uid://dy6bsmjnf8u44" path="res://Asset/UIUX/Container.png" id="42_uk6eg"]
 [ext_resource type="Texture2D" uid="uid://cruxbb2jv2vmx" path="res://Asset/Materials1.png" id="43_wy3ce"]
@@ -2285,7 +2284,6 @@ player = NodePath("../..")
 
 [node name="MagicTreeUI" parent="ROOT_UI" node_paths=PackedStringArray("player") instance=ExtResource("34_ogpy2")]
 visible = false
-script = ExtResource("39_msw74")
 player = NodePath("../..")
 
 [node name="CurrencyHolder" type="NinePatchRect" parent="ROOT_UI"]
