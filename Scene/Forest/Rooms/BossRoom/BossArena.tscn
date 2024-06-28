@@ -1,12 +1,17 @@
-[gd_scene load_steps=4 format=3 uid="uid://d1gxkrikxon85"]
+[gd_scene load_steps=6 format=3 uid="uid://d1gxkrikxon85"]
 
 [ext_resource type="Script" path="res://Scene/Forest/Rooms/BossRoom/BossArena.gd" id="1_imlmd"]
 [ext_resource type="TileSet" uid="uid://bckra1sdqvx78" path="res://Scene/Forest/Rooms/ForestTilemap.tres" id="2_63v6e"]
 [ext_resource type="Script" path="res://Scene/monsterEntities.gd" id="3_esx2j"]
+[ext_resource type="PackedScene" uid="uid://c1vsfoc55pk0w" path="res://Entity/Player/player.tscn" id="4_cvreh"]
 
-[node name="BossArena" type="Node2D" node_paths=PackedStringArray("tile_map", "creatureManager")]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_iww2h"]
+size = Vector2(143, 114)
+
+[node name="BossArena" type="Node2D" node_paths=PackedStringArray("player", "tile_map", "creatureManager")]
 script = ExtResource("1_imlmd")
 roomName = "BossRoom"
+player = NodePath("Player")
 tile_map = NodePath("TileMap")
 creatureManager = NodePath("monsterEntities")
 
@@ -34,3 +39,18 @@ layer_5/tile_data = PackedInt32Array()
 
 [node name="monsterEntities" type="Node" parent="."]
 script = ExtResource("3_esx2j")
+
+[node name="BossSpawnPoint" type="Node2D" parent="."]
+position = Vector2(-1, -229)
+
+[node name="Player" parent="." instance=ExtResource("4_cvreh")]
+position = Vector2(-3, 680)
+
+[node name="Camera2D" type="Camera2D" parent="."]
+enabled = false
+
+[node name="TriggerEvent" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TriggerEvent"]
+position = Vector2(4.5, 297)
+shape = SubResource("RectangleShape2D_iww2h")

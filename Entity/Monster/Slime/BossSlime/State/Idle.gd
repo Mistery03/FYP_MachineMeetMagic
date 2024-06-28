@@ -19,3 +19,7 @@ func physics_update(delta: float) -> void:
 
 
 
+func _on_boss_slime_on_damage_taken(damageAmount):
+	parent.currHealth -= damageAmount
+	parent.currHealth = clamp(parent.currHealth,0,parent.maxHP)
+	transitioned.emit("damaged")
