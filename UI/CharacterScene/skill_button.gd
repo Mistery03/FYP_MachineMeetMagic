@@ -30,6 +30,7 @@ func _process(delta):
 		panel.show_behind_parent = true
 #When button pressed
 func _on_pressed():
+	#if player research >= to requirement then unlock if not  description box
 	panel.show_behind_parent = true
 	line_2d.default_color = Color(0.6460919380188, 0.2988940179348, 0.0000004813075)
 	#skill learned need to safe data as learned skill

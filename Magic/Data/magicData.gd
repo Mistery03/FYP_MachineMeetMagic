@@ -13,3 +13,4 @@ extends Resource
 @export var attackCooldown:int
 @export var speed:float
 @export var description:String
+@export var unloackAmount:int
