@@ -7,11 +7,15 @@ extends Node2D
 @onready var melee_hitbox = $Animation/sword/meleeHitbox
 @export var magicManager:Node
 @export var player:Player
+
+@onready var magic_spawn_point = $Animation/MagicSpawnPoint
 #var isEquipped:bool
 var mousePos
 var staffMana:float
 var canCast:bool = true
 var magicData: MagicData
+
+
 
 
 # Called when the node enters the scene tree for the first time.

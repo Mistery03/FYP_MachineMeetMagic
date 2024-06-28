@@ -4,9 +4,6 @@
 [ext_resource type="Texture2D" uid="uid://0hdsh20r7wqf" path="res://Asset/normalAttack.png" id="2_txd66"]
 [ext_resource type="Texture2D" uid="uid://bt7sdnmsut5sw" path="res://IgnisNormalAttack.png" id="2_vhyv1"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_oonl1"]
-size = Vector2(12.5, 22.5)
-
 [sub_resource type="AtlasTexture" id="AtlasTexture_qtr0k"]
 atlas = ExtResource("2_txd66")
 region = Rect2(0, 0, 64, 64)
@@ -15,13 +12,13 @@ region = Rect2(0, 0, 64, 64)
 atlas = ExtResource("2_txd66")
 region = Rect2(64, 0, 64, 64)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_dbpsb"]
-atlas = ExtResource("2_txd66")
-region = Rect2(128, 0, 64, 64)
-
 [sub_resource type="AtlasTexture" id="AtlasTexture_tye07"]
 atlas = ExtResource("2_txd66")
 region = Rect2(192, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dbpsb"]
+atlas = ExtResource("2_txd66")
+region = Rect2(128, 0, 64, 64)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_5fcaq"]
 atlas = ExtResource("2_vhyv1")
@@ -98,21 +95,33 @@ region = Rect2(816, 0, 48, 48)
 [sub_resource type="SpriteFrames" id="SpriteFrames_xvip3"]
 animations = [{
 "frames": [{
-"duration": 1.0,
+"duration": 2.0,
 "texture": SubResource("AtlasTexture_qtr0k")
 }, {
-"duration": 1.0,
+"duration": 2.0,
 "texture": SubResource("AtlasTexture_g7gbt")
 }, {
-"duration": 1.0,
+"duration": 2.0,
+"texture": SubResource("AtlasTexture_tye07")
+}, {
+"duration": 2.0,
 "texture": SubResource("AtlasTexture_dbpsb")
 }, {
-"duration": 1.0,
+"duration": 2.0,
+"texture": SubResource("AtlasTexture_qtr0k")
+}, {
+"duration": 2.0,
+"texture": SubResource("AtlasTexture_g7gbt")
+}, {
+"duration": 0.5,
 "texture": SubResource("AtlasTexture_tye07")
+}, {
+"duration": 0.5,
+"texture": SubResource("AtlasTexture_dbpsb")
 }],
 "loop": false,
-"name": &"default",
-"speed": 4.0
+"name": &"Fireball",
+"speed": 12.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -177,23 +186,28 @@ animations = [{
 "speed": 10.0
 }]
 
-[node name="IgnisNormalAttack" type="CharacterBody2D"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_oonl1"]
+size = Vector2(17.5, 13.75)
+
+[node name="IgnisNormalAttack" type="Area2D"]
 z_index = 100
-scale = Vector2(0.4, 0.4)
-script = ExtResource("1_0lex2")
-
-[node name="Area2D" type="Area2D" parent="."]
-collision_layer = 128
+scale = Vector2(0.8, 0.8)
+collision_layer = 512
 collision_mask = 256
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-position = Vector2(-1.25, 6.25)
-shape = SubResource("RectangleShape2D_oonl1")
+script = ExtResource("1_0lex2")
+speed = 18000
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 texture_filter = 1
+rotation = 1.5708
 sprite_frames = SubResource("SpriteFrames_xvip3")
-frame = 3
+animation = &"Fireball"
+frame = 7
 frame_progress = 1.0
 
-[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-3.75, -0.624999)
+scale = Vector2(1, 1)
+shape = SubResource("RectangleShape2D_oonl1")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

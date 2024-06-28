@@ -2,7 +2,7 @@ extends State
 
 @export var chaseSpeed:float
 @export var separationWeight: float = 3  # Adjust the influence of separation
-const SHOOT_DISTANCE = 500
+const SHOOT_DISTANCE = 50
 
 
 func enter() -> void:
@@ -29,8 +29,7 @@ func physics_update(delta: float) -> void:
 	parent.move_and_slide()
 	
 	if distance_to_player <= SHOOT_DISTANCE:
-		parent.velocity = Vector2.ZERO
-		#transitioned.emit("shoot")
+		transitioned.emit("shoot")
 		
 		
 func _separation(slime):

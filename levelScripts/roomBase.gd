@@ -1,6 +1,9 @@
 class_name Room
 extends Node2D
 
+@export_category("Level")
+@export var levelName:String 
+
 @export_category("Room Settings")
 @export var roomName = ""
 @export var PK_roomID:int = 128
@@ -38,6 +41,8 @@ var validSpawnPositions = []
 
 
 func _ready():
+	player.localLevel = self
+	levelName = roomName
 	var grassTiles = tile_map.get_used_cells(1)
 	for coords in grassTiles:
 		grassData = tile_map.get_cell_tile_data(1,coords)

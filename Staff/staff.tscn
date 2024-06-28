@@ -22,9 +22,8 @@ animations = [{
 script = ExtResource("1_lhwre")
 
 [node name="Animation" type="AnimatedSprite2D" parent="."]
-visible = false
 texture_filter = 1
 sprite_frames = SubResource("SpriteFrames_d1fay")
 
-[node name="MagicSpawnPoint" type="Node2D" parent="."]
+[node name="MagicSpawnPoint" type="Node2D" parent="Animation"]
 position = Vector2(-6, -5)

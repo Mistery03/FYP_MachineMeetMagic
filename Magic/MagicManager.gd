@@ -17,12 +17,14 @@ var attackTimer:Timer
 
 func init(player:Player):
 	self.player = player
-	await get_tree().create_timer(2.5).timeout
-	self.localLevel = player.localLevel
+	
+	
 	
 	
 func _process(delta):
 	mousePos = player.mousePos
+	self.localLevel = player.localLevel
+	
 	pass
 
 func checkMagicUnlock() -> Array[MagicData]:
@@ -38,10 +40,13 @@ func normalAttack():
 		currMagic = magicData
 		if currMagic.name == "Ignis Normal Attack":
 			var magicScene = currMagic.scene.instantiate()
-			magicScene.global_position = player.global_position
+			
+			magicScene.global_position = staff.magic_spawn_point.global_position
 			magicScene.player = player
-			magicScene.mousePos = mousePos
+			#magicScene.mousePos = mousePos
 			magicScene.magicData = currMagic
+			magicScene.staff = staff
+			
 			player.currMana -= currMagic.manaRequirement
 			localLevel.add_child(magicScene)
 			

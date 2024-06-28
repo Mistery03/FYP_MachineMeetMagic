@@ -647,6 +647,18 @@ tracks/15/keys = {
 "update": 0,
 "values": [Vector2(-4.41942, -4.41942)]
 }
+tracks/16/type = "value"
+tracks/16/imported = false
+tracks/16/enabled = true
+tracks/16/path = NodePath("Animation/MagicSpawnPoint:position")
+tracks/16/interp = 1
+tracks/16/loop_wrap = true
+tracks/16/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(5.5, -5.5)]
+}
 
 [sub_resource type="Animation" id="Animation_ffrp5"]
 resource_name = "RESETBACK"
@@ -1579,6 +1591,18 @@ tracks/12/keys = {
 "update": 0,
 "values": [Vector2(0, 0)]
 }
+tracks/13/type = "value"
+tracks/13/imported = false
+tracks/13/enabled = true
+tracks/13/path = NodePath("Animation/MagicSpawnPoint:position")
+tracks/13/interp = 1
+tracks/13/loop_wrap = true
+tracks/13/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-5.5, -5.5)]
+}
 
 [sub_resource type="Animation" id="Animation_76tdj"]
 resource_name = "idleFront"
@@ -1741,6 +1765,18 @@ tracks/12/keys = {
 "update": 0,
 "values": [Vector2(0, 0)]
 }
+tracks/13/type = "value"
+tracks/13/imported = false
+tracks/13/enabled = true
+tracks/13/path = NodePath("Animation/MagicSpawnPoint:position")
+tracks/13/interp = 1
+tracks/13/loop_wrap = true
+tracks/13/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(5.5, -5.5)]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_htq8g"]
 _data = {
@@ -1887,7 +1923,7 @@ magicManager = NodePath("../MagicManager")
 player = NodePath("..")
 
 [node name="Animation" parent="Staff" index="0"]
-visible = true
+z_index = -1
 flip_h = true
 
 [node name="axe" type="Sprite2D" parent="Staff/Animation" index="0"]
@@ -1920,6 +1956,9 @@ position = Vector2(-4.41942, -4.41942)
 rotation = -0.785398
 shape = SubResource("CapsuleShape2D_gkpp5")
 
+[node name="MagicSpawnPoint" parent="Staff/Animation" index="2"]
+position = Vector2(5.5, -5.5)
+
 [node name="StaffAnimation" type="AnimationPlayer" parent="Staff"]
 libraries = {
 "": SubResource("AnimationLibrary_htq8g")
@@ -1945,9 +1984,10 @@ inventoryUI = NodePath("../ROOT_UI/InventoryUI")
 potionHUD = NodePath("../ROOT_UI/ItemHUDPlaceholder/PotionHUD")
 player = NodePath("..")
 
-[node name="MagicManager" type="Node" parent="." node_paths=PackedStringArray("magic_tree_ui")]
+[node name="MagicManager" type="Node" parent="." node_paths=PackedStringArray("magic_tree_ui", "staff")]
 script = ExtResource("11_ur7hc")
 magic_tree_ui = NodePath("../ROOT_UI/MagicTreeUI")
+staff = NodePath("../Staff")
 magicDataList = Array[Resource("res://Magic/Data/magicData.gd")]([ExtResource("16_uflgr"), ExtResource("17_45ckk"), ExtResource("18_uuexe"), ExtResource("19_kedec")])
 
 [node name="StateController" type="Node" parent="." node_paths=PackedStringArray("current_state")]
