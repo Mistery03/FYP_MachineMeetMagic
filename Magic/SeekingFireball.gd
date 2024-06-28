@@ -45,8 +45,6 @@ func _process(delta):
 func _physics_process(delta):
 	shoot_in_direction_of_mouse(delta)
 
-
-
 func shoot_in_direction_of_mouse(delta) -> void:
 	if direction != Vector2.ZERO:
 		rotation = atan2(direction.y, direction.x)

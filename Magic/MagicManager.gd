@@ -29,6 +29,7 @@ func checkMagicUnlock() -> Array[MagicData]:
 	var unlockedIndices: Array[MagicData] = []
 	for i in range(magicDataList.size()):
 		if magicDataList[i].isUnlocked:
+			print(magicDataList[i].isUnlocked)
 			unlockedIndices.append(magicDataList[i])
 	return unlockedIndices
 
@@ -36,25 +37,39 @@ func normalAttack():
 	if magicData:
 		currMagic = magicData
 		if currMagic.scene:
-			if currMagic.name == "Seeking Fireball":
+			match currMagic.name:
+				"Fireball":
+					var magicScene = currMagic.scene.instantiate()
+					var direction = (player.mousePos - staff.magic_spawn_point.global_position).normalized()
+					magicScene.global_position = staff.magic_spawn_point.global_position
+					magicScene.direction = direction
+					magicScene.rotation = atan2(direction.y,direction.x)
+					player.currMana -= currMagic.manaRequirement
+					localLevel.add_child(magicScene)
+					
+				"Seeking Fireball":
+					var magicScene = currMagic.scene.instantiate()
 
-				var magicScene = currMagic.scene.instantiate()
+					magicScene.global_position = staff.magic_spawn_point.global_position
+					magicScene.player = player
+						#magicScene.mousePos = mousePos
+					magicScene.magicData = currMagic
+					magicScene.staff = staff
 
-				magicScene.global_position = staff.magic_spawn_point.global_position
-				magicScene.player = player
-					#magicScene.mousePos = mousePos
-				magicScene.magicData = currMagic
-				magicScene.staff = staff
+					player.currMana -= currMagic.manaRequirement
+					localLevel.add_child(magicScene)
 
-				player.currMana -= currMagic.manaRequirement
-				localLevel.add_child(magicScene)
+				"Explosion":
+					var magicScene = currMagic.scene.instantiate()
+					magicScene.global_position = mousePos
+					magicScene.magicData = currMagic
+					player.currMana -= currMagic.manaRequirement
+					localLevel.add_child(magicScene)
 
-			elif currMagic.name == "Explosion":
-				var magicScene = currMagic.scene.instantiate()
-				magicScene.global_position = mousePos
-				magicScene.magicData = currMagic
-				player.currMana -= currMagic.manaRequirement
-				localLevel.add_child(magicScene)
+
+
+
+
 
 
 

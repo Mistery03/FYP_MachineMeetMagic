@@ -1,4 +1,4 @@
-[gd_scene load_steps=104 format=3 uid="uid://c1vsfoc55pk0w"]
+[gd_scene load_steps=103 format=3 uid="uid://c1vsfoc55pk0w"]
 
 [ext_resource type="Texture2D" uid="uid://bd32dcnew3uvf" path="res://Asset/L.png" id="1_ksidj"]
 [ext_resource type="Script" path="res://Entity/Player/player.gd" id="1_xfdxb"]
@@ -28,7 +28,6 @@
 [ext_resource type="Resource" uid="uid://dcf0tfhforbdf" path="res://Magic/Data/Explosion.tres" id="17_6mn17"]
 [ext_resource type="Script" path="res://UI/Wiring/Wiring.gd" id="18_3q6sb"]
 [ext_resource type="Script" path="res://Entity/Player/ItemHUDPlaceholder.gd" id="19_4bbe1"]
-[ext_resource type="Resource" uid="uid://djb03olcdq404" path="res://Magic/Data/IgnisSkill3.tres" id="19_kedec"]
 [ext_resource type="PackedScene" uid="uid://crsbugvcqu5mn" path="res://Staff/staffHUD.tscn" id="20_qac2v"]
 [ext_resource type="Texture2D" uid="uid://cgi863ww3hb3g" path="res://Asset/fantasyAssets.png" id="21_kqu6c"]
 [ext_resource type="PackedScene" uid="uid://ca71hsm6y7dur" path="res://Staff/staff.tscn" id="22_01tsa"]
@@ -1988,7 +1987,7 @@ player = NodePath("..")
 script = ExtResource("11_ur7hc")
 magic_tree_ui = NodePath("../ROOT_UI/MagicTreeUI")
 staff = NodePath("../Staff")
-magicDataList = Array[Resource("res://Magic/Data/magicData.gd")]([ExtResource("15_btgj0"), ExtResource("15_1nlwc"), ExtResource("17_6mn17"), ExtResource("19_kedec")])
+magicDataList = Array[Resource("res://Magic/Data/magicData.gd")]([ExtResource("15_btgj0"), ExtResource("15_1nlwc"), ExtResource("17_6mn17"), ExtResource("15_btgj0")])
 
 [node name="StateController" type="Node" parent="." node_paths=PackedStringArray("current_state")]
 script = ExtResource("7_xedn3")

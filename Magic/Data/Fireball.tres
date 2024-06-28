@@ -10,7 +10,7 @@ region = Rect2(32, 0, 32, 32)
 
 [resource]
 script = ExtResource("2_f6ggp")
-name = "IgnisSkill1"
+name = "Fireball"
 skillButton = SubResource("AtlasTexture_hnxxk")
 scene = ExtResource("1_wyb3j")
 manaRequirement = 5.0
@@ -18,6 +18,6 @@ isUnlocked = false
 burningTime = 20.0
 efficientTime = 0.0
 damage = 0.0
-attackBased = false
+attackBased = true
 attackCooldown = 0
 speed = 0.0

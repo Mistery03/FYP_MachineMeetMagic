@@ -22,7 +22,7 @@ var last_selected_room
 
 func init(player:Player):
 	self.player = player
-	print(self.player)
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	player.isBuildEnabled = isBuildEnabled
