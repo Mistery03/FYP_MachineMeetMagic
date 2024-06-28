@@ -26,7 +26,7 @@ func _ready():
 	
 		
 func _process(delta):
-	if MagicData.isUnlocked:
+	if magicData.isUnlocked:
 		panel.show_behind_parent = true
 #When button pressed
 func _on_pressed():
@@ -47,8 +47,8 @@ func _on_mouse_entered():
 	descriptionbox.visible = true
 	magicname.visible = true
 	description.visible = true
-	magicname.text = MagicData.name
-	description.text = MagicData.description
+	magicname.text = magicData.name
+	description.text = magicData.description
 
 
 func _on_mouse_exited():
