@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="Magic" load_steps=5 format=3 uid="uid://60imtm71g3ri"]
+[gd_resource type="Resource" script_class="MagicData" load_steps=5 format=3 uid="uid://60imtm71g3ri"]
 
 [ext_resource type="Script" path="res://Magic/Data/magicData.gd" id="1_1gl0f"]
 [ext_resource type="PackedScene" uid="uid://cbpcjmtv6eke7" path="res://Magic/IgnisNormalAttack.tscn" id="1_4llb0"]
@@ -13,8 +13,11 @@ script = ExtResource("1_1gl0f")
 name = "Ignis Normal Attack"
 skillButton = SubResource("AtlasTexture_vhwpq")
 scene = ExtResource("1_4llb0")
-manaRequirement = 20.0
+manaRequirement = 5.0
 isUnlocked = false
 burningTime = 0.0
 efficientTime = 0.0
-damangeAmount = 0.0
+damage = 20.0
+attackBased = true
+attackCooldown = 0
+speed = 0.0

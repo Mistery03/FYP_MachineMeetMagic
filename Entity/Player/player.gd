@@ -57,7 +57,7 @@ const JUMP_VELOCITY = 4.5
 
 @onready var text_on_mouse = $TextOnMouse
 
-signal OnDamageTaken(damageAmount:float)
+
 
 var potion:Potion
 var isBuildEnabled:bool
@@ -74,6 +74,7 @@ var isInDestroyArea:bool = false
 var wasAttacking:bool = false
 var isInInventory:bool = false
 var isDead:bool = false
+var isMagicAvailable:bool = false
 
 var canInput:bool = true
 var canDash:bool = true

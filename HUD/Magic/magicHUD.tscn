@@ -34,3 +34,11 @@ offset_right = 29.0
 offset_bottom = 219.0
 scale = Vector2(15, 15)
 texture = SubResource("AtlasTexture_xovp4")
+
+[node name="Darkened" type="Panel" parent="."]
+visible = false
+layout_mode = 0
+offset_left = 13.0
+offset_top = 17.0
+offset_right = 584.0
+offset_bottom = 900.0

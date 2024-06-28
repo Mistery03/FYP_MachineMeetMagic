@@ -7,3 +7,4 @@ extends Resource
 @export var atlasCoord:Vector2i = Vector2i(-1,-1)
 @export var description:String = ""
 @export var instance:PackedScene 
+@export var isUnlocked:bool

@@ -1,0 +1,35 @@
+[gd_scene load_steps=5 format=3 uid="uid://cptbu4xehy3nc"]
+
+[ext_resource type="PackedScene" uid="uid://cnyew34njaqgl" path="res://UI/CharacterScene/machine_button.tscn" id="1_nstk4"]
+[ext_resource type="Resource" uid="uid://ch3ruj8fn022x" path="res://Building/Machine/Data/powerGenerator.tres" id="2_mrp4f"]
+[ext_resource type="Resource" uid="uid://b4ot4cdrsegxs" path="res://Building/Machine/Data/battery.tres" id="3_mp1le"]
+[ext_resource type="Resource" uid="uid://dqo00x1g854h3" path="res://Building/Machine/Data/scrollScriber.tres" id="4_be3ow"]
+
+[node name="machineTree" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = -1344.0
+offset_bottom = -836.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 0
+
+[node name="machineButton" parent="." instance=ExtResource("1_nstk4")]
+layout_mode = 0
+machineData = ExtResource("2_mrp4f")
+
+[node name="machineButton" parent="machineButton" instance=ExtResource("1_nstk4")]
+layout_mode = 0
+offset_top = 64.0
+offset_bottom = 96.0
+disabled = true
+machineData = ExtResource("3_mp1le")
+
+[node name="machineButton2" parent="machineButton/machineButton" instance=ExtResource("1_nstk4")]
+layout_mode = 0
+offset_top = 64.0
+offset_bottom = 96.0
+disabled = true
+machineData = ExtResource("4_be3ow")

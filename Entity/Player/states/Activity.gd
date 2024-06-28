@@ -58,7 +58,7 @@ func physics_update(delta: float) -> void:
 
 func process_input(event)->void:
 
-	if Input.is_action_just_pressed("ACTION") and parent.isStaffEquipped and parent.canInput:
+	if Input.is_action_just_pressed("ACTION") and parent.isStaffEquipped and parent.canInput and !parent.isMagicAvailable:
 		parent.staff.customAnimation.stop()
 		parent.canInput = false
 		transitioned.emit("attack")

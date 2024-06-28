@@ -1,4 +1,4 @@
-[gd_scene load_steps=102 format=3 uid="uid://c1vsfoc55pk0w"]
+[gd_scene load_steps=99 format=3 uid="uid://c1vsfoc55pk0w"]
 
 [ext_resource type="Texture2D" uid="uid://bd32dcnew3uvf" path="res://Asset/L.png" id="1_ksidj"]
 [ext_resource type="Script" path="res://Entity/Player/player.gd" id="1_xfdxb"]
@@ -21,14 +21,11 @@
 [ext_resource type="PackedScene" uid="uid://htlhwdgl8ast" path="res://HUD/DynamicLabel/dynamicLabel.tscn" id="14_8yknx"]
 [ext_resource type="Script" path="res://Entity/Player/states/Action.gd" id="14_h6fpb"]
 [ext_resource type="FontFile" uid="uid://cl3rxpo58micg" path="res://Asset/Font/Lambda-Regular.ttf" id="14_me7n8"]
+[ext_resource type="Script" path="res://Magic/Data/magicData.gd" id="15_nhgnp"]
 [ext_resource type="PackedScene" uid="uid://dd2ysdc77pxkq" path="res://UI/Build/build_hud.tscn" id="15_otihl"]
 [ext_resource type="PackedScene" uid="uid://cnj7jj8r34b1q" path="res://Material/Material.tscn" id="15_qe768"]
-[ext_resource type="Resource" uid="uid://60imtm71g3ri" path="res://Magic/Data/IgnisNormalAttack.tres" id="16_uflgr"]
-[ext_resource type="Resource" uid="uid://b5wauuhno0qg2" path="res://Magic/Data/IgnisSkill1.tres" id="17_45ckk"]
 [ext_resource type="Script" path="res://UI/Wiring/Wiring.gd" id="18_3q6sb"]
-[ext_resource type="Resource" uid="uid://dcf0tfhforbdf" path="res://Magic/Data/IgnisSkill2.tres" id="18_uuexe"]
 [ext_resource type="Script" path="res://Entity/Player/ItemHUDPlaceholder.gd" id="19_4bbe1"]
-[ext_resource type="Resource" uid="uid://djb03olcdq404" path="res://Magic/Data/IgnisSkill3.tres" id="19_kedec"]
 [ext_resource type="PackedScene" uid="uid://crsbugvcqu5mn" path="res://Staff/staffHUD.tscn" id="20_qac2v"]
 [ext_resource type="Texture2D" uid="uid://cgi863ww3hb3g" path="res://Asset/fantasyAssets.png" id="21_kqu6c"]
 [ext_resource type="PackedScene" uid="uid://ca71hsm6y7dur" path="res://Staff/staff.tscn" id="22_01tsa"]
@@ -38,7 +35,6 @@
 [ext_resource type="Script" path="res://Entity/Player/states/Damaged.gd" id="23_i72d5"]
 [ext_resource type="PackedScene" uid="uid://dab70bjir0c00" path="res://HUD/Magic/magicHUD.tscn" id="24_71sui"]
 [ext_resource type="Script" path="res://Entity/Player/Roll.gd" id="25_j1p4y"]
-[ext_resource type="Script" path="res://Entity/Player/Death.gd" id="27_i3hmp"]
 [ext_resource type="Texture2D" uid="uid://bi05jqai8a2ss" path="res://Asset/materials.png" id="32_6ejnk"]
 [ext_resource type="PackedScene" uid="uid://cujcp3sdk8yco" path="res://UI/CharacterScene/inventorySheet.tscn" id="32_dbx42"]
 [ext_resource type="PackedScene" uid="uid://eu0xsfmexgdv" path="res://UI/CharacterScene/magic_tree_ui.tscn" id="34_ogpy2"]
@@ -83,10 +79,6 @@ region = Rect2(32, 160, 32, 32)
 [sub_resource type="AtlasTexture" id="AtlasTexture_yrotq"]
 atlas = ExtResource("1_ksidj")
 region = Rect2(64, 160, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_yecut"]
-atlas = ExtResource("1_ksidj")
-region = Rect2(96, 160, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_tf0gl"]
 atlas = ExtResource("1_ksidj")
@@ -200,11 +192,8 @@ animations = [{
 }, {
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_yrotq")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_yecut")
 }],
-"loop": false,
+"loop": true,
 "name": &"FALLING",
 "speed": 5.0
 }, {
@@ -314,8 +303,8 @@ animations = [{
 }]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_5n34a"]
-radius = 50.0
-height = 140.0
+radius = 56.0
+height = 164.0
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_jc7sf"]
 atlas = ExtResource("32_6ejnk")
@@ -400,54 +389,6 @@ tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/keys = {
 "times": PackedFloat32Array(0.6),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [true]
-}
-tracks/6/type = "value"
-tracks/6/imported = false
-tracks/6/enabled = true
-tracks/6/path = NodePath("Animation/sword:visible")
-tracks/6/interp = 1
-tracks/6/loop_wrap = true
-tracks/6/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [false]
-}
-tracks/7/type = "value"
-tracks/7/imported = false
-tracks/7/enabled = true
-tracks/7/path = NodePath("Animation/axe:position")
-tracks/7/interp = 1
-tracks/7/loop_wrap = true
-tracks/7/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(5, -5)]
-}
-tracks/8/type = "value"
-tracks/8/imported = false
-tracks/8/enabled = true
-tracks/8/path = NodePath("Animation:offset")
-tracks/8/interp = 1
-tracks/8/loop_wrap = true
-tracks/8/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(0, 0)]
-}
-tracks/9/type = "value"
-tracks/9/imported = false
-tracks/9/enabled = true
-tracks/9/path = NodePath("Animation:flip_h")
-tracks/9/interp = 1
-tracks/9/loop_wrap = true
-tracks/9/keys = {
-"times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [true]
@@ -1405,18 +1346,6 @@ tracks/10/keys = {
 "update": 1,
 "values": [true]
 }
-tracks/11/type = "value"
-tracks/11/imported = false
-tracks/11/enabled = true
-tracks/11/path = NodePath("Animation/axe:visible")
-tracks/11/interp = 1
-tracks/11/loop_wrap = true
-tracks/11/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [false]
-}
 
 [sub_resource type="Animation" id="Animation_o074o"]
 resource_name = "idleBack"
@@ -1837,18 +1766,17 @@ _data = {
 atlas = ExtResource("43_wy3ce")
 region = Rect2(160, 0, 32, 32)
 
-[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("staff", "itemHUDPlaceholder", "playerHUD", "playerCurrencyText", "playerCurrencyHUD", "playerInventoryController", "magicUI", "animation", "moveComponent", "stateController") groups=["invalidPosition"]]
+[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("staff", "itemHUDPlaceholder", "playerHUD", "playerCurrencyHUD", "playerInventoryController", "magicUI", "animation", "moveComponent", "stateController") groups=["invalidPosition"]]
 z_index = 10
 scale = Vector2(0.1, 0.1)
-collision_mask = 120
+collision_mask = 344
 script = ExtResource("1_xfdxb")
 playerData = ExtResource("2_g17go")
 potionObject = ExtResource("3_41una")
 staff = NodePath("Staff")
 itemHUDPlaceholder = NodePath("ROOT_UI/ItemHUDPlaceholder")
 playerHUD = NodePath("ROOT_UI/Player_hud")
-playerCurrencyText = NodePath("ROOT_UI/CurrencyHolder/Currency")
-playerCurrencyHUD = NodePath("ROOT_UI/CurrencyHolder")
+playerCurrencyHUD = NodePath("ROOT_UI/CurrencyHolder/Currency")
 playerInventoryController = NodePath("ROOT_UI/InventoryUI")
 maxInventorySize = 20
 initSlot = ExtResource("4_e4jpf")
@@ -1869,458 +1797,12 @@ position_smoothing_speed = 4.0
 texture_filter = 1
 scale = Vector2(5, 5)
 sprite_frames = SubResource("SpriteFrames_47nfc")
-animation = &"FALLING"
+animation = &"ROLL"
 autoplay = "IDLE"
-frame = 3
+frame = 5
 frame_progress = 1.0
 
 [node name="PlayerHitbox" type="CollisionShape2D" parent="."]
-position = Vector2(-9.53674e-07, 10)
 shape = SubResource("CapsuleShape2D_5n34a")
 
-[node name="Staff" parent="." node_paths=PackedStringArray("customAnimation", "magicManager", "player") instance=ExtResource("22_01tsa")]
-z_index = -1
-position = Vector2(10, 0)
-scale = Vector2(8, 8)
-customAnimation = NodePath("StaffAnimation")
-magicManager = NodePath("../MagicManager")
-player = NodePath("..")
-
-[node name="Animation" parent="Staff" index="0"]
-visible = true
-flip_h = true
-
-[node name="axe" type="Sprite2D" parent="Staff/Animation" index="0"]
-visible = false
-modulate = Color(0, 0.792157, 1, 0.54902)
-texture_filter = 1
-position = Vector2(5, -5)
-rotation = -0.020944
-texture = SubResource("AtlasTexture_jc7sf")
-flip_h = true
-
-[node name="sword" type="Sprite2D" parent="Staff/Animation" index="1"]
-visible = false
-modulate = Color(0, 1, 1, 1)
-position = Vector2(11.25, -11.25)
-rotation = -1.5708
-texture = SubResource("AtlasTexture_olby7")
-flip_h = true
-flip_v = true
-
-[node name="meleeHitbox" type="Area2D" parent="Staff/Animation/sword"]
-collision_layer = 128
-collision_mask = 256
-monitorable = false
-script = ExtResource("9_1p8cg")
-damagepoint = 20.0
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Staff/Animation/sword/meleeHitbox"]
-position = Vector2(-4.41942, -4.41942)
-rotation = -0.785398
-shape = SubResource("CapsuleShape2D_gkpp5")
-
-[node name="StaffAnimation" type="AnimationPlayer" parent="Staff"]
-libraries = {
-"": SubResource("AnimationLibrary_htq8g")
-}
-
-[node name="windSFX" type="AudioStreamPlayer2D" parent="Staff"]
-position = Vector2(-5.96046e-07, -2.98023e-07)
-stream = ExtResource("35_4dsxo")
-volume_db = 5.0
-max_distance = 500.0
-
-[node name="woodBreakSFX" type="AudioStreamPlayer2D" parent="Staff"]
-stream = ExtResource("36_a4jww")
-pitch_scale = 0.8
-attenuation = 1.36604
-
-[node name="InventoryManager" type="Node" parent="."]
-script = ExtResource("12_0atyh")
-
-[node name="PotionManager" type="Node" parent="." node_paths=PackedStringArray("inventoryUI", "potionHUD", "player")]
-script = ExtResource("5_5bgkf")
-inventoryUI = NodePath("../ROOT_UI/InventoryUI")
-potionHUD = NodePath("../ROOT_UI/ItemHUDPlaceholder/PotionHUD")
-player = NodePath("..")
-
-[node name="MagicManager" type="Node" parent="." node_paths=PackedStringArray("magic_tree_ui")]
-script = ExtResource("11_ur7hc")
-magic_tree_ui = NodePath("../ROOT_UI/MagicTreeUI")
-magicDataList = Array[Resource("res://Magic/Data/magicData.gd")]([ExtResource("16_uflgr"), ExtResource("17_45ckk"), ExtResource("18_uuexe"), ExtResource("19_kedec")])
-
-[node name="StateController" type="Node" parent="." node_paths=PackedStringArray("current_state")]
-script = ExtResource("7_xedn3")
-current_state = NodePath("Idle")
-
-[node name="Idle" type="Node" parent="StateController" node_paths=PackedStringArray("attack")]
-script = ExtResource("8_5d7eh")
-attack = NodePath("../Attack")
-rollStaminaComsumption = 10.0
-animation_name = "Idle"
-
-[node name="Move" type="Node" parent="StateController" node_paths=PackedStringArray("attack", "walk_timer")]
-script = ExtResource("9_5ji7g")
-attack = NodePath("../Attack")
-walk_timer = NodePath("../../walkSFX")
-rollStaminaComsumption = 20.0
-animation_name = "walkSide"
-
-[node name="Build" type="Node" parent="StateController" node_paths=PackedStringArray("wiring_machine_state", "wiring_battery_state", "buildUI", "buildMenu")]
-script = ExtResource("10_10mal")
-wiring_machine_state = NodePath("../WiringMachine")
-wiring_battery_state = NodePath("../WiringBattery")
-buildUI = NodePath("../../ROOT_UI/Build")
-buildMenu = NodePath("../../ROOT_UI/Build/BuildMenu")
-inputList = {
-"Build": "Build",
-"Exit": "Exit"
-}
-
-[node name="Destroy" type="Node" parent="StateController" node_paths=PackedStringArray("wiring_machine_state", "wiring_battery_state", "destroyHUD")]
-script = ExtResource("11_7uhfu")
-wiring_machine_state = NodePath("../WiringMachine")
-wiring_battery_state = NodePath("../WiringBattery")
-destroyHUD = NodePath("../../ROOT_UI/Destroy")
-inputList = {
-"Build": "Build",
-"Exit": "Exit"
-}
-materialInstance = ExtResource("15_qe768")
-
-[node name="WiringMachine" type="Node" parent="StateController" node_paths=PackedStringArray("HUD")]
-script = ExtResource("12_ii11w")
-HUD = NodePath("../../ROOT_UI/Wiring")
-inputList = {
-"Build": "Build",
-"Exit": "Exit"
-}
-
-[node name="WiringBattery" type="Node" parent="StateController" node_paths=PackedStringArray("HUD")]
-script = ExtResource("13_3c3kb")
-HUD = NodePath("../../ROOT_UI/Wiring")
-inputList = {
-"Build": "Build",
-"Exit": "Exit"
-}
-
-[node name="Cut" type="Node" parent="StateController" node_paths=PackedStringArray("timer")]
-script = ExtResource("14_h6fpb")
-timer = NodePath("../../ActionTimer")
-materialInstance = ExtResource("15_qe768")
-
-[node name="Attack" type="Node" parent="StateController"]
-script = ExtResource("22_nvrgv")
-animation_name = "WALKFRONT"
-
-[node name="Damaged" type="Node" parent="StateController"]
-script = ExtResource("23_i72d5")
-animation_name = "Damaged"
-
-[node name="Roll" type="Node" parent="StateController"]
-script = ExtResource("25_j1p4y")
-roll_speed_multiplier = 1.2
-animation_name = "ROLL"
-
-[node name="Death" type="Node" parent="StateController"]
-script = ExtResource("27_i3hmp")
-zoom_level = 12.0
-animation_name = "Falling"
-
-[node name="MoveComponent" type="Node" parent="." node_paths=PackedStringArray("rollTimer")]
-script = ExtResource("10_gim7i")
-rollTimer = NodePath("../RollDuration")
-inputList = {
-"MoveBackward": "MoveBackward",
-"MoveForward": "MoveForward",
-"MoveLeft": "MoveLeft",
-"MoveRight": "MoveRight"
-}
-
-[node name="ROOT_UI" type="CanvasLayer" parent="."]
-layer = 2
-
-[node name="Player_hud" parent="ROOT_UI" node_paths=PackedStringArray("player") instance=ExtResource("39_0xjwo")]
-player = NodePath("../..")
-metadata/_edit_use_anchors_ = true
-
-[node name="Build" type="Control" parent="ROOT_UI"]
-visible = false
-z_as_relative = false
-layout_mode = 3
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
-
-[node name="BuildMenu" parent="ROOT_UI/Build" node_paths=PackedStringArray("parentUI") instance=ExtResource("12_58i1p")]
-layout_mode = 1
-offset_left = 48.0
-offset_top = 49.0
-offset_right = 8.0
-offset_bottom = 9.0
-parentUI = NodePath("..")
-
-[node name="BuildHud" parent="ROOT_UI/Build" instance=ExtResource("15_otihl")]
-layout_mode = 1
-anchors_preset = 0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
-offset_left = -1.0
-offset_top = 800.0
-offset_right = 620.0
-offset_bottom = 864.0
-grow_horizontal = 1
-grow_vertical = 1
-
-[node name="Destroy" type="Control" parent="ROOT_UI"]
-visible = false
-layout_mode = 3
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
-
-[node name="DestroyLabel" type="Label" parent="ROOT_UI/Destroy"]
-layout_mode = 1
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = 609.0
-offset_right = 7307.0
-offset_bottom = 1367.0
-grow_horizontal = 2
-scale = Vector2(0.05, 0.05)
-theme_override_fonts/font = ExtResource("14_me7n8")
-theme_override_font_sizes/font_size = 1200
-text = "DESTROY MODE"
-
-[node name="Explanation" type="Label" parent="ROOT_UI/Destroy"]
-layout_mode = 2
-offset_top = 720.0
-offset_right = 1600.0
-offset_bottom = 767.0
-theme_override_fonts/font = ExtResource("14_me7n8")
-theme_override_font_sizes/font_size = 40
-text = "Select the machine to destroy"
-horizontal_alignment = 1
-
-[node name="CloseBuildMenu" parent="ROOT_UI/Destroy" instance=ExtResource("14_8yknx")]
-layout_mode = 0
-offset_left = 100.0
-offset_top = 815.0
-offset_right = 207.0
-offset_bottom = 847.0
-
-[node name="Wiring" type="Control" parent="ROOT_UI"]
-visible = false
-layout_mode = 3
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
-script = ExtResource("18_3q6sb")
-text = "WIRING MODE"
-
-[node name="WiringLabel" type="Label" parent="ROOT_UI/Wiring"]
-layout_mode = 1
-offset_left = 383.0
-offset_top = 51.0
-offset_right = 1182.0
-offset_bottom = 189.0
-theme_override_fonts/font = ExtResource("14_me7n8")
-theme_override_font_sizes/font_size = 90
-text = "WIRING MODE
-"
-horizontal_alignment = 1
-
-[node name="HBoxContainer" type="HBoxContainer" parent="ROOT_UI/Wiring"]
-layout_mode = 1
-anchors_preset = 12
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = 515.0
-offset_top = 683.0
-offset_right = 778.0
-offset_bottom = 715.0
-grow_horizontal = 2
-grow_vertical = 0
-scale = Vector2(1.5, 1.5)
-theme_override_constants/separation = 100
-
-[node name="CreateWire" parent="ROOT_UI/Wiring/HBoxContainer" instance=ExtResource("14_8yknx")]
-layout_mode = 2
-text = "CREATE WIRE
-"
-promptMessage = ": Create Wire"
-promptAction = "ACTION"
-
-[node name="DestroyWire" parent="ROOT_UI/Wiring/HBoxContainer" instance=ExtResource("14_8yknx")]
-layout_mode = 2
-text = "Destroy Wire
-"
-promptMessage = ": Destroy Wire"
-promptAction = "ACTION2"
-
-[node name="CloseBuildMenu" parent="ROOT_UI/Wiring" instance=ExtResource("14_8yknx")]
-layout_mode = 0
-offset_left = 100.0
-offset_top = 815.0
-offset_right = 207.0
-offset_bottom = 847.0
-
-[node name="WiringMachine" parent="ROOT_UI/Wiring" instance=ExtResource("14_8yknx")]
-layout_mode = 0
-offset_left = 300.0
-offset_top = 815.0
-offset_right = 509.0
-offset_bottom = 847.0
-text = "NUMKEY1: Wire Machine
-"
-promptMessage = ": Wire Machine"
-promptAction = "NUMKEY1"
-
-[node name="WiringBattery" parent="ROOT_UI/Wiring" instance=ExtResource("14_8yknx")]
-layout_mode = 0
-offset_left = 520.0
-offset_top = 815.0
-offset_right = 729.0
-offset_bottom = 847.0
-text = "NUMKEY1: Wire Machine
-"
-promptMessage = ": Wire Battery"
-promptAction = "NUMKEY2"
-
-[node name="ItemHUDPlaceholder" type="Control" parent="ROOT_UI" node_paths=PackedStringArray("player", "animation")]
-layout_mode = 3
-anchors_preset = 0
-offset_top = 80.0
-offset_right = 40.0
-offset_bottom = 120.0
-script = ExtResource("19_4bbe1")
-player = NodePath("../..")
-animation = NodePath("ItemHUDAnimation")
-
-[node name="StaffHUD" parent="ROOT_UI/ItemHUDPlaceholder" node_paths=PackedStringArray("player") instance=ExtResource("20_qac2v")]
-layout_mode = 1
-offset_left = 147.0
-offset_top = 525.0
-offset_right = 107.0
-offset_bottom = 525.0
-scale = Vector2(0.2, 0.2)
-actionInput = "EQUIP"
-texture = SubResource("AtlasTexture_1dcaq")
-player = NodePath("../../..")
-
-[node name="PotionHUD" parent="ROOT_UI/ItemHUDPlaceholder" node_paths=PackedStringArray("inventoryUI") instance=ExtResource("22_lae4u")]
-layout_mode = 1
-offset_left = 16.0
-offset_top = 612.0
-offset_right = -24.0
-offset_bottom = 612.0
-scale = Vector2(0.2, 0.2)
-actionInput = "EQUIPPOTION"
-texture = SubResource("AtlasTexture_e1oi2")
-inventoryUI = NodePath("../../InventoryUI")
-
-[node name="MagicHUD" parent="ROOT_UI/ItemHUDPlaceholder" node_paths=PackedStringArray("magicManager") instance=ExtResource("24_71sui")]
-layout_mode = 1
-offset_left = 281.0
-offset_top = 612.0
-offset_right = 241.0
-offset_bottom = 612.0
-scale = Vector2(0.2, 0.2)
-magicManager = NodePath("../../../MagicManager")
-
-[node name="ItemHUDAnimation" type="AnimationPlayer" parent="ROOT_UI/ItemHUDPlaceholder"]
-libraries = {
-"": SubResource("AnimationLibrary_4077c")
-}
-
-[node name="Timer" type="Timer" parent="ROOT_UI/ItemHUDPlaceholder"]
-one_shot = true
-
-[node name="InventoryUI" parent="ROOT_UI" node_paths=PackedStringArray("player") instance=ExtResource("32_dbx42")]
-visible = false
-player = NodePath("../..")
-
-[node name="MagicTreeUI" parent="ROOT_UI" node_paths=PackedStringArray("player") instance=ExtResource("34_ogpy2")]
-visible = false
-script = ExtResource("39_msw74")
-player = NodePath("../..")
-
-[node name="CurrencyHolder" type="NinePatchRect" parent="ROOT_UI"]
-self_modulate = Color(0.0156863, 0.184314, 0.32549, 1)
-z_index = -5
-texture_filter = 1
-offset_left = 1314.0
-offset_top = 805.0
-offset_right = 1505.0
-offset_bottom = 854.0
-scale = Vector2(1.2, 1.2)
-texture = ExtResource("42_uk6eg")
-region_rect = Rect2(0, -2, 32, 37)
-
-[node name="TextureRect" type="TextureRect" parent="ROOT_UI/CurrencyHolder"]
-layout_mode = 0
-offset_left = 8.33333
-offset_top = 5.0
-offset_right = 48.3333
-offset_bottom = 45.0
-texture = SubResource("AtlasTexture_fg7kg")
-
-[node name="Currency" type="Label" parent="ROOT_UI/CurrencyHolder"]
-layout_mode = 0
-offset_left = 72.5
-offset_top = 3.33335
-offset_right = 174.5
-offset_bottom = 46.3334
-theme_override_fonts/font = ExtResource("14_me7n8")
-theme_override_font_sizes/font_size = 34
-text = "999999"
-horizontal_alignment = 2
-
-[node name="ActionTimer" type="Timer" parent="."]
-wait_time = 0.8
-
-[node name="walkSFX" type="Timer" parent="."]
-wait_time = 0.5
-one_shot = true
-
-[node name="RollDuration" type="Timer" parent="."]
-wait_time = 0.2
-one_shot = true
-
-[node name="TextOnMouse" type="Label" parent="."]
-visible = false
-z_index = 100
-offset_right = 40.0
-offset_bottom = 23.0
-theme_override_fonts/font = ExtResource("14_me7n8")
-theme_override_font_sizes/font_size = 80
-text = "Mouse Text"
-horizontal_alignment = 1
-
-[node name="Audio" type="Node" parent="."]
-
-[node name="PlaceSFX" type="AudioStreamPlayer" parent="Audio"]
-stream = ExtResource("37_raash")
-
-[node name="walkingOnWoodSFX" type="AudioStreamPlayer" parent="Audio"]
-stream = ExtResource("38_o8wch")
-volume_db = -12.0
-
-[node name="walkingOnGrassSFX" type="AudioStreamPlayer" parent="Audio"]
-stream = ExtResource("39_wma1b")
-volume_db = -12.0
-
-[node name="breakingSFX" type="AudioStreamPlayer2D" parent="Audio"]
-stream = ExtResource("36_a4jww")
-pitch_scale = 2.5
-
-[connection signal="OnDamageTaken" from="." to="StateController/Idle" method="_on_player_on_damage_taken"]
-[connection signal="timeout" from="ROOT_UI/ItemHUDPlaceholder/Timer" to="ROOT_UI/ItemHUDPlaceholder" method="_on_timer_timeout"]
-[connection signal="timeout" from="ActionTimer" to="StateController/Cut" method="_on_timer_timeout"]
-[connection signal="timeout" from="RollDuration" to="StateController/Roll" method="_on_roll_duration_timeout"]
-
-[editable path="Staff"]
+[node name="Staf

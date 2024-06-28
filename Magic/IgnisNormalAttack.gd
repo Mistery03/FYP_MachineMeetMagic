@@ -1,19 +1,40 @@
-extends Node2D
+class_name IgnisNormalAttack extends CharacterBody2D
+
+@export var magicData:MagicData
+@onready var animation = $AnimatedSprite2D
 
 var target_position = Vector2.ZERO
 var speed = 300
+var player:Player
+var mousePos:Vector2
+var direction:Vector2
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	set_process(true) # Replace with function body.
+	animation.play("default")
+	await animation.animation_finished
+	queue_free()
 
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	#check position then play animation
-	if target_position != position:
-		var direction = (target_position - position).normalized()
-		position += direction * speed * delta
-		
-		if position.distance_to(target_position) < 10:
-			queue_free()
-	  
+	#mousePos = player.mousePos
+	var offset = player.mousePos - global_position
+	rotation = atan2(offset.y,offset.x)
+	#need to fix
+	pass
+	
+func _physics_process(delta):
+	#velocity = -direction * speed
+	#global_position += velocity * delta
+	shoot_in_direction_of_mouse()
+	
+func shoot_in_direction_of_mouse() -> void:
+	var mouse_position = get_global_mouse_position()
+	var direction = (mouse_position - global_position).normalized()
+	position = global_position + direction * 5
+
+	
+func _on_area_2d_body_entered(body):
+	if body is Entity:
+		body.OnDamageTaken.emit(magicData.damage)
+		pass
+	pass # Replace with function body.

@@ -1,4 +1,4 @@
-class_name  Magic
+class_name  MagicData
 extends Resource
 
 @export var name:String
@@ -8,4 +8,8 @@ extends Resource
 @export var isUnlocked:bool
 @export var burningTime:float
 @export var efficientTime:float 
-@export var damangeAmount:float
+@export var damage:float
+@export var attackBased:bool
+@export var attackCooldown:int
+@export var speed:float
+
