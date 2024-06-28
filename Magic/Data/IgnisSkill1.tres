@@ -17,3 +17,4 @@ burningTime = 20.0
 efficientTime = 0.0
 damangeAmount = 0.0
 attackBased = true
+attackCooldown = 0

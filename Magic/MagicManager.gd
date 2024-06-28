@@ -32,18 +32,22 @@ func checkMagicUnlock() -> Array[MagicData]:
 			unlockedIndices.append(magicDataList[i])
 			print("unlocked : ", unlockedIndices[i])
 	return unlockedIndices
-
-func checkMagicEquip():
-	
-	pass
 	
 func normalAttack():
 	if magicData:
 		currMagic = magicData
-		var magicScene = currMagic.scene.instantiate()
-		magicScene.global_position = mousePos
-		localLevel.add_child(magicScene)
-		
+		if currMagic.name == "Ignis Normal Attack":
+			var magicScene = currMagic.scene.instantiate()
+			magicScene.global_position = player.global_position
+			magicScene.player = player
+			magicScene.mousePos = mousePos
+			localLevel.add_child(magicScene)
+			
+		elif currMagic.name == "IgnisSkill2":
+			var magicScene = currMagic.scene.instantiate()
+			magicScene.global_position = mousePos
+			localLevel.add_child(magicScene)
+
 	
 	
 	#var unlocked_magic = checkMagicUnlock()
