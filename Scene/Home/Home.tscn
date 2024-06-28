@@ -1302,5 +1302,6 @@ localLevel = NodePath("..")
 position = Vector2(-127, -202)
 
 [node name="BossSlime" parent="monsterEntities" instance=ExtResource("17_qvhqv")]
+position = Vector2(-186, -28)
 
 [node name="PurpleSlime" parent="monsterEntities" instance=ExtResource("18_x3jy1")]

@@ -53,6 +53,11 @@ func shoot_in_direction_of_mouse(delta) -> void:
 
 
 func _on_body_entered(body):
+	if body is BossSlime:
+		body.OnDamageTaken.emit(magicData.damage)
+		queue_free()
+		
 	if body is Entity:
 		body.OnDamageTaken.emit(magicData.damage)
 		isHitCount += 1
+	

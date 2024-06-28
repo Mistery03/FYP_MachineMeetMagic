@@ -1,4 +1,4 @@
-[gd_scene load_steps=31 format=3 uid="uid://crlmmk86fjtnf"]
+[gd_scene load_steps=37 format=3 uid="uid://crlmmk86fjtnf"]
 
 [ext_resource type="Script" path="res://Entity/State/StateMachine.gd" id="2_1e76v"]
 [ext_resource type="Texture2D" uid="uid://dfbobrjgxuwbl" path="res://Asset/slime.png" id="2_o73m2"]
@@ -22,6 +22,30 @@ region = Rect2(256, 0, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_c227g"]
 atlas = ExtResource("2_o73m2")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_v3bul"]
+atlas = ExtResource("2_o73m2")
+region = Rect2(224, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_eoh17"]
+atlas = ExtResource("3_3jxcv")
+region = Rect2(224, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_g7p42"]
+atlas = ExtResource("3_3jxcv")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fr6t1"]
+atlas = ExtResource("3_3jxcv")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ua6oo"]
+atlas = ExtResource("3_3jxcv")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3cbls"]
+atlas = ExtResource("3_3jxcv")
 region = Rect2(0, 0, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_27k1j"]
@@ -91,6 +115,29 @@ animations = [{
 }],
 "loop": false,
 "name": &"DAMAGED",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_v3bul")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_eoh17")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_g7p42")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fr6t1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ua6oo")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3cbls")
+}],
+"loop": false,
+"name": &"DEATH",
 "speed": 5.0
 }, {
 "frames": [{
@@ -174,9 +221,7 @@ debug_color = Color(0.917647, 0, 0.705882, 0.419608)
 texture_filter = 1
 scale = Vector2(5, 5)
 sprite_frames = SubResource("SpriteFrames_o3sr5")
-animation = &"SPAWN"
-frame = 7
-frame_progress = 1.0
+animation = &"DEATH"
 
 [node name="StateController" type="Node" parent="." node_paths=PackedStringArray("current_state")]
 script = ExtResource("2_1e76v")
@@ -202,6 +247,7 @@ animation_name = "damaged"
 
 [node name="Death" type="Node" parent="StateController"]
 script = ExtResource("9_eixto")
+animation_name = "DEATH"
 
 [node name="MoveComponent" type="Node" parent="."]
 script = ExtResource("11_hjj1d")

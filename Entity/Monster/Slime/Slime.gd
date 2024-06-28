@@ -6,8 +6,6 @@ extends Entity
 @export var damagePoint:float = 10
 @export var localLevel:Node2D
 
-
-
 var spawnPoint = position  # Define the spawn point
 var currentDirection = Vector2(1, 0)  # Initial direction
 var player:Player

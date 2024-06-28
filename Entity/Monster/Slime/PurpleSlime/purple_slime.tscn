@@ -1,4 +1,4 @@
-[gd_scene load_steps=32 format=3 uid="uid://c7da086plnuik"]
+[gd_scene load_steps=38 format=3 uid="uid://c7da086plnuik"]
 
 [ext_resource type="Texture2D" uid="uid://dfbobrjgxuwbl" path="res://Asset/slime.png" id="1_8u64y"]
 [ext_resource type="Script" path="res://Entity/Monster/Slime/PurpleSlime/purple_slime.gd" id="1_g7l1s"]
@@ -23,6 +23,30 @@ region = Rect2(256, 0, 32, 32)
 [sub_resource type="AtlasTexture" id="AtlasTexture_8onls"]
 atlas = ExtResource("1_8u64y")
 region = Rect2(0, 128, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_on6x2"]
+atlas = ExtResource("1_8u64y")
+region = Rect2(224, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5o4ig"]
+atlas = ExtResource("2_68h2a")
+region = Rect2(224, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_df3xp"]
+atlas = ExtResource("2_68h2a")
+region = Rect2(96, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_l33qo"]
+atlas = ExtResource("2_68h2a")
+region = Rect2(64, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0gylo"]
+atlas = ExtResource("2_68h2a")
+region = Rect2(32, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0y4nv"]
+atlas = ExtResource("2_68h2a")
+region = Rect2(0, 32, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_81nf4"]
 atlas = ExtResource("1_8u64y")
@@ -91,6 +115,29 @@ animations = [{
 }],
 "loop": false,
 "name": &"DAMAGED",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_on6x2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5o4ig")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_df3xp")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_l33qo")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0gylo")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0y4nv")
+}],
+"loop": false,
+"name": &"DEATH",
 "speed": 5.0
 }, {
 "frames": [{
@@ -174,9 +221,8 @@ debug_color = Color(0.917647, 0, 0.705882, 0.419608)
 texture_filter = 1
 scale = Vector2(5, 5)
 sprite_frames = SubResource("SpriteFrames_ubfch")
-animation = &"SPAWN"
-frame = 7
-frame_progress = 1.0
+animation = &"DEATH"
+frame_progress = 0.997468
 
 [node name="StateController" type="Node" parent="." node_paths=PackedStringArray("current_state")]
 script = ExtResource("4_361h5")
@@ -201,6 +247,7 @@ animation_name = "damaged"
 
 [node name="Death" type="Node" parent="StateController"]
 script = ExtResource("10_e0k06")
+animation_name = "DEATH"
 
 [node name="MoveComponent" type="Node" parent="."]
 script = ExtResource("11_dcbfp")

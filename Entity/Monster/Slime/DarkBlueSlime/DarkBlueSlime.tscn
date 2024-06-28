@@ -1,5 +1,6 @@
-[gd_scene load_steps=29 format=3 uid="uid://yqdv0b1oe11b"]
+[gd_scene load_steps=35 format=3 uid="uid://yqdv0b1oe11b"]
 
+[ext_resource type="Script" path="res://Entity/Monster/Slime/DarkBlueSlime/DarkBlueSlime.gd" id="1_dk0mu"]
 [ext_resource type="Texture2D" uid="uid://dfbobrjgxuwbl" path="res://Asset/slime.png" id="2_4ytix"]
 [ext_resource type="Texture2D" uid="uid://b8m7h885sjdf6" path="res://Asset/slimeSpawn.png" id="2_6kql3"]
 [ext_resource type="Script" path="res://Entity/State/StateMachine.gd" id="3_5s58v"]
@@ -9,23 +10,6 @@
 [ext_resource type="Script" path="res://Entity/Monster/Slime/State/Death.gd" id="7_0241h"]
 [ext_resource type="AudioStream" uid="uid://xdl252khl462" path="res://Asset/SFX/popUpSfx.mp3" id="8_pj65o"]
 
-[sub_resource type="GDScript" id="GDScript_km451"]
-script/source = "class_name DarkBlueSlime
-extends Slime
-
-
-func _ready():
-	super()
-	
-
-	
-
-
-	
-
-	
-"
-
 [sub_resource type="AtlasTexture" id="AtlasTexture_de6ml"]
 atlas = ExtResource("2_4ytix")
 region = Rect2(192, 0, 32, 32)
@@ -33,6 +17,30 @@ region = Rect2(192, 0, 32, 32)
 [sub_resource type="AtlasTexture" id="AtlasTexture_5hmlk"]
 atlas = ExtResource("2_4ytix")
 region = Rect2(192, 128, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0xxff"]
+atlas = ExtResource("2_4ytix")
+region = Rect2(224, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_toe7d"]
+atlas = ExtResource("2_6kql3")
+region = Rect2(224, 64, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5irvg"]
+atlas = ExtResource("2_6kql3")
+region = Rect2(96, 64, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_etk3m"]
+atlas = ExtResource("2_6kql3")
+region = Rect2(64, 64, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_eakq6"]
+atlas = ExtResource("2_6kql3")
+region = Rect2(32, 64, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4ve2o"]
+atlas = ExtResource("2_6kql3")
+region = Rect2(0, 64, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_cy4g4"]
 atlas = ExtResource("2_4ytix")
@@ -105,6 +113,29 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
+"texture": SubResource("AtlasTexture_0xxff")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_toe7d")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5irvg")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_etk3m")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_eakq6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4ve2o")
+}],
+"loop": false,
+"name": &"DEATH",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
 "texture": SubResource("AtlasTexture_cy4g4")
 }, {
 "duration": 1.0,
@@ -167,23 +198,18 @@ radius = 48.0104
 [sub_resource type="CircleShape2D" id="CircleShape2D_n8gn0"]
 radius = 50.04
 
-[node name="DarkBlueSlime" type="CharacterBody2D" node_paths=PackedStringArray("collision_box", "spawnSFX", "animation", "stateController")]
+[node name="DarkBlueSlime" type="CharacterBody2D"]
 scale = Vector2(0.1, 0.1)
 collision_layer = 256
 collision_mask = 438
-script = SubResource("GDScript_km451")
-collision_box = NodePath("CollisionBox")
-spawnSFX = NodePath("spawnSFX")
-moveSpeed = 20.0
-animation = NodePath("Animation")
-stateController = NodePath("StateController")
+script = ExtResource("1_dk0mu")
 
 [node name="Animation" type="AnimatedSprite2D" parent="."]
 texture_filter = 1
 scale = Vector2(5, 5)
 sprite_frames = SubResource("SpriteFrames_ibc5k")
-animation = &"DAMAGED"
-frame = 1
+animation = &"DEATH"
+frame = 5
 frame_progress = 1.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -208,6 +234,7 @@ animation_name = "damaged"
 
 [node name="Death" type="Node" parent="StateController"]
 script = ExtResource("7_0241h")
+animation_name = "DEATH"
 
 [node name="CollisionBox" type="Area2D" parent="." groups=["Seperable"]]
 collision_layer = 256
