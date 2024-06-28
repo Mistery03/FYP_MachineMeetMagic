@@ -1,4 +1,4 @@
-[gd_scene load_steps=41 format=3 uid="uid://dm1j4it5oof3n"]
+[gd_scene load_steps=42 format=3 uid="uid://dm1j4it5oof3n"]
 
 [ext_resource type="Script" path="res://Scene/Home/Home.gd" id="1_iycag"]
 [ext_resource type="PackedScene" uid="uid://c1vsfoc55pk0w" path="res://Entity/Player/player.tscn" id="1_jnw16"]
@@ -16,6 +16,7 @@
 [ext_resource type="Texture2D" uid="uid://b7p1vl7hrge60" path="res://Asset/Level/backgroundChecker.png" id="13_lrcqq"]
 [ext_resource type="PackedScene" uid="uid://crlmmk86fjtnf" path="res://Entity/Monster/Slime/BlueSlime/BlueSlime.tscn" id="15_8mevs"]
 [ext_resource type="Script" path="res://Scene/monsterEntities.gd" id="15_703uy"]
+[ext_resource type="PackedScene" uid="uid://db1g8thxyqg42" path="res://Entity/Monster/Slime/BossSlime/bossSlime.tscn" id="17_qvhqv"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_klcm4"]
 texture = ExtResource("1_vetej")
@@ -1298,3 +1299,5 @@ localLevel = NodePath("..")
 
 [node name="BlueSlime" parent="monsterEntities" instance=ExtResource("15_8mevs")]
 position = Vector2(-127, -202)
+
+[node name="BossSlime" parent="monsterEntities" instance=ExtResource("17_qvhqv")]

@@ -3,7 +3,9 @@
 [ext_resource type="Script" path="res://Entity/State/StateMachine.gd" id="1_gq3a6"]
 [ext_resource type="Script" path="res://Entity/Entity.gd" id="1_vqa37"]
 
-[node name="Entity" type="Node2D"]
+[node name="Entity" type="CharacterBody2D"]
+collision_layer = 0
+collision_mask = 118
 script = ExtResource("1_vqa37")
 
 [node name="Animation" type="AnimatedSprite2D" parent="."]
@@ -16,3 +18,11 @@ autoplay = "IDLE"
 
 [node name="StateController" type="Node" parent="."]
 script = ExtResource("1_gq3a6")
+
+[node name="CollisionBox" type="Area2D" parent="." groups=["Seperable"]]
+collision_layer = 256
+collision_mask = 502
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CollisionBox"]
+position = Vector2(0, 14)
+debug_color = Color(0.917647, 0, 0.705882, 0.419608)

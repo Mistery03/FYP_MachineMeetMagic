@@ -16,8 +16,6 @@ extends MachineControlUI
 @onready var brew_btn = $brewBTN
 @onready var area_of_pressing = $AreaOfPressing
 
-
-
 var isBrewPressed:bool = false
 var valueInPercentage:float = 0
 var timeToProgress:float = 0

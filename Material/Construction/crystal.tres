@@ -9,11 +9,12 @@ region = Rect2(240, 288, 24, 24)
 
 [resource]
 script = ExtResource("1_7pb3s")
-name = "Magic Crystal"
-type = "Construction"
-texture = SubResource("AtlasTexture_dncw6")
-amount = 0
 magicEssenceAmountResult = 5
 burnPerSecond = 200
 manaProducedPerSecond = 0
 durability = 0
+name = "Magic Crystal"
+type = "Construction"
+amount = 0
+texture = SubResource("AtlasTexture_dncw6")
+description = ""

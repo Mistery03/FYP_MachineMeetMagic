@@ -2,8 +2,8 @@
 
 [ext_resource type="Script" path="res://Scene/Forest/Rooms/EnemyRush/battle_room_1.gd" id="1_1bv4w"]
 [ext_resource type="TileSet" uid="uid://bckra1sdqvx78" path="res://Scene/Forest/Rooms/ForestTilemap.tres" id="2_nphqp"]
-[ext_resource type="Resource" uid="uid://doh0owdslxx3s" path="res://Entity/Monster/Slime/Data/blueSlime.tres" id="2_u7gjw"]
 [ext_resource type="Resource" uid="uid://d2r7bwb28rbca" path="res://Entity/Monster/Slime/Data/purpleSlime.tres" id="3_0o60w"]
+[ext_resource type="Resource" uid="uid://e3axqaaofq7l" path="res://Entity/Monster/Slime/Data/darkBlueSlime.tres" id="3_dbsn0"]
 [ext_resource type="Script" path="res://Scene/Forest/Rooms/Door/Door.gd" id="4_24qk5"]
 [ext_resource type="Script" path="res://Scene/monsterEntities.gd" id="4_wc1h8"]
 [ext_resource type="PackedScene" uid="uid://b7pgfgv6lh1ls" path="res://Scene/Forest/gate_keeper.tscn" id="6_5lixu"]
@@ -19,7 +19,7 @@ door = NodePath("Door")
 tile_map = NodePath("TileMap")
 rockSelection = Array[Vector2i]([Vector2i(1, 0), Vector2i(0, 1)])
 creatureManager = NodePath("monsterEntities")
-creatureList = Array[Resource("res://Entity/Data/mobData.gd")]([ExtResource("2_u7gjw"), ExtResource("3_0o60w")])
+creatureList = Array[Resource("res://Entity/Data/mobData.gd")]([ExtResource("3_0o60w"), ExtResource("3_dbsn0")])
 maxCreatureSpawn = 10
 
 [node name="TileMap" type="TileMap" parent="."]

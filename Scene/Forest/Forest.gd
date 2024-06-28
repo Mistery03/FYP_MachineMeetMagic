@@ -91,7 +91,7 @@ func spawnRoom():
 	player.objectsPosInLevelList = roomInstance.objectPosList
 	
 	await get_tree().create_timer(1).timeout
-	roomInstance.spawnEnemies()
+	roomInstance.spawnCreatures()
 
 
 func goNextRoom():

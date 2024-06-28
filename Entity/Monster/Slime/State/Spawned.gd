@@ -14,5 +14,4 @@ func update(delta: float) -> void:
 func physics_update(delta: float) -> void:
 	pass
 
-func process_input(event)->void:
-	pass
+

@@ -25,9 +25,6 @@ func physics_update(delta: float) -> void:
 	parent.velocity = chaseSpeed * parent.currentDirection * delta
 	parent.move_and_slide()
 		
-func process_input(event)->void:
-	pass
-
 
 func _on_collision_box_body_entered(body):
 	if body is Player:
@@ -38,3 +35,7 @@ func apply_separation_force(separation_force: Vector2, weight: float) -> void:
 	# Apply separation force to the current direction
 	parent.currentDirection += separation_force * weight
 	parent.currentDirection = parent.currentDirection.normalized()
+
+func _on_collision_box_area_entered(area):
+	if area is staffMelee:
+		transitioned.emit("damaged")

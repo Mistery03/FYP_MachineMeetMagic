@@ -28,13 +28,9 @@ func physics_update(delta: float) -> void:
 	parent.move_and_slide()
 	
 	if distance_to_player <= SHOOT_DISTANCE:
-		transitioned.emit("shoot")
+		pass
+		#transitioned.emit("shoot")
 		
-
-func _on_collision_box_body_entered(body):
-	if body is Player:
-		parent.player.OnDamageTaken.emit(parent.damagePoint)
-		transitioned.emit("death")
 		
 func _separation(slime):
 	var sumRepel = Vector2.ZERO
@@ -55,3 +51,6 @@ func _computeRepel(slime,slimeNeighbour):
 	var weight = 1.0/(dist*dist+1.0)
 	var repelDirection = repelVeleocity.normalized()
 	return weight * repelDirection
+
+
+

@@ -1,14 +1,16 @@
-class_name BlueSlime
+class_name BossSlime
 extends Slime
+
 
 
 func _ready():
 	super()
-	
-
-	
 
 
-	
 
-	
+
+
+
+
+
+

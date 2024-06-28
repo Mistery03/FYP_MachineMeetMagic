@@ -157,10 +157,11 @@ radius = 50.04
 [node name="PurpleSlime" type="CharacterBody2D" node_paths=PackedStringArray("collision_box", "spawnSFX", "animation", "stateController") groups=["Seperable"]]
 scale = Vector2(0.1, 0.1)
 collision_layer = 256
-collision_mask = 469
+collision_mask = 503
 script = ExtResource("1_g7l1s")
 collision_box = NodePath("CollisionBox")
 spawnSFX = NodePath("spawnSFX")
+damagePoint = 5.0
 animation = NodePath("Animation")
 stateController = NodePath("StateController")
 
@@ -179,9 +180,9 @@ frame_progress = 1.0
 
 [node name="StateController" type="Node" parent="." node_paths=PackedStringArray("current_state")]
 script = ExtResource("4_361h5")
-current_state = NodePath("Spawned")
+current_state = NodePath("Spawn")
 
-[node name="Spawned" type="Node" parent="StateController"]
+[node name="Spawn" type="Node" parent="StateController"]
 script = ExtResource("5_jqp1k")
 
 [node name="Chase" type="Node" parent="StateController"]
@@ -206,7 +207,7 @@ script = ExtResource("11_dcbfp")
 
 [node name="CollisionBox" type="Area2D" parent="."]
 collision_layer = 256
-collision_mask = 212
+collision_mask = 502
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CollisionBox"]
 position = Vector2(0, 14)

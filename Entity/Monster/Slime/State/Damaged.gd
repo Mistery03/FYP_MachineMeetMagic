@@ -18,10 +18,6 @@ func update(delta: float) -> void:
 func physics_update(delta: float) -> void:
 	pass
 
-func process_input(event)->void:
-	pass
-
-
 
 func _on_collision_box_area_entered(area):
 	if area is staffMelee:

@@ -1,0 +1,227 @@
+[gd_scene load_steps=29 format=3 uid="uid://yqdv0b1oe11b"]
+
+[ext_resource type="Texture2D" uid="uid://dfbobrjgxuwbl" path="res://Asset/slime.png" id="2_4ytix"]
+[ext_resource type="Texture2D" uid="uid://b8m7h885sjdf6" path="res://Asset/slimeSpawn.png" id="2_6kql3"]
+[ext_resource type="Script" path="res://Entity/State/StateMachine.gd" id="3_5s58v"]
+[ext_resource type="Script" path="res://Entity/Monster/Slime/State/Spawned.gd" id="4_pcw6e"]
+[ext_resource type="Script" path="res://Entity/Monster/Slime/BlueSlime/State/Chase.gd" id="5_1sar4"]
+[ext_resource type="Script" path="res://Entity/Monster/Slime/State/Damaged.gd" id="6_rhp8i"]
+[ext_resource type="Script" path="res://Entity/Monster/Slime/State/Death.gd" id="7_0241h"]
+[ext_resource type="AudioStream" uid="uid://xdl252khl462" path="res://Asset/SFX/popUpSfx.mp3" id="8_pj65o"]
+
+[sub_resource type="GDScript" id="GDScript_km451"]
+script/source = "class_name DarkBlueSlime
+extends Slime
+
+
+func _ready():
+	super()
+	
+
+	
+
+
+	
+
+	
+"
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_de6ml"]
+atlas = ExtResource("2_4ytix")
+region = Rect2(192, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5hmlk"]
+atlas = ExtResource("2_4ytix")
+region = Rect2(192, 128, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cy4g4"]
+atlas = ExtResource("2_4ytix")
+region = Rect2(192, 160, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gwdls"]
+atlas = ExtResource("2_4ytix")
+region = Rect2(224, 160, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bqolo"]
+atlas = ExtResource("2_4ytix")
+region = Rect2(256, 160, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rn3an"]
+atlas = ExtResource("2_4ytix")
+region = Rect2(192, 128, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_08uj0"]
+atlas = ExtResource("2_4ytix")
+region = Rect2(224, 128, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_o8xtu"]
+atlas = ExtResource("2_4ytix")
+region = Rect2(256, 128, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mmdhx"]
+atlas = ExtResource("2_6kql3")
+region = Rect2(0, 64, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_v7tea"]
+atlas = ExtResource("2_6kql3")
+region = Rect2(32, 64, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5ed5s"]
+atlas = ExtResource("2_6kql3")
+region = Rect2(64, 64, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gcrq6"]
+atlas = ExtResource("2_6kql3")
+region = Rect2(96, 64, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0e81n"]
+atlas = ExtResource("2_6kql3")
+region = Rect2(128, 64, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_o8g6o"]
+atlas = ExtResource("2_6kql3")
+region = Rect2(160, 64, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qpiqp"]
+atlas = ExtResource("2_6kql3")
+region = Rect2(192, 64, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5rcl8"]
+atlas = ExtResource("2_6kql3")
+region = Rect2(224, 64, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ibc5k"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_de6ml")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5hmlk")
+}],
+"loop": false,
+"name": &"DAMAGED",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cy4g4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gwdls")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bqolo")
+}],
+"loop": true,
+"name": &"IDLE",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rn3an")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_08uj0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_o8xtu")
+}],
+"loop": true,
+"name": &"MOVE",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mmdhx")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_v7tea")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5ed5s")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gcrq6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0e81n")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_o8g6o")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qpiqp")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5rcl8")
+}],
+"loop": false,
+"name": &"SPAWN",
+"speed": 5.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_7kqex"]
+radius = 48.0104
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_n8gn0"]
+radius = 50.04
+
+[node name="DarkBlueSlime" type="CharacterBody2D" node_paths=PackedStringArray("collision_box", "spawnSFX", "animation", "stateController")]
+scale = Vector2(0.1, 0.1)
+collision_layer = 256
+collision_mask = 438
+script = SubResource("GDScript_km451")
+collision_box = NodePath("CollisionBox")
+spawnSFX = NodePath("spawnSFX")
+moveSpeed = 20.0
+animation = NodePath("Animation")
+stateController = NodePath("StateController")
+
+[node name="Animation" type="AnimatedSprite2D" parent="."]
+texture_filter = 1
+scale = Vector2(5, 5)
+sprite_frames = SubResource("SpriteFrames_ibc5k")
+animation = &"DAMAGED"
+frame = 1
+frame_progress = 1.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 12)
+shape = SubResource("CircleShape2D_7kqex")
+debug_color = Color(0.921569, 0, 0.698039, 0.419608)
+
+[node name="StateController" type="Node" parent="." node_paths=PackedStringArray("current_state")]
+script = ExtResource("3_5s58v")
+current_state = NodePath("Spawn")
+
+[node name="Spawn" type="Node" parent="StateController"]
+script = ExtResource("4_pcw6e")
+
+[node name="Chase" type="Node" parent="StateController"]
+script = ExtResource("5_1sar4")
+chaseSpeed = 2000.0
+
+[node name="Damaged" type="Node" parent="StateController"]
+script = ExtResource("6_rhp8i")
+animation_name = "damaged"
+
+[node name="Death" type="Node" parent="StateController"]
+script = ExtResource("7_0241h")
+
+[node name="CollisionBox" type="Area2D" parent="." groups=["Seperable"]]
+collision_layer = 256
+collision_mask = 212
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CollisionBox"]
+position = Vector2(0, 14)
+shape = SubResource("CircleShape2D_n8gn0")
+debug_color = Color(0.917647, 0, 0.705882, 0.419608)
+
+[node name="spawnSFX" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("8_pj65o")
+volume_db = -12.0
+
+[connection signal="area_entered" from="CollisionBox" to="StateController/Chase" method="_on_collision_box_area_entered"]
+[connection signal="area_entered" from="CollisionBox" to="StateController/Damaged" method="_on_collision_box_area_entered"]
+[connection signal="body_entered" from="CollisionBox" to="StateController/Chase" method="_on_collision_box_body_entered"]
