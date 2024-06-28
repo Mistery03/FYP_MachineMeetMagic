@@ -98,6 +98,7 @@ scale = Vector2(2, 2)
 self_modulate = Color(1, 0.815686, 0.686275, 1)
 z_index = -5
 texture_filter = 1
+layout_mode = 0
 offset_left = 1200.0
 offset_top = 192.0
 offset_right = 1391.0
