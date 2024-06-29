@@ -1,7 +1,9 @@
-[gd_scene load_steps=3 format=3 uid="uid://bm2u5jp0exc2h"]
+[gd_scene load_steps=5 format=3 uid="uid://bm2u5jp0exc2h"]
 
 [ext_resource type="Script" path="res://UI/Potion/PotionGridContainerPlayer.gd" id="1_52tpy"]
 [ext_resource type="PackedScene" uid="uid://chm64ke4qgtt7" path="res://UI/Potion/PotionSlotPlayer.tscn" id="2_ohu1s"]
+[ext_resource type="Resource" uid="uid://byxin16s1k5vg" path="res://Potion/Consumable/Mana Potion/ManaPotion.tres" id="3_axvhy"]
+[ext_resource type="Resource" uid="uid://b0rx68wwi0q20" path="res://Potion/Heal/Healing Potion/HealingPotion.tres" id="4_eneda"]
 
 [node name="PotionGridContainerPlayer" type="Control"]
 layout_mode = 3
@@ -16,9 +18,13 @@ columns = 5
 
 [node name="PotionSlotPlayer" parent="GridContainer" instance=ExtResource("2_ohu1s")]
 layout_mode = 2
+potionData = ExtResource("3_axvhy")
+potionAmount = 2
 
 [node name="PotionSlotPlayer2" parent="GridContainer" instance=ExtResource("2_ohu1s")]
 layout_mode = 2
+potionData = ExtResource("4_eneda")
+potionAmount = 2
 
 [node name="PotionSlotPlayer3" parent="GridContainer" instance=ExtResource("2_ohu1s")]
 layout_mode = 2

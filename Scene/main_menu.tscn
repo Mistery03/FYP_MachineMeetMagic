@@ -40,7 +40,7 @@ offset_left = 1326.0
 offset_top = 871.0
 offset_right = 1582.0
 offset_bottom = 894.0
-text = "alpha ver 0.0.1.4-testbuld-hlsrbbh"
+text = "alpha ver 0.0.1.6-testbuld-hlsrbbh"
 
 [connection signal="pressed" from="playButton" to="." method="_on_play_button_pressed"]
 [connection signal="pressed" from="playButton" to="." method="_on_texture_button_pressed"]
