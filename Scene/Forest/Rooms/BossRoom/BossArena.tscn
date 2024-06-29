@@ -30,12 +30,11 @@ bg_color = Color(0.207843, 0.301961, 0.556863, 1)
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_skmn6"]
 bg_color = Color(0.309804, 0.517647, 0.807843, 1)
 
-[node name="BossArena" type="Node2D" node_paths=PackedStringArray("player", "tile_map", "creatureManager")]
+[node name="BossArena" type="Node2D" node_paths=PackedStringArray("tile_map", "creatureManager")]
 script = ExtResource("1_imlmd")
 bossInstance = ExtResource("2_p8a7c")
 levelName = "BossRoom"
 roomName = "BossRoom"
-player = NodePath("")
 tile_map = NodePath("TileMap")
 creatureManager = NodePath("monsterEntities")
 

@@ -39,7 +39,7 @@ func normalAttack():
 		if currMagic.scene:
 			match currMagic.name:
 				"Fireball":
-					if currMagic.manaRequirement >= player.currMana:
+					if  player.currMana  >= currMagic.manaRequirement:
 						var magicScene = currMagic.scene.instantiate()
 						var direction = (player.mousePos - staff.magic_spawn_point.global_position).normalized()
 						magicScene.global_position = staff.magic_spawn_point.global_position
@@ -49,7 +49,7 @@ func normalAttack():
 						localLevel.add_child(magicScene)
 					
 				"Seeking Fireball":
-					if currMagic.manaRequirement >= player.currMana:
+					if  player.currMana  >= currMagic.manaRequirement:
 						var magicScene = currMagic.scene.instantiate()
 
 						magicScene.global_position = staff.magic_spawn_point.global_position
@@ -62,7 +62,7 @@ func normalAttack():
 						localLevel.add_child(magicScene)
 
 				"Explosion":
-					if currMagic.manaRequirement >= player.currMana:
+					if player.currMana  >= currMagic.manaRequirement:
 						var magicScene = currMagic.scene.instantiate()
 						magicScene.global_position = mousePos
 						magicScene.magicData = currMagic

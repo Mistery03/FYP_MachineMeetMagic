@@ -17,6 +17,6 @@ scene = ExtResource("1_krgqs")
 craftingRecipe = ExtResource("1_511a1")
 name = "Healing Potion"
 type = "Potion"
-amount = 0
+amount = 2
 texture = SubResource("AtlasTexture_6uluo")
 description = "Healing potion approved by Ethan"

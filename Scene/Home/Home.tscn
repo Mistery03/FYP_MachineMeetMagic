@@ -1302,7 +1302,7 @@ text = "Gumball The Friendly
 position = Vector2(67, -222)
 script = ExtResource("16_hqxag")
 itemData = ExtResource("12_pn2ej")
-amount = 20
+amount = 50
 
 [node name="Label2" type="Label" parent="Material"]
 offset_left = -80.0
