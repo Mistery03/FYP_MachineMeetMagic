@@ -14,6 +14,8 @@ var originalPos = Vector2.ZERO
 var leap_direction = Vector2.ZERO
 var hasCollidedWithPlayer:bool = false
 
+var bossDied:bool = false
+
 func _ready():
 	currHealth = maxHP
 	spawnPoint = position

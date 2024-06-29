@@ -14,7 +14,7 @@ func exit() -> void:
 	pass
 
 func update(delta: float) -> void:
-	if parent.currHealth <= 0:
+	if parent.currHealth <= 0 or parent.bossDied:
 		transitioned.emit("death")
 
 func physics_update(delta: float) -> void:

@@ -75,6 +75,7 @@ func process_input(event)->void:
 		#isCreating = false
 	if Input.is_action_just_pressed("NUMKEY1"):
 		hideWiresOrbuildMode()
+		parent.change_sfx.play()
 		transitioned.emit("wiringMachine")
 
 func enterBuildMode():

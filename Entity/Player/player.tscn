@@ -1,4 +1,4 @@
-[gd_scene load_steps=104 format=3 uid="uid://c1vsfoc55pk0w"]
+[gd_scene load_steps=105 format=3 uid="uid://c1vsfoc55pk0w"]
 
 [ext_resource type="Texture2D" uid="uid://bd32dcnew3uvf" path="res://Asset/L.png" id="1_ksidj"]
 [ext_resource type="Script" path="res://Entity/Player/player.gd" id="1_xfdxb"]
@@ -50,6 +50,7 @@
 [ext_resource type="AudioStream" uid="uid://2lu5if0yp64i" path="res://Asset/SFX/forestWalkSFX.mp3" id="39_wma1b"]
 [ext_resource type="Texture2D" uid="uid://dy6bsmjnf8u44" path="res://Asset/UIUX/Container.png" id="42_uk6eg"]
 [ext_resource type="Texture2D" uid="uid://cruxbb2jv2vmx" path="res://Asset/Materials1.png" id="43_wy3ce"]
+[ext_resource type="AudioStream" uid="uid://buxy730oqikoq" path="res://Asset/SFX/changeSFX.mp3" id="51_4ymld"]
 
 [sub_resource type="Resource" id="Resource_fijhs"]
 script = ExtResource("3_v12hw")
@@ -1886,6 +1887,7 @@ machineSave = SubResource("Resource_fijhs")
 potionObject = ExtResource("3_41una")
 potion_manager = NodePath("PotionManager")
 staff = NodePath("Staff")
+ResearchPointCurrency = 100
 itemHUDPlaceholder = NodePath("ROOT_UI/HUDHolder/ItemHUDPlaceholder")
 playerHUD = NodePath("ROOT_UI/HUDHolder/Player_hud")
 playerCurrencyText = NodePath("ROOT_UI/HUDHolder/CurrencyHolder/Currency")
@@ -2329,6 +2331,19 @@ text = "NUMKEY1: Wire Machine
 promptMessage = ": Wire Battery"
 promptAction = "NUMKEY2"
 
+[node name="Description" type="Label" parent="ROOT_UI/Wiring"]
+layout_mode = 0
+offset_left = 1298.0
+offset_top = 390.0
+offset_right = 1564.0
+offset_bottom = 543.0
+theme_override_fonts/font = ExtResource("14_me7n8")
+theme_override_font_sizes/font_size = 30
+text = "To wire press on the Mana Generator then hold to the machine you want to connect
+"
+horizontal_alignment = 1
+autowrap_mode = 2
+
 [node name="InventoryUI" parent="ROOT_UI" node_paths=PackedStringArray("player") instance=ExtResource("32_dbx42")]
 visible = false
 player = NodePath("../..")
@@ -2375,6 +2390,9 @@ volume_db = -12.0
 [node name="breakingSFX" type="AudioStreamPlayer2D" parent="Audio"]
 stream = ExtResource("36_a4jww")
 pitch_scale = 2.5
+
+[node name="ChangeSFX" type="AudioStreamPlayer" parent="Audio"]
+stream = ExtResource("51_4ymld")
 
 [connection signal="OnDamageTaken" from="." to="StateController/Idle" method="_on_player_on_damage_taken"]
 [connection signal="timeout" from="ROOT_UI/HUDHolder/ItemHUDPlaceholder/Timer" to="ROOT_UI/HUDHolder/ItemHUDPlaceholder" method="_on_timer_timeout"]

@@ -7,6 +7,8 @@ extends Node
 @export var separationWeight: float = 1.0  # Adjust the influence of separation
 @export var separationDistance: float = 100.0  # Maximum distance for separation effect
 # Called when the node enters the scene tree for the first time.
+
+var bossSlime
 func _ready():
 	for entity in get_children():
 		entity.player = player
@@ -16,7 +18,11 @@ func init(player):
 	for entity in get_children():
 		entity.player = player
 		entity.localLevel = localLevel
+		if entity is Slime:
+			entity.bossDied = bossSlime.bossDied
 		
+func setBoss(bossSlime:BossSlime):
+	self.bossSlime = bossSlime
 
 func getCreatureList():
 	return get_children()

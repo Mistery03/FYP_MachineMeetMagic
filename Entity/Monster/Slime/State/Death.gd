@@ -3,6 +3,7 @@ extends State
 
 func enter() -> void:
 	super()
+	parent.bossDied = true
 	await animations.animation_finished
 	parent.queue_free()
 

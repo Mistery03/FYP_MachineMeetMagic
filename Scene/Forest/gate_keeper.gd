@@ -17,5 +17,5 @@ func _process(delta):
 	else:
 		for creature in creatureManager.get_children():
 			if creature is BossSlime:
-				if !creature.is_inside_tree():
+				if creature.bossDied:
 					queue_free()

@@ -55,6 +55,7 @@ const JUMP_VELOCITY = 4.5
 @onready var walking_on_wood_sfx = $Audio/walkingOnWoodSFX
 @onready var walking_on_grass_sfx = $Audio/walkingOnGrassSFX
 @onready var breaking_sfx = $Audio/breakingSFX
+@onready var change_sfx = $Audio/ChangeSFX
 
 @onready var player_hitbox = $PlayerHitbox
 

@@ -5,6 +5,7 @@ extends Panel
 @onready var build_menu = $"../../.."
 @onready var texture_rect = $TextureRect
 @onready var darkened = $Darkened
+@onready var click_sfx = $clickSFX
 
 var material_container
 
@@ -22,6 +23,7 @@ func _process(delta):
 	
 func _on_button_pressed():
 	if buildingData and buildingData.isUnlocked:
+		click_sfx.play()
 		build_menu.atlasCoord =  buildingData.atlasCoord
 		build_menu.parentUI.visible = false
 

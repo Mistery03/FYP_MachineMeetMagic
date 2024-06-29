@@ -1,8 +1,9 @@
-[gd_scene load_steps=5 format=3 uid="uid://b8l6h6q66lu2w"]
+[gd_scene load_steps=6 format=3 uid="uid://b8l6h6q66lu2w"]
 
 [ext_resource type="Texture2D" uid="uid://bmyhgaqtdma1t" path="res://Asset/UIUX/slot.png" id="1_an5jc"]
 [ext_resource type="Script" path="res://UI/Build/build_slot.gd" id="1_mxukq"]
 [ext_resource type="Texture2D" uid="uid://cy01yfe162ynm" path="res://Asset/Machine.png" id="3_sebgp"]
+[ext_resource type="AudioStream" uid="uid://buxy730oqikoq" path="res://Asset/SFX/changeSFX.mp3" id="4_wlhnu"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_1itxd"]
 atlas = ExtResource("3_sebgp")
@@ -45,6 +46,10 @@ offset_bottom = 32.0
 visible = false
 offset_right = 31.0
 offset_bottom = 32.0
+
+[node name="clickSFX" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_wlhnu")
+pitch_scale = 1.4
 
 [connection signal="mouse_entered" from="Button" to="." method="_on_button_mouse_entered"]
 [connection signal="mouse_exited" from="Button" to="." method="_on_button_mouse_exited"]

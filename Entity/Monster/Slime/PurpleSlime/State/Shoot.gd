@@ -20,7 +20,7 @@ func update(delta: float) -> void:
 		time_since_last_shot = 0.0
 		shoot_projectile()
 
-	if parent.currHealth <= 0:
+	if parent.currHealth <= 0 or parent.bossDied:
 		transitioned.emit("death")
 
 func physics_update(delta: float) -> void:

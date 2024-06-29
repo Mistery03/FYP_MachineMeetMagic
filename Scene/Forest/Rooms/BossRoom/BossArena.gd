@@ -15,6 +15,7 @@ func spawnBoss():
 	var boss = bossInstance.mobInstance.instantiate()
 	boss.global_position = boss_spawn_point.global_position
 	creatureManager.add_child(boss)
+	creatureManager.setBoss(boss)
 	creatureManager.init(player)
 
 

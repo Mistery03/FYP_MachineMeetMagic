@@ -13,6 +13,7 @@ size = Vector2(18, 104)
 
 [node name="BattleRoom2" type="Node2D" node_paths=PackedStringArray("door", "tile_map", "creatureManager")]
 script = ExtResource("1_uoagu")
+levelName = "EnemyRoom"
 roomName = "EnemyRoom2"
 PK_roomID = 17
 door = NodePath("Door")
@@ -64,6 +65,6 @@ z_index = 5
 position = Vector2(171, -11)
 rotation = 1.5708
 creatureManager = NodePath("../monsterEntities")
-localLevel = NodePath(".")
+localLevel = NodePath("..")
 
 [connection signal="body_entered" from="Door/Area2D" to="Door" method="_on_area_2d_body_entered"]
