@@ -43,7 +43,7 @@ var isForExternalSlot:bool = false
 func init(player:Player):
 	self.player = player
 	if self.player:
-		self.player.inventory_manager.connect("OnInventoryChanged",OnInventoryChanged)
+		self.player.inventory_manager.connect("OnInventoryChanged", OnInventoryChanged)
 		playerInventory = player.inventory
 		maxInventorySlot = player.maxInventorySize
 

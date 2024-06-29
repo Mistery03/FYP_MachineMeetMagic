@@ -9,3 +9,4 @@ extends Resource
 @export var instance:PackedScene 
 @export var isUnlocked:bool
 @export var unlockAmount:int
+@export var craftingRecipe:CraftingRecipe

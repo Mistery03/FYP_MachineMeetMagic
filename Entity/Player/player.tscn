@@ -2190,13 +2190,14 @@ anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
 
-[node name="BuildMenu" parent="ROOT_UI/Build" node_paths=PackedStringArray("parentUI") instance=ExtResource("12_58i1p")]
+[node name="BuildMenu" parent="ROOT_UI/Build" node_paths=PackedStringArray("parentUI", "player") instance=ExtResource("12_58i1p")]
 layout_mode = 1
-offset_left = 48.0
-offset_top = 49.0
-offset_right = 8.0
-offset_bottom = 9.0
+offset_left = 14.0
+offset_top = 120.0
+offset_right = -26.0
+offset_bottom = 80.0
 parentUI = NodePath("..")
+player = NodePath("../../..")
 
 [node name="BuildHud" parent="ROOT_UI/Build" instance=ExtResource("15_otihl")]
 layout_mode = 1

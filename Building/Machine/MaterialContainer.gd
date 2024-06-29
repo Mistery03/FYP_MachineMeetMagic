@@ -10,7 +10,7 @@ extends HBoxContainer
 var ingredients:Array[SlotData] = [null,null,null]
 
 ##NOTE multiplier is in by the potionSelectGrid, the buttons
-var multiplier:int
+var multiplier:int =1
 
 var material_slots 
 var required_amount

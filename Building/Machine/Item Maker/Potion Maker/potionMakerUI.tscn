@@ -18,7 +18,7 @@
 [ext_resource type="Texture2D" uid="uid://dw0wj1ftq8uye" path="res://Asset/potionSS.png" id="15_3krqe"]
 [ext_resource type="Resource" uid="uid://byxin16s1k5vg" path="res://Potion/Consumable/Mana Potion/ManaPotion.tres" id="15_5ykga"]
 [ext_resource type="Texture2D" uid="uid://7r2f7a1fj1mb" path="res://Asset/UIUX/blackBox.png" id="15_o40i4"]
-[ext_resource type="Script" path="res://Building/Machine/Item Maker/Potion Maker/MaterialContainer.gd" id="18_kx3ni"]
+[ext_resource type="Script" path="res://Building/Machine/MaterialContainer.gd" id="18_kx3ni"]
 [ext_resource type="Script" path="res://Building/Machine/Item Maker/Potion Maker/ingredientPlaceholder.gd" id="21_lq417"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_x66as"]

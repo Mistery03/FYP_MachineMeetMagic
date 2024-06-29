@@ -5,7 +5,7 @@ extends Panel
 @onready var build_menu = $"../../.."
 @onready var texture_rect = $TextureRect
 
-
+var material_container
 
 func _ready():
 	if buildingData == null:
@@ -19,7 +19,6 @@ func _on_button_pressed():
 		build_menu.atlasCoord =  buildingData.atlasCoord
 		build_menu.parentUI.visible = false
 
-
 func _on_button_mouse_entered():
 	if buildingData:
 		build_menu.timer.paused = true
@@ -28,6 +27,9 @@ func _on_button_mouse_entered():
 		build_menu.texture = buildingData.texture
 		build_menu.description = buildingData.description
 		build_menu.instance = buildingData.instance
+	
+	if material_container:
+		material_container.recipe = buildingData.craftingRecipe
 
 func _on_button_mouse_exited():
 	build_menu.timer.paused = false
