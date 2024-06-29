@@ -22,3 +22,4 @@ attackBased = true
 attackCooldown = 0
 speed = 0.0
 description = "idk normal"
+unlockAmount = 10

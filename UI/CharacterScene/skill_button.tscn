@@ -1,10 +1,11 @@
-[gd_scene load_steps=9 format=3 uid="uid://404eqowmraym"]
+[gd_scene load_steps=11 format=3 uid="uid://404eqowmraym"]
 
 [ext_resource type="Texture2D" uid="uid://u1h6oyjt8kdh" path="res://Asset/Skill_Btn.png" id="1_ceceg"]
 [ext_resource type="Script" path="res://UI/CharacterScene/skill_button.gd" id="2_4ew76"]
 [ext_resource type="Texture2D" uid="uid://bmyhgaqtdma1t" path="res://Asset/UIUX/slot.png" id="2_otktk"]
 [ext_resource type="Script" path="res://UI/CharacterScene/Description box.gd" id="4_4gx3y"]
 [ext_resource type="FontFile" uid="uid://cl3rxpo58micg" path="res://Asset/Font/Lambda-Regular.ttf" id="5_bggwl"]
+[ext_resource type="Texture2D" uid="uid://cruxbb2jv2vmx" path="res://Asset/Materials1.png" id="6_lpm1k"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_k514t"]
 atlas = ExtResource("1_ceceg")
@@ -16,6 +17,10 @@ colors = PackedColorArray(0.713726, 0.713726, 0.713726, 1, 0.713726, 0.713726, 0
 
 [sub_resource type="GradientTexture1D" id="GradientTexture1D_4s6sk"]
 gradient = SubResource("Gradient_b4tl3")
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ioj8i"]
+atlas = ExtResource("6_lpm1k")
+region = Rect2(256, 416, 32, 32)
 
 [node name="skillButton" type="TextureButton"]
 texture_filter = 1
@@ -74,6 +79,22 @@ theme_override_fonts/font = ExtResource("5_bggwl")
 theme_override_font_sizes/font_size = 9
 text = "In publishing and graphic design, Lorem ipsum is a placeholder text commonly used to demonstrate the visual form of a document or a typeface without relying on meaningful content. Lorem ipsum may be used as a placeholder before the final copy is available"
 autowrap_mode = 2
+
+[node name="Sprite2D2" type="Sprite2D" parent="Descriptionbox"]
+visible = false
+position = Vector2(185, 16)
+scale = Vector2(0.8, 0.8)
+texture = SubResource("AtlasTexture_ioj8i")
+
+[node name="researchPoint" type="Label" parent="Descriptionbox"]
+visible = false
+offset_left = 201.0
+offset_top = 5.0
+offset_right = 225.0
+offset_bottom = 29.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("5_bggwl")
+text = "999"
 
 [connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
 [connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]

@@ -2284,6 +2284,7 @@ player = NodePath("../..")
 
 [node name="MagicTreeUI" parent="ROOT_UI" node_paths=PackedStringArray("player") instance=ExtResource("34_ogpy2")]
 visible = false
+z_index = 50
 player = NodePath("../..")
 
 [node name="CurrencyHolder" type="NinePatchRect" parent="ROOT_UI"]

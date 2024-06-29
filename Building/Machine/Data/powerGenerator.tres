@@ -13,3 +13,4 @@ atlasCoord = Vector2i(0, 3)
 description = "Need power? Just build a generator!"
 instance = ExtResource("1_dy0mw")
 isUnlocked = false
+unlockAmount = 5

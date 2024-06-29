@@ -21,7 +21,7 @@ resources_spreadsheet_view/context_menu_on_leftclick=false
 [application]
 
 config/name="FYP_MachineMeetMagic"
-run/main_scene="res://Scene/Home/Home.tscn"
+run/main_scene="res://Scene/main_menu.tscn"
 config/features=PackedStringArray("4.2", "GL Compatibility")
 config/icon="res://icon.svg"
 

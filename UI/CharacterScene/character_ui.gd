@@ -16,6 +16,7 @@ var machine_description:String
 var buildingData:BuildingData
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	
 	if PlayerGlobal.playerResearchPoint >0:
 		researchCurrency = PlayerGlobal.playerResearchPoint
 		
@@ -23,10 +24,14 @@ func _ready():
 		researchCurrency = player.ResearchPointCurrency
 	currency.text = str(researchCurrency)
 	print("currency:", researchCurrency)
+	#researchCurrency = skill_tree.skillButton.researchCurrency
 	
 	 # Replace with function body.
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
+	skill_tree.player = player
+	machine_tree.player = player
 	researchCurrency = player.ResearchPointCurrency
 	currency.text = str(researchCurrency)
 	print("currency:", researchCurrency)
+	

@@ -22,3 +22,4 @@ attackBased = true
 attackCooldown = 2
 speed = 0.0
 description = ""
+unlockAmount = 20

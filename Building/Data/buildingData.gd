@@ -8,4 +8,4 @@ extends Resource
 @export var description:String = ""
 @export var instance:PackedScene 
 @export var isUnlocked:bool
-@export var unloackAmount:int
+@export var unlockAmount:int

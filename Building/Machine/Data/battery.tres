@@ -17,3 +17,4 @@ atlasCoord = Vector2i(0, 12)
 description = "Better call battery when you are worried about mana outages!"
 instance = ExtResource("1_os0l8")
 isUnlocked = false
+unlockAmount = 20
