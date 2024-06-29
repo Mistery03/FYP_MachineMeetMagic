@@ -99,6 +99,7 @@ layout_mode = 2
 buildingData = ExtResource("9_cux2h")
 
 [node name="DescriptionBoard" type="NinePatchRect" parent="."]
+visible = false
 texture_filter = 1
 layout_mode = 0
 offset_left = 169.0
@@ -124,9 +125,9 @@ texture = SubResource("AtlasTexture_spxpk")
 
 [node name="BuidlingName" type="Label" parent="DescriptionBoard"]
 layout_mode = 0
-offset_left = 36.3333
+offset_left = 29.3333
 offset_top = 82.6667
-offset_right = 2658.34
+offset_right = 2651.34
 offset_bottom = 653.667
 scale = Vector2(0.05, 0.05)
 theme_override_colors/font_color = Color(0, 0, 0, 1)
@@ -284,6 +285,7 @@ text = "PLAYER INVENTORY"
 horizontal_alignment = 1
 
 [node name="Control" type="Control" parent="."]
+visible = false
 anchors_preset = 0
 offset_left = 366.0
 offset_top = 5.0

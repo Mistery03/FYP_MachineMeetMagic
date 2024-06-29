@@ -28,6 +28,7 @@ config/icon="res://icon.svg"
 [autoload]
 
 PlayerGlobal="*res://Global/PlayerGlobal.gd"
+TutorialGlobal="*res://Global/TutorialGlobal.gd"
 
 [display]
 

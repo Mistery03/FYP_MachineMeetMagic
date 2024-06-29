@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://ciyq3cn8pdvwd"]
+[gd_scene load_steps=7 format=3 uid="uid://ciyq3cn8pdvwd"]
 
 [ext_resource type="Script" path="res://UI/MachineSlot/fuel_slot.gd" id="1_0ckax"]
 [ext_resource type="Texture2D" uid="uid://daap0c1p135gi" path="res://Asset/UIUX/machineContainer.png" id="2_pislw"]
@@ -8,6 +8,10 @@
 [sub_resource type="AtlasTexture" id="AtlasTexture_go8od"]
 atlas = ExtResource("3_yanya")
 region = Rect2(448, 480, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3o3vf"]
+atlas = ExtResource("3_yanya")
+region = Rect2(64, 128, 32, 32)
 
 [node name="FuelSlot" type="Panel"]
 custom_minimum_size = Vector2(180, 180)
@@ -29,6 +33,13 @@ layout_mode = 0
 offset_right = 40.0
 offset_bottom = 40.0
 texture = SubResource("AtlasTexture_go8od")
+
+[node name="Preview" type="TextureRect" parent="Border"]
+self_modulate = Color(1, 1, 1, 0.258824)
+custom_minimum_size = Vector2(32, 32)
+offset_right = 40.0
+offset_bottom = 40.0
+texture = SubResource("AtlasTexture_3o3vf")
 
 [node name="Label" type="Label" parent="."]
 layout_mode = 0

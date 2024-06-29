@@ -4,6 +4,7 @@ extends Panel
 
 @onready var build_menu = $"../../.."
 @onready var texture_rect = $TextureRect
+@onready var darkened = $Darkened
 
 var material_container
 
@@ -13,14 +14,19 @@ func _ready():
 	else:
 		texture_rect.texture = buildingData.texture
 
+func _process(delta):
+	if buildingData.isUnlocked:
+		darkened.visible = false
+	else:
+		darkened.visible = true
 	
 func _on_button_pressed():
-	if buildingData:
+	if buildingData and buildingData.isUnlocked:
 		build_menu.atlasCoord =  buildingData.atlasCoord
 		build_menu.parentUI.visible = false
 
 func _on_button_mouse_entered():
-	if buildingData:
+	if buildingData and buildingData.isUnlocked:
 		build_menu.timer.paused = true
 		build_menu.description_board.visible = true
 		build_menu.buildingName = buildingData.name

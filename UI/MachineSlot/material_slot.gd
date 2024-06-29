@@ -9,6 +9,7 @@ extends Panel
 @onready var border = $Border
 @onready var item_texture = $Border/ItemTexture
 @onready var label = $Label
+@onready var preview = $Border/Preview
 
 var dragOffset: Vector2
 var isMousePressed:bool = false
@@ -28,11 +29,12 @@ func _process(delta):
 		item_texture.visible = true
 		label.visible = true
 		label.text = str(amount)
-		
+		preview.visible= false
 
 	else:
 		item_texture.visible = false
 		label.visible = false
+		preview.visible= true
 
 	if !parentControl.isDragging:
 		item_texture.global_position =  border.global_position 

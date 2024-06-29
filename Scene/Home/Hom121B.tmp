@@ -1,4 +1,4 @@
-[gd_scene load_steps=47 format=3 uid="uid://dm1j4it5oof3n"]
+[gd_scene load_steps=44 format=3 uid="uid://dm1j4it5oof3n"]
 
 [ext_resource type="Script" path="res://Scene/Home/Home.gd" id="1_iycag"]
 [ext_resource type="PackedScene" uid="uid://c1vsfoc55pk0w" path="res://Entity/Player/player.tscn" id="1_jnw16"]
@@ -11,8 +11,6 @@
 [ext_resource type="PackedScene" uid="uid://cquwobpa3kh6" path="res://Scene/teleporter.tscn" id="7_v0x8g"]
 [ext_resource type="Script" path="res://Scene/Home/MachineList.gd" id="8_g4svt"]
 [ext_resource type="PackedScene" uid="uid://cnj7jj8r34b1q" path="res://Material/Material.tscn" id="10_nl125"]
-[ext_resource type="Resource" uid="uid://b0mv13gn6qdxo" path="res://Material/Construction/wood.tres" id="11_rj2gd"]
-[ext_resource type="Resource" uid="uid://dnawlrv34finb" path="res://Material/Fuel/fuel.tres" id="12_pn2ej"]
 [ext_resource type="Texture2D" uid="uid://b7p1vl7hrge60" path="res://Asset/Level/backgroundChecker.png" id="13_lrcqq"]
 [ext_resource type="PackedScene" uid="uid://crlmmk86fjtnf" path="res://Entity/Monster/Slime/BlueSlime/BlueSlime.tscn" id="15_8mevs"]
 [ext_resource type="Script" path="res://Scene/monsterEntities.gd" id="15_703uy"]
@@ -21,7 +19,6 @@
 [ext_resource type="Script" path="res://Scene/Home/Tutorial3.gd" id="18_fd1hb"]
 [ext_resource type="Script" path="res://Scene/Home/Tutorial4.gd" id="19_12rld"]
 [ext_resource type="Script" path="res://Scene/Home/Tutorial5.gd" id="20_wq48p"]
-[ext_resource type="Script" path="res://Scene/Home/Tutorial6.gd" id="22_dhvvh"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_klcm4"]
 texture = ExtResource("1_vetej")
@@ -1282,8 +1279,7 @@ player = NodePath("../Player")
 localLevel = NodePath("..")
 
 [node name="BlueSlime" parent="monsterEntities" instance=ExtResource("15_8mevs")]
-position = Vector2(-11, -175)
-damagePoint = 80.0
+position = Vector2(-127, -202)
 
 [node name="Label" type="Label" parent="monsterEntities/BlueSlime"]
 offset_left = -220.0
@@ -1297,8 +1293,6 @@ text = "Gumball The Friendly
 
 [node name="Material" parent="." instance=ExtResource("10_nl125")]
 position = Vector2(72, -211)
-itemData = ExtResource("11_rj2gd")
-amount = 5
 
 [node name="Label2" type="Label" parent="Material"]
 offset_left = -80.0
@@ -1313,8 +1307,6 @@ text = "Welcome to your new home"
 [node name="Material2" parent="." instance=ExtResource("10_nl125")]
 position = Vector2(102, -150)
 script = ExtResource("17_lkx25")
-itemData = ExtResource("11_rj2gd")
-amount = 5
 
 [node name="Label2" type="Label" parent="Material2"]
 offset_left = -46.0
@@ -1329,8 +1321,6 @@ text = "How? Press B"
 [node name="Material3" parent="." instance=ExtResource("10_nl125")]
 position = Vector2(17, -54)
 script = ExtResource("18_fd1hb")
-itemData = ExtResource("12_pn2ej")
-amount = 5
 
 [node name="Label2" type="Label" parent="Material3"]
 offset_left = -28.0
@@ -1346,8 +1336,6 @@ autowrap_mode = 2
 [node name="Material4" parent="." instance=ExtResource("10_nl125")]
 position = Vector2(106, -182)
 script = ExtResource("19_12rld")
-itemData = ExtResource("12_pn2ej")
-amount = 5
 
 [node name="Label2" type="Label" parent="Material4"]
 offset_left = -28.0
@@ -1363,8 +1351,6 @@ autowrap_mode = 2
 [node name="Material5" parent="." instance=ExtResource("10_nl125")]
 position = Vector2(91, -105)
 script = ExtResource("20_wq48p")
-itemData = ExtResource("12_pn2ej")
-amount = 5
 
 [node name="Label2" type="Label" parent="Material5"]
 offset_left = -44.0
@@ -1375,23 +1361,4 @@ scale = Vector2(0.05, 0.05)
 theme_override_fonts/font = ExtResource("17_c8e1y")
 theme_override_font_sizes/font_size = 300
 text = "These machine will aid you to become stronger"
-autowrap_mode = 2
-
-[node name="Material6" parent="." instance=ExtResource("10_nl125")]
-position = Vector2(-88, -185)
-script = ExtResource("22_dhvvh")
-itemData = ExtResource("11_rj2gd")
-amount = 5
-
-[node name="Label2" type="Label" parent="Material6"]
-offset_left = -106.0
-offset_top = -92.0
-offset_right = 4054.0
-offset_bottom = 1289.0
-scale = Vector2(0.05, 0.05)
-theme_override_fonts/font = ExtResource("17_c8e1y")
-theme_override_font_sizes/font_size = 300
-text = "AWSD to move
-Space + AWSD to roll in a particular direction
-C to open character progression"
 autowrap_mode = 2

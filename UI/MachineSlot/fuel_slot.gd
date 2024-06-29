@@ -9,6 +9,7 @@ extends Panel
 @onready var border = $Border
 @onready var item_texture = $Border/ItemTexture
 @onready var label = $Label
+@onready var preview = $Border/Preview
 
 var fuelDurability:int
 
@@ -31,6 +32,7 @@ func _process(delta):
 		item_texture.visible = true
 		label.visible = true
 		label.text = str(amount)
+		preview.visible = false
 		if fuelDurability <= 0:
 			fuelDurability = item.durability
 		if parentControl.parentMachine:
@@ -38,6 +40,7 @@ func _process(delta):
 	else:
 		item_texture.visible = false
 		label.visible = false
+		preview.visible = true
 		if parentControl.parentMachine:
 			parentControl.parentMachine.isThereFuel = false
 		
