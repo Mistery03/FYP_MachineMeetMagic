@@ -6,7 +6,7 @@
 script = ExtResource("1_kph4g")
 inventory = Array[Resource("res://UI/Inventory/Data/slotData.gd")]([null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null])
 Name = "Player"
-MaxHealth = 1.0
+MaxHealth = 100.0
 MaxStamina = 100.0
 MaxMana = 100.0
 MaxDefence = 100.0
