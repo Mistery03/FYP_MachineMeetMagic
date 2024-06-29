@@ -34,5 +34,13 @@ offset_right = 1112.0
 offset_bottom = 856.0
 texture_normal = SubResource("AtlasTexture_fxl26")
 
+[node name="Label" type="Label" parent="."]
+layout_mode = 0
+offset_left = 1326.0
+offset_top = 871.0
+offset_right = 1582.0
+offset_bottom = 894.0
+text = "alpha ver 0.0.1.1-testbuld-nsrbbh"
+
 [connection signal="pressed" from="playButton" to="." method="_on_texture_button_pressed"]
 [connection signal="pressed" from="playButton" to="." method="_on_play_button_pressed"]
