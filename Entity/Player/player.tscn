@@ -2054,6 +2054,7 @@ inputList = {
 script = ExtResource("14_h6fpb")
 timer = NodePath("../../ActionTimer")
 materialInstance = ExtResource("15_qe768")
+max_drop_items = 20
 
 [node name="Attack" type="Node" parent="StateController"]
 script = ExtResource("22_nvrgv")

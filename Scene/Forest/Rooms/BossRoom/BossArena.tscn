@@ -1,11 +1,10 @@
-[gd_scene load_steps=12 format=3 uid="uid://d1gxkrikxon85"]
+[gd_scene load_steps=11 format=3 uid="uid://d1gxkrikxon85"]
 
 [ext_resource type="Script" path="res://Scene/Forest/Rooms/BossRoom/BossArena.gd" id="1_imlmd"]
 [ext_resource type="TileSet" uid="uid://bckra1sdqvx78" path="res://Scene/Forest/Rooms/ForestTilemap.tres" id="2_63v6e"]
 [ext_resource type="Resource" uid="uid://cyvrs685eukie" path="res://Entity/Monster/Slime/Data/bossSlime.tres" id="2_p8a7c"]
 [ext_resource type="Script" path="res://Scene/monsterEntities.gd" id="3_esx2j"]
 [ext_resource type="Script" path="res://Scene/Forest/Rooms/BossRoom/WorldCamera.gd" id="6_di4pl"]
-[ext_resource type="PackedScene" uid="uid://c1vsfoc55pk0w" path="res://Entity/Player/player.tscn" id="7_8237y"]
 [ext_resource type="PackedScene" uid="uid://b7pgfgv6lh1ls" path="res://Scene/Forest/gate_keeper.tscn" id="7_dq5gh"]
 [ext_resource type="Script" path="res://Scene/Forest/Rooms/BossRoom/Finished.gd" id="8_xm08r"]
 [ext_resource type="Texture2D" uid="uid://b7p1vl7hrge60" path="res://Asset/Level/backgroundChecker.png" id="9_kqgiy"]
@@ -21,7 +20,7 @@ script = ExtResource("1_imlmd")
 bossInstance = ExtResource("2_p8a7c")
 levelName = "BossRoom"
 roomName = "BossRoom"
-player = NodePath("Player")
+player = NodePath("")
 tile_map = NodePath("TileMap")
 creatureManager = NodePath("monsterEntities")
 
@@ -73,9 +72,6 @@ position = Vector2(1, 270)
 scale = Vector2(1.52529, 1)
 creatureManager = NodePath("../monsterEntities")
 localLevel = NodePath("..")
-
-[node name="Player" parent="." instance=ExtResource("7_8237y")]
-position = Vector2(-11, -508)
 
 [node name="GateKeeper2" parent="." node_paths=PackedStringArray("creatureManager", "localLevel") instance=ExtResource("7_dq5gh")]
 visible = false
