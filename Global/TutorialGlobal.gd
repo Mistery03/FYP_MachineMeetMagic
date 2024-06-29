@@ -8,4 +8,6 @@ var tutorialFive:bool = false
 var tutorialSix:bool = false
 var tutorialSeven:bool = false
 var tutorialEight:bool = false
+var tutorialNine:bool = false
+var tutorialTen:bool = false
 

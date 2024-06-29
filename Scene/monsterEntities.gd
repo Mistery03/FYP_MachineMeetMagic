@@ -18,7 +18,7 @@ func init(player):
 	for entity in get_children():
 		entity.player = player
 		entity.localLevel = localLevel
-		if entity is Slime:
+		if entity is Slime and localLevel.levelName == "BossRoom":
 			entity.bossDied = bossSlime.bossDied
 		
 func setBoss(bossSlime:BossSlime):

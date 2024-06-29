@@ -1887,7 +1887,6 @@ machineSave = SubResource("Resource_fijhs")
 potionObject = ExtResource("3_41una")
 potion_manager = NodePath("PotionManager")
 staff = NodePath("Staff")
-ResearchPointCurrency = 100
 itemHUDPlaceholder = NodePath("ROOT_UI/HUDHolder/ItemHUDPlaceholder")
 playerHUD = NodePath("ROOT_UI/HUDHolder/Player_hud")
 playerCurrencyText = NodePath("ROOT_UI/HUDHolder/CurrencyHolder/Currency")

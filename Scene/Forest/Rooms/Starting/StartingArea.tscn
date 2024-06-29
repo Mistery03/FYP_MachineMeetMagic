@@ -1,10 +1,16 @@
-[gd_scene load_steps=7 format=3 uid="uid://d2ydrp0fee631"]
+[gd_scene load_steps=13 format=3 uid="uid://d2ydrp0fee631"]
 
 [ext_resource type="Script" path="res://Scene/Forest/Rooms/Starting/StartingArea.gd" id="1_5uh1g"]
 [ext_resource type="TileSet" uid="uid://bckra1sdqvx78" path="res://Scene/Forest/Rooms/ForestTilemap.tres" id="2_7nsx7"]
 [ext_resource type="Resource" uid="uid://doh0owdslxx3s" path="res://Entity/Monster/Slime/Data/blueSlime.tres" id="2_b3stg"]
 [ext_resource type="Script" path="res://Scene/Forest/Rooms/Door/Door.gd" id="4_1bka2"]
 [ext_resource type="Script" path="res://Scene/monsterEntities.gd" id="4_culep"]
+[ext_resource type="PackedScene" uid="uid://cnj7jj8r34b1q" path="res://Material/Material.tscn" id="6_1sl8b"]
+[ext_resource type="Script" path="res://Scene/Forest/Rooms/Starting/tutorial1.gd" id="7_1jdhe"]
+[ext_resource type="Resource" uid="uid://b0mv13gn6qdxo" path="res://Material/Construction/wood.tres" id="8_5g0sj"]
+[ext_resource type="FontFile" uid="uid://cl3rxpo58micg" path="res://Asset/Font/Lambda-Regular.ttf" id="8_h40yx"]
+[ext_resource type="Script" path="res://Scene/Forest/Rooms/Starting/tutorial2.gd" id="10_whtop"]
+[ext_resource type="Resource" uid="uid://dnawlrv34finb" path="res://Material/Fuel/fuel.tres" id="11_4b3ds"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ky2ka"]
 size = Vector2(481.5, 198)
@@ -62,7 +68,68 @@ collision_layer = 32
 position = Vector2(214.25, 17)
 shape = SubResource("RectangleShape2D_ky2ka")
 
-[node name="monsterEntities" type="Node" parent="."]
+[node name="monsterEntities" type="Node" parent="." node_paths=PackedStringArray("localLevel")]
 script = ExtResource("4_culep")
+localLevel = NodePath("..")
+
+[node name="Material6" parent="." instance=ExtResource("6_1sl8b")]
+position = Vector2(176, -3)
+script = ExtResource("7_1jdhe")
+itemData = ExtResource("8_5g0sj")
+amount = 5
+
+[node name="Label2" type="Label" parent="Material6"]
+offset_left = -106.0
+offset_top = -92.0
+offset_right = 4054.0
+offset_bottom = 1289.0
+scale = Vector2(0.05, 0.05)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 200
+theme_override_fonts/font = ExtResource("8_h40yx")
+theme_override_font_sizes/font_size = 300
+text = "Press 
+Left arrow: To Equip potions
+Up arrow: To Equip Staff
+Right arrow: To Equip Magic"
+autowrap_mode = 2
+
+[node name="Material7" parent="." instance=ExtResource("6_1sl8b")]
+position = Vector2(7, -6)
+script = ExtResource("10_whtop")
+itemData = ExtResource("11_4b3ds")
+amount = 10
+
+[node name="Label2" type="Label" parent="Material7"]
+offset_left = -106.0
+offset_top = -92.0
+offset_right = 4054.0
+offset_bottom = 1289.0
+scale = Vector2(0.05, 0.05)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 200
+theme_override_fonts/font = ExtResource("8_h40yx")
+theme_override_font_sizes/font_size = 300
+text = "Welcome to the forest, do not be afraid to venture into the wilderness and collect materials to make you stronger and create potions at home"
+autowrap_mode = 2
+
+[node name="Material8" parent="." instance=ExtResource("6_1sl8b")]
+position = Vector2(259, 72)
+script = ExtResource("10_whtop")
+itemData = ExtResource("11_4b3ds")
+amount = 10
+
+[node name="Label2" type="Label" parent="Material8"]
+offset_left = -106.0
+offset_top = -92.0
+offset_right = 4054.0
+offset_bottom = 1289.0
+scale = Vector2(0.05, 0.05)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 200
+theme_override_fonts/font = ExtResource("8_h40yx")
+theme_override_font_sizes/font_size = 300
+text = "Make sure to equip the staff to cut down trees and happy adventuring!"
+autowrap_mode = 2
 
 [connection signal="body_entered" from="Door/Area2D" to="Door" method="_on_area_2d_body_entered"]
