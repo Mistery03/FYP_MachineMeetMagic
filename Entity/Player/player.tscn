@@ -1872,18 +1872,20 @@ _data = {
 atlas = ExtResource("43_wy3ce")
 region = Rect2(160, 0, 32, 32)
 
-[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("staff", "itemHUDPlaceholder", "playerHUD", "playerCurrencyText", "playerCurrencyHUD", "playerInventoryController", "magicUI", "animation", "moveComponent", "stateController") groups=["invalidPosition"]]
+[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("potion_manager", "staff", "itemHUDPlaceholder", "playerHUD", "playerCurrencyText", "playerCurrencyHUD", "HUDHolder", "playerInventoryController", "magicUI", "animation", "moveComponent", "stateController") groups=["invalidPosition"]]
 z_index = 10
 scale = Vector2(0.1, 0.1)
 collision_mask = 120
 script = ExtResource("1_xfdxb")
 playerData = ExtResource("2_g17go")
 potionObject = ExtResource("3_41una")
+potion_manager = NodePath("PotionManager")
 staff = NodePath("Staff")
-itemHUDPlaceholder = NodePath("ROOT_UI/ItemHUDPlaceholder")
-playerHUD = NodePath("ROOT_UI/Player_hud")
-playerCurrencyText = NodePath("ROOT_UI/CurrencyHolder/Currency")
-playerCurrencyHUD = NodePath("ROOT_UI/CurrencyHolder")
+itemHUDPlaceholder = NodePath("ROOT_UI/HUDHolder/ItemHUDPlaceholder")
+playerHUD = NodePath("ROOT_UI/HUDHolder/Player_hud")
+playerCurrencyText = NodePath("ROOT_UI/HUDHolder/CurrencyHolder/Currency")
+playerCurrencyHUD = NodePath("ROOT_UI/HUDHolder/CurrencyHolder")
+HUDHolder = NodePath("ROOT_UI/HUDHolder")
 playerInventoryController = NodePath("ROOT_UI/InventoryUI")
 maxInventorySize = 20
 initSlot = ExtResource("4_e4jpf")
@@ -1904,10 +1906,8 @@ position_smoothing_speed = 4.0
 texture_filter = 1
 scale = Vector2(5, 5)
 sprite_frames = SubResource("SpriteFrames_47nfc")
-animation = &"FALLING"
+animation = &"WALKBACKWARD"
 autoplay = "IDLE"
-frame = 3
-frame_progress = 1.0
 
 [node name="PlayerHitbox" type="CollisionShape2D" parent="."]
 position = Vector2(-9.53674e-07, 10)
@@ -1980,7 +1980,7 @@ script = ExtResource("12_0atyh")
 [node name="PotionManager" type="Node" parent="." node_paths=PackedStringArray("inventoryUI", "potionHUD", "player")]
 script = ExtResource("5_5bgkf")
 inventoryUI = NodePath("../ROOT_UI/InventoryUI")
-potionHUD = NodePath("../ROOT_UI/ItemHUDPlaceholder/PotionHUD")
+potionHUD = NodePath("../ROOT_UI/HUDHolder/ItemHUDPlaceholder/PotionHUD")
 player = NodePath("..")
 
 [node name="MagicManager" type="Node" parent="." node_paths=PackedStringArray("magic_tree_ui", "staff")]
@@ -2080,9 +2080,102 @@ inputList = {
 [node name="ROOT_UI" type="CanvasLayer" parent="."]
 layer = 2
 
-[node name="Player_hud" parent="ROOT_UI" node_paths=PackedStringArray("player") instance=ExtResource("39_0xjwo")]
-player = NodePath("../..")
+[node name="HUDHolder" type="Control" parent="ROOT_UI"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Player_hud" parent="ROOT_UI/HUDHolder" node_paths=PackedStringArray("player") instance=ExtResource("39_0xjwo")]
+layout_mode = 1
+offset_right = -40.0
+offset_bottom = -40.0
+player = NodePath("../../..")
 metadata/_edit_use_anchors_ = true
+
+[node name="ItemHUDPlaceholder" type="Control" parent="ROOT_UI/HUDHolder" node_paths=PackedStringArray("player", "animation")]
+layout_mode = 3
+anchors_preset = 0
+offset_top = 238.0
+offset_right = 40.0
+offset_bottom = 278.0
+scale = Vector2(0.8, 0.8)
+script = ExtResource("19_4bbe1")
+player = NodePath("../../..")
+animation = NodePath("ItemHUDAnimation")
+
+[node name="StaffHUD" parent="ROOT_UI/HUDHolder/ItemHUDPlaceholder" node_paths=PackedStringArray("player") instance=ExtResource("20_qac2v")]
+layout_mode = 1
+offset_left = 147.0
+offset_top = 525.0
+offset_right = 107.0
+offset_bottom = 525.0
+scale = Vector2(0.2, 0.2)
+actionInput = "EQUIP"
+texture = SubResource("AtlasTexture_1dcaq")
+player = NodePath("../../../..")
+
+[node name="PotionHUD" parent="ROOT_UI/HUDHolder/ItemHUDPlaceholder" node_paths=PackedStringArray("inventoryUI", "player") instance=ExtResource("22_lae4u")]
+layout_mode = 1
+offset_left = 16.0
+offset_top = 612.0
+offset_right = -24.0
+offset_bottom = 612.0
+scale = Vector2(0.2, 0.2)
+actionInput = "EQUIPPOTION"
+texture = SubResource("AtlasTexture_e1oi2")
+inventoryUI = NodePath("../../../InventoryUI")
+player = NodePath("../../../..")
+
+[node name="MagicHUD" parent="ROOT_UI/HUDHolder/ItemHUDPlaceholder" node_paths=PackedStringArray("magicManager", "player") instance=ExtResource("24_71sui")]
+layout_mode = 1
+offset_left = 281.0
+offset_top = 612.0
+offset_right = 241.0
+offset_bottom = 612.0
+scale = Vector2(0.2, 0.2)
+magicManager = NodePath("../../../../MagicManager")
+player = NodePath("../../../..")
+
+[node name="ItemHUDAnimation" type="AnimationPlayer" parent="ROOT_UI/HUDHolder/ItemHUDPlaceholder"]
+libraries = {
+"": SubResource("AnimationLibrary_4077c")
+}
+
+[node name="Timer" type="Timer" parent="ROOT_UI/HUDHolder/ItemHUDPlaceholder"]
+one_shot = true
+
+[node name="CurrencyHolder" type="NinePatchRect" parent="ROOT_UI/HUDHolder"]
+self_modulate = Color(0.0156863, 0.184314, 0.32549, 1)
+z_index = -5
+texture_filter = 1
+layout_mode = 0
+offset_left = 1401.0
+offset_top = 817.0
+offset_right = 1592.0
+offset_bottom = 866.0
+scale = Vector2(0.8, 0.8)
+texture = ExtResource("42_uk6eg")
+region_rect = Rect2(0, -2, 32, 37)
+
+[node name="TextureRect" type="TextureRect" parent="ROOT_UI/HUDHolder/CurrencyHolder"]
+layout_mode = 0
+offset_left = 8.33333
+offset_top = 5.0
+offset_right = 48.3333
+offset_bottom = 45.0
+texture = SubResource("AtlasTexture_fg7kg")
+
+[node name="Currency" type="Label" parent="ROOT_UI/HUDHolder/CurrencyHolder"]
+layout_mode = 0
+offset_left = 72.5
+offset_top = 3.33335
+offset_right = 174.5
+offset_bottom = 46.3334
+theme_override_fonts/font = ExtResource("14_me7n8")
+theme_override_font_sizes/font_size = 34
+text = "999999"
+horizontal_alignment = 2
 
 [node name="Build" type="Control" parent="ROOT_UI"]
 visible = false
@@ -2230,55 +2323,6 @@ text = "NUMKEY1: Wire Machine
 promptMessage = ": Wire Battery"
 promptAction = "NUMKEY2"
 
-[node name="ItemHUDPlaceholder" type="Control" parent="ROOT_UI" node_paths=PackedStringArray("player", "animation")]
-layout_mode = 3
-anchors_preset = 0
-offset_top = 80.0
-offset_right = 40.0
-offset_bottom = 120.0
-script = ExtResource("19_4bbe1")
-player = NodePath("../..")
-animation = NodePath("ItemHUDAnimation")
-
-[node name="StaffHUD" parent="ROOT_UI/ItemHUDPlaceholder" node_paths=PackedStringArray("player") instance=ExtResource("20_qac2v")]
-layout_mode = 1
-offset_left = 147.0
-offset_top = 525.0
-offset_right = 107.0
-offset_bottom = 525.0
-scale = Vector2(0.2, 0.2)
-actionInput = "EQUIP"
-texture = SubResource("AtlasTexture_1dcaq")
-player = NodePath("../../..")
-
-[node name="PotionHUD" parent="ROOT_UI/ItemHUDPlaceholder" node_paths=PackedStringArray("inventoryUI") instance=ExtResource("22_lae4u")]
-layout_mode = 1
-offset_left = 16.0
-offset_top = 612.0
-offset_right = -24.0
-offset_bottom = 612.0
-scale = Vector2(0.2, 0.2)
-actionInput = "EQUIPPOTION"
-texture = SubResource("AtlasTexture_e1oi2")
-inventoryUI = NodePath("../../InventoryUI")
-
-[node name="MagicHUD" parent="ROOT_UI/ItemHUDPlaceholder" node_paths=PackedStringArray("magicManager") instance=ExtResource("24_71sui")]
-layout_mode = 1
-offset_left = 281.0
-offset_top = 612.0
-offset_right = 241.0
-offset_bottom = 612.0
-scale = Vector2(0.2, 0.2)
-magicManager = NodePath("../../../MagicManager")
-
-[node name="ItemHUDAnimation" type="AnimationPlayer" parent="ROOT_UI/ItemHUDPlaceholder"]
-libraries = {
-"": SubResource("AnimationLibrary_4077c")
-}
-
-[node name="Timer" type="Timer" parent="ROOT_UI/ItemHUDPlaceholder"]
-one_shot = true
-
 [node name="InventoryUI" parent="ROOT_UI" node_paths=PackedStringArray("player") instance=ExtResource("32_dbx42")]
 visible = false
 player = NodePath("../..")
@@ -2287,37 +2331,6 @@ player = NodePath("../..")
 visible = false
 script = ExtResource("39_msw74")
 player = NodePath("../..")
-
-[node name="CurrencyHolder" type="NinePatchRect" parent="ROOT_UI"]
-self_modulate = Color(0.0156863, 0.184314, 0.32549, 1)
-z_index = -5
-texture_filter = 1
-offset_left = 1314.0
-offset_top = 805.0
-offset_right = 1505.0
-offset_bottom = 854.0
-scale = Vector2(1.2, 1.2)
-texture = ExtResource("42_uk6eg")
-region_rect = Rect2(0, -2, 32, 37)
-
-[node name="TextureRect" type="TextureRect" parent="ROOT_UI/CurrencyHolder"]
-layout_mode = 0
-offset_left = 8.33333
-offset_top = 5.0
-offset_right = 48.3333
-offset_bottom = 45.0
-texture = SubResource("AtlasTexture_fg7kg")
-
-[node name="Currency" type="Label" parent="ROOT_UI/CurrencyHolder"]
-layout_mode = 0
-offset_left = 72.5
-offset_top = 3.33335
-offset_right = 174.5
-offset_bottom = 46.3334
-theme_override_fonts/font = ExtResource("14_me7n8")
-theme_override_font_sizes/font_size = 34
-text = "999999"
-horizontal_alignment = 2
 
 [node name="ActionTimer" type="Timer" parent="."]
 wait_time = 0.8
@@ -2358,7 +2371,7 @@ stream = ExtResource("36_a4jww")
 pitch_scale = 2.5
 
 [connection signal="OnDamageTaken" from="." to="StateController/Idle" method="_on_player_on_damage_taken"]
-[connection signal="timeout" from="ROOT_UI/ItemHUDPlaceholder/Timer" to="ROOT_UI/ItemHUDPlaceholder" method="_on_timer_timeout"]
+[connection signal="timeout" from="ROOT_UI/HUDHolder/ItemHUDPlaceholder/Timer" to="ROOT_UI/HUDHolder/ItemHUDPlaceholder" method="_on_timer_timeout"]
 [connection signal="timeout" from="ActionTimer" to="StateController/Cut" method="_on_timer_timeout"]
 [connection signal="timeout" from="RollDuration" to="StateController/Roll" method="_on_roll_duration_timeout"]
 

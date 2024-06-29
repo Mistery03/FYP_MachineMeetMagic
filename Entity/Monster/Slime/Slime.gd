@@ -5,6 +5,7 @@ extends Entity
 @export var spawnSFX:AudioStreamPlayer2D
 @export var damagePoint:float = 10
 @export var localLevel:Node2D
+@export var chaseSpeed:float = 6000
 
 var spawnPoint = position  # Define the spawn point
 var currentDirection = Vector2(1, 0)  # Initial direction

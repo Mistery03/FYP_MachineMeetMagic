@@ -5,7 +5,7 @@ var isDamaged:bool = false
 func enter() -> void:
 	super()
 	parent.velocity = Vector2.ZERO
-	await get_tree().create_timer(3).timeout
+	await get_tree().create_timer(2.5).timeout
 	transitioned.emit("chase")
 
 	

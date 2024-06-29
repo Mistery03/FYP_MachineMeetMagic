@@ -8,10 +8,10 @@ var validSpawnPositions = []
 
 func enter() -> void:
 	super()
-	if parent.localLevel.levelName == "BossRoom":
+	if parent.localLevel.levelName == "BossRoom" and parent.localLevel.creatureManager.get_child_count() <= 7:
 		spawnSlimes()
 	else:
-		print("Invalid level spawn area")
+		await get_tree().create_timer(5).timeout
 		transitioned.emit("Chase")
 		
 func exit() -> void:
@@ -46,12 +46,16 @@ func spawnSlimes():
 		##NOTE Creature list returns MobData
 		var creatureData= creatureList.pick_random()
 		var creatureInstance = creatureData.mobInstance.instantiate()
+		print(parent.localLevel.tile_map.map_to_local(spawnPos))
 		creatureInstance.global_position = parent.localLevel.tile_map.map_to_local(spawnPos)
 		creatureInstance.localLevel = self
+		creatureInstance.chaseSpeed = 8500
+		creatureInstance.maxHP = 60
 		parent.localLevel.creatureManager.add_child(creatureInstance)
 		parent.localLevel.creatureManager.init(parent.player)
 		creatureInstance.animation.play("SPAWN")
 
 		await get_tree().create_timer(0.2).timeout
-	
+		
+	await get_tree().create_timer(2).timeout
 	transitioned.emit("Chase")

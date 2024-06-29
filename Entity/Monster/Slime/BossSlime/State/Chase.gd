@@ -1,11 +1,11 @@
 extends State
 
-@export var chaseSpeed:float
+
 @export var separationWeight: float = 3  # Adjust the influence of separation
 @export var SHOOT_DISTANCE = 240
 
-@export var jump_attack_probability: float = 20.0
-@export var spawn_creatures_probability: float = 40.0
+@export var jump_attack_probability: float = 30.0
+@export var spawn_creatures_probability: float = 10.0
 @export var dash_attack_probability: float = 60.0
 
 
@@ -29,7 +29,7 @@ func physics_update(delta: float) -> void:
 	var separationForce = _separation(parent)
 	print(separationForce)
 	parent.currentDirection = (direction_to_player + separationWeight * separationForce).normalized()
-	parent.velocity = chaseSpeed * parent.currentDirection * delta
+	parent.velocity = parent.chaseSpeed * parent.currentDirection * delta
 	parent.move_and_slide()
 
 	if distance_to_player <= SHOOT_DISTANCE:

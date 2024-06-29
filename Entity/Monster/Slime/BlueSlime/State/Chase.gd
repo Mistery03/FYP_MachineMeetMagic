@@ -1,6 +1,5 @@
 extends State
 
-@export var chaseSpeed:float
 @export var separationWeight: float = 1.0  # Adjust the influence of separation
 const LEAP_DISTANCE = 45
 
@@ -22,7 +21,7 @@ func physics_update(delta: float) -> void:
 	var distance_to_player = parent.global_position.distance_to(parent.player.global_position)
 	
 	parent.currentDirection = direction_to_player
-	parent.velocity = chaseSpeed * parent.currentDirection * delta
+	parent.velocity = parent.chaseSpeed * parent.currentDirection * delta
 	parent.move_and_slide()
 		
 

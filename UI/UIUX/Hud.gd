@@ -9,7 +9,7 @@ extends Control
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	hp_progress_bar.init(player)
+	hp_progress_bar.init(player,player.playerData.MaxHealth,player.currHealth)
 	mana_progress_bar.init(player)
 	stamina_progress_bar.init(player)
 
