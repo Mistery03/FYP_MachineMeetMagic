@@ -3,10 +3,11 @@ extends Control
 @export var actionInput:String
 @export var texture:Texture2D
 @export var inventoryUI:Control
+@export var player:Player
 
 
 @onready var texture_rect = $border/TextureRect
-@onready var player = $"../../.."
+
 @onready var darkened = $Darkened
 @onready var potion_amount = $PotionAmount
 

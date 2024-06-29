@@ -1,15 +1,14 @@
-[gd_scene load_steps=9 format=3 uid="uid://biincpe1d1eek"]
+[gd_scene load_steps=8 format=3 uid="uid://biincpe1d1eek"]
 
 [ext_resource type="Script" path="res://UI/UIUX/Hud.gd" id="1_tnpfs"]
 [ext_resource type="Texture2D" uid="uid://bg5c8m1a5wibs" path="res://Asset/UIUX/healthbarUnder.png" id="2_ek56v"]
-[ext_resource type="Texture2D" uid="uid://cqm4lwbhuhlqd" path="res://Asset/UIUX/healthbarProgress.png" id="3_qft53"]
-[ext_resource type="Script" path="res://UI/UIUX/HPProgressBar.gd" id="4_w6vbs"]
+[ext_resource type="PackedScene" uid="uid://c7gatwjkw72wn" path="res://HUD/Healthbar/hp_progress_bar.tscn" id="2_hq8hl"]
 [ext_resource type="Script" path="res://UI/UIUX/ManaProgressBar.gd" id="5_io7js"]
 [ext_resource type="Texture2D" uid="uid://cntlg4lsg37wk" path="res://Asset/UIUX/manaProgress.png" id="5_w73pq"]
 [ext_resource type="Script" path="res://UI/UIUX/StaminaProgressBar.gd" id="6_ogyyb"]
 [ext_resource type="Texture2D" uid="uid://do1u8ll46v0us" path="res://Asset/UIUX/staminaBar.png" id="7_1xomr"]
 
-[node name="Player_hud" type="Control"]
+[node name="Player_hud" type="Control" node_paths=PackedStringArray("hp_progress_bar")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -19,19 +18,14 @@ offset_bottom = -900.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_tnpfs")
+hp_progress_bar = NodePath("HPProgressBar")
 
-[node name="HPProgressBar" type="TextureProgressBar" parent="."]
-unique_name_in_owner = true
-texture_filter = 1
+[node name="HPProgressBar" parent="." instance=ExtResource("2_hq8hl")]
 layout_mode = 0
-offset_left = 16.0
-offset_top = 16.0
-offset_right = 362.0
-offset_bottom = 70.0
-nine_patch_stretch = true
-texture_under = ExtResource("2_ek56v")
-texture_progress = ExtResource("3_qft53")
-script = ExtResource("4_w6vbs")
+offset_left = 18.0
+offset_top = 17.0
+offset_right = 364.0
+offset_bottom = 71.0
 
 [node name="ManaProgressBar" type="TextureProgressBar" parent="."]
 texture_filter = 1

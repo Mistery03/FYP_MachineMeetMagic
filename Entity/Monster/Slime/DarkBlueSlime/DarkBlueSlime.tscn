@@ -198,18 +198,22 @@ radius = 48.0104
 [sub_resource type="CircleShape2D" id="CircleShape2D_n8gn0"]
 radius = 50.04
 
-[node name="DarkBlueSlime" type="CharacterBody2D"]
+[node name="DarkBlueSlime" type="CharacterBody2D" node_paths=PackedStringArray("collision_box", "spawnSFX", "animation", "stateController")]
 scale = Vector2(0.1, 0.1)
 collision_layer = 256
 collision_mask = 438
 script = ExtResource("1_dk0mu")
+collision_box = NodePath("CollisionBox")
+spawnSFX = NodePath("spawnSFX")
+animation = NodePath("Animation")
+stateController = NodePath("StateController")
 
 [node name="Animation" type="AnimatedSprite2D" parent="."]
 texture_filter = 1
 scale = Vector2(5, 5)
 sprite_frames = SubResource("SpriteFrames_ibc5k")
-animation = &"DEATH"
-frame = 5
+animation = &"DAMAGED"
+frame = 1
 frame_progress = 1.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -226,7 +230,6 @@ script = ExtResource("4_pcw6e")
 
 [node name="Chase" type="Node" parent="StateController"]
 script = ExtResource("5_1sar4")
-chaseSpeed = 2000.0
 
 [node name="Damaged" type="Node" parent="StateController"]
 script = ExtResource("6_rhp8i")

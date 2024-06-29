@@ -209,6 +209,7 @@ script = ExtResource("1_g7l1s")
 collision_box = NodePath("CollisionBox")
 spawnSFX = NodePath("spawnSFX")
 damagePoint = 5.0
+chaseSpeed = 5000.0
 animation = NodePath("Animation")
 stateController = NodePath("StateController")
 
@@ -233,13 +234,13 @@ script = ExtResource("5_jqp1k")
 
 [node name="Chase" type="Node" parent="StateController"]
 script = ExtResource("5_hbufe")
-chaseSpeed = 4000.0
+SHOOT_DISTANCE = 120
 animation_name = "MOVE"
 
 [node name="Shoot" type="Node" parent="StateController"]
 script = ExtResource("6_4mfrd")
 projectile_scene = ExtResource("7_fxqju")
-shoot_interval = 2.5
+shoot_interval = 0.8
 
 [node name="Damaged" type="Node" parent="StateController"]
 script = ExtResource("9_h7l5v")

@@ -2,7 +2,7 @@ extends State
 
 func enter() -> void:
 	super()
-	await get_tree().create_timer(1).timeout
+	await get_tree().create_timer(5).timeout
 	transitioned.emit("Chase")
 
 func exit() -> void:

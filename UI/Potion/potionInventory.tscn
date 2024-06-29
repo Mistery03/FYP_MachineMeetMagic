@@ -1,9 +1,10 @@
-[gd_scene load_steps=10 format=3 uid="uid://dpthqxsb7e3fk"]
+[gd_scene load_steps=11 format=3 uid="uid://dpthqxsb7e3fk"]
 
 [ext_resource type="Texture2D" uid="uid://dy6bsmjnf8u44" path="res://Asset/UIUX/Container.png" id="1_a6l5k"]
 [ext_resource type="Script" path="res://UI/Potion/potionInventory.gd" id="1_nux41"]
 [ext_resource type="PackedScene" uid="uid://g6fcu5xcdnaa" path="res://UI/Potion/PotionGridContainer.tscn" id="2_cycir"]
 [ext_resource type="Resource" uid="uid://b0rx68wwi0q20" path="res://Potion/Heal/Healing Potion/HealingPotion.tres" id="4_25qxv"]
+[ext_resource type="Resource" uid="uid://byxin16s1k5vg" path="res://Potion/Consumable/Mana Potion/ManaPotion.tres" id="5_6aoo7"]
 [ext_resource type="Resource" uid="uid://doo0oqvv31wtn" path="res://Potion/Buff/Defence Potion/DefencePotion.tres" id="5_e0rmr"]
 [ext_resource type="Texture2D" uid="uid://dw0wj1ftq8uye" path="res://Asset/potionSS.png" id="6_1234l"]
 [ext_resource type="Script" path="res://UI/Potion/DescriptionBoard.gd" id="6_spmlp"]
@@ -42,6 +43,9 @@ scale = Vector2(3.5, 3.5)
 potionData = ExtResource("4_25qxv")
 
 [node name="PotionSlot2" parent="PotionGridContainer/GridContainer" index="1"]
+potionData = ExtResource("5_6aoo7")
+
+[node name="PotionSlot3" parent="PotionGridContainer/GridContainer" index="2"]
 potionData = ExtResource("5_e0rmr")
 
 [node name="DescriptionBoard" type="NinePatchRect" parent="."]

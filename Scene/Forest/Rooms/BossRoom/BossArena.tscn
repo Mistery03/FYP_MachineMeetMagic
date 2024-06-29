@@ -1,12 +1,21 @@
-[gd_scene load_steps=4 format=3 uid="uid://d1gxkrikxon85"]
+[gd_scene load_steps=8 format=3 uid="uid://d1gxkrikxon85"]
 
 [ext_resource type="Script" path="res://Scene/Forest/Rooms/BossRoom/BossArena.gd" id="1_imlmd"]
 [ext_resource type="TileSet" uid="uid://bckra1sdqvx78" path="res://Scene/Forest/Rooms/ForestTilemap.tres" id="2_63v6e"]
+[ext_resource type="Resource" uid="uid://cyvrs685eukie" path="res://Entity/Monster/Slime/Data/bossSlime.tres" id="2_p8a7c"]
 [ext_resource type="Script" path="res://Scene/monsterEntities.gd" id="3_esx2j"]
+[ext_resource type="Script" path="res://Scene/Forest/Rooms/BossRoom/WorldCamera.gd" id="6_di4pl"]
+[ext_resource type="PackedScene" uid="uid://b7pgfgv6lh1ls" path="res://Scene/Forest/gate_keeper.tscn" id="7_dq5gh"]
 
-[node name="BossArena" type="Node2D" node_paths=PackedStringArray("tile_map", "creatureManager")]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_iww2h"]
+size = Vector2(260, 114)
+
+[node name="BossArena" type="Node2D" node_paths=PackedStringArray("player", "tile_map", "creatureManager")]
 script = ExtResource("1_imlmd")
+bossInstance = ExtResource("2_p8a7c")
+levelName = "BossRoom"
 roomName = "BossRoom"
+player = NodePath("")
 tile_map = NodePath("TileMap")
 creatureManager = NodePath("monsterEntities")
 
@@ -32,5 +41,32 @@ layer_4/tile_data = PackedInt32Array()
 layer_5/name = "highlight"
 layer_5/tile_data = PackedInt32Array()
 
-[node name="monsterEntities" type="Node" parent="."]
+[node name="monsterEntities" type="Node" parent="." node_paths=PackedStringArray("player", "localLevel")]
 script = ExtResource("3_esx2j")
+player = NodePath("")
+localLevel = NodePath("..")
+
+[node name="BossSpawnPoint" type="Node2D" parent="."]
+position = Vector2(-1, -229)
+
+[node name="WorldCamera" type="Camera2D" parent="."]
+position = Vector2(-2, 111)
+enabled = false
+zoom = Vector2(3.5, 3.5)
+script = ExtResource("6_di4pl")
+
+[node name="TriggerEvent" type="Area2D" parent="."]
+position = Vector2(2, 159)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TriggerEvent"]
+position = Vector2(-3, 0)
+shape = SubResource("RectangleShape2D_iww2h")
+
+[node name="GateKeeper" parent="." node_paths=PackedStringArray("creatureManager", "localLevel") instance=ExtResource("7_dq5gh")]
+visible = false
+position = Vector2(1, 270)
+scale = Vector2(1.52529, 1)
+creatureManager = NodePath("../monsterEntities")
+localLevel = NodePath("..")
+
+[connection signal="body_entered" from="TriggerEvent" to="." method="_on_trigger_event_body_entered"]

@@ -1,6 +1,7 @@
 extends Control
 
 @export var magicManager:Node
+@export var player:Player
 
 var currIndex:int = 0
 var prevIndex:int = 0
@@ -9,7 +10,7 @@ var isMagicNull:bool = false
 var unlocked_magic: Array = []
 var magicSize:Array = [null, null, null, null,null]
 @onready var texture_rect = $border/TextureRect
-@onready var player = $"../../.."
+
 @onready var darkened = $Darkened
 # Called when the node enters the scene tree for the first time.
 func _ready():

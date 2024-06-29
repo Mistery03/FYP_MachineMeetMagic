@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="MobData" load_steps=3 format=3 uid="uid://cyvrs685eukie"]
+
+[ext_resource type="Script" path="res://Entity/Data/mobData.gd" id="1_n2gvv"]
+[ext_resource type="PackedScene" uid="uid://db1g8thxyqg42" path="res://Entity/Monster/Slime/BossSlime/bossSlime.tscn" id="1_u4vfl"]
+
+[resource]
+script = ExtResource("1_n2gvv")
+mobName = "Slime Eater"
+mobDesc = "is this a butterfly?"
+mobInstance = ExtResource("1_u4vfl")

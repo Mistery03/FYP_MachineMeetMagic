@@ -13,6 +13,8 @@ func enter() -> void:
 
 func update(delta: float) -> void:
 	super(delta)
+	if parent.isInCutscene:
+		transitioned.emit("idle")
 	if parent.homeTilemap:
 		var parentPos = parent.homeTilemap.local_to_map(parent.position)
 		var floorData:TileData = parent.homeTilemap.get_cell_tile_data(0,parentPos)

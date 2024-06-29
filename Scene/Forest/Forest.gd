@@ -90,8 +90,9 @@ func spawnRoom():
 	player.objectsPosInLevelList.clear()
 	player.objectsPosInLevelList = roomInstance.objectPosList
 	
-	await get_tree().create_timer(1).timeout
-	roomInstance.spawnCreatures()
+	if roomInstance.roomName != "BossRoom":
+		await get_tree().create_timer(1).timeout
+		roomInstance.spawnCreatures()
 
 
 func goNextRoom():

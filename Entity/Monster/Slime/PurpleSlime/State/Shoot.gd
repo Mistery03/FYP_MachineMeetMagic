@@ -2,7 +2,7 @@ extends State
 
 @export var projectile_scene: PackedScene
 @export var shoot_interval: float = 1.0  # Time between shots
-const SHOOT_DISTANCE = 200
+@export var SHOOT_DISTANCE = 200
 
 var time_since_last_shot: float = 0.0
 

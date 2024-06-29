@@ -6,7 +6,9 @@ extends PlayerActivityState
 var lerp_timer: Timer
 
 func enter() -> void:
-	super()
+	if !parent.isInCutscene:
+		super()
+	
 	parent.isDead = false
 	lerp_to_zero()
 	if !parent.isMachineUI:
@@ -34,7 +36,7 @@ func process_input(event)->void:
 	super(event)
 	moveComponent.axis = moveComponent.get_movement_direction()
 
-	if moveComponent.axis:
+	if moveComponent.axis and !parent.isInCutscene:
 		transitioned.emit("move")
 
 	if parent.levelTilemap and !parent.isLevelTransitioning:

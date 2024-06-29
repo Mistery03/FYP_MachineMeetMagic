@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="CraftingRecipe" load_steps=5 format=3 uid="uid://cwkcy4fonll4i"]
+
+[ext_resource type="Resource" uid="uid://dnawlrv34finb" path="res://Material/Fuel/fuel.tres" id="1_8au7v"]
+[ext_resource type="Script" path="res://Crafting Recipe/RecipeBase.gd" id="1_cpdc1"]
+[ext_resource type="Script" path="res://UI/Inventory/Data/slotData.gd" id="2_kg3jt"]
+
+[sub_resource type="Resource" id="Resource_xvtq3"]
+script = ExtResource("2_kg3jt")
+item = ExtResource("1_8au7v")
+amount = 15
+
+[resource]
+script = ExtResource("1_cpdc1")
+craftingList = Array[ExtResource("2_kg3jt")]([SubResource("Resource_xvtq3"), null, null])

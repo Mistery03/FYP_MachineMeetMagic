@@ -6,9 +6,11 @@ const JUMP_VELOCITY = 4.5
 
 @export var playerData:EntityData
 @export var localLevel:Node2D
+@export var machineSave:MachineSaveFile
 
 @export_category("Potion")
 @export var potionObject:PotionData
+@export var potion_manager:Node
 
 @export_category("Staff")
 @export var staff:Staff = null
@@ -23,6 +25,7 @@ const JUMP_VELOCITY = 4.5
 @export var playerHUD:Control
 @export var playerCurrencyText:Label
 @export var playerCurrencyHUD:Control
+@export var HUDHolder:Control
 
 @export_category("Player Inventory")
 @export var playerInventoryController:Control
@@ -43,7 +46,7 @@ const JUMP_VELOCITY = 4.5
 @export var cameraZoom:float = 6
 
 @onready var inventory_manager = $InventoryManager
-@onready var potion_manager = $PotionManager
+
 @onready var camera = $Camera
 
 @onready var magic_manager = $MagicManager
@@ -56,8 +59,6 @@ const JUMP_VELOCITY = 4.5
 @onready var player_hitbox = $PlayerHitbox
 
 @onready var text_on_mouse = $TextOnMouse
-
-
 
 var potion:Potion
 var isBuildEnabled:bool
@@ -75,9 +76,12 @@ var wasAttacking:bool = false
 var isInInventory:bool = false
 var isDead:bool = false
 var isMagicAvailable:bool = false
+var isInCutscene:bool = false
 
 var canInput:bool = true
 var canDash:bool = true
+
+var parentAnimationWhenCutscene
 
 var objectsPosInLevelList:Array[Vector2i]
 
@@ -85,10 +89,11 @@ var zoomValue:float = 6
 
 func _ready() -> void:
 	if PlayerGlobal.playerInventory:
-		inventory = PlayerGlobal.playerInventory
+		#inventory = PlayerGlobal.playerInventory
 		MagicEssenceCurrency = PlayerGlobal.playerMagicEssence
 		ResearchPointCurrency = PlayerGlobal.playerResearchPoint
-		
+	
+	inventory = playerData.inventory
 	playerCurrencyText.text = str(MagicEssenceCurrency)	
 	camera.zoom = Vector2(cameraZoom,cameraZoom)
 
@@ -108,7 +113,7 @@ func _process(delta) -> void:
 	playerCurrencyText.text = str(MagicEssenceCurrency)
 	mousePos = get_global_mouse_position()
 	##NOTE Wai this is for you
-	print("Player's researchpoint: ",ResearchPointCurrency)
+	#print("Player's researchpoint: ",ResearchPointCurrency)
 	
 
 func _input(event):

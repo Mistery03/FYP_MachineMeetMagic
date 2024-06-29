@@ -239,7 +239,6 @@ script = ExtResource("6_4q6fg")
 
 [node name="Chase" type="Node" parent="StateController"]
 script = ExtResource("7_7seg2")
-chaseSpeed = 4000.0
 
 [node name="Damaged" type="Node" parent="StateController"]
 script = ExtResource("8_4cmn4")

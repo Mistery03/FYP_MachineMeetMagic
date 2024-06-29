@@ -22,10 +22,6 @@ func physics_update(delta: float) -> void:
 	parent.velocity = chaseSpeed * parent.currentDirection * delta
 	parent.move_and_slide()
 	
-	
-
-
-
 func _on_collision_box_body_entered(body):
 	if body is Player:
 		body.OnDamageTaken.emit(damagePoint)

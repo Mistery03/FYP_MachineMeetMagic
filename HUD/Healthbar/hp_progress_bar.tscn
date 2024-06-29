@@ -1,0 +1,16 @@
+[gd_scene load_steps=4 format=3 uid="uid://c7gatwjkw72wn"]
+
+[ext_resource type="Texture2D" uid="uid://bg5c8m1a5wibs" path="res://Asset/UIUX/healthbarUnder.png" id="1_piqgh"]
+[ext_resource type="Texture2D" uid="uid://cqm4lwbhuhlqd" path="res://Asset/UIUX/healthbarProgress.png" id="2_3e4ao"]
+[ext_resource type="Script" path="res://UI/UIUX/HPProgressBar.gd" id="3_x470f"]
+
+[node name="HPProgressBar" type="TextureProgressBar"]
+texture_filter = 1
+offset_left = 16.0
+offset_top = 16.0
+offset_right = 362.0
+offset_bottom = 70.0
+nine_patch_stretch = true
+texture_under = ExtResource("1_piqgh")
+texture_progress = ExtResource("2_3e4ao")
+script = ExtResource("3_x470f")
