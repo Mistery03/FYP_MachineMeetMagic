@@ -17,3 +17,4 @@ atlasCoord = Vector2i(0, 1)
 description = "Extract magic essence from worldly materials."
 instance = ExtResource("1_806td")
 isUnlocked = true
+unlockAmount = 0
