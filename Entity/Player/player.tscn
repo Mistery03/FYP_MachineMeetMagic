@@ -1954,7 +1954,7 @@ collision_layer = 128
 collision_mask = 256
 monitorable = false
 script = ExtResource("9_1p8cg")
-damagepoint = 20.0
+damagepoint = 30.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Staff/Animation/sword/meleeHitbox"]
 position = Vector2(-4.41942, -4.41942)
@@ -2054,7 +2054,7 @@ inputList = {
 script = ExtResource("14_h6fpb")
 timer = NodePath("../../ActionTimer")
 materialInstance = ExtResource("15_qe768")
-max_drop_items = 20
+max_drop_items = 12
 
 [node name="Attack" type="Node" parent="StateController"]
 script = ExtResource("22_nvrgv")

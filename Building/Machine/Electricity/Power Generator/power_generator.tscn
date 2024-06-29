@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://dinksu5e5vepb"]
+[gd_scene load_steps=6 format=3 uid="uid://dinksu5e5vepb"]
 
 [ext_resource type="Script" path="res://Building/Machine/Electricity/Power Generator/power_generator.gd" id="1_sb6xt"]
 [ext_resource type="SpriteFrames" uid="uid://cktdrmvvswus8" path="res://Building/Machine/Electricity/Power Generator/powerGeneratorAnimation.tres" id="2_tmhor"]
@@ -7,9 +7,13 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_oek2j"]
 size = Vector2(24, 29)
 
-[node name="PowerGenerator" type="Node2D" node_paths=PackedStringArray("machineUI", "animation")]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ryqo3"]
+size = Vector2(21, 22)
+
+[node name="PowerGenerator" type="StaticBody2D" node_paths=PackedStringArray("machineUI", "animation")]
 z_index = 10
 texture_filter = 1
+collision_layer = 2
 script = ExtResource("1_sb6xt")
 manaPerSecond = 1000.0
 burnPerSecond = 1.0
@@ -32,4 +36,7 @@ parentMachine = NodePath("../..")
 position = Vector2(0, 0.5)
 shape = SubResource("RectangleShape2D_oek2j")
 
-[connection signal="input_event" from="Interectable" to="." method="_on_interectable_input_event"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 3)
+shape = SubResource("RectangleShape2D_ryqo3")
+debug_color = Color(0.901961, 0.109804, 0.713726, 0.419608)

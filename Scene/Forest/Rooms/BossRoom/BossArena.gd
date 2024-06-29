@@ -28,3 +28,6 @@ func _on_trigger_event_body_entered(body):
 		spawnBoss()
 		await get_tree().create_timer(0.2).timeout
 		trigger_event.queue_free()
+
+
+

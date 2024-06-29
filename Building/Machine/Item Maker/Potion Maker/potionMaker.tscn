@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=3 uid="uid://eul3ho43kdj"]
+[gd_scene load_steps=27 format=3 uid="uid://eul3ho43kdj"]
 
 [ext_resource type="Script" path="res://Building/Machine/Item Maker/Potion Maker/potionMaker.gd" id="1_3k2kl"]
 [ext_resource type="Texture2D" uid="uid://cy01yfe162ynm" path="res://Asset/Machine.png" id="1_qlrj0"]
@@ -157,8 +157,11 @@ _data = {
 "floating": SubResource("Animation_3fvs2")
 }
 
-[node name="PotionMaker" type="Node2D" node_paths=PackedStringArray("machineUI", "animation", "pickup_sfx")]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_pcblw"]
+
+[node name="PotionMaker" type="StaticBody2D" node_paths=PackedStringArray("machineUI", "animation", "pickup_sfx")]
 z_index = 20
+collision_layer = 2
 script = ExtResource("1_3k2kl")
 originalTexture = SubResource("AtlasTexture_bms3i")
 machineUI = NodePath("Root/PotionMakerUI")
@@ -239,5 +242,10 @@ autoplay = "floating"
 [node name="pickupSFX" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("8_ha7dp")
 pitch_scale = 1.2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 2)
+shape = SubResource("RectangleShape2D_pcblw")
+debug_color = Color(0.901961, 0.109804, 0.713726, 0.419608)
 
 [connection signal="input_event" from="Interectable" to="." method="_on_interectable_input_event"]

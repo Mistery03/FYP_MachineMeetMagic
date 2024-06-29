@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://divwuueno2oyu"]
+[gd_scene load_steps=23 format=3 uid="uid://divwuueno2oyu"]
 
 [ext_resource type="Script" path="res://Building/Machine/Material Exchange/Scroll Scriber/scroll_sciber.gd" id="1_ukyqw"]
 [ext_resource type="Texture2D" uid="uid://cy01yfe162ynm" path="res://Asset/Machine.png" id="2_q5lp5"]
@@ -112,8 +112,12 @@ _data = {
 "floating": SubResource("Animation_3fvs2")
 }
 
-[node name="ScrollSciber" type="Node2D" node_paths=PackedStringArray("machineUI", "animation", "pickup_sfx")]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_x3r4s"]
+size = Vector2(21, 22)
+
+[node name="ScrollSciber" type="StaticBody2D" node_paths=PackedStringArray("machineUI", "animation", "pickup_sfx")]
 z_index = 20
+collision_layer = 2
 script = ExtResource("1_ukyqw")
 machineUI = NodePath("Root/ScrollScriberUi")
 animation = NodePath("Animation")
@@ -181,5 +185,10 @@ autoplay = "floating"
 [node name="pickupSFX" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("8_04b1a")
 pitch_scale = 1.2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 3)
+shape = SubResource("RectangleShape2D_x3r4s")
+debug_color = Color(0.901961, 0.109804, 0.713726, 0.419608)
 
 [connection signal="input_event" from="Interectable" to="." method="_on_interectable_input_event"]

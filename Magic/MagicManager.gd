@@ -39,32 +39,35 @@ func normalAttack():
 		if currMagic.scene:
 			match currMagic.name:
 				"Fireball":
-					var magicScene = currMagic.scene.instantiate()
-					var direction = (player.mousePos - staff.magic_spawn_point.global_position).normalized()
-					magicScene.global_position = staff.magic_spawn_point.global_position
-					magicScene.direction = direction
-					magicScene.rotation = atan2(direction.y,direction.x)
-					player.currMana -= currMagic.manaRequirement
-					localLevel.add_child(magicScene)
+					if currMagic.manaRequirement >= player.currMana:
+						var magicScene = currMagic.scene.instantiate()
+						var direction = (player.mousePos - staff.magic_spawn_point.global_position).normalized()
+						magicScene.global_position = staff.magic_spawn_point.global_position
+						magicScene.direction = direction
+						magicScene.rotation = atan2(direction.y,direction.x)
+						player.currMana -= currMagic.manaRequirement
+						localLevel.add_child(magicScene)
 					
 				"Seeking Fireball":
-					var magicScene = currMagic.scene.instantiate()
+					if currMagic.manaRequirement >= player.currMana:
+						var magicScene = currMagic.scene.instantiate()
 
-					magicScene.global_position = staff.magic_spawn_point.global_position
-					magicScene.player = player
-						#magicScene.mousePos = mousePos
-					magicScene.magicData = currMagic
-					magicScene.staff = staff
+						magicScene.global_position = staff.magic_spawn_point.global_position
+						magicScene.player = player
+							#magicScene.mousePos = mousePos
+						magicScene.magicData = currMagic
+						magicScene.staff = staff
 
-					player.currMana -= currMagic.manaRequirement
-					localLevel.add_child(magicScene)
+						player.currMana -= currMagic.manaRequirement
+						localLevel.add_child(magicScene)
 
 				"Explosion":
-					var magicScene = currMagic.scene.instantiate()
-					magicScene.global_position = mousePos
-					magicScene.magicData = currMagic
-					player.currMana -= currMagic.manaRequirement
-					localLevel.add_child(magicScene)
+					if currMagic.manaRequirement >= player.currMana:
+						var magicScene = currMagic.scene.instantiate()
+						magicScene.global_position = mousePos
+						magicScene.magicData = currMagic
+						player.currMana -= currMagic.manaRequirement
+						localLevel.add_child(magicScene)
 
 
 
