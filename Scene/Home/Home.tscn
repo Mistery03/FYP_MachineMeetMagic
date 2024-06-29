@@ -1,4 +1,4 @@
-[gd_scene load_steps=48 format=3 uid="uid://dm1j4it5oof3n"]
+[gd_scene load_steps=49 format=3 uid="uid://dm1j4it5oof3n"]
 
 [ext_resource type="Script" path="res://Scene/Home/Home.gd" id="1_iycag"]
 [ext_resource type="PackedScene" uid="uid://c1vsfoc55pk0w" path="res://Entity/Player/player.tscn" id="1_jnw16"]
@@ -23,6 +23,7 @@
 [ext_resource type="Script" path="res://Scene/Home/Tutorial4.gd" id="19_12rld"]
 [ext_resource type="Script" path="res://Scene/Home/Tutorial5.gd" id="20_wq48p"]
 [ext_resource type="Script" path="res://Scene/Home/Tutorial6.gd" id="22_dhvvh"]
+[ext_resource type="AudioStream" uid="uid://t1ev5awa0pk6" path="res://Asset/SFX/BGM1.mp3" id="24_cnni2"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_klcm4"]
 texture = ExtResource("1_vetej")
@@ -1412,3 +1413,8 @@ Space + AWSD to roll in a particular direction
 C to open character progression
 ESC to open inventory"
 autowrap_mode = 2
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("24_cnni2")
+volume_db = -10.0
+autoplay = true

@@ -40,3 +40,5 @@ shape = SubResource("RectangleShape2D_oek2j")
 position = Vector2(0, 3)
 shape = SubResource("RectangleShape2D_ryqo3")
 debug_color = Color(0.901961, 0.109804, 0.713726, 0.419608)
+
+[connection signal="input_event" from="Interectable" to="." method="_on_interectable_input_event"]
