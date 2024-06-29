@@ -8,7 +8,7 @@
 [ext_resource type="Script" path="res://UI/UIUX/StaminaProgressBar.gd" id="6_ogyyb"]
 [ext_resource type="Texture2D" uid="uid://do1u8ll46v0us" path="res://Asset/UIUX/staminaBar.png" id="7_1xomr"]
 
-[node name="Player_hud" type="Control"]
+[node name="Player_hud" type="Control" node_paths=PackedStringArray("hp_progress_bar")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -18,9 +18,14 @@ offset_bottom = -900.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_tnpfs")
+hp_progress_bar = NodePath("HPProgressBar")
 
 [node name="HPProgressBar" parent="." instance=ExtResource("2_hq8hl")]
 layout_mode = 0
+offset_left = 18.0
+offset_top = 17.0
+offset_right = 364.0
+offset_bottom = 71.0
 
 [node name="ManaProgressBar" type="TextureProgressBar" parent="."]
 texture_filter = 1

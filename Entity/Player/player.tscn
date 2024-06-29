@@ -1,9 +1,10 @@
-[gd_scene load_steps=103 format=3 uid="uid://c1vsfoc55pk0w"]
+[gd_scene load_steps=105 format=3 uid="uid://c1vsfoc55pk0w"]
 
 [ext_resource type="Texture2D" uid="uid://bd32dcnew3uvf" path="res://Asset/L.png" id="1_ksidj"]
 [ext_resource type="Script" path="res://Entity/Player/player.gd" id="1_xfdxb"]
-[ext_resource type="Resource" uid="uid://c6joqno41m2ls" path="res://Entity/Player/playerData.tres" id="2_g17go"]
+[ext_resource type="Resource" uid="uid://dpptpvovlf7tr" path="res://Entity/Player/Data/playerData.tres" id="2_kfwpk"]
 [ext_resource type="Resource" uid="uid://doo0oqvv31wtn" path="res://Potion/Buff/Defence Potion/DefencePotion.tres" id="3_41una"]
+[ext_resource type="Script" path="res://Building/Machine/Data/MachineSave.gd" id="3_v12hw"]
 [ext_resource type="Resource" uid="uid://bf2wpudjl6wu5" path="res://Entity/Data/testSlot1.tres" id="4_e4jpf"]
 [ext_resource type="Script" path="res://Potion/PotionManager.gd" id="5_5bgkf"]
 [ext_resource type="Script" path="res://Entity/State/StateMachine.gd" id="7_xedn3"]
@@ -50,6 +51,10 @@
 [ext_resource type="AudioStream" uid="uid://2lu5if0yp64i" path="res://Asset/SFX/forestWalkSFX.mp3" id="39_wma1b"]
 [ext_resource type="Texture2D" uid="uid://dy6bsmjnf8u44" path="res://Asset/UIUX/Container.png" id="42_uk6eg"]
 [ext_resource type="Texture2D" uid="uid://cruxbb2jv2vmx" path="res://Asset/Materials1.png" id="43_wy3ce"]
+
+[sub_resource type="Resource" id="Resource_fijhs"]
+script = ExtResource("3_v12hw")
+machine_list = Array[Resource("res://Building/Machine/Data/machineData.gd")]([])
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_dykra"]
 atlas = ExtResource("1_ksidj")
@@ -1877,7 +1882,8 @@ z_index = 10
 scale = Vector2(0.1, 0.1)
 collision_mask = 120
 script = ExtResource("1_xfdxb")
-playerData = ExtResource("2_g17go")
+playerData = ExtResource("2_kfwpk")
+machineSave = SubResource("Resource_fijhs")
 potionObject = ExtResource("3_41una")
 potion_manager = NodePath("PotionManager")
 staff = NodePath("Staff")

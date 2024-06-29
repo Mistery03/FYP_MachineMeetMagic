@@ -20,13 +20,15 @@ extends Node2D
 func _ready():
 	canvas_layer.visible = true
 	var tween = get_tree().create_tween()
-	tween.tween_property(fade_out,"modulate:a",0,1.5)
-	await get_tree().create_timer(1.5).timeout
+	tween.tween_property(fade_out,"modulate:a",0,2)
+	machineList.player = player
+	machineList.spawnMachine(player)
+	await get_tree().create_timer(2).timeout
 	canvas_layer.visible = false
 	player.isBuildEnabled = isBuildEnabled
 	player.homeTilemap = tile_map
 	player.localLevel = self
-	machineList.player = player
+	
 	
 	var teleporterGridCoords = tile_map.get_used_cells(2)
 	var teleporterData = tile_map.get_cell_tile_data(2,teleporterGridCoords[0])

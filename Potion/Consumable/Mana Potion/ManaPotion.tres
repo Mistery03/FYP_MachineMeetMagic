@@ -1,0 +1,22 @@
+[gd_resource type="Resource" script_class="PotionData" load_steps=6 format=3 uid="uid://byxin16s1k5vg"]
+
+[ext_resource type="Resource" uid="uid://d3br064ytmpxk" path="res://Crafting Recipe/Potion Recipe/defencePotionRecipe.tres" id="1_3m1pd"]
+[ext_resource type="PackedScene" uid="uid://dnsb3nt8lmryw" path="res://Potion/Consumable/Mana Potion/ManaPotion.tscn" id="2_oe762"]
+[ext_resource type="Script" path="res://Potion/Data/PotionData.gd" id="3_wx3x3"]
+[ext_resource type="Texture2D" uid="uid://dw0wj1ftq8uye" path="res://Asset/potionSS.png" id="4_ueed5"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_u2260"]
+atlas = ExtResource("4_ueed5")
+region = Rect2(64, 0, 32, 32)
+
+[resource]
+script = ExtResource("3_wx3x3")
+category = "Consumable"
+isThrowable = false
+scene = ExtResource("2_oe762")
+craftingRecipe = ExtResource("1_3m1pd")
+name = "Mana Potion"
+type = "Potion"
+amount = 0
+texture = SubResource("AtlasTexture_u2260")
+description = "Is it me or mana potion seems just like fancy water?"

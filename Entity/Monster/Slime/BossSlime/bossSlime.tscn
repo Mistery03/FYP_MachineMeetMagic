@@ -333,9 +333,9 @@ volume_db = -12.0
 
 [node name="HPProgressBar" parent="RootUI" index="0" instance=ExtResource("17_jvfmp")]
 offset_left = 263.0
-offset_top = 788.0
+offset_top = 801.0
 offset_right = 609.0
-offset_bottom = 842.0
+offset_bottom = 864.0
 scale = Vector2(3.14962, -1.04316)
 
 [node name="BossName" type="Label" parent="RootUI" index="1"]
@@ -346,6 +346,15 @@ offset_bottom = 725.0
 theme_override_fonts/font = ExtResource("18_o3dmg")
 theme_override_font_sizes/font_size = 45
 text = "BOSSNAME BOSSNAME BOSSNAME"
+
+[node name="HPAmount" type="Label" parent="RootUI" index="2"]
+offset_left = 746.0
+offset_top = 748.0
+offset_right = 869.0
+offset_bottom = 784.0
+theme_override_fonts/font = ExtResource("18_o3dmg")
+theme_override_font_sizes/font_size = 30
+text = "10000/10000"
 
 [connection signal="OnDamageTaken" from="." to="StateController/Idle" method="_on_boss_slime_on_damage_taken"]
 [connection signal="OnDamageTaken" from="." to="StateController/Chase" method="_on_boss_slime_on_damage_taken"]

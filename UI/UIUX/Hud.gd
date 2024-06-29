@@ -3,7 +3,7 @@ extends Control
 
 @export var player : Player
 
-@onready var hp_progress_bar = %HPProgressBar
+@export var hp_progress_bar:Control
 @onready var mana_progress_bar = $ManaProgressBar
 @onready var stamina_progress_bar = $StaminaProgressBar
 

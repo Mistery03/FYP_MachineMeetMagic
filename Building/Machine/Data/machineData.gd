@@ -1,4 +1,5 @@
 class_name MachineData
 extends Resource
 
-@export var manaConsumption:float
+@export var machineInstance:PackedScene
+@export var machineGlobalPos:Vector2

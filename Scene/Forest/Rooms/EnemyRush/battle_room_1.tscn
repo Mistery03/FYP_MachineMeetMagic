@@ -60,8 +60,9 @@ shape = SubResource("RectangleShape2D_hllm6")
 script = ExtResource("4_wc1h8")
 localLevel = NodePath("..")
 
-[node name="GateKeeper" parent="." node_paths=PackedStringArray("creatureManager") instance=ExtResource("6_5lixu")]
+[node name="GateKeeper" parent="." node_paths=PackedStringArray("creatureManager", "localLevel") instance=ExtResource("6_5lixu")]
 position = Vector2(576, -16)
 creatureManager = NodePath("../monsterEntities")
+localLevel = NodePath("..")
 
 [connection signal="body_entered" from="Door/Area2D" to="Door" method="_on_area_2d_body_entered"]

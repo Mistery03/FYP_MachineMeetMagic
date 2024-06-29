@@ -6,6 +6,7 @@ const JUMP_VELOCITY = 4.5
 
 @export var playerData:EntityData
 @export var localLevel:Node2D
+@export var machineSave:MachineSaveFile
 
 @export_category("Potion")
 @export var potionObject:PotionData
@@ -59,8 +60,6 @@ const JUMP_VELOCITY = 4.5
 
 @onready var text_on_mouse = $TextOnMouse
 
-
-
 var potion:Potion
 var isBuildEnabled:bool
 var isBuildMode:bool
@@ -90,10 +89,11 @@ var zoomValue:float = 6
 
 func _ready() -> void:
 	if PlayerGlobal.playerInventory:
-		inventory = PlayerGlobal.playerInventory
+		#inventory = PlayerGlobal.playerInventory
 		MagicEssenceCurrency = PlayerGlobal.playerMagicEssence
 		ResearchPointCurrency = PlayerGlobal.playerResearchPoint
-		
+	
+	inventory = playerData.inventory
 	playerCurrencyText.text = str(MagicEssenceCurrency)	
 	camera.zoom = Vector2(cameraZoom,cameraZoom)
 
@@ -113,7 +113,7 @@ func _process(delta) -> void:
 	playerCurrencyText.text = str(MagicEssenceCurrency)
 	mousePos = get_global_mouse_position()
 	##NOTE Wai this is for you
-	print("Player's researchpoint: ",ResearchPointCurrency)
+	#print("Player's researchpoint: ",ResearchPointCurrency)
 	
 
 func _input(event):

@@ -74,7 +74,13 @@ func update(delta: float) -> void:
 				var instance = machineInstance.instantiate()
 				instance.position = parent.homeTilemap.map_to_local(mouseTilePos)
 				parent.localLevel.machineList.add_child(instance)
+				
+				var machineSaveFile = MachineData.new()
+				machineSaveFile.machineInstance = machineInstance
+				machineSaveFile.machineGlobalPos = parent.homeTilemap.map_to_local(mouseTilePos)
 
+				parent.machineSave.machine_list.push_front(machineSaveFile)
+			
 			wiring_machine_state.updateWithinWireList()
 			wiring_battery_state.updateWithinWireList()
 
