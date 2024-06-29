@@ -1,0 +1,138 @@
+[gd_scene load_steps=26 format=3 uid="uid://eul3ho43kdj"]
+
+[ext_resource type="Script" path="res://Building/Machine/Item Maker/Potion Maker/potionMaker.gd" id="1_3k2kl"]
+[ext_resource type="Texture2D" uid="uid://cy01yfe162ynm" path="res://Asset/Machine.png" id="1_qlrj0"]
+[ext_resource type="Texture2D" uid="uid://dw0wj1ftq8uye" path="res://Asset/potionSS.png" id="2_4qn54"]
+[ext_resource type="Texture2D" uid="uid://bptk6f0j2t4ex" path="res://Asset/UIUX/speechBubble.png" id="4_b4tv3"]
+[ext_resource type="PackedScene" uid="uid://cr3ojbwvnl0ts" path="res://Building/Machine/Item Maker/Potion Maker/potionMakerUI.tscn" id="4_lg0d5"]
+[ext_resource type="Script" path="res://Building/Machine/PopUp.gd" id="5_88puf"]
+[ext_resource type="Texture2D" uid="uid://cruxbb2jv2vmx" path="res://Asset/Materials1.png" id="6_l22d1"]
+[ext_resource type="FontFile" uid="uid://cl3rxpo58micg" path="res://Asset/Font/Lambda-Regular.ttf" id="7_7tj3m"]
+[ext_resource type="AudioStream" uid="uid://dig47o38sc8j6" path="res://Asset/SFX/ding.mp3" id="8_ha7dp"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_twj1w"]
+atlas = ExtResource("1_qlrj0")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_winio"]
+atlas = ExtResource("1_qlrj0")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_drsk2"]
+atlas = ExtResource("1_qlrj0")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_j6ocp"]
+atlas = ExtResource("1_qlrj0")
+region = Rect2(128, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_l56vi"]
+atlas = ExtResource("1_qlrj0")
+region = Rect2(160, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_o4ipy"]
+atlas = ExtResource("1_qlrj0")
+region = Rect2(192, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5ojvn"]
+atlas = ExtResource("1_qlrj0")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ofie2"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_twj1w")
+}],
+"loop": true,
+"name": &"End",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_winio")
+}],
+"loop": true,
+"name": &"Idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_drsk2")
+}],
+"loop": true,
+"name": &"NoPower",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_j6ocp")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_l56vi")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_o4ipy")
+}],
+"loop": true,
+"name": &"Processing",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5ojvn")
+}],
+"loop": true,
+"name": &"Standby",
+"speed": 5.0
+}]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bms3i"]
+atlas = ExtResource("2_4qn54")
+region = Rect2(0, 64, 32, 32)
+
+[sub_resource type="Animation" id="Animation_cjuve"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("PotionSprite:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, -5)]
+}
+
+[sub_resource type="Animation" id="Animation_pgnun"]
+resource_name = "floating"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("PotionSprite:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.4, 0.8),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(0, -5), Vector2(0, -6), Vector2(0, -5)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_w5tpa"]
+_data = {
+"RESET": SubResource("Animation_cjuve"),
+"floating": SubResource("Animation_pgnun")
+}
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_jywj8"]
+size = Vector2(26, 28)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_r8b0d"]
+atlas = ExtResource("6_l22d1")
+region = Rect2(0, 672, 32, 32)
+
+[sub_resource type="Animation" id="Anima

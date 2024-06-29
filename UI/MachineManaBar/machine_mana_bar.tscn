@@ -1,0 +1,27 @@
+[gd_scene load_steps=5 format=3 uid="uid://cxsbrurialksc"]
+
+[ext_resource type="Texture2D" uid="uid://i1qy16ilxpv2" path="res://Asset/UIUX/manaBorderBar2.png" id="1_8gvyd"]
+[ext_resource type="Texture2D" uid="uid://ffxps64qbuxq" path="res://Asset/UIUX/manaBar.png" id="2_kqdgy"]
+[ext_resource type="FontFile" uid="uid://cl3rxpo58micg" path="res://Asset/Font/Lambda-Regular.ttf" id="3_lngu7"]
+[ext_resource type="Script" path="res://UI/MachineManaBar/machine_mana_bar.gd" id="3_vwcp1"]
+
+[node name="MachineManaBar" type="TextureProgressBar"]
+offset_right = 640.0
+offset_bottom = 320.0
+value = 100.0
+texture_over = ExtResource("1_8gvyd")
+texture_progress = ExtResource("2_kqdgy")
+script = ExtResource("3_vwcp1")
+
+[node name="ManaAmountDisplay" type="Label" parent="."]
+layout_mode = 0
+offset_left = 19.0
+offset_top = 150.0
+offset_right = 606.0
+offset_bottom = 220.0
+theme_override_colors/font_color = Color(0.968627, 0.968627, 0.968627, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("3_lngu7")
+theme_override_font_sizes/font_size = 30
+text = "100/100"
+horizontal_alignment = 1

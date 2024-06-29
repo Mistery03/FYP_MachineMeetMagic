@@ -1,0 +1,364 @@
+[gd_scene load_steps=50 format=3 uid="uid://db1g8thxyqg42"]
+
+[ext_resource type="PackedScene" uid="uid://bveafp4dvobga" path="res://Entity/Entity.tscn" id="1_5u21s"]
+[ext_resource type="Script" path="res://Entity/Monster/Slime/BossSlime/bossSlime.gd" id="2_bpjrv"]
+[ext_resource type="Texture2D" uid="uid://b8m7h885sjdf6" path="res://Asset/slimeSpawn.png" id="2_pa0iy"]
+[ext_resource type="Texture2D" uid="uid://dfbobrjgxuwbl" path="res://Asset/slime.png" id="3_lqj02"]
+[ext_resource type="Script" path="res://Entity/Monster/Slime/State/Spawned.gd" id="5_168fq"]
+[ext_resource type="Script" path="res://Entity/Monster/Slime/BossSlime/State/Idle.gd" id="5_pylat"]
+[ext_resource type="Script" path="res://Entity/Monster/Slime/BossSlime/State/Chase.gd" id="6_w1yjb"]
+[ext_resource type="Script" path="res://Entity/Monster/Slime/State/Damaged.gd" id="7_1cfk2"]
+[ext_resource type="Script" path="res://Entity/Monster/Slime/State/Death.gd" id="8_sebg8"]
+[ext_resource type="Script" path="res://Entity/Monster/Slime/BossSlime/State/JumpAttack.gd" id="9_m8plw"]
+[ext_resource type="AudioStream" uid="uid://xdl252khl462" path="res://Asset/SFX/popUpSfx.mp3" id="9_ysd0v"]
+[ext_resource type="PackedScene" uid="uid://drvsjd1syi8qh" path="res://Entity/Monster/Slime/Projectile/projectile.tscn" id="10_b1g7y"]
+[ext_resource type="Script" path="res://Entity/Monster/Slime/BossSlime/State/DashAttack.gd" id="11_nnqa4"]
+[ext_resource type="Script" path="res://Entity/Monster/Slime/BossSlime/State/SpawnSlimes.gd" id="12_wsmy6"]
+[ext_resource type="Resource" uid="uid://e3axqaaofq7l" path="res://Entity/Monster/Slime/Data/darkBlueSlime.tres" id="14_x0wtl"]
+[ext_resource type="Resource" uid="uid://d2r7bwb28rbca" path="res://Entity/Monster/Slime/Data/purpleSlime.tres" id="15_tqfeq"]
+[ext_resource type="PackedScene" uid="uid://c7gatwjkw72wn" path="res://HUD/Healthbar/hp_progress_bar.tscn" id="17_jvfmp"]
+[ext_resource type="FontFile" uid="uid://cl3rxpo58micg" path="res://Asset/Font/Lambda-Regular.ttf" id="18_o3dmg"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_eih3m"]
+atlas = ExtResource("3_lqj02")
+region = Rect2(192, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_21osh"]
+atlas = ExtResource("3_lqj02")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_daj8u"]
+atlas = ExtResource("3_lqj02")
+region = Rect2(224, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_egta2"]
+atlas = ExtResource("2_pa0iy")
+region = Rect2(224, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6tef3"]
+atlas = ExtResource("2_pa0iy")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7jm3l"]
+atlas = ExtResource("2_pa0iy")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_70aih"]
+atlas = ExtResource("2_pa0iy")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nlsqq"]
+atlas = ExtResource("2_pa0iy")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_db66x"]
+atlas = ExtResource("3_lqj02")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_prc16"]
+atlas = ExtResource("3_lqj02")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_t1j8d"]
+atlas = ExtResource("3_lqj02")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_u7qeb"]
+atlas = ExtResource("2_pa0iy")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rrb7h"]
+atlas = ExtResource("2_pa0iy")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ink2v"]
+atlas = ExtResource("2_pa0iy")
+region = Rect2(128, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_js8b7"]
+atlas = ExtResource("2_pa0iy")
+region = Rect2(160, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rbylk"]
+atlas = ExtResource("2_pa0iy")
+region = Rect2(192, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vryud"]
+atlas = ExtResource("2_pa0iy")
+region = Rect2(224, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_veyro"]
+atlas = ExtResource("3_lqj02")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_y2bwa"]
+atlas = ExtResource("3_lqj02")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_iadjv"]
+atlas = ExtResource("3_lqj02")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3g2x8"]
+atlas = ExtResource("2_pa0iy")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_sft28"]
+atlas = ExtResource("2_pa0iy")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mriqe"]
+atlas = ExtResource("2_pa0iy")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_uwjgy"]
+atlas = ExtResource("2_pa0iy")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_swhjv"]
+atlas = ExtResource("2_pa0iy")
+region = Rect2(128, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kcg0h"]
+atlas = ExtResource("2_pa0iy")
+region = Rect2(160, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jtbc1"]
+atlas = ExtResource("2_pa0iy")
+region = Rect2(192, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yv858"]
+atlas = ExtResource("2_pa0iy")
+region = Rect2(224, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_nja4y"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_eih3m")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_21osh")
+}],
+"loop": false,
+"name": &"DAMAGED",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_daj8u")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_egta2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6tef3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7jm3l")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_70aih")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nlsqq")
+}],
+"loop": false,
+"name": &"DEATH",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_db66x")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_prc16")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_t1j8d")
+}],
+"loop": true,
+"name": &"IDLE",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_u7qeb")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rrb7h")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ink2v")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_js8b7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rbylk")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vryud")
+}],
+"loop": false,
+"name": &"JUMP",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_veyro")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_y2bwa")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_iadjv")
+}],
+"loop": true,
+"name": &"MOVE",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3g2x8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_sft28")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mriqe")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_uwjgy")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_swhjv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kcg0h")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jtbc1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_yv858")
+}],
+"loop": false,
+"name": &"SPAWN",
+"speed": 5.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_r5rir"]
+radius = 56.6667
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_am7ir"]
+radius = 54.037
+
+[node name="BossSlime" node_paths=PackedStringArray("healthbarControl", "collision_box", "spawnSFX", "animation", "stateController") instance=ExtResource("1_5u21s")]
+scale = Vector2(0.8, 0.8)
+collision_layer = 1024
+collision_mask = 247
+script = ExtResource("2_bpjrv")
+healthbarControl = NodePath("RootUI/HPProgressBar")
+bossName = "The Slime Eater"
+collision_box = NodePath("CollisionBox")
+spawnSFX = NodePath("spawnSFX")
+damagePoint = 10.0
+chaseSpeed = 6000.0
+maxHP = 1000.0
+animation = NodePath("Animation")
+stateController = NodePath("StateController")
+
+[node name="Animation" parent="." index="0"]
+sprite_frames = SubResource("SpriteFrames_nja4y")
+animation = &"IDLE"
+
+[node name="CollisionBox" parent="." index="1"]
+collision_layer = 1024
+collision_mask = 503
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CollisionBox" index="0"]
+position = Vector2(0, 15)
+shape = SubResource("CircleShape2D_r5rir")
+debug_color = Color(0.752941, 0.458824, 0.105882, 0.419608)
+
+[node name="CollisionShape2D" parent="." index="2"]
+position = Vector2(0, 15)
+shape = SubResource("CircleShape2D_am7ir")
+debug_color = Color(0.945098, 0, 0.596078, 0.419608)
+
+[node name="StateController" parent="." index="3" node_paths=PackedStringArray("current_state")]
+current_state = NodePath("Spawn")
+
+[node name="Idle" type="Node" parent="StateController" index="0"]
+script = ExtResource("5_pylat")
+
+[node name="Spawn" type="Node" parent="StateController" index="1"]
+script = ExtResource("5_168fq")
+animation_name = "SPAWN"
+
+[node name="Chase" type="Node" parent="StateController" index="2"]
+script = ExtResource("6_w1yjb")
+SHOOT_DISTANCE = 180
+
+[node name="Damaged" type="Node" parent="StateController" index="3"]
+script = ExtResource("7_1cfk2")
+animation_name = "DAMAGED"
+
+[node name="Death" type="Node" parent="StateController" index="4"]
+script = ExtResource("8_sebg8")
+animation_name = "DEATH"
+
+[node name="JumpAttack" type="Node" parent="StateController" index="5"]
+script = ExtResource("9_m8plw")
+projectile = ExtResource("10_b1g7y")
+bullet_count = 21
+animation_name = "Jump"
+
+[node name="DashAttack" type="Node" parent="StateController" index="6"]
+script = ExtResource("11_nnqa4")
+chaseSpeed = 7500.0
+damagePoint = 30.0
+
+[node name="SpawnSlimes" type="Node" parent="StateController" index="7"]
+script = ExtResource("12_wsmy6")
+creatureList = Array[Resource("res://Entity/Data/mobData.gd")]([ExtResource("14_x0wtl"), ExtResource("15_tqfeq")])
+maxCreatureSpawn = 5
+
+[node name="spawnSFX" type="AudioStreamPlayer2D" parent="." index="4"]
+stream = ExtResource("9_ysd0v")
+volume_db = -12.0
+
+[node name="RootUI" type="CanvasLayer" parent="." index="5"]
+
+[node name="HPProgressBar" parent="RootUI" index="0" instance=ExtResource("17_jvfmp")]
+offset_left = 263.0
+offset_top = 801.0
+offset_right = 609.0
+offset_bottom = 864.0
+scale = Vector2(3.14962, -1.04316)
+
+[node name="BossName" type="Label" parent="RootUI" index="1"]
+offset_left = 305.0
+offset_top = 672.0
+offset_right = 1098.0
+offset_bottom = 725.0
+theme_override_fonts/font = ExtResource("18_o3dmg")
+theme_override_font_sizes/font_size = 45
+text = "BOSSNAME BOSSNAME BOSSNAME"
+
+[node name="HPAmount" type="Label" parent="RootUI" index="2"]
+offset_left = 746.0
+offset_top = 748.0
+offset_right = 869.0
+offset_bottom = 784.0
+theme_override_fonts/font = ExtResource("18_o3dmg")
+theme_override_font_sizes/font_size = 30
+text = "10000/10000"
+
+[connection signal="OnDamageTaken" from="." to="StateController/Idle" method="_on_boss_slime_on_damage_taken"]
+[connection signal="OnDamageTaken" from="." to="StateController/Chase" method="_on_boss_slime_on_damage_taken"]
+[connection signal="area_entered" from="CollisionBox" to="StateController/Chase" method="_on_collision_box_area_entered"]
+[connection signal="area_entered" from="CollisionBox" to="StateController/Damaged" method="_on_collision_box_area_entered"]
+[connection signal="body_entered" from="CollisionBox" to="StateController/Chase" method="_on_collision_box_body_entered"]
+[connection signal="body_entered" from="CollisionBox" to="StateController/DashAttack" method="_on_collision_box_body_entered"]

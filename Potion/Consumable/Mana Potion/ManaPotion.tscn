@@ -1,0 +1,16 @@
+[gd_scene load_steps=4 format=3 uid="uid://dnsb3nt8lmryw"]
+
+[ext_resource type="Script" path="res://Potion/Buff/Defence Potion/DefencePotion.gd" id="1_f0x85"]
+[ext_resource type="Texture2D" uid="uid://dw0wj1ftq8uye" path="res://Asset/potionSS.png" id="2_b5dxt"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tu61o"]
+atlas = ExtResource("2_b5dxt")
+region = Rect2(64, 0, 32, 32)
+
+[node name="ManaPotion" type="Node2D"]
+script = ExtResource("1_f0x85")
+manaPoints = 30.0
+
+[node name="PotionSprite" type="Sprite2D" parent="."]
+texture_filter = 1
+texture = SubResource("AtlasTexture_tu61o")

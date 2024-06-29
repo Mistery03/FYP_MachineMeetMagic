@@ -1,0 +1,20 @@
+[gd_resource type="Resource" script_class="MaterialData" load_steps=4 format=3 uid="uid://b0mv13gn6qdxo"]
+
+[ext_resource type="Script" path="res://Material/Data/materialData.gd" id="2_3ongc"]
+[ext_resource type="Texture2D" uid="uid://bi05jqai8a2ss" path="res://Asset/materials.png" id="3_kf0ws"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dmqar"]
+atlas = ExtResource("3_kf0ws")
+region = Rect2(48, 48, 24, 24)
+
+[resource]
+script = ExtResource("2_3ongc")
+magicEssenceAmountResult = 2
+burnPerSecond = 50
+manaProducedPerSecond = 0
+durability = 0
+name = "Wood"
+type = "Construction"
+amount = 0
+texture = SubResource("AtlasTexture_dmqar")
+description = ""

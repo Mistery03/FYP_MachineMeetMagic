@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="MobData" load_steps=3 format=3 uid="uid://e3axqaaofq7l"]
+
+[ext_resource type="Script" path="res://Entity/Data/mobData.gd" id="1_e48u5"]
+[ext_resource type="PackedScene" uid="uid://yqdv0b1oe11b" path="res://Entity/Monster/Slime/DarkBlueSlime/DarkBlueSlime.tscn" id="1_jffsw"]
+
+[resource]
+script = ExtResource("1_e48u5")
+mobName = "Dark Blue Slime"
+mobDesc = "Adult slime that wants to mess you "
+mobInstance = ExtResource("1_jffsw")

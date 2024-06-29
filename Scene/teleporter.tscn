@@ -1,0 +1,154 @@
+[gd_scene load_steps=11 format=3 uid="uid://cquwobpa3kh6"]
+
+[ext_resource type="Script" path="res://Scene/Teleporter.gd" id="1_7j6qd"]
+[ext_resource type="Texture2D" uid="uid://c0q82oth7xkok" path="res://Asset/homeTileMap.png" id="2_xjmqd"]
+[ext_resource type="Script" path="res://Scene/UIUX/LevelSelection.gd" id="4_64gdj"]
+[ext_resource type="Texture2D" uid="uid://dspu8vs1bbv68" path="res://Asset/UIUX/levelSelection.png" id="4_74l1w"]
+[ext_resource type="FontFile" uid="uid://cl3rxpo58micg" path="res://Asset/Font/Lambda-Regular.ttf" id="6_fw8ga"]
+[ext_resource type="Texture2D" uid="uid://gc6227cge533" path="res://Asset/UIUX/radialBarBorder.png" id="7_82d06"]
+[ext_resource type="Script" path="res://Scene/UIUX/MagicallForestBTN.gd" id="7_hlq3s"]
+[ext_resource type="Texture2D" uid="uid://cvms4hvaojrsr" path="res://Asset/UIUX/radialBar.png" id="8_8curs"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jft2l"]
+atlas = ExtResource("2_xjmqd")
+region = Rect2(256, 0, 64, 64)
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ypvlw"]
+radius = 20.0
+height = 54.0
+
+[node name="Teleporter" type="Node2D"]
+script = ExtResource("1_7j6qd")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+z_index = 2
+texture_filter = 1
+texture = SubResource("AtlasTexture_jft2l")
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 32
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(0, -2)
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_ypvlw")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+layer = 5
+
+[node name="LevelSelection" type="Control" parent="CanvasLayer"]
+visible = false
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("4_64gdj")
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer/LevelSelection"]
+layout_mode = 0
+offset_right = 1631.0
+offset_bottom = 901.0
+texture = ExtResource("4_74l1w")
+stretch_mode = 4
+
+[node name="LevelDescription" type="Label" parent="CanvasLayer/LevelSelection"]
+visible = false
+layout_mode = 0
+offset_left = 590.0
+offset_top = 407.0
+offset_right = 1009.0
+offset_bottom = 729.0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("6_fw8ga")
+theme_override_font_sizes/font_size = 34
+text = "Select destination"
+horizontal_alignment = 1
+autowrap_mode = 2
+
+[node name="SelectLevelText" type="Label" parent="CanvasLayer/LevelSelection"]
+layout_mode = 0
+offset_left = 558.0
+offset_top = 459.0
+offset_right = 1062.0
+offset_bottom = 533.0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("6_fw8ga")
+theme_override_font_sizes/font_size = 64
+text = "Select destination"
+horizontal_alignment = 1
+autowrap_mode = 2
+
+[node name="MagicallForestBTN" type="Button" parent="CanvasLayer/LevelSelection"]
+layout_mode = 0
+offset_left = 670.0
+offset_top = 47.0
+offset_right = 943.0
+offset_bottom = 110.0
+theme_override_fonts/font = ExtResource("6_fw8ga")
+theme_override_font_sizes/font_size = 48
+text = "Magical Forest"
+script = ExtResource("7_hlq3s")
+levelDesc = "The Magical Forest seems to be the closest to you and there are tales that the magical forest is full exotic wild beast and untouch magic"
+
+[node name="Button2" type="Button" parent="CanvasLayer/LevelSelection"]
+layout_mode = 0
+offset_left = 232.0
+offset_top = 703.0
+offset_right = 505.0
+offset_bottom = 766.0
+theme_override_fonts/font = ExtResource("6_fw8ga")
+theme_override_font_sizes/font_size = 48
+text = "Unknown
+"
+
+[node name="Button3" type="Button" parent="CanvasLayer/LevelSelection"]
+layout_mode = 0
+offset_left = 1131.0
+offset_top = 707.0
+offset_right = 1404.0
+offset_bottom = 770.0
+theme_override_fonts/font = ExtResource("6_fw8ga")
+theme_override_font_sizes/font_size = 48
+text = "Unknown"
+
+[node name="instruction" type="Label" parent="CanvasLayer/LevelSelection"]
+layout_mode = 0
+offset_left = 118.0
+offset_top = 834.0
+offset_right = 453.0
+offset_bottom = 871.0
+theme_override_fonts/font = ExtResource("6_fw8ga")
+theme_override_font_sizes/font_size = 32
+text = "Press ESC to exit the level selection menu
+"
+
+[node name="RadialLoading" type="TextureProgressBar" parent="."]
+visible = false
+texture_filter = 1
+offset_left = -19.0
+offset_top = -74.0
+offset_right = 45.0
+offset_bottom = -10.0
+scale = Vector2(0.7, 0.7)
+max_value = 3.0
+step = 0.1
+fill_mode = 4
+texture_over = ExtResource("7_82d06")
+texture_progress = ExtResource("8_8curs")
+
+[node name="IndicatorPopUp" type="Label" parent="."]
+visible = false
+offset_left = -46.0
+offset_top = -52.0
+offset_right = 143.0
+offset_bottom = -24.0
+scale = Vector2(0.05, 0.05)
+theme_override_fonts/font = ExtResource("6_fw8ga")
+theme_override_font_sizes/font_size = 240
+text = "Hold  [E] to teleport"
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
+[connection signal="body_exited" from="Area2D" to="." method="_on_area_2d_body_exited"]
+[connection signal="mouse_entered" from="CanvasLayer/LevelSelection/MagicallForestBTN" to="CanvasLayer/LevelSelection/MagicallForestBTN" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="CanvasLayer/LevelSelection/MagicallForestBTN" to="CanvasLayer/LevelSelection/MagicallForestBTN" method="_on_mouse_exited"]
+[connection signal="pressed" from="CanvasLayer/LevelSelection/MagicallForestBTN" to="CanvasLayer/LevelSelection/MagicallForestBTN" method="_on_pressed"]

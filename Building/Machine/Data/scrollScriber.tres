@@ -1,0 +1,20 @@
+[gd_resource type="Resource" script_class="BuildingData" load_steps=5 format=3 uid="uid://dqo00x1g854h3"]
+
+[ext_resource type="PackedScene" uid="uid://divwuueno2oyu" path="res://Building/Machine/Material Exchange/Scroll Scriber/scroll_sciber.tscn" id="1_k0afd"]
+[ext_resource type="Script" path="res://Building/Data/buildingData.gd" id="1_opnia"]
+[ext_resource type="Texture2D" uid="uid://cy01yfe162ynm" path="res://Asset/Machine.png" id="2_gmw60"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mdxub"]
+atlas = ExtResource("2_gmw60")
+region = Rect2(0, 64, 32, 32)
+
+[resource]
+script = ExtResource("1_opnia")
+name = "Scroll Scriber"
+category = "Material Exchange"
+texture = SubResource("AtlasTexture_mdxub")
+atlasCoord = Vector2i(0, 2)
+description = "Convert Magic into Researchable points"
+instance = ExtResource("1_k0afd")
+isUnlocked = true
+unlockAmount = 0

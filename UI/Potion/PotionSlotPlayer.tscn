@@ -1,0 +1,81 @@
+[gd_scene load_steps=9 format=3 uid="uid://chm64ke4qgtt7"]
+
+[ext_resource type="Script" path="res://UI/Potion/PotionSlotPlayer.gd" id="1_7dy1s"]
+[ext_resource type="Texture2D" uid="uid://dy6bsmjnf8u44" path="res://Asset/UIUX/Container.png" id="2_udxp3"]
+[ext_resource type="Texture2D" uid="uid://dw0wj1ftq8uye" path="res://Asset/potionSS.png" id="3_50yo1"]
+[ext_resource type="FontFile" uid="uid://cl3rxpo58micg" path="res://Asset/Font/Lambda-Regular.ttf" id="4_gbvxh"]
+[ext_resource type="Texture2D" uid="uid://cy01yfe162ynm" path="res://Asset/Machine.png" id="4_xx5hn"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_olqjb"]
+atlas = ExtResource("3_50yo1")
+region = Rect2(0, 64, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_sff5m"]
+atlas = ExtResource("3_50yo1")
+region = Rect2(0, 64, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mos3l"]
+atlas = ExtResource("4_xx5hn")
+region = Rect2(160, 160, 32, 32)
+
+[node name="PotionSlotPlayer" type="Panel"]
+self_modulate = Color(1, 1, 1, 0)
+custom_minimum_size = Vector2(38, 38)
+offset_right = 40.0
+offset_bottom = 48.0
+script = ExtResource("1_7dy1s")
+defaultTexture = SubResource("AtlasTexture_olqjb")
+
+[node name="Container" type="TextureRect" parent="."]
+texture_filter = 1
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("2_udxp3")
+
+[node name="PotionTexture" type="TextureRect" parent="Container"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+texture = SubResource("AtlasTexture_sff5m")
+
+[node name="Select" type="TextureRect" parent="."]
+visible = false
+texture_filter = 1
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+texture = SubResource("AtlasTexture_mos3l")
+
+[node name="Button" type="Button" parent="."]
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="PotionAmount" type="Label" parent="."]
+visible = false
+layout_mode = 0
+offset_left = 25.0
+offset_top = 24.0
+offset_right = 213.0
+offset_bottom = 252.0
+scale = Vector2(0.05, 0.05)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 10
+theme_override_fonts/font = ExtResource("4_gbvxh")
+theme_override_font_sizes/font_size = 200
+text = "99
+"
+
+[node name="Darkened" type="Panel" parent="."]
+visible = false
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[connection signal="focus_entered" from="Button" to="." method="_on_button_focus_entered"]
+[connection signal="focus_exited" from="Button" to="." method="_on_button_focus_exited"]
+[connection signal="gui_input" from="Button" to="." method="_on_button_gui_input"]
+[connection signal="gui_input" from="Darkened" to="." method="_on_darkened_gui_input"]

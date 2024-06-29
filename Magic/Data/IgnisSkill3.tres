@@ -1,0 +1,22 @@
+[gd_resource type="Resource" script_class="MagicData" load_steps=4 format=3 uid="uid://djb03olcdq404"]
+
+[ext_resource type="Script" path="res://Magic/Data/magicData.gd" id="1_xl4wg"]
+[ext_resource type="Texture2D" uid="uid://u1h6oyjt8kdh" path="res://Asset/Skill_Btn.png" id="2_5onrj"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lyq3t"]
+atlas = ExtResource("2_5onrj")
+region = Rect2(96, 0, 32, 32)
+
+[resource]
+script = ExtResource("1_xl4wg")
+name = "IgnisSkill3"
+skillButton = SubResource("AtlasTexture_lyq3t")
+manaRequirement = 0.0
+isUnlocked = false
+burningTime = 0.0
+efficientTime = 0.0
+damage = 0.0
+attackBased = false
+attackCooldown = 0
+speed = 0.0
+description = ""

@@ -1,0 +1,51 @@
+[gd_scene load_steps=7 format=3 uid="uid://dsnw47taoamf7"]
+
+[ext_resource type="Script" path="res://UI/MachineSlot/result_slot.gd" id="1_qnqh8"]
+[ext_resource type="Texture2D" uid="uid://daap0c1p135gi" path="res://Asset/UIUX/machineContainer.png" id="2_0676r"]
+[ext_resource type="Texture2D" uid="uid://cruxbb2jv2vmx" path="res://Asset/Materials1.png" id="3_aj532"]
+[ext_resource type="FontFile" uid="uid://cl3rxpo58micg" path="res://Asset/Font/Lambda-Regular.ttf" id="4_ytnev"]
+[ext_resource type="AudioStream" uid="uid://dig47o38sc8j6" path="res://Asset/SFX/ding.mp3" id="5_xe8ws"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_04xho"]
+atlas = ExtResource("3_aj532")
+region = Rect2(0, 672, 32, 32)
+
+[node name="ResultSlot" type="Panel"]
+custom_minimum_size = Vector2(180, 180)
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("1_qnqh8")
+
+[node name="Border" type="TextureRect" parent="."]
+texture_filter = 1
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+scale = Vector2(5, 5)
+texture = ExtResource("2_0676r")
+
+[node name="ItemTexture" type="TextureRect" parent="Border"]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+texture = SubResource("AtlasTexture_04xho")
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 0
+offset_left = 103.0
+offset_top = 103.0
+offset_right = 179.0
+offset_bottom = 195.0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 20
+theme_override_fonts/font = ExtResource("4_ytnev")
+theme_override_font_sizes/font_size = 80
+text = "99"
+
+[node name="pickupSFX" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("5_xe8ws")
+pitch_scale = 1.2
+
+[connection signal="gui_input" from="Border/ItemTexture" to="." method="_on_item_texture_gui_input"]

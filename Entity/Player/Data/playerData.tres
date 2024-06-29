@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="PlayerData" load_steps=2 format=3 uid="uid://dpptpvovlf7tr"]
+
+[ext_resource type="Script" path="res://Entity/Player/Data/PlayerData.gd" id="1_kph4g"]
+
+[resource]
+script = ExtResource("1_kph4g")
+inventory = Array[Resource("res://UI/Inventory/Data/slotData.gd")]([null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null])
+Name = "Player"
+MaxHealth = 100.0
+MaxStamina = 100.0
+MaxMana = 100.0
+MaxDefence = 100.0

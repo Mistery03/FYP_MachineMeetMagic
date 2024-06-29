@@ -1,0 +1,20 @@
+[gd_resource type="Resource" script_class="MagicData" load_steps=5 format=3 uid="uid://cqgrvsd8t35a3"]
+
+[ext_resource type="PackedScene" uid="uid://cbpcjmtv6eke7" path="res://Magic/SeekingFireball.tscn" id="1_0hx32"]
+[ext_resource type="Script" path="res://Magic/Data/magicData.gd" id="1_hb0xh"]
+[ext_resource type="Texture2D" uid="uid://u1h6oyjt8kdh" path="res://Asset/Skill_Btn.png" id="3_oimyw"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vhwpq"]
+atlas = ExtResource("3_oimyw")
+region = Rect2(32, 0, 32, 32)
+
+[resource]
+script = ExtResource("1_hb0xh")
+name = "Ignis Normal Attack"
+skillButton = SubResource("AtlasTexture_vhwpq")
+scene = ExtResource("1_0hx32")
+manaRequirement = 20.0
+isUnlocked = true
+burningTime = 0.0
+efficientTime = 0.0
+damangeAmount = 0.0

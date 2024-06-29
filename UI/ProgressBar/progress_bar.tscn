@@ -1,0 +1,12 @@
+[gd_scene load_steps=3 format=3 uid="uid://3etlyd8c2p38"]
+
+[ext_resource type="Texture2D" uid="uid://dc5gs43kepf3r" path="res://Asset/UIUX/loadingBorderBar.png" id="1_2co2l"]
+[ext_resource type="Texture2D" uid="uid://0nonicmp0lij" path="res://Asset/UIUX/loadingBar.png" id="2_r5bfj"]
+
+[node name="ProgressBar" type="TextureProgressBar"]
+offset_right = 640.0
+offset_bottom = 320.0
+scale = Vector2(0.8, 0.8)
+value = 100.0
+texture_over = ExtResource("1_2co2l")
+texture_progress = ExtResource("2_r5bfj")

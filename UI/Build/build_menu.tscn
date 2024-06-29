@@ -1,0 +1,295 @@
+[gd_scene load_steps=21 format=3 uid="uid://dgn61wamn10el"]
+
+[ext_resource type="Script" path="res://UI/Build/build_menu.gd" id="1_0ur8d"]
+[ext_resource type="Texture2D" uid="uid://dy6bsmjnf8u44" path="res://Asset/UIUX/Container.png" id="1_bxykf"]
+[ext_resource type="PackedScene" uid="uid://b8l6h6q66lu2w" path="res://UI/Build/build_slot.tscn" id="2_gxta4"]
+[ext_resource type="FontFile" uid="uid://cl3rxpo58micg" path="res://Asset/Font/Lambda-Regular.ttf" id="3_88haw"]
+[ext_resource type="Texture2D" uid="uid://cy01yfe162ynm" path="res://Asset/Machine.png" id="5_25chw"]
+[ext_resource type="Resource" uid="uid://b7tm5f2vprc8a" path="res://Building/Machine/Data/extractor.tres" id="5_mgpqo"]
+[ext_resource type="Resource" uid="uid://dqo00x1g854h3" path="res://Building/Machine/Data/scrollScriber.tres" id="6_ft3vg"]
+[ext_resource type="Script" path="res://UI/Build/DescriptionBoard.gd" id="6_ulo5r"]
+[ext_resource type="Texture2D" uid="uid://dw0wj1ftq8uye" path="res://Asset/potionSS.png" id="6_wdmht"]
+[ext_resource type="Resource" uid="uid://ch3ruj8fn022x" path="res://Building/Machine/Data/powerGenerator.tres" id="7_1tdyj"]
+[ext_resource type="Resource" uid="uid://b4ot4cdrsegxs" path="res://Building/Machine/Data/battery.tres" id="8_vgx31"]
+[ext_resource type="Resource" uid="uid://dirfmb3120dov" path="res://Building/Machine/Data/potionMaker.tres" id="9_cux2h"]
+[ext_resource type="Script" path="res://Building/Machine/MaterialContainer.gd" id="12_gfy0j"]
+[ext_resource type="Script" path="res://UI/Inventory/Player/PlayerInventoryHanlder.gd" id="14_71dvt"]
+[ext_resource type="Script" path="res://Building/Machine/Item Maker/Potion Maker/ingredientPlaceholder.gd" id="14_xjsrd"]
+[ext_resource type="PackedScene" uid="uid://d3a8b5m3ju4nv" path="res://UI/Inventory/Player/playerInventory_machineSlot.tscn" id="15_yndb0"]
+[ext_resource type="PackedScene" uid="uid://cnj7jj8r34b1q" path="res://Material/Material.tscn" id="16_ea8qt"]
+[ext_resource type="PackedScene" uid="uid://cawvmrg7mckvi" path="res://UI/Inventory/Player/player_grid_inventory.tscn" id="17_uuavj"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_spxpk"]
+atlas = ExtResource("5_25chw")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_r6mg4"]
+atlas = ExtResource("6_wdmht")
+region = Rect2(0, 0, 32, 32)
+
+[node name="BuildMenu" type="Control" node_paths=PackedStringArray("inventoryHandler")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(3, 3)
+script = ExtResource("1_0ur8d")
+inventoryHandler = NodePath("PlayerInventoryHanlder")
+
+[node name="BuildMenu" type="NinePatchRect" parent="."]
+texture_filter = 1
+layout_mode = 0
+offset_left = 0.333333
+offset_top = 5.33333
+offset_right = 166.333
+offset_bottom = 213.333
+texture = ExtResource("1_bxykf")
+region_rect = Rect2(0, 0, 32, 32)
+
+[node name="Label" type="Label" parent="BuildMenu"]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -106.0
+offset_top = 7.0
+offset_right = 4210.0
+offset_bottom = 862.0
+grow_horizontal = 2
+scale = Vector2(0.05, 0.05)
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("3_88haw")
+theme_override_font_sizes/font_size = 400
+text = "BUILD MENU"
+horizontal_alignment = 1
+
+[node name="GridContainer" type="GridContainer" parent="BuildMenu"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -70.0
+offset_top = 31.0
+offset_right = 70.0
+offset_bottom = 99.0
+grow_horizontal = 2
+columns = 4
+
+[node name="BuildSlot" parent="BuildMenu/GridContainer" instance=ExtResource("2_gxta4")]
+layout_mode = 2
+buildingData = ExtResource("5_mgpqo")
+
+[node name="BuildSlot2" parent="BuildMenu/GridContainer" instance=ExtResource("2_gxta4")]
+layout_mode = 2
+buildingData = ExtResource("6_ft3vg")
+
+[node name="BuildSlot3" parent="BuildMenu/GridContainer" instance=ExtResource("2_gxta4")]
+layout_mode = 2
+buildingData = ExtResource("7_1tdyj")
+
+[node name="BuildSlot4" parent="BuildMenu/GridContainer" instance=ExtResource("2_gxta4")]
+layout_mode = 2
+buildingData = ExtResource("8_vgx31")
+
+[node name="BuildSlot5" parent="BuildMenu/GridContainer" instance=ExtResource("2_gxta4")]
+layout_mode = 2
+buildingData = ExtResource("9_cux2h")
+
+[node name="DescriptionBoard" type="NinePatchRect" parent="."]
+visible = false
+texture_filter = 1
+layout_mode = 0
+offset_left = 169.0
+offset_top = 4.0
+offset_right = 360.0
+offset_bottom = 212.0
+texture = ExtResource("1_bxykf")
+region_rect = Rect2(0.595047, 0.0548, 30.9449, 31.9452)
+script = ExtResource("6_ulo5r")
+
+[node name="BuildingIcon" type="TextureRect" parent="DescriptionBoard"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -40.1667
+offset_top = 7.0
+offset_right = -0.166656
+offset_bottom = 47.0
+grow_horizontal = 2
+scale = Vector2(2, 2)
+texture = SubResource("AtlasTexture_spxpk")
+
+[node name="BuidlingName" type="Label" parent="DescriptionBoard"]
+layout_mode = 0
+offset_left = 29.3333
+offset_top = 82.6667
+offset_right = 2651.34
+offset_bottom = 653.667
+scale = Vector2(0.05, 0.05)
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("3_88haw")
+theme_override_font_sizes/font_size = 500
+text = "MACHINENAME"
+horizontal_alignment = 1
+
+[node name="MaterialContainer" type="HBoxContainer" parent="DescriptionBoard" node_paths=PackedStringArray("inventoryHandler")]
+custom_minimum_size = Vector2(32, 0)
+layout_mode = 1
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_top = 6.0
+offset_bottom = 38.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+script = ExtResource("12_gfy0j")
+inventoryHandler = NodePath("../../PlayerInventoryHanlder")
+
+[node name="ingredientPlaceholder" type="TextureRect" parent="DescriptionBoard/MaterialContainer"]
+texture_filter = 1
+layout_mode = 2
+texture = SubResource("AtlasTexture_r6mg4")
+script = ExtResource("14_xjsrd")
+
+[node name="amount" type="Label" parent="DescriptionBoard/MaterialContainer/ingredientPlaceholder"]
+layout_mode = 0
+offset_left = 19.0
+offset_top = 18.3333
+offset_right = 301.0
+offset_bottom = 361.333
+scale = Vector2(0.05, 0.05)
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 10
+theme_override_constants/outline_size = 20
+theme_override_fonts/font = ExtResource("3_88haw")
+theme_override_font_sizes/font_size = 200
+text = "99
+"
+
+[node name="ingredientPlaceholder2" type="TextureRect" parent="DescriptionBoard/MaterialContainer"]
+texture_filter = 1
+layout_mode = 2
+texture = SubResource("AtlasTexture_r6mg4")
+script = ExtResource("14_xjsrd")
+
+[node name="amount" type="Label" parent="DescriptionBoard/MaterialContainer/ingredientPlaceholder2"]
+layout_mode = 0
+offset_left = 19.0
+offset_top = 18.3333
+offset_right = 301.0
+offset_bottom = 361.333
+scale = Vector2(0.05, 0.05)
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 10
+theme_override_constants/outline_size = 20
+theme_override_fonts/font = ExtResource("3_88haw")
+theme_override_font_sizes/font_size = 200
+text = "99
+"
+
+[node name="ingredientPlaceholder3" type="TextureRect" parent="DescriptionBoard/MaterialContainer"]
+texture_filter = 1
+layout_mode = 2
+texture = SubResource("AtlasTexture_r6mg4")
+script = ExtResource("14_xjsrd")
+
+[node name="amount" type="Label" parent="DescriptionBoard/MaterialContainer/ingredientPlaceholder3"]
+layout_mode = 0
+offset_left = 19.0
+offset_top = 18.3333
+offset_right = 301.0
+offset_bottom = 361.333
+scale = Vector2(0.05, 0.05)
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 10
+theme_override_constants/outline_size = 20
+theme_override_fonts/font = ExtResource("3_88haw")
+theme_override_font_sizes/font_size = 200
+text = "99
+"
+
+[node name="BuildingDescription" type="Label" parent="DescriptionBoard"]
+layout_mode = 0
+offset_left = 9.66667
+offset_top = 142.333
+offset_right = 3469.67
+offset_bottom = 1414.33
+scale = Vector2(0.05, 0.05)
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("3_88haw")
+theme_override_font_sizes/font_size = 200
+text = "Taken from the Latin words \"dolorem ipsum\", which translates to \"pain itself\", Lorem Ipsum text saw a revival in the mid-20th century as placeholder text in printing and design."
+horizontal_alignment = 1
+autowrap_mode = 2
+
+[node name="Timer" type="Timer" parent="."]
+
+[node name="PlayerInventory" type="NinePatchRect" parent="."]
+visible = false
+texture_filter = 1
+layout_mode = 0
+offset_left = 364.0
+offset_top = 3.0
+offset_right = 518.0
+offset_bottom = 211.0
+texture = ExtResource("1_bxykf")
+region_rect = Rect2(0, 0, 32, 32)
+
+[node name="PlayerInventoryHanlder" type="Control" parent="." node_paths=PackedStringArray("parentControl")]
+visible = false
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("14_71dvt")
+parentControl = NodePath("..")
+playerInventory = Array[Resource("res://UI/Inventory/Data/slotData.gd")]([null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null])
+inventorySlot = ExtResource("15_yndb0")
+maxInventorySlot = 20
+materialInstance = ExtResource("16_ea8qt")
+
+[node name="PlayerGridInventory" parent="PlayerInventoryHanlder" instance=ExtResource("17_uuavj")]
+self_modulate = Color(0.780392, 0.478431, 0.219608, 1)
+layout_mode = 1
+offset_left = 382.333
+offset_top = 39.0
+offset_right = 1148.33
+offset_bottom = 1053.0
+scale = Vector2(0.15, 0.15)
+script = null
+
+[node name="PlayerInventory2" type="Label" parent="."]
+visible = false
+layout_mode = 0
+offset_left = 373.333
+offset_top = 11.3333
+offset_right = 3115.33
+offset_bottom = 444.333
+scale = Vector2(0.05, 0.05)
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("3_88haw")
+theme_override_font_sizes/font_size = 360
+text = "PLAYER INVENTORY"
+horizontal_alignment = 1
+
+[node name="Control" type="Control" parent="."]
+visible = false
+anchors_preset = 0
+offset_left = 366.0
+offset_top = 5.0
+offset_right = 516.0
+offset_bottom = 207.0
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

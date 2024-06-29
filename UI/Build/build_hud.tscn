@@ -1,0 +1,37 @@
+[gd_scene load_steps=2 format=3 uid="uid://dd2ysdc77pxkq"]
+
+[ext_resource type="PackedScene" uid="uid://htlhwdgl8ast" path="res://HUD/DynamicLabel/dynamicLabel.tscn" id="1_18t15"]
+
+[node name="BuildHud" type="VBoxContainer"]
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 760.0
+offset_right = 430.0
+offset_bottom = 824.0
+grow_horizontal = 2
+grow_vertical = 0
+size_flags_horizontal = 3
+alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+theme_override_constants/separation = 100
+
+[node name="Control" type="Control" parent="HBoxContainer"]
+layout_mode = 2
+
+[node name="CloseBuildMenu" parent="HBoxContainer" instance=ExtResource("1_18t15")]
+layout_mode = 2
+
+[node name="DestroyMachine" parent="HBoxContainer" instance=ExtResource("1_18t15")]
+layout_mode = 2
+promptMessage = ": destroy machine"
+promptAction = "delete"
+
+[node name="Wiring" parent="HBoxContainer" instance=ExtResource("1_18t15")]
+layout_mode = 2
+promptMessage = ": Wiring"
+promptAction = "WIRING"

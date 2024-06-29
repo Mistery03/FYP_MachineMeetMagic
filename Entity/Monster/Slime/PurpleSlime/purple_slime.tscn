@@ -1,0 +1,274 @@
+[gd_scene load_steps=38 format=3 uid="uid://c7da086plnuik"]
+
+[ext_resource type="Texture2D" uid="uid://dfbobrjgxuwbl" path="res://Asset/slime.png" id="1_8u64y"]
+[ext_resource type="Script" path="res://Entity/Monster/Slime/PurpleSlime/purple_slime.gd" id="1_g7l1s"]
+[ext_resource type="Texture2D" uid="uid://b8m7h885sjdf6" path="res://Asset/slimeSpawn.png" id="2_68h2a"]
+[ext_resource type="Script" path="res://Entity/State/StateMachine.gd" id="4_361h5"]
+[ext_resource type="Script" path="res://Entity/Monster/Slime/PurpleSlime/State/Chase.gd" id="5_hbufe"]
+[ext_resource type="Script" path="res://Entity/Monster/Slime/State/Spawned.gd" id="5_jqp1k"]
+[ext_resource type="Script" path="res://Entity/Monster/Slime/PurpleSlime/State/Shoot.gd" id="6_4mfrd"]
+[ext_resource type="PackedScene" uid="uid://drvsjd1syi8qh" path="res://Entity/Monster/Slime/Projectile/projectile.tscn" id="7_fxqju"]
+[ext_resource type="Script" path="res://Entity/Monster/Slime/State/Damaged.gd" id="9_h7l5v"]
+[ext_resource type="Script" path="res://Entity/Monster/Slime/State/Death.gd" id="10_e0k06"]
+[ext_resource type="Script" path="res://Entity/Monster/MoveComponent.gd" id="11_dcbfp"]
+[ext_resource type="AudioStream" uid="uid://xdl252khl462" path="res://Asset/SFX/popUpSfx.mp3" id="12_gb21b"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_e1py8"]
+radius = 50.04
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0o1ml"]
+atlas = ExtResource("1_8u64y")
+region = Rect2(256, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8onls"]
+atlas = ExtResource("1_8u64y")
+region = Rect2(0, 128, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_on6x2"]
+atlas = ExtResource("1_8u64y")
+region = Rect2(224, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5o4ig"]
+atlas = ExtResource("2_68h2a")
+region = Rect2(224, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_df3xp"]
+atlas = ExtResource("2_68h2a")
+region = Rect2(96, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_l33qo"]
+atlas = ExtResource("2_68h2a")
+region = Rect2(64, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0gylo"]
+atlas = ExtResource("2_68h2a")
+region = Rect2(32, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0y4nv"]
+atlas = ExtResource("2_68h2a")
+region = Rect2(0, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_81nf4"]
+atlas = ExtResource("1_8u64y")
+region = Rect2(0, 128, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_a06lo"]
+atlas = ExtResource("1_8u64y")
+region = Rect2(32, 128, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qxrww"]
+atlas = ExtResource("1_8u64y")
+region = Rect2(64, 128, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_buihk"]
+atlas = ExtResource("1_8u64y")
+region = Rect2(0, 160, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_upr4r"]
+atlas = ExtResource("1_8u64y")
+region = Rect2(32, 160, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6f5ww"]
+atlas = ExtResource("1_8u64y")
+region = Rect2(64, 160, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dnc4m"]
+atlas = ExtResource("2_68h2a")
+region = Rect2(0, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8pnc1"]
+atlas = ExtResource("2_68h2a")
+region = Rect2(32, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_my2xn"]
+atlas = ExtResource("2_68h2a")
+region = Rect2(64, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nxgjo"]
+atlas = ExtResource("2_68h2a")
+region = Rect2(96, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2dj74"]
+atlas = ExtResource("2_68h2a")
+region = Rect2(128, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_o540j"]
+atlas = ExtResource("2_68h2a")
+region = Rect2(160, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qlq8m"]
+atlas = ExtResource("2_68h2a")
+region = Rect2(192, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_uuyfb"]
+atlas = ExtResource("2_68h2a")
+region = Rect2(224, 32, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ubfch"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0o1ml")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8onls")
+}],
+"loop": false,
+"name": &"DAMAGED",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_on6x2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5o4ig")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_df3xp")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_l33qo")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0gylo")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0y4nv")
+}],
+"loop": false,
+"name": &"DEATH",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_81nf4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_a06lo")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qxrww")
+}],
+"loop": true,
+"name": &"IDLE",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_buihk")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_upr4r")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6f5ww")
+}],
+"loop": true,
+"name": &"MOVE",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dnc4m")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8pnc1")
+}, {
+"duration": 2.0,
+"texture": SubResource("AtlasTexture_my2xn")
+}, {
+"duration": 0.5,
+"texture": SubResource("AtlasTexture_nxgjo")
+}, {
+"duration": 1.2,
+"texture": SubResource("AtlasTexture_2dj74")
+}, {
+"duration": 0.5,
+"texture": SubResource("AtlasTexture_o540j")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qlq8m")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_uuyfb")
+}],
+"loop": false,
+"name": &"SPAWN",
+"speed": 5.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_f4mak"]
+radius = 50.04
+
+[node name="PurpleSlime" type="CharacterBody2D" node_paths=PackedStringArray("collision_box", "spawnSFX", "animation", "stateController") groups=["Seperable"]]
+scale = Vector2(0.1, 0.1)
+collision_layer = 256
+collision_mask = 503
+script = ExtResource("1_g7l1s")
+collision_box = NodePath("CollisionBox")
+spawnSFX = NodePath("spawnSFX")
+damagePoint = 5.0
+chaseSpeed = 5000.0
+animation = NodePath("Animation")
+stateController = NodePath("StateController")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 14)
+shape = SubResource("CircleShape2D_e1py8")
+debug_color = Color(0.917647, 0, 0.705882, 0.419608)
+
+[node name="Animation" type="AnimatedSprite2D" parent="."]
+texture_filter = 1
+scale = Vector2(5, 5)
+sprite_frames = SubResource("SpriteFrames_ubfch")
+animation = &"DEATH"
+frame_progress = 0.997468
+
+[node name="StateController" type="Node" parent="." node_paths=PackedStringArray("current_state")]
+script = ExtResource("4_361h5")
+current_state = NodePath("Spawn")
+
+[node name="Spawn" type="Node" parent="StateController"]
+script = ExtResource("5_jqp1k")
+
+[node name="Chase" type="Node" parent="StateController"]
+script = ExtResource("5_hbufe")
+SHOOT_DISTANCE = 120
+animation_name = "MOVE"
+
+[node name="Shoot" type="Node" parent="StateController"]
+script = ExtResource("6_4mfrd")
+projectile_scene = ExtResource("7_fxqju")
+shoot_interval = 0.8
+
+[node name="Damaged" type="Node" parent="StateController"]
+script = ExtResource("9_h7l5v")
+animation_name = "damaged"
+
+[node name="Death" type="Node" parent="StateController"]
+script = ExtResource("10_e0k06")
+animation_name = "DEATH"
+
+[node name="MoveComponent" type="Node" parent="."]
+script = ExtResource("11_dcbfp")
+
+[node name="CollisionBox" type="Area2D" parent="."]
+collision_layer = 256
+collision_mask = 502
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CollisionBox"]
+position = Vector2(0, 14)
+shape = SubResource("CircleShape2D_f4mak")
+debug_color = Color(0.917647, 0, 0.705882, 0.419608)
+
+[node name="EscapeTime" type="Timer" parent="."]
+wait_time = 5.0
+
+[node name="spawnSFX" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("12_gb21b")
+volume_db = -12.0
+
+[connection signal="OnDamageTaken" from="." to="StateController/Shoot" method="_on_purple_slime_on_damage_taken"]
+[connection signal="area_entered" from="CollisionBox" to="StateController/Shoot" method="_on_collision_box_area_entered"]
+[connection signal="area_entered" from="CollisionBox" to="StateController/Damaged" method="_on_collision_box_area_entered"]

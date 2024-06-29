@@ -1,3 +1,38 @@
-[gd_scene format=3 uid="uid://6hetoebu3te7"]
+[gd_scene load_steps=9 format=3 uid="uid://6hetoebu3te7"]
 
-[node name="Forest" type="Node3D"]
+[ext_resource type="Script" path="res://Scene/Forest/Forest.gd" id="1_5y603"]
+[ext_resource type="PackedScene" uid="uid://d2ydrp0fee631" path="res://Scene/Forest/Rooms/Starting/StartingArea.tscn" id="2_xtj4a"]
+[ext_resource type="PackedScene" uid="uid://pffje6rhngjq" path="res://Scene/Forest/Rooms/EnemyRush/battle_room_1.tscn" id="3_j10gy"]
+[ext_resource type="PackedScene" uid="uid://m4gebh6dm0in" path="res://Scene/Forest/Rooms/EnemyRush/battle_room_2.tscn" id="4_af1n7"]
+[ext_resource type="PackedScene" uid="uid://d1gxkrikxon85" path="res://Scene/Forest/Rooms/BossRoom/BossArena.tscn" id="5_gdfwr"]
+[ext_resource type="PackedScene" uid="uid://c1vsfoc55pk0w" path="res://Entity/Player/player.tscn" id="6_7w6c7"]
+[ext_resource type="Texture2D" uid="uid://b7p1vl7hrge60" path="res://Asset/Level/backgroundChecker.png" id="7_nwmnj"]
+[ext_resource type="AudioStream" uid="uid://qdrgee2t21ae" path="res://Asset/SFX/windySFX.mp3" id="8_v3a4h"]
+
+[node name="Forest" type="Node2D" node_paths=PackedStringArray("player")]
+script = ExtResource("1_5y603")
+startingArea = ExtResource("2_xtj4a")
+enemyRooms = Array[PackedScene]([ExtResource("4_af1n7"), ExtResource("3_j10gy")])
+bossArea = ExtResource("5_gdfwr")
+player = NodePath("Player")
+
+[node name="Rooms" type="Node2D" parent="."]
+
+[node name="Player" parent="." instance=ExtResource("6_7w6c7")]
+z_index = 5
+zoom_duration = 0.2
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+layer = 5
+
+[node name="FadeOut" type="TextureRect" parent="CanvasLayer"]
+modulate = Color(0, 0, 0, 1)
+z_index = 100
+offset_right = 1600.0
+offset_bottom = 900.0
+texture = ExtResource("7_nwmnj")
+expand_mode = 2
+
+[node name="windSFX" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("8_v3a4h")
+volume_db = -10.0

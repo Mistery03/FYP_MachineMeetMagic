@@ -1,0 +1,56 @@
+[gd_scene load_steps=6 format=3 uid="uid://b8l6h6q66lu2w"]
+
+[ext_resource type="Texture2D" uid="uid://bmyhgaqtdma1t" path="res://Asset/UIUX/slot.png" id="1_an5jc"]
+[ext_resource type="Script" path="res://UI/Build/build_slot.gd" id="1_mxukq"]
+[ext_resource type="Texture2D" uid="uid://cy01yfe162ynm" path="res://Asset/Machine.png" id="3_sebgp"]
+[ext_resource type="AudioStream" uid="uid://buxy730oqikoq" path="res://Asset/SFX/changeSFX.mp3" id="4_wlhnu"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1itxd"]
+atlas = ExtResource("3_sebgp")
+region = Rect2(0, 0, 32, 32)
+
+[node name="BuildSlot" type="Panel"]
+self_modulate = Color(1, 1, 1, 0)
+custom_minimum_size = Vector2(32, 32)
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = -1120.0
+offset_bottom = -616.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_mxukq")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture_filter = 1
+texture = ExtResource("1_an5jc")
+centered = false
+
+[node name="TextureRect" type="TextureRect" parent="."]
+texture_filter = 1
+layout_mode = 0
+offset_left = 2.0
+offset_top = 1.0
+offset_right = 42.0
+offset_bottom = 41.0
+scale = Vector2(0.7, 0.7)
+texture = SubResource("AtlasTexture_1itxd")
+
+[node name="Button" type="Button" parent="."]
+self_modulate = Color(1, 1, 1, 0.0784314)
+layout_mode = 0
+offset_right = 32.0
+offset_bottom = 32.0
+
+[node name="Darkened" type="Panel" parent="."]
+visible = false
+offset_right = 31.0
+offset_bottom = 32.0
+
+[node name="clickSFX" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_wlhnu")
+pitch_scale = 1.4
+
+[connection signal="mouse_entered" from="Button" to="." method="_on_button_mouse_entered"]
+[connection signal="mouse_exited" from="Button" to="." method="_on_button_mouse_exited"]
+[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]

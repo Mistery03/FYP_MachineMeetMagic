@@ -1,0 +1,20 @@
+[gd_resource type="Resource" script_class="MaterialData" load_steps=4 format=3 uid="uid://hngsrmkxc4r7"]
+
+[ext_resource type="Script" path="res://Material/Data/materialData.gd" id="1_7pb3s"]
+[ext_resource type="Texture2D" uid="uid://bi05jqai8a2ss" path="res://Asset/materials.png" id="2_ansno"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dncw6"]
+atlas = ExtResource("2_ansno")
+region = Rect2(240, 288, 24, 24)
+
+[resource]
+script = ExtResource("1_7pb3s")
+magicEssenceAmountResult = 5
+burnPerSecond = 200
+manaProducedPerSecond = 0
+durability = 0
+name = "Magic Crystal"
+type = "Construction"
+amount = 0
+texture = SubResource("AtlasTexture_dncw6")
+description = ""

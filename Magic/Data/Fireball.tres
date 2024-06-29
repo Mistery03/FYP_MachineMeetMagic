@@ -1,0 +1,25 @@
+[gd_resource type="Resource" script_class="MagicData" load_steps=5 format=3 uid="uid://b5wauuhno0qg2"]
+
+[ext_resource type="PackedScene" uid="uid://dd6556eoj3lht" path="res://Magic/Fireball.tscn" id="1_wyb3j"]
+[ext_resource type="Script" path="res://Magic/Data/magicData.gd" id="2_f6ggp"]
+[ext_resource type="Texture2D" uid="uid://u1h6oyjt8kdh" path="res://Asset/Skill_Btn.png" id="3_f0whn"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hnxxk"]
+atlas = ExtResource("3_f0whn")
+region = Rect2(32, 0, 32, 32)
+
+[resource]
+script = ExtResource("2_f6ggp")
+name = "Fireball"
+skillButton = SubResource("AtlasTexture_hnxxk")
+scene = ExtResource("1_wyb3j")
+manaRequirement = 5.0
+isUnlocked = false
+burningTime = 20.0
+efficientTime = 0.0
+damage = 0.0
+attackBased = true
+attackCooldown = 0
+speed = 0.0
+description = ""
+unlockAmount = 5

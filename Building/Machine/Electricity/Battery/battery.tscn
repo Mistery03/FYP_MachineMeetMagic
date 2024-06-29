@@ -1,0 +1,37 @@
+[gd_scene load_steps=6 format=3 uid="uid://cq2cn78jyocyj"]
+
+[ext_resource type="Script" path="res://Building/Machine/Electricity/Battery/battery.gd" id="1_0r3hi"]
+[ext_resource type="Texture2D" uid="uid://cy01yfe162ynm" path="res://Asset/Machine.png" id="1_7b4sq"]
+[ext_resource type="PackedScene" uid="uid://1hjdqifegyyi" path="res://Building/Machine/Electricity/Battery/batteryUI.tscn" id="3_xausg"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_i7une"]
+atlas = ExtResource("1_7b4sq")
+region = Rect2(0, 384, 160, 32)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_64ogj"]
+size = Vector2(26, 28)
+
+[node name="Battery" type="Node2D" node_paths=PackedStringArray("machineUI") groups=["Battery"]]
+z_index = 20
+script = ExtResource("1_0r3hi")
+maxCapacity = 10000.0
+manaOutputPerSecond = 500
+machineUI = NodePath("Root/BatteryUI")
+maxMana = 10000.0
+
+[node name="Sprite" type="Sprite2D" parent="."]
+texture_filter = 1
+texture = SubResource("AtlasTexture_i7une")
+hframes = 5
+
+[node name="Root" type="CanvasLayer" parent="."]
+
+[node name="BatteryUI" parent="Root" instance=ExtResource("3_xausg")]
+visible = false
+
+[node name="Interectable" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Interectable"]
+shape = SubResource("RectangleShape2D_64ogj")
+
+[connection signal="input_event" from="Interectable" to="." method="_on_interectable_input_event"]
