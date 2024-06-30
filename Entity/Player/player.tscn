@@ -1912,7 +1912,7 @@ position_smoothing_speed = 4.0
 texture_filter = 1
 scale = Vector2(5, 5)
 sprite_frames = SubResource("SpriteFrames_47nfc")
-animation = &"WALKBACKWARD"
+animation = &"FALLEN"
 autoplay = "IDLE"
 
 [node name="PlayerHitbox" type="CollisionShape2D" parent="."]

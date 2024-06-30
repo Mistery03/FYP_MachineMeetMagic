@@ -1,4 +1,4 @@
-[gd_scene load_steps=38 format=3 uid="uid://c7da086plnuik"]
+[gd_scene load_steps=40 format=3 uid="uid://c7da086plnuik"]
 
 [ext_resource type="Texture2D" uid="uid://dfbobrjgxuwbl" path="res://Asset/slime.png" id="1_8u64y"]
 [ext_resource type="Script" path="res://Entity/Monster/Slime/PurpleSlime/purple_slime.gd" id="1_g7l1s"]
@@ -10,8 +10,10 @@
 [ext_resource type="PackedScene" uid="uid://drvsjd1syi8qh" path="res://Entity/Monster/Slime/Projectile/projectile.tscn" id="7_fxqju"]
 [ext_resource type="Script" path="res://Entity/Monster/Slime/State/Damaged.gd" id="9_h7l5v"]
 [ext_resource type="Script" path="res://Entity/Monster/Slime/State/Death.gd" id="10_e0k06"]
+[ext_resource type="PackedScene" uid="uid://cnj7jj8r34b1q" path="res://Material/Material.tscn" id="11_av7gn"]
 [ext_resource type="Script" path="res://Entity/Monster/MoveComponent.gd" id="11_dcbfp"]
 [ext_resource type="AudioStream" uid="uid://xdl252khl462" path="res://Asset/SFX/popUpSfx.mp3" id="12_gb21b"]
+[ext_resource type="Resource" uid="uid://dnawlrv34finb" path="res://Material/Fuel/fuel.tres" id="12_hpuhl"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_e1py8"]
 radius = 50.04
@@ -248,6 +250,8 @@ animation_name = "damaged"
 
 [node name="Death" type="Node" parent="StateController"]
 script = ExtResource("10_e0k06")
+materialInstance = ExtResource("11_av7gn")
+fuelData = ExtResource("12_hpuhl")
 animation_name = "DEATH"
 
 [node name="MoveComponent" type="Node" parent="."]

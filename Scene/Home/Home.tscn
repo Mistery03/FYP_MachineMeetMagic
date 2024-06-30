@@ -1285,7 +1285,8 @@ localLevel = NodePath("..")
 
 [node name="BlueSlime" parent="monsterEntities" instance=ExtResource("15_8mevs")]
 position = Vector2(-104, -157)
-damagePoint = 80.0
+damagePoint = 100.0
+chaseSpeed = 9000.0
 
 [node name="Label" type="Label" parent="monsterEntities/BlueSlime"]
 offset_left = -220.0

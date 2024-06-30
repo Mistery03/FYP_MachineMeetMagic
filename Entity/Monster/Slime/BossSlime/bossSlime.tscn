@@ -1,4 +1,4 @@
-[gd_scene load_steps=50 format=3 uid="uid://db1g8thxyqg42"]
+[gd_scene load_steps=52 format=3 uid="uid://db1g8thxyqg42"]
 
 [ext_resource type="PackedScene" uid="uid://bveafp4dvobga" path="res://Entity/Entity.tscn" id="1_5u21s"]
 [ext_resource type="Script" path="res://Entity/Monster/Slime/BossSlime/bossSlime.gd" id="2_bpjrv"]
@@ -11,7 +11,9 @@
 [ext_resource type="Script" path="res://Entity/Monster/Slime/State/Death.gd" id="8_sebg8"]
 [ext_resource type="Script" path="res://Entity/Monster/Slime/BossSlime/State/JumpAttack.gd" id="9_m8plw"]
 [ext_resource type="AudioStream" uid="uid://xdl252khl462" path="res://Asset/SFX/popUpSfx.mp3" id="9_ysd0v"]
+[ext_resource type="PackedScene" uid="uid://cnj7jj8r34b1q" path="res://Material/Material.tscn" id="10_6cmil"]
 [ext_resource type="PackedScene" uid="uid://drvsjd1syi8qh" path="res://Entity/Monster/Slime/Projectile/projectile.tscn" id="10_b1g7y"]
+[ext_resource type="Resource" uid="uid://dnawlrv34finb" path="res://Material/Fuel/fuel.tres" id="11_1l4xi"]
 [ext_resource type="Script" path="res://Entity/Monster/Slime/BossSlime/State/DashAttack.gd" id="11_nnqa4"]
 [ext_resource type="Script" path="res://Entity/Monster/Slime/BossSlime/State/SpawnSlimes.gd" id="12_wsmy6"]
 [ext_resource type="Resource" uid="uid://e3axqaaofq7l" path="res://Entity/Monster/Slime/Data/darkBlueSlime.tres" id="14_x0wtl"]
@@ -307,6 +309,9 @@ animation_name = "DAMAGED"
 
 [node name="Death" type="Node" parent="StateController" index="4"]
 script = ExtResource("8_sebg8")
+materialInstance = ExtResource("10_6cmil")
+max_drop_items = 30
+fuelData = ExtResource("11_1l4xi")
 animation_name = "DEATH"
 
 [node name="JumpAttack" type="Node" parent="StateController" index="5"]

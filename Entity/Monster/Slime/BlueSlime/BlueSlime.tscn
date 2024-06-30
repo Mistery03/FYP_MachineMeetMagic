@@ -1,4 +1,4 @@
-[gd_scene load_steps=37 format=3 uid="uid://crlmmk86fjtnf"]
+[gd_scene load_steps=39 format=3 uid="uid://crlmmk86fjtnf"]
 
 [ext_resource type="Script" path="res://Entity/State/StateMachine.gd" id="2_1e76v"]
 [ext_resource type="Texture2D" uid="uid://dfbobrjgxuwbl" path="res://Asset/slime.png" id="2_o73m2"]
@@ -11,6 +11,8 @@
 [ext_resource type="Script" path="res://Entity/Monster/Slime/State/Damaged.gd" id="8_4cmn4"]
 [ext_resource type="Script" path="res://Entity/Monster/Slime/State/Death.gd" id="9_eixto"]
 [ext_resource type="Script" path="res://Entity/Monster/MoveComponent.gd" id="11_hjj1d"]
+[ext_resource type="PackedScene" uid="uid://cnj7jj8r34b1q" path="res://Material/Material.tscn" id="11_l6qak"]
+[ext_resource type="Resource" uid="uid://dnawlrv34finb" path="res://Material/Fuel/fuel.tres" id="12_167yl"]
 [ext_resource type="AudioStream" uid="uid://xdl252khl462" path="res://Asset/SFX/popUpSfx.mp3" id="12_htc8t"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_3l8tp"]
@@ -246,6 +248,8 @@ animation_name = "damaged"
 
 [node name="Death" type="Node" parent="StateController"]
 script = ExtResource("9_eixto")
+materialInstance = ExtResource("11_l6qak")
+fuelData = ExtResource("12_167yl")
 animation_name = "DEATH"
 
 [node name="MoveComponent" type="Node" parent="."]

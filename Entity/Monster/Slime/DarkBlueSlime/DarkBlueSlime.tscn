@@ -1,4 +1,4 @@
-[gd_scene load_steps=35 format=3 uid="uid://yqdv0b1oe11b"]
+[gd_scene load_steps=37 format=3 uid="uid://yqdv0b1oe11b"]
 
 [ext_resource type="Script" path="res://Entity/Monster/Slime/DarkBlueSlime/DarkBlueSlime.gd" id="1_dk0mu"]
 [ext_resource type="Texture2D" uid="uid://dfbobrjgxuwbl" path="res://Asset/slime.png" id="2_4ytix"]
@@ -9,6 +9,8 @@
 [ext_resource type="Script" path="res://Entity/Monster/Slime/State/Damaged.gd" id="6_rhp8i"]
 [ext_resource type="Script" path="res://Entity/Monster/Slime/State/Death.gd" id="7_0241h"]
 [ext_resource type="AudioStream" uid="uid://xdl252khl462" path="res://Asset/SFX/popUpSfx.mp3" id="8_pj65o"]
+[ext_resource type="PackedScene" uid="uid://cnj7jj8r34b1q" path="res://Material/Material.tscn" id="9_bqr3w"]
+[ext_resource type="Resource" uid="uid://dnawlrv34finb" path="res://Material/Fuel/fuel.tres" id="10_s4gby"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_de6ml"]
 atlas = ExtResource("2_4ytix")
@@ -237,6 +239,8 @@ animation_name = "damaged"
 
 [node name="Death" type="Node" parent="StateController"]
 script = ExtResource("7_0241h")
+materialInstance = ExtResource("9_bqr3w")
+fuelData = ExtResource("10_s4gby")
 animation_name = "DEATH"
 
 [node name="CollisionBox" type="Area2D" parent="." groups=["Seperable"]]
