@@ -60,7 +60,7 @@ func insert(droppedItem: GameMaterial, amount: int):
 					else:
 						slotToBeAdded.amount = MAXSTACKSIZE
 						overflow -= MAXSTACKSIZE
-					inventory[index] = slotToBeAdded
+					inventory[index] = slotToBeAdded	
 					inserted = true
 					break
 

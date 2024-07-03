@@ -6,3 +6,4 @@ extends ObjectData
 @export var isThrowable:bool
 @export var scene:PackedScene
 @export var craftingRecipe:CraftingRecipe
+

@@ -1,4 +1,4 @@
-##@NOTE State interface
+##@NOTE State Abstract
 class_name State
 extends Node
 
