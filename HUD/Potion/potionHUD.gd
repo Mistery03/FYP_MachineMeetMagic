@@ -34,42 +34,42 @@ func _process(delta):
 
 	if Input.is_action_just_pressed("EQUIPPOTION"):
 
-		potionList = inventoryUI.potion_grid_container_player.potionList
-
-		if potionList.size() > 0:
+		player.playerData.potionList = inventoryUI.potion_grid_container_player.potionList
+	
+		if player.playerData.potionList.size() > 0:
 			prevIndex = currIndex
 
 			print("Incre ",currIncreament)
-			currIndex = currIncreament % potionList.size()
+			currIndex = currIncreament % player.playerData.potionList.size()
 			print("Index ",currIndex)
 			currIncreament += 1
 
-			if currIncreament >= potionList.size() and currIndex != prevIndex:
+			if currIncreament >= player.playerData.potionList.size() and currIndex != prevIndex:
 				currIncreament = 0
 
-			if potionList[currIndex]:
-				var amount = inventoryUI.potion_grid_container_player.getPotionAmount(potionList[currIndex])
+			if player.playerData.potionList[currIndex]:
+				var amount = inventoryUI.potion_grid_container_player.getPotionAmount(player.playerData.potionList[currIndex])
 				texture_rect.visible = true
 				potion_amount.visible = true
-				texture_rect.texture = potionList[currIndex].texture
+				texture_rect.texture = player.playerData.potionList[currIndex].texture
 				potion_amount.text = str(amount)
-				player.potion_manager.potionData = potionList[currIndex]
+				player.potion_manager.potionData = player.playerData.potionList[currIndex]
 			else:	
 				texture_rect.visible = false
 				potion_amount.visible = false
 				player.potion_manager.potionData = null
 				isPotionNull = true
-			print(potionList)
+			print(player.playerData.potionList)
 
 	if isPotionNull:
 		currIncreament += 1
 		prevIndex = currIndex
-		currIndex = currIncreament % potionList.size()
+		currIndex = currIncreament % player.playerData.potionList.size()
 
-		currIncreament = clamp(currIncreament,0,potionList.size())
-		if currIncreament >= potionList.size() and currIndex != prevIndex:
+		currIncreament = clamp(currIncreament,0,player.playerData.potionList.size())
+		if currIncreament >= player.playerData.potionList.size() and currIndex != prevIndex:
 			currIncreament = 0
-		if potionList[currIndex]:
+		if player.playerData.potionList[currIndex]:
 			isPotionNull = false
 
 

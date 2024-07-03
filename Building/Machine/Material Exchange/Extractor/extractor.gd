@@ -39,8 +39,6 @@ func _process(delta):
 
 
 
-
-
 func _on_interectable_input_event(viewport, event, shape_idx):
 	super(viewport, event, shape_idx)
 	if event is InputEventMouseButton:

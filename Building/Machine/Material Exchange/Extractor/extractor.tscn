@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://dprxecily2808"]
+[gd_scene load_steps=14 format=3 uid="uid://dprxecily2808"]
 
 [ext_resource type="Script" path="res://Building/Machine/Material Exchange/Extractor/extractor.gd" id="1_tl5kv"]
 [ext_resource type="SpriteFrames" uid="uid://cbtw4dcn8pny6" path="res://Building/Machine/Material Exchange/Extractor/extractorAnimation.tres" id="2_fc8e1"]
@@ -38,8 +38,12 @@ _data = {
 "floating": SubResource("Animation_3fvs2")
 }
 
-[node name="Extractor" type="Node2D" node_paths=PackedStringArray("machineUI", "animation", "pickup_sfx")]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_tq80v"]
+size = Vector2(26, 28)
+
+[node name="Extractor" type="StaticBody2D" node_paths=PackedStringArray("machineUI", "animation", "pickup_sfx")]
 z_index = 20
+collision_layer = 2
 script = ExtResource("1_tl5kv")
 machineUI = NodePath("Root/ExtractorUI")
 animation = NodePath("Animation")
@@ -109,5 +113,9 @@ autoplay = "floating"
 [node name="pickupSFX" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("8_6ns7p")
 pitch_scale = 1.2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_tq80v")
+debug_color = Color(0.87451, 0.196078, 0.709804, 0.419608)
 
 [connection signal="input_event" from="Interectable" to="." method="_on_interectable_input_event"]

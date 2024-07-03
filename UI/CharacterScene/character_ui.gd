@@ -2,7 +2,6 @@ class_name researchTree extends Control
 
 @onready var machine_tree = $machineTree
 @onready var skill_tree = $skillTree
-@onready var description_box = $"Description box"
 @onready var currency = $CurrencyHolder/Currency
 @export var player:Player
 

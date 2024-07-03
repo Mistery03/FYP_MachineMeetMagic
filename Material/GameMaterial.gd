@@ -14,8 +14,7 @@ var material_holder
 
 func _ready():
 	sprite.texture = itemData.texture
-	if TutorialGlobal.tutorialOne:
-		queue_free()
+
 	#amount = itemData.amount
 
 func _on_area_2d_body_entered(body):
@@ -24,6 +23,5 @@ func _on_area_2d_body_entered(body):
 		body.inventory_manager.insert(self,amount)
 		visible = false
 		await pickup_sfx.finished
-		TutorialGlobal.tutorialOne = true
 		
 		queue_free()

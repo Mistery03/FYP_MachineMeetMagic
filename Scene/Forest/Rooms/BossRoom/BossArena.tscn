@@ -1,20 +1,35 @@
-[gd_scene load_steps=12 format=3 uid="uid://d1gxkrikxon85"]
+[gd_scene load_steps=16 format=3 uid="uid://d1gxkrikxon85"]
 
 [ext_resource type="Script" path="res://Scene/Forest/Rooms/BossRoom/BossArena.gd" id="1_imlmd"]
 [ext_resource type="TileSet" uid="uid://bckra1sdqvx78" path="res://Scene/Forest/Rooms/ForestTilemap.tres" id="2_63v6e"]
 [ext_resource type="Resource" uid="uid://cyvrs685eukie" path="res://Entity/Monster/Slime/Data/bossSlime.tres" id="2_p8a7c"]
 [ext_resource type="Script" path="res://Scene/monsterEntities.gd" id="3_esx2j"]
 [ext_resource type="Script" path="res://Scene/Forest/Rooms/BossRoom/WorldCamera.gd" id="6_di4pl"]
-[ext_resource type="PackedScene" uid="uid://c1vsfoc55pk0w" path="res://Entity/Player/player.tscn" id="7_8237y"]
 [ext_resource type="PackedScene" uid="uid://b7pgfgv6lh1ls" path="res://Scene/Forest/gate_keeper.tscn" id="7_dq5gh"]
 [ext_resource type="Script" path="res://Scene/Forest/Rooms/BossRoom/Finished.gd" id="8_xm08r"]
+[ext_resource type="FontFile" uid="uid://cl3rxpo58micg" path="res://Asset/Font/Lambda-Regular.ttf" id="9_63jlx"]
 [ext_resource type="Texture2D" uid="uid://b7p1vl7hrge60" path="res://Asset/Level/backgroundChecker.png" id="9_kqgiy"]
+[ext_resource type="PackedScene" uid="uid://c1vsfoc55pk0w" path="res://Entity/Player/player.tscn" id="10_qisky"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_iww2h"]
 size = Vector2(260, 114)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_3ejso"]
 size = Vector2(153, 178)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_r4y87"]
+bg_color = Color(0.0823529, 0.0862745, 0.231373, 1)
+border_width_left = 5
+border_width_top = 5
+border_width_right = 5
+border_width_bottom = 5
+border_color = Color(0.235294, 0, 0.34902, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_31gvk"]
+bg_color = Color(0.207843, 0.301961, 0.556863, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_skmn6"]
+bg_color = Color(0.309804, 0.517647, 0.807843, 1)
 
 [node name="BossArena" type="Node2D" node_paths=PackedStringArray("player", "tile_map", "creatureManager")]
 script = ExtResource("1_imlmd")
@@ -74,9 +89,6 @@ scale = Vector2(1.52529, 1)
 creatureManager = NodePath("../monsterEntities")
 localLevel = NodePath("..")
 
-[node name="Player" parent="." instance=ExtResource("7_8237y")]
-position = Vector2(-11, -508)
-
 [node name="GateKeeper2" parent="." node_paths=PackedStringArray("creatureManager", "localLevel") instance=ExtResource("7_dq5gh")]
 visible = false
 position = Vector2(-1, -559)
@@ -114,5 +126,21 @@ text = "THANK YOU FOR PLAYING
 Machine Meets Magic"
 horizontal_alignment = 1
 
+[node name="brewBTN" type="Button" parent="CanvasLayer"]
+visible = false
+offset_left = 608.0
+offset_top = 586.0
+offset_right = 919.0
+offset_bottom = 666.0
+theme_override_fonts/font = ExtResource("9_63jlx")
+theme_override_font_sizes/font_size = 60
+theme_override_styles/normal = SubResource("StyleBoxFlat_r4y87")
+theme_override_styles/hover = SubResource("StyleBoxFlat_31gvk")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_skmn6")
+text = "Start again"
+
+[node name="Player" parent="." instance=ExtResource("10_qisky")]
+
 [connection signal="body_entered" from="TriggerEvent" to="." method="_on_trigger_event_body_entered"]
 [connection signal="body_entered" from="Area2D" to="Area2D" method="_on_body_entered"]
+[connection signal="pressed" from="CanvasLayer/brewBTN" to="Area2D" method="_on_brew_btn_pressed"]

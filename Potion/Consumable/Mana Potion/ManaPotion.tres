@@ -17,6 +17,6 @@ scene = ExtResource("2_oe762")
 craftingRecipe = ExtResource("1_3m1pd")
 name = "Mana Potion"
 type = "Potion"
-amount = 0
+amount = 2
 texture = SubResource("AtlasTexture_u2260")
 description = "Is it me or mana potion seems just like fancy water?"

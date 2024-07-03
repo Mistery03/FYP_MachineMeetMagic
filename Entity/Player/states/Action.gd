@@ -15,10 +15,12 @@ var materialDroppedData
 var materialRes
 
 var isDropped:bool = false
+var canClick: bool = true
 
 func enter() -> void:
 	super()
 	isDropped = false
+	canClick = true
 
 func exit()->void:
 	parent.isAttackable = true
@@ -46,6 +48,7 @@ func update(delta: float) -> void:
 					timer.start()
 					materialRes = materialDroppedData.get_custom_data("materialDropped")
 					clickedPos = mouseTilePos
+					canClick = false  # Prevent further clicks until complete
 
 						#parent.staff.customAnimation.stop()
 						#await parent.staff.customAnimation.animation_finished
@@ -62,9 +65,10 @@ func dropMaterials()->bool:
 		var instance = materialInstance.instantiate()
 		instance.itemData = materialRes
 		instance.amount = 1
-		instance.position = parent.levelTilemap.map_to_local(clickedPos) + Vector2(randi_range(-5, 5), randi_range(-5, 5))  # Randomize position slightly
+		instance.global_position = parent.levelTilemap.map_to_local(clickedPos) + Vector2(randi_range(-5, 5), randi_range(-5, 5))  # Randomize position slightly
 		instance.z_index = 10
-		add_child(instance)
+		parent.localLevel.add_child(instance)
+		print("Mat pos",instance.global_position)
 
 	return true
 
@@ -76,3 +80,5 @@ func _on_timer_timeout():
 	isDropped= true
 	parent.staff.global_position  = parent.global_position
 	parent.staff.z_index = -1
+	canClick = true  # Allow clicking again
+	

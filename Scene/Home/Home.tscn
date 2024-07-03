@@ -1,4 +1,4 @@
-[gd_scene load_steps=47 format=3 uid="uid://dm1j4it5oof3n"]
+[gd_scene load_steps=49 format=3 uid="uid://dm1j4it5oof3n"]
 
 [ext_resource type="Script" path="res://Scene/Home/Home.gd" id="1_iycag"]
 [ext_resource type="PackedScene" uid="uid://c1vsfoc55pk0w" path="res://Entity/Player/player.tscn" id="1_jnw16"]
@@ -16,12 +16,14 @@
 [ext_resource type="Texture2D" uid="uid://b7p1vl7hrge60" path="res://Asset/Level/backgroundChecker.png" id="13_lrcqq"]
 [ext_resource type="PackedScene" uid="uid://crlmmk86fjtnf" path="res://Entity/Monster/Slime/BlueSlime/BlueSlime.tscn" id="15_8mevs"]
 [ext_resource type="Script" path="res://Scene/monsterEntities.gd" id="15_703uy"]
+[ext_resource type="Script" path="res://Scene/Home/Tutorial1.gd" id="16_hqxag"]
 [ext_resource type="FontFile" uid="uid://cl3rxpo58micg" path="res://Asset/Font/Lambda-Regular.ttf" id="17_c8e1y"]
 [ext_resource type="Script" path="res://Scene/Home/Tutorial2.gd" id="17_lkx25"]
 [ext_resource type="Script" path="res://Scene/Home/Tutorial3.gd" id="18_fd1hb"]
 [ext_resource type="Script" path="res://Scene/Home/Tutorial4.gd" id="19_12rld"]
 [ext_resource type="Script" path="res://Scene/Home/Tutorial5.gd" id="20_wq48p"]
 [ext_resource type="Script" path="res://Scene/Home/Tutorial6.gd" id="22_dhvvh"]
+[ext_resource type="AudioStream" uid="uid://t1ev5awa0pk6" path="res://Asset/SFX/BGM1.mp3" id="24_cnni2"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_klcm4"]
 texture = ExtResource("1_vetej")
@@ -1282,8 +1284,9 @@ player = NodePath("../Player")
 localLevel = NodePath("..")
 
 [node name="BlueSlime" parent="monsterEntities" instance=ExtResource("15_8mevs")]
-position = Vector2(-11, -175)
-damagePoint = 80.0
+position = Vector2(-104, -157)
+damagePoint = 100.0
+chaseSpeed = 9000.0
 
 [node name="Label" type="Label" parent="monsterEntities/BlueSlime"]
 offset_left = -220.0
@@ -1298,9 +1301,10 @@ text = "Gumball The Friendly
 "
 
 [node name="Material" parent="." instance=ExtResource("10_nl125")]
-position = Vector2(72, -211)
-itemData = ExtResource("11_rj2gd")
-amount = 5
+position = Vector2(67, -222)
+script = ExtResource("16_hqxag")
+itemData = ExtResource("12_pn2ej")
+amount = 50
 
 [node name="Label2" type="Label" parent="Material"]
 offset_left = -80.0
@@ -1315,7 +1319,7 @@ theme_override_font_sizes/font_size = 340
 text = "Welcome to your new home"
 
 [node name="Material2" parent="." instance=ExtResource("10_nl125")]
-position = Vector2(102, -150)
+position = Vector2(191, -178)
 script = ExtResource("17_lkx25")
 itemData = ExtResource("11_rj2gd")
 amount = 5
@@ -1333,10 +1337,10 @@ theme_override_font_sizes/font_size = 340
 text = "How? Press B"
 
 [node name="Material3" parent="." instance=ExtResource("10_nl125")]
-position = Vector2(17, -54)
+position = Vector2(147, -70)
 script = ExtResource("18_fd1hb")
 itemData = ExtResource("12_pn2ej")
-amount = 5
+amount = 20
 
 [node name="Label2" type="Label" parent="Material3"]
 offset_left = -28.0
@@ -1352,10 +1356,10 @@ text = "What this over here?"
 autowrap_mode = 2
 
 [node name="Material4" parent="." instance=ExtResource("10_nl125")]
-position = Vector2(106, -182)
+position = Vector2(135, -211)
 script = ExtResource("19_12rld")
 itemData = ExtResource("12_pn2ej")
-amount = 5
+amount = 20
 
 [node name="Label2" type="Label" parent="Material4"]
 offset_left = -28.0
@@ -1371,10 +1375,10 @@ text = "Your objective is to become strong"
 autowrap_mode = 2
 
 [node name="Material5" parent="." instance=ExtResource("10_nl125")]
-position = Vector2(91, -105)
+position = Vector2(191, -108)
 script = ExtResource("20_wq48p")
 itemData = ExtResource("12_pn2ej")
-amount = 5
+amount = 10
 
 [node name="Label2" type="Label" parent="Material5"]
 offset_left = -44.0
@@ -1390,16 +1394,16 @@ text = "These machine will aid you to become stronger"
 autowrap_mode = 2
 
 [node name="Material6" parent="." instance=ExtResource("10_nl125")]
-position = Vector2(-88, -185)
+position = Vector2(-113, -191)
 script = ExtResource("22_dhvvh")
 itemData = ExtResource("11_rj2gd")
 amount = 5
 
 [node name="Label2" type="Label" parent="Material6"]
-offset_left = -106.0
-offset_top = -92.0
-offset_right = 4054.0
-offset_bottom = 1289.0
+offset_left = -84.0
+offset_top = -114.0
+offset_right = 4076.0
+offset_bottom = 1613.0
 scale = Vector2(0.05, 0.05)
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 200
@@ -1410,3 +1414,8 @@ Space + AWSD to roll in a particular direction
 C to open character progression
 ESC to open inventory"
 autowrap_mode = 2
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("24_cnni2")
+volume_db = -10.0
+autoplay = true

@@ -6,7 +6,7 @@ extends Control
 @onready var grid_container = $GridContainer
 
 var gridList:Array = []
-var potionList:Array = []
+var potionList:Array[PotionData] = []
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
@@ -16,7 +16,7 @@ func _process(delta):
 		for potionSlot in gridList:
 			potionSlot.potionInventory = potion_inventory
 			potionList.append(potionSlot.potionData)
-	
+		
 	#print(potionList)
 
 func decreasePotionAmount(potionData:PotionData):

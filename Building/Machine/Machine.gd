@@ -1,5 +1,5 @@
 class_name Machine
-extends Node2D
+extends StaticBody2D
 
 @export_category("Machine Settings")
 @export var machineUI:Control
