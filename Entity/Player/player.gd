@@ -97,7 +97,8 @@ func _ready() -> void:
 	inventory = playerData.inventory
 	playerCurrencyText.text = str(MagicEssenceCurrency)	
 	camera.zoom = Vector2(cameraZoom,cameraZoom)
-
+	maxHP = playerData.MaxHealth
+	maxMana = playerData.MaxMana
 	currHealth = playerData.MaxHealth
 	currMana = playerData.MaxMana
 	currStamina = playerData.MaxStamina
